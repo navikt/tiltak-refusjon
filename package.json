@@ -1,0 +1,73 @@
+{
+  "name": "tiltak-refusjon",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^5.6.3",
+    "@navikt/fnrvalidator": "^1.1.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.1",
+    "@testing-library/user-event": "^7.2.1",
+    "@types/amplitude-js": "^5.8.0",
+    "@types/classnames": "^2.2.9",
+    "@types/react-responsive": "^8.0.2",
+    "amplitude-js": "^5.9.0",
+    "classnames": "^2.2.6",
+    "craco-less": "^1.16.0",
+    "lodash.throttle": "^4.1.1",
+    "nav-frontend-alertstriper": "^3.0.12",
+    "nav-frontend-alertstriper-style": "^2.0.10",
+    "nav-frontend-chevron-style": "^0.3.5",
+    "nav-frontend-core": "^4.0.12",
+    "nav-frontend-ekspanderbartpanel": "^3.0.8",
+    "nav-frontend-ekspanderbartpanel-style": "^1.0.8",
+    "nav-frontend-grid": "^1.0.27",
+    "nav-frontend-grid-style": "^0.2.20",
+    "nav-frontend-js-utils": "^1.0.8",
+    "nav-frontend-knapper": "^1.0.40",
+    "nav-frontend-knapper-style": "^0.3.35",
+    "nav-frontend-lenker": "^1.0.34",
+    "nav-frontend-lenker-style": "^0.2.25",
+    "nav-frontend-paneler": "^1.0.24",
+    "nav-frontend-paneler-style": "^0.3.18",
+    "nav-frontend-skjema": "^2.0.12",
+    "nav-frontend-skjema-style": "^2.0.4",
+    "nav-frontend-tekstomrade": "^2.0.42",
+    "nav-frontend-typografi": "^2.0.18",
+    "nav-frontend-typografi-style": "^1.0.19",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.0",
+    "react-collapse": "^5.0.1",
+    "react-dom": "^16.13.0",
+    "react-responsive": "^8.0.3",
+    "react-scripts": "3.4.0",
+    "typescript": "^3.8.3",
+    "webpack-bundle-analyzer": "^3.6.0"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "mock": "cross-env REACT_APP_MOCK=true npm start",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-bundle-analyser": "^1.4.0"
+  }
+}
