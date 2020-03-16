@@ -13,14 +13,14 @@ import { ReactComponent as GraphRefusjonAvLonnIkon } from '@/assets/ikoner/graph
 import BEMHelper from "../utils/bem";
 import './Utregning.less';
 import {Systemtittel, Undertittel} from "nav-frontend-typografi";
-
+import { Refusjon } from "../types/refusjon";
 
 const cls = BEMHelper('visUtregningenPanel');
-
 const visTalletEller0 = (tallet?: number) => (tallet === 0 || tallet ? tallet : 0);
 const visSatsMedEttDesimal = (sats?: number) => (sats ? sats * 100 : 0).toFixed(1);
+const visAntallFeriedager = (feriedager?: number) => (feriedager === 1 ? ' 1 feriedag' : feriedager + ' feriedager');
 
-const Utregning = () => (
+const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
 
     <div className={cls.element('panel')}>
 
@@ -38,8 +38,7 @@ const Utregning = () => (
                     </div>
                 </Column>
                 <Column md="6" sm="6" xs="6" className={cls.element('column__siste')}>
-                    {/*{visTalletEller0(props.stillingprosent)} %*/}
-                    20 %
+                    {visTalletEller0(props.refusjon.stillingsprosent)}
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -53,8 +52,7 @@ const Utregning = () => (
                     </div>
                 </Column>
                 <Column md="6" sm="6" xs="6" className={cls.element('column__siste')}>
-                    {/*<div> {visTalletEller0(props.manedslonn)} kr</div>div*/}
-                    <div> 20000 kr</div>
+                    {visTalletEller0(props.refusjon.manedslonn)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -64,15 +62,14 @@ const Utregning = () => (
                         <MediaQuery minWidth={700}>
                             <FerieIkon className={cls.element('ikon')}/>
                         </MediaQuery>
-                        Fratrekk for 0 feriedager
+                        Fratrekk for {visAntallFeriedager(props.refusjon.feriedager)}
                     </div>
                 </Column>
                 <Column md="1" sm="1" xs="1">
                     -
                 </Column>
                 <Column md="3" sm="3" xs="3" className={cls.element('column__siste')}>
-                    {/*<div> {visTalletEller0(props.manedslonn)} kr</div>div*/}
-                    <div> 2000 kr</div>
+                    {visTalletEller0(props.refusjon.trekkFeriedager)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -89,8 +86,7 @@ const Utregning = () => (
                     -
                 </Column>
                 <Column md="3" sm="3" xs="3" className={cls.element('column__siste')}>
-                    {/*<div> {visTalletEller0(props.manedslonn)} kr</div>div*/}
-                    <div> 2000 kr</div>
+                    {visTalletEller0(props.refusjon.sykepenger)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -100,8 +96,7 @@ const Utregning = () => (
                     </div>
                 </Column>
                 <Column md="6" sm="6" xs="6" className={cls.element('column__siste')}>
-                    {/*<div> {visTalletEller0(props.manedslonn)} kr</div>div*/}
-                    <div> 30000 kr</div>
+                    {visTalletEller0(props.refusjon.nettoManedslonn)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -115,14 +110,13 @@ const Utregning = () => (
                     </div>
                 </Column>
                 <Column md="2" sm="2" xs="2">
-                    ({visSatsMedEttDesimal(0.141)}%)
+                    ({visSatsMedEttDesimal(props.refusjon.satsArbgiverAvgift)}%)
                 </Column>
                 <Column md="1" sm="1" xs="1">
                     +
                 </Column>
                 <Column md="3" sm="3" xs="3" className={cls.element('column__siste')}>
-                    {/*<div> {visTalletEller0(props.manedslonn)} kr</div>div*/}
-                    <div> 2000 kr</div>
+                    {visTalletEller0(props.refusjon.feriepenger)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -136,14 +130,13 @@ const Utregning = () => (
                     </div>
                 </Column>
                 <Column md="2" sm="2" xs="2">
-                    ({visSatsMedEttDesimal(0.02)}%)
+                    ({visSatsMedEttDesimal(props.refusjon.satsOtp)}%)
                 </Column>
                 <Column md="1" sm="1" xs="1">
                     +
                 </Column>
                 <Column md="3" sm="3" xs="3" className={cls.element('column__siste')}>
-                    {/*<div> {visTalletEller0(props.manedslonn)} kr</div>div*/}
-                    <div> 2000 kr</div>
+                    {visTalletEller0(props.refusjon.otpBelop)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -157,14 +150,13 @@ const Utregning = () => (
                     </div>
                 </Column>
                 <Column md="2" sm="2" xs="2">
-                    ({visSatsMedEttDesimal(0.141)}%)
+                    ({visSatsMedEttDesimal(props.refusjon.satsArbgiverAvgift)}%)
                 </Column>
                 <Column md="1" sm="1" xs="1">
                     +
                 </Column>
                 <Column md="3" sm="3" xs="3" className={cls.element('column__siste')}>
-                    {/*<div> {visTalletEller0(props.manedslonn)} kr</div>div*/}
-                    <div> 2000 kr</div>
+                    {visTalletEller0(props.refusjon.arbgiverAvgift)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -178,8 +170,7 @@ const Utregning = () => (
                     =
                 </Column>
                 <Column md="3" sm="3" xs="3" className={cls.element('column__siste')}>
-                    {/*<div> {visTalletEller0(props.manedslonn)} kr</div>div*/}
-                    <div> 30000 kr</div>
+                    {visTalletEller0(props.refusjon.totalArbgiverUtgift)} kr
                 </Column>
             </Row>
             <Row className={classNames(cls.element('rad'), cls.element('rad__siste'))}>
@@ -190,18 +181,15 @@ const Utregning = () => (
                     <div>Fastsatt refusjon</div>
                 </Column>
                 <Column md="6" sm="3" xs="6" className={cls.element('column__siste')}>
-                    {/*{props.lonnstilskuddProsent || 0} %*/}
-                    40 %
+                    {props.refusjon.refusjonsProsent || 0} %
                 </Column>
             </Row>
             <Row className={classNames(cls.element('rad'), cls.element('rad__oppsummering'))}>
                 <Column md="9" sm="9" xs="6" className={cls.element('tittel')}>
                     <Undertittel> Refusjon per måned:</Undertittel>
                 </Column>
-
                 <Column md="3" sm="3" xs="6" className={cls.element('column__siste')}>
-                    {/*<Undertittel>{sumLonnstilskuddPerMåned} kr</Undertittel>*/}
-                    <Undertittel>16000 kr</Undertittel>
+                    <Undertittel>{visTalletEller0(props.refusjon.refusjonsBelop)} kr</Undertittel>
                 </Column>
             </Row>
         </Container>

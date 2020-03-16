@@ -1,5 +1,3 @@
-
-
 export interface Refusjon {
     id: string;
     tiltakstype: TiltaksType;
@@ -23,7 +21,7 @@ export interface Refusjon {
     satsArbgiverAvgift: number;
     arbgiverAvgift: number;
     totalArbgiverUtgift: number;
-    satsRefusjon: number;
+    refusjonsProsent: number;
     refusjonsBelop: number;
 }
 

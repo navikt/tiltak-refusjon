@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-typescript": "^7.8.3",
     "@craco/craco": "^5.6.3",
     "@navikt/fnrvalidator": "^1.1.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -41,7 +44,7 @@
     "react-dom": "^16.13.0",
     "react-responsive": "^8.0.3",
     "react-scripts": "3.4.0",
-    "typescript": "^3.8.3",
+    "save-dev": "0.0.1-security",
     "webpack-bundle-analyzer": "^3.6.0"
   },
   "scripts": {
@@ -67,7 +70,18 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "jest": "^24.9.0",
+    "jest-fetch-mock": "^3.0.3",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3",
     "webpack": "^4.41.5",
     "webpack-bundle-analyser": "^1.4.0"
+  },
+  "jest": {
+    "automock": false,
+    "setupFiles": [
+      "./setupJest.js"
+    ]
   }
 }

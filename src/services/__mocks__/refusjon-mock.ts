@@ -1,4 +1,4 @@
-import {Refusjon, TiltaksType} from '../types/refusjon';
+import {Refusjon} from '../../types/refusjon';
 
 const refusjonMock: Refusjon = {
     id: 'c9697a6f-f3fe-4436-a9d9-959ab6e5bcbe',
@@ -9,7 +9,7 @@ const refusjonMock: Refusjon = {
     veilederNavn: 'Jonas Trane',
     bedriftNavn: 'Kiwi Majorstuen',
     bedriftKontaktperson: 'Martine Loren',
-    feriedager: 1,
+    feriedager: 2,
     trekkFeriedager: 1500,
     sykedager: 2,
     sykepenger: 2000,
@@ -23,9 +23,9 @@ const refusjonMock: Refusjon = {
     satsArbgiverAvgift: 0.141,
     arbgiverAvgift: 3737,
     totalArbgiverUtgift: 33947,
-    satsRefusjon: 0.4,
+    refusjonsProsent: 40,
     refusjonsBelop: 13579
-}
+};
 
 
 export default refusjonMock;

@@ -3,7 +3,7 @@ import RefusjonSide from "./RefusjonSide/RefusjonSide";
 
 import BEMHelper from "./utils/bem";
 import Innloggingslinje from "./InnloggingBoundary/Innloggingslinje";
-import refusjonMock from "./mock/refusjon-mock";
+import refusjonMock from "./services/__mocks__/refusjon-mock";
 
 const cls = BEMHelper('background');
 

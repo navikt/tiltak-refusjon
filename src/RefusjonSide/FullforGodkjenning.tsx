@@ -7,7 +7,7 @@ import './FullforGodkjenning.less';
 import BEMHelper from "../utils/bem";
 import {Column, Container, Row} from "nav-frontend-grid";
 import Tekstomrade from 'nav-frontend-tekstomrade';
-import {Refusjon} from "../types/refusjon";
+import { Refusjon } from "../types/refusjon";
 
 const cls = BEMHelper('fullforGodkjenning');
 
