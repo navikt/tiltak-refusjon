@@ -6,8 +6,7 @@ import {Checkbox, CheckboxGruppe, Input, TextareaControlled} from 'nav-frontend-
 import './FullforGodkjenning.less';
 import BEMHelper from "../utils/bem";
 import {Column, Container, Row} from "nav-frontend-grid";
-import Tekstomrade from 'nav-frontend-tekstomrade';
-import { Refusjon } from "../types/refusjon";
+import {Refusjon, Varighet} from "../types/refusjon";
 
 const cls = BEMHelper('fullforGodkjenning');
 
@@ -40,7 +39,18 @@ class FullforGodkjenning extends React.Component<Props>  {
             </div>);
     };
 
+    visPeriode = () => {
+        const maaneder:number = this.props.refusjon.varighet.maaneder;
+        const dager:number = this.props.refusjon.varighet.dager;
+
+        if(maaneder !== 0){
+            return "(" + maaneder + " måneder" + (dager !== 0 ? " og " + dager + " dager)" : ")");
+        }
+        return dager !== 0 && "(" + dager + " dager)";
+    };
+
     render() {
+
         return (
             <div className={cls.element('container')}>
                 <Sidetittel className={cls.element('marginbottom')}>Refusjon</Sidetittel>
@@ -61,7 +71,7 @@ class FullforGodkjenning extends React.Component<Props>  {
                                 <Element>Periode:</Element>
                             </Column>
                             <Column md="8" sm="8" xs="8">
-                                { this.props.refusjon.fraDato.toDateString() } - {this.props.refusjon.tilDato.toLocaleDateString()}
+                                { this.props.refusjon.varighet.fraDato } - { this.props.refusjon.varighet.tilDato } {this.visPeriode()}
                             </Column>
                         </Row>
                         <Row className={cls.element('rad')}>

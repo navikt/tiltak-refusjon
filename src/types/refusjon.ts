@@ -1,8 +1,6 @@
 export interface Refusjon {
     id: string;
     tiltakstype: TiltaksType;
-    fraDato: Date;
-    tilDato: Date;
     deltakerNavn: String;
     veilederNavn: String;
     bedriftNavn: String;
@@ -23,6 +21,14 @@ export interface Refusjon {
     totalArbgiverUtgift: number;
     refusjonsProsent: number;
     refusjonsBelop: number;
+    varighet: Varighet;
+}
+
+export interface Varighet {
+    fraDato: String;
+    tilDato: String;
+    maaneder: number;
+    dager: number;
 }
 
 export type TiltaksType = 'Arbeidstrening' | 'Midlertidig lønnstilskudd' | 'Midlertidig lønnstilskudd';

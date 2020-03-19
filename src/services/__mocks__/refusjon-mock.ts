@@ -3,8 +3,6 @@ import {Refusjon} from '../../types/refusjon';
 const refusjonMock: Refusjon = {
     id: 'c9697a6f-f3fe-4436-a9d9-959ab6e5bcbe',
     tiltakstype: "Midlertidig lønnstilskudd",
-    fraDato: new Date(2020, 4, 1),
-    tilDato: new Date(2020, 6, 30),
     deltakerNavn: 'Mikke Mus',
     veilederNavn: 'Jonas Trane',
     bedriftNavn: 'Kiwi Majorstuen',
@@ -24,7 +22,8 @@ const refusjonMock: Refusjon = {
     arbgiverAvgift: 3737,
     totalArbgiverUtgift: 33947,
     refusjonsProsent: 40,
-    refusjonsBelop: 13579
+    refusjonsBelop: 13579,
+    varighet: {fraDato: "01.03.2020", tilDato: "06.06.2020", dager: 6, maaneder: 3}
 };
 
 
