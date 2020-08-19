@@ -1,7 +1,8 @@
 import * as React from 'react';
 import BEMHelper from "../utils/bem";
 import './RefusjonSide.less'
-import FullforGodkjenning from "./FullforGodkjenning";
+import FullforGodkjenningArbeidsgiver from "./FullforGodkjenningArbeidsgiver";
+import FullforGodkjenningSaksbehandler from "./FullforGodkjenningSaksbehandler";
 import Utregning from "./Utregning";
 import restService from "../services/rest-service"
 import {Refusjon, TiltaksType} from "../types/refusjon";
@@ -14,6 +15,8 @@ const refusjon: Refusjon = RefusjonInit;
 interface State {
     refusjon: Refusjon;
 }
+
+const saksbehandler = false;
 
 class RefusjonSide extends React.Component <{},State> {
 
@@ -30,16 +33,23 @@ class RefusjonSide extends React.Component <{},State> {
 
     refusjonMedId = (id: String) => {
         return restService.hentRefusjon("enId")
-            .then(promise => {
+            .then((promise: Refusjon) => {
                 console.log('tiltak: ', promise);
                 this.setState({refusjon: promise});
             })
     };
 
+    godkjenningComponent = () => {
+        if(saksbehandler){
+            return <FullforGodkjenningSaksbehandler refusjon={this.state.refusjon}/>
+        }
+        return <FullforGodkjenningArbeidsgiver refusjon={this.state.refusjon}/>
+    }
+
     render() {
         return (
             <div className={cls.element('container')}>
-                <FullforGodkjenning refusjon={this.state.refusjon}/>
+                {this.godkjenningComponent()}
                 <Utregning refusjon={this.state.refusjon}/>
             </div>
         );
