@@ -5,7 +5,7 @@ import FullforGodkjenningArbeidsgiver from "./FullforGodkjenningArbeidsgiver";
 import FullforGodkjenningSaksbehandler from "./FullforGodkjenningSaksbehandler";
 import Utregning from "./Utregning";
 import restService from "../services/rest-service"
-import {Refusjon, TiltaksType} from "../types/refusjon";
+import {Refusjon} from "../types/refusjon";
 import RefusjonInit from "../types/refusjonInit";
 
 const cls = BEMHelper('refusjonside');
