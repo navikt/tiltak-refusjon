@@ -178,7 +178,7 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                     <MediaQuery minWidth={700}>
                         <GraphRefusjonAvLonnIkon className={cls.element('ikon')} />
                     </MediaQuery>
-                    <div>Fastsatt refusjon</div>
+                    <div>Fastsatt refusjon av lønn</div>
                 </Column>
                 <Column md="6" sm="3" xs="6" className={cls.element('column__siste')}>
                     {props.refusjon.refusjonsProsent || 0} %

@@ -3,7 +3,7 @@ import {Normaltekst, Sidetittel} from "nav-frontend-typografi";
 import PanelBase, {Panel} from 'nav-frontend-paneler';
 import {Hovedknapp, Knapp} from 'nav-frontend-knapper';
 import {Checkbox, CheckboxGruppe, Input, TextareaControlled} from 'nav-frontend-skjema';
-import './FullforGodkjenning.less';
+import './FullforGodkjenningArbeidsgiver.less';
 import restService from "../services/rest-service"
 import BEMHelper from "../utils/bem";
 import {Refusjon} from "../types/refusjon";
@@ -127,15 +127,10 @@ class FullforGodkjenningArbeidsgiver extends React.Component<Props> {
                     {this.oppgiUtregningsfeil()}
                 </Panel>
 
-                <PanelBase border className={cls.element('bluepanel')}>
-                    <Normaltekst>Kiwi Majorstuen får utbetalt <b>{this.props.refusjon.refusjonsBelop} kr</b> i refusjon
-                        for denne tiltaksperioden.</Normaltekst>
-                </PanelBase>
-
                 <Hovedknapp className={cls.element('fullfoerknapp')}
                             htmlType="submit"
                             onClick={() => this.oppdaterRefusjon()}
-                >Fullfør refusjon</Hovedknapp>
+                >Behandle refusjon</Hovedknapp>
             </div>
         );
     }
