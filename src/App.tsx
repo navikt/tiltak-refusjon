@@ -1,32 +1,33 @@
-import * as React from 'react';
+import * as React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Forside from "./Forside/Forside";
+import Innloggingslinje from "./InnloggingBoundary/Innloggingslinje";
+import { basePath } from "./paths.json";
 import RefusjonSide from "./RefusjonSide/RefusjonSide";
 
-import BEMHelper from "./utils/bem";
-import Innloggingslinje from "./InnloggingBoundary/Innloggingslinje";
-import refusjonMock from "./services/__mocks__/refusjon-mock";
-
-const cls = BEMHelper('background');
-
 const innloggetSom = {
-    identifikator: "t115435",
-    erNavAnsatt: true,
-    organisasjoner: [{
-        bedriftNavn: "NAV",
-        bedriftNr: "12345"
-    }]
+  identifikator: "t115435",
+  erNavAnsatt: true,
+  organisasjoner: [
+    {
+      bedriftNavn: "NAV",
+      bedriftNr: "12345"
+    }
+  ]
 };
 
-
-class App extends React.Component {
-    render() {
-        return (
-            <div >
-                <Innloggingslinje innloggetBruker={innloggetSom}/>
-                <RefusjonSide/>
-            </div>
-        );
-    }
+function App() {
+  return (
+    <Router basename={basePath}>
+      <Innloggingslinje innloggetBruker={innloggetSom} />
+      <Route exact path="/">
+        <Forside />
+      </Route>
+      <Route exact path="/refusjon">
+        <RefusjonSide />
+      </Route>
+    </Router>
+  );
 }
 
 export default App;
-
