@@ -32,5 +32,4 @@ spec:
     outbound:
       rules:
         - application: tiltak-refusjon-api
-          namespace: arbeidsgiver
 
