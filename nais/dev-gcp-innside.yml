@@ -4,5 +4,5 @@ ingresses:
 login-url: "https://loginservice-q.nav.no/login?redirect=https://arbeidsgiver.dev-adeo.no/tiltak-refusjon"
 name: "tiltak-refusjon-innside"
 azure: true
-decorator-external-script: "https://app-q0.adeo.no/internarbeidsflatedecorator/v2/static/js/head.v2.min.js"
-decorator-external-styling: "https://app-q0.adeo.no/internarbeidsflatedecorator/v2/static/css/main.css"
+decorator-internal-script: "https://app-q0.adeo.no/internarbeidsflatedecorator/v2/static/js/head.v2.min.js"
+decorator-internal-styling: "https://app-q0.adeo.no/internarbeidsflatedecorator/v2/static/css/main.css"

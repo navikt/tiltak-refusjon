@@ -31,12 +31,12 @@ spec:
       value: {{{login-url}}}
     - name: APIGW_URL
       value: "http://tiltak-refusjon-api"
-    - name: DECORATOR_INTERNAL_URL
-      value: "{{{decorator-internal-url}}}"
-    - name: DECORATOR_EXTERNAL_SCRIPT
-      value: "{{{decorator-external-script}}}"
-    - name: DECORATOR_EXTERNAL_STYLING
-      value: "{{{decorator-external-styling}}}"
+    - name: DECORATOR_EXTERNAL_URL
+      value: "{{{decorator-external-url}}}"
+    - name: DECORATOR_INTERNAL_SCRIPT
+      value: "{{{decorator-internal-script}}}"
+    - name: DECORATOR_INTERNAL_STYLING
+      value: "{{{decorator-internal-styling}}}"
   accessPolicy:
     outbound:
       rules:

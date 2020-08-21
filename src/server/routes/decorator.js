@@ -28,8 +28,16 @@ const getDecorator = () =>
         reject(new Error(error));
       }
     };
+    if (process.env.DECORATOR_EXTERNAL_URL) {
+      requestDecorator(callback);
+    }else {
+      const data = {
+        NAV_SCRIPTS: `<script src="${process.env.DECORATOR_INTERNAL_SCRIPT}"/>`,
+        NAV_STYLES:  `<link rel=“stylesheet” href="${process.env.DECORATOR_INTERNAL_STYLING}"/>`,
 
-    requestDecorator(callback);
+      };
+      resolve(data);
+    }
   });
 
 module.exports = getDecorator;
