@@ -77,10 +77,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Installer avhengigheter (npm ci)
+      - name: Installer avhengigheter
         run:  yarn install --production --ignore-scripts --no-optional
 
-      - name: Bygg (npm run build)
+      - name: Bygg
         run: yarn build
 
       - name: Bygg, tag og push Docker-image
