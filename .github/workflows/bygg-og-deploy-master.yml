@@ -104,9 +104,9 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
-          RESOURCE: naiserator.yaml
+          RESOURCE: nais.yml
           PRINT_PAYLOAD: true
-          VARS: nais/dev-gcp.json
+          VARS: nais/dev-gcp.yml
 
   deploy-prod-sbs:
     name: Deploy til prod
@@ -121,6 +121,6 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
-          RESOURCE: naiserator.yaml
+          RESOURCE: nais.yml
           PRINT_PAYLOAD: true
-          VARS: nais/prod-gcp.json
+          VARS: nais/prod-gcp.yml
