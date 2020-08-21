@@ -2,6 +2,7 @@
   "name": "tiltak-refusjon",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/tiltak-refusjon",
   "dependencies": {
     "@craco/craco": "^5.6.4",
     "@navikt/fnrvalidator": "^1.1.0",
