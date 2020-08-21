@@ -28,4 +28,9 @@ spec:
       value: {{{selvbetjening-login-url}}}
     - name: APIGW_URL
       value: "http://tiltak-refusjon-api"
+  accessPolicy:
+    outbound:
+      rules:
+        - application: tiltak-refusjon-api
+          namespace: arbeidsgiver
 
