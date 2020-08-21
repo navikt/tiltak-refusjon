@@ -3,3 +3,5 @@ ingresses:
 login-url: "https://loginservice.nav.no/login?redirect=https://arbeidsgiver.adeo.no/tiltak-refusjon"
 name: tiltak-refusjon-innside
 azure: true
+decorator-external-script: "https://internarbeidsflatedecorator.nais.adeo.no/internarbeidsflatedecorator/v2/static/js/head.v2.min.js"
+decorator-external-styling: "https://internarbeidsflatedecorator.nais.adeo.no/internarbeidsflatedecorator/v2/static/css/main.css"

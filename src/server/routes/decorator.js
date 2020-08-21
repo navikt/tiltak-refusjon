@@ -2,14 +2,7 @@ const jsdom = require("jsdom");
 const request = require("request");
 
 const { JSDOM } = jsdom;
-let url = "";
-if (process.env.NAIS_CLUSTER_NAME === "prod-gcp") {
-  url =
-    "https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level4/no/";
-} else {
-  url =
-    "https://dekoratoren.dev.nav.no/?context=arbeidsgiver&redirectToApp=true&level=Level4/no/";
-}
+let url = process.env.DECORATOR_INTERNAL_URL;
 
 const requestDecorator = callback => request(url, callback);
 
