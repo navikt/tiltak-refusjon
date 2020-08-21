@@ -1,3 +1,5 @@
 {
-    "basePath": "/tiltak-refusjon"
+    "apiPath": "/tiltak-refusjon/api",
+    "basePath": "/tiltak-refusjon",
+    "redirectTilLoginPath": "/tiltak-refusjon/redirect-til-login"
 }

@@ -1,0 +1,2 @@
+ingress: "https://arbeidsgiver-q.nav.no/tiltak-refusjon"
+selvbetjening-login-url: "https://loginservice-q.nav.no/login?redirect=https://arbeidsgiver-q.nav.no/tiltak-refusjon"
