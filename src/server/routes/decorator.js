@@ -8,7 +8,7 @@ if (process.env.NAIS_CLUSTER_NAME === "prod-gcp") {
     "https://www.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level4/no/";
 } else {
   url =
-    "https://www.nav-q0.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level4/no/";
+    "https://www-q0.nav.no/dekoratoren/?context=arbeidsgiver&redirectToApp=true&level=Level4/no/";
 }
 
 const requestDecorator = callback => request(url, callback);
