@@ -10,7 +10,11 @@ spec:
   team: arbeidsgiver
   port: 3000
   ingresses:
-    - {{{ingress}}}
+    {{#each ingresses as |url|}}
+       - {{url}}
+    {{/each}}
+  # ingresses:
+  #   - {{{ingress}}}
   liveness:
     path: /tiltak-refusjon/internal/isAlive
     initialDelay: 5
