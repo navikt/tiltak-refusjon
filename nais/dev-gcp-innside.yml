@@ -1,0 +1,6 @@
+ingresses:
+    - "https://arbeidsgiver.dev-adeo.no/tiltak-refusjon"
+    - "https://arbeidsgiver.dev.adeo.no/tiltak-refusjon"
+login-url: "https://loginservice-q.nav.no/login?redirect=https://arbeidsgiver.dev-adeo.no/tiltak-refusjon"
+name: "tiltak-refusjon-innside"
+azure: true

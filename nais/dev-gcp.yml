@@ -1,6 +1,0 @@
-ingresses:
-    - "https://arbeidsgiver.dev.nav.no/tiltak-refusjon"
-    - "https://arbeidsgiver.dev-nav.no/tiltak-refusjon"
-    - "https://arbeidsgiver.dev-adeo.no/tiltak-refusjon"
-    - "https://arbeidsgiver.dev.adeo.no/tiltak-refusjon"
-selvbetjening-login-url: "https://loginservice-q.nav.no/login?redirect=https://arbeidsgiver-q.nav.no/tiltak-refusjon"

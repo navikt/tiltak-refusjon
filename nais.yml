@@ -1,7 +1,7 @@
 apiVersion: 'nais.io/v1alpha1'
 kind: 'Application'
 metadata:
-  name: tiltak-refusjon
+  name: {{{name}}}
   namespace: arbeidsgiver
   labels:
     team: arbeidsgiver
@@ -13,8 +13,11 @@ spec:
     {{#each ingresses as |url|}}
        - {{url}}
     {{/each}}
-  # ingresses:
-  #   - {{{ingress}}}
+{{#if azure}}
+  azure:
+    application:
+      enabled: true
+{{/if}}
   liveness:
     path: /tiltak-refusjon/internal/isAlive
     initialDelay: 5
@@ -25,11 +28,14 @@ spec:
     - name: NODE_EXTRA_CA_CERTS
       value: /etc/ssl/ca-bundle.pem
     - name: LOGIN_URL
-      value: {{{selvbetjening-login-url}}}
+      value: {{{login-url}}}
     - name: APIGW_URL
       value: "http://tiltak-refusjon-api"
   accessPolicy:
     outbound:
       rules:
         - application: tiltak-refusjon-api
-
+      {{#if azure}}
+      external:
+        - host: login.microsoftonline.com
+      {{/if}}

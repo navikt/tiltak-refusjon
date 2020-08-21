@@ -1,0 +1,5 @@
+ingresses:
+    - "https://arbeidsgiver.dev.nav.no/tiltak-refusjon"
+login-url: "https://loginservice-q.nav.no/login?redirect=https://arbeidsgiver.dev.nav.no/tiltak-refusjon"
+name: "tiltak-refusjon-utside"
+azure: false
