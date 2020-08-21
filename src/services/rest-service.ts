@@ -1,6 +1,5 @@
+import { apiPath } from '../paths.json';
 import { Refusjon } from "../types/refusjon";
-
-const API_URL = 'http://localhost:8070/tiltak-refusjon-api/refusjon';
 const HEADERS = {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
@@ -14,9 +13,7 @@ export interface RestService {
 
 const hentRefusjon = async (id: String): Promise<Refusjon> => {
 
-    console.log('url: ', API_URL);
-
-    return await fetch(`${API_URL}?id=${id}`, {
+    return await fetch(`${apiPath}/refusjon/fake`, {
         //mode: 'no-cors',
         //credentials: 'include',
         method: 'GET',
@@ -35,8 +32,6 @@ const hentRefusjon = async (id: String): Promise<Refusjon> => {
 };
 
 const lagreRefusjon = async (refusjon: Refusjon): Promise<Refusjon> => {
-
-    console.log('url: ', API_URL);
     console.log('Refusjon: ', refusjon);
 
     // if (avtale.godkjentAvDeltaker || avtale.godkjentAvArbeidsgiver || avtale.godkjentAvVeileder) { //TODO Sjekke på godkjenning

@@ -1,27 +1,20 @@
-const proxy = require('http-proxy-middleware');
-const whitelist = require('./whitelist');
-
-const brukLokalLogin = process.env.NODE_ENV === 'development' || process.env.REACT_APP_ON_HEROKU === 'true';
-
-const envProperties = {
-    APIGW_URL: process.env.APIGW_URL || 'http://localhost:8080',
-    APIGW_HEADER: process.env.APIGW_HEADER
-};
-
+const apiMockRoutes = require("./server/routes/apiMock");
+const apiProxyRoutes = require("./server/routes/apiProxy");
+const internalRoutes = require("./server/routes/internals");
+const loginRoutes = require("./server/routes/login");
+const settingsJs = require("./server/routes/settingsJs");
+/**
+ * Dette er configen som `craco start` bruker...
+ * @param app
+ */
 module.exports = function(app) {
-
-    const proxyConfig = {
-        changeOrigin: true,
-        pathRewrite: whitelist,
-        target: envProperties.APIGW_URL,
-        xfwd: true,
-    };
-
-    if (envProperties.APIGW_HEADER) {
-        proxyConfig.headers = {
-            'x-nav-apiKey': envProperties.APIGW_HEADER,
-        };
-    }
-
-    app.use('/refusjon', proxy(proxyConfig));
+  internalRoutes(app);
+  loginRoutes(app);
+  settingsJs(app);
+  if (process.env.REACT_APP_MOCK) {
+    //featureTogglesMock(app);
+    apiMockRoutes(app);
+  } else {
+    apiProxyRoutes(app);
+  }
 };
