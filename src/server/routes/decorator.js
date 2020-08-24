@@ -11,17 +11,11 @@ const getDecorator = () =>
         const { document } = new JSDOM(body).window;
         const prop = "innerHTML";
 
-        const data = {
-          NAV_SCRIPTS: document.getElementById("scripts")[prop],
-          NAV_STYLES: document.getElementById("styles")[prop],
-          NAV_SKIPLINKS: document.getElementById("skiplinks")[prop],
-          NAV_HEADING: document.getElementById("header-withmenu")[prop],
-          NAV_FOOTER: document.getElementById("footer-withmenu")[prop],
-          NAV_MENU_RESOURCES: document.getElementById("megamenu-resources")[
-            prop
-          ]
-        };
-        resolve(data);
+        resolve(setTemplate(document.getElementById("scripts")[prop],
+            document.getElementById("styles")[prop],
+            document.getElementById("skiplinks")[prop],
+            document.getElementById("header-withmenu")[prop],
+            document.getElementById("footer-withmenu")[prop]));
       } else {
         reject(new Error(error));
       }
@@ -29,12 +23,18 @@ const getDecorator = () =>
     if (process.env.DECORATOR_EXTERNAL_URL) {
       requestDecorator(callback);
     } else {
-      const data = {
-        NAV_SCRIPTS: `<script src="${process.env.DECORATOR_INTERNAL_SCRIPT}"></script>`,
-        NAV_STYLES:  `<link rel=“stylesheet” href="${process.env.DECORATOR_INTERNAL_STYLING}"/>`,
-      };
-      resolve(data);
+      resolve(setTemplate(`<script src="${process.env.DECORATOR_INTERNAL_SCRIPT}"></script>`,
+          `<link rel="stylesheet" href="${process.env.DECORATOR_INTERNAL_STYLING}"/>`,
+          '', '', ''));
     }
   });
+
+const setTemplate = (script, style, skiplinks, heading, footer) => ({
+  NAV_SCRIPTS: script,
+      NAV_STYLES: style,
+      NAV_SKIPLINKS: skiplinks,
+      NAV_HEADING: heading,
+      NAV_FOOTER: footer,
+});
 
 module.exports = getDecorator;
