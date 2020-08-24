@@ -2,9 +2,7 @@ const jsdom = require("jsdom");
 const request = require("request");
 
 const { JSDOM } = jsdom;
-let url = process.env.DECORATOR_INTERNAL_URL;
-
-const requestDecorator = callback => request(url, callback);
+const requestDecorator = callback => request(process.env.DECORATOR_EXTERNAL_URL, callback);
 
 const getDecorator = () =>
   new Promise((resolve, reject) => {
@@ -28,7 +26,7 @@ const getDecorator = () =>
         reject(new Error(error));
       }
     };
-    if (process.env.DECORATOR_EXTERNAL_URL ) {
+    if (process.env.DECORATOR_EXTERNAL_URL) {
       requestDecorator(callback);
     }else {
       const data = {
