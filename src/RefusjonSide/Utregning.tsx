@@ -12,7 +12,7 @@ import {ReactComponent as ArbeidIkon} from '@/assets/ikoner/arbeidsgiveravgift.s
 import { ReactComponent as GraphRefusjonAvLonnIkon } from '@/assets/ikoner/graphRefusjonAvLønn.svg';
 import BEMHelper from "../utils/bem";
 import './Utregning.less';
-import {Systemtittel, Undertittel} from "nav-frontend-typografi";
+import {Element, Normaltekst, Systemtittel, Undertittel} from "nav-frontend-typografi";
 import { Refusjon } from "../types/refusjon";
 
 const cls = BEMHelper('visUtregningenPanel');
@@ -24,8 +24,29 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
 
     <div className={cls.element('panel')}>
 
-        <Systemtittel>Vår utregning</Systemtittel>
+        <Systemtittel>Om tiltaket</Systemtittel>
+        <p/>
+        <div className={cls.element('kolonner')}>
+            <div className={cls.element('marginright_5pst')}>
+                <Element className={cls.element('marginbottom')}>Tiltak:</Element>
+                <Element className={cls.element('marginbottom')}>Periode:</Element>
+                <Element className={cls.element('marginbottom')}>Deltaker:</Element>
+                <Element className={cls.element('marginbottom')}>Veileder:</Element>
+                <Element className={cls.element('marginbottom')}>Arbeidsgiver:</Element>
+            </div>
+            <div className={cls.element('marginright_5pst')}>
+                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.tiltakstype}</Normaltekst>
+                <Normaltekst className={cls.element('marginbottom')}>
+                    {props.refusjon.varighet.fraDato} - {props.refusjon.varighet.tilDato} ({props.refusjon.varighet.maaneder} måneder)
+                </Normaltekst>
+                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.deltakerNavn}</Normaltekst>
+                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.veilederNavn}</Normaltekst>
+                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.bedriftNavn}</Normaltekst>
+            </div>
+        </div>
+        <div className={cls.element('marginbottom')}/>
 
+        <Systemtittel>Vår utregning</Systemtittel>
         <Panel border={false}>
         <Container fluid>
             <Row className={cls.element('rad')}>
