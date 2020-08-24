@@ -5,3 +5,4 @@ name: tiltak-refusjon-innside
 azure: true
 decorator-internal-script: "https://internarbeidsflatedecorator.nais.adeo.no/internarbeidsflatedecorator/v2/static/js/head.v2.min.js"
 decorator-internal-styling: "https://internarbeidsflatedecorator.nais.adeo.no/internarbeidsflatedecorator/v2/static/css/main.css"
+decorator-external-url: ""

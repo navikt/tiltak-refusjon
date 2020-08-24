@@ -28,7 +28,7 @@ const getDecorator = () =>
         reject(new Error(error));
       }
     };
-    if (process.env.DECORATOR_EXTERNAL_URL) {
+    if (process.env.DECORATOR_EXTERNAL_URL ) {
       requestDecorator(callback);
     }else {
       const data = {
