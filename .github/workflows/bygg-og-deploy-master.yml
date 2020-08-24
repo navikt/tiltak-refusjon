@@ -93,7 +93,7 @@ jobs:
     steps:
       - name: Sjekk ut kode
         uses: actions/checkout@v2
-      - name: Deploy til dev-gcp innside
+      - name: Deploy til dev-gcp utside
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
@@ -129,7 +129,7 @@ jobs:
     steps:
       - name: Sjekk ut kode
         uses: actions/checkout@v2
-      - name: Deploy til prod-gcp innside
+      - name: Deploy til prod-gcp utside
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
