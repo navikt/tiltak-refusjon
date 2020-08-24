@@ -32,7 +32,6 @@ const getDecorator = () =>
       const data = {
         NAV_SCRIPTS: `<script src="${process.env.DECORATOR_INTERNAL_SCRIPT}"></script>`,
         NAV_STYLES:  `<link rel=“stylesheet” href="${process.env.DECORATOR_INTERNAL_STYLING}"/>`,
-
       };
       resolve(data);
     }

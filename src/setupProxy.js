@@ -2,7 +2,6 @@ const apiMockRoutes = require("./server/routes/apiMock");
 const apiProxyRoutes = require("./server/routes/apiProxy");
 const internalRoutes = require("./server/routes/internals");
 const loginRoutes = require("./server/routes/login");
-const settingsJs = require("./server/routes/settingsJs");
 /**
  * Dette er configen som `craco start` bruker...
  * @param app
@@ -10,7 +9,6 @@ const settingsJs = require("./server/routes/settingsJs");
 module.exports = function(app) {
   internalRoutes(app);
   loginRoutes(app);
-  settingsJs(app);
   if (process.env.REACT_APP_MOCK) {
     //featureTogglesMock(app);
     apiMockRoutes(app);
