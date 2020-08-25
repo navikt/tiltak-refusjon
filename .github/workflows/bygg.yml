@@ -1,0 +1,60 @@
+name: Bygg master
+
+on:
+  push:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
+
+jobs:
+  bygg:
+    name: Bygg
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sjekk ut kode
+        uses: actions/checkout@v2
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Installer avhengigheter
+        run:  yarn install --production --ignore-scripts --no-optional
+
+#      - name: Kjør tester
+#        run: yarn test
+
+      - name: Bygg
+        run: yarn build
+
+      - uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq -r ./tiltak-refusjon.zip ./build
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: tiltak-refusjon
+          path: ./tiltak-refusjon.zip
+
+      - name: Trigger workflow i tiltak-refusjon-innside
+        if: github.ref == 'refs/heads/master'
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.PAT }}
+          script: |
+            github.actions.createWorkflowDispatch({
+              owner: 'navikt',
+              repo: 'tiltak-refusjon-loginproxy',
+              workflow_id: 'trigges-utenfra.yml',
+              ref: 'master'
+            });
