@@ -48,13 +48,8 @@ jobs:
 
       - name: Trigger workflow i tiltak-refusjon-innside
         if: github.ref == 'refs/heads/master'
-        uses: actions/github-script@v3
+        uses: benc-uk/workflow-dispatch@v1
         with:
-          github-token: ${{ secrets.PAT }}
-          script: |
-            github.actions.createWorkflowDispatch({
-              owner: 'navikt',
-              repo: 'tiltak-refusjon-innside',
-              workflow_id: 'bygg-og-deploy.yml',
-              ref: 'master'
-            });
+          workflow: Fetch frontend, bygg og deploy
+          repo: navikt/tiltak-refusjon-innside
+          token: ${{ secrets.PAT }}
