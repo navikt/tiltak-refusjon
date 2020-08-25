@@ -24,7 +24,7 @@ jobs:
               'navikt',
               'tiltak-refusjon-loginproxy',
               'trigges-utenfra.yml',
-              'master',
+              'master'
             });
 
   bygg:
