@@ -12,6 +12,7 @@ import restService from "../services/rest-service";
 import { Refusjon } from "../types/refusjon";
 import BEMHelper from "../utils/bem";
 import "./FullforGodkjenningArbeidsgiver.less";
+import {formaterDato} from "./Utregning";
 
 const cls = BEMHelper("fullforGodkjenning");
 
@@ -105,8 +106,8 @@ class FullforGodkjenningArbeidsgiver extends React.Component<Props> {
         <Panel border className={cls.element("marginbottom")}>
           <Normaltekst className={cls.element("marginbottom")}>
             Har deltakeren hatt ferie i peroden{" "}
-            {this.props.refusjon.varighet.fraDato} -{" "}
-            {this.props.refusjon.varighet.tilDato}?
+            {formaterDato(this.props.refusjon.fraDato)} -{" "}
+            {formaterDato(this.props.refusjon.tilDato)}?
           </Normaltekst>
           <div className={cls.element("knapprad")}>
             <Knapp

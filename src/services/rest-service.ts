@@ -13,7 +13,7 @@ export interface RestService {
 
 const hentRefusjon = async (id: String): Promise<Refusjon> => {
 
-    return await fetch(`${apiPath}/refusjon/fake`, {
+    return await fetch(`${apiPath}/refusjon/` + id, {
         //mode: 'no-cors',
         //credentials: 'include',
         method: 'GET',

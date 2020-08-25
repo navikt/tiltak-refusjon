@@ -28,11 +28,11 @@ class RefusjonSide extends React.Component <{},State> {
     }
 
     componentDidMount() {
-        this.refusjonMedId("enId");
+        this.refusjonMedId("2");
     }
 
     refusjonMedId = (id: String) => {
-        return restService.hentRefusjon("enId")
+        return restService.hentRefusjon(id.toString())
             .then((promise: Refusjon) => {
                 console.log('tiltak: ', promise);
                 this.setState({refusjon: promise});

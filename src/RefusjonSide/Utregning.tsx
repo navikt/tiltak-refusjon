@@ -14,11 +14,20 @@ import BEMHelper from "../utils/bem";
 import './Utregning.less';
 import {Element, Normaltekst, Systemtittel, Undertittel} from "nav-frontend-typografi";
 import { Refusjon } from "../types/refusjon";
+import moment from "moment";
 
 const cls = BEMHelper('visUtregningenPanel');
 const visTalletEller0 = (tallet?: number) => (tallet === 0 || tallet ? tallet : 0);
 const visSatsMedEttDesimal = (sats?: number) => (sats ? sats * 100 : 0).toFixed(1);
 const visAntallFeriedager = (feriedager?: number) => (feriedager === 1 ? ' 1 feriedag' : feriedager + ' feriedager');
+
+export const formaterDato = (dato: string): string => {
+    return moment(dato).format('DD. MMMM yyyy');
+};
+
+export const periode = (fraDato: string, tilDato: string): string => {
+    return moment(tilDato).diff(fraDato, "months").toFixed(1); //TODO Finpuss etter design-beslutning
+};
 
 const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
 
@@ -35,13 +44,13 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                 <Element className={cls.element('marginbottom')}>Arbeidsgiver:</Element>
             </div>
             <div className={cls.element('marginright_5pst')}>
-                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.tiltakstype}</Normaltekst>
+                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.tiltak}</Normaltekst>
                 <Normaltekst className={cls.element('marginbottom')}>
-                    {props.refusjon.varighet.fraDato} - {props.refusjon.varighet.tilDato} ({props.refusjon.varighet.maaneder} måneder)
+                    {formaterDato(props.refusjon.fraDato)} - {formaterDato(props.refusjon.tilDato)} ({periode(props.refusjon.fraDato, props.refusjon.tilDato)} måneder)
                 </Normaltekst>
-                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.deltakerNavn}</Normaltekst>
-                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.veilederNavn}</Normaltekst>
-                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.bedriftNavn}</Normaltekst>
+                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.deltaker}</Normaltekst>
+                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.veileder}</Normaltekst>
+                <Normaltekst className={cls.element('marginbottom')}>{props.refusjon.bedrift}</Normaltekst>
             </div>
         </div>
         <div className={cls.element('marginbottom')}/>
@@ -73,7 +82,7 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                     </div>
                 </Column>
                 <Column md="6" sm="6" xs="6" className={cls.element('column__siste')}>
-                    {visTalletEller0(props.refusjon.manedslonn)} kr
+                    {visTalletEller0(props.refusjon.månedslønn)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -90,7 +99,7 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                     -
                 </Column>
                 <Column md="3" sm="3" xs="3" className={cls.element('column__siste')}>
-                    {visTalletEller0(props.refusjon.trekkFeriedager)} kr
+                    {visTalletEller0(props.refusjon.trekkFeriedagerBeløp)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -117,7 +126,7 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                     </div>
                 </Column>
                 <Column md="6" sm="6" xs="6" className={cls.element('column__siste')}>
-                    {visTalletEller0(props.refusjon.nettoManedslonn)} kr
+                    {visTalletEller0(props.refusjon.nettoMånedslønn)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -131,7 +140,7 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                     </div>
                 </Column>
                 <Column md="2" sm="2" xs="2">
-                    ({visSatsMedEttDesimal(props.refusjon.satsArbgiverAvgift)}%)
+                    ({visSatsMedEttDesimal(props.refusjon.satsFeriepenger)}%)
                 </Column>
                 <Column md="1" sm="1" xs="1">
                     +
@@ -157,7 +166,7 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                     +
                 </Column>
                 <Column md="3" sm="3" xs="3" className={cls.element('column__siste')}>
-                    {visTalletEller0(props.refusjon.otpBelop)} kr
+                    {visTalletEller0(props.refusjon.beløpOtp)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -171,13 +180,13 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                     </div>
                 </Column>
                 <Column md="2" sm="2" xs="2">
-                    ({visSatsMedEttDesimal(props.refusjon.satsArbgiverAvgift)}%)
+                    ({visSatsMedEttDesimal(props.refusjon.satsArbeidsgiveravgift)}%)
                 </Column>
                 <Column md="1" sm="1" xs="1">
                     +
                 </Column>
                 <Column md="3" sm="3" xs="3" className={cls.element('column__siste')}>
-                    {visTalletEller0(props.refusjon.arbgiverAvgift)} kr
+                    {visTalletEller0(props.refusjon.arbeidsgiveravgift)} kr
                 </Column>
             </Row>
             <Row className={cls.element('rad')}>
@@ -191,7 +200,7 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                     =
                 </Column>
                 <Column md="3" sm="3" xs="3" className={cls.element('column__siste')}>
-                    {visTalletEller0(props.refusjon.totalArbgiverUtgift)} kr
+                    {visTalletEller0(props.refusjon.sumUtgifterArbeidsgiver)} kr
                 </Column>
             </Row>
             <Row className={classNames(cls.element('rad'), cls.element('rad__siste'))}>
@@ -202,7 +211,7 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                     <div>Fastsatt refusjon av lønn</div>
                 </Column>
                 <Column md="6" sm="3" xs="6" className={cls.element('column__siste')}>
-                    {props.refusjon.refusjonsProsent || 0} %
+                    {visSatsMedEttDesimal(props.refusjon.satsRefusjon || 0)} %
                 </Column>
             </Row>
             <Row className={classNames(cls.element('rad'), cls.element('rad__oppsummering'))}>
@@ -210,7 +219,7 @@ const Utregning: React.FunctionComponent<{ refusjon: Refusjon; }> = (props) => (
                     <Undertittel> Refusjon per måned:</Undertittel>
                 </Column>
                 <Column md="3" sm="3" xs="6" className={cls.element('column__siste')}>
-                    <Undertittel>{visTalletEller0(props.refusjon.refusjonsBelop)} kr</Undertittel>
+                    <Undertittel>{visTalletEller0(props.refusjon.refusjonPrMåned)} kr</Undertittel>
                 </Column>
             </Row>
         </Container>

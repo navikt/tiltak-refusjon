@@ -58,7 +58,7 @@ class FullforGodkjenningSaksbehandler extends React.Component<Props> {
                 </div>
 
                 <PanelBase border className={cls.element('bluepanel')}>
-                    <Normaltekst>Kiwi Majorstuen får utbetalt <b>{this.props.refusjon.refusjonsBelop} kr</b> i refusjon
+                    <Normaltekst>Kiwi Majorstuen får utbetalt <b>{this.props.refusjon.refusjonPrMåned} kr</b> i refusjon
                         for denne tiltaksperioden.</Normaltekst>
                 </PanelBase>
 

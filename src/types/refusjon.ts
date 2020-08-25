@@ -1,34 +1,35 @@
 export interface Refusjon {
     id: string;
-    tiltakstype: TiltaksType;
-    deltakerNavn: String;
-    veilederNavn: String;
-    bedriftNavn: String;
+    tiltak: tiltakstype;
+    deltaker: String;
+    veileder: String;
+    bedrift: String;
     bedriftKontaktperson: String
     feriedager: number;
-    trekkFeriedager: number;
+    trekkFeriedagerBeløp: number;
     sykepenger: number;
     sykedager: number;
     stillingsprosent: number;
-    manedslonn: number;
-    nettoManedslonn: number;
+    månedslønn: number;
+    nettoMånedslønn: number;
     satsFeriepenger: number;
     feriepenger: number;
     satsOtp: number;
-    otpBelop: number;
-    satsArbgiverAvgift: number;
-    arbgiverAvgift: number;
-    totalArbgiverUtgift: number;
-    refusjonsProsent: number;
-    refusjonsBelop: number;
-    varighet: Varighet;
+    beløpOtp: number;
+    satsArbeidsgiveravgift: number;
+    arbeidsgiveravgift: number;
+    sumUtgifterArbeidsgiver: number;
+    satsRefusjon: number;
+    refusjonPrMåned: number;
+    fraDato: string;
+    tilDato: string;
 }
 
 export interface Varighet {
-    fraDato: String;
-    tilDato: String;
-    maaneder: number;
+    fraDato: string;
+    tilDato: string;
+    måneder: number;
     dager: number;
 }
 
-export type TiltaksType = 'Arbeidstrening' | 'Midlertidig lønnstilskudd' | 'Midlertidig lønnstilskudd';
+export type tiltakstype = 'Arbeidstrening' | 'Midlertidig lønnstilskudd' | ' lønnstilskudd';
