@@ -54,7 +54,7 @@ jobs:
           script: |
             github.actions.createWorkflowDispatch({
               owner: 'navikt',
-              repo: 'tiltak-refusjon-loginproxy',
-              workflow_id: 'trigges-utenfra.yml',
+              repo: 'tiltak-refusjon-innside',
+              workflow_id: 'bygg-og-deploy.yml',
               ref: 'master'
             });
