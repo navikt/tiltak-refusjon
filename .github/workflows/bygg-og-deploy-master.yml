@@ -82,23 +82,23 @@ jobs:
           echo $GITHUB_TOKEN | docker login docker.pkg.github.com -u $GITHUB_REPOSITORY --password-stdin
           docker push $IMAGE_BASE
 
-  deploy-dev-gcp-innside:
-    name: Deploy til dev-gcp innside
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-    needs: bygg
-    steps:
-      - name: Sjekk ut kode
-        uses: actions/checkout@v2
-      - name: Deploy til dev-gcp innside
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-gcp
-          RESOURCE: nais.yml
-          PRINT_PAYLOAD: true
-          VARS: nais/dev-gcp-innside.yml
+#  deploy-dev-gcp-innside:
+#    name: Deploy til dev-gcp innside
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 3
+#    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+#    needs: bygg
+#    steps:
+#      - name: Sjekk ut kode
+#        uses: actions/checkout@v2
+#      - name: Deploy til dev-gcp innside
+#        uses: nais/deploy/actions/deploy@v1
+#        env:
+#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+#          CLUSTER: dev-gcp
+#          RESOURCE: nais.yml
+#          PRINT_PAYLOAD: true
+#          VARS: nais/dev-gcp-innside.yml
 
   deploy-dev-gcp-utside:
     name: Deploy til dev-gcp utside
@@ -118,23 +118,23 @@ jobs:
           PRINT_PAYLOAD: true
           VARS: nais/dev-gcp-utside.yml
           
-  deploy-prod-gcp-innside:
-    name: Deploy til prod-gcp innside
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-    needs: bygg
-    steps:
-      - name: Sjekk ut kode
-        uses: actions/checkout@v2
-      - name: Deploy til prod-gcp innside
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-gcp
-          RESOURCE: nais.yml
-          PRINT_PAYLOAD: true
-          VARS: nais/prod-gcp-innside.yml
+#  deploy-prod-gcp-innside:
+#    name: Deploy til prod-gcp innside
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 3
+#    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+#    needs: bygg
+#    steps:
+#      - name: Sjekk ut kode
+#        uses: actions/checkout@v2
+#      - name: Deploy til prod-gcp innside
+#        uses: nais/deploy/actions/deploy@v1
+#        env:
+#          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+#          CLUSTER: prod-gcp
+#          RESOURCE: nais.yml
+#          PRINT_PAYLOAD: true
+#          VARS: nais/prod-gcp-innside.yml
 
   deploy-prod-gcp-utside:
     name: Deploy til prod-gcp utside
