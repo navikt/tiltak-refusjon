@@ -18,7 +18,7 @@ jobs:
       - name: Gjør REST-kall
         uses: actions/github-script@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PAT }}
           script: |
             github.actions.createWorkflowDispatch({
               owner: 'navikt',
