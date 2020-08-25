@@ -11,6 +11,22 @@ env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/${{ github.event.repository.name }}:${{ github.sha }}
 
 jobs:
+  trigge-annet-repo:
+    name: "Trigg bygg i annet repo"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gjør REST-kall
+        uses: actions/github-script@0.5.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.actions.createWorkflowDispatch({
+              'navikt',
+              'tiltak-refusjon-loginproxy',
+              'trigges-utenfra.yml',
+              'master',
+            });
+
   bygg:
     name: Bygg
     runs-on: ubuntu-latest
