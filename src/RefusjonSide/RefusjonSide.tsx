@@ -3,19 +3,13 @@ import BEMHelper from "../utils/bem";
 import "./RefusjonSide.less";
 import FullforGodkjenningArbeidsgiver from "./FullforGodkjenningArbeidsgiver";
 import FullforGodkjenningSaksbehandler from "./FullforGodkjenningSaksbehandler";
-import { Refusjon } from "../types/refusjon";
 
 const cls = BEMHelper("refusjonside");
 
-
-
-interface State {
-  refusjon: Refusjon;
-}
-
 const saksbehandler = false;
 
-class RefusjonSide extends React.Component<{}, State> {
+class RefusjonSide extends React.Component {
+
   godkjenningComponent = () => {
     if (saksbehandler) {
       return <FullforGodkjenningSaksbehandler />;

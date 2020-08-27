@@ -37,8 +37,10 @@ class FullforGodkjenningSaksbehandler extends React.Component<{}, State> {
     });
   };
 
-  oppdaterRefusjon = () => {
-    //return restService.lagreRefusjon(this.props.refusjon);
+  oppdaterRefusjon = (oppdatertRefusjon: Refusjon) => {
+    return restService.lagreRefusjon(oppdatertRefusjon).then((promise: Refusjon) => {
+      this.setState({ refusjon: promise });
+    });
   };
 
   render() {
@@ -102,7 +104,7 @@ class FullforGodkjenningSaksbehandler extends React.Component<{}, State> {
         <Hovedknapp
           className={cls.element("fullfoerknapp")}
           htmlType="submit"
-          onClick={() => this.oppdaterRefusjon()}
+          onClick={() => this.oppdaterRefusjon(this.state.refusjon)}
         >
           Behandle refusjon
         </Hovedknapp>

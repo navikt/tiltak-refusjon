@@ -21,9 +21,8 @@ interface State {
   refusjon: Refusjon;
   visEndreFeriedager: boolean;
   visOppgiUtregningsfeil: boolean;
-
 }
-// feriedager: number;
+
 
 class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
 
@@ -192,7 +191,7 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
           <Hovedknapp
             className={cls.element("fullfoerknapp")}
             htmlType="submit"
-            onClick={() => console.log('Not implemented yet')}
+            onClick={() => this.oppdaterRefusjon(this.state.refusjon)}
           >
             Behandle refusjon
           </Hovedknapp>
