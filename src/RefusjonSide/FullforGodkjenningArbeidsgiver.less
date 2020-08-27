@@ -4,8 +4,6 @@
   &__container {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    border-right-style: groove;
     padding-right: 3%;
   }
 
@@ -48,5 +46,12 @@
   &__fullfoerknapp {
     margin-bottom: 15px;
     width: 284px;
+  }
+
+  @media (min-width: 768px) {
+    &__container {
+      width: 50%;
+      border-right-style: groove;
+    }
   }
 }

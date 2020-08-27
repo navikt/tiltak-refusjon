@@ -4,7 +4,7 @@ import {
   Checkbox,
   CheckboxGruppe,
   Input,
-  TextareaControlled
+  TextareaControlled,
 } from "nav-frontend-skjema";
 import { Normaltekst, Sidetittel } from "nav-frontend-typografi";
 import * as React from "react";
@@ -23,7 +23,7 @@ class FullforGodkjenningArbeidsgiver extends React.Component<Props> {
   state = {
     visEndreFeriedager: false,
     visOppgiUtregningsfeil: false,
-    feriedager: 0
+    feriedager: 0,
   };
 
   visBunntekstFeriedager = () => {
@@ -49,7 +49,7 @@ class FullforGodkjenningArbeidsgiver extends React.Component<Props> {
             bredde="S"
             // feil="Skriv feriedagene som tall"
             value={this.state.feriedager}
-            onChange={ev => {
+            onChange={(ev) => {
               this.setState({ feriedager: ev.target.value }); //TODO beregne på nytt i api'et
             }}
           />
@@ -155,7 +155,7 @@ class FullforGodkjenningArbeidsgiver extends React.Component<Props> {
                 this.setState({ visOppgiUtregningsfeil: false });
               }}
             >
-              Nei, alt ser riktig ut
+              Nei
             </Knapp>
           </div>
           {this.oppgiUtregningsfeil()}

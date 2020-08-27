@@ -1,24 +1,22 @@
-@import '~nav-frontend-core/less/_variabler';
+@import "~nav-frontend-core/less/_variabler";
 
 .innloggingslinje {
-    border-bottom-style: outset;
-    margin-left: 10%;
-    margin-right: 10%;
-    padding: 1rem;
+  border-bottom-style: outset;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+
+  &__identitetogloggut {
     display: flex;
     align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: white;
 
-    &__identitetogloggut {
-        display: flex;
-        align-items: center;
-
-        &__identitet {
-            padding-right: 1rem;
-        }
+    &__identitet {
+      padding-right: 1rem;
     }
-
-
+  }
 }
