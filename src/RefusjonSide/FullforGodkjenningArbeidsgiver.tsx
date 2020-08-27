@@ -34,12 +34,17 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
       visEndreFeriedager: false,
       visOppgiUtregningsfeil: false,
     };
-    // feriedager: 0
     this.refusjonMedId("2");
   }
 
   refusjonMedId = (id: string) => {
     return restService.hentRefusjon(id).then((promise: Refusjon) => {
+      this.setState({ refusjon: promise });
+    });
+  };
+
+  oppdaterRefusjon = (oppdatertRefusjon: Refusjon) => {
+    return restService.lagreRefusjon(oppdatertRefusjon).then((promise: Refusjon) => {
       this.setState({ refusjon: promise });
     });
   };
@@ -59,7 +64,7 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
     if (typeof antallFeriedager === 'number') {
       let oppdatertRefusjon: Refusjon = this.state.refusjon;
       oppdatertRefusjon.feriedager = antallFeriedager;
-      this.setState({refusjon: oppdatertRefusjon})
+      this.oppdaterRefusjon(oppdatertRefusjon)
     }
   };
 
@@ -74,8 +79,8 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
             inputMode="numeric"
             pattern="[0-9]*"
             bredde="S"
-            value={this.state.refusjon.feriedager}
-            onChange={(ev) => this.oppdatereFerieDager(parseInt(ev.target.value))}
+            value={(this.state.refusjon.feriedager === 0 ? '' : this.state.refusjon.feriedager)}
+            onChange={(ev) => this.oppdatereFerieDager(+ev.target.value)}
           />
           <p />
           {this.visBunntekstFeriedager()}
@@ -108,10 +113,6 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
         </div>
       )
     );
-  };
-
-  oppdaterRefusjon = () => {
-    return restService.lagreRefusjon(this.state.refusjon);
   };
 
   render() {
@@ -147,9 +148,7 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
                 mini
                 className={cls.element("knapp")}
                 onClick={() => {
-                  this.setState({ visEndreFeriedager: false });
-                  this.oppdatereFerieDager(0);
-                  //this.oppdaterRefusjon();
+                  this.setState({ visEndreFeriedager: true });
                 }}
               >
                 Nei
@@ -189,7 +188,7 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
           <Hovedknapp
             className={cls.element("fullfoerknapp")}
             htmlType="submit"
-            onClick={() => this.oppdaterRefusjon()}
+            onClick={() => console.log('Not implemented yet')}
           >
             Behandle refusjon
           </Hovedknapp>
