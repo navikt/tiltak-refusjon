@@ -2,8 +2,10 @@ export interface Refusjon {
     id: string;
     tiltak: tiltakstype;
     deltaker: String;
+    deltakerFnr: String;
     veileder: String;
     bedrift: String;
+    bedriftnummer: String;
     bedriftKontaktperson: String
     feriedager: number;
     trekkFeriedagerBeløp: number;

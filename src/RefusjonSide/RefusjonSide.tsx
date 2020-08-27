@@ -20,37 +20,22 @@ const saksbehandler = false;
 
 class RefusjonSide extends React.Component <{},State> {
 
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            refusjon
-        }
-    }
 
-    componentDidMount() {
-        this.refusjonMedId("2");
-    }
 
-    refusjonMedId = (id: String) => {
-        return restService.hentRefusjon(id.toString())
-            .then((promise: Refusjon) => {
-                console.log('tiltak: ', promise);
-                this.setState({refusjon: promise});
-            })
-    };
+
 
     godkjenningComponent = () => {
         if(saksbehandler){
-            return <FullforGodkjenningSaksbehandler refusjon={this.state.refusjon}/>
+            return <FullforGodkjenningSaksbehandler/>
         }
-        return <FullforGodkjenningArbeidsgiver refusjon={this.state.refusjon}/>
+        return <FullforGodkjenningArbeidsgiver/>
     }
 
     render() {
         return (
             <div className={cls.element('container')}>
                 {this.godkjenningComponent()}
-                <Utregning refusjon={this.state.refusjon}/>
+
             </div>
         );
     }

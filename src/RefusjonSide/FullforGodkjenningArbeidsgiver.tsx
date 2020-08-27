@@ -1,177 +1,198 @@
-import { Hovedknapp, Knapp } from "nav-frontend-knapper";
-import { Panel } from "nav-frontend-paneler";
+import {Hovedknapp, Knapp} from "nav-frontend-knapper";
+import {Panel} from "nav-frontend-paneler";
 import {
-  Checkbox,
-  CheckboxGruppe,
-  Input,
-  TextareaControlled
+    Checkbox,
+    CheckboxGruppe,
+    Input,
+    TextareaControlled
 } from "nav-frontend-skjema";
-import { Normaltekst, Sidetittel } from "nav-frontend-typografi";
+import {Normaltekst, Sidetittel} from "nav-frontend-typografi";
 import * as React from "react";
 import restService from "../services/rest-service";
-import { Refusjon } from "../types/refusjon";
+import {Refusjon} from "../types/refusjon";
 import BEMHelper from "../utils/bem";
 import "./FullforGodkjenningArbeidsgiver.less";
-import {formaterDato} from "./Utregning";
+import Utregning, {formaterDato} from "./Utregning";
+import refusjonInit from "../types/refusjonInit";
 
 const cls = BEMHelper("fullforGodkjenning");
 
-interface Props {
-  refusjon: Refusjon;
+interface State {
+    refusjon: Refusjon;
+    visEndreFeriedager: boolean;
+    visOppgiUtregningsfeil: boolean;
 }
+    // feriedager: number;
 
-class FullforGodkjenningArbeidsgiver extends React.Component<Props> {
-  state = {
-    visEndreFeriedager: false,
-    visOppgiUtregningsfeil: false,
-    feriedager: 0
-  };
+class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
 
-  visBunntekstFeriedager = () => {
-    if (this.state.feriedager > 0) {
-      return (
-        <Normaltekst className={cls.element("marginbottom")}>
-          Siden deltakeren har hatt {this.state.feriedager} feriedager, blir
-          utgiften for disse dagene fjernet i grunnlaget for refusjon.
-        </Normaltekst>
-      );
+    constructor(props: any) {
+        super(props);
+
+        this.state = {
+            refusjon: refusjonInit,
+            visEndreFeriedager: false,
+            visOppgiUtregningsfeil: false,
+        }
+            // feriedager: 0
+        this.refusjonMedId("2");
     }
-  };
 
-  endreFeriedager = () => {
-    return (
-      (this.state.visEndreFeriedager || this.state.feriedager > 0) && (
-        <div>
-          <p />
-          <Input
-            description="Hvor mange dager har deltakeren hatt ferie i perioden?"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            bredde="S"
-            // feil="Skriv feriedagene som tall"
-            value={this.state.feriedager}
-            onChange={ev => {
-              this.setState({ feriedager: ev.target.value }); //TODO beregne på nytt i api'et
-            }}
-          />
-          <p />
-          {this.visBunntekstFeriedager()}
-        </div>
-      )
-    );
-  };
+    refusjonMedId = (id: String) => {
+        return restService.hentRefusjon(id.toString())
+            .then((promise: Refusjon) => {
+                this.setState({refusjon: promise});
+            })
+    };
 
-  oppgiUtregningsfeil = () => {
-    return (
-      this.state.visOppgiUtregningsfeil && (
-        <div>
-          <CheckboxGruppe
-            className={cls.element("margintopbottom")}
-            legend="Hva mener du er feil?"
-          >
-            <Checkbox label={"Stillingprosent"} />
-            <Checkbox label={"Månedslønn"} />
-            <Checkbox label={"Sykepenger"} />
-            <Checkbox label={"Feriepenger"} />
-            <Checkbox label={"Obligatorisk tjenestepensjon"} />
-            <Checkbox label={"Arbeidsgiveravgift"} />
-            <Checkbox label={"Fastsatt refusjon"} />
-          </CheckboxGruppe>
-          <TextareaControlled
-            label="Oppgi begrunnelse for hvorfor dette er feil"
-            maxLength={1000}
-            defaultValue={""}
-          />
-        </div>
-      )
-    );
-  };
+    visBunntekstFeriedager = () => {
+        if (this.state.refusjon.feriedager > 0) {
+            return (
+                <Normaltekst className={cls.element("marginbottom")}>
+                    Siden deltakeren har hatt {this.state.refusjon.feriedager} feriedager, blir
+                    utgiften for disse dagene fjernet i grunnlaget for refusjon.
+                </Normaltekst>
+            );
+        }
+    };
 
-  oppdaterRefusjon = () => {
-    return restService.lagreRefusjon(this.props.refusjon);
-  };
+    endreFeriedager = () => {
+        return (
+            (this.state.visEndreFeriedager || this.state.refusjon.feriedager > 0) && (
+                <div>
+                    <p/>
+                    <Input
+                        description="Hvor mange dager har deltakeren hatt ferie i perioden?"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        bredde="S"
+                        // feil="Skriv feriedagene som tall"
+                        value={this.state.refusjon.feriedager}
+                        onChange={ev => {
+                            this.setState({feriedager: +ev.target.value}); //TODO beregne på nytt i api'et
+                        }}
+                    />
+                    <p/>
+                    {this.visBunntekstFeriedager()}
+                </div>
+            )
+        );
+    };
 
-  render() {
-    return (
-      <div className={cls.element("container")}>
-        <Sidetittel className={cls.element("marginbottom")}>
-          Refusjon
-        </Sidetittel>
-        <Normaltekst className={cls.element("marginbottom")}>
-          Før din bedrift får utbetalt pengene dere har rett til, må vi stille
-          noen spørsmål:
-        </Normaltekst>
+    oppgiUtregningsfeil = () => {
+        return (
+            this.state.visOppgiUtregningsfeil && (
+                <div>
+                    <CheckboxGruppe
+                        className={cls.element("margintopbottom")}
+                        legend="Hva mener du er feil?"
+                    >
+                        <Checkbox label={"Stillingprosent"}/>
+                        <Checkbox label={"Månedslønn"}/>
+                        <Checkbox label={"Sykepenger"}/>
+                        <Checkbox label={"Feriepenger"}/>
+                        <Checkbox label={"Obligatorisk tjenestepensjon"}/>
+                        <Checkbox label={"Arbeidsgiveravgift"}/>
+                        <Checkbox label={"Fastsatt refusjon"}/>
+                    </CheckboxGruppe>
+                    <TextareaControlled
+                        label="Oppgi begrunnelse for hvorfor dette er feil"
+                        maxLength={1000}
+                        defaultValue={""}
+                    />
+                </div>
+            )
+        );
+    };
 
-        {/* ENDRE FERIEDAGER */}
-        <Panel border className={cls.element("marginbottom")}>
-          <Normaltekst className={cls.element("marginbottom")}>
-            Har deltakeren hatt ferie i peroden{" "}
-            {formaterDato(this.props.refusjon.fraDato)} -{" "}
-            {formaterDato(this.props.refusjon.tilDato)}?
-          </Normaltekst>
-          <div className={cls.element("knapprad")}>
-            <Knapp
-              mini
-              className={cls.element("knapp")}
-              onClick={() => {
-                this.setState({ visEndreFeriedager: true });
-              }}
-            >
-              Ja
-            </Knapp>
-            <Knapp
-              mini
-              className={cls.element("knapp")}
-              onClick={() => {
-                this.setState({ visEndreFeriedager: false, feriedager: 0 });
-                this.props.refusjon.feriedager = this.state.feriedager;
-                //this.oppdaterRefusjon();
-              }}
-            >
-              Nei
-            </Knapp>
-          </div>
-          {this.endreFeriedager()}
-        </Panel>
+    oppdaterRefusjon = () => {
+        return restService.lagreRefusjon(this.state.refusjon);
+    };
 
-        {/* OPPGI REGNEFEIL */}
-        <Panel border className={cls.element("marginbottom")}>
-          <Normaltekst className={cls.element("marginbottom")}>
-            Er det noe du mener er feil i vår utregning?
-          </Normaltekst>
-          <div className={cls.element("knapprad")}>
-            <Knapp
-              mini
-              className={cls.element("knapp")}
-              onClick={() => {
-                this.setState({ visOppgiUtregningsfeil: true });
-              }}
-            >
-              Ja
-            </Knapp>
-            <Knapp
-              mini
-              className={cls.element("knapp")}
-              onClick={() => {
-                this.setState({ visOppgiUtregningsfeil: false });
-              }}
-            >
-              Nei, alt ser riktig ut
-            </Knapp>
-          </div>
-          {this.oppgiUtregningsfeil()}
-        </Panel>
+    render() {
+        return (
+            <>
+                <div className={cls.element("container")}>
+                    <Sidetittel className={cls.element("marginbottom")}>
+                        Refusjon
+                    </Sidetittel>
+                    <Normaltekst className={cls.element("marginbottom")}>
+                        Før din bedrift får utbetalt pengene dere har rett til, må vi stille
+                        noen spørsmål:
+                    </Normaltekst>
 
-        <Hovedknapp
-          className={cls.element("fullfoerknapp")}
-          htmlType="submit"
-          onClick={() => this.oppdaterRefusjon()}
-        >
-          Behandle refusjon
-        </Hovedknapp>
-      </div>
-    );
-  }
+                    {/* ENDRE FERIEDAGER */}
+                    <Panel border className={cls.element("marginbottom")}>
+                        <Normaltekst className={cls.element("marginbottom")}>
+                            Har deltakeren hatt ferie i peroden{" "}
+                            {formaterDato(this.state.refusjon.fraDato)} -{" "}
+                            {formaterDato(this.state.refusjon.tilDato)}?
+                        </Normaltekst>
+                        <div className={cls.element("knapprad")}>
+                            <Knapp
+                                mini
+                                className={cls.element("knapp")}
+                                onClick={() => {
+                                    this.setState({visEndreFeriedager: true});
+                                }}
+                            >
+                                Ja
+                            </Knapp>
+                            <Knapp
+                                mini
+                                className={cls.element("knapp")}
+                                onClick={() => {
+                                    this.setState({visEndreFeriedager: false, feriedager: 0});
+                                    this.state.refusjon.feriedager = this.state.feriedager;
+                                    //this.oppdaterRefusjon();
+                                }}
+                            >
+                                Nei
+                            </Knapp>
+                        </div>
+                        {this.endreFeriedager()}
+                    </Panel>
+
+                    {/* OPPGI REGNEFEIL */}
+                    <Panel border className={cls.element("marginbottom")}>
+                        <Normaltekst className={cls.element("marginbottom")}>
+                            Er det noe du mener er feil i vår utregning?
+                        </Normaltekst>
+                        <div className={cls.element("knapprad")}>
+                            <Knapp
+                                mini
+                                className={cls.element("knapp")}
+                                onClick={() => {
+                                    this.setState({visOppgiUtregningsfeil: true});
+                                }}
+                            >
+                                Ja
+                            </Knapp>
+                            <Knapp
+                                mini
+                                className={cls.element("knapp")}
+                                onClick={() => {
+                                    this.setState({visOppgiUtregningsfeil: false});
+                                }}
+                            >
+                                Nei, alt ser riktig ut
+                            </Knapp>
+                        </div>
+                        {this.oppgiUtregningsfeil()}
+                    </Panel>
+
+                    <Hovedknapp
+                        className={cls.element("fullfoerknapp")}
+                        htmlType="submit"
+                        onClick={() => this.oppdaterRefusjon()}
+                    >
+                        Behandle refusjon
+                    </Hovedknapp>
+                </div>
+                <Utregning refusjon={this.state.refusjon}/>
+            </>
+        );
+    }
 }
 
 export default FullforGodkjenningArbeidsgiver;

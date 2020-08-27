@@ -7,19 +7,40 @@ import './FullforGodkjenningSaksbehandler.less';
 import restService from "../services/rest-service"
 import BEMHelper from "../utils/bem";
 import {Refusjon} from "../types/refusjon";
+import refusjonInit from "../types/refusjonInit";
 
 const cls = BEMHelper('fullforGodkjenning');
 
-interface Props {
+interface State {
     refusjon: Refusjon;
+    visEndreFeriedager: boolean;
+    visOppgiUtregningsfeil: boolean;
+    feriedager: number;
 }
 
-class FullforGodkjenningSaksbehandler extends React.Component<Props> {
+class FullforGodkjenningSaksbehandler extends React.Component<{}, State> {
 
-    state = {};
+    constructor(props: any) {
+        super(props);
+
+        this.state = {
+            refusjon: refusjonInit,
+            visEndreFeriedager: false,
+            visOppgiUtregningsfeil: false,
+            feriedager: 0
+        }
+        this.refusjonMedId("2");
+    }
+
+    refusjonMedId = (id: String) => {
+        return restService.hentRefusjon(id.toString())
+            .then((promise: Refusjon) => {
+                this.setState({refusjon: promise});
+            })
+    };
 
     oppdaterRefusjon = () => {
-        return restService.lagreRefusjon(this.props.refusjon);
+        //return restService.lagreRefusjon(this.props.refusjon);
     };
 
     render() {
@@ -36,13 +57,13 @@ class FullforGodkjenningSaksbehandler extends React.Component<Props> {
                         <Normaltekst className={cls.element('marginbottom')}>Sykepenger utbetalt:</Normaltekst>
                     </div>
                     <div className={cls.element('marginright_5pst')}>
-                        <Element className={cls.element('marginbottom')}>{this.props.refusjon.feriepenger} kr</Element>
-                        <Element className={cls.element('marginbottom')}>{this.props.refusjon.sykepenger} kr</Element>
+                        <Element className={cls.element('marginbottom')}>{this.state.refusjon.feriepenger} kr</Element>
+                        <Element className={cls.element('marginbottom')}>{this.state.refusjon.sykepenger} kr</Element>
                     </div>
                     <div>
-                        <Normaltekst className={cls.element('marginbottom')}>{this.props.refusjon.feriedager} feriedager
+                        <Normaltekst className={cls.element('marginbottom')}>{this.state.refusjon.feriedager} feriedager
                             i perioden.</Normaltekst>
-                        <Normaltekst className={cls.element('marginbottom')}>{this.props.refusjon.feriedager} sykedager
+                        <Normaltekst className={cls.element('marginbottom')}>{this.state.refusjon.feriedager} sykedager
                             som NAV må dekke.</Normaltekst>
                     </div>
                 </div>
@@ -58,7 +79,7 @@ class FullforGodkjenningSaksbehandler extends React.Component<Props> {
                 </div>
 
                 <PanelBase border className={cls.element('bluepanel')}>
-                    <Normaltekst>Kiwi Majorstuen får utbetalt <b>{this.props.refusjon.refusjonPrMåned} kr</b> i refusjon
+                    <Normaltekst>Kiwi Majorstuen får utbetalt <b>{this.state.refusjon.refusjonPrMåned} kr</b> i refusjon
                         for denne tiltaksperioden.</Normaltekst>
                 </PanelBase>
 

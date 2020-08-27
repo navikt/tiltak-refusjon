@@ -36,13 +36,21 @@ const lagreRefusjon = async (refusjon: Refusjon): Promise<Refusjon> => {
 
     // if (avtale.godkjentAvDeltaker || avtale.godkjentAvArbeidsgiver || avtale.godkjentAvVeileder) { //TODO Sjekke på godkjenning
 
-    // const response = await fetch(API_URL, {
-    //     method: 'PUT',
-    //     body: JSON.stringify(refusjon),
-    //     headers: HEADERS
-    // });
-
-    return await hentRefusjon(refusjon.id);
+     return await fetch(`${apiPath}/refusjon/`, {
+         method: 'PUT',
+         body: JSON.stringify(refusjon),
+         headers: HEADERS
+     }).then(response => {
+         if (!response.ok) {
+             console.error('error: ', response);
+             throw new Error(response.statusText)
+         }
+         return response.json() as Promise<Refusjon>
+     }).catch(error => {
+             console.error('error2: ', error);
+             throw error
+         }
+     )
 };
 
 const restService: RestService = {
