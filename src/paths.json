@@ -1,8 +1,4 @@
 {
     "apiPath": "/tiltak-refusjon/api",
-    "basePath": "/tiltak-refusjon",
-    "redirectTilLoginPath": "/tiltak-refusjon/redirect-til-login",
-    "isAlivePath": "/tiltak-refusjon/internal/isAlive",
-    "isReadyPath": "/tiltak-refusjon/internal/isReady",
-    "settingsJsPath": "/tiltak-refusjon/static/js/settings.js"
+    "basePath": "/tiltak-refusjon"
 }
