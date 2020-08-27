@@ -1,5 +1,6 @@
 import { apiPath } from "../paths.json";
 import { Refusjon } from "../types/refusjon";
+
 const HEADERS = {
   "Content-Type": "application/json",
   Accept: "application/json",
@@ -11,10 +12,7 @@ export interface RestService {
 }
 
 const hentRefusjon = async (id: String): Promise<Refusjon> => {
-  console.log('uri: ', `${apiPath}/refusjon/` + id);
   return await fetch(`${apiPath}/refusjon/` + id, {
-    //mode: 'no-cors',
-    //credentials: 'include',
     method: "GET",
     headers: HEADERS,
   })
@@ -32,10 +30,6 @@ const hentRefusjon = async (id: String): Promise<Refusjon> => {
 };
 
 const lagreRefusjon = async (refusjon: Refusjon): Promise<Refusjon> => {
-  console.log("Refusjon: ", refusjon);
-
-  // if (avtale.godkjentAvDeltaker || avtale.godkjentAvArbeidsgiver || avtale.godkjentAvVeileder) { //TODO Sjekke på godkjenning
-
   return await fetch(`${apiPath}/refusjon/`, {
     method: "PUT",
     body: JSON.stringify(refusjon),

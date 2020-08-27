@@ -26,6 +26,7 @@ interface State {
 // feriedager: number;
 
 class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
+
   constructor(props: any) {
     super(props);
 
@@ -39,7 +40,9 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
 
   refusjonMedId = (id: string) => {
     return restService.hentRefusjon(id).then((promise: Refusjon) => {
-      this.setState({ refusjon: promise });
+      this.setState({ refusjon: promise }, () => {
+          this.setState({visEndreFeriedager: this.state.refusjon.feriedager > 0})
+      });
     });
   };
 
@@ -71,7 +74,7 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
 
   endreFeriedager = () => {
     return (
-      (this.state.visEndreFeriedager || this.state.refusjon.feriedager > 0) && (
+      this.state.visEndreFeriedager && (
         <div>
           <p />
           <Input
@@ -148,7 +151,8 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
                 mini
                 className={cls.element("knapp")}
                 onClick={() => {
-                  this.setState({ visEndreFeriedager: true });
+                  this.setState({ visEndreFeriedager: false });
+                  this.oppdatereFerieDager(0);
                 }}
               >
                 Nei

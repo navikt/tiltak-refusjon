@@ -8,6 +8,8 @@ import restService from "../services/rest-service";
 import BEMHelper from "../utils/bem";
 import { Refusjon } from "../types/refusjon";
 import refusjonInit from "../types/refusjonInit";
+import Utregning from "./Utregning";
+
 
 const cls = BEMHelper("fullforGodkjenning");
 
@@ -15,7 +17,6 @@ interface State {
   refusjon: Refusjon;
   visEndreFeriedager: boolean;
   visOppgiUtregningsfeil: boolean;
-  feriedager: number;
 }
 
 class FullforGodkjenningSaksbehandler extends React.Component<{}, State> {
@@ -26,7 +27,6 @@ class FullforGodkjenningSaksbehandler extends React.Component<{}, State> {
       refusjon: refusjonInit,
       visEndreFeriedager: false,
       visOppgiUtregningsfeil: false,
-      feriedager: 0,
     };
     this.refusjonMedId("2");
   }
@@ -43,7 +43,8 @@ class FullforGodkjenningSaksbehandler extends React.Component<{}, State> {
 
   render() {
     return (
-      <div className={cls.element("container")}>
+      <>
+        <div className={cls.element("container")}>
         <Sidetittel className={cls.element("marginbottom")}>
           Refusjon
         </Sidetittel>
@@ -106,6 +107,8 @@ class FullforGodkjenningSaksbehandler extends React.Component<{}, State> {
           Behandle refusjon
         </Hovedknapp>
       </div>
+        <Utregning refusjon={this.state.refusjon} />
+      </>
     );
   }
 }
