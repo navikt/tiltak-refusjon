@@ -1,60 +1,61 @@
-import { apiPath } from '../paths.json';
+import { apiPath } from "../paths.json";
 import { Refusjon } from "../types/refusjon";
 const HEADERS = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
+  "Content-Type": "application/json",
+  Accept: "application/json",
 };
 
-
 export interface RestService {
-    hentRefusjon: (id: string) => Promise<Refusjon>;
-    lagreRefusjon: (refusjon: Refusjon) => Promise<Refusjon>;
+  hentRefusjon: (id: string) => Promise<Refusjon>;
+  lagreRefusjon: (refusjon: Refusjon) => Promise<Refusjon>;
 }
 
 const hentRefusjon = async (id: String): Promise<Refusjon> => {
-
-    return await fetch(`${apiPath}/refusjon/` + id, {
-        //mode: 'no-cors',
-        //credentials: 'include',
-        method: 'GET',
-        headers: HEADERS
-    }).then(response => {
-        if (!response.ok) {
-            console.error('error: ', response);
-            throw new Error(response.statusText)
-        }
-        return response.json() as Promise<Refusjon>
-    }).catch(error => {
-        console.error('error2: ', error);
-        throw error
-    }
-    )
+  console.log('uri: ', `${apiPath}/refusjon/` + id);
+  return await fetch(`${apiPath}/refusjon/` + id, {
+    //mode: 'no-cors',
+    //credentials: 'include',
+    method: "GET",
+    headers: HEADERS,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        console.error("error: ", response);
+        throw new Error(response.statusText);
+      }
+      return response.json() as Promise<Refusjon>;
+    })
+    .catch((error) => {
+      console.error("error2: ", error);
+      throw error;
+    });
 };
 
 const lagreRefusjon = async (refusjon: Refusjon): Promise<Refusjon> => {
-    console.log('Refusjon: ', refusjon);
+  console.log("Refusjon: ", refusjon);
 
-    // if (avtale.godkjentAvDeltaker || avtale.godkjentAvArbeidsgiver || avtale.godkjentAvVeileder) { //TODO Sjekke på godkjenning
+  // if (avtale.godkjentAvDeltaker || avtale.godkjentAvArbeidsgiver || avtale.godkjentAvVeileder) { //TODO Sjekke på godkjenning
 
-     return await fetch(`${apiPath}/refusjon/`, {
-         method: 'PUT',
-         body: JSON.stringify(refusjon),
-         headers: HEADERS
-     }).then(response => {
-         if (!response.ok) {
-             console.error('error: ', response);
-             throw new Error(response.statusText)
-         }
-         return response.json() as Promise<Refusjon>
-     }).catch(error => {
-             console.error('error2: ', error);
-             throw error
-         }
-     )
+  return await fetch(`${apiPath}/refusjon/`, {
+    method: "PUT",
+    body: JSON.stringify(refusjon),
+    headers: HEADERS,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        console.error("error: ", response);
+        throw new Error(response.statusText);
+      }
+      return response.json() as Promise<Refusjon>;
+    })
+    .catch((error) => {
+      console.error("error2: ", error);
+      throw error;
+    });
 };
 
 const restService: RestService = {
-    hentRefusjon,
-    lagreRefusjon,
+  hentRefusjon,
+  lagreRefusjon,
 };
 export default restService;

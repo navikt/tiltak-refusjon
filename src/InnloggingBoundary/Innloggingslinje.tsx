@@ -15,7 +15,7 @@ const cls = BEMHelper("innloggingslinje");
 
 const Innloggingslinje: FunctionComponent<{
   innloggetBruker: InnloggetBruker;
-}> = props => {
+}> = (props) => {
   const bruker = props.innloggetBruker.identifikator;
   //const [brukBackupmeny, setBrukBackupmeny] = useState<boolean>(true);
   const brukBackupmeny = true;

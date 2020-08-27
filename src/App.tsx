@@ -7,29 +7,29 @@ import RefusjonSide from "./RefusjonSide/RefusjonSide";
 import { InternDekorator } from "./InternDekorator/InternDekorator";
 
 const innloggetSom = {
-    identifikator: "t115435",
-    erNavAnsatt: true,
-    organisasjoner: [
-        {
-            bedriftNavn: "NAV",
-            bedriftNr: "12345"
-        }
-    ]
+  identifikator: "t115435",
+  erNavAnsatt: true,
+  organisasjoner: [
+    {
+      bedriftNavn: "NAV",
+      bedriftNr: "12345",
+    },
+  ],
 };
 
 function App() {
-    return (
-        <Router basename={basePath}>
-            <InternDekorator/>
-            <Innloggingslinje innloggetBruker={innloggetSom}/>
-            <Route exact path="/">
-                <Forside/>
-            </Route>
-            <Route exact path="/refusjon">
-                <RefusjonSide/>
-            </Route>
-        </Router>
-    );
+  return (
+    <Router basename={basePath}>
+      <InternDekorator />
+      <Innloggingslinje innloggetBruker={innloggetSom} />
+      <Route exact path="/">
+        <Forside />
+      </Route>
+      <Route exact path="/refusjon">
+        <RefusjonSide />
+      </Route>
+    </Router>
+  );
 }
 
 export default App;
