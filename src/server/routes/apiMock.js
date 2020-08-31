@@ -16,7 +16,7 @@ module.exports = function(app) {
     next();
   });
 
-  app.get("/tiltak-refusjon/api/refusjon/fake", (req, res) => {
+  app.get("/api/refusjon/fake", (req, res) => {
     res.json({ id: "1" });
   });
 };
