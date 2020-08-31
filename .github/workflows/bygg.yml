@@ -53,3 +53,11 @@ jobs:
           workflow: Fetch frontend, bygg og deploy
           repo: navikt/tiltak-refusjon-innside
           token: ${{ secrets.PAT }}
+
+      - name: Trigger workflow i tiltak-refusjon-utside
+        if: github.ref == 'refs/heads/master'
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Fetch frontend, bygg og deploy
+          repo: navikt/tiltak-refusjon-utside
+          token: ${{ secrets.PAT }}
