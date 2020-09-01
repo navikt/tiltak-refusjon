@@ -23,7 +23,8 @@ const Forside: FunctionComponent<{}> = () => {
   }, []);
 
   const onSelected = (event: React.MouseEvent<HTMLDivElement>, id: string) => {
-    history.push(refusjon.toString().replace(":id", id));
+    const path = refusjon.toString().replace(":id", id);
+    history.push("/tiltak-refusjon" + path);
   };
 
   const getOversiktLabels = () => [

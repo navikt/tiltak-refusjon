@@ -55,7 +55,7 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: Trigger workflow i tiltak-refusjon-utside
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: Fetch frontend, bygg og deploy
