@@ -10,7 +10,7 @@ function App() {
       <Route exact path="/">
         <Forside />
       </Route>
-      <Route exact path="/refusjon">
+      <Route exact path="/refusjon/:id">
         <RefusjonSide />
       </Route>
     </Router>

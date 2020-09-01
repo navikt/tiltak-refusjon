@@ -27,6 +27,7 @@ const refusjonMock: Refusjon = {
   refusjonPrMåned: 13579,
   fraDato: "01.03.2020",
   tilDato: "06.06.2020",
+  opprettet_tidspunkt: "2020-08-31T15:38:59.572507",
 };
 
 export default refusjonMock;

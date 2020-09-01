@@ -23,9 +23,7 @@ interface State {
   visOppgiUtregningsfeil: boolean;
 }
 
-
 class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
-
   constructor(props: any) {
     super(props);
 
@@ -34,21 +32,31 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
       visEndreFeriedager: false,
       visOppgiUtregningsfeil: false,
     };
-    this.refusjonMedId("2");
+    const id = this.getRefusjonsId();
+    if (id) {
+      this.refusjonMedId(id);
+    }
   }
+
+  getRefusjonsId = (): string | undefined =>
+    window.location.pathname.split("/")[3];
 
   refusjonMedId = (id: string) => {
     return restService.hentRefusjon(id).then((promise: Refusjon) => {
       this.setState({ refusjon: promise }, () => {
-          this.setState({visEndreFeriedager: this.state.refusjon.feriedager > 0})
+        this.setState({
+          visEndreFeriedager: this.state.refusjon.feriedager > 0,
+        });
       });
     });
   };
 
   oppdaterRefusjon = (oppdatertRefusjon: Refusjon) => {
-    return restService.lagreRefusjon(oppdatertRefusjon).then((promise: Refusjon) => {
-      this.setState({ refusjon: promise });
-    });
+    return restService
+      .lagreRefusjon(oppdatertRefusjon)
+      .then((promise: Refusjon) => {
+        this.setState({ refusjon: promise });
+      });
   };
 
   visBunntekstFeriedager = () => {
@@ -63,13 +71,12 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
   };
 
   oppdatereFerieDager = (antallFeriedager: number) => {
-    if (typeof antallFeriedager === 'number') {
+    if (typeof antallFeriedager === "number") {
       let oppdatertRefusjon: Refusjon = this.state.refusjon;
       oppdatertRefusjon.feriedager = antallFeriedager;
-      this.oppdaterRefusjon(oppdatertRefusjon)
+      this.oppdaterRefusjon(oppdatertRefusjon);
     }
   };
-
 
   endreFeriedager = () => {
     return (
@@ -81,7 +88,11 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
             inputMode="numeric"
             pattern="[0-9]*"
             bredde="S"
-            value={(this.state.refusjon.feriedager === 0 ? '' : this.state.refusjon.feriedager)}
+            value={
+              this.state.refusjon.feriedager === 0
+                ? ""
+                : this.state.refusjon.feriedager
+            }
             onChange={(ev) => this.oppdatereFerieDager(+ev.target.value)}
           />
           <p />

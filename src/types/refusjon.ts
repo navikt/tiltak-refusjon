@@ -1,12 +1,12 @@
 export interface Refusjon {
   id: string;
   tiltak: tiltakstype;
-  deltaker: String;
-  deltakerFnr: String;
-  veileder: String;
-  bedrift: String;
-  bedriftnummer: String;
-  bedriftKontaktperson: String;
+  deltaker: string;
+  deltakerFnr: string;
+  veileder: string;
+  bedrift: string;
+  bedriftnummer: string;
+  bedriftKontaktperson: string;
   feriedager: number;
   trekkFeriedagerBeløp: number;
   sykepenger: number;
@@ -25,6 +25,7 @@ export interface Refusjon {
   refusjonPrMåned: number;
   fraDato: string;
   tilDato: string;
+  opprettet_tidspunkt: string;
 }
 
 export interface Varighet {

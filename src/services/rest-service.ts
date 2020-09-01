@@ -9,6 +9,7 @@ const HEADERS = {
 export interface RestService {
   hentRefusjon: (id: string) => Promise<Refusjon>;
   lagreRefusjon: (refusjon: Refusjon) => Promise<Refusjon>;
+  hentRefusjoner: () => Promise<Refusjon[]>;
 }
 
 const hentRefusjon = async (id: String): Promise<Refusjon> => {
@@ -28,6 +29,18 @@ const hentRefusjon = async (id: String): Promise<Refusjon> => {
       throw error;
     });
 };
+
+const hentRefusjoner = async (): Promise<Refusjon[]> =>
+  await fetch(`${apiPath}/refusjon`, {
+    method: "GET",
+    headers: HEADERS,
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      console.error("fetch failed", err);
+    });
 
 const lagreRefusjon = async (refusjon: Refusjon): Promise<Refusjon> => {
   return await fetch(`${apiPath}/refusjon/`, {
@@ -51,5 +64,6 @@ const lagreRefusjon = async (refusjon: Refusjon): Promise<Refusjon> => {
 const restService: RestService = {
   hentRefusjon,
   lagreRefusjon,
+  hentRefusjoner,
 };
 export default restService;

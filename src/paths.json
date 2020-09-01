@@ -1,4 +1,5 @@
 {
     "apiPath": "/tiltak-refusjon/api",
-    "basePath": "/tiltak-refusjon"
+    "basePath": "/tiltak-refusjon",
+    "refusjon": "/refusjon/:id"
 }

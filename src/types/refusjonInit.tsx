@@ -27,6 +27,7 @@ const refusjonInit: Refusjon = {
   refusjonPrMåned: 0,
   fraDato: "",
   tilDato: "",
+  opprettet_tidspunkt: "",
 };
 
 export default refusjonInit;

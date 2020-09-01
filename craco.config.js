@@ -9,9 +9,9 @@ const eslint = {
     rules: {
       // Det er en bug i denne sjekken som automatisk feiler på ÆØÅ
       // https://github.com/yannickcr/eslint-plugin-react/issues/1654
-      "react/jsx-pascal-case": "off"
-    }
-  }
+      "react/jsx-pascal-case": "off",
+    },
+  },
 };
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
   eslint,
   webpack: {
     alias: {
-      "@": path.resolve(__dirname, "src/")
-    }
-  }
+      "@": path.resolve(__dirname, "src/"),
+    },
+  },
 };
