@@ -3,8 +3,7 @@ const paths = require("../../paths");
 
 module.exports = function(app) {
   const proxyConfig = {
-    target: "http://localhost:8080",
-    pathRewrite: {"^/api": "/tiltak-refusjon-api"},
+    target: "http://localhost:8080"
   };
 
   app.use(paths.apiPath, createProxyMiddleware(proxyConfig));

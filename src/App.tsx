@@ -7,10 +7,10 @@ import RefusjonSide from "./RefusjonSide/RefusjonSide";
 function App() {
   return (
     <Router basename={basePath}>
-      <Route exact path="/tiltak-refusjon/">
+      <Route exact path="/">
         <Forside />
       </Route>
-      <Route exact path="/tiltak-refusjon/refusjon/:id">
+      <Route exact path="/refusjon/:id">
         <RefusjonSide />
       </Route>
     </Router>
