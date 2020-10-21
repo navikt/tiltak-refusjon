@@ -1,6 +1,6 @@
 export interface Refusjon {
   id: string;
-  tiltak: tiltakstype;
+  tiltak: Tiltakstype;
   deltaker: string;
   deltakerFnr: string;
   veileder: string;
@@ -35,7 +35,7 @@ export interface Varighet {
   dager: number;
 }
 
-export type tiltakstype =
+export type Tiltakstype =
   | "Arbeidstrening"
   | "Midlertidig lønnstilskudd"
   | " lønnstilskudd";
