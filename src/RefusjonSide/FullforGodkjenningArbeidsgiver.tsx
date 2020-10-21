@@ -8,12 +8,12 @@ import {
 } from "nav-frontend-skjema";
 import { Normaltekst, Sidetittel } from "nav-frontend-typografi";
 import * as React from "react";
-import restService from "../services/rest-service";
 import { Refusjon } from "../types/refusjon";
 import BEMHelper from "../utils/bem";
 import "./FullforGodkjenningArbeidsgiver.less";
 import Utregning, { formaterDato } from "./Utregning";
 import refusjonInit from "../types/refusjonInit";
+import {hentRefusjon,lagreRefusjon} from "../services/rest-service";
 
 const cls = BEMHelper("fullforGodkjenning");
 
@@ -23,7 +23,7 @@ interface State {
   visOppgiUtregningsfeil: boolean;
 }
 
-class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
+class FullforGodkjenningArbeidsgiver extends React.Component<{refusjonId: string}, State> {
   constructor(props: any) {
     super(props);
 
@@ -32,17 +32,13 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
       visEndreFeriedager: false,
       visOppgiUtregningsfeil: false,
     };
-    const id = this.getRefusjonsId();
-    if (id) {
-      this.refusjonMedId(id);
+    if (props.refusjonId) {
+      this.refusjonMedId(props.refusjonId);
     }
   }
 
-  getRefusjonsId = (): string | undefined =>
-    window.location.pathname.split("/")[3];
-
   refusjonMedId = (id: string) => {
-    return restService.hentRefusjon(id).then((promise: Refusjon) => {
+    return hentRefusjon(id).then((promise: Refusjon) => {
       this.setState({ refusjon: promise }, () => {
         this.setState({
           visEndreFeriedager: this.state.refusjon.feriedager > 0,
@@ -52,8 +48,7 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
   };
 
   oppdaterRefusjon = (oppdatertRefusjon: Refusjon) => {
-    return restService
-      .lagreRefusjon(oppdatertRefusjon)
+    return lagreRefusjon(oppdatertRefusjon)
       .then((promise: Refusjon) => {
         this.setState({ refusjon: promise });
       });
@@ -71,11 +66,9 @@ class FullforGodkjenningArbeidsgiver extends React.Component<{}, State> {
   };
 
   oppdatereFerieDager = (antallFeriedager: number) => {
-    if (typeof antallFeriedager === "number") {
-      let oppdatertRefusjon: Refusjon = this.state.refusjon;
-      oppdatertRefusjon.feriedager = antallFeriedager;
-      this.oppdaterRefusjon(oppdatertRefusjon);
-    }
+    let oppdatertRefusjon: Refusjon = this.state.refusjon;
+    oppdatertRefusjon.feriedager = antallFeriedager;
+    this.oppdaterRefusjon(oppdatertRefusjon);
   };
 
   endreFeriedager = () => {

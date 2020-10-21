@@ -2,7 +2,7 @@ import * as React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Forside from "./Forside/Forside";
 import { basePath } from "./paths.json";
-import RefusjonSide from "./RefusjonSide/RefusjonSide";
+import RefusjonSideArbeidsgiver from "./RefusjonSide/RefusjonSideArbeidsgiver";
 
 function App() {
   return (
@@ -10,8 +10,8 @@ function App() {
       <Route exact path="/">
         <Forside />
       </Route>
-      <Route exact path="/refusjon/:id">
-        <RefusjonSide />
+      <Route exact path="/refusjon/:refusjonId">
+        <RefusjonSideArbeidsgiver />
       </Route>
     </Router>
   );

@@ -4,7 +4,7 @@ import PanelBase from "nav-frontend-paneler";
 import { Hovedknapp } from "nav-frontend-knapper";
 import { Checkbox, CheckboxGruppe } from "nav-frontend-skjema";
 import "./FullforGodkjenningSaksbehandler.less";
-import restService from "../services/rest-service";
+import {hentRefusjon,lagreRefusjon} from "../services/rest-service";
 import BEMHelper from "../utils/bem";
 import { Refusjon } from "../types/refusjon";
 import refusjonInit from "../types/refusjonInit";
@@ -32,13 +32,13 @@ class FullforGodkjenningSaksbehandler extends React.Component<{}, State> {
   }
 
   refusjonMedId = (id: String) => {
-    return restService.hentRefusjon(id.toString()).then((promise: Refusjon) => {
+    return hentRefusjon(id.toString()).then((promise: Refusjon) => {
       this.setState({ refusjon: promise });
     });
   };
 
   oppdaterRefusjon = (oppdatertRefusjon: Refusjon) => {
-    return restService.lagreRefusjon(oppdatertRefusjon).then((promise: Refusjon) => {
+    return lagreRefusjon(oppdatertRefusjon).then((promise: Refusjon) => {
       this.setState({ refusjon: promise });
     });
   };

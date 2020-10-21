@@ -1,26 +1,24 @@
 import * as React from "react";
 import BEMHelper from "../utils/bem";
-import "./RefusjonSide.less";
-import FullforGodkjenningArbeidsgiver from "./FullforGodkjenningArbeidsgiver";
+import "./RefusjonSideArbeidsgiver.less";
 import FullforGodkjenningSaksbehandler from "./FullforGodkjenningSaksbehandler";
 import { Undertittel } from "nav-frontend-typografi";
 import { VenstreChevron } from "nav-frontend-chevron";
 import { useHistory } from "react-router";
+import {useState} from "react";
+import {Refusjon} from "../types/refusjon";
+import {useEffect} from "react";
+import {hentRefusjon} from "../services/rest-service";
+import { useParams } from 'react-router-dom';
 
 const cls = BEMHelper("refusjonside");
 
 const saksbehandler = false;
 
-const RefusjonSide = () => {
+const RefusjonSideSaksbehandler = () => {
   const history = useHistory();
+  const { refusjonId } = useParams();
   const tilbakeTilOversikt = () => history.goBack();
-
-  const godkjenningComponent = () => {
-    if (saksbehandler) {
-      return <FullforGodkjenningSaksbehandler />;
-    }
-    return <FullforGodkjenningArbeidsgiver />;
-  };
 
   return (
     <div className={cls.element("wrapper")}>
@@ -34,9 +32,9 @@ const RefusjonSide = () => {
         </div>
         <Undertittel>Tilbake til oversikt</Undertittel>
       </div>
-      <div className={cls.element("container")}>{godkjenningComponent()}</div>
+      <div className={cls.element("container")}>{<FullforGodkjenningSaksbehandler refusjonId={refusjonId} />}</div>
     </div>
   );
 };
 
-export default RefusjonSide;
+export default RefusjonSideSaksbehandler;

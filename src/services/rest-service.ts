@@ -6,13 +6,7 @@ const HEADERS = {
   Accept: "application/json",
 };
 
-export interface RestService {
-  hentRefusjon: (id: string) => Promise<Refusjon>;
-  lagreRefusjon: (refusjon: Refusjon) => Promise<Refusjon>;
-  hentRefusjoner: () => Promise<Refusjon[]>;
-}
-
-const hentRefusjon = async (id: String): Promise<Refusjon> => {
+export const hentRefusjon = async (id: String): Promise<Refusjon> => {
   return await fetch(`${apiPath}/refusjon/` + id, {
     method: "GET",
     headers: HEADERS,
@@ -30,7 +24,7 @@ const hentRefusjon = async (id: String): Promise<Refusjon> => {
     });
 };
 
-const hentRefusjoner = async (): Promise<Refusjon[]> =>
+export const hentRefusjoner = async (): Promise<Refusjon[]> =>
   await fetch(`${apiPath}/refusjon`, {
     method: "GET",
     headers: HEADERS,
@@ -42,7 +36,7 @@ const hentRefusjoner = async (): Promise<Refusjon[]> =>
       console.error("fetch failed", err);
     });
 
-const lagreRefusjon = async (refusjon: Refusjon): Promise<Refusjon> => {
+export const lagreRefusjon = async (refusjon: Refusjon): Promise<Refusjon> => {
   return await fetch(`${apiPath}/refusjon/`, {
     method: "PUT",
     body: JSON.stringify(refusjon),
@@ -61,9 +55,3 @@ const lagreRefusjon = async (refusjon: Refusjon): Promise<Refusjon> => {
     });
 };
 
-const restService: RestService = {
-  hentRefusjon,
-  lagreRefusjon,
-  hentRefusjoner,
-};
-export default restService;
