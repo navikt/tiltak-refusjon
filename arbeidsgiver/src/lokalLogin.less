@@ -1,0 +1,40 @@
+.login {
+    min-height: 30rem;
+    display: flex;
+    justify-content: center;
+    background-color: #f1f1f1;
+
+    &__boks {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 4rem 2rem;
+        border-radius: 8px;
+        background-color: white;
+        margin: 5rem 1rem;
+        border: 1px solid #c9c9c9;
+    }
+
+    &__input-wrapper {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media (min-width: 768px) {
+        &__boks {
+            padding: 4rem 10rem;
+            margin: 5rem 2rem;
+        }
+
+        &__input-wrapper {
+            flex-direction: row;
+        }
+        &__submit-knapp {
+            margin-left: 0.5rem;
+        }
+    }
+}

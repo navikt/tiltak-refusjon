@@ -1,0 +1,65 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: {{appname}}
+  namespace: arbeidsgiver
+  labels:
+    team: arbeidsgiver
+spec:
+  image: {{image}}
+  port: 3000
+  ingresses:
+    - {{ingress}}
+  liveness:
+    path: /isAlive
+    initialDelay: 10
+  readiness:
+    path: /isReady
+    initialDelay: 10
+  env:
+    {{#each env}}
+    - name: "{{@key}}"
+      value: "{{{this}}}"
+    {{/each}}
+    - name: HOST
+      value: {{ingress}}
+  accessPolicy:
+    outbound:
+      rules:
+        {{#each outbound}}
+          - application: "{{this}}"
+        {{/each}}
+      external:
+      {{#each host}}
+        - host: "{{this}}"
+      {{/each}}
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
+  {{#if labs}}
+  replicas:
+    min: 1
+    max: 1
+  {{/if}}
+  {{#unless labs}}
+  replicas:
+    min: 2
+    max: 2
+  tokenx:
+    enabled: true
+  idporten:
+    enabled: true
+    sidecar:
+      enabled: true
+      level: Level4
+      locale: nb
+      autoLogin: true
+      autoLoginIgnorePaths:
+        - /
+        - /assets/**
+        - /static/**
+        - /dekoratoren/**
+  envFrom:
+    - secret: tiltak-refusjon-session-encrypt-key
+  {{/unless}}

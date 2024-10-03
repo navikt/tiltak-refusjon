@@ -1,0 +1,13 @@
+appname: tiltak-refusjon-arbeidsgiver
+ingress: https://tiltak-refusjon.ekstern.dev.nav.no
+labs: false
+host:
+  - www.nav.no
+outbound:
+  - tiltak-refusjon-api
+env:
+  MILJO: dev-gcp
+  DECORATOR_URL: https://www.nav.no/dekoratoren
+  API_AUDIENCE: "dev-gcp:arbeidsgiver:tiltak-refusjon-api"
+  API_URL: http://tiltak-refusjon-api
+slack_alert_channel: arbeidsgiver-notifications-test
