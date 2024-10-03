@@ -9,10 +9,10 @@
         "build": "tsc && vite build",
         "test-and-build": "npm run test && npm run lint && npm run build",
         "preview": "vite preview",
-        "pretty-svg": "pretty-quick --staged --pattern \"**/*.*(js|json|jsx|ts|tsx|css|scss|less)\" && sh ./svgo.sh",
+        "pretty-svg": "pretty-quick --staged --pattern \"**/*.*(js|json|jsx|ts|tsx|css|scss|less)\" && sh ./arbeidsgiver/svgo.sh",
         "test": "vitest --environment=jsdom --run",
         "storybook": "storybook dev -p 6006",
-        "release": "NODE_OPTIONS=--openssl-legacy-provider cross-env GIT_COMMIT_HASH=$(git log -n 1 --pretty=format:'%h') node sentry.js",
+        "release": "NODE_OPTIONS=--openssl-legacy-provider cross-env GIT_COMMIT_HASH=$(git log -n 1 --pretty=format:'%h') node ./arbeidsgiver/sentry.js",
         "build-storybook": "storybook build"
     },
     "dependencies": {

@@ -5,9 +5,9 @@ ENV NODE_ENV $NODE_ENV
 
 ENV NODE_EXTRA_CA_CERTS /etc/ssl/ca-bundle.pem
 
-COPY ./server/node_modules ./node_modules
-COPY ./server/src .
-COPY ./dist ./build
+COPY ./saksbehandler/server/node_modules ./node_modules
+COPY ./saksbehandler/server/src .
+COPY ./saksbehandler/dist ./build
 
 EXPOSE 3000
 

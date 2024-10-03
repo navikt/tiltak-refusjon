@@ -1,9 +1,11 @@
-name: Bygg og deploy main
+name: Arbeidsgiver - Bygg og deploy
 
 on:
   push:
     branches:
       - 'main'
+    paths:
+      - 'arbeidsgiver/**'
   workflow_dispatch:
 
 env:
@@ -22,14 +24,17 @@ jobs:
       - name: Sjekk ut kode
         uses: actions/checkout@v4
       - name: Server yarn install
-        working-directory: ./server
+        working-directory: arbeidsgiver/server
         run: npm ci
       - name: Frontend install
         run: npm ci
+        working-directory: arbeidsgiver
       - name: Frontend build
         run: npm run test-and-build
+        working-directory: arbeidsgiver
       - name: Sett opp sentry release
         run: npm run release
+        working-directory: arbeidsgiver
       - name: Push docker image to GAR
         uses: nais/docker-build-push@v0
         id: docker-build-push
@@ -37,6 +42,7 @@ jobs:
           team: arbeidsgiver
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          dockerfile: arbeidsgiver/Dockerfile
 
   deploy-dev:
     name: Deploy til dev-gcp
@@ -52,8 +58,8 @@ jobs:
         uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
-          RESOURCE: .nais/nais.yml
-          VARS: .nais/dev.yml
+          RESOURCE: .nais/arbeidsgiver/nais.yml
+          VARS: .nais/arbeidsgiver/dev.yml
           VAR: image=${{ needs.bygg.outputs.image }}
 
   deploy-labs:
@@ -70,14 +76,15 @@ jobs:
         uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
-          RESOURCE: .nais/nais.yml
-          VARS: .nais/labs.yml
+          RESOURCE: .nais/arbeidsgiver/nais.yml
+          VARS: .nais/arbeidsgiver/labs.yml
           VAR: image=${{ needs.bygg.outputs.image }}
 
   deploy-prod:
     name: Deploy til prod-gcp
     runs-on: ubuntu-latest
-    needs: bygg
+    needs: [bygg, deploy-dev, deploy-labs]
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: read
       id-token: write
@@ -88,6 +95,6 @@ jobs:
         uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: prod-gcp
-          RESOURCE: .nais/nais.yml
-          VARS: .nais/prod.yml
+          RESOURCE: .nais/arbeidsgiver/nais.yml
+          VARS: .nais/arbeidsgiver/prod.yml
           VAR: image=${{ needs.bygg.outputs.image }}

@@ -1,15 +1,17 @@
-name: Bygg og deploy
+name: Saksbehandler - Bygg og deploy
 
 on:
   push:
     branches:
       - 'main'
+    paths:
+      - 'saksbehandler/**'
 
 jobs:
   bygg:
     permissions:
       contents: read
-      id-token: write    
+      id-token: write
     name: Bygg og deploy
     runs-on: ubuntu-latest
     outputs:
@@ -23,11 +25,13 @@ jobs:
           node-version: 20
       - name: Frontend npm install
         run: npm ci
+        working-directory: saksbehandler
       - name: Server npm install
-        working-directory: ./server
+        working-directory: saksbehandler/server
         run: npm ci
       - name: Frontend - test, lint og bygg
         run: npm run test-and-build
+        working-directory: saksbehandler
       - name: Push docker image to GAR
         uses: nais/docker-build-push@v0
         id: docker-build-push
@@ -35,6 +39,7 @@ jobs:
           team: arbeidsgiver
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          dockerfile: saksbehandler/Dockerfile
 
   deploy-dev:
     name: Deploy til dev-gcp
@@ -50,7 +55,7 @@ jobs:
         uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
-          RESOURCE: .nais/nais-dev-gcp.yml
+          RESOURCE: .nais/saksbehandler/nais-dev-gcp.yml
           VAR: image=${{ needs.bygg.outputs.image }}
 
   deploy-labs:
@@ -67,13 +72,14 @@ jobs:
         uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
-          RESOURCE: .nais/nais-dev-gcp-labs.yml
+          RESOURCE: .nais/saksbehandler/nais-dev-gcp-labs.yml
           VAR: image=${{ needs.bygg.outputs.image }}
 
   deploy-prod:
     name: Deploy til prod-gcp
     runs-on: ubuntu-latest
-    needs: bygg
+    needs: [bygg, deploy-dev, deploy-labs]
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: read
       id-token: write
@@ -84,5 +90,5 @@ jobs:
         uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: prod-gcp
-          RESOURCE: .nais/nais-prod-gcp.yml
+          RESOURCE: .nais/saksbehandler/nais-prod-gcp.yml
           VAR: image=${{ needs.bygg.outputs.image }}
