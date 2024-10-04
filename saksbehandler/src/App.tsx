@@ -11,10 +11,12 @@ import { FeatureToggleProvider } from './featureToggles/FeatureToggleProvider';
 import { FilterProvider } from './refusjon/oversikt/FilterContext';
 import Korreksjon from './KorreksjonSide/Korreksjon';
 import ErrorBoundary from './ErrorBoundary';
+import MinKomponent from "~/min-komponent";
 
 function App() {
     return (
         <BrowserRouter>
+            <MinKomponent />
             <ScrollToTop />
             <AdvarselBannerTestversjon />
             <InternflateDekoratør />

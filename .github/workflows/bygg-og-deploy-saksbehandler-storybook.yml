@@ -26,10 +26,8 @@ jobs:
           node-version: 20
       - name: Frontend npm install
         run: npm ci
-        working-directory: saksbehandler
       - name: Frontend - test, lint og bygg
-        run: npm run build-storybook
-        working-directory: saksbehandler
+        run: npm run build-storybook -w saksbehandler
       - name: Push docker image to GAR
         uses: nais/docker-build-push@v0
         id: docker-build-push
