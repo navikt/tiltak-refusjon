@@ -114,7 +114,6 @@ export const merkForUnntakOmInntekterFremITid = async (refusjonId: string, merki
     return response.data;
 };
 
-
 export const opprettKorreksjonsutkast = async (
     refusjonId: string,
     korreksjonsgrunner: Korreksjonsgrunn[],

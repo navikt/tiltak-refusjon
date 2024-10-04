@@ -7,7 +7,9 @@ import { BodyShort, Label } from '@navikt/ds-react';
 import sumBy from 'lodash.sumby';
 import InntekterKunFraTiltaketSvar from './InntekterKunFraTiltaketSvar';
 
-const HarTattStillingTilAlleInntektsLinjerGammel: FunctionComponent<{ refusjonsgrunnlag: Refusjonsgrunnlag }> = (props) => {
+const HarTattStillingTilAlleInntektsLinjerGammel: FunctionComponent<{ refusjonsgrunnlag: Refusjonsgrunnlag }> = (
+    props
+) => {
     if (!props.refusjonsgrunnlag.inntektsgrunnlag) {
         return null;
     }
@@ -23,7 +25,7 @@ const HarTattStillingTilAlleInntektsLinjerGammel: FunctionComponent<{ refusjonsg
                 Er inntektene som vi har hentet ({formatterPenger(sumInntekterOpptjentIPeriode)}) kun fra tiltaket{' '}
                 {tiltakstypeTekst[props.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}?{' '}
             </Label>
-            <InntekterKunFraTiltaketSvar inntekterKunFraTiltaket={props.refusjonsgrunnlag.inntekterKunFraTiltaket}/>
+            <InntekterKunFraTiltaketSvar inntekterKunFraTiltaket={props.refusjonsgrunnlag.inntekterKunFraTiltaket} />
             {props.refusjonsgrunnlag.endretBruttoLønn !== null &&
                 props.refusjonsgrunnlag.endretBruttoLønn !== undefined && (
                     <>

@@ -8,7 +8,10 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const schema = z.object({
-    merking: z.coerce.number({ invalid_type_error: 'Må være tall' }).min(1, 'Må være mer en 1').max(12, 'Må være mindre enn 12')
+    merking: z.coerce
+        .number({ invalid_type_error: 'Må være tall' })
+        .min(1, 'Må være mer en 1')
+        .max(12, 'Må være mindre enn 12'),
 });
 
 type FormFields = z.infer<typeof schema>;

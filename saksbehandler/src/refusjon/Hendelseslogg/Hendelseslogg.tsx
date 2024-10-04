@@ -15,16 +15,17 @@ type Props = {
 };
 const cls = BEMHelper('hendelseslogg');
 
-const hendelseVarselTekst = (varsel:  HendelseMedVisningsstatus) : string => {
-    let tekst = hendelseTekst[varsel.event]
-    if(varsel.event === "FristForlenget" && varsel.utførtAv === 'ARBEIDSGIVER'){
-        tekst ="Krysset av for fravær"
+const hendelseVarselTekst = (varsel: HendelseMedVisningsstatus): string => {
+    let tekst = hendelseTekst[varsel.event];
+    if (varsel.event === 'FristForlenget' && varsel.utførtAv === 'ARBEIDSGIVER') {
+        tekst = 'Krysset av for fravær';
     }
-    return `${tekst} ${varsel.metadata && 'antallMndFremITid' in varsel.metadata 
-        ? `(${varsel.metadata.antallMndFremITid} måneder)`
-        : ''
-    }`    
-}
+    return `${tekst} ${
+        varsel.metadata && 'antallMndFremITid' in varsel.metadata
+            ? `(${varsel.metadata.antallMndFremITid} måneder)`
+            : ''
+    }`;
+};
 
 interface HendelseMedVisningsstatus extends Hendelse {
     skjules: boolean;
@@ -147,7 +148,7 @@ const HendelsesLogg: FunctionComponent<Props> = (props) => {
                                                             title={formatterDato(varsel.tidspunkt)}
                                                             grå={varsel.skjules}
                                                         >
-                                                            {hendelseVarselTekst(varsel)}                                              
+                                                            {hendelseVarselTekst(varsel)}
                                                         </UtgråetTekst>
                                                     </span>
                                                 </div>

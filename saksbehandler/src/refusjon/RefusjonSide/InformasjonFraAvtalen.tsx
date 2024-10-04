@@ -9,7 +9,6 @@ import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import Rad from '@/komponenter/Rad/Rad';
 import Boks from '@/komponenter/Boks/Boks';
 
-
 const InformasjonFraAvtalen: FunctionComponent<{
     tilskuddsgrunnlag: Tilskuddsgrunnlag;
     fristForGodkjenning?: string;
@@ -22,19 +21,19 @@ const InformasjonFraAvtalen: FunctionComponent<{
     const refusjonsnummer = `${props.tilskuddsgrunnlag.avtaleNr}-${props.tilskuddsgrunnlag.løpenummer}`;
 
     return (
-        <Boks variant='grå'>
+        <Boks variant="grå">
             <Heading size="small">Informasjon hentet fra avtalen</Heading>
             <VerticalSpacer rem={1} />
             <Rad>
                 <EksternLenke href={avtaleLenke}>
-                        Avtale om {tiltakstypeTekst[props.tilskuddsgrunnlag.tiltakstype]}
+                    Avtale om {tiltakstypeTekst[props.tilskuddsgrunnlag.tiltakstype]}
                 </EksternLenke>
             </Rad>
             <Rad noSpace={true}>
                 <Label>Bedriftsnavn: </Label>
                 <BodyShort size="small">{props.tilskuddsgrunnlag.bedriftNavn}</BodyShort>
             </Rad>
-            <Rad>    
+            <Rad>
                 <Label>Virksomhetsnummer: </Label>
                 <BodyShort size="small">{props.tilskuddsgrunnlag.bedriftNr}</BodyShort>
             </Rad>

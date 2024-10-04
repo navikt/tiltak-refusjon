@@ -43,8 +43,8 @@ const UtregningsradHvaInngårIDette: FunctionComponent<Props> = (props) => {
                                     <Table.DataCell>
                                         {erFerietrekkForAnnenMåned && (
                                             <HelpText>
-                                                Dette ferietrekket hører til en annen måned enn refusjonen og vil
-                                                ikke bli trukket her.
+                                                Dette ferietrekket hører til en annen måned enn refusjonen og vil ikke
+                                                bli trukket her.
                                             </HelpText>
                                         )}
                                     </Table.DataCell>

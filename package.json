@@ -5,11 +5,17 @@
         "arbeidsgiver",
         "saksbehandler"
     ],
+    "scripts": {
+        "lint": "eslint --max-warnings=0",
+        "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\""
+    },
     "dependencies": {
         "react": "^18.2.0"
     },
     "devDependencies": {
         "@types/react": "^18.2.12",
+        "eslint": "^8.57.1",
+        "eslint-config-react-app": "^7.0.1",
         "prettier": "^3.3.3"
     }
 }

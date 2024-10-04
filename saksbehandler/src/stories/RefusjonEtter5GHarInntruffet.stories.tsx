@@ -1,7 +1,7 @@
 import { InnloggetBruker } from '@/bruker/BrukerContextType';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import { Refusjon } from '@/refusjon/refusjon';
-import { RefusjonStatus, Tiltak  } from '@/refusjon/refusjon';
+import { RefusjonStatus, Tiltak } from '@/refusjon/refusjon';
 import { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
@@ -16,10 +16,10 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const innloggetBruker : InnloggetBruker = {
+const innloggetBruker: InnloggetBruker = {
     harKorreksjonTilgang: false,
-    identifikator: "123456"
-}
+    identifikator: '123456',
+};
 
 const etter5GRefusjon: Refusjon = {
     harInntektIAlleMåneder: true,

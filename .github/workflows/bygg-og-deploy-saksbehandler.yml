@@ -28,6 +28,10 @@ jobs:
       - name: Server npm install
         run: npm ci
         working-directory: saksbehandler/server
+      - name: Prettier
+        run: npm run prettier
+      - name: Linting
+        run: npm run lint
       - name: Frontend - test, lint og bygg
         run: npm run test-and-build -w saksbehandler
       - name: Push docker image to GAR

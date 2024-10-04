@@ -1,7 +1,8 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent } from 'react';
 
-
-const InntekterKunFraTiltaketSvar  : FunctionComponent<{inntekterKunFraTiltaket : boolean | undefined}> = ({inntekterKunFraTiltaket}) => {
+const InntekterKunFraTiltaketSvar: FunctionComponent<{ inntekterKunFraTiltaket: boolean | undefined }> = ({
+    inntekterKunFraTiltaket,
+}) => {
     const svar = () => {
         switch (inntekterKunFraTiltaket) {
             case true:
@@ -13,8 +14,6 @@ const InntekterKunFraTiltaketSvar  : FunctionComponent<{inntekterKunFraTiltaket 
         }
     };
 
-    return  (
-        <p>{svar()}</p>
-    )
-}
+    return <p>{svar()}</p>;
+};
 export default InntekterKunFraTiltaketSvar;

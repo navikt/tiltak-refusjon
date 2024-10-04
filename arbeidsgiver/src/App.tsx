@@ -13,7 +13,7 @@ import Refusjon from './refusjon/RefusjonSide/Refusjon';
 import { registrereBesok } from './utils/amplitude-utils';
 import RefusjonProvider from './RefusjonProvider';
 import { FilterProvider } from './refusjon/oversikt/FilterContext';
-import MinKomponent from "~/min-komponent";
+import MinKomponent from '~/min-komponent';
 
 function App() {
     useEffect(() => {

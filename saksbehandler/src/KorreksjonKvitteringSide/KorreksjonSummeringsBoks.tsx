@@ -33,9 +33,11 @@ const KorreksjonSummeringBoks: FunctionComponent<Props> = (props) => {
                             <VerticalSpacer rem={0.5} />
                             <BodyShort size="small">
                                 Dere skylder{' '}
-                                <b>{formatterPenger(Math.abs(props.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0))}</b>
-                                {' '}for perioden{' '} 
-                                 {formatterPeriode(
+                                <b>
+                                    {formatterPenger(Math.abs(props.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0))}
+                                </b>{' '}
+                                for perioden{' '}
+                                {formatterPeriode(
                                     props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                     props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                                 )}{' '}

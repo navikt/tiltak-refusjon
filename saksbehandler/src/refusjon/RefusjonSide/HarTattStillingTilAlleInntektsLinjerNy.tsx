@@ -9,19 +9,16 @@ import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import InntekterFraTiltaketSvarNyLabel from './HarTattStillingTilAlleInnteksLinjerNyLabel';
 import InntekterKunFraTiltaketSvar from './InntekterKunFraTiltaketSvar';
 
-
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
     harTattStillingTilAlleInntektslinjer?: boolean;
 };
 
 const HarTattStillingTilAlleInntektsLinjerNy: FunctionComponent<Props> = (props) => {
-
     if (
-        props.harTattStillingTilAlleInntektslinjer === false &&( 
-        props.refusjonsgrunnlag.inntekterKunFraTiltaket === null ||
-        props.refusjonsgrunnlag.inntekterKunFraTiltaket === undefined)
-
+        props.harTattStillingTilAlleInntektslinjer === false &&
+        (props.refusjonsgrunnlag.inntekterKunFraTiltaket === null ||
+            props.refusjonsgrunnlag.inntekterKunFraTiltaket === undefined)
     ) {
         return null;
     }
@@ -49,7 +46,9 @@ const HarTattStillingTilAlleInntektsLinjerNy: FunctionComponent<Props> = (props)
                 />
                 <VerticalSpacer rem={2} />
                 <InntekterFraTiltaketSvarNyLabel refusjonsgrunnlag={props.refusjonsgrunnlag} />
-                <InntekterKunFraTiltaketSvar inntekterKunFraTiltaket={props.refusjonsgrunnlag.inntekterKunFraTiltaket} />
+                <InntekterKunFraTiltaketSvar
+                    inntekterKunFraTiltaket={props.refusjonsgrunnlag.inntekterKunFraTiltaket}
+                />
                 {props.refusjonsgrunnlag.endretBruttoLønn !== null &&
                     props.refusjonsgrunnlag.endretBruttoLønn !== undefined && (
                         <>

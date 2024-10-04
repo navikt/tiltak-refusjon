@@ -31,12 +31,12 @@ const InntektsMeldingHeader: FunctionComponent<Properties> = ({
                 ) : (
                     <>{unntakOmInntekterFremitid > 0 && <>og {unntakOmInntekterFremitid} måneder etter</>}</>
                 )}
-                      {refusjonsgrunnlag.inntektsgrunnlag && (
-                <BodyShort size="small">
-                    Sist hentet:{' '}
-                    {formatterDato(refusjonsgrunnlag.inntektsgrunnlag.innhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)}
-                </BodyShort>
-            )}
+                {refusjonsgrunnlag.inntektsgrunnlag && (
+                    <BodyShort size="small">
+                        Sist hentet:{' '}
+                        {formatterDato(refusjonsgrunnlag.inntektsgrunnlag.innhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)}
+                    </BodyShort>
+                )}
             </Heading>
         </div>
     );

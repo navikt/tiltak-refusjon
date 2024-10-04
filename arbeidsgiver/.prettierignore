@@ -1,7 +1,0 @@
-# Ignore files:
-build
-tsconfig.json
-tsconfig.base.json
-tslint.json
-package-lock.json
-.github
