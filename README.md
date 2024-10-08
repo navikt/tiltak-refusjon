@@ -46,13 +46,15 @@ npm install react -w saksbehandler
 Installere en avhengighet i alle workspaces:
 
 ```bash
-npm install <pakkenavn> --workspaces
+npm install <pakkenavn> -w
 
 // Eksempel
-npm install react -w saksbehandler
+npm install react -w
 ```
 
 ### Kjøre
+
+Start:
 
 ```bash
 npm start -w <workspace-navn>
@@ -61,9 +63,20 @@ npm start -w <workspace-navn>
 npm start -w arbeidsgiver
 ```
 
+Kjøre kommando:
+
 ```bash
 npm run <kommando> -w <workspace-navn>
 
 // Eksempel
 npm run build -w arbeidsgiver
+```
+
+Kjøre kommando i alle workspaces:
+
+```bash
+npm run <kommando> -w
+
+// Eksempel
+npm run test -w
 ```
