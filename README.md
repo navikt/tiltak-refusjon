@@ -1,7 +1,5 @@
 # tiltak-refusjon
 
-## Hvordan kjøre prosjektet lokalt
-
 Tiltak-refusjon bruker [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces).
 
 Workspaces:
@@ -10,7 +8,7 @@ Workspaces:
 - [saksbehandler](./saksbehandler)
 - [komponenter](./komponenter)
 
-### Hvordan komponenter?
+### Hvordan funker komponenter?
 
 Felles komponenter som brukes i flere workspaces ligger i [komponenter](./komponenter). Disse komponentene kan importeres i de andre workspaces med `~/`-prefiks.
 
