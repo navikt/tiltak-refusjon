@@ -1,10 +1,10 @@
 import { BodyShort, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StatusTekst from '../../komponenter/StatusTekst/StatusTekst';
-import BEMHelper from '../../utils/bem';
-import { formatterDato } from '../../utils/datoUtils';
-import { Refusjon } from '../refusjon';
+import StatusTekst from '../StatusTekst';
+import BEMHelper from '../utils/bem';
+import { formatterDato } from '../utils';
+import { Refusjon } from '../types/refusjon';
 
 type Props = {
     refusjoner: Refusjon[];

@@ -12,7 +12,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': path.resolve(__dirname, '/src'),
-            '~': path.resolve(__dirname, '../komponenter'),
+            '~': path.resolve(__dirname, '../komponenter/src'),
         },
     },
     plugins: [react(), svgr()],
