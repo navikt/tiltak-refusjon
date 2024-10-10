@@ -14,5 +14,8 @@
         "eslint": "^8.57.1",
         "eslint-config-react-app": "^7.0.1",
         "prettier": "^3.3.3"
+    },
+    "dependencies": {
+        "react": "^18.3.1"
     }
 }
