@@ -21,7 +21,7 @@ const setup = (router, authClient, tokenEndpoint) => {
             }
         },
         createProxyMiddleware({
-            target: 'http://modiacontextholder.personoversikt/modiacontextholder',
+            target: 'http://modiacontextholder.personoversikt',
             followRedirects: false,
             changeOrigin: true,
         })
