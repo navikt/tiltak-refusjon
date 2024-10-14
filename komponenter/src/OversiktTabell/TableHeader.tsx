@@ -1,30 +1,20 @@
 import { Table } from '@navikt/ds-react';
+import { FunctionComponent, useEffect } from 'react';
 
-const TableHeader = () => {
+interface Props {
+    cellHeaders: string[];
+}
+
+
+const TableHeader: FunctionComponent<Props> = ({cellHeaders}) => {
     return (
         <Table.Header>
             <Table.Row>
-                <Table.HeaderCell scope="col">
-                Refusjon
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                Veileder
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                Deltaker
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                Arbeidsgiver
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                Enhet
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                Status
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                Frist for godkjenning
-                </Table.HeaderCell>
+                {cellHeaders.map((header) => (
+                    <Table.HeaderCell scope="col" key={header}>
+                        {header}
+                    </Table.HeaderCell>
+                ))}
             </Table.Row>
         </Table.Header>
     );
