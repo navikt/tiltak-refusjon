@@ -2,17 +2,19 @@ import React, { FunctionComponent } from 'react';
 import { useInnloggetBruker } from '../../bruker/BrukerContext';
 import { useHentRefusjoner } from '../../services/rest-service';
 import { antallRefusjoner } from '../../utils/amplitude-utils';
-import BEMHelper from '../../utils/bem';
 import { useFilter } from './FilterContext';
 import FinnerIngenRefusjoner from './FinnerIngenRefusjon/FinnerIngenRefusjoner';
-import LabelRad from './LabelRad';
-import './oversikt.less';
 import { BrukerContextType } from '../../bruker/BrukerContextType';
 import useOppdaterPagedata from '../../bruker/bedriftsmenyRefusjon/useOppdaterPagedata';
+import OversiktTabell from '~/OversiktTabell';
+import ArbeidsgiverTableBody from '~/OversiktTabell/ArbeidsgiverTableBody';
+import ArbeidsgiverOversiktHeaders from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
 
-import OversiktTabell from './OversiktTabell';
+import BEMHelper from '../../utils/bem';
 import { Pagination } from '@navikt/ds-react';
 
+
+import './Oversikt.less';
 const cls = BEMHelper('oversikt');
 
 const Oversikt: FunctionComponent = () => {
@@ -26,13 +28,11 @@ const Oversikt: FunctionComponent = () => {
 
     return (
         <nav className={cls.className} aria-label="Main">
-            <div role="list">
-                <LabelRad />
                 {refusjoner.length > 0 ? (
                     <>
-                        <OversiktTabell refusjoner={pageable.refusjoner} />
+                        <OversiktTabell role="list" tableHeader={<ArbeidsgiverOversiktHeaders/>} tableBody={<ArbeidsgiverTableBody refusjoner={pageable.refusjoner}/>} />
                         <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}>
-                            <Pagination
+                            <Pagination className={cls.element('pagination')}
                                 page={pageable.currentPage + 1}
                                 onPageChange={(x) => oppdaterFilter({ page: x - 1 })}
                                 count={pageable.totalPages}
@@ -44,7 +44,6 @@ const Oversikt: FunctionComponent = () => {
                 ) : (
                     <FinnerIngenRefusjoner orgnr={brukerContext.valgtBedrift.valgtOrg?.[0].OrganizationNumber} />
                 )}
-            </div>
         </nav>
     );
 };

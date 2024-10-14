@@ -11,7 +11,7 @@ type Props = {
 };
 const cls = BEMHelper('oversiktTabell');
 
-const TableBody: FunctionComponent<Props> = (props) => {
+const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
     const navigate = useNavigate();
 
     return (
@@ -55,11 +55,13 @@ const TableBody: FunctionComponent<Props> = (props) => {
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
-                        <div>
+                    <div className={cls.element('title_row_column')}>
                             <StatusTekst
                                 status={refusjon.status}
+                                tiltakstype={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
                                 tilskuddFom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom}
                                 tilskuddTom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom}
+                                fratrekkRefunderbarBeløp={refusjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp}
                             />
                         </div>
                     </Table.DataCell>
@@ -74,4 +76,4 @@ const TableBody: FunctionComponent<Props> = (props) => {
     );
 };
 
-export default TableBody;
+export default TabellBodySaksbehandler;

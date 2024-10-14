@@ -14,7 +14,7 @@ export enum SortingOrder {
 
 export interface PageableRefusjon {
     currentPage: number;
-    refusjoner: Array<Refusjon>;
+    refusjoner: Refusjon[];
     size: number;
     totalItems: number;
     totalPages: number;
