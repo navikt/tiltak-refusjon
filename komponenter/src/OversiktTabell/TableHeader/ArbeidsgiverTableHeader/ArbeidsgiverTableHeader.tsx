@@ -1,15 +1,9 @@
 import { BodyShort, Table, Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-
-import SortingValg from '../../../../arbeidsgiver/src/refusjon/oversikt/SortingValg';
-
-
-import { useFilter } from '../../../../arbeidsgiver/src/refusjon/oversikt/FilterContext';
-
-import BEMHelper from '../../utils/bem';
-
+import SortingValg from '../../../../../arbeidsgiver/src/refusjon/oversikt/SortingValg';
+import { useFilter } from '../../../../../arbeidsgiver/src/refusjon/oversikt/FilterContext';
+import BEMHelper from '../../../utils/bem';
 import { SortingOrder } from '~/types/refusjon';
 
 interface Props {
@@ -28,8 +22,8 @@ const ArbeidsgiverTableHeader: FunctionComponent<Props> = (props) => {
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell scope="col">
-                        <Label className={cls.element('label')}>Tiltakstype</Label>
-                        <SortingValg
+                        Tiltakstype
+                        <SortingValg style={{marginRight:"5rem" ,display: 'block'}}
                             className={cls.className}
                             sortingAsc={SortingOrder.TILTAKSTYPE_ASC}
                             sortingDesc={SortingOrder.TILTAKSTYPE_DESC}
