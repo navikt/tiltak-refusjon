@@ -1,0 +1,27 @@
+.sortingValg{
+    &__label-sortering{
+        margin-left: 0.25rem;
+        display: flex;
+    }
+
+    &__sortering {
+        &--asc,
+        &--asc-selected {
+            bottom: 0.1rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        &--desc,
+        &--desc-selected {
+            top: 0.1rem;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        &--asc-selected,
+        &--desc-selected {
+            opacity: 0.5;
+        }
+    }
+} 
