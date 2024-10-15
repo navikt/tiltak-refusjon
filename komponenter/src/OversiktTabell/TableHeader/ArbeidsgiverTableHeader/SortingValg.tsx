@@ -1,14 +1,24 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
-import { SortingOrder } from '../../../types/refusjon';
+import { SortingOrder } from '~/types/refusjon';
+import TriangleUp from '~/assets/image/triangleUp.svg?react';
+import TriangleDown from '~/assets/image/triangleDown.svg?react';
+import BEMHelper from '~/utils/bem';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
+import './SortingValg.less';
 
-import TriangleUp from '../../../../../arbeidsgiver/src/asset/image/triangleUp.svg?react';
-import TriangleDown from '../../../../../arbeidsgiver/src/asset/image/triangleDown.svg?react;';
-//import TriangleDown from '@/asset/image/triangleDown.svg?react';
-import BEMHelper from '../../../utils/bem';
-import { useFilter } from '../../../../../arbeidsgiver/src/refusjon/oversikt/FilterContext';
+export interface Filter {
+    status: RefusjonStatus | undefined;
+    tiltakstype: Tiltak | undefined;
+    sorting: SortingOrder | undefined;
+    page: number | undefined;
+    size: number | undefined;
+}
 
 interface SortingProps {
     className: string;
+    filter: Filter;
+    oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
     sortingAsc: SortingOrder;
     sortingDesc: SortingOrder;
     highlightSortOrderAsc: boolean;
@@ -16,9 +26,9 @@ interface SortingProps {
 }
 
 const SortingValg: FunctionComponent<SortingProps> = (props: PropsWithChildren<SortingProps>) => {
-    const cls = BEMHelper(props.className);
-    const { filter, oppdaterFilter } = useFilter();
-    const { sortingDesc, sortingAsc, highlightSortOrderAsc, highlightSortOrderDesc } = props;
+    const cls = BEMHelper('sortingValg');
+
+    const { filter, oppdaterFilter, sortingDesc, sortingAsc, highlightSortOrderAsc, highlightSortOrderDesc } = props;
 
     return (
         <span className={cls.element('label-sortering')}>

@@ -30,7 +30,7 @@ const Oversikt: FunctionComponent = () => {
         <nav className={cls.className} aria-label="Main">
                 {refusjoner.length > 0 ? (
                     <>
-                        <OversiktTabell role="list" tableHeader={<ArbeidsgiverOversiktHeaders/>} tableBody={<ArbeidsgiverTableBody refusjoner={pageable.refusjoner}/>} />
+                        <OversiktTabell role="list" tableHeader={<ArbeidsgiverOversiktHeaders filter={filter} oppdaterFilter={oppdaterFilter} />} tableBody={<ArbeidsgiverTableBody refusjoner={pageable.refusjoner}/>} />
                         <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}>
                             <Pagination className={cls.element('pagination')}
                                 page={pageable.currentPage + 1}

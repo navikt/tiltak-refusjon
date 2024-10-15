@@ -1,70 +1,93 @@
 import { BodyShort, Table, Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import SortingValg from '../../../../../arbeidsgiver/src/refusjon/oversikt/SortingValg';
-import { useFilter } from '../../../../../arbeidsgiver/src/refusjon/oversikt/FilterContext';
+import SortingValg from './SortingValg';
 import BEMHelper from '../../../utils/bem';
 import { SortingOrder } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
+
+export interface Filter {
+    status: RefusjonStatus | undefined;
+    tiltakstype: Tiltak | undefined;
+    sorting: SortingOrder | undefined;
+    page: number | undefined;
+    size: number | undefined;
+}
 
 interface Props {
-
-
-
+    filter: Filter;
+    oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
 }
 
 const cls = BEMHelper('oversikt');
 
-const ArbeidsgiverTableHeader: FunctionComponent<Props> = (props) => {
-    const navigate = useNavigate();
-
-    const { filter } = useFilter();
+const ArbeidsgiverTableHeader: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
     return (
-            <Table.Header>
-                <Table.Row>
-                    <Table.HeaderCell scope="col">
-                        Tiltakstype
-                        <SortingValg style={{marginRight:"5rem" ,display: 'block'}}
+        <Table.Header>
+            <Table.Row>
+                <Table.HeaderCell scope="col">
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <Label>Tiltakstype</Label>
+                        <SortingValg
                             className={cls.className}
+                            filter={filter}
+                            oppdaterFilter={oppdaterFilter}
                             sortingAsc={SortingOrder.TILTAKSTYPE_ASC}
                             sortingDesc={SortingOrder.TILTAKSTYPE_DESC}
                             highlightSortOrderAsc={filter.sorting === SortingOrder.TILTAKSTYPE_ASC}
                             highlightSortOrderDesc={filter.sorting === SortingOrder.TILTAKSTYPE_DESC}
                         />
-                    </Table.HeaderCell>
-                    <Table.HeaderCell scope="col">
-                        <Label className={cls.element('label')}>Bedrift</Label>
+                    </div>
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <Label>Bedrift</Label>
                         <SortingValg
                             className={cls.className}
+                            filter={filter}
+                            oppdaterFilter={oppdaterFilter}
                             sortingAsc={SortingOrder.BEDRIFT_ASC}
                             sortingDesc={SortingOrder.BEDRIFT_DESC}
                             highlightSortOrderAsc={filter.sorting === SortingOrder.BEDRIFT_ASC}
                             highlightSortOrderDesc={filter.sorting === SortingOrder.BEDRIFT_DESC}
                         />
-                    </Table.HeaderCell>
-                    <Table.HeaderCell scope="col">
+                    </div>
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                         <Label className={cls.element('label')}>Deltaker</Label>
                         <SortingValg
                             className={cls.className}
+                            filter={filter}
+                            oppdaterFilter={oppdaterFilter}
                             sortingAsc={SortingOrder.DELTAKER_ASC}
                             sortingDesc={SortingOrder.DELTAKER_DESC}
                             highlightSortOrderAsc={filter.sorting === SortingOrder.DELTAKER_ASC}
                             highlightSortOrderDesc={filter.sorting === SortingOrder.DELTAKER_DESC}
                         />
-                    </Table.HeaderCell>
-                    <Table.HeaderCell scope="col">
+                    </div>
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                         <Label className={cls.element('label')}>Periode</Label>
                         <SortingValg
                             className={cls.className}
+                            filter={filter}
+                            oppdaterFilter={oppdaterFilter}
                             sortingAsc={SortingOrder.PERIODE_ASC}
                             sortingDesc={SortingOrder.PERIODE_DESC}
                             highlightSortOrderAsc={filter.sorting === SortingOrder.PERIODE_ASC}
                             highlightSortOrderDesc={filter.sorting === SortingOrder.PERIODE_DESC}
                         />
-                    </Table.HeaderCell>
-                    <Table.HeaderCell scope="col">
+                    </div>
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                         <Label className={cls.element('label')}>Status</Label>
                         <SortingValg
                             className={cls.className}
+                            filter={filter}
+                            oppdaterFilter={oppdaterFilter}
                             sortingAsc={SortingOrder.STATUS_ASC}
                             sortingDesc={SortingOrder.STATUS_DESC}
                             highlightSortOrderAsc={
@@ -72,19 +95,24 @@ const ArbeidsgiverTableHeader: FunctionComponent<Props> = (props) => {
                             }
                             highlightSortOrderDesc={filter.sorting === SortingOrder.STATUS_DESC}
                         />
-                    </Table.HeaderCell>
-                    <Table.HeaderCell scope="col">
+                    </div>
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                         <Label className={cls.element('label')}>Frist for godkjenning</Label>
                         <SortingValg
                             className={cls.className}
+                            filter={filter}
+                            oppdaterFilter={oppdaterFilter}
                             sortingAsc={SortingOrder.FRISTFORGODKJENNING_ASC}
                             sortingDesc={SortingOrder.FRISTFORGODKJENNING_DESC}
                             highlightSortOrderAsc={filter.sorting === SortingOrder.FRISTFORGODKJENNING_ASC}
                             highlightSortOrderDesc={filter.sorting === SortingOrder.FRISTFORGODKJENNING_DESC}
                         />
-                    </Table.HeaderCell>
-                </Table.Row>
-            </Table.Header>
+                    </div>
+                </Table.HeaderCell>
+            </Table.Row>
+        </Table.Header>
     );
-}
+};
 export default ArbeidsgiverTableHeader;
