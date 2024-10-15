@@ -1,16 +1,6 @@
-import { KorreksjonStatus, RefusjonStatus } from './status';
+import { Refusjon } from '~/types/refusjon';
+import { KorreksjonStatus } from './status';
 import { Tiltak } from './tiltak';
-
-export enum SortingOrder {
-    DELTAKER_ASC = 'DELTAKER_ASC',
-    DELTAKER_DESC = 'DELTAKER_DESC',
-    PERIODE_ASC = 'PERIODE_ASC',
-    PERIODE_DESC = 'PERIODE_DESC',
-    STATUS_ASC = 'STATUS_ASC',
-    STATUS_DESC = 'STATUS_DESC',
-    FRISTFORGODKJENNING_ASC = 'FRISTFORGODKJENNING_ASC',
-    FRISTFORGODKJENNING_DESC = 'FRISTFORGODKJENNING_DESC',
-}
 
 export interface PageableRefusjon {
     currentPage: number;
@@ -18,24 +8,6 @@ export interface PageableRefusjon {
     size: number;
     totalItems: number;
     totalPages: number;
-}
-
-export interface Refusjon {
-    id: string;
-    bedriftNr: string;
-    deltakerFnr: string;
-    godkjentAvArbeidsgiver?: string;
-    status: RefusjonStatus;
-    forrigeFristForGodkjenning?: string;
-    fristForGodkjenning: string;
-    harTattStillingTilAlleInntektslinjer: boolean;
-    korreksjonId?: string;
-    refusjonsgrunnlag: Refusjonsgrunnlag;
-    utbetaltTidspunkt?: string;
-    unntakOmInntekterFremitid: number;
-    hentInntekterLengerFrem: string;
-    sistEndret: string;
-    åpnetFørsteGang: string;
 }
 
 export interface Korreksjon {

@@ -1,13 +1,13 @@
 import { BodyShort, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StatusTekst from '../StatusTekst';
-import BEMHelper from '../utils/bem';
-import { formatterDato, formatterPeriode } from '../utils';
-import { Refusjon } from '../types/refusjon';
-import { storForbokstav } from '../utils/stringUtils';
-import { tiltakstypeTekst } from '../types/messages';
-import { NORSK_DATO_FORMAT_SHORT } from '../utils/datoUtils';
+import StatusTekst from '~/StatusTekst';
+import BEMHelper from '~/utils/bem';
+import { formatterDato, formatterPeriode } from '~/utils';
+import { Refusjon } from '~/types/refusjon';
+import { storForbokstav } from '~/utils/stringUtils';
+import { tiltakstypeTekst } from '~/types/messages';
+import { NORSK_DATO_FORMAT_SHORT } from '~/utils/datoUtils';
 
 type Props = {
     refusjoner: Refusjon[];

@@ -4,15 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 import { RefusjonStatus } from '../status';
 import { Tiltak } from '../tiltak';
 import { LogReturn } from 'amplitude-js';
-import { SortingOrder } from '../refusjon';
+import { Filter, SortingOrder } from '~/types/refusjon';
 
-export interface Filter {
-    status: RefusjonStatus | undefined;
-    tiltakstype: Tiltak | undefined;
-    sorting: SortingOrder | undefined;
-    page: number | undefined;
-    size: number | undefined;
-}
 
 type FilterContextType = { filter: Filter; oppdaterFilter: (nyttFilter: Partial<Filter>) => void };
 
