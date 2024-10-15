@@ -4,8 +4,8 @@ import BEMHelper from '../utils/bem';
 import './OversiktTabell.less';
 
 interface Props {
-    tableHeader: ReactElement;
-    tableBody: ReactElement;
+    tableHeader: React.ReactElement;
+    tableBody: React.ReactElement;
     
 };
 
@@ -14,7 +14,7 @@ const cls = BEMHelper('oversiktTabell');
 const OversiktTabell: FunctionComponent<Props> = ({tableHeader, tableBody}) => {
 
     return (
-        <Table className={cls.className}>
+        <Table role='list' className={cls.className}>
             {tableHeader}
             {tableBody}
         </Table>

@@ -7,13 +7,11 @@ import FinnerIngenRefusjoner from './FinnerIngenRefusjon/FinnerIngenRefusjoner';
 import { BrukerContextType } from '../../bruker/BrukerContextType';
 import useOppdaterPagedata from '../../bruker/bedriftsmenyRefusjon/useOppdaterPagedata';
 import OversiktTabell from '~/OversiktTabell';
-import ArbeidsgiverTableBody from '~/OversiktTabell/ArbeidsgiverTableBody';
-import ArbeidsgiverOversiktHeaders from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
+import ArbeidsgiverTableBody from '~/OversiktTabell/TableBody/ArbeidsgiverTableBody';
+import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
 
 import BEMHelper from '../../utils/bem';
 import { Pagination } from '@navikt/ds-react';
-
-
 import './Oversikt.less';
 const cls = BEMHelper('oversikt');
 
@@ -30,7 +28,7 @@ const Oversikt: FunctionComponent = () => {
         <nav className={cls.className} aria-label="Main">
                 {refusjoner.length > 0 ? (
                     <>
-                        <OversiktTabell role="list" tableHeader={<ArbeidsgiverOversiktHeaders filter={filter} oppdaterFilter={oppdaterFilter} />} tableBody={<ArbeidsgiverTableBody refusjoner={pageable.refusjoner}/>} />
+                        <OversiktTabell tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />} tableBody={<ArbeidsgiverTableBody refusjoner={pageable.refusjoner}/>} />
                         <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}>
                             <Pagination className={cls.element('pagination')}
                                 page={pageable.currentPage + 1}

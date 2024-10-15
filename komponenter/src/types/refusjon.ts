@@ -17,6 +17,22 @@ export enum SortingOrder {
     FRISTFORGODKJENNING_DESC = 'FRISTFORGODKJENNING_DESC',
 }
 
+export interface Filter {
+    status: RefusjonStatus | undefined;
+    tiltakstype: Tiltak | undefined;
+    sorting: SortingOrder | undefined;
+    page: number | undefined;
+    size: number | undefined;
+}
+
+export interface PageableRefusjon {
+    currentPage: number;
+    refusjoner: Refusjon[];
+    size: number;
+    totalItems: number;
+    totalPages: number;
+}
+
 export interface Refusjon {
     id: string;
     bedriftNr: string;
@@ -25,12 +41,14 @@ export interface Refusjon {
     status: RefusjonStatus;
     forrigeFristForGodkjenning?: string;
     fristForGodkjenning: string;
-    harInntektIAlleMåneder: boolean;
+    harTattStillingTilAlleInntektslinjer: boolean;
     korreksjonId?: string;
     refusjonsgrunnlag: Refusjonsgrunnlag;
+    utbetaltTidspunkt?: string;
     unntakOmInntekterFremitid: number;
     hentInntekterLengerFrem: string;
-    harTattStillingTilAlleInntektslinjer: boolean;
+    sistEndret: string;
+    åpnetFørsteGang: string;
 }
 
 export interface Korreksjon {

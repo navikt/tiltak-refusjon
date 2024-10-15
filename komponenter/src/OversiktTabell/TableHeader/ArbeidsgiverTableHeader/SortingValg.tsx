@@ -3,17 +3,8 @@ import { SortingOrder } from '~/types/refusjon';
 import TriangleUp from '~/assets/image/triangleUp.svg?react';
 import TriangleDown from '~/assets/image/triangleDown.svg?react';
 import BEMHelper from '~/utils/bem';
-import { RefusjonStatus } from '~/types/status';
-import { Tiltak } from '~/types/tiltak';
 import './SortingValg.less';
-
-export interface Filter {
-    status: RefusjonStatus | undefined;
-    tiltakstype: Tiltak | undefined;
-    sorting: SortingOrder | undefined;
-    page: number | undefined;
-    size: number | undefined;
-}
+import { Filter } from '~/types/refusjon';
 
 interface SortingProps {
     className: string;
