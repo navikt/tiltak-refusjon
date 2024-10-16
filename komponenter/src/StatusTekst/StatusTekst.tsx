@@ -16,7 +16,7 @@ interface Props {
     fratrekkRefunderbarBeløp?: boolean;
 }
 
-const StatusTekst: FunctionComponent<Props> = (props) => {
+const StatusTekst = (props: Props) => {
     if (props.status === RefusjonStatus.KLAR_FOR_INNSENDING) {
         return (
             <Tag variant="success" size="small">

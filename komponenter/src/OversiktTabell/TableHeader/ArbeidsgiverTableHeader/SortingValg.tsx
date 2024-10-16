@@ -16,7 +16,7 @@ interface SortingProps {
     highlightSortOrderDesc: boolean;
 }
 
-const SortingValg: FunctionComponent<SortingProps> = (props: PropsWithChildren<SortingProps>) => {
+const SortingValg = (props: PropsWithChildren<SortingProps>) => {
     const cls = BEMHelper('sortingValg');
 
     const { filter, oppdaterFilter, sortingDesc, sortingAsc, highlightSortOrderAsc, highlightSortOrderDesc } = props;
