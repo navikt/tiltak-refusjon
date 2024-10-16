@@ -4,10 +4,11 @@ import { RefusjonContext } from '../../../RefusjonProvider';
 import LagreKnapp from '../../../komponenter/LagreKnapp';
 import Utregning from '../../../komponenter/Utregning';
 import VerticalSpacer from '../../../komponenter/VerticalSpacer';
-import BEMHelper from '../../../utils/bem';
-import { Refusjon } from '../../refusjon';
+
 import SummeringBoks from '../SummeringBoks';
 import './refusjonInnsending.less';
+import { Refusjon } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
 
 interface Properties {
     refusjon: Refusjon;

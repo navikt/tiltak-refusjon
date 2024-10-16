@@ -5,9 +5,10 @@ import JuridiskEnhet from '@/asset/image/juridiskEnhet2.svg?react';
 import SystemError from '@/asset/image/systemError.svg?react';
 import { Bedriftvalg, Feilstatus, Organisasjon } from '../../bruker/bedriftsmenyRefusjon/api/api';
 import LagNyRad from './LagNyRad';
-import BEMHelper from '../../utils/bem';
+
 import { ExpansionCard, Link, Heading } from '@navikt/ds-react';
 import Boks from '../Boks/Boks';
+import BEMHelper from '~/utils/bem';
 
 interface Props {
     bedriftvalg: Bedriftvalg;

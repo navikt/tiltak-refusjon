@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { BodyShort } from '@navikt/ds-react';
-import BEMHelper from '../../utils/bem';
+
 import { BrukerContextType } from '../../bruker/BrukerContextType';
 import { useInnloggetBruker } from '../../bruker/BrukerContext';
 import { PageSizeOption } from '../../bruker/bedriftsmenyRefusjon/api/api';
 import { useFilter } from '../oversikt/FilterContext';
 import './paginationAntallValg.less';
+import BEMHelper from '~/utils/bem';
 
 const PagnationAntallValg: FunctionComponent = () => {
     const cls = BEMHelper('pagination-valg');

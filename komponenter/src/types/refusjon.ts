@@ -62,6 +62,9 @@ export interface Korreksjon {
     korreksjonsgrunner: Korreksjonsgrunn[];
     refusjonsgrunnlag: Refusjonsgrunnlag;
     harTattStillingTilAlleInntektslinjer: boolean;
+    godkjentTidspunkt?: string;
+    unntakOmInntekterFremitid: number;
+    sistEndret: string;
 }
 
 export interface Refusjonsgrunnlag {
@@ -76,7 +79,10 @@ export interface Refusjonsgrunnlag {
     forrigeRefusjonMinusBeløp?: number;
     fratrekkRefunderbarBeløp?: boolean;
     harFerietrekkForSammeMåned: boolean;
+    refunderbarBeløp?: number;
+    sumUtbetaltVarig?: number;
 }
+
 
 export interface Tilskuddsgrunnlag {
     arbeidsgiveravgiftSats: number;
@@ -90,6 +96,9 @@ export interface Tilskuddsgrunnlag {
     deltakerEtternavn: string;
     deltakerFnr: string;
     deltakerFornavn: string;
+    arbeidsgiverFornavn: string;
+    arbeidsgiverEtternavn: string;
+    arbeidsgiverTlf: string;
     feriepengerSats: number;
     id: string;
     lønnstilskuddsprosent: number;
@@ -118,7 +127,7 @@ export interface Inntektslinje {
     opptjeningsperiodeFom?: string;
     opptjeningsperiodeTom?: string;
     erMedIInntektsgrunnlag: boolean;
-    erOpptjentIPeriode?: boolean;
+    erOpptjentIPeriode?: boolean | null;
 }
 
 export interface Beregning {
@@ -146,6 +155,7 @@ export enum Korreksjonsgrunn {
     TRUKKET_FEIL_FOR_FRAVÆR = 'TRUKKET_FEIL_FOR_FRAVÆR',
     OPPDATERT_AMELDING = 'OPPDATERT_AMELDING',
     ANNEN_GRUNN = 'ANNEN_GRUNN',
+    INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE = 'INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE'
 }
 
 export interface PageableRefusjon {

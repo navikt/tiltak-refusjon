@@ -1,11 +1,12 @@
 import { FunctionComponent, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { godkjennRefusjonMedNullbeløp, useHentRefusjon } from '../../../services/rest-service';
-import BEMHelper from '../../../utils/bem';
+
 import LagreKnapp from '../../../komponenter/LagreKnapp';
 import RefusjonFullførNullbeløpModal from './RefusjonFullførNullbeløpModal';
 import { UtbetaltStatus, innSendingRefusjon } from '../../../utils/amplitude-utils';
 import './refusjonFullførNullbeløp.less';
+import BEMHelper from '~/utils/bem';
 
 const RefusjonFullførNullbeløp: FunctionComponent = () => {
     const [visRefusjonFullførNullbeløpModal, setVisRefusjonFullførNullbeløpModal] = useState<boolean>(false);

@@ -1,8 +1,9 @@
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
-import { Refusjon } from '@/refusjon/refusjon';
-import { RefusjonStatus } from '@/refusjon/status';
-import { Tiltak } from '@/refusjon/tiltak';
+
 import type { Meta, StoryObj } from '@storybook/react';
+import { Refusjon } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
 
 const meta = {
     title: 'KvitteringSide',
@@ -113,6 +114,7 @@ const refusjonPlussbelop: Refusjon = {
         fratrekkRefunderbarBeløp: false,
         refunderbarBeløp: undefined,
         forrigeRefusjonMinusBeløp: 0,
+        harFerietrekkForSammeMåned: false,
         beregning: {
             lønn: 12000,
             lønnFratrukketFerie: 10800,

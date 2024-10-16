@@ -2,10 +2,11 @@ import axios from 'axios';
 import React, { FunctionComponent, useState } from 'react';
 import { InnloggetBruker } from './bruker/BrukerContextType';
 import { inneholderUrlnavn } from './utils/miljoUtils';
-import BEMHelper from './utils/bem';
+
 import './lokalLogin.less';
 import { useAsyncError } from './useError';
 import { Label, TextField, Button } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 type Props = {
     innloggetBruker: InnloggetBruker | undefined;

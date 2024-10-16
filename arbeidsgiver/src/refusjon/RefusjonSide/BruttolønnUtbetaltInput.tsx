@@ -1,10 +1,11 @@
 import React, { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useState } from 'react';
 import { Alert, TextField } from '@navikt/ds-react';
-import { Inntektsgrunnlag, Refusjon } from '../refusjon';
-import { tiltakstypeTekst } from '@/messages';
-import BEMHelper from '@/utils/bem';
+
 import { sumInntekterOpptjentIPeriode } from '@/utils/inntekterUtiles';
 import VerticalSpacer from '@/komponenter/VerticalSpacer';
+import { Inntektsgrunnlag, Refusjon } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
+import { tiltakstypeTekst } from '~/types/messages';
 
 interface Properties {
     refusjon: Refusjon;

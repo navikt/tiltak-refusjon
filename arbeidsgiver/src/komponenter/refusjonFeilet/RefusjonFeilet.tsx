@@ -1,10 +1,11 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { Bedriftvalg, Feilstatus, StatusFeilBedriftmeny } from '../../bruker/bedriftsmenyRefusjon/api/api';
-import BEMHelper from '../../utils/bem';
+
 import './refusjonFeilet.less';
 import RefusjonFeiletManglerUnderEnhet from './RefusjonFeiletManglerUnderEnhet';
 import { BodyShort, Heading } from '@navikt/ds-react';
 import Boks from '../Boks/Boks';
+import BEMHelper from '~/utils/bem';
 
 interface Props {
     bedriftvalg: Bedriftvalg;

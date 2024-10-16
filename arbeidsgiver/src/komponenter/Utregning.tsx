@@ -11,14 +11,16 @@ import Stranden from '@/asset/image/strand.svg?react';
 
 import { BodyShort, Heading, ReadMore } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import { Beregning, Inntektsgrunnlag, Tilskuddsgrunnlag } from '../refusjon/refusjon';
+
 import { formatterPenger } from '../utils/PengeUtils';
 import EksternLenke from './EksternLenke/EksternLenke';
 import Utregningsrad from './Utregningsrad';
 import VerticalSpacer from './VerticalSpacer';
 import UtregningsradHvaInngårIDette from './UtregningsradHvaInngårIDette';
-import BEMHelper from '@/utils/bem';
+
 import './Utregning.less';
+import { Beregning, Inntektsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
 
 interface Props {
     refusjonsnummer: {

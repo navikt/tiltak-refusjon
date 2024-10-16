@@ -10,9 +10,10 @@ import OversiktTabell from '~/OversiktTabell';
 import ArbeidsgiverTableBody from '~/OversiktTabell/TableBody/ArbeidsgiverTableBody';
 import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
 
-import BEMHelper from '../../utils/bem';
+
 import { Pagination } from '@navikt/ds-react';
 import './Oversikt.less';
+import BEMHelper from '~/utils/bem';
 const cls = BEMHelper('oversikt');
 
 const Oversikt: FunctionComponent = () => {

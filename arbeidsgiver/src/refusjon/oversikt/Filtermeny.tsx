@@ -1,13 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { statusTekst } from '../../messages';
+
 import { brukerflate } from '../../utils/amplitude-utils';
-import { storForbokstav } from '../../utils/stringUtils';
-import { RefusjonStatus } from '../status';
-import { Tiltak } from '../tiltak';
+
 import { useFilter } from './FilterContext';
 import { ExpansionCard, Radio, RadioGroup } from '@navikt/ds-react';
 import PagnationAntallValg from '../OversiktSide/PaginationAntallValg';
+import { RefusjonStatus } from '~/types/status';
+import { storForbokstav } from '~/utils/stringUtils';
+import { statusTekst } from '~/types/messages';
+import { Tiltak } from '~/types/tiltak';
 
 const Filtermeny: FunctionComponent = () => {
     const { filter, oppdaterFilter } = useFilter();

@@ -1,7 +1,8 @@
 import React, { FunctionComponent, PropsWithChildren, useState } from 'react';
 import { useParams } from 'react-router';
-import { Refusjon, Refusjonsgrunnlag } from './refusjon/refusjon';
+
 import { useHentRefusjon } from './services/rest-service';
+import { Refusjon, Refusjonsgrunnlag } from '~/types/refusjon';
 
 export type SettRefusjonsgrunnlagVerdi = <K extends keyof NonNullable<Refusjonsgrunnlag>, T extends Refusjonsgrunnlag>(
     felt: K,

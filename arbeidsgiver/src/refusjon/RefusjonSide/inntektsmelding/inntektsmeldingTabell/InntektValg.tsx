@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FunctionComponent } from 'react';
 import { Radio, RadioGroup } from '@navikt/ds-react';
 import { FeilkodeError, setInntektslinjeOpptjentIPeriode } from '../../../../services/rest-service';
-import { Inntektslinje } from '../../../refusjon';
+
 import { mutate } from 'swr';
+import { Inntektslinje } from '~/types/refusjon';
 
 interface Props {
     inntekt: Inntektslinje;
