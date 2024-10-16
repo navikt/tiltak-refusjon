@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useContext } from 'react';
-import BEMHelper from '../../../../utils/bem';
+
 import { MenyContext } from '../../BedriftsmenyRefusjon';
 import { Alert, BodyShort } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 const TomtSok: FunctionComponent<{}> = () => {
     const cls = BEMHelper('bedriftliste');

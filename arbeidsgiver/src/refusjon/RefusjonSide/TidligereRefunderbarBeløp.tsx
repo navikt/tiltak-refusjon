@@ -1,13 +1,16 @@
 import React, { ChangeEvent, FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
-import BEMHelper from '../../utils/bem';
-import { Refusjon } from '../refusjon';
+
 import { sumInntekterOpptjentIPeriode } from '../../utils/inntekterUtiles';
 import { settTidligereRefunderbarBeløp } from '../../services/rest-service';
 import { useParams } from 'react-router';
-import { formatterDato } from '../../utils/datoUtils';
+
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { tiltakstypeTekst } from '../../messages';
+
 import { Alert, Radio, RadioGroup, TextField, Heading, Label, BodyShort, debounce } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
+import { tiltakstypeTekst } from '~/types/messages';
+import { formatterDato } from '~/utils';
+import { Refusjon } from '~/types/refusjon';
 
 interface Properties {
     refusjon: Refusjon;

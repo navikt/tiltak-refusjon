@@ -1,11 +1,11 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
-import { storForbokstav } from '../../utils/stringUtils';
-import { statusTekst } from '../../messages';
-import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '../../utils/datoUtils';
 import EksternLenke from '../../komponenter/EksternLenke/EksternLenke';
-import { Refusjon } from '../refusjon';
-import BEMHelper from '../../utils/bem';
 import { Tag, BodyShort, Heading } from '@navikt/ds-react';
+import { Refusjon } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
+import { storForbokstav } from '~/utils/stringUtils';
+import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { statusTekst } from '~/types/messages';
 
 interface Properties {
     refusjon: Refusjon;

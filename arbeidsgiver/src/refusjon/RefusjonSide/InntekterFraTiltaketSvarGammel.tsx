@@ -1,9 +1,10 @@
 import { Label, BodyShort } from '@navikt/ds-react';
 import React, { FunctionComponent } from 'react';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { tiltakstypeTekst } from '../../messages';
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Refusjonsgrunnlag } from '../refusjon';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import { tiltakstypeTekst } from '~/types/messages';
+
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;

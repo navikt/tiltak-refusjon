@@ -1,10 +1,12 @@
 import React, { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction } from 'react';
 import GodkjennModal from './GodkjennModal';
 import { BodyShort } from '@navikt/ds-react';
-import { formatterPeriode } from '../../utils/datoUtils';
+
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Refusjon } from '../refusjon';
+import { Refusjon } from '~/types/refusjon';
+import { formatterPeriode } from '~/utils';
+
 
 interface Properties {
     refusjon: Refusjon;

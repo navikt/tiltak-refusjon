@@ -1,7 +1,8 @@
 import { LogReturn } from 'amplitude-js';
-import { Refusjon } from '../refusjon/refusjon';
-import { Tiltak } from '../refusjon/tiltak';
+
 import amplitude from './amplitudeInstance';
+import { Tiltak } from '~/types/tiltak';
+import { Refusjon } from '~/types/refusjon';
 
 type Tiltaktype = Tiltak | 'UNDEFINED';
 

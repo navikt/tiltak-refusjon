@@ -1,11 +1,13 @@
 import { sortBy, sumBy } from 'lodash';
 import { Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import { NORSK_MÅNEDÅR_FORMAT, formatterDato, formatterPeriode } from '../../utils/datoUtils';
-import { Inntektslinje } from '../refusjon';
+
 import { inntektBeskrivelse } from './inntektsmelding/InntekterFraAMeldingen';
-import BEMHelper from '../../utils/bem';
+
 import '../RefusjonSide/InntekterFraAMeldingen.less';
+import { Inntektslinje } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
+import { formatterDato, formatterPeriode, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 type Props = {
     inntekter: Inntektslinje[];

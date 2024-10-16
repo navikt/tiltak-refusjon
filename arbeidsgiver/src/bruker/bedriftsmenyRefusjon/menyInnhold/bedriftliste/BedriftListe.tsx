@@ -5,10 +5,11 @@ import UnderEnhet from '@/asset/image/childNode.svg?react';
 import { ChevronDownIcon } from '@navikt/aksel-icons';
 import './bedriftListe.less';
 import { BedriftvalgType, initPageData, OrganisasjonEnhet, Organisasjon } from '../../api/api';
-import BEMHelper from '../../../../utils/bem';
+
 import { setDefaultBedriftlisteMedApneElementer } from '../../api/kontruer-Utils';
 import TomtSok from './TomtSok';
 import { BodyShort, Checkbox, Label, Link } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 const BedriftListe: FunctionComponent<{}> = (props: PropsWithChildren<{}>) => {
     const cls = BEMHelper('bedriftliste');

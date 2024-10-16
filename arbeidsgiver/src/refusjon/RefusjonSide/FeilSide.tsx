@@ -1,12 +1,14 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { useParams } from 'react-router';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { tiltakstypeTekst } from '../../messages';
+
 import { useHentRefusjon } from '../../services/rest-service';
-import { formatterPeriode } from '../../utils/datoUtils';
+
 import { formatterPenger } from '../../utils/PengeUtils';
 import { Alert, Label, BodyShort, Heading } from '@navikt/ds-react';
 import Boks from '../../komponenter/Boks/Boks';
+import { tiltakstypeTekst } from '~/types/messages';
+import { formatterPeriode } from '~/utils';
 
 type AlertStripeType = 'info' | 'success' | 'warning' | 'error';
 

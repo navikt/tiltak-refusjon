@@ -1,7 +1,8 @@
 import React from 'react';
 import './AdvarselBannerTestversjon.less';
-import BEMHelper from '../utils/bem';
+
 import { Alert } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 const cls = BEMHelper('advarsel-banner-testversjon');
 

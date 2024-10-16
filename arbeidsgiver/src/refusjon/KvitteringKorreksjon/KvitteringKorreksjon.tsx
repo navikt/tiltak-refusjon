@@ -2,18 +2,22 @@ import { ExpansionCard, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import Utregning from '../../komponenter/Utregning';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { korreksjonStatusTekst } from '../../messages';
-import { NORSK_DATO_OG_TID_FORMAT, formatterDato } from '../../utils/datoUtils';
-import { storForbokstav } from '../../utils/stringUtils';
+
+
 import InntekterFraTiltaketSvar from '../RefusjonSide/InntekterFraTiltaketSvar';
 import SummeringBoks from '../RefusjonSide/SummeringBoks';
 import InformasjonFraAvtalen from '../RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
-import { KorreksjonStatus } from '../status';
+
 import InntekterFraAMeldingenKorreksjon from './InntekterFraAMeldingenKorreksjon';
 import KorreksjonInfo from './KorreksjonInfo';
 import Boks from '../../komponenter/Boks/Boks';
-import { Korreksjon, Refusjon } from '../refusjon';
+import { Korreksjon, Refusjon } from '~/types/refusjon';
+import { storForbokstav } from '~/utils/stringUtils';
+import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { korreksjonStatusTekst } from '~/types/messages';
+import { KorreksjonStatus } from '~/types/status';
+
 
 type Props = {
     refusjon: Refusjon;

@@ -1,16 +1,20 @@
 import React, { Fragment, FunctionComponent } from 'react';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { lønnsbeskrivelseTekst } from '../../messages';
-import { formatterDato, formatterPeriode, månedsNavn, NORSK_MÅNEDÅR_FORMAT } from '../../utils/datoUtils';
+
+
 import { formatterPenger } from '../../utils/PengeUtils';
 import { Alert, Heading } from '@navikt/ds-react';
-import BEMHelper from '../../utils/bem';
+
 import '../RefusjonSide/InntekterFraAMeldingen.less';
 import Boks from '../../komponenter/Boks/Boks';
-import { Korreksjon } from '../refusjon';
+
 import InntektsMeldingHeader from '../RefusjonSide/inntektsmelding/InntektsMeldingHeader';
 import groupBy from 'lodash.groupby';
 import sortBy from 'lodash.sortby';
+import { lønnsbeskrivelseTekst } from '~/types/messages';
+import { Korreksjon } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
+import { formatterDato, formatterPeriode, månedsNavn, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 const inntektBeskrivelse = (beskrivelse: string | undefined) => {
     if (beskrivelse === undefined) {

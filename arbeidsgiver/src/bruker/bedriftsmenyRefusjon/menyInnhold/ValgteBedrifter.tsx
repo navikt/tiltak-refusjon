@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useContext } from 'react';
 import { BedriftvalgType } from '../api/api';
 import UnderEnhet from '@/asset/image/underenhet.svg?react';
-import BEMHelper from '../../../utils/bem';
+
 import { MenyContext } from '../BedriftsmenyRefusjon';
 import { Label, BodyShort } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 const ValgteBedrifter: FunctionComponent = () => {
     const cls = BEMHelper('menyInnhold');

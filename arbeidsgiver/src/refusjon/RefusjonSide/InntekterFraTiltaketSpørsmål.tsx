@@ -1,16 +1,16 @@
 import React, { ChangeEvent, Dispatch, FunctionComponent, SetStateAction, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { tiltakstypeTekst } from '../../messages';
 import { endreBruttolønn, useHentRefusjon } from '../../services/rest-service';
-import BEMHelper from '../../utils/bem';
-import { formatterPeriode, månedsNavn } from '../../utils/datoUtils';
 import { sumInntekterOpptjentIPeriode } from '../../utils/inntekterUtiles';
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Refusjon } from '../refusjon';
 import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import { BodyShort, Heading, Label, Radio, RadioGroup, debounce } from '@navikt/ds-react';
 import BruttolønnUtbetaltInput from '@/refusjon/RefusjonSide/BruttolønnUtbetaltInput';
+import BEMHelper from '~/utils/bem';
+import { Refusjon } from '~/types/refusjon';
+import { formatterPeriode, månedsNavn } from '~/utils';
+import { tiltakstypeTekst } from '~/types/messages';
 interface Properties {
     setVisRefusjonInnsending: Dispatch<SetStateAction<boolean>>;
 }

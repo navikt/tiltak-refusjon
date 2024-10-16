@@ -1,10 +1,12 @@
 import { Label, BodyShort, Heading } from '@navikt/ds-react';
 import React, { FunctionComponent, PropsWithChildren } from 'react';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { tiltakstypeTekst } from '../../messages';
-import BEMHelper from '../../utils/bem';
+
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Refusjon } from '../refusjon';
+import { Refusjon } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
+import { tiltakstypeTekst } from '~/types/messages';
+
 
 interface Properties {
     refusjon: Refusjon;

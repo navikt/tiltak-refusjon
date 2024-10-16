@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useContext, useEffect, useState } from 'react';
-import BEMHelper from '../../../utils/bem';
+
 import { ClsBedriftsmeny, OrganisasjonEnhet } from '../api/api';
 import { MenyContext } from '../BedriftsmenyRefusjon';
 import { TextField } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 const Sokefelt: FunctionComponent = () => {
     const cls = BEMHelper(ClsBedriftsmeny.MENYINNHOLD);

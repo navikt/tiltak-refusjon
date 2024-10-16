@@ -1,8 +1,9 @@
 import KvitteringKorreksjon from '@/refusjon/KvitteringKorreksjon/KvitteringKorreksjon';
-import { Korreksjon, Korreksjonsgrunn, Refusjon } from '@/refusjon/refusjon';
-import { KorreksjonStatus, RefusjonStatus } from '@/refusjon/status';
-import { Tiltak } from '@/refusjon/tiltak';
+
 import { Meta, StoryObj } from '@storybook/react';
+import { Korreksjon, Korreksjonsgrunn, Refusjon } from '~/types/refusjon';
+import { KorreksjonStatus, RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
 
 const meta = {
     title: 'KvitteringKorreksjon',
@@ -102,6 +103,7 @@ const refusjon: Refusjon = {
         fratrekkRefunderbarBeløp: false,
         refunderbarBeløp: undefined,
         forrigeRefusjonMinusBeløp: 0,
+        harFerietrekkForSammeMåned: false,
         beregning: {
             lønn: 2000,
             lønnFratrukketFerie: -33000,
@@ -223,6 +225,7 @@ const korreksjon: Korreksjon = {
         fratrekkRefunderbarBeløp: false,
         refunderbarBeløp: undefined,
         forrigeRefusjonMinusBeløp: 0,
+        harFerietrekkForSammeMåned: false,
         beregning: {
             lønn: 62000,
             lønnFratrukketFerie: 27000,
@@ -249,6 +252,8 @@ const korreksjon: Korreksjon = {
     kostnadssted: '1000',
     godkjentTidspunkt: '2024-01-22T15:57:08.799741Z',
     unntakOmInntekterFremitid: 0,
+    harInntektIAlleMåneder: false,
+    harTattStillingTilAlleInntektslinjer:false,
     sistEndret: '2024-01-22T15:56:06.292479Z',
 };
 

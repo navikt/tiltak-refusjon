@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useContext } from 'react';
-import BEMHelper from '../../../../utils/bem';
+
 import { BedriftvalgType, ClsBedriftsmeny } from '../../api/api';
 import './infolinje.less';
 import { MenyContext } from '../../BedriftsmenyRefusjon';
 import { Label, Button } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 const Infolinje: FunctionComponent = () => {
     const cls = BEMHelper(ClsBedriftsmeny.SOK_ETTER_BEDRIFTER);

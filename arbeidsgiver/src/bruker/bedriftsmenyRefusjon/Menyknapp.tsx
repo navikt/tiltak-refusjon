@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useContext } from 'react';
 import Underenhet from '@/asset/image/underenhet.svg?react';
 import { ChevronDownIcon } from '@navikt/aksel-icons';
-import BEMHelper from '../../utils/bem';
+
 import { MenyContext } from './BedriftsmenyRefusjon';
 import { Bedriftvalg, BedriftvalgType, ClsBedriftsmeny } from './api/api';
 import { Label, BodyShort } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 const Menyknapp: FunctionComponent = () => {
     const cls = BEMHelper(ClsBedriftsmeny.BEDRIFTSMENY);

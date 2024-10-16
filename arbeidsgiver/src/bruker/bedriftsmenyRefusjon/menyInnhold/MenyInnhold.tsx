@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import BedriftListe from './bedriftliste/BedriftListe';
-import BEMHelper from '../../../utils/bem';
+
 import './menyInnhold.less';
 import RadioValg from './RadioValg';
 import Sokefelt from './Sokefelt';
 import { ClsBedriftsmeny } from '../api/api';
+import BEMHelper from '~/utils/bem';
 
 const MenyInnhold: FunctionComponent = () => {
     const cls = BEMHelper(ClsBedriftsmeny.MENYINNHOLD);

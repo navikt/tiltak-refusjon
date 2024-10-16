@@ -1,13 +1,13 @@
 import { Label, BodyShort, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { tiltakstypeTekst } from '../../messages';
-import { formatterPeriode, månedsNavn } from '../../utils/datoUtils';
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Refusjonsgrunnlag } from '../refusjon';
 import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import Boks from '../../komponenter/Boks/Boks';
 import { valgtBruttoLønn } from '@/utils/inntekterUtiles';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import { formatterPeriode, månedsNavn } from '~/utils';
+import { tiltakstypeTekst } from '~/types/messages';
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
