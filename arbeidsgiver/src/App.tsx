@@ -13,7 +13,6 @@ import Refusjon from './refusjon/RefusjonSide/Refusjon';
 import { registrereBesok } from './utils/amplitude-utils';
 import RefusjonProvider from './RefusjonProvider';
 import { FilterProvider } from './refusjon/oversikt/FilterContext';
-import MinKomponent from '~/min-komponent';
 
 function App() {
     useEffect(() => {
@@ -22,7 +21,6 @@ function App() {
     return (
         <ErrorOgSuspenseHandlerMain>
             <BrowserRouter>
-                <MinKomponent />
                 <ScrollToTop />
                 <AdvarselBannerTestversjon />
                 <Routes>

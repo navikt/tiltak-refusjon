@@ -1,12 +1,10 @@
 {
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "paths":{
-      "@/*": ["./src/*"],
-      "~/*": ["../komponenter/*"],
-    }
-  },
-  "include": [
-    "src"
-  ],
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./src/*"],
+            "~/*": ["../komponenter/*"]
+        }
+    },
+    "include": ["src"]
 }
