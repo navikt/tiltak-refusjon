@@ -76,7 +76,7 @@ const Landingsside: FunctionComponent = () => {
                 </ul>
                 <BodyShort size="small">
                     Les mer om{' '}
-                    <EksternLenke href="https://www.altinn.no/hjelp/profil/roller-og-rettigheter">
+                    <EksternLenke href="https://info.altinn.no/hjelp/profil/enkelttjenester-og-roller/">
                         roller og rettigheter i Altinn
                     </EksternLenke>
                 </BodyShort>
