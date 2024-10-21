@@ -10,6 +10,7 @@ import SaksbehanderTableHeader from '~/OversiktTabell/TableHeader/SaksbehandlerT
 
 import './Oversikt.less';
 import BEMHelper from '~/utils/bem';
+import LenkePanel from '~/LenkePanel/LenkePanel';
 const cls = BEMHelper('oversikt');
 
 const Oversikt: FunctionComponent = () => {
@@ -26,7 +27,8 @@ const Oversikt: FunctionComponent = () => {
     }
 
     return (
-        <nav aria-label="Main" role={"list"}>
+        <nav className={cls.className} aria-label="Main" role={"list"} >
+            <LenkePanel refusjoner={refusjonerPage.refusjoner} />
             <OversiktTabell tableHeader={<SaksbehanderTableHeader/>} tableBody={<TabellBodySaksbehandler refusjoner={refusjonerPage.refusjoner}/>}/>
             <Pagination className={cls.element('pagination')}
                 page={refusjonerPage.currentPage + 1}
