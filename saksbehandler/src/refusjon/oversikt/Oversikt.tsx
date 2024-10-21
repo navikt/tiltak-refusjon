@@ -2,13 +2,14 @@ import React, { FunctionComponent } from 'react';
 import Info from './Info';
 import { Pagination } from '@navikt/ds-react';
 import { useHentRefusjoner } from '../../services/rest-service';
-import BEMHelper from '../../utils/bem';
+
 import { useFilter } from './FilterContext';
 import OversiktTabell from '~/OversiktTabell';
 import TabellBodySaksbehandler from '~/OversiktTabell/TableBodySaksbehandler';
 import SaksbehanderTableHeader from '~/OversiktTabell/TableHeader/SaksbehandlerTableHeader';
 
 import './Oversikt.less';
+import BEMHelper from '~/utils/bem';
 const cls = BEMHelper('oversikt');
 
 const Oversikt: FunctionComponent = () => {

@@ -1,6 +1,9 @@
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
-import { Refusjon, Tiltak, RefusjonStatus } from '@/refusjon/refusjon';
+
 import type { Meta, StoryObj } from '@storybook/react';
+import { Refusjon } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
 
 const meta = {
     title: 'Refusjons Saksbehandler/KvitteringSide',
@@ -22,6 +25,9 @@ const refusjonMinusbelop: Refusjon = {
             deltakerFornavn: 'Formye',
             deltakerEtternavn: 'Ferietrekksen',
             deltakerFnr: '28061827902',
+            arbeidsgiverFornavn: 'Arne',
+            arbeidsgiverEtternavn: 'Arbeidsgiver',
+            arbeidsgiverTlf: '41111111',
             veilederNavIdent: 'Z123456',
             bedriftNavn: 'Kiwi Majorstuen',
             bedriftNr: '999999999',
@@ -126,6 +132,8 @@ const refusjonMinusbelop: Refusjon = {
     korreksjonId: undefined,
     harTattStillingTilAlleInntektslinjer: true,
     harInntektIAlleMåneder: false,
+    åpnetFørsteGang: '2024-01-22T15:55:56.514591Z',
+    sistEndret: '2024-01-22T15:56:06.292479Z',
 };
 
 export const RefusjonMinusbelop: Story = {

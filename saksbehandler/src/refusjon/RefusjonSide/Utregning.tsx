@@ -13,12 +13,14 @@ import { BodyShort, Heading, ReadMore } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Beregning, Inntektsgrunnlag, Tilskuddsgrunnlag } from '../refusjon';
+
 import Utregningsrad from './Utregningsrad';
-import BEMHelper from '@/utils/bem';
+
 import './Utregning.less';
 import EksternLenke from '@/komponenter/EksternLenke/EksternLenke';
 import UtregningsradHvaInngårIDette from './UtregningsradHvaInngårIDette';
+import { Beregning, Inntektsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
 
 interface Props {
     refusjonsnummer: {

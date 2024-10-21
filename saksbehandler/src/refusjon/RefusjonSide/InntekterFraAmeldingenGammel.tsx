@@ -2,12 +2,14 @@ import React, { FunctionComponent } from 'react';
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 import styled from 'styled-components';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { lønnsbeskrivelseTekst } from '../../messages';
-import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '../../utils/datoUtils';
+
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Inntektsgrunnlag } from '../refusjon';
+
 import Boks from '@/komponenter/Boks/Boks';
 import sortBy from 'lodash.sortby';
+import { lønnsbeskrivelseTekst } from '~/types/messages';
+import { Inntektsgrunnlag } from '~/types/refusjon';
+import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 const Fleks = styled.div`
     display: flex;

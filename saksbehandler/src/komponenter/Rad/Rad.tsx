@@ -1,6 +1,7 @@
 import React from 'react';
-import BEMHelper from '../../utils/bem';
+
 import './Rad.less';
+import BEMHelper from '~/utils/bem';
 
 interface Props {
     noSpace?: boolean;

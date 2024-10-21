@@ -1,13 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { formatterPeriode, månedsNavn } from '../../utils/datoUtils';
+
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Refusjonsgrunnlag } from '../refusjon';
+
 import { GrønnBoks } from './InntekterFraTiltaketSpørsmål';
 import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import InntekterFraTiltaketSvarNyLabel from './HarTattStillingTilAlleInnteksLinjerNyLabel';
 import InntekterKunFraTiltaketSvar from './InntekterKunFraTiltaketSvar';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import { formatterPeriode, månedsNavn } from '~/utils';
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;

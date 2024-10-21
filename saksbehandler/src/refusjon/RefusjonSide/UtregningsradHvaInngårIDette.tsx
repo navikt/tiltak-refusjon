@@ -1,9 +1,10 @@
 import { HelpText, ReadMore, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { formatterPenger } from '../../utils/PengeUtils';
-import { NORSK_MÅNEDÅR_FORMAT, formatterDato, getMåned } from '../../utils/datoUtils';
-import { Inntektslinje, Tilskuddsgrunnlag } from '../refusjon';
+
 import { inntektBeskrivelse } from './InntekterFraAMeldingen/InntekterFraAMeldingen';
+import { Inntektslinje, Tilskuddsgrunnlag } from '~/types/refusjon';
+import { formatterDato, getMåned, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 type Props = {
     inntekter: Inntektslinje[];

@@ -133,6 +133,7 @@ const refusjon: Refusjon = {
     status: RefusjonStatus.KORRIGERT,
     korreksjonId: '01HMRY76T65RTNQV0T43MDCE8B',
     utbetaltTidspunkt: undefined,
+    harInntektIAlleMåneder: false,
     åpnetFørsteGang: '2024-01-22T15:55:56.514591Z',
     sistEndret: '2024-01-22T15:56:06.292479Z',
     harTattStillingTilAlleInntektslinjer: true,

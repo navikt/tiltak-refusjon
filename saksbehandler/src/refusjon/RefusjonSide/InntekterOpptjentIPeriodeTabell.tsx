@@ -1,11 +1,12 @@
 import { Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { NORSK_MÅNEDÅR_FORMAT, formatterDato, formatterPeriode } from '../../utils/datoUtils';
-import { Inntektslinje } from '../refusjon';
+
 import { inntektBeskrivelse } from './InntekterFraAMeldingen/InntekterFraAMeldingen';
 import sumBy from 'lodash.sumby';
 import sortBy from 'lodash.sortby';
+import { Inntektslinje } from '~/types/refusjon';
+import { formatterDato, formatterPeriode, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 type Props = {
     inntekter: Inntektslinje[];

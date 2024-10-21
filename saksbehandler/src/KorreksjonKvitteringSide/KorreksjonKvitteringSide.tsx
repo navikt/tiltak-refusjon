@@ -1,10 +1,10 @@
-import { Korreksjon } from '@/refusjon/refusjon';
+
 import { formatterPenger } from '@/utils/PengeUtils';
 import { Alert, BodyShort, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '../komponenter/VerticalSpacer';
 import HvitBoks from '../komponenter/hvitboks/HvitBoks';
-import { korreksjonStatusTekst } from '../messages';
+
 import InformasjonFraAvtalen from '../refusjon/RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraAMeldingenGammel from '../refusjon/RefusjonSide/InntekterFraAmeldingenGammel';
@@ -12,8 +12,11 @@ import HarTattStillingTilAlleInntektsLinjerNy from '../refusjon/RefusjonSide/Har
 import HarTattStillingTilAlleInntektsLinjerGammel from '../refusjon/RefusjonSide/HarTattStillingTilAlleInntektsLinjerGammel';
 import TidligereRefunderbarBeløpKvittering from '../refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
 import Utregning from '../refusjon/RefusjonSide/Utregning';
-import { storForbokstav } from '../utils/stringUtils';
+
 import KorreksjonSummeringBoks from './KorreksjonSummeringsBoks';
+import { Korreksjon } from '~/types/refusjon';
+import { storForbokstav } from '~/utils/stringUtils';
+import { korreksjonStatusTekst } from '~/types/messages';
 
 type Props = {
     korreksjon: Korreksjon;

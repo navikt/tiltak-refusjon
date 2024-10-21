@@ -329,6 +329,7 @@ const refusjonMedNullbelop: Refusjon = {
     åpnetFørsteGang: '2024-01-19T12:50:45.247677Z',
     sistEndret: '2024-01-19T12:51:16.363278Z',
     harTattStillingTilAlleInntektslinjer: true,
+    harInntektIAlleMåneder: false,
 };
 
 export const RefusjonNullbelop: Story = {

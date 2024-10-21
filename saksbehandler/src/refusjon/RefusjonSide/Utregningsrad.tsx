@@ -1,10 +1,12 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
 import React, { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 import { formatterPenger } from '../../utils/PengeUtils';
-import BEMHelper from '../../utils/bem';
+
 import { visSatsMedNorskFormatering } from '../../utils/utregningUtil';
-import { Tilskuddsgrunnlag } from '../refusjon';
+
 import './Utregningsrad.less';
+import { Tilskuddsgrunnlag } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
 
 interface Props {
     labelIkon?: React.ReactNode;

@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { tiltakstypeTekst } from '../../messages';
+
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Refusjonsgrunnlag } from '../refusjon';
+
 import { BodyShort, Label } from '@navikt/ds-react';
 import sumBy from 'lodash.sumby';
 import InntekterKunFraTiltaketSvar from './InntekterKunFraTiltaketSvar';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import { tiltakstypeTekst } from '~/types/messages';
 
 const HarTattStillingTilAlleInntektsLinjerGammel: FunctionComponent<{ refusjonsgrunnlag: Refusjonsgrunnlag }> = (
     props

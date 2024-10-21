@@ -2,10 +2,11 @@ import { FunctionComponent, useState } from 'react';
 import { merkForUnntakOmInntekterFremITid } from '../../services/rest-service';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 import { BodyShort, TextField, Button, Modal, Heading } from '@navikt/ds-react';
-import { Refusjon } from '../refusjon';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Refusjon } from '~/types/refusjon';
 
 const schema = z.object({
     merking: z.coerce

@@ -1,10 +1,12 @@
 import Pengesedler from '@/asset/image/pengesedler.svg?react';
 import { Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import { formatterPeriode } from '../../utils/datoUtils';
+
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Refusjonsgrunnlag } from '../refusjon';
+
 import styled from 'styled-components';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import { formatterPeriode } from '~/utils';
 
 const Boks = styled.div`
     display: flex;

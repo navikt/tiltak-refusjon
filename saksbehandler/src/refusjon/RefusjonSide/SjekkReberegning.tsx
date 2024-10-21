@@ -5,8 +5,9 @@ import LagreKnapp from '../../komponenter/LagreKnapp';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 import BekreftelseModal from '../../komponenter/bekreftelse-modal/BekreftelseModal';
 import { sjekkReberegning, useHentRefusjon } from '../../services/rest-service';
-import { Beregning } from '../refusjon';
+
 import Utregning from './Utregning';
+import { Beregning } from '~/types/refusjon';
 
 const SjekkReberegning: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();

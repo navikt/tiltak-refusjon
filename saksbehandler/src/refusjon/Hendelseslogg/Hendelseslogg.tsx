@@ -1,14 +1,18 @@
 import React, { FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
-import BEMHelper from '../../utils/bem';
+
 import { Button, Checkbox, Modal, Table } from '@navikt/ds-react';
-import { storForbokstav } from '../../utils/stringUtils';
+
 import HendelseIkon from './HendelseIkon';
-import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '../../utils/datoUtils';
+
 import './Hendelseslogg.less';
-import { Hendelse, HendelseType } from '../refusjon';
-import { hendelseTekst } from '../../messages';
+
 import { hentHendelser } from '../../services/rest-service';
 import { Nettressurs, Status } from '../../nettressurs';
+import BEMHelper from '~/utils/bem';
+import { hendelseTekst } from '~/types/messages';
+import { Hendelse, HendelseType } from '~/types/refusjon';
+import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { storForbokstav } from '~/utils/stringUtils';
 
 type Props = {
     refusjonId?: string;

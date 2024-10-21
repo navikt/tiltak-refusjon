@@ -147,6 +147,7 @@ const refusjonPlussbelop: Refusjon = {
     åpnetFørsteGang: '2024-01-19T13:20:55.109605Z',
     sistEndret: '2024-01-19T13:21:06.588565Z',
     harTattStillingTilAlleInntektslinjer: true,
+    harInntektIAlleMåneder: false,
 };
 
 export const RefusjonPlussbelop: Story = {

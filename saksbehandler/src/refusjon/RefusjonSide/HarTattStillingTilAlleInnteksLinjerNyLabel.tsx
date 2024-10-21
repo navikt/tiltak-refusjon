@@ -1,9 +1,10 @@
 import { Label } from '@navikt/ds-react';
 import { formatterPenger } from '@/utils/PengeUtils';
 import { FunctionComponent } from 'react';
-import { Refusjonsgrunnlag } from '../refusjon';
-import { formatterPeriode } from '@/utils/datoUtils';
-import { tiltakstypeTekst } from '@/messages';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import { formatterPeriode } from '~/utils';
+import { tiltakstypeTekst } from '~/types/messages';
+
 
 interface Props {
     refusjonsgrunnlag: Refusjonsgrunnlag;

@@ -1,10 +1,12 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { tiltakstypeTekst } from '../../messages';
-import BEMHelper from '../../utils/bem';
+
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Refusjonsgrunnlag } from '../refusjon';
+
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
+import { tiltakstypeTekst } from '~/types/messages';
 
 interface Properties {
     refusjonsgrunnlag: Refusjonsgrunnlag;

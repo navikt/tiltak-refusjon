@@ -7,7 +7,7 @@ import 'react-day-picker/dist/style.css';
 import { useParams } from 'react-router';
 import BekreftelseModal from '../../komponenter/bekreftelse-modal/BekreftelseModal';
 import { forlengFrist, useHentRefusjon } from '../../services/rest-service';
-import BEMHelper from '../../utils/bem';
+
 import './ForlengFrist.less';
 import {
     finnFeilMeldingFraInputDialog,
@@ -17,6 +17,7 @@ import {
 } from './forlengFristUtils';
 import GrunnlagTilForlengelse from './GrunnlagTilForlengelse';
 import { FeilkodeError } from '../../types/errors';
+import BEMHelper from '~/utils/bem';
 
 const cls = BEMHelper('forleng-frist');
 

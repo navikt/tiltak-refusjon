@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useContext, useEffect, useState, PropsWithChildren } from 'react';
-import { RefusjonStatus, Tiltak } from '../refusjon';
+
 import { useOversiktCookie } from './OversiktCookie/OversiktCookie';
 import { AktivSøk } from './VisRefusjonerFilter';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
 
 export interface Filter extends RefusjonsAktor {
     status?: RefusjonStatus;

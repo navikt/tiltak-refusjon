@@ -1,13 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import EksternLenke from '../../komponenter/EksternLenke/EksternLenke';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { tiltakstypeTekst } from '../../messages';
-import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '../../utils/datoUtils';
+
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Tilskuddsgrunnlag } from '../refusjon';
+
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import Rad from '@/komponenter/Rad/Rad';
 import Boks from '@/komponenter/Boks/Boks';
+import { Tilskuddsgrunnlag } from '~/types/refusjon';
+import { tiltakstypeTekst } from '~/types/messages';
+import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 
 const InformasjonFraAvtalen: FunctionComponent<{
     tilskuddsgrunnlag: Tilskuddsgrunnlag;

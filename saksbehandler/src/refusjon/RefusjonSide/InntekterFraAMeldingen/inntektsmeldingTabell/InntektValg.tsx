@@ -1,7 +1,8 @@
 import { Radio, RadioGroup } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { setInntektslinjeOpptjentIPeriode } from '../../../../services/rest-service';
-import { Inntektslinje } from '../../../refusjon';
+import { Inntektslinje } from '~/types/refusjon';
+
 
 interface Props {
     inntekt: Inntektslinje;

@@ -2,15 +2,18 @@ import { FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
 import styled from 'styled-components';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { tiltakstypeTekst } from '../../messages';
+
 import { endreBruttolønn, useHentKorreksjon } from '../../services/rest-service';
-import BEMHelper from '../../utils/bem';
-import { formatterPeriode, månedsNavn } from '../../utils/datoUtils';
+
 import { sumInntekterOpptjentIPeriode } from '../../utils/inntekterUtils';
 import { formatterPenger } from '../../utils/PengeUtils';
-import { Refusjonsgrunnlag } from '../refusjon';
+
 import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import { BodyShort, Heading, Label, Radio, RadioGroup, TextField } from '@navikt/ds-react';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
+import { formatterPeriode, månedsNavn } from '~/utils';
+import { tiltakstypeTekst } from '~/types/messages';
 
 export const GrønnBoks = styled.div`
     background-color: #ccf1d6;

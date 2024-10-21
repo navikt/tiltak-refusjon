@@ -1,6 +1,9 @@
 import KorreksjonKvitteringSide from '@/KorreksjonKvitteringSide/KorreksjonKvitteringSide';
-import { Korreksjon, Korreksjonsgrunn, Tiltak, KorreksjonStatus } from '@/refusjon/refusjon';
+
 import { Meta, StoryObj } from '@storybook/react';
+import { Korreksjon, Korreksjonsgrunn } from '~/types/refusjon';
+import { KorreksjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
 
 const meta = {
     title: 'Refusjons Saksbehandler/Korreksjon kvittering',
@@ -23,6 +26,9 @@ const korreksjon: Korreksjon = {
             deltakerFornavn: 'Formye',
             deltakerEtternavn: 'Ferietrekksen',
             deltakerFnr: '28061827902',
+            arbeidsgiverFornavn: 'Arne',
+            arbeidsgiverEtternavn: 'Arbeidsgiver',
+            arbeidsgiverTlf: '41111111',
             veilederNavIdent: 'Z123456',
             bedriftNavn: 'Kiwi Majorstuen',
             bedriftNr: '999999999',
@@ -122,6 +128,8 @@ const korreksjon: Korreksjon = {
     kostnadssted: undefined,
     harInntektIAlleMåneder: false,
     harTattStillingTilAlleInntektslinjer: true,
+    unntakOmInntekterFremitid: 0,
+    sistEndret: '2024-01-22T15:56:06.292479Z',
 };
 
 export const KorreksjonMedPlussbelopOgTilbakekreving: Story = {

@@ -49,6 +49,7 @@ export interface Refusjon {
     hentInntekterLengerFrem: string;
     sistEndret: string;
     åpnetFørsteGang: string;
+    harInntektIAlleMåneder: boolean
 }
 
 export interface Korreksjon {
@@ -127,7 +128,7 @@ export interface Inntektslinje {
     opptjeningsperiodeFom?: string;
     opptjeningsperiodeTom?: string;
     erMedIInntektsgrunnlag: boolean;
-    erOpptjentIPeriode?: boolean | null;
+    erOpptjentIPeriode?: boolean;
 }
 
 export interface Beregning {

@@ -2,13 +2,15 @@ import React, { FunctionComponent, Suspense } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useParams } from 'react-router';
 import { useHentKorreksjon } from '../services/rest-service';
-import { korreksjonsgrunnTekst } from '../messages';
+
 import VerticalSpacer from '../komponenter/VerticalSpacer';
 import KorreksjonSide from './KorreksjonSide';
-import { KorreksjonStatus } from '../refusjon/refusjon';
+
 import TilbakeTilOversikt from '../komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import { Link } from 'react-router-dom';
 import KorreksjonKvitteringSide from '../KorreksjonKvitteringSide/KorreksjonKvitteringSide';
+import { korreksjonsgrunnTekst } from '~/types/messages';
+import { KorreksjonStatus } from '~/types/status';
 
 const Advarsler: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
