@@ -70,7 +70,7 @@ const RefusjonFeiletManglerUnderEnhet: FunctionComponent<Props> = ({ bedriftvalg
             </div>
 
             <div className={cls.element('altinn-lenke')}>
-                <Link href="https://www.altinn.no/hjelp/profil/roller-og-rettigheter/">
+                <Link href="https://info.altinn.no/hjelp/profil/enkelttjenester-og-roller//">
                     Les mer om roller og rettigheter på altinn.no
                 </Link>
             </div>
