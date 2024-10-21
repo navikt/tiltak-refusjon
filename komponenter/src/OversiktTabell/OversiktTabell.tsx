@@ -4,6 +4,7 @@ import BEMHelper from '../utils/bem';
 import './OversiktTabell.less';
 
 interface Props {
+    className?: string;
     tableHeader?: React.ReactNode;
     tableBody?: React.ReactNode;
     

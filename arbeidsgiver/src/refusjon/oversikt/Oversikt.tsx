@@ -11,7 +11,7 @@ import ArbeidsgiverTableBody from '~/OversiktTabell/TableBody/ArbeidsgiverTableB
 import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
 
 
-import { Pagination } from '@navikt/ds-react';
+import { LinkPanel, Pagination } from '@navikt/ds-react';
 import './Oversikt.less';
 import BEMHelper from '~/utils/bem';
 const cls = BEMHelper('oversikt');
@@ -29,7 +29,10 @@ const Oversikt: FunctionComponent = () => {
         <nav className={cls.className} aria-label="Main">
                 {refusjoner.length > 0 ? (
                     <>
+                        <LinkPanel className={cls.element('linkPanel')} refusjoner={pageable.refusjoner}/>
+                  
                         <OversiktTabell tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />} tableBody={<ArbeidsgiverTableBody refusjoner={pageable.refusjoner}/>} />
+                       
                         <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}>
                             <Pagination className={cls.element('pagination')}
                                 page={pageable.currentPage + 1}
