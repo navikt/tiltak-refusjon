@@ -11,7 +11,7 @@ import ArbeidsgiverTableBody from '~/OversiktTabell/TableBody/ArbeidsgiverTableB
 import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
 
 import { Pagination } from '@navikt/ds-react';
-import './Oversikt.less';
+import './oversikt.less';
 import BEMHelper from '~/utils/bem';
 import LenkePanel from '~/LenkePanel/LenkePanel';
 
