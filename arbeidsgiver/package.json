@@ -52,6 +52,7 @@
         "@storybook/test": "7.6.10",
         "@testing-library/react": "14.1.2",
         "@types/amplitude-js": "^8.16.2",
+        "@types/history": "^5.0.0",
         "@types/lodash.groupby": "^4.6.9",
         "@types/lodash.sortby": "^4.7.9",
         "@types/lodash.sumby": "^4.6.9",
