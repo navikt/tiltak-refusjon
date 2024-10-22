@@ -2,11 +2,12 @@ import React, { FunctionComponent, useContext, useEffect, useState } from 'react
 import { RefusjonContext } from '../../RefusjonProvider';
 import { useParams } from 'react-router';
 import { lagreBedriftKID } from '../../services/rest-service';
-import BEMHelper from '../../utils/bem';
+
 import validator from 'norsk-validator';
 
 import './KIDInputValidator.less';
 import { TextField } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 const KIDInputValidator: FunctionComponent = () => {
     const cls = BEMHelper('kidValidator');

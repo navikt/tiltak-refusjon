@@ -1,8 +1,9 @@
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
-import { Refusjon } from '@/refusjon/refusjon';
-import { RefusjonStatus } from '@/refusjon/status';
-import { Tiltak } from '@/refusjon/tiltak';
+
 import type { Meta, StoryObj } from '@storybook/react';
+import { Refusjon } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
 
 const meta = {
     title: 'KvitteringSide',
@@ -76,7 +77,7 @@ const refusjonPlussbelop: Refusjon = {
                     måned: '2023-12',
                     opptjeningsperiodeFom: '2023-12-01',
                     opptjeningsperiodeTom: '2023-12-31',
-                    erOpptjentIPeriode: null,
+                    erOpptjentIPeriode: undefined,
                     id: '01HMGY3BT66V3X4F5RCZSGTCBW',
                     erMedIInntektsgrunnlag: true,
                 },
@@ -87,7 +88,7 @@ const refusjonPlussbelop: Refusjon = {
                     måned: '2023-12',
                     opptjeningsperiodeFom: '2023-12-01',
                     opptjeningsperiodeTom: '2023-12-31',
-                    erOpptjentIPeriode: null,
+                    erOpptjentIPeriode: undefined,
                     id: '01HMGY3BT630AZMZBJF8QJNT9A',
                     erMedIInntektsgrunnlag: true,
                 },
@@ -98,7 +99,7 @@ const refusjonPlussbelop: Refusjon = {
                     måned: '2023-12',
                     opptjeningsperiodeFom: '2023-12-01',
                     opptjeningsperiodeTom: '2023-12-31',
-                    erOpptjentIPeriode: null,
+                    erOpptjentIPeriode: undefined,
                     id: '01HMGY3BT6CBVMSKM76J15JGQJ',
                     erMedIInntektsgrunnlag: true,
                 },
@@ -113,6 +114,7 @@ const refusjonPlussbelop: Refusjon = {
         fratrekkRefunderbarBeløp: false,
         refunderbarBeløp: undefined,
         forrigeRefusjonMinusBeløp: 0,
+        harFerietrekkForSammeMåned: false,
         beregning: {
             lønn: 12000,
             lønnFratrukketFerie: 10800,
@@ -145,6 +147,7 @@ const refusjonPlussbelop: Refusjon = {
     åpnetFørsteGang: '2024-01-19T13:20:55.109605Z',
     sistEndret: '2024-01-19T13:21:06.588565Z',
     harTattStillingTilAlleInntektslinjer: true,
+    harInntektIAlleMåneder: false,
 };
 
 export const RefusjonPlussbelopGammel: Story = {

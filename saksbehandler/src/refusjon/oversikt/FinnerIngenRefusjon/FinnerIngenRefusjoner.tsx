@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import BEMHelper from '../../../utils/bem';
+
 import { Heading } from '@navikt/ds-react';
 import InfoIkon from '@/asset/image/info.svg?react';
 import './finnerIngenRefusjoner.less';
+import BEMHelper from '~/utils/bem';
 
 const cls = BEMHelper('finnerIngenRefusjoner');
 

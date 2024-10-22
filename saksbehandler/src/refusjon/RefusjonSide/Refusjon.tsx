@@ -6,17 +6,17 @@ import styled from 'styled-components';
 import TilbakeTilOversikt from '../../komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 import { useHentRefusjon } from '../../services/rest-service';
-import { formatterDato } from '../../utils/datoUtils';
 import ForlengFrist from '../ForlengFrist/ForlengFrist';
 import KvitteringSide from '../KvitteringSide/KvitteringSide';
 import MerkForUnntakOmInntekterToMånederFrem from '../MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
-import { RefusjonStatus } from '../refusjon';
 import FeilSide from './FeilSide';
 import HenterInntekterBoks from './HenterInntekterBoks';
 import RefusjonSide from './RefusjonSide';
 import { useInnloggetBruker } from '../../bruker/BrukerContext';
 import { BrukerContextType } from '../../bruker/BrukerContextType';
 import HendelsesLogg from '../Hendelseslogg/Hendelseslogg';
+import { RefusjonStatus } from '~/types/status';
+import { formatterDato } from '~/utils';
 
 const Fleks = styled.div`
     display: flex;

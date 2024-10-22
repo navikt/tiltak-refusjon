@@ -2,10 +2,7 @@ import { Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent, ReactElement } from 'react';
 import Utregning from '../../komponenter/Utregning';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { statusTekst } from '../../messages';
-import { RefusjonStatus } from '../../refusjon/status';
-import { NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT, formatterDato } from '../../utils/datoUtils';
-import { storForbokstav } from '../../utils/stringUtils';
+
 import InntekterFraAMeldingenGammel from '../RefusjonSide/InntekterFraAMeldingenGammel';
 import InntekterFraTiltaketSvar from '../RefusjonSide/InntekterFraTiltaketSvar';
 import InntekterFraTiltaketSvarGammel from '../RefusjonSide/InntekterFraTiltaketSvarGammel';
@@ -13,11 +10,16 @@ import SummeringBoks from '../RefusjonSide/SummeringBoks';
 import TidligereRefunderbarBeløpKvittering from '../RefusjonSide/TidligereRefunderbarBeløpKvittering';
 import InformasjonFraAvtalen from '../RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
-import { Refusjon } from '../refusjon';
+
 import LagreSomPdfKnapp from './LagreSomPdfKnapp';
 import Statusmelding from './Statusmelding';
 import SummeringBoksNullbeløp from '../RefusjonSide/SummeringsBoksNullbeløp';
 import Boks from '../../komponenter/Boks/Boks';
+import { Refusjon } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { storForbokstav } from '~/utils/stringUtils';
+import { statusTekst } from '~/types/messages';
+import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {

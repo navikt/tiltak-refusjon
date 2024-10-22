@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import BEMHelper from '../../utils/bem';
+
 import './Banner.less';
 import { Heading } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 const cls = BEMHelper('Banner');
 

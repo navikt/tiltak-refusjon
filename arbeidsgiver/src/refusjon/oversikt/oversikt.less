@@ -1,3 +1,19 @@
 .oversikt {
     padding-bottom: 1.25rem;
+
+    &__linkPanel {
+        display:none;
+    }
+}
+@media(max-width: 768px) {
+    .oversikt{
+        &__linkPanel {
+            background-color: white;
+            margin-bottom: 0.1rem;
+            display:flex;
+        }
+        table {
+            display:none;
+        }
+    }
 }

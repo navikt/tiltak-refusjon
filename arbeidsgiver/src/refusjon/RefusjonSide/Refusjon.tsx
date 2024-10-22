@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useEffect, useRef } from 'react';
 import TilbakeTilOversikt from '../../komponenter/TilbakeTilOversikt';
-import { formatterDato } from '../../utils/datoUtils';
+
 import KvitteringKorreksjon from '../KvitteringKorreksjon/KvitteringKorreksjon';
 import KvitteringSide from '../KvitteringSide/KvitteringSide';
-import { RefusjonStatus } from '../status';
+
 import FeilSide from './FeilSide';
 import RefusjonSide from './RefusjonSide';
 import { BodyShort } from '@navikt/ds-react';
@@ -11,7 +11,9 @@ import { useParams } from 'react-router-dom';
 import { oppdaterRefusjonFetcher, useHentKorreksjon, useHentRefusjon } from '../../services/rest-service';
 import useSWRMutation from 'swr/mutation';
 import { mutate } from 'swr';
-import { Refusjon as RefusjonType } from '../refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { formatterDato } from '~/utils';
+import { Refusjon as RefusjonType } from '~/types/refusjon';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -96,7 +98,7 @@ const Korreksjonskvittering: FunctionComponent<{ refusjon: RefusjonType }> = ({ 
 
 const Refusjon: FunctionComponent = () => {
     return (
-        <div style={{ margin: '0 auto', maxWidth: '55rem' }}>
+        <div style={{ margin: '0 auto', maxWidth: '80rem' }}>
             <div style={{ flex: '0 0 55rem', flexShrink: 1 }}>
                 <TilbakeTilOversikt />
                 <Komponent />

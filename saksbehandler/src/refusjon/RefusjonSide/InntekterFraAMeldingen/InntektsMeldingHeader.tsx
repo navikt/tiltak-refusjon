@@ -1,8 +1,8 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import BEMHelper from '../../../utils/bem';
-import { formatterDato, månedsNavn, NORSK_DATO_OG_TID_FORMAT } from '../../../utils/datoUtils';
-import { Refusjonsgrunnlag } from '../../refusjon';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import { formatterDato, månedsNavn, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import BEMHelper from '~/utils/bem';
 
 interface Properties {
     refusjonsgrunnlag: Refusjonsgrunnlag;

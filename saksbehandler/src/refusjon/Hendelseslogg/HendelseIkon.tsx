@@ -8,7 +8,7 @@ import {
     XMarkOctagonIcon,
 } from '@navikt/aksel-icons';
 import { FunctionComponent, ReactNode } from 'react';
-import { HendelseType } from '../refusjon';
+import { HendelseType } from '~/types/refusjon';
 
 interface Props {
     hendelse: HendelseType;

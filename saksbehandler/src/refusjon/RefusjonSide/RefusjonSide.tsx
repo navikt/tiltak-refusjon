@@ -2,7 +2,6 @@ import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useParams } from 'react-router';
 import EksternLenke from '../../komponenter/EksternLenke/EksternLenke';
-import StatusTekst from '../../komponenter/StatusTekst/StatusTekst';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 import HvitBoks from '../../komponenter/hvitboks/HvitBoks';
 import { useHentRefusjon } from '../../services/rest-service';
@@ -13,6 +12,7 @@ import './RefusjonSide.less';
 import TidligereRefunderbarBeløpKvittering from './TidligereRefunderbarBeløpKvittering';
 import Utregning from './Utregning';
 import InntekterFraTiltaketSvar from './HarTattStillingTilAlleInntektsLinjerNy';
+import StatusTekst from '~/StatusTekst';
 
 const RefusjonSide: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
@@ -35,11 +35,12 @@ const RefusjonSide: FunctionComponent = () => {
                 <Heading size="large">Beregning av refusjon</Heading>
                 <StatusTekst
                     status={refusjon.status}
+                    tiltakstype={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
                     tilskuddFom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom}
                     tilskuddTom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom}
+                    fratrekkRefunderbarBeløp={refusjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp}
                 />
             </div>
-
             <VerticalSpacer rem={1} />
             <BodyShort size="small">
                 Vi henter inntektsopplysninger for deltakeren fra a-meldingen automatisk. Hvis inntektsopplysningene

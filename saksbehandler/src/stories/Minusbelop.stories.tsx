@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Utregning from '@/refusjon/RefusjonSide/Utregning';
-import { Tiltak } from '@/refusjon/refusjon';
+import { Tiltak } from '~/types/tiltak';
 
 const meta = {
     title: 'Refusjons Saksbehandler/Utregning',
@@ -41,6 +41,9 @@ const refusjon1 = {
         deltakerFornavn: 'Jon',
         deltakerEtternavn: 'Janson Ferietrekk minus beløp 1',
         deltakerFnr: '08124521514',
+        arbeidsgiverFornavn: 'Arne',
+        arbeidsgiverEtternavn: 'Arbeidsgiver',
+        arbeidsgiverTlf: '41111111',
         veilederNavIdent: 'Z123456',
         bedriftNavn: 'Kiwi Majorstuen',
         bedriftNr: '910712306',
@@ -114,6 +117,9 @@ const refusjon2 = {
         deltakerFornavn: 'Jon',
         deltakerEtternavn: 'Janson Ferietrekk minus beløp 2',
         deltakerFnr: '08124521514',
+        arbeidsgiverFornavn: 'Arne',
+        arbeidsgiverEtternavn: 'Arbeidsgiver',
+        arbeidsgiverTlf: '41111111',
         veilederNavIdent: 'Z123456',
         bedriftNavn: 'Kiwi Majorstuen',
         bedriftNr: '910712306',

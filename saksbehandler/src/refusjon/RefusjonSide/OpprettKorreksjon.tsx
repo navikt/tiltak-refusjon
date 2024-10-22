@@ -3,10 +3,12 @@ import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import BekreftelseModal from '../../komponenter/bekreftelse-modal/BekreftelseModal';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { korreksjonsgrunnTekst } from '../../messages';
+
 import { opprettKorreksjonsutkast } from '../../services/rest-service';
-import { Korreksjonsgrunn } from '../refusjon';
+
 import { Button, BodyShort, ErrorMessage, Checkbox, CheckboxGroup, TextField, Textarea } from '@navikt/ds-react';
+import { Korreksjonsgrunn } from '~/types/refusjon';
+import { korreksjonsgrunnTekst } from '~/types/messages';
 
 const OpprettKorreksjon: FunctionComponent<{}> = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();

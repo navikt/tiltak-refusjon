@@ -2,10 +2,12 @@ import Pengesedler from '@/asset/image/pengesedler.svg?react';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import VerticalSpacer from '../komponenter/VerticalSpacer';
-import { formatterPeriode } from '../utils/datoUtils';
+
 import { formatterPenger } from '../utils/PengeUtils';
-import { Korreksjon, Refusjonsgrunnlag } from '../refusjon/refusjon';
+
 import { BodyShort, Label } from '@navikt/ds-react';
+import { Korreksjon, Refusjonsgrunnlag } from '~/types/refusjon';
+import { formatterPeriode } from '~/utils';
 
 const Boks = styled.div`
     display: flex;

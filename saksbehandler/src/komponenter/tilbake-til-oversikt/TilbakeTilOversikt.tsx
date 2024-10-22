@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { ChevronLeftIcon } from '@navikt/aksel-icons';
 import { Link } from 'react-router-dom';
-import BEMHelper from '../../utils/bem';
+
 import './tilbaketTilOversikt.less';
+import BEMHelper from '~/utils/bem';
 
 const TilbakeTilOversikt: FunctionComponent = () => {
     const cls = BEMHelper('tilbake-til-oversikt');

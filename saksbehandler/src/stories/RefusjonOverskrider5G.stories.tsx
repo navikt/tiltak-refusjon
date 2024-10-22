@@ -1,8 +1,10 @@
 import { InnloggetBruker } from '@/bruker/BrukerContextType';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
-import { Refusjon } from '@/refusjon/refusjon';
-import { RefusjonStatus, Tiltak } from '@/refusjon/refusjon';
+
 import { Meta, StoryObj } from '@storybook/react';
+import { Refusjon } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
 
 const meta = {
     title: 'Refusjons Saksbehandler/KvitteringSide',
@@ -31,6 +33,9 @@ const over5gRefusjon: Refusjon = {
             deltakerFornavn: 'Olav',
             deltakerEtternavn: 'Over5gsen',
             deltakerFnr: '08098138758',
+            arbeidsgiverFornavn: 'Arne',
+            arbeidsgiverEtternavn: 'Arbeidsgiver',
+            arbeidsgiverTlf: '41111111',
             veilederNavIdent: 'X123456',
             bedriftNavn: 'Kiwi Majorstuen',
             bedriftNr: '999999999',
@@ -99,6 +104,8 @@ const over5gRefusjon: Refusjon = {
     status: RefusjonStatus.SENDT_KRAV,
     korreksjonId: undefined,
     harTattStillingTilAlleInntektslinjer: true,
+    åpnetFørsteGang: '2024-01-22T15:55:56.514591Z',
+    sistEndret: '2024-01-22T15:56:06.292479Z',
 };
 
 export const RefusjonOverskrider5G: Story = {

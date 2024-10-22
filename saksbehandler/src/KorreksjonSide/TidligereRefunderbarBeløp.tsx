@@ -1,12 +1,14 @@
 import React, { ChangeEvent, FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
 import { Alert, Radio, RadioGroup, TextField, Heading, Label, BodyShort } from '@navikt/ds-react';
-import { Refusjonsgrunnlag } from '../refusjon/refusjon';
-import { tiltakstypeTekst } from '../messages';
+
 import VerticalSpacer from '../komponenter/VerticalSpacer';
-import BEMHelper from '../utils/bem';
+
 import { settTidligereRefunderbarBeløp } from '../services/rest-service';
 import { useParams } from 'react-router-dom';
 import sumBy from 'lodash.sumby';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
+import { tiltakstypeTekst } from '~/types/messages';
 
 interface Properties {
     refusjonsgrunnlag: Refusjonsgrunnlag;

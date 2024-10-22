@@ -3,9 +3,10 @@ import { FunctionComponent } from 'react';
 import { useParams } from 'react-router';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 import HvitBoks from '../../komponenter/hvitboks/HvitBoks';
-import { tiltakstypeTekst } from '../../messages';
+
 import { useHentRefusjon } from '../../services/rest-service';
 import InformasjonFraAvtalen from './InformasjonFraAvtalen';
+import { tiltakstypeTekst } from '~/types/messages';
 
 type AlertStripeType = 'info' | 'success' | 'warning' | 'error';
 

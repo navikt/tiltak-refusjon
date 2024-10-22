@@ -1,6 +1,7 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
-import BEMHelper from '../../utils/bem';
+
 import './IkonRad.less';
+import BEMHelper from '~/utils/bem';
 
 const cls = BEMHelper('ikonRad');
 

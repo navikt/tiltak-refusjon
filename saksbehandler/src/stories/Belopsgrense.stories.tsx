@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Utregning from '@/refusjon/RefusjonSide/Utregning';
-import { Tiltak } from '@/refusjon/refusjon';
+import { Tiltak } from '~/types/tiltak';
 
 const meta = {
     title: 'Refusjons Saksbehandler/Utregning',

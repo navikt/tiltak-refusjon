@@ -1,4 +1,4 @@
-import { Inntektsgrunnlag, Inntektslinje } from '../refusjon/refusjon';
+import { Inntektsgrunnlag, Inntektslinje } from '~/types/refusjon';
 
 export const sumInntekterOpptjentIPeriode = (inntektsgrunnlag: Inntektsgrunnlag): number =>
     inntektsgrunnlag?.inntekter

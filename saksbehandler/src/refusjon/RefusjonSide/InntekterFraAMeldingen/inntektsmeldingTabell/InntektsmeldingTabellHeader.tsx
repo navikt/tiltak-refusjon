@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
-import { månedsNavn } from '../../../../utils/datoUtils';
-import { Refusjonsgrunnlag } from '../../../refusjon';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
+import { månedsNavn } from '~/utils';
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;

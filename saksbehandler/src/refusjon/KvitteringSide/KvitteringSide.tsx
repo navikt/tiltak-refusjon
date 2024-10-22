@@ -5,9 +5,7 @@ import { useFeatureToggles } from '../../featureToggles/FeatureToggleProvider';
 import { Feature } from '../../featureToggles/features';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 import HvitBoks from '../../komponenter/hvitboks/HvitBoks';
-import { statusTekst } from '../../messages';
-import { NORSK_DATO_OG_TID_FORMAT, formatterDato } from '../../utils/datoUtils';
-import { storForbokstav } from '../../utils/stringUtils';
+
 import InformasjonFraAvtalen from '../RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraAMeldingenGammel from '../RefusjonSide/InntekterFraAmeldingenGammel';
@@ -19,8 +17,13 @@ import SummeringBoks from '../RefusjonSide/SummeringBoks';
 import SummeringBoksNullbeløp from '../RefusjonSide/SummeringBoksNullbeløp';
 import TidligereRefunderbarBeløpKvittering from '../RefusjonSide/TidligereRefunderbarBeløpKvittering';
 import Utregning from '../RefusjonSide/Utregning';
-import { Refusjon, RefusjonStatus } from '../refusjon';
+
 import Statusmelding from './Statusmelding';
+import { Refusjon } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { storForbokstav } from '~/utils/stringUtils';
+import { statusTekst } from '~/types/messages';
+import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 
 const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {

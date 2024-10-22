@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { ExpansionCard, RadioGroup, Radio } from '@navikt/ds-react';
-import { RefusjonStatus, Tiltak } from '../refusjon';
+
 import { useFilter } from './FilterContext';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 import VisRefusjonerFilter from './VisRefusjonerFilter';
 import { useInnloggetBruker } from '../../bruker/BrukerContext';
 import { BrukerContextType } from '../../bruker/BrukerContextType';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
 
 interface OptionProps {
     value: string;

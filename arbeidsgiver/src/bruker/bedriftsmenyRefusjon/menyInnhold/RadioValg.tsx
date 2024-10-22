@@ -1,9 +1,10 @@
 import React, { FunctionComponent, PropsWithChildren, useContext } from 'react';
 import { BedriftvalgType, initPageData, Organisasjonlist } from '../api/api';
-import BEMHelper from '../../../utils/bem';
+
 import { MenyContext } from '../BedriftsmenyRefusjon';
 import { setDefaultBedriftlisteMedApneElementer } from '../api/kontruer-Utils';
 import { Radio, RadioGroup } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 interface Properties {
     className: string;

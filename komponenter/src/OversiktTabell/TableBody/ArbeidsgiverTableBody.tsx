@@ -1,26 +1,26 @@
-import { LinkPanel, BodyShort } from '@navikt/ds-react';
+import { BodyShort, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StatusTekst from '../../komponenter/StatusTekst/StatusTekst';
-import BEMHelper from '../../utils/bem';
-import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '../../utils/datoUtils';
-import { Refusjon } from '../refusjon';
-import './OversiktTabell.less';
+import StatusTekst from '~/StatusTekst';
+import BEMHelper from '~/utils/bem';
+import { formatterDato, formatterPeriode } from '~/utils';
+import { Refusjon } from '~/types/refusjon';
+import { storForbokstav } from '~/utils/stringUtils';
+import { tiltakstypeTekst } from '~/types/messages';
+import { NORSK_DATO_FORMAT_SHORT } from '~/utils/datoUtils';
 
 type Props = {
     refusjoner: Refusjon[];
 };
 const cls = BEMHelper('oversiktTabell');
 
-const OversiktTabell: FunctionComponent<Props> = (props) => {
+const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
     const navigate = useNavigate();
+
     return (
-        <>
+        <Table.Body>
             {props.refusjoner.map((refusjon) => (
-                <LinkPanel
-                    className={cls.element('linkPanel')}
-                    border={false}
-                    role="listitem"
+                <Table.Row
                     key={refusjon.id}
                     onClick={(event) => {
                         event.preventDefault();
@@ -29,9 +29,26 @@ const OversiktTabell: FunctionComponent<Props> = (props) => {
                             search: window.location.search,
                         });
                     }}
-                    href={`/refusjon/${refusjon.id}`}
                 >
-                    <LinkPanel.Title className={cls.element('linkpanel_title_row')}>
+                    <Table.DataCell>
+                        <BodyShort
+                            size="small"
+                            className={cls.element('title_row_column')}
+                            aria-labelledby={cls.element('deltaker')}
+                        >
+                            {storForbokstav(tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype])}
+                        </BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
+                        <BodyShort
+                            size="small"
+                            className={cls.element('title_row_column')}
+                            aria-labelledby={cls.element('deltaker')}
+                        >
+                            {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.bedriftNavn}{' '}
+                        </BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
                         <BodyShort
                             size="small"
                             className={cls.element('title_row_column')}
@@ -40,6 +57,8 @@ const OversiktTabell: FunctionComponent<Props> = (props) => {
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}{' '}
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
                         </BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
                         <BodyShort
                             size="small"
                             className={cls.element('title_row_column')}
@@ -51,26 +70,33 @@ const OversiktTabell: FunctionComponent<Props> = (props) => {
                                 NORSK_DATO_FORMAT_SHORT
                             )}
                         </BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
                         <div className={cls.element('title_row_column')}>
                             <StatusTekst
                                 status={refusjon.status}
+                                tiltakstype={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
                                 tilskuddFom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom}
                                 tilskuddTom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom}
                                 fratrekkRefunderbarBeløp={refusjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp}
                             />
                         </div>
+                    </Table.DataCell>
+                    <Table.DataCell>
                         <BodyShort
                             size="small"
                             className={cls.element('title_row_column')}
                             aria-labelledby={cls.element('frist-godkjenning')}
                         >
-                            {formatterDato(refusjon.fristForGodkjenning)}
+                            {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'VTAO'
+                                ? formatterDato(refusjon.fristForGodkjenning)
+                                : ''}
                         </BodyShort>
-                    </LinkPanel.Title>
-                </LinkPanel>
+                    </Table.DataCell>
+                </Table.Row>
             ))}
-        </>
+        </Table.Body>
     );
 };
 
-export default OversiktTabell;
+export default TableBodyArbeidsgiver;

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Utregning from '@/komponenter/Utregning';
-import { Tiltak } from '@/refusjon/tiltak';
-import { Refusjonsgrunnlag } from '@/refusjon/refusjon';
+import { Tiltak } from '~/types/tiltak';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
 
 const meta = {
     title: 'Utregning',
@@ -99,6 +99,7 @@ const refusjondata: Refusjonsgrunnlag & {
     },
     erKorreksjon: false,
     forrigeRefusjonMinusBeløp: 0,
+    harFerietrekkForSammeMåned: false,
     beregning: {
         lønn: 42846,
         lønnFratrukketFerie: 42846,
@@ -273,6 +274,7 @@ const refusjondata5G: Refusjonsgrunnlag & {
     },
     erKorreksjon: false,
     forrigeRefusjonMinusBeløp: 0,
+    harFerietrekkForSammeMåned: false,
     beregning: {
         lønn: 42846,
         lønnFratrukketFerie: 42846,

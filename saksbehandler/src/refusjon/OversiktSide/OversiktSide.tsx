@@ -1,11 +1,12 @@
 import React, { FunctionComponent, Suspense } from 'react';
 import OversiktSkeleton from '../../komponenter/OversiktSkeleton/OversiktSkeleton';
-import BEMHelper from '../../utils/bem';
+
 import Filtermeny from '../oversikt/Filtermeny';
 import Oversikt from '../oversikt/Oversikt';
 import './OversiktSide.less';
 import Banner from '../oversikt/Banner';
 import BannerLaster from '../oversikt/BannerLaster';
+import BEMHelper from '~/utils/bem';
 
 const cls = BEMHelper('OversiktSide');
 

@@ -1,30 +1,35 @@
-export enum Tiltak {
-    MENTOR = 'MENTOR',
-    MIDLERTIDIG_LØNNSTILSKUDD = 'MIDLERTIDIG_LONNSTILSKUDD',
-    VARIG_LØNNSTILSKUDD = 'VARIG_LONNSTILSKUDD',
-    SOMMERJOBB = 'SOMMERJOBB',
+import { KorreksjonStatus, RefusjonStatus } from './status';
+import { Tiltak } from './tiltak';
+
+export enum SortingOrder {
+    TILTAKSTYPE_ASC = 'TILTAKSTYPE_ASC',
+    TILTAKSTYPE_DESC = 'TILTAKSTYPE_DESC',
+    BEDRIFT_ASC = 'BEDRIFT_ASC',
+    BEDRIFT_DESC = 'BEDRIFT_DESC',
+    DELTAKER_ASC = 'DELTAKER_ASC',
+    DELTAKER_DESC = 'DELTAKER_DESC',
+    PERIODE_ASC = 'PERIODE_ASC',
+    PERIODE_DESC = 'PERIODE_DESC',
+    STATUS_ASC = 'STATUS_ASC',
+    STATUS_DESC = 'STATUS_DESC',
+    FRISTFORGODKJENNING_ASC = 'FRISTFORGODKJENNING_ASC',
+    FRISTFORGODKJENNING_DESC = 'FRISTFORGODKJENNING_DESC',
 }
 
-export enum RefusjonStatus {
-    KLAR_FOR_INNSENDING = 'KLAR_FOR_INNSENDING',
-    FOR_TIDLIG = 'FOR_TIDLIG',
-    SENDT_KRAV = 'SENDT_KRAV',
-    GODKJENT_MINUSBELØP = 'GODKJENT_MINUSBELØP',
-    UTBETALT = 'UTBETALT',
-    UTBETALING_FEILET = 'UTBETALING_FEILET',
-    UTGÅTT = 'UTGÅTT',
-    ANNULLERT = 'ANNULLERT',
-    KORRIGERT = 'KORRIGERT',
-    GODKJENT_NULLBELØP = 'GODKJENT_NULLBELØP',
+export interface Filter {
+    status: RefusjonStatus | undefined;
+    tiltakstype: Tiltak | undefined;
+    sorting: SortingOrder | undefined;
+    page: number | undefined;
+    size: number | undefined;
 }
 
-export enum KorreksjonStatus {
-    UTKAST = 'UTKAST',
-    TILLEGSUTBETALING = 'TILLEGSUTBETALING',
-    OPPGJORT = 'OPPGJORT',
-    TILBAKEKREVING = 'TILBAKEKREVING',
-    TILLEGGSUTBETALING_UTBETALT = 'TILLEGGSUTBETALING_UTBETALT',
-    TILLEGGSUTBETALING_FEILET = 'TILLEGGSUTBETALING_FEILET',
+export interface PageableRefusjon {
+    currentPage: number;
+    refusjoner: Refusjon[];
+    size: number;
+    totalItems: number;
+    totalPages: number;
 }
 
 export interface Refusjon {
@@ -35,12 +40,15 @@ export interface Refusjon {
     status: RefusjonStatus;
     forrigeFristForGodkjenning?: string;
     fristForGodkjenning: string;
-    harInntektIAlleMåneder: boolean;
+    harTattStillingTilAlleInntektslinjer: boolean;
     korreksjonId?: string;
     refusjonsgrunnlag: Refusjonsgrunnlag;
+    utbetaltTidspunkt?: string;
     unntakOmInntekterFremitid: number;
     hentInntekterLengerFrem: string;
-    harTattStillingTilAlleInntektslinjer: boolean;
+    sistEndret: string;
+    åpnetFørsteGang: string;
+    harInntektIAlleMåneder: boolean;
 }
 
 export interface Korreksjon {
@@ -54,6 +62,9 @@ export interface Korreksjon {
     korreksjonsgrunner: Korreksjonsgrunn[];
     refusjonsgrunnlag: Refusjonsgrunnlag;
     harTattStillingTilAlleInntektslinjer: boolean;
+    godkjentTidspunkt?: string;
+    unntakOmInntekterFremitid: number;
+    sistEndret: string;
 }
 
 export interface Refusjonsgrunnlag {
@@ -68,6 +79,8 @@ export interface Refusjonsgrunnlag {
     forrigeRefusjonMinusBeløp?: number;
     fratrekkRefunderbarBeløp?: boolean;
     harFerietrekkForSammeMåned: boolean;
+    refunderbarBeløp?: number;
+    sumUtbetaltVarig?: number;
 }
 
 export interface Tilskuddsgrunnlag {
@@ -82,6 +95,9 @@ export interface Tilskuddsgrunnlag {
     deltakerEtternavn: string;
     deltakerFnr: string;
     deltakerFornavn: string;
+    arbeidsgiverFornavn: string;
+    arbeidsgiverEtternavn: string;
+    arbeidsgiverTlf: string;
     feriepengerSats: number;
     id: string;
     lønnstilskuddsprosent: number;
@@ -138,6 +154,7 @@ export enum Korreksjonsgrunn {
     TRUKKET_FEIL_FOR_FRAVÆR = 'TRUKKET_FEIL_FOR_FRAVÆR',
     OPPDATERT_AMELDING = 'OPPDATERT_AMELDING',
     ANNEN_GRUNN = 'ANNEN_GRUNN',
+    INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE = 'INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE',
 }
 
 export interface PageableRefusjon {

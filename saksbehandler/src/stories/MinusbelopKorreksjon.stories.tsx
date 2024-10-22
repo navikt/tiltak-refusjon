@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Utregning from '@/refusjon/RefusjonSide/Utregning';
-import { Tiltak } from '@/refusjon/refusjon';
+import { Tiltak } from '~/types/tiltak';
 
 const meta = {
     title: 'Refusjons Saksbehandler/Utregning',
@@ -42,6 +42,9 @@ const refusjonsdata = {
         deltakerFornavn: 'Bjørnstjerne',
         deltakerEtternavn: 'Bjørnson',
         deltakerFnr: '28128521498',
+        arbeidsgiverFornavn: 'Arne',
+        arbeidsgiverEtternavn: 'Arbeidsgiver',
+        arbeidsgiverTlf: '41111111',
         veilederNavIdent: 'X123456',
         bedriftNavn: 'Kiwi Majorstuen',
         bedriftNr: '999999999',

@@ -1,18 +1,10 @@
 import React, { FunctionComponent, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { registrerMenyValg } from '../../utils/amplitude-utils';
 import { useSearchParams } from 'react-router-dom';
-import { RefusjonStatus } from '../status';
-import { Tiltak } from '../tiltak';
 import { LogReturn } from 'amplitude-js';
-import { SortingOrder } from '../refusjon';
-
-export interface Filter {
-    status: RefusjonStatus | undefined;
-    tiltakstype: Tiltak | undefined;
-    sorting: SortingOrder | undefined;
-    page: number | undefined;
-    size: number | undefined;
-}
+import { Filter, SortingOrder } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
 
 type FilterContextType = { filter: Filter; oppdaterFilter: (nyttFilter: Partial<Filter>) => void };
 

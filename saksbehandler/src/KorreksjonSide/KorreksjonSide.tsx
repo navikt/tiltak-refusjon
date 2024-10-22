@@ -10,9 +10,11 @@ import InformasjonFraAvtalen from '../refusjon/RefusjonSide/InformasjonFraAvtale
 import InntekterFraAMeldingen from '../refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraTiltaketSpørsmål from '../refusjon/RefusjonSide/InntekterFraTiltaketSpørsmål';
 import Utregning from '../refusjon/RefusjonSide/Utregning';
-import { Korreksjon, KorreksjonStatus } from '../refusjon/refusjon';
+
 import OverstyrMinusbeløpOgFerietrekk from './OverstyrMinusbeløpOgFerietrekk';
 import TidligereRefunderbarBeløp from './TidligereRefunderbarBeløp';
+import { KorreksjonStatus } from '~/types/status';
+import { Korreksjon } from '~/types/refusjon';
 
 type Props = {
     korreksjon: Korreksjon;

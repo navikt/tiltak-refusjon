@@ -1,12 +1,8 @@
 import { Alert, Button, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
 import { Fragment, FunctionComponent } from 'react';
 import VerticalSpacer from '../../../komponenter/VerticalSpacer';
-import { lønnsbeskrivelseTekst } from '../../../messages';
 import { hentInntekterLengerFrem } from '../../../services/rest-service';
 import { refusjonApnet } from '../../../utils/amplitude-utils';
-import BEMHelper from '../../../utils/bem';
-import { månedsNavn, månedsNavnPlusMåned } from '../../../utils/datoUtils';
-import { RefusjonStatus } from '../../status';
 import InntektsMeldingHeader from './InntektsMeldingHeader';
 import { inntektProperties } from './inntektProperties';
 import './inntektsMelding.less';
@@ -14,9 +10,13 @@ import InntektsmeldingTabellBody from './inntektsmeldingTabell/InntektsmeldingTa
 import InntektsmeldingTabellHeader from './inntektsmeldingTabell/InntektsmeldingTabellHeader';
 import IngenInntekter from './inntektsmeldingVarsel/IngenInntekter';
 import IngenRefunderbareInntekter from './inntektsmeldingVarsel/IngenRefunderbareInntekter';
-import { Refusjon } from '@/refusjon/refusjon';
 import Boks from '@/komponenter/Boks/Boks';
 import { groupBy, sortBy } from 'lodash';
+import { lønnsbeskrivelseTekst } from '~/types/messages';
+import { Refusjon } from '~/types/refusjon';
+import BEMHelper from '~/utils/bem';
+import { månedsNavn, månedsNavnPlusMåned } from '~/utils';
+import { RefusjonStatus } from '~/types/status';
 
 export const inntektBeskrivelse = (beskrivelse: string | undefined) => {
     if (beskrivelse === undefined) return '';

@@ -1,8 +1,9 @@
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
-import { Refusjon } from '@/refusjon/refusjon';
-import { RefusjonStatus } from '@/refusjon/status';
-import { Tiltak } from '@/refusjon/tiltak';
+
 import { Meta, StoryObj } from '@storybook/react';
+import { Refusjon } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
 
 const meta = {
     title: 'KvitteringSide',
@@ -70,6 +71,7 @@ const førOver5GRefusjon: Refusjon = {
         refunderbarBeløp: undefined,
         forrigeRefusjonMinusBeløp: 0,
         sumUtbetaltVarig: 0,
+        harFerietrekkForSammeMåned: false,
         beregning: {
             lønn: 200000,
             lønnFratrukketFerie: 200000,
@@ -102,6 +104,7 @@ const førOver5GRefusjon: Refusjon = {
     åpnetFørsteGang: '2024-02-01T13:36:10.518149Z',
     sistEndret: '2024-02-01T13:36:16.955213Z',
     harTattStillingTilAlleInntektslinjer: true,
+    harInntektIAlleMåneder: false,
 };
 
 export const RefusjonFør5G: Story = {
@@ -163,6 +166,7 @@ const over5gRefusjon: Refusjon = {
         refunderbarBeløp: undefined,
         forrigeRefusjonMinusBeløp: 0,
         sumUtbetaltVarig: 560000,
+        harFerietrekkForSammeMåned: false,
         beregning: {
             lønn: 200000,
             lønnFratrukketFerie: 200000,
@@ -195,6 +199,7 @@ const over5gRefusjon: Refusjon = {
     åpnetFørsteGang: '2024-02-01T13:36:27.492860Z',
     sistEndret: '2024-02-01T13:36:34.652733Z',
     harTattStillingTilAlleInntektslinjer: true,
+    harInntektIAlleMåneder: false,
 };
 
 export const RefusjonOverskrider5G: Story = {
@@ -256,6 +261,7 @@ const etter5GRefusjon: Refusjon = {
         refunderbarBeløp: undefined,
         forrigeRefusjonMinusBeløp: 0,
         sumUtbetaltVarig: 593100,
+        harFerietrekkForSammeMåned: false,
         beregning: {
             lønn: 200000,
             lønnFratrukketFerie: 200000,
@@ -288,6 +294,7 @@ const etter5GRefusjon: Refusjon = {
     åpnetFørsteGang: '2024-02-01T13:39:49.917544Z',
     sistEndret: '2024-02-01T13:39:56.115464Z',
     harTattStillingTilAlleInntektslinjer: true,
+    harInntektIAlleMåneder: false,
 };
 
 export const RefusjonEtter5G: Story = {

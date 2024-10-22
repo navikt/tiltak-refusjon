@@ -1,5 +1,5 @@
 import React, { FunctionComponent, PropsWithChildren, useContext, useEffect } from 'react';
-import BEMHelper from '../../../utils/bem';
+
 import './bedriftsmeny.less';
 import { MenyContext } from '../BedriftsmenyRefusjon';
 import useOrganisasjon from '../api/useOrganisasjon';
@@ -7,6 +7,7 @@ import MenyInnhold from '../menyInnhold/MenyInnhold';
 import Menyknapp from '../Menyknapp';
 import { ClsBedriftsmeny } from '../api/api';
 import Infolinje from '../menyInnhold/infolinje/Infolinje';
+import BEMHelper from '~/utils/bem';
 
 const Bedriftsmeny: FunctionComponent<{}> = (props: PropsWithChildren<{}>) => {
     const cls = BEMHelper(ClsBedriftsmeny.BEDRIFTSMENY);

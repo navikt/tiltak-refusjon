@@ -1,4 +1,4 @@
-import { Inntektsgrunnlag } from './../refusjon/refusjon';
+import { Inntektsgrunnlag } from '~/types/refusjon';
 export const formatterPenger = (penger: number) =>
     `${penger < 0 ? '– ' : ''}${new Intl.NumberFormat('nb-NO', {
         signDisplay: 'never',

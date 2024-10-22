@@ -1,5 +1,5 @@
 import React, { FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
-import BEMHelper from '../../utils/bem';
+
 import NavIkon from '@/asset/image/navikon.svg?react';
 import Bedriftsmeny from './bedriftsmeny/Bedriftsmeny';
 import { OrganisasjonData, konstruereOrganisasjonliste } from './api/konstruer';
@@ -17,6 +17,7 @@ import './bedriftsmenyRefusjon.less';
 import { setDefaultBedriftlisteMedApneElementer } from './api/kontruer-Utils';
 import useSize from './api/useSize';
 import { Heading } from '@navikt/ds-react';
+import BEMHelper from '~/utils/bem';
 
 interface Props {
     organisasjoner: Organisasjon[];

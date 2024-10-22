@@ -1,11 +1,12 @@
 import { Alert, BodyShort } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { korreksjonsgrunnTekst, tiltakstypeTekst } from '../../messages';
+
 import { formatterPenger } from '../../utils/PengeUtils';
-import { formatterDato } from '../../utils/datoUtils';
-import { Korreksjon, Korreksjonsgrunn } from '../refusjon';
-import { KorreksjonStatus } from '../status';
+import { korreksjonsgrunnTekst, tiltakstypeTekst } from '~/types/messages';
+import { formatterDato } from '~/utils';
+import { Korreksjon, Korreksjonsgrunn } from '~/types/refusjon';
+import { KorreksjonStatus } from '~/types/status';
 
 type Props = {
     korreksjon: Korreksjon;

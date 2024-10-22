@@ -2,10 +2,15 @@ import React, { FunctionComponent } from 'react';
 import Info from './Info';
 import { Pagination } from '@navikt/ds-react';
 import { useHentRefusjoner } from '../../services/rest-service';
-import BEMHelper from '../../utils/bem';
+
 import { useFilter } from './FilterContext';
-import LabelRad from './LabelRad';
-import OversiktTabell from './OversiktTabell';
+import OversiktTabell from '~/OversiktTabell';
+import TabellBodySaksbehandler from '~/OversiktTabell/TableBodySaksbehandler';
+import SaksbehanderTableHeader from '~/OversiktTabell/TableHeader/SaksbehandlerTableHeader';
+
+import './Oversikt.less';
+import BEMHelper from '~/utils/bem';
+import LenkePanel from '~/LenkePanel/LenkePanel';
 const cls = BEMHelper('oversikt');
 
 const Oversikt: FunctionComponent = () => {
@@ -22,21 +27,20 @@ const Oversikt: FunctionComponent = () => {
     }
 
     return (
-        <nav className={cls.className} aria-label="Main">
-            <div role="list">
-                <LabelRad />
-                <OversiktTabell refusjoner={refusjonerPage.refusjoner} />
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Pagination
-                    page={refusjonerPage.currentPage + 1}
-                    onPageChange={(x) => oppdaterFilter({ page: x - 1 })}
-                    count={refusjonerPage.totalPages}
-                    boundaryCount={1}
-                    siblingCount={1}
-                />
-            </div>
+        <nav className={cls.className} aria-label="Main" role={'list'}>
+            <LenkePanel refusjoner={refusjonerPage.refusjoner} />
+            <OversiktTabell
+                tableHeader={<SaksbehanderTableHeader />}
+                tableBody={<TabellBodySaksbehandler refusjoner={refusjonerPage.refusjoner} />}
+            />
+            <Pagination
+                className={cls.element('pagination')}
+                page={refusjonerPage.currentPage + 1}
+                onPageChange={(x) => oppdaterFilter({ page: x - 1 })}
+                count={refusjonerPage.totalPages}
+                boundaryCount={1}
+                siblingCount={1}
+            />
         </nav>
     );
 };
