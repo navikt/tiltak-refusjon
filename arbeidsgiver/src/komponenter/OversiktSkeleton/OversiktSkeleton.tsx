@@ -1,6 +1,6 @@
 import { useFilter } from '@/refusjon/oversikt/FilterContext';
 import React from 'react';
-import Skeleton from 'react-loading-skeleton';
+import { Skeleton, Table } from '@navikt/ds-react';
 import OversiktTabell from '~/OversiktTabell';
 import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
 
@@ -14,7 +14,17 @@ export default function OversiktSkeleton() {
         <div className={cls.className}>
             <OversiktTabell
                 tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />}
-                tableBody={<Skeleton count={3} className={cls.element('rad')} />}
+                tableBody={
+                    <Table.Body>
+                        {[1, 2, 3].map((value) => (
+                            <Table.Row key={value}>
+                                <Table.DataCell colSpan={100}>
+                                    <Skeleton height={30} variant="rectangle"></Skeleton>
+                                </Table.DataCell>
+                            </Table.Row>
+                        ))}
+                    </Table.Body>
+                }
             />
         </div>
     );
