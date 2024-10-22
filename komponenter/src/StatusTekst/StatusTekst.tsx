@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Tag } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
 import { statusTekst } from '../types/messages';
 import { RefusjonStatus } from '../types/status';
 import { formatterDato } from '../utils/datoUtils';
@@ -26,7 +25,9 @@ const StatusTekst = (props: Props) => {
     } else if (props.status === RefusjonStatus.FOR_TIDLIG) {
         if (props.tiltakstype === Tiltak.VTAO) {
             return (
-                <Tag variant="info">Sendes {formatterDato(moment(props.tilskuddTom).add(1, 'days').toString())}</Tag>
+                <Tag variant="info" size="small">
+                    Sendes {formatterDato(moment(props.tilskuddTom).add(1, 'days').toString())}
+                </Tag>
             );
         }
         return (
