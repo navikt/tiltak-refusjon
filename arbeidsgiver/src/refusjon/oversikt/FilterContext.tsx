@@ -6,7 +6,6 @@ import { Filter, SortingOrder } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
 
-
 type FilterContextType = { filter: Filter; oppdaterFilter: (nyttFilter: Partial<Filter>) => void };
 
 const FilterContext = React.createContext<FilterContextType | undefined>(undefined);

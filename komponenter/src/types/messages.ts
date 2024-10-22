@@ -1,6 +1,6 @@
 import { HendelseType, Korreksjonsgrunn } from './refusjon';
 import { Tiltak } from './tiltak';
-import { KorreksjonStatus, RefusjonStatus, } from './status';
+import { KorreksjonStatus, RefusjonStatus } from './status';
 
 export const tiltakstypeTekst: { [key in Tiltak]: string } = {
     MIDLERTIDIG_LONNSTILSKUDD: 'midlertidig lønnstilskudd',
@@ -193,7 +193,7 @@ export const korreksjonsgrunnTekst: { [key in Korreksjonsgrunn]: string } = {
     OPPDATERT_AMELDING: 'Oppdatert A-melding',
     ANNEN_GRUNN: 'Annen grunn',
     UTBETALT_HELE_TILSKUDDSBELØP: 'Utbetalt hele tilskuddsbeløpet',
-    INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE: 'Inntekter rapportert etter tilskuddsperioden'
+    INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE: 'Inntekter rapportert etter tilskuddsperioden',
 };
 
 export const hendelseTekst: { [key in HendelseType]: string } = {

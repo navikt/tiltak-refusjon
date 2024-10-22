@@ -105,7 +105,7 @@ const etter5GRefusjon: Refusjon = {
     korreksjonId: undefined,
     harTattStillingTilAlleInntektslinjer: true,
     åpnetFørsteGang: '2024-01-22T15:55:56.514591Z',
-    sistEndret: '2024-01-22T15:56:06.292479Z',   
+    sistEndret: '2024-01-22T15:56:06.292479Z',
 };
 
 export const RefusjonEtter5G: Story = {

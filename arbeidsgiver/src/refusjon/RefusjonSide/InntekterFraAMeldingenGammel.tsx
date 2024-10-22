@@ -15,7 +15,6 @@ import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
-
 const inntektBeskrivelse = (beskrivelse: string | undefined) => {
     if (beskrivelse === undefined) {
         return '';

@@ -6,7 +6,6 @@ import { formatterPenger } from '../utils/PengeUtils';
 import { Inntektslinje, Tilskuddsgrunnlag } from '~/types/refusjon';
 import { formatterDato, getMåned, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
-
 type Props = {
     inntekter: Inntektslinje[];
     tilskuddsgrunnlag?: Tilskuddsgrunnlag;

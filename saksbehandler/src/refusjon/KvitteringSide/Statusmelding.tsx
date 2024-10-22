@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import { Alert, BodyShort } from '@navikt/ds-react';
 import { RefusjonStatus } from '~/types/status';
 
-
 interface Props {
     status: RefusjonStatus;
 }

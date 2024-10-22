@@ -1,7 +1,6 @@
 import React, { Fragment, FunctionComponent } from 'react';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 
-
 import { formatterPenger } from '../../utils/PengeUtils';
 import { Alert, Heading } from '@navikt/ds-react';
 

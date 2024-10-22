@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { månedsNavn } from '~/utils';
 
-
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
 };

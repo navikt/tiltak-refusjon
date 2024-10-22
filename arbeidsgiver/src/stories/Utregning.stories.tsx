@@ -3,7 +3,6 @@ import Utregning from '@/komponenter/Utregning';
 import { Tiltak } from '~/types/tiltak';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 
-
 const meta = {
     title: 'Utregning',
     component: Utregning,

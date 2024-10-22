@@ -27,10 +27,14 @@ const Oversikt: FunctionComponent = () => {
     }
 
     return (
-        <nav className={cls.className} aria-label="Main" role={"list"} >
+        <nav className={cls.className} aria-label="Main" role={'list'}>
             <LenkePanel refusjoner={refusjonerPage.refusjoner} />
-            <OversiktTabell tableHeader={<SaksbehanderTableHeader/>} tableBody={<TabellBodySaksbehandler refusjoner={refusjonerPage.refusjoner}/>}/>
-            <Pagination className={cls.element('pagination')}
+            <OversiktTabell
+                tableHeader={<SaksbehanderTableHeader />}
+                tableBody={<TabellBodySaksbehandler refusjoner={refusjonerPage.refusjoner} />}
+            />
+            <Pagination
+                className={cls.element('pagination')}
                 page={refusjonerPage.currentPage + 1}
                 onPageChange={(x) => oppdaterFilter({ page: x - 1 })}
                 count={refusjonerPage.totalPages}

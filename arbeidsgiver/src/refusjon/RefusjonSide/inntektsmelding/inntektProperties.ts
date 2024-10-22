@@ -1,5 +1,4 @@
-import { Refusjon } from "~/types/refusjon";
-
+import { Refusjon } from '~/types/refusjon';
 
 export const inntektProperties = (refusjon: Refusjon) => {
     const { inntektsgrunnlag } = refusjon.refusjonsgrunnlag;

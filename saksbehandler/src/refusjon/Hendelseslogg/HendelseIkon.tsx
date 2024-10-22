@@ -10,7 +10,6 @@ import {
 import { FunctionComponent, ReactNode } from 'react';
 import { HendelseType } from '~/types/refusjon';
 
-
 interface Props {
     hendelse: HendelseType;
 }

@@ -8,7 +8,6 @@ import { formatterDato } from '~/utils';
 import { Korreksjon, Korreksjonsgrunn } from '~/types/refusjon';
 import { KorreksjonStatus } from '~/types/status';
 
-
 type Props = {
     korreksjon: Korreksjon;
 };

@@ -4,7 +4,6 @@ import { BrukerContextType, InnloggetBruker } from '../bruker/BrukerContextType'
 import { BedriftvalgType } from '../bruker/bedriftsmenyRefusjon/api/api';
 import { Filter, Korreksjon, PageableRefusjon, Refusjon } from '~/types/refusjon';
 
-
 export class FeilkodeError extends Error {}
 export class ApiError extends Error {}
 export class AutentiseringError extends ApiError {}

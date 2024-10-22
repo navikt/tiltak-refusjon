@@ -5,7 +5,6 @@ import { formatterPenger } from '../../utils/PengeUtils';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { tiltakstypeTekst } from '~/types/messages';
 
-
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
 };

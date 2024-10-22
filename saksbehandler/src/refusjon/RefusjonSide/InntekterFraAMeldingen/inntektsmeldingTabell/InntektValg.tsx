@@ -3,7 +3,6 @@ import { FunctionComponent } from 'react';
 import { setInntektslinjeOpptjentIPeriode } from '../../../../services/rest-service';
 import { Inntektslinje } from '~/types/refusjon';
 
-
 interface Props {
     inntekt: Inntektslinje;
     korreksjonId?: string;

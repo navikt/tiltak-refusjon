@@ -1,2 +1,1 @@
-export  * from "./datoUtils"
-
+export * from './datoUtils';

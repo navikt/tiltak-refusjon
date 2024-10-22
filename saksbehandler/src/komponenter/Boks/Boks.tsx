@@ -3,7 +3,6 @@ import { Farger } from '../../utils/boksUtils';
 import { CSSProperties, FunctionComponent, PropsWithChildren } from 'react';
 import BEMHelper from '~/utils/bem';
 
-
 type Props = {
     className?: string;
     style?: CSSProperties;

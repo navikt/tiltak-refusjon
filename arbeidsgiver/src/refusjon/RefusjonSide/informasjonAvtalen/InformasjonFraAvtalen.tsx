@@ -11,7 +11,6 @@ import { tiltakstypeTekst } from '~/types/messages';
 import { formatterDato, formatterPeriode } from '~/utils';
 import { Refusjon } from '~/types/refusjon';
 
-
 type Props = {
     refusjon: Refusjon;
 };

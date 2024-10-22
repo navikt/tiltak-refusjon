@@ -4,7 +4,6 @@ import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { formatterDato, månedsNavn, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import BEMHelper from '~/utils/bem';
 
-
 interface Properties {
     refusjonsgrunnlag: Refusjonsgrunnlag;
     unntakOmInntekterFremitid: number;

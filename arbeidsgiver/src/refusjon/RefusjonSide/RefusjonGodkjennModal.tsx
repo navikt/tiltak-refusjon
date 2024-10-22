@@ -7,7 +7,6 @@ import { formatterPenger } from '../../utils/PengeUtils';
 import { Refusjon } from '~/types/refusjon';
 import { formatterPeriode } from '~/utils';
 
-
 interface Properties {
     refusjon: Refusjon;
     visGodkjennModal: boolean;

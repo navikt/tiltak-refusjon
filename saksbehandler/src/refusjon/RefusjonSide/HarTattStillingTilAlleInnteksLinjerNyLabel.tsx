@@ -5,7 +5,6 @@ import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { formatterPeriode } from '~/utils';
 import { tiltakstypeTekst } from '~/types/messages';
 
-
 interface Props {
     refusjonsgrunnlag: Refusjonsgrunnlag;
 }

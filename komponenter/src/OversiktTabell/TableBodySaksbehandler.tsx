@@ -55,7 +55,7 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
-                    <div className={cls.element('title_row_column')}>
+                        <div className={cls.element('title_row_column')}>
                             <StatusTekst
                                 status={refusjon.status}
                                 tiltakstype={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}

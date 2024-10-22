@@ -1,6 +1,5 @@
-import { KorreksjonStatus, RefusjonStatus } from "./status";
-import { Tiltak } from "./tiltak";
-
+import { KorreksjonStatus, RefusjonStatus } from './status';
+import { Tiltak } from './tiltak';
 
 export enum SortingOrder {
     TILTAKSTYPE_ASC = 'TILTAKSTYPE_ASC',
@@ -49,7 +48,7 @@ export interface Refusjon {
     hentInntekterLengerFrem: string;
     sistEndret: string;
     åpnetFørsteGang: string;
-    harInntektIAlleMåneder: boolean
+    harInntektIAlleMåneder: boolean;
 }
 
 export interface Korreksjon {
@@ -83,7 +82,6 @@ export interface Refusjonsgrunnlag {
     refunderbarBeløp?: number;
     sumUtbetaltVarig?: number;
 }
-
 
 export interface Tilskuddsgrunnlag {
     arbeidsgiveravgiftSats: number;
@@ -156,7 +154,7 @@ export enum Korreksjonsgrunn {
     TRUKKET_FEIL_FOR_FRAVÆR = 'TRUKKET_FEIL_FOR_FRAVÆR',
     OPPDATERT_AMELDING = 'OPPDATERT_AMELDING',
     ANNEN_GRUNN = 'ANNEN_GRUNN',
-    INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE = 'INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE'
+    INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE = 'INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE',
 }
 
 export interface PageableRefusjon {

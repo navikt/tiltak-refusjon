@@ -254,7 +254,7 @@ const korreksjon: Korreksjon = {
     godkjentTidspunkt: '2024-01-22T15:23:37.346428Z',
     unntakOmInntekterFremitid: 0,
     harInntektIAlleMåneder: false,
-    harTattStillingTilAlleInntektslinjer:false,
+    harTattStillingTilAlleInntektslinjer: false,
     sistEndret: '2024-01-22T15:56:06.292479Z',
 };
 

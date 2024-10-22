@@ -7,7 +7,6 @@ import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import { tiltakstypeTekst } from '~/types/messages';
 
-
 interface Properties {
     refusjon: Refusjon;
 }

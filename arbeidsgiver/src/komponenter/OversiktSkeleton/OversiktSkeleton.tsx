@@ -12,7 +12,10 @@ export default function OversiktSkeleton() {
     const { filter, oppdaterFilter } = useFilter();
     return (
         <div className={cls.className}>
-            <OversiktTabell tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter}/>} tableBody={<Skeleton count={3} className={cls.element('rad')} />} />
+            <OversiktTabell
+                tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />}
+                tableBody={<Skeleton count={3} className={cls.element('rad')} />}
+            />
         </div>
     );
 }

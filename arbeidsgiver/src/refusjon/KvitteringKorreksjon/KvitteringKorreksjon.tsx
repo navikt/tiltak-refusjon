@@ -3,7 +3,6 @@ import { FunctionComponent } from 'react';
 import Utregning from '../../komponenter/Utregning';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 
-
 import InntekterFraTiltaketSvar from '../RefusjonSide/InntekterFraTiltaketSvar';
 import SummeringBoks from '../RefusjonSide/SummeringBoks';
 import InformasjonFraAvtalen from '../RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
@@ -17,7 +16,6 @@ import { storForbokstav } from '~/utils/stringUtils';
 import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { korreksjonStatusTekst } from '~/types/messages';
 import { KorreksjonStatus } from '~/types/status';
-
 
 type Props = {
     refusjon: Refusjon;
