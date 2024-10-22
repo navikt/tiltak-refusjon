@@ -6,6 +6,7 @@ on:
       - 'main'
     paths:
       - 'saksbehandler/**'
+  workflow_dispatch:
 
 jobs:
   bygg:
