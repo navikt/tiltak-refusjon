@@ -1,10 +1,11 @@
-import { useFilter } from '@/refusjon/oversikt/FilterContext';
+
 import React from 'react';
 import { Skeleton, Table } from '@navikt/ds-react';
 import OversiktTabell from '~/OversiktTabell';
 import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
 
 import BEMHelper from '~/utils/bem';
+import { useFilter } from '@/refusjon/oversikt/FilterContext';
 
 const cls = BEMHelper('oversikt');
 

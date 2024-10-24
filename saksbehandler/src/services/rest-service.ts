@@ -2,10 +2,12 @@ import axios from 'axios';
 import useSWR, { mutate } from 'swr';
 import { InnloggetBruker } from '../bruker/BrukerContextType';
 import { Feature } from '../featureToggles/features';
-import { Filter, useFilter } from '../refusjon/oversikt/FilterContext';
+import { Filter } from '~/types/filter';
 
 import { ApiError, FeilkodeError } from '../types/errors';
 import { Beregning, Hendelse, Korreksjon, Korreksjonsgrunn, PageableRefusjon, Refusjon } from '~/types/refusjon';
+import { useFilter } from '@/refusjon/oversikt/FilterContext';
+
 
 const api = axios.create({
     baseURL: '/api/saksbehandler',

@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import VisRefusjonerFilter from './VisRefusjonerFilter';
-import StatusFilter from '~/Filtermeny/StatusFilter/StatusFilter';
-import TiltakFilter from '~/Filtermeny/TiltakFilter/TiltakFilter';
 import { Filter } from '~/types/filter';
+import { useMediaQuery } from 'react-responsive';
+import TiltakFilter from './TiltakFilter/TiltakFilter';
+import StatusFilter from './StatusFilter/StatusFilter';
+import { brukerflate } from '~/utils/amplitude-utils';
 
 interface Props {
     filter: Filter;
@@ -12,15 +12,13 @@ interface Props {
 }
 
 const Filtermeny: FunctionComponent<Props> = ({filter, oppdaterFilter, brukerContext}) => {
-
+    const erDesktopStorrelse = useMediaQuery({ minWidth: 768 });
+    brukerflate(erDesktopStorrelse);
     return (
-        <div role="menubar" aria-label="meny for filtrering av refusjoner">
-            <VisRefusjonerFilter />
-            <VerticalSpacer rem={1.25} />
+        <div>
             <StatusFilter filter={filter} oppdaterFilter={oppdaterFilter} brukerContext={brukerContext}/>
-            <VerticalSpacer rem={1.25} />
+            <div style={{ marginTop: '0.75rem' }} />
             <TiltakFilter filter={filter} oppdaterFilter={oppdaterFilter}  />
-            <VerticalSpacer rem={1.25} />
         </div>
     );
 };
