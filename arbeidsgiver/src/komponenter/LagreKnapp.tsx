@@ -1,7 +1,7 @@
 import React, { FunctionComponent, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { Nettressurs, Status } from '../nettressurs';
 import { handterFeil } from '../utils/apiFeilUtils';
-import VerticalSpacer from './VerticalSpacer';
+import VerticalSpacer from '../../../komponenter/src/VerticalSpacer';
 import { Alert, Button, ButtonProps } from '@navikt/ds-react';
 
 type Props = {

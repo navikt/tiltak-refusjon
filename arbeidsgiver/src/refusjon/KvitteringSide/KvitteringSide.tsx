@@ -1,7 +1,7 @@
 import { Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent, ReactElement } from 'react';
 import Utregning from '../../komponenter/Utregning';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
 
 import InntekterFraAMeldingenGammel from '../RefusjonSide/InntekterFraAMeldingenGammel';
 import InntekterFraTiltaketSvar from '../RefusjonSide/InntekterFraTiltaketSvar';
@@ -11,10 +11,10 @@ import TidligereRefunderbarBeløpKvittering from '../RefusjonSide/TidligereRefun
 import InformasjonFraAvtalen from '../RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
 
-import LagreSomPdfKnapp from './LagreSomPdfKnapp';
-import Statusmelding from './Statusmelding';
+import LagreSomPdfKnapp from '../../../../komponenter/src/KvitteringSide/LagreSomPdfKnapp';
+import Statusmelding from '../../../../komponenter/src/KvitteringSide/Statusmelding';
 import SummeringBoksNullbeløp from '../RefusjonSide/SummeringsBoksNullbeløp';
-import Boks from '../../komponenter/Boks/Boks';
+import Boks from '~/Boks';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { storForbokstav } from '~/utils/stringUtils';

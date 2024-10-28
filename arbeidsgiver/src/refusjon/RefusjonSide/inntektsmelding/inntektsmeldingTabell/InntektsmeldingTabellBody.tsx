@@ -1,6 +1,6 @@
 import { sortBy } from 'lodash';
 import { FunctionComponent } from 'react';
-import { formatterPenger } from '../../../../utils/PengeUtils';
+import { formatterPenger } from '../../../../../../komponenter/src/utils/PengeUtils';
 
 import { inntektBeskrivelse } from '../InntekterFraAMeldingen';
 import InntektValg from './InntektValg';

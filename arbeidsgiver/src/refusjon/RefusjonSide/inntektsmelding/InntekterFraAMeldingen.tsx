@@ -1,6 +1,6 @@
 import { Alert, Button, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
 import { Fragment, FunctionComponent } from 'react';
-import VerticalSpacer from '../../../komponenter/VerticalSpacer';
+import VerticalSpacer from '../../../../../komponenter/src/VerticalSpacer';
 import { hentInntekterLengerFrem } from '../../../services/rest-service';
 import { refusjonApnet } from '../../../utils/amplitude-utils';
 import InntektsMeldingHeader from './InntektsMeldingHeader';
@@ -10,7 +10,7 @@ import InntektsmeldingTabellBody from './inntektsmeldingTabell/InntektsmeldingTa
 import InntektsmeldingTabellHeader from './inntektsmeldingTabell/InntektsmeldingTabellHeader';
 import IngenInntekter from './inntektsmeldingVarsel/IngenInntekter';
 import IngenRefunderbareInntekter from './inntektsmeldingVarsel/IngenRefunderbareInntekter';
-import Boks from '@/komponenter/Boks/Boks';
+import Boks from '~/Boks';
 import { groupBy, sortBy } from 'lodash';
 import { lønnsbeskrivelseTekst } from '~/types/messages';
 import { Refusjon } from '~/types/refusjon';

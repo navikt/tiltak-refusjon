@@ -1,9 +1,7 @@
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useParams } from 'react-router';
-import EksternLenke from '../../komponenter/EksternLenke/EksternLenke';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import HvitBoks from '../../komponenter/hvitboks/HvitBoks';
 import { useHentRefusjon } from '../../services/rest-service';
 import InformasjonFraAvtalen from './InformasjonFraAvtalen';
 import InntekterFraAMeldingen from './InntekterFraAMeldingen/InntekterFraAMeldingen';
@@ -13,13 +11,15 @@ import TidligereRefunderbarBeløpKvittering from './TidligereRefunderbarBeløpKv
 import Utregning from './Utregning';
 import InntekterFraTiltaketSvar from './HarTattStillingTilAlleInntektsLinjerNy';
 import StatusTekst from '~/StatusTekst';
+import EksternLenke from '~/EksternLenke/EksternLenke';
+import Boks from '~/Boks';
 
 const RefusjonSide: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
     const refusjon = useHentRefusjon(refusjonId!);
 
     return (
-        <HvitBoks>
+        <Boks variant='hvit'>
             {refusjon.status === 'KLAR_FOR_INNSENDING' && refusjon.refusjonsgrunnlag.inntektsgrunnlag === null && (
                 <Alert variant="info" size="small">
                     <Heading spacing size="small">
@@ -90,7 +90,7 @@ const RefusjonSide: FunctionComponent = () => {
                     inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
                 />
             )}
-        </HvitBoks>
+        </Boks>
     );
 };
 

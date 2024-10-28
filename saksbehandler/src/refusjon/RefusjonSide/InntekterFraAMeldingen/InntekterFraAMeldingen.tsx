@@ -7,13 +7,14 @@ import InntektsmeldingTabellBody from './inntektsmeldingTabell/InntektsmeldingTa
 import InntektsmeldingTabellHeader from './inntektsmeldingTabell/InntektsmeldingTabellHeader';
 import InntektsMeldingHeader from './InntektsMeldingHeader';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
-import Boks from '@/komponenter/Boks/Boks';
+
 import groupBy from 'lodash.groupby';
 import sortBy from 'lodash.sortby';
 import { lønnsbeskrivelseTekst } from '~/types/messages';
 import { Inntektsgrunnlag, Refusjonsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import { månedsNavn } from '~/utils';
+import Boks from '~/Boks';
 
 export const inntektBeskrivelse = (beskrivelse: string | undefined) => {
     if (beskrivelse === undefined) {

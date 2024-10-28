@@ -4,7 +4,7 @@ import { Bedriftvalg, Feilstatus, StatusFeilBedriftmeny } from '../../bruker/bed
 import './refusjonFeilet.less';
 import RefusjonFeiletManglerUnderEnhet from './RefusjonFeiletManglerUnderEnhet';
 import { BodyShort, Heading } from '@navikt/ds-react';
-import Boks from '../Boks/Boks';
+import Boks from '~/Boks';
 import BEMHelper from '~/utils/bem';
 
 interface Props {

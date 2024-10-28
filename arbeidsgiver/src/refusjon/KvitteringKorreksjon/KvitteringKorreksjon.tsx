@@ -1,7 +1,7 @@
 import { ExpansionCard, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import Utregning from '../../komponenter/Utregning';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
 
 import InntekterFraTiltaketSvar from '../RefusjonSide/InntekterFraTiltaketSvar';
 import SummeringBoks from '../RefusjonSide/SummeringBoks';
@@ -10,7 +10,7 @@ import InntekterFraAMeldingen from '../RefusjonSide/inntektsmelding/InntekterFra
 
 import InntekterFraAMeldingenKorreksjon from './InntekterFraAMeldingenKorreksjon';
 import KorreksjonInfo from './KorreksjonInfo';
-import Boks from '../../komponenter/Boks/Boks';
+import Boks from '~/Boks';
 import { Korreksjon, Refusjon } from '~/types/refusjon';
 import { storForbokstav } from '~/utils/stringUtils';
 import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';

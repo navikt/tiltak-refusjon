@@ -1,15 +1,15 @@
 // DENNE KOMPONENTEN SKAL KUN BRUKES TIL VISNING AV KVITTERINGER PÅ REFUSJONER SOM ER SENDT INN FØR SPØRSMÅL OM INNTEKTSLINJE ER OPPTJENT I PERIODEN
 import { sortBy } from 'lodash';
 import { FunctionComponent } from 'react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
 
 import { refusjonApnet } from '../../utils/amplitude-utils';
 
-import { formatterPenger } from '../../utils/PengeUtils';
+import { formatterPenger } from '../../../../komponenter/src/utils/PengeUtils';
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 
 import '../RefusjonSide/InntekterFraAMeldingen.less';
-import Boks from '../../komponenter/Boks/Boks';
+import Boks from '~/Boks';
 import { lønnsbeskrivelseTekst } from '~/types/messages';
 import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';

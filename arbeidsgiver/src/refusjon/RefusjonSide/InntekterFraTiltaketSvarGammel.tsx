@@ -1,7 +1,7 @@
 import { Label, BodyShort } from '@navikt/ds-react';
 import React, { FunctionComponent } from 'react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { formatterPenger } from '../../utils/PengeUtils';
+import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
+import { formatterPenger } from '../../../../komponenter/src/utils/PengeUtils';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { tiltakstypeTekst } from '~/types/messages';
 

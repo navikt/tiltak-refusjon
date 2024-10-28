@@ -1,12 +1,12 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { useParams } from 'react-router';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
 
 import { useHentRefusjon } from '../../services/rest-service';
 
-import { formatterPenger } from '../../utils/PengeUtils';
+import { formatterPenger } from '../../../../komponenter/src/utils/PengeUtils';
 import { Alert, Label, BodyShort, Heading } from '@navikt/ds-react';
-import Boks from '../../komponenter/Boks/Boks';
+import Boks from '~/Boks';
 import { tiltakstypeTekst } from '~/types/messages';
 import { formatterPeriode } from '~/utils';
 

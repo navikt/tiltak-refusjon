@@ -2,7 +2,7 @@ import { formatterPenger } from '@/utils/PengeUtils';
 import { Alert, BodyShort, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '../komponenter/VerticalSpacer';
-import HvitBoks from '../komponenter/hvitboks/HvitBoks';
+
 
 import InformasjonFraAvtalen from '../refusjon/RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
@@ -16,6 +16,7 @@ import KorreksjonSummeringBoks from './KorreksjonSummeringsBoks';
 import { Korreksjon } from '~/types/refusjon';
 import { storForbokstav } from '~/utils/stringUtils';
 import { korreksjonStatusTekst } from '~/types/messages';
+import Boks from '~/Boks';
 
 type Props = {
     korreksjon: Korreksjon;
@@ -23,7 +24,7 @@ type Props = {
 
 const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
     return (
-        <HvitBoks>
+        <Boks variant='hvit'>
             <VerticalSpacer rem={2} />
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading size="large" role="heading">
@@ -88,7 +89,7 @@ const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
             )}
             <VerticalSpacer rem={2} />
             <KorreksjonSummeringBoks refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} korreksjon={korreksjon} />
-        </HvitBoks>
+        </Boks>
     );
 };
 

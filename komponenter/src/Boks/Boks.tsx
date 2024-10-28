@@ -1,5 +1,5 @@
 import './Boks.less';
-import { Farger } from '../../utils/boksUtils';
+import { Farger } from '~/utils/boksUtils';
 import { CSSProperties, FunctionComponent, PropsWithChildren } from 'react';
 import BEMHelper from '~/utils/bem';
 

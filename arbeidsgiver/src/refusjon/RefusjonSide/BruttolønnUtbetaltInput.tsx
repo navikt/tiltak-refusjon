@@ -2,7 +2,7 @@ import React, { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, 
 import { Alert, TextField } from '@navikt/ds-react';
 
 import { sumInntekterOpptjentIPeriode } from '@/utils/inntekterUtiles';
-import VerticalSpacer from '@/komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { Inntektsgrunnlag, Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import { tiltakstypeTekst } from '~/types/messages';

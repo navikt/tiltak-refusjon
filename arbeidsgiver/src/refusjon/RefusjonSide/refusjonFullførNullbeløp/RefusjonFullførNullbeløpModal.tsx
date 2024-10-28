@@ -2,7 +2,7 @@ import React, { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction }
 import GodkjennModal from '../GodkjennModal';
 import { Alert } from '@navikt/ds-react';
 
-import { formatterPenger } from '../../../utils/PengeUtils';
+import { formatterPenger } from '../../../../../komponenter/src/utils/PengeUtils';
 import { Refusjon } from '~/types/refusjon';
 import { formatterPeriode } from '~/utils';
 

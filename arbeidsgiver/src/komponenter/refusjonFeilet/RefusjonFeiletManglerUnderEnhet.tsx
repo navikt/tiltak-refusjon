@@ -7,7 +7,7 @@ import { Bedriftvalg, Feilstatus, Organisasjon } from '../../bruker/bedriftsmeny
 import LagNyRad from './LagNyRad';
 
 import { ExpansionCard, Link, Heading } from '@navikt/ds-react';
-import Boks from '../Boks/Boks';
+import Boks from '~/Boks';
 import BEMHelper from '~/utils/bem';
 
 interface Props {

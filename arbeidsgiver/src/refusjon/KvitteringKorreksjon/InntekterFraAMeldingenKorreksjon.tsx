@@ -1,11 +1,11 @@
 import React, { Fragment, FunctionComponent } from 'react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
 
-import { formatterPenger } from '../../utils/PengeUtils';
+import { formatterPenger } from '../../../../komponenter/src/utils/PengeUtils';
 import { Alert, Heading } from '@navikt/ds-react';
 
 import '../RefusjonSide/InntekterFraAMeldingen.less';
-import Boks from '../../komponenter/Boks/Boks';
+import Boks from '~/Boks';
 
 import InntektsMeldingHeader from '../RefusjonSide/inntektsmelding/InntektsMeldingHeader';
 import groupBy from 'lodash.groupby';

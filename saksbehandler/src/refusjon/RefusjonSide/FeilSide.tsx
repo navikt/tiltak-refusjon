@@ -2,11 +2,10 @@ import { Alert, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useParams } from 'react-router';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import HvitBoks from '../../komponenter/hvitboks/HvitBoks';
-
 import { useHentRefusjon } from '../../services/rest-service';
 import InformasjonFraAvtalen from './InformasjonFraAvtalen';
 import { tiltakstypeTekst } from '~/types/messages';
+import Boks from '~/Boks';
 
 type AlertStripeType = 'info' | 'success' | 'warning' | 'error';
 
@@ -20,7 +19,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
     const refusjon = useHentRefusjon(refusjonId!);
 
     return (
-        <HvitBoks>
+        <Boks variant='hvit'>
             <Alert variant={props.advarselType} size="small">
                 {props.feiltekst}
             </Alert>
@@ -36,7 +35,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
                 fristForGodkjenning={refusjon.fristForGodkjenning}
                 bedriftKontonummerInnhentetTidspunkt={refusjon.refusjonsgrunnlag.bedriftKontonummerInnhentetTidspunkt}
             />
-        </HvitBoks>
+        </Boks>
     );
 };
 
