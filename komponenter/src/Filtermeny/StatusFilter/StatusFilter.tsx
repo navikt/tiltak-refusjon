@@ -6,10 +6,10 @@ import { RefusjonStatus } from '~/types/status';
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    brukerContext: any;
+    options: {erArbeidsgiver: boolean, harKorreksjonTilgang: boolean};
 }
 
-const StatusFilter: FunctionComponent<Props> = ({filter, oppdaterFilter, brukerContext}) => {
+const StatusFilter: FunctionComponent<Props> = ({filter, oppdaterFilter, options}) => {
 
     interface OptionProps {
         value: string;
@@ -25,11 +25,11 @@ const StatusFilter: FunctionComponent<Props> = ({filter, oppdaterFilter, brukerC
         { value: RefusjonStatus.SENDT_KRAV, label: 'Sendt Krav' },
         { value: RefusjonStatus.UTBETALT, label: 'Utbetalt' },
         { value: RefusjonStatus.UTGÅTT, label: 'Frist utgått' },
-        { value: RefusjonStatus.UTBETALING_FEILET, label: 'Utbetaling feilet'},
+        { value: RefusjonStatus.UTBETALING_FEILET, label: 'Utbetaling feilet', hidden: options.erArbeidsgiver },
         {
             value: RefusjonStatus.KORRIGERT,
             label: 'Korrigert',
-            hidden: !brukerContext.innloggetBruker.harKorreksjonTilgang,
+            hidden: !options.harKorreksjonTilgang,
         },
     ];
 

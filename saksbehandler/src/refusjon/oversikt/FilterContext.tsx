@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useContext, useEffect, useState, PropsWithChildren } from 'react';
-
 import { useOversiktCookie } from './OversiktCookie/OversiktCookie';
 import { AktivSøk } from './VisRefusjonerFilter';
 import { RefusjonStatus } from '~/types/status';

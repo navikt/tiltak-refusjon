@@ -8,16 +8,16 @@ import { Filter } from '~/types/filter';
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    brukerContext: any;
+    options: {erArbeidsgiver: boolean, harKorreksjonTilgang: boolean};
 }
 
-const Filtermeny: FunctionComponent<Props> = ({filter, oppdaterFilter, brukerContext}) => {
+const Filtermeny: FunctionComponent<Props> = ({filter, oppdaterFilter, options}) => {
 
     return (
         <div role="menubar" aria-label="meny for filtrering av refusjoner">
             <VisRefusjonerFilter />
             <VerticalSpacer rem={1.25} />
-            <StatusFilter filter={filter} oppdaterFilter={oppdaterFilter} brukerContext={brukerContext}/>
+            <StatusFilter filter={filter} oppdaterFilter={oppdaterFilter} options={options}/>
             <VerticalSpacer rem={1.25} />
             <TiltakFilter filter={filter} oppdaterFilter={oppdaterFilter}  />
             <VerticalSpacer rem={1.25} />

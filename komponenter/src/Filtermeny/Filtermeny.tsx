@@ -8,15 +8,15 @@ import { brukerflate } from '~/utils/amplitude-utils';
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    brukerContext: any;
+    options: {erArbeidsgiver: boolean, harKorreksjonTilgang: boolean};
 }
 
-const Filtermeny: FunctionComponent<Props> = ({filter, oppdaterFilter, brukerContext}) => {
+const Filtermeny: FunctionComponent<Props> = ({filter, oppdaterFilter, options}) => {
     const erDesktopStorrelse = useMediaQuery({ minWidth: 768 });
     brukerflate(erDesktopStorrelse);
     return (
         <div>
-            <StatusFilter filter={filter} oppdaterFilter={oppdaterFilter} brukerContext={brukerContext}/>
+            <StatusFilter filter={filter} oppdaterFilter={oppdaterFilter} options={options}/>
             <div style={{ marginTop: '0.75rem' }} />
             <TiltakFilter filter={filter} oppdaterFilter={oppdaterFilter}  />
         </div>
