@@ -5,7 +5,7 @@ import StatusTekst from '~/StatusTekst';
 import BEMHelper from '~/utils/bem';
 import { formatterDato, formatterPeriode } from '~/utils';
 import { Refusjon } from '~/types/refusjon';
-import { storForbokstav } from '~/utils/stringUtils';
+import { kunStorForbokstav } from '~/utils/stringUtils';
 import { tiltakstypeTekst } from '~/types/messages';
 import { NORSK_DATO_FORMAT_SHORT } from '~/utils/datoUtils';
 
@@ -36,7 +36,7 @@ const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
                             className={cls.element('title_row_column')}
                             aria-labelledby={cls.element('deltaker')}
                         >
-                            {storForbokstav(tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype])}
+                            {kunStorForbokstav(tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype])}
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>

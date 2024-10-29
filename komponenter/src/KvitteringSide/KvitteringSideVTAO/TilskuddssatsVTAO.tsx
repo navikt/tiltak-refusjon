@@ -5,6 +5,7 @@ import { Refusjon } from '~/types/refusjon';
 import { formatterPeriode } from '~/utils';
 import VerticalSpacer from '~/VerticalSpacer';
 import Boks from '~/Boks';
+import { formatterPenger } from '~/utils/PengeUtils';
 
 interface Props {
     refusjon: Refusjon;
@@ -24,7 +25,7 @@ const TilskuddssatsVTAO: FunctionComponent<Props> = ({refusjon}) => {
                 style={{ width: '40%' }}
                 label="Månedlig tilskuddssats"
                 description="Sats for 2024"
-                value="6 808 kr"
+                value={formatterPenger(tilskuddsgrunnlag.tilskuddsbeløp)}
                 readOnly
             />
         </Boks>

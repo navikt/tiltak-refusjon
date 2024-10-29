@@ -131,7 +131,7 @@ const Komponent: FunctionComponent = () => {
 const Refusjon: FunctionComponent = () => {
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ flex: '0 0 55rem', flexShrink: 1 }}>
+            <div style={{ flex: '0 0 80rem', flexShrink: 1 }}>
                 <TilbakeTilOversikt />
                 <Suspense fallback={<HenterInntekterBoks />}>
                     <Advarsler />

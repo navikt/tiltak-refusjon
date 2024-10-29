@@ -1,10 +1,13 @@
 import { BodyShort, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StatusTekst from '../StatusTekst';
-import BEMHelper from '../utils/bem';
-import { formatterDato } from '../utils';
-import { Refusjon } from '../types/refusjon';
+import StatusTekst from '~/StatusTekst';
+import { tiltakstypeTekst } from '~/types/messages';
+import { Refusjon } from '~/types/refusjon';
+
+import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
+import BEMHelper from '~/utils/bem';
+import { kunStorForbokstav } from '~/utils/stringUtils';
 
 type Props = {
     refusjoner: Refusjon[];
@@ -28,6 +31,15 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                     }}
                 >
                     <Table.DataCell>
+                        <BodyShort
+                            size="small"
+                            className={cls.element('title_row_column')}
+                            aria-labelledby={cls.element('deltaker')}
+                        >
+                            {kunStorForbokstav(tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype])}
+                        </BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
                         <BodyShort size="small" aria-labelledby={cls.element('refusjon')}>
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}
@@ -42,6 +54,19 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                         <BodyShort size="small" aria-labelledby={cls.element('deltaker')}>
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}{' '}
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
+                        </BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
+                        <BodyShort
+                            size="small"
+                            className={cls.element('title_row_column')}
+                            aria-labelledby={cls.element('periode')}
+                        >
+                            {formatterPeriode(
+                                refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
+                                refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
+                                NORSK_DATO_FORMAT_SHORT
+                            )}
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>

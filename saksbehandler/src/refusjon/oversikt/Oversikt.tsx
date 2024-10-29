@@ -5,7 +5,7 @@ import { useHentRefusjoner } from '../../services/rest-service';
 
 import { useFilter } from './FilterContext';
 import OversiktTabell from '~/OversiktTabell';
-import TabellBodySaksbehandler from '~/OversiktTabell/TableBodySaksbehandler';
+import TabellBodySaksbehandler from '~/OversiktTabell/TableBody/TableBodySaksbehandler';
 import SaksbehanderTableHeader from '~/OversiktTabell/TableHeader/SaksbehandlerTableHeader';
 
 import './Oversikt.less';
@@ -15,7 +15,7 @@ const cls = BEMHelper('oversikt');
 
 const Oversikt: FunctionComponent = () => {
     const { filter, oppdaterFilter } = useFilter();
-
+ 
     const refusjonerPage = useHentRefusjoner(filter);
 
     if (refusjonerPage === undefined) {
