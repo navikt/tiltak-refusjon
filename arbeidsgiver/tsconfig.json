@@ -6,5 +6,5 @@
             "~/*": ["../komponenter/src/*"]
         }
     },
-    "include": ["src", "../komponenter/src/VerticalSpacer.tsx", "../komponenter/src/KvitteringSide/LagreSomPdfKnapp.tsx", "../komponenter/src/KvitteringSide/Statusmelding.tsx", "../komponenter/src/utils/boksUtils.ts", "../komponenter/src/IkonRad", "../komponenter/src/utils/PengeUtils.ts"]
+    "include": ["src"]
 }
