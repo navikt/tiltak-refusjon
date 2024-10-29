@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react';
 import { FunctionComponent, PropsWithChildren, Suspense } from 'react';
-import VerticalSpacer from '../../komponenter/src/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { Alert, BodyShort, Heading, Loader } from '@navikt/ds-react';
 import Boks from '~/Boks';
 

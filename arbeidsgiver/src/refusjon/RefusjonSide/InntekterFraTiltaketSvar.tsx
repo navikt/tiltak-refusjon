@@ -1,7 +1,7 @@
 import { Label, BodyShort, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
-import { formatterPenger } from '../../../../komponenter/src/utils/PengeUtils';
+import VerticalSpacer from '~/VerticalSpacer';
+import { formatterPenger } from '~/utils/PengeUtils';
 import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import Boks from '~/Boks';
 import { valgtBruttoLønn } from '@/utils/inntekterUtiles';

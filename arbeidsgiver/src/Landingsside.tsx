@@ -3,7 +3,7 @@ import SommerIkon from '@/asset/image/sommer.svg?react';
 import { BodyShort, Button, Heading, Label, Link } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 
-import VerticalSpacer from '../../komponenter/src/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import Boks from '~/Boks';
 import EksternLenke from '~/EksternLenke/EksternLenke';
 

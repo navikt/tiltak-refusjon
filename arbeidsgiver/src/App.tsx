@@ -14,7 +14,6 @@ import { registrereBesok } from './utils/amplitude-utils';
 import RefusjonProvider from './RefusjonProvider';
 import { FilterProvider } from './refusjon/oversikt/FilterContext';
 
-
 function App() {
     useEffect(() => {
         registrereBesok();

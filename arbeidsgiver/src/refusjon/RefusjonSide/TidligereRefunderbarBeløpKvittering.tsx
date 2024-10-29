@@ -1,8 +1,8 @@
 import { Label, BodyShort, Heading } from '@navikt/ds-react';
 import React, { FunctionComponent, PropsWithChildren } from 'react';
-import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
-import { formatterPenger } from '../../../../komponenter/src/utils/PengeUtils';
+import { formatterPenger } from '~/utils/PengeUtils';
 import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import { tiltakstypeTekst } from '~/types/messages';

@@ -1,11 +1,11 @@
 import KIDInputValidator from '../../../komponenter/KIDInputValidator/KIDInputValidator';
 import { FunctionComponent } from 'react';
 
-import VerticalSpacer from '../../../../../komponenter/src/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
-import { formatterPenger } from '../../../../../komponenter/src/utils/PengeUtils';
+import { formatterPenger } from '~/utils/PengeUtils';
 import { Alert, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
-import IkonRad from '../../../../../komponenter/src/IkonRad/IkonRad';
+import IkonRad from '~/IkonRad/IkonRad';
 import Boks from '~/Boks';
 import { tiltakstypeTekst } from '~/types/messages';
 import { formatterDato, formatterPeriode } from '~/utils';

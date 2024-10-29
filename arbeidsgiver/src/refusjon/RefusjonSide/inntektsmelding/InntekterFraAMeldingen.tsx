@@ -1,6 +1,6 @@
 import { Alert, Button, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
 import { Fragment, FunctionComponent } from 'react';
-import VerticalSpacer from '../../../../../komponenter/src/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { hentInntekterLengerFrem } from '../../../services/rest-service';
 import { refusjonApnet } from '../../../utils/amplitude-utils';
 import InntektsMeldingHeader from './InntektsMeldingHeader';

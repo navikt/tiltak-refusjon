@@ -4,7 +4,7 @@ import { sumInntekterOpptjentIPeriode } from '../../utils/inntekterUtiles';
 import { settTidligereRefunderbarBeløp } from '../../services/rest-service';
 import { useParams } from 'react-router';
 
-import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
 import { Alert, Radio, RadioGroup, TextField, Heading, Label, BodyShort, debounce } from '@navikt/ds-react';
 import BEMHelper from '~/utils/bem';

@@ -1,7 +1,7 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
 import React, { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 
-import { formatterPenger } from '../../../komponenter/src/utils/PengeUtils';
+import { formatterPenger } from '~/utils/PengeUtils';
 
 import { visSatsMedNorskFormatering } from '../utils/utregningUtil';
 import './Utregningsrad.less';

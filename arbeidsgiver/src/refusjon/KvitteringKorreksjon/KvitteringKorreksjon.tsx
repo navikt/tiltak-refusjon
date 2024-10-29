@@ -1,7 +1,7 @@
 import { ExpansionCard, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import Utregning from '../../komponenter/Utregning';
-import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
 import InntekterFraTiltaketSvar from '../RefusjonSide/InntekterFraTiltaketSvar';
 import SummeringBoks from '../RefusjonSide/SummeringBoks';

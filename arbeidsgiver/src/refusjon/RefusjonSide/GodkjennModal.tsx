@@ -1,6 +1,6 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
 import LagreOgAvbrytKnapp from '../../komponenter/LagreOgAvbrytKnapp';
-import VerticalSpacer from '../../../../komponenter/src/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { Modal, Heading } from '@navikt/ds-react';
 
 type Props = {
