@@ -25,7 +25,7 @@ const OversiktSide: FunctionComponent = () => {
         featureToggleVTAO: !featureToggles[Feature.VtaoToggle],
     };
 
-    console.log('Featuretoggle',featureToggles[Feature.VtaoToggle])
+    console.log('Featuretoggle', featureToggles[Feature.VtaoToggle]);
 
     return (
         <div className={cls.className}>
@@ -37,7 +37,7 @@ const OversiktSide: FunctionComponent = () => {
             <div className={cls.element('oversikt')}>
                 <div className={cls.element('wrapper')}>
                     <div className={cls.element('meny')}>
-                        <Filtermeny filter={filter} oppdaterFilter={oppdaterFilter} options={options}  />
+                        <Filtermeny filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
                     </div>
                     <div className={cls.element('container')}>
                         <Suspense fallback={<OversiktSkeleton />}>

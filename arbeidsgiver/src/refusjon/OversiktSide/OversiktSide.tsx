@@ -13,7 +13,6 @@ const OversiktSide: FunctionComponent = () => {
         erArbeidsgiver: true,
         harKorreksjonTilgang: false,
         featureToggleVTAO: true,
-        
     };
 
     return (

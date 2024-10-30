@@ -16,13 +16,16 @@ interface Props {
 }
 
 const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, options }) => {
-
     const refusjonFilterTiltak: OptionProps[] = [
         { value: '', label: 'Alle' },
         { value: Tiltak.MIDLERTIDIG_LØNNSTILSKUDD, label: 'Midlertidig lønnstilskudd' },
         { value: Tiltak.VARIG_LØNNSTILSKUDD, label: 'Varig lønnstilskudd' },
         { value: Tiltak.SOMMERJOBB, label: 'Sommerjobb' },
-        { value: Tiltak.VTAO, label: 'Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)', hidden: options.featureToggleVTAO },
+        {
+            value: Tiltak.VTAO,
+            label: 'Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)',
+            hidden: options.featureToggleVTAO,
+        },
     ];
 
     return (
@@ -37,22 +40,23 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, option
                         legend=""
                         value={filter.tiltakstype === undefined ? '' : filter.tiltakstype}
                     >
-                        {refusjonFilterTiltak.filter((option: OptionProps) => {
-                            return !option.hidden;
-                        }) 
-                        .map((option: OptionProps, index: number) => (
-                            <Radio
-                                key={index}
-                                role="radio"
-                                value={option.value}
-                                onChange={(event) => {
-                                    const nyTiltaktype = event.currentTarget.value as Tiltak;
-                                    oppdaterFilter({ tiltakstype: nyTiltaktype || undefined });
-                                }}
-                            >
-                                {option.value === '' ? 'Alle' : option.label}
-                            </Radio>
-                        ))}
+                        {refusjonFilterTiltak
+                            .filter((option: OptionProps) => {
+                                return !option.hidden;
+                            })
+                            .map((option: OptionProps, index: number) => (
+                                <Radio
+                                    key={index}
+                                    role="radio"
+                                    value={option.value}
+                                    onChange={(event) => {
+                                        const nyTiltaktype = event.currentTarget.value as Tiltak;
+                                        oppdaterFilter({ tiltakstype: nyTiltaktype || undefined });
+                                    }}
+                                >
+                                    {option.value === '' ? 'Alle' : option.label}
+                                </Radio>
+                            ))}
                     </RadioGroup>
                 </ExpansionCard.Content>
             </ExpansionCard>
