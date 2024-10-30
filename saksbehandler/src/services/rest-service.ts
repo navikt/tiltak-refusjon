@@ -8,7 +8,6 @@ import { ApiError, FeilkodeError } from '../types/errors';
 import { Beregning, Hendelse, Korreksjon, Korreksjonsgrunn, PageableRefusjon, Refusjon } from '~/types/refusjon';
 import { useFilter } from '@/refusjon/oversikt/FilterContext';
 
-
 const api = axios.create({
     baseURL: '/api/saksbehandler',
     timeout: 30000,

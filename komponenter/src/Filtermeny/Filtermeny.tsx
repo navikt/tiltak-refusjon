@@ -8,17 +8,17 @@ import { brukerflate } from '~/utils/amplitude-utils';
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    options: {erArbeidsgiver: boolean, harKorreksjonTilgang: boolean};
+    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean };
 }
 
-const Filtermeny: FunctionComponent<Props> = ({filter, oppdaterFilter, options}) => {
+const Filtermeny: FunctionComponent<Props> = ({ filter, oppdaterFilter, options }) => {
     const erDesktopStorrelse = useMediaQuery({ minWidth: 768 });
     brukerflate(erDesktopStorrelse);
     return (
         <div>
-            <StatusFilter filter={filter} oppdaterFilter={oppdaterFilter} options={options}/>
+            <StatusFilter filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
             <div style={{ marginTop: '0.75rem' }} />
-            <TiltakFilter filter={filter} oppdaterFilter={oppdaterFilter}  />
+            <TiltakFilter filter={filter} oppdaterFilter={oppdaterFilter} />
         </div>
     );
 };

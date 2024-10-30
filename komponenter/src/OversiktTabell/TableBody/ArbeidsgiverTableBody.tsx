@@ -36,7 +36,9 @@ const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
                             className={cls.element('title_row_column')}
                             aria-labelledby={cls.element('deltaker')}
                         >
-                            {kunStorForbokstav(tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype])}
+                            {kunStorForbokstav(
+                                tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
+                            )}
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>

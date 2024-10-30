@@ -17,7 +17,7 @@ import { BrukerContextType } from '../../bruker/BrukerContextType';
 import HendelsesLogg from '../Hendelseslogg/Hendelseslogg';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
-import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO'
+import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 
 const Fleks = styled.div`
     display: flex;
@@ -121,7 +121,7 @@ const Komponent: FunctionComponent = () => {
                     {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
                         <KvitteringSideVTAO refusjon={refusjon} />
                     ) : (
-                         <KvitteringSide refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
+                        <KvitteringSide refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
                     )}
                 </>
             );

@@ -19,7 +19,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
     const refusjon = useHentRefusjon(refusjonId!);
 
     return (
-        <Boks variant='hvit'>
+        <Boks variant="hvit">
             <Alert variant={props.advarselType} size="small">
                 {props.feiltekst}
             </Alert>

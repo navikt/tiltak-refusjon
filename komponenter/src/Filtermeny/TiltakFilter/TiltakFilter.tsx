@@ -14,8 +14,7 @@ interface Props {
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
 }
 
-const TiltakFilter: FunctionComponent<Props> = ({filter, oppdaterFilter}) => {
-
+const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
     const refusjonFilterTiltak: OptionProps[] = [
         { value: '', label: 'Alle' },
         { value: Tiltak.MIDLERTIDIG_LØNNSTILSKUDD, label: 'Midlertidig lønnstilskudd' },

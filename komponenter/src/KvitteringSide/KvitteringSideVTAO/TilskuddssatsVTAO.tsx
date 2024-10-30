@@ -11,12 +11,12 @@ interface Props {
     refusjon: Refusjon;
 }
 
-const TilskuddssatsVTAO: FunctionComponent<Props> = ({refusjon}) => {
+const TilskuddssatsVTAO: FunctionComponent<Props> = ({ refusjon }) => {
     const cls = BEMHelper('refusjonside');
     const { tilskuddsgrunnlag } = refusjon.refusjonsgrunnlag;
 
     return (
-        <Boks variant='grønn'>
+        <Boks variant="grønn">
             <Heading level="3" size="small">
                 Refusjon for {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
             </Heading>

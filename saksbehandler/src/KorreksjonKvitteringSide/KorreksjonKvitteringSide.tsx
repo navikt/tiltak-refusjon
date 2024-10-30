@@ -3,7 +3,6 @@ import { Alert, BodyShort, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '../komponenter/VerticalSpacer';
 
-
 import InformasjonFraAvtalen from '../refusjon/RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraAMeldingenGammel from '../refusjon/RefusjonSide/InntekterFraAmeldingenGammel';
@@ -24,7 +23,7 @@ type Props = {
 
 const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
     return (
-        <Boks variant='hvit'>
+        <Boks variant="hvit">
             <VerticalSpacer rem={2} />
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading size="large" role="heading">

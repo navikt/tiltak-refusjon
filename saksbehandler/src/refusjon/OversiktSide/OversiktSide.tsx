@@ -13,7 +13,6 @@ import { useFilter } from '../oversikt/FilterContext';
 const cls = BEMHelper('OversiktSide');
 
 const OversiktSide: FunctionComponent = () => {
-
     const { filter, oppdaterFilter } = useFilter();
     const brukerContext: BrukerContextType = useInnloggetBruker();
 

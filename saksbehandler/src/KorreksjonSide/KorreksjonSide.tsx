@@ -35,7 +35,7 @@ const KorreksjonSide: FunctionComponent<Props> = ({ korreksjon }) => {
     };
 
     return (
-        <Boks variant='hvit'>
+        <Boks variant="hvit">
             <BekreftSlettKorreksjon />
 
             <VerticalSpacer rem={2} />

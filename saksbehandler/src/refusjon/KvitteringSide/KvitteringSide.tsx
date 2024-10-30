@@ -46,7 +46,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker })
     const featureToggles = useFeatureToggles();
 
     return (
-        <Boks variant='hvit'>
+        <Boks variant="hvit">
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 {innloggetBruker.harKorreksjonTilgang &&
                     refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&

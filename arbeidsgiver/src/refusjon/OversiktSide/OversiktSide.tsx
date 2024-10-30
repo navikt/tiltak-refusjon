@@ -8,7 +8,6 @@ import Filtermeny from '~/Filtermeny/Filtermeny';
 import { useFilter } from '../oversikt/FilterContext';
 
 const OversiktSide: FunctionComponent = () => {
-
     const { filter, oppdaterFilter } = useFilter();
     const options = {
         erArbeidsgiver: true,

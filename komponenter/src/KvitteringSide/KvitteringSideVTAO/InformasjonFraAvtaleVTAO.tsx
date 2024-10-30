@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
 
-
 import { Alert, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
 
 import moment from 'moment';

@@ -1,5 +1,5 @@
-import { RefusjonStatus } from "./status";
-import { Tiltak } from "./tiltak";
+import { RefusjonStatus } from './status';
+import { Tiltak } from './tiltak';
 
 export interface Filter {
     status: RefusjonStatus | undefined;
@@ -23,4 +23,3 @@ export enum SortingOrder {
     FRISTFORGODKJENNING_ASC = 'FRISTFORGODKJENNING_ASC',
     FRISTFORGODKJENNING_DESC = 'FRISTFORGODKJENNING_DESC',
 }
-

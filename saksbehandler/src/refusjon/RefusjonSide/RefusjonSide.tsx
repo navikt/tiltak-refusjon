@@ -19,7 +19,7 @@ const RefusjonSide: FunctionComponent = () => {
     const refusjon = useHentRefusjon(refusjonId!);
 
     return (
-        <Boks variant='hvit'>
+        <Boks variant="hvit">
             {refusjon.status === 'KLAR_FOR_INNSENDING' && refusjon.refusjonsgrunnlag.inntektsgrunnlag === null && (
                 <Alert variant="info" size="small">
                     <Heading spacing size="small">

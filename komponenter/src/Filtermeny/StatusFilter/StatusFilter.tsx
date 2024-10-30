@@ -6,17 +6,16 @@ import { RefusjonStatus } from '~/types/status';
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    options: {erArbeidsgiver: boolean, harKorreksjonTilgang: boolean};
+    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean };
 }
 
-const StatusFilter: FunctionComponent<Props> = ({filter, oppdaterFilter, options}) => {
-
+const StatusFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, options }) => {
     interface OptionProps {
         value: string;
         label?: string;
         hidden?: boolean;
     }
-    
+
     const refusjonFilterStatus: OptionProps[] = [
         { value: '', label: 'Alle' },
         { value: RefusjonStatus.FOR_TIDLIG, label: 'For tidlig' },
@@ -34,33 +33,32 @@ const StatusFilter: FunctionComponent<Props> = ({filter, oppdaterFilter, options
     ];
 
     return (
-
-<ExpansionCard size="small" aria-label="Small-variant" defaultOpen={true}>
-<ExpansionCard.Header>
-    <ExpansionCard.Title size="small">Status</ExpansionCard.Title>
-</ExpansionCard.Header>
-<ExpansionCard.Content>
-    <RadioGroup size="small" legend="" value={filter.status === undefined ? '' : filter.status}>
-        {refusjonFilterStatus
-            .filter((option: OptionProps) => {
-                return !option.hidden;
-            })
-            .map((option: OptionProps, index: number) => (
-                <Radio
-                    key={index}
-                    role="radio"
-                    value={option.value}
-                    onChange={(event) => {
-                        const nyStatus = event.currentTarget.value as RefusjonStatus;
-                        oppdaterFilter({ status: nyStatus || undefined });
-                    }}
-                >
-                    {option.value === '' ? 'Alle' : option.label}
-                </Radio>
-            ))}
-    </RadioGroup>
-</ExpansionCard.Content>
-</ExpansionCard>
-    )
-}
+        <ExpansionCard size="small" aria-label="Small-variant" defaultOpen={true}>
+            <ExpansionCard.Header>
+                <ExpansionCard.Title size="small">Status</ExpansionCard.Title>
+            </ExpansionCard.Header>
+            <ExpansionCard.Content>
+                <RadioGroup size="small" legend="" value={filter.status === undefined ? '' : filter.status}>
+                    {refusjonFilterStatus
+                        .filter((option: OptionProps) => {
+                            return !option.hidden;
+                        })
+                        .map((option: OptionProps, index: number) => (
+                            <Radio
+                                key={index}
+                                role="radio"
+                                value={option.value}
+                                onChange={(event) => {
+                                    const nyStatus = event.currentTarget.value as RefusjonStatus;
+                                    oppdaterFilter({ status: nyStatus || undefined });
+                                }}
+                            >
+                                {option.value === '' ? 'Alle' : option.label}
+                            </Radio>
+                        ))}
+                </RadioGroup>
+            </ExpansionCard.Content>
+        </ExpansionCard>
+    );
+};
 export default StatusFilter;

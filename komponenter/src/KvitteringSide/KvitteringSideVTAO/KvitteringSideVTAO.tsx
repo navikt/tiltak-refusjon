@@ -1,16 +1,15 @@
-import { BodyLong, Heading, Tag } from "@navikt/ds-react";
-import { FunctionComponent, ReactElement } from "react";
-import Boks from "~/Boks/Boks";
-import { statusTekst } from "~/types/messages";
-import { Refusjon } from "~/types/refusjon";
-import { RefusjonStatus } from "~/types/status";
-import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from "~/utils";
-import { storForbokstav } from "~/utils/stringUtils";
-import VerticalSpacer from "~/VerticalSpacer";
-import InformasjonFraAvtalenVTAO from "./InformasjonFraAvtaleVTAO";
-import TilskuddssatsVTAO from "./TilskuddssatsVTAO";
-import SummeringBoksVTAO from "./SummeringBoksVTAO";
-
+import { BodyLong, Heading, Tag } from '@navikt/ds-react';
+import { FunctionComponent, ReactElement } from 'react';
+import Boks from '~/Boks/Boks';
+import { statusTekst } from '~/types/messages';
+import { Refusjon } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { storForbokstav } from '~/utils/stringUtils';
+import VerticalSpacer from '~/VerticalSpacer';
+import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
+import TilskuddssatsVTAO from './TilskuddssatsVTAO';
+import SummeringBoksVTAO from './SummeringBoksVTAO';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -51,15 +50,15 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon }) => (
         </Heading>
         <VerticalSpacer rem={1} />
         <BodyLong>
-            Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Tilskuddssatsen er 6 808 kroner
-            per måned. Satsen settes årlig av departementet og avtale- og refusjonsløsningen vil automatisk
-            oppdateres når det kommer nye satser.
+            Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Tilskuddssatsen er 6 808 kroner per
+            måned. Satsen settes årlig av departementet og avtale- og refusjonsløsningen vil automatisk oppdateres når
+            det kommer nye satser.
         </BodyLong>
         <VerticalSpacer rem={1} />
-    
+
         <InformasjonFraAvtalenVTAO refusjon={refusjon} />
         <VerticalSpacer rem={2} />
-        <TilskuddssatsVTAO refusjon={refusjon}/>
+        <TilskuddssatsVTAO refusjon={refusjon} />
         <VerticalSpacer rem={1} />
         <SummeringBoksVTAO
             erForKorreksjon={false}

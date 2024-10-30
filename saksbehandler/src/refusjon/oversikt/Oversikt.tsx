@@ -15,7 +15,7 @@ const cls = BEMHelper('oversikt');
 
 const Oversikt: FunctionComponent = () => {
     const { filter, oppdaterFilter } = useFilter();
- 
+
     const refusjonerPage = useHentRefusjoner(filter);
 
     if (refusjonerPage === undefined) {

@@ -12,7 +12,7 @@ import { mutate } from 'swr';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
 import { Refusjon as RefusjonType } from '~/types/refusjon';
-import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO'
+import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -47,8 +47,8 @@ const Komponent: FunctionComponent = () => {
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
             return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAO refusjon={refusjon}/>
-            ) : (            
+                <KvitteringSideVTAO refusjon={refusjon} />
+            ) : (
                 <FeilSide
                     advarselType="info"
                     feiltekst={

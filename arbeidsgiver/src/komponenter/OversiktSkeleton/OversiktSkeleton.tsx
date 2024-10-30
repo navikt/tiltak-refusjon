@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Skeleton, Table } from '@navikt/ds-react';
 import OversiktTabell from '~/OversiktTabell';
