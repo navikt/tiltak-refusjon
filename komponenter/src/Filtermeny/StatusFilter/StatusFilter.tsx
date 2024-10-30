@@ -6,7 +6,7 @@ import { RefusjonStatus } from '~/types/status';
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean };
+    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean; featureToggleVTAO: boolean };
 }
 
 const StatusFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, options }) => {

@@ -12,15 +12,17 @@ interface OptionProps {
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
+    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean; featureToggleVTAO: boolean };
 }
 
-const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
+const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, options }) => {
+
     const refusjonFilterTiltak: OptionProps[] = [
         { value: '', label: 'Alle' },
         { value: Tiltak.MIDLERTIDIG_LØNNSTILSKUDD, label: 'Midlertidig lønnstilskudd' },
         { value: Tiltak.VARIG_LØNNSTILSKUDD, label: 'Varig lønnstilskudd' },
         { value: Tiltak.SOMMERJOBB, label: 'Sommerjobb' },
-        { value: Tiltak.VTAO, label: 'Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)' },
+        { value: Tiltak.VTAO, label: 'Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)', hidden: options.featureToggleVTAO },
     ];
 
     return (
@@ -35,7 +37,10 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
                         legend=""
                         value={filter.tiltakstype === undefined ? '' : filter.tiltakstype}
                     >
-                        {refusjonFilterTiltak.map((option: OptionProps, index: number) => (
+                        {refusjonFilterTiltak.filter((option: OptionProps) => {
+                            return !option.hidden;
+                        }) 
+                        .map((option: OptionProps, index: number) => (
                             <Radio
                                 key={index}
                                 role="radio"

@@ -12,6 +12,8 @@ const OversiktSide: FunctionComponent = () => {
     const options = {
         erArbeidsgiver: true,
         harKorreksjonTilgang: false,
+        featureToggleVTAO: true,
+        
     };
 
     return (

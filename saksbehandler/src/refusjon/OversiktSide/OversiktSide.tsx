@@ -9,17 +9,23 @@ import BEMHelper from '~/utils/bem';
 import { BrukerContextType } from '@/bruker/BrukerContextType';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { useFilter } from '../oversikt/FilterContext';
+import { useFeatureToggles } from '../../featureToggles/FeatureToggleProvider';
+import { Feature } from '@/featureToggles/features';
 
 const cls = BEMHelper('OversiktSide');
 
 const OversiktSide: FunctionComponent = () => {
     const { filter, oppdaterFilter } = useFilter();
+    const featureToggles = useFeatureToggles();
     const brukerContext: BrukerContextType = useInnloggetBruker();
 
     const options = {
         erArbeidsgiver: false,
         harKorreksjonTilgang: brukerContext.innloggetBruker.harKorreksjonTilgang,
+        featureToggleVTAO: !featureToggles[Feature.VtaoToggle],
     };
+
+    console.log('Featuretoggle',featureToggles[Feature.VtaoToggle])
 
     return (
         <div className={cls.className}>
@@ -31,7 +37,7 @@ const OversiktSide: FunctionComponent = () => {
             <div className={cls.element('oversikt')}>
                 <div className={cls.element('wrapper')}>
                     <div className={cls.element('meny')}>
-                        <Filtermeny filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
+                        <Filtermeny filter={filter} oppdaterFilter={oppdaterFilter} options={options}  />
                     </div>
                     <div className={cls.element('container')}>
                         <Suspense fallback={<OversiktSkeleton />}>
