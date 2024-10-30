@@ -3,11 +3,14 @@ import { useOversiktCookie } from './OversiktCookie/OversiktCookie';
 import { AktivSøk } from './VisRefusjonerFilter';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
+import { SortingOrder } from '~/types/filter';
 
 export interface Filter extends RefusjonsAktor {
     status?: RefusjonStatus;
     tiltakstype?: Tiltak;
+    sorting?: SortingOrder;
     page?: number;
+    size?: number;
 }
 
 export interface RefusjonsAktor {
