@@ -2,11 +2,11 @@ import { RefusjonStatus } from './status';
 import { Tiltak } from './tiltak';
 
 export interface Filter {
-    status: RefusjonStatus | undefined;
-    tiltakstype: Tiltak | undefined;
-    sorting: SortingOrder | undefined;
-    page: number | undefined;
-    size: number | undefined;
+    status?: RefusjonStatus | undefined;
+    tiltakstype?: Tiltak | undefined;
+    sorting?: SortingOrder | undefined;
+    page?: number | undefined;
+    size?: number | undefined;
 }
 
 export enum SortingOrder {
