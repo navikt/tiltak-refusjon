@@ -12,7 +12,7 @@ interface OptionProps {
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean; featureToggleVTAO: boolean };
+    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean; skjulVTAO: boolean };
 }
 
 const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, options }) => {
@@ -24,7 +24,7 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, option
         {
             value: Tiltak.VTAO,
             label: 'Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)',
-            hidden: options.featureToggleVTAO,
+            hidden: options.skjulVTAO,
         },
     ];
 

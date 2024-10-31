@@ -22,10 +22,8 @@ const OversiktSide: FunctionComponent = () => {
     const options = {
         erArbeidsgiver: false,
         harKorreksjonTilgang: brukerContext.innloggetBruker.harKorreksjonTilgang,
-        featureToggleVTAO: !featureToggles[Feature.VtaoToggle],
+        skjulVTAO: !featureToggles[Feature.VtaoToggle],
     };
-
-    console.log('Featuretoggle', featureToggles[Feature.VtaoToggle]);
 
     return (
         <div className={cls.className}>
