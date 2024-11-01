@@ -1,10 +1,9 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
-import { SortingOrder } from '~/types/refusjon';
 import TriangleUp from '~/assets/image/triangleUp.svg?react';
 import TriangleDown from '~/assets/image/triangleDown.svg?react';
 import BEMHelper from '~/utils/bem';
 import './SortingValg.less';
-import { Filter } from '~/types/refusjon';
+import { Filter, SortingOrder } from '~/types/filter';
 
 interface SortingProps {
     className: string;

@@ -2,7 +2,8 @@ import axios, { AxiosResponse } from 'axios';
 import useSWR, { SWRConfiguration, mutate } from 'swr';
 import { BrukerContextType, InnloggetBruker } from '../bruker/BrukerContextType';
 import { BedriftvalgType } from '../bruker/bedriftsmenyRefusjon/api/api';
-import { Filter, Korreksjon, PageableRefusjon, Refusjon } from '~/types/refusjon';
+import { Korreksjon, PageableRefusjon, Refusjon } from '~/types/refusjon';
+import { Filter } from '~/types/filter';
 
 export class FeilkodeError extends Error {}
 export class ApiError extends Error {}

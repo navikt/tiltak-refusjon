@@ -1,8 +1,8 @@
 import { Alert, BodyShort } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
-import { formatterPenger } from '../../utils/PengeUtils';
+import { formatterPenger } from '~/utils/PengeUtils';
 import { korreksjonsgrunnTekst, tiltakstypeTekst } from '~/types/messages';
 import { formatterDato } from '~/utils';
 import { Korreksjon, Korreksjonsgrunn } from '~/types/refusjon';

@@ -1,15 +1,16 @@
 import KIDInputValidator from '../../../komponenter/KIDInputValidator/KIDInputValidator';
 import { FunctionComponent } from 'react';
-import EksternLenke from '../../../komponenter/EksternLenke/EksternLenke';
-import VerticalSpacer from '../../../komponenter/VerticalSpacer';
 
-import { formatterPenger } from '../../../utils/PengeUtils';
+import VerticalSpacer from '~/VerticalSpacer';
+
+import { formatterPenger } from '~/utils/PengeUtils';
 import { Alert, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
-import IkonRad from '../../../komponenter/IkonRad/IkonRad';
-import Boks from '../../../komponenter/Boks/Boks';
+import IkonRad from '~/IkonRad/IkonRad';
+import Boks from '~/Boks';
 import { tiltakstypeTekst } from '~/types/messages';
 import { formatterDato, formatterPeriode } from '~/utils';
 import { Refusjon } from '~/types/refusjon';
+import EksternLenke from '~/EksternLenke/EksternLenke';
 
 type Props = {
     refusjon: Refusjon;

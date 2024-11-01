@@ -11,7 +11,7 @@ import TidligereRefunderbarBeløp from './TidligereRefunderbarBeløp';
 import RefusjonGodkjennModal from './RefusjonGodkjennModal';
 import RefusjonFullførNullbeløp from './refusjonFullførNullbeløp/RefusjonFullførNullbeløp';
 import './RefusjonSide.less';
-import Boks from '../../komponenter/Boks/Boks';
+import Boks from '~/Boks';
 
 const RefusjonSide: FunctionComponent = () => {
     const navigate = useNavigate();

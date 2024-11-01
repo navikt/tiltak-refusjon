@@ -1,8 +1,8 @@
 import * as Sentry from '@sentry/react';
 import { FunctionComponent, PropsWithChildren, Suspense } from 'react';
-import VerticalSpacer from './komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { Alert, BodyShort, Heading, Loader } from '@navikt/ds-react';
-import Boks from './komponenter/Boks/Boks';
+import Boks from '~/Boks';
 
 const ErrorOgSuspenseHandlerMain: FunctionComponent<PropsWithChildren> = (props) => (
     <Sentry.ErrorBoundary

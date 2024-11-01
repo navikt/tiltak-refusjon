@@ -2,10 +2,10 @@ import Pengesedler from '@/asset/image/pengesedler.svg?react';
 import { Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 
-import { formatterPenger } from '../../utils/PengeUtils';
+import { formatterPenger } from '~/utils/PengeUtils';
 
-import Boks from '../../komponenter/Boks/Boks';
-import VerticalSpacer from '@/komponenter/VerticalSpacer';
+import Boks from '~/Boks';
+import VerticalSpacer from '~/VerticalSpacer';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { formatterPeriode } from '~/utils';
 

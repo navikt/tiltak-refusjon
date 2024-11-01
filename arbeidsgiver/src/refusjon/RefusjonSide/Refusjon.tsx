@@ -1,9 +1,7 @@
 import React, { FunctionComponent, useEffect, useRef } from 'react';
 import TilbakeTilOversikt from '../../komponenter/TilbakeTilOversikt';
-
 import KvitteringKorreksjon from '../KvitteringKorreksjon/KvitteringKorreksjon';
 import KvitteringSide from '../KvitteringSide/KvitteringSide';
-
 import FeilSide from './FeilSide';
 import RefusjonSide from './RefusjonSide';
 import { BodyShort } from '@navikt/ds-react';
@@ -14,6 +12,7 @@ import { mutate } from 'swr';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
 import { Refusjon as RefusjonType } from '~/types/refusjon';
+import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -47,7 +46,9 @@ const Komponent: FunctionComponent = () => {
 
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
-            return (
+            return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
+                <KvitteringSideVTAO refusjon={refusjon} />
+            ) : (
                 <FeilSide
                     advarselType="info"
                     feiltekst={
@@ -84,7 +85,11 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.GODKJENT_NULLBELØP:
         case RefusjonStatus.UTBETALT:
         case RefusjonStatus.UTBETALING_FEILET:
-            return <KvitteringSide refusjon={refusjon} />;
+            return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
+                <KvitteringSideVTAO refusjon={refusjon} />
+            ) : (
+                <KvitteringSide refusjon={refusjon} />
+            );
         case RefusjonStatus.KORRIGERT: {
             return <Korreksjonskvittering refusjon={refusjon} />;
         }

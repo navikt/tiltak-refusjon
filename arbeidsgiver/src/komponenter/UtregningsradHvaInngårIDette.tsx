@@ -2,7 +2,7 @@ import { HelpText, ReadMore, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { inntektBeskrivelse } from '../refusjon/RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
 
-import { formatterPenger } from '../utils/PengeUtils';
+import { formatterPenger } from '~/utils/PengeUtils';
 import { Inntektslinje, Tilskuddsgrunnlag } from '~/types/refusjon';
 import { formatterDato, getMåned, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 

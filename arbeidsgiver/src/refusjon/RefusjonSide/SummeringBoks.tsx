@@ -1,11 +1,11 @@
 import Pengesedler from '@/asset/image/pengesedler.svg?react';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
-import { formatterPenger } from '../../utils/PengeUtils';
+import { formatterPenger } from '~/utils/PengeUtils';
 
-import Boks from '../../komponenter/Boks/Boks';
+import Boks from '~/Boks';
 import { Refusjonsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { formatterPeriode } from '~/utils';

@@ -1,18 +1,8 @@
-import { BodyShort, Table, Label } from '@navikt/ds-react';
+import { Table, Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import SortingValg from './SortingValg';
 import BEMHelper from '../../../utils/bem';
-import { SortingOrder } from '~/types/refusjon';
-import { RefusjonStatus } from '~/types/status';
-import { Tiltak } from '~/types/tiltak';
-
-export interface Filter {
-    status: RefusjonStatus | undefined;
-    tiltakstype: Tiltak | undefined;
-    sorting: SortingOrder | undefined;
-    page: number | undefined;
-    size: number | undefined;
-}
+import { Filter, SortingOrder } from '~/types/filter';
 
 interface Props {
     filter: Filter;

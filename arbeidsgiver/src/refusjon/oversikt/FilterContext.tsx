@@ -2,9 +2,9 @@ import React, { FunctionComponent, PropsWithChildren, useContext, useEffect, use
 import { registrerMenyValg } from '../../utils/amplitude-utils';
 import { useSearchParams } from 'react-router-dom';
 import { LogReturn } from 'amplitude-js';
-import { Filter, SortingOrder } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
+import { Filter, SortingOrder } from '~/types/filter';
 
 type FilterContextType = { filter: Filter; oppdaterFilter: (nyttFilter: Partial<Filter>) => void };
 

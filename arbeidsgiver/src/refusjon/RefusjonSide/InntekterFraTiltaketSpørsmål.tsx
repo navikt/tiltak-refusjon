@@ -1,9 +1,9 @@
 import React, { ChangeEvent, Dispatch, FunctionComponent, SetStateAction, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { endreBruttolønn, useHentRefusjon } from '../../services/rest-service';
 import { sumInntekterOpptjentIPeriode } from '../../utils/inntekterUtiles';
-import { formatterPenger } from '../../utils/PengeUtils';
+import { formatterPenger } from '~/utils/PengeUtils';
 import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import { BodyShort, Heading, Label, Radio, RadioGroup, debounce } from '@navikt/ds-react';
 import BruttolønnUtbetaltInput from '@/refusjon/RefusjonSide/BruttolønnUtbetaltInput';

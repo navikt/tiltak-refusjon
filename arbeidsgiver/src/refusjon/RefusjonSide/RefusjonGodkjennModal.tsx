@@ -2,8 +2,8 @@ import React, { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction }
 import GodkjennModal from './GodkjennModal';
 import { BodyShort } from '@navikt/ds-react';
 
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { formatterPenger } from '../../utils/PengeUtils';
+import VerticalSpacer from '~/VerticalSpacer';
+import { formatterPenger } from '~/utils/PengeUtils';
 import { Refusjon } from '~/types/refusjon';
 import { formatterPeriode } from '~/utils';
 

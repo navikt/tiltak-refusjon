@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import { useInnloggetBruker } from '../../bruker/BrukerContext';
 import { useHentRefusjoner } from '../../services/rest-service';
 import { antallRefusjoner } from '../../utils/amplitude-utils';
-import { useFilter } from './FilterContext';
 import FinnerIngenRefusjoner from './FinnerIngenRefusjon/FinnerIngenRefusjoner';
 import { BrukerContextType } from '../../bruker/BrukerContextType';
 import useOppdaterPagedata from '../../bruker/bedriftsmenyRefusjon/useOppdaterPagedata';
@@ -14,6 +13,7 @@ import { Pagination } from '@navikt/ds-react';
 import './oversikt.less';
 import BEMHelper from '~/utils/bem';
 import LenkePanel from '~/LenkePanel/LenkePanel';
+import { useFilter } from './FilterContext';
 
 const cls = BEMHelper('oversikt');
 

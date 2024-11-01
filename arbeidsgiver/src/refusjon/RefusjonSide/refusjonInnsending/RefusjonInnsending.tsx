@@ -3,7 +3,7 @@ import { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useCont
 import { RefusjonContext } from '../../../RefusjonProvider';
 import LagreKnapp from '../../../komponenter/LagreKnapp';
 import Utregning from '../../../komponenter/Utregning';
-import VerticalSpacer from '../../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
 import SummeringBoks from '../SummeringBoks';
 import './refusjonInnsending.less';

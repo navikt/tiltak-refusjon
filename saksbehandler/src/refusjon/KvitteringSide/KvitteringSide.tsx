@@ -4,8 +4,6 @@ import { InnloggetBruker } from '../../bruker/BrukerContextType';
 import { useFeatureToggles } from '../../featureToggles/FeatureToggleProvider';
 import { Feature } from '../../featureToggles/features';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import HvitBoks from '../../komponenter/hvitboks/HvitBoks';
-
 import InformasjonFraAvtalen from '../RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraAMeldingenGammel from '../RefusjonSide/InntekterFraAmeldingenGammel';
@@ -17,13 +15,13 @@ import SummeringBoks from '../RefusjonSide/SummeringBoks';
 import SummeringBoksNullbeløp from '../RefusjonSide/SummeringBoksNullbeløp';
 import TidligereRefunderbarBeløpKvittering from '../RefusjonSide/TidligereRefunderbarBeløpKvittering';
 import Utregning from '../RefusjonSide/Utregning';
-
 import Statusmelding from './Statusmelding';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { storForbokstav } from '~/utils/stringUtils';
 import { statusTekst } from '~/types/messages';
 import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import Boks from '~/Boks';
 
 const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -48,7 +46,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker })
     const featureToggles = useFeatureToggles();
 
     return (
-        <HvitBoks>
+        <Boks variant="hvit">
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 {innloggetBruker.harKorreksjonTilgang &&
                     refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
@@ -125,7 +123,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker })
                     enhet={refusjonsgrunnlag.tilskuddsgrunnlag.enhet}
                 />
             )}
-        </HvitBoks>
+        </Boks>
     );
 };
 

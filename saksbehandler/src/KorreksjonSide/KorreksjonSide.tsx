@@ -1,7 +1,6 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '../komponenter/VerticalSpacer';
-import HvitBoks from '../komponenter/hvitboks/HvitBoks';
 import BekreftOppgjørKorreksjon from '../refusjon/RefusjonSide/BekreftOppgjørKorreksjon';
 import BekreftSlettKorreksjon from '../refusjon/RefusjonSide/BekreftSlettKorreksjon';
 import BekreftTilbakekrevKorreksjon from '../refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';
@@ -15,6 +14,7 @@ import OverstyrMinusbeløpOgFerietrekk from './OverstyrMinusbeløpOgFerietrekk';
 import TidligereRefunderbarBeløp from './TidligereRefunderbarBeløp';
 import { KorreksjonStatus } from '~/types/status';
 import { Korreksjon } from '~/types/refusjon';
+import Boks from '~/Boks';
 
 type Props = {
     korreksjon: Korreksjon;
@@ -35,7 +35,7 @@ const KorreksjonSide: FunctionComponent<Props> = ({ korreksjon }) => {
     };
 
     return (
-        <HvitBoks>
+        <Boks variant="hvit">
             <BekreftSlettKorreksjon />
 
             <VerticalSpacer rem={2} />
@@ -103,7 +103,7 @@ const KorreksjonSide: FunctionComponent<Props> = ({ korreksjon }) => {
                             )}
                     </>
                 )}
-        </HvitBoks>
+        </Boks>
     );
 };
 
