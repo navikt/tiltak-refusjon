@@ -13,7 +13,7 @@ import FeilSide from './FeilSide';
 import HenterInntekterBoks from '~/HenterInntekterBoks';
 import RefusjonSide from './RefusjonSide';
 import { useInnloggetBruker } from '../../bruker/BrukerContext';
-import { BrukerContextType } from '../../bruker/BrukerContextType';
+import { BrukerContextType } from '../../../../komponenter/src/types/BrukerContextType';
 import HendelsesLogg from '../Hendelseslogg/Hendelseslogg';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
@@ -119,7 +119,7 @@ const Komponent: FunctionComponent = () => {
                     </Fleks>
                     <VerticalSpacer rem={1} />
                     {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                        <KvitteringSideVTAO refusjon={refusjon} />
+                        <KvitteringSideVTAO refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
                     ) : (
                         <KvitteringSide refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
                     )}

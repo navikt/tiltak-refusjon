@@ -1,6 +1,6 @@
 import React, { CSSProperties, FunctionComponent, PropsWithChildren } from 'react';
 import { Modal, Heading } from '@navikt/ds-react';
-import LagreOgAvbrytKnapp from '../LagreOgAvbrytKnapp';
+import LagreOgAvbrytKnapp from '../../../saksbehandler/src/komponenter/LagreOgAvbrytKnapp';
 import './bekreftelseModal.less';
 import BEMHelper from '~/utils/bem';
 

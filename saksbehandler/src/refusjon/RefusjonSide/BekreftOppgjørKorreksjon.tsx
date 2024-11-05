@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
-import BekreftelseModal from '../../komponenter/bekreftelse-modal/BekreftelseModal';
+import BekreftelseModal from '../../../../komponenter/src/bekreftelse-modal/BekreftelseModal';
 import { fullførKorreksjonVedOppgjort } from '../../services/rest-service';
 import { BodyShort, Button } from '@navikt/ds-react';
 

@@ -2,15 +2,15 @@ import React, { FunctionComponent, Suspense } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useParams } from 'react-router';
 import { useHentKorreksjon } from '../services/rest-service';
-
 import VerticalSpacer from '../komponenter/VerticalSpacer';
 import KorreksjonSide from './KorreksjonSide';
-
 import TilbakeTilOversikt from '../komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import { Link } from 'react-router-dom';
 import KorreksjonKvitteringSide from '../KorreksjonKvitteringSide/KorreksjonKvitteringSide';
 import { korreksjonsgrunnTekst } from '~/types/messages';
 import { KorreksjonStatus } from '~/types/status';
+import KorreksjonSideVTAO from './KorreksjonSideVTAO';
+import KorreksjonKvitteringSideVTAO from '@/KorreksjonKvitteringSide/KorreksjonKvitteringSideVTAO';
 
 const Advarsler: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
@@ -41,13 +41,30 @@ const Komponent: FunctionComponent = () => {
 
     switch (korreksjon.status) {
         case KorreksjonStatus.UTKAST:
-            return <KorreksjonSide korreksjon={korreksjon} />;
+            return (
+                <>
+                    {korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
+                        <KorreksjonSideVTAO korreksjon={korreksjon} />
+                    ) : (
+                        <KorreksjonSide korreksjon={korreksjon} />
+                    )}
+                </>
+            );
+            return;
         case KorreksjonStatus.TILBAKEKREVING:
         case KorreksjonStatus.OPPGJORT:
         case KorreksjonStatus.TILLEGSUTBETALING:
         case KorreksjonStatus.TILLEGGSUTBETALING_UTBETALT:
         case KorreksjonStatus.TILLEGGSUTBETALING_FEILET:
-            return <KorreksjonKvitteringSide korreksjon={korreksjon} />;
+            return (
+                <>
+                    {korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
+                        <KorreksjonKvitteringSideVTAO korreksjon={korreksjon} />
+                    ) : (
+                        <KorreksjonKvitteringSide korreksjon={korreksjon} />
+                    )}
+                </>
+            );
     }
 };
 

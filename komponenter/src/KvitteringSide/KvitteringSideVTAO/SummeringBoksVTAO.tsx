@@ -5,12 +5,12 @@ import { formatterPeriode } from '../../utils/datoUtils';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import Boks from '~/Boks';
 import VerticalSpacer from '~/VerticalSpacer';
-import { RefusjonStatus } from '~/types/status';
+import { KorreksjonStatus, RefusjonStatus } from '~/types/status';
 import { formatterPenger } from '~/utils/PengeUtils';
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
-    status: RefusjonStatus;
+    status: RefusjonStatus | KorreksjonStatus;
     erForKorreksjon: boolean;
 };
 

@@ -2,7 +2,6 @@ import { formatterPenger } from '@/utils/PengeUtils';
 import { Alert, BodyShort, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '../komponenter/VerticalSpacer';
-
 import InformasjonFraAvtalen from '../refusjon/RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraAMeldingenGammel from '../refusjon/RefusjonSide/InntekterFraAmeldingenGammel';
@@ -10,7 +9,6 @@ import HarTattStillingTilAlleInntektsLinjerNy from '../refusjon/RefusjonSide/Har
 import HarTattStillingTilAlleInntektsLinjerGammel from '../refusjon/RefusjonSide/HarTattStillingTilAlleInntektsLinjerGammel';
 import TidligereRefunderbarBeløpKvittering from '../refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
 import Utregning from '../refusjon/RefusjonSide/Utregning';
-
 import KorreksjonSummeringBoks from './KorreksjonSummeringsBoks';
 import { Korreksjon } from '~/types/refusjon';
 import { storForbokstav } from '~/utils/stringUtils';
@@ -39,7 +37,6 @@ const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
                 bedriftKontonummerInnhentetTidspunkt={korreksjon.refusjonsgrunnlag.bedriftKontonummerInnhentetTidspunkt}
             />
             <VerticalSpacer rem={2} />
-
             {korreksjon.harTattStillingTilAlleInntektslinjer ? (
                 <>
                     <InntekterFraAMeldingen
@@ -87,7 +84,7 @@ const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
                 </Alert>
             )}
             <VerticalSpacer rem={2} />
-            <KorreksjonSummeringBoks refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} korreksjon={korreksjon} />
+            <KorreksjonSummeringBoks refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
         </Boks>
     );
 };

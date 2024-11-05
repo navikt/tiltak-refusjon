@@ -6,11 +6,12 @@ import './OversiktSide.less';
 import Banner from '../oversikt/Banner';
 import BannerLaster from '../oversikt/BannerLaster';
 import BEMHelper from '~/utils/bem';
-import { BrukerContextType } from '@/bruker/BrukerContextType';
+
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { useFilter } from '../oversikt/FilterContext';
 import { useFeatureToggles } from '../../featureToggles/FeatureToggleProvider';
 import { Feature } from '@/featureToggles/features';
+import { BrukerContextType } from '~/types/BrukerContextType';
 
 const cls = BEMHelper('OversiktSide');
 

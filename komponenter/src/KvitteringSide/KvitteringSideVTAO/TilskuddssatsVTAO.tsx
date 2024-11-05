@@ -1,19 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import { Heading, TextField } from '@navikt/ds-react';
 import BEMHelper from '~/utils/bem';
-import { Refusjon } from '~/types/refusjon';
+import { Refusjon, Tilskuddsgrunnlag } from '~/types/refusjon';
 import { formatterPeriode } from '~/utils';
 import VerticalSpacer from '~/VerticalSpacer';
 import Boks from '~/Boks';
 import { formatterPenger } from '~/utils/PengeUtils';
 
 interface Props {
-    refusjon: Refusjon;
+    tilskuddsgrunnlag: Tilskuddsgrunnlag;
 }
 
-const TilskuddssatsVTAO: FunctionComponent<Props> = ({ refusjon }) => {
+const TilskuddssatsVTAO: FunctionComponent<Props> = ({ tilskuddsgrunnlag }) => {
     const cls = BEMHelper('refusjonside');
-    const { tilskuddsgrunnlag } = refusjon.refusjonsgrunnlag;
 
     return (
         <Boks variant="grønn">

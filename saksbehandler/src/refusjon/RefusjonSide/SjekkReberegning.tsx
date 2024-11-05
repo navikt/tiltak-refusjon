@@ -3,7 +3,7 @@ import { FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
 import LagreKnapp from '../../komponenter/LagreKnapp';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import BekreftelseModal from '../../komponenter/bekreftelse-modal/BekreftelseModal';
+import BekreftelseModal from '../../../../komponenter/src/bekreftelse-modal/BekreftelseModal';
 import { sjekkReberegning, useHentRefusjon } from '../../services/rest-service';
 
 import Utregning from './Utregning';

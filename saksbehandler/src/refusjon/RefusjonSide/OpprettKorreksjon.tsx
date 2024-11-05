@@ -1,11 +1,9 @@
 import React, { ChangeEvent, FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import BekreftelseModal from '../../komponenter/bekreftelse-modal/BekreftelseModal';
+import BekreftelseModal from '../../../../komponenter/src/bekreftelse-modal/BekreftelseModal';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-
 import { opprettKorreksjonsutkast } from '../../services/rest-service';
-
 import { Button, BodyShort, ErrorMessage, Checkbox, CheckboxGroup, TextField, Textarea } from '@navikt/ds-react';
 import { Korreksjonsgrunn } from '~/types/refusjon';
 import { korreksjonsgrunnTekst } from '~/types/messages';

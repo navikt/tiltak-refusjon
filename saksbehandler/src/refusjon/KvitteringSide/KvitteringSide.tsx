@@ -1,6 +1,6 @@
 import { Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent, ReactElement } from 'react';
-import { InnloggetBruker } from '../../bruker/BrukerContextType';
+import { InnloggetBruker } from '../../../../komponenter/src/types/BrukerContextType';
 import { useFeatureToggles } from '../../featureToggles/FeatureToggleProvider';
 import { Feature } from '../../featureToggles/features';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
