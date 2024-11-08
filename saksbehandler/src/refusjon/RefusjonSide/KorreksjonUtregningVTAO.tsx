@@ -8,7 +8,9 @@ import './Utregning.less';
 import { Tilskuddsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 
-const KorreksjonUtregningVTAO: FunctionComponent<{tilskuddsgrunnlag: Tilskuddsgrunnlag}> = ({tilskuddsgrunnlag}) => {
+const KorreksjonUtregningVTAO: FunctionComponent<{ tilskuddsgrunnlag: Tilskuddsgrunnlag }> = ({
+    tilskuddsgrunnlag,
+}) => {
     const cls = BEMHelper('utregning');
 
     return (
@@ -20,23 +22,20 @@ const KorreksjonUtregningVTAO: FunctionComponent<{tilskuddsgrunnlag: Tilskuddsgr
             <Table zebraStripes>
                 <Table.Body>
                     <Table.Row shadeOnHover={false}>
-                        <Table.DataCell>
-                            Refusjonsgrunnlag
-                        </Table.DataCell >
-                        <Table.DataCell style={{width:'1rem'}}></Table.DataCell>
-                        <Table.DataCell align='right'style={{width:'7rem'}}>
-                        {formatterPenger(Math.abs(tilskuddsgrunnlag.tilskuddsbeløp))}
+                        <Table.DataCell>Refusjonsgrunnlag</Table.DataCell>
+                        <Table.DataCell style={{ width: '1rem' }}></Table.DataCell>
+                        <Table.DataCell align="right" style={{ width: '7rem' }}>
+                            {formatterPenger(Math.abs(tilskuddsgrunnlag.tilskuddsbeløp))}
                         </Table.DataCell>
                     </Table.Row>
                     <Table.Row shadeOnHover={false}>
-                        <Table.DataCell>
-                            Refusjonsbeløp til utbetaling
+                        <Table.DataCell>Refusjonsbeløp til utbetaling</Table.DataCell>
+                        <Table.DataCell style={{ width: '1rem' }}>
+                            <ErlikTegn height={'0.80rem'} width={'0.80rem'} />{' '}
                         </Table.DataCell>
-                        <Table.DataCell style={{width:'1rem'}}>
-                            <ErlikTegn height={'0.80rem'} width={'0.80rem'}/>                            </Table.DataCell>
-                        <Table.DataCell align='right' style={{width:'7rem'}}>
-                            <MinusTegn height={'0.80rem'} width={'0.80rem'}/>
-                                {formatterPenger(Math.abs(tilskuddsgrunnlag.tilskuddsbeløp))}
+                        <Table.DataCell align="right" style={{ width: '7rem' }}>
+                            <MinusTegn height={'0.80rem'} width={'0.80rem'} />
+                            {formatterPenger(Math.abs(tilskuddsgrunnlag.tilskuddsbeløp))}
                         </Table.DataCell>
                     </Table.Row>
                 </Table.Body>

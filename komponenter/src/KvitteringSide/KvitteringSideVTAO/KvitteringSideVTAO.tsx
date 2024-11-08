@@ -53,11 +53,9 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                     {innloggetBruker.harKorreksjonTilgang &&
                         refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
                         !refusjon.korreksjonId && <OpprettKorreksjonVTAOKnapp setFeilmelding={setFeilmelding} />}
-                    <div style={{ marginBottom: '10px', float: 'right' }}>
-                        {etikettForRefusjonStatus(refusjon)}
-                    </div>
+                    <div style={{ marginBottom: '10px', float: 'right' }}>{etikettForRefusjonStatus(refusjon)}</div>
                 </div>
-       
+
                 <VerticalSpacer rem={3} />
                 <Heading level="2" size="large">
                     Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)

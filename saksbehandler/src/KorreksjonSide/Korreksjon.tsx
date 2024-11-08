@@ -44,7 +44,7 @@ const Komponent: FunctionComponent = () => {
             return (
                 <>
                     {korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                        <KorreksjonSideVTAO refusjonsgrunnlag={korreksjon.refusjonsgrunnlag}/>
+                        <KorreksjonSideVTAO refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
                     ) : (
                         <KorreksjonSide korreksjon={korreksjon} />
                     )}

@@ -2,7 +2,7 @@ import { BodyShort, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StatusTekst from '~/StatusTekst';
-import { tiltakstypeTekst } from '~/types/messages';
+import { tiltakstypeTekstKort } from '~/types/messages';
 import { Refusjon } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
 import BEMHelper from '~/utils/bem';
@@ -17,13 +17,12 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
     const navigate = useNavigate();
 
     const navigerTilRefusjonEllerKorreksjon = (refusjon: Refusjon) => {
-        if(refusjon.korreksjonId){
+        if (refusjon.korreksjonId) {
             navigate({
                 pathname: `/korreksjon/${refusjon.korreksjonId}`,
                 search: window.location.search,
             });
-        }
-        else{
+        } else {
             navigate({
                 pathname: `/refusjon/${refusjon.id}`,
                 search: window.location.search,
@@ -48,7 +47,7 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                             aria-labelledby={cls.element('deltaker')}
                         >
                             {kunStorForbokstav(
-                                tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
+                                tiltakstypeTekstKort[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
                             )}
                         </BodyShort>
                     </Table.DataCell>

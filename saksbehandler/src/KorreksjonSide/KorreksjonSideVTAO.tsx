@@ -13,8 +13,7 @@ type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
 };
 
-const KorreksjonSideVTAO: FunctionComponent<Props> = ({ refusjonsgrunnlag }) => {  
-
+const KorreksjonSideVTAO: FunctionComponent<Props> = ({ refusjonsgrunnlag }) => {
     const { bedriftKontonummer, tilskuddsgrunnlag } = refusjonsgrunnlag;
 
     return (
@@ -39,9 +38,7 @@ const KorreksjonSideVTAO: FunctionComponent<Props> = ({ refusjonsgrunnlag }) => 
             <VerticalSpacer rem={2} />
             <TilskuddssatsVTAO tilskuddsgrunnlag={tilskuddsgrunnlag} />
             <VerticalSpacer rem={1} />
-            <KorreksjonUtregningVTAO
-                tilskuddsgrunnlag={tilskuddsgrunnlag}
-            />
+            <KorreksjonUtregningVTAO tilskuddsgrunnlag={tilskuddsgrunnlag} />
             <VerticalSpacer rem={1} />
             <BekreftTilbakekrevKorreksjon />
         </Boks>

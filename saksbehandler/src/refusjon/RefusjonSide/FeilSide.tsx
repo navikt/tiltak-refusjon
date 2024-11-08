@@ -25,7 +25,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
             </Alert>
             <VerticalSpacer rem={2} />
             <Heading size="large">
-                Refusjon av {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
+                Refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
             </Heading>
             <VerticalSpacer rem={1} />
             <InformasjonFraAvtalen

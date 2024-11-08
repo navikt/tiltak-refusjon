@@ -15,7 +15,6 @@ type Props = {
 };
 
 const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
-
     return (
         <Boks variant="hvit">
             <VerticalSpacer rem={2} />

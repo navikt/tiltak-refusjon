@@ -7,6 +7,11 @@ export const tiltakstypeTekst: { [key in Tiltak]: string } = {
     VARIG_LONNSTILSKUDD: 'varig lønnstilskudd',
     MENTOR: 'mentor',
     SOMMERJOBB: 'sommerjobb',
+    VTAO: 'varig tilrettelagt arbeid i ordinær virksomhet',
+};
+
+export const tiltakstypeTekstKort: { [key in Tiltak]: string } = {
+    ...tiltakstypeTekst,
     VTAO: 'VTA-O',
 };
 
