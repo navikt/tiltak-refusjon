@@ -56,7 +56,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon }) => {
         <Boks variant="hvit">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading size="large" role="heading">
-                    Kvittering for refusjon
+                    Refusjon for {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
                 </Heading>
                 {etikettForRefusjonStatus(refusjon)}
             </div>

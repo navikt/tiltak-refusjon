@@ -2,45 +2,28 @@ import { BodyShort, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '../komponenter/VerticalSpacer';
 import BekreftSlettKorreksjon from '../refusjon/RefusjonSide/BekreftSlettKorreksjon';
-import { Korreksjon, Refusjon } from '~/types/refusjon';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
 import Boks from '~/Boks';
 import InformasjonFraAvtalenVTAO from '~/KvitteringSide/KvitteringSideVTAO/InformasjonFraAvtaleVTAO';
 import TilskuddssatsVTAO from '~/KvitteringSide/KvitteringSideVTAO/TilskuddssatsVTAO';
-import KorreksjonUtregningVTAO from '@/refusjon/RefusjonSide/KorreksjonUtregningVTAO';
 import BekreftTilbakekrevKorreksjon from '@/refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';
+import KorreksjonUtregningVTAO from '@/refusjon/RefusjonSide/KorreksjonUtregningVTAO';
 
 type Props = {
-    korreksjon: Korreksjon;
+    refusjonsgrunnlag: Refusjonsgrunnlag;
 };
 
-const KorreksjonSideVTAO: FunctionComponent<Props> = ({ korreksjon }) => {
-    /*
-    const korreksjonstype = (): KorreksjonStatus | null => {
-        if (!korreksjon.refusjonsgrunnlag.beregning) {
-            return null;
-        }
-        if (korreksjon.refusjonsgrunnlag.beregning.refusjonsbeløp > 0) {
-            return KorreksjonStatus.TILLEGSUTBETALING;
-        } else if (korreksjon.refusjonsgrunnlag.beregning.refusjonsbeløp < 0) {
-            return KorreksjonStatus.TILBAKEKREVING;
-        } else {
-            return KorreksjonStatus.OPPGJORT;
-        }
-    };
-    */
+const KorreksjonSideVTAO: FunctionComponent<Props> = ({ refusjonsgrunnlag }) => {  
+
+    const { bedriftKontonummer, tilskuddsgrunnlag } = refusjonsgrunnlag;
 
     return (
         <Boks variant="hvit">
             <BekreftSlettKorreksjon />
-
             <VerticalSpacer rem={2} />
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Heading size="large" role="heading">
-                    Korreksjonsutkast
-                </Heading>
-            </div>
-
+            <Heading size="large" role="heading">
+                Korreksjonsutkast
+            </Heading>
             <VerticalSpacer rem={1} />
             <BodyShort size="small">
                 Dette er en korreksjon av tidligere utbetalt refusjon. Det beregnes her et foreløpig oppgjør fratrukket
@@ -49,22 +32,15 @@ const KorreksjonSideVTAO: FunctionComponent<Props> = ({ korreksjon }) => {
             </BodyShort>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalenVTAO
-                tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                bedriftKontonummer={korreksjon.refusjonsgrunnlag.bedriftKontonummer}
-                åpnetFørsteGang={'2021-01-01'}
+                tilskuddsgrunnlag={tilskuddsgrunnlag}
+                bedriftKontonummer={bedriftKontonummer}
+                åpnetFørsteGang={'Trengs ikke på korreksjon'}
             />
             <VerticalSpacer rem={2} />
-            <TilskuddssatsVTAO tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
+            <TilskuddssatsVTAO tilskuddsgrunnlag={tilskuddsgrunnlag} />
             <VerticalSpacer rem={1} />
             <KorreksjonUtregningVTAO
-                refusjonsnummer={{
-                    avtalenr: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                    løpenummer: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                }}
-                erKorreksjon={true}
-                beregning={korreksjon.refusjonsgrunnlag.beregning}
-                tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
+                tilskuddsgrunnlag={tilskuddsgrunnlag}
             />
             <VerticalSpacer rem={1} />
             <BekreftTilbakekrevKorreksjon />

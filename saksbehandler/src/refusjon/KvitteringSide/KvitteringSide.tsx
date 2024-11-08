@@ -15,7 +15,7 @@ import SummeringBoks from '../RefusjonSide/SummeringBoks';
 import SummeringBoksNullbeløp from '../RefusjonSide/SummeringBoksNullbeløp';
 import TidligereRefunderbarBeløpKvittering from '../RefusjonSide/TidligereRefunderbarBeløpKvittering';
 import Utregning from '../RefusjonSide/Utregning';
-import Statusmelding from './Statusmelding';
+import Statusmelding from '~/KvitteringSide/Statusmelding';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { storForbokstav } from '~/utils/stringUtils';
@@ -56,7 +56,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker })
             <VerticalSpacer rem={2} />
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading size="large" role="heading">
-                    Kvittering for refusjon
+                    Refusjon for {storForbokstav(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype)}
                 </Heading>
                 {etikettForRefusjonStatus(refusjon)}
             </div>

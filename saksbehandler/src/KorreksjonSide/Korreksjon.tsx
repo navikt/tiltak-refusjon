@@ -1,7 +1,7 @@
 import React, { FunctionComponent, Suspense } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useParams } from 'react-router';
-import { useHentKorreksjon } from '../services/rest-service';
+import { useHentKorreksjon, useHentRefusjon } from '../services/rest-service';
 import VerticalSpacer from '../komponenter/VerticalSpacer';
 import KorreksjonSide from './KorreksjonSide';
 import TilbakeTilOversikt from '../komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
@@ -44,7 +44,7 @@ const Komponent: FunctionComponent = () => {
             return (
                 <>
                     {korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                        <KorreksjonSideVTAO korreksjon={korreksjon} />
+                        <KorreksjonSideVTAO refusjonsgrunnlag={korreksjon.refusjonsgrunnlag}/>
                     ) : (
                         <KorreksjonSide korreksjon={korreksjon} />
                     )}

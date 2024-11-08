@@ -12,6 +12,7 @@ import TilskuddssatsVTAO from './TilskuddssatsVTAO';
 import SummeringBoksVTAO from './SummeringBoksVTAO';
 import { InnloggetBruker } from '~/types/BrukerContextType';
 import OpprettKorreksjonVTAOKnapp from '../../../../saksbehandler/src/komponenter/OpprettKorreksjonVTAOKnapp';
+import StatusmeldingVTAO from './StatusmeldingVTAO';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -52,22 +53,23 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                     {innloggetBruker.harKorreksjonTilgang &&
                         refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
                         !refusjon.korreksjonId && <OpprettKorreksjonVTAOKnapp setFeilmelding={setFeilmelding} />}
+                    <div style={{ marginBottom: '10px', float: 'right' }}>
+                        {etikettForRefusjonStatus(refusjon)}
+                    </div>
                 </div>
-                <Tag style={{ float: 'right' }} variant={'info'}>
-                    Status: For tidlig
-                </Tag>
+       
                 <VerticalSpacer rem={3} />
                 <Heading level="2" size="large">
                     Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
                 </Heading>
-                <VerticalSpacer rem={1} />
+                <VerticalSpacer rem={2} />
                 <BodyLong>
                     Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Tilskuddssatsen er 6 808
                     kroner per måned. Satsen settes årlig av departementet og avtale- og refusjonsløsningen vil
                     automatisk oppdateres når det kommer nye satser.
                 </BodyLong>
+                <StatusmeldingVTAO status={refusjon.status} />
                 <VerticalSpacer rem={1} />
-
                 <InformasjonFraAvtalenVTAO
                     tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                     bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}

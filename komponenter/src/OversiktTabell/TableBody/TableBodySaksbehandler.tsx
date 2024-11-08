@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import StatusTekst from '~/StatusTekst';
 import { tiltakstypeTekst } from '~/types/messages';
 import { Refusjon } from '~/types/refusjon';
-
 import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
 import BEMHelper from '~/utils/bem';
 import { kunStorForbokstav } from '~/utils/stringUtils';
@@ -17,6 +16,21 @@ const cls = BEMHelper('oversiktTabell');
 const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
     const navigate = useNavigate();
 
+    const navigerTilRefusjonEllerKorreksjon = (refusjon: Refusjon) => {
+        if(refusjon.korreksjonId){
+            navigate({
+                pathname: `/korreksjon/${refusjon.korreksjonId}`,
+                search: window.location.search,
+            });
+        }
+        else{
+            navigate({
+                pathname: `/refusjon/${refusjon.id}`,
+                search: window.location.search,
+            });
+        }
+    };
+
     return (
         <Table.Body>
             {props.refusjoner.map((refusjon) => (
@@ -24,10 +38,7 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                     key={refusjon.id}
                     onClick={(event) => {
                         event.preventDefault();
-                        navigate({
-                            pathname: `/refusjon/${refusjon.id}`,
-                            search: window.location.search,
-                        });
+                        navigerTilRefusjonEllerKorreksjon(refusjon);
                     }}
                 >
                     <Table.DataCell>

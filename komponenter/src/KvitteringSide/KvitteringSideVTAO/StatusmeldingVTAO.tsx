@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+
 import { Alert, BodyShort } from '@navikt/ds-react';
 import { RefusjonStatus } from '~/types/status';
 
@@ -11,8 +12,8 @@ const Statusmelding: FunctionComponent<Props> = (props) => {
         case RefusjonStatus.UTBETALING_FEILET:
             return (
                 <Alert variant="warning" size="small">
-                    Vi har problemer med utbetalingen. Arbeidgiver har fått beskjed om å ta kontakt med veileder. Meld
-                    inn problemet som porten-sak. Noter refusjonsnummer.
+                    Vi har problemer med utbetalingen. Sjekk at kontonummeret oppgitt i avtalen er i bruk. Ta kontakt
+                    med veileder for å få hjelp.
                 </Alert>
             );
         case RefusjonStatus.UTBETALT:
