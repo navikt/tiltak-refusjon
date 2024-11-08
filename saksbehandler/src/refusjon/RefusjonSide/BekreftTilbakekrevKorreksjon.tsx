@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Alert, BodyShort, Button } from '@navikt/ds-react';
 import { useParams } from 'react-router';
-import BekreftelseModal from '../../../../komponenter/src/bekreftelse-modal/BekreftelseModal';
+import BekreftelseModal from '~/bekreftelse-modal/BekreftelseModal';
 import { fullførKorreksjonVedTilbakekreving } from '../../services/rest-service';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
 

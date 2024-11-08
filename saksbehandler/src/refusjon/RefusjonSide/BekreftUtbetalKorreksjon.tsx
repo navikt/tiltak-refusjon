@@ -2,7 +2,7 @@ import { BodyShort, Button } from '@navikt/ds-react';
 import { FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import BekreftelseModal from '../../../../komponenter/src/bekreftelse-modal/BekreftelseModal';
+import BekreftelseModal from '~/bekreftelse-modal/BekreftelseModal';
 import { useHentKorreksjon, utbetalKorreksjon } from '../../services/rest-service';
 
 const BekreftUtbetalKorreksjon: FunctionComponent = () => {

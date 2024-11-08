@@ -1,6 +1,6 @@
 import axios from 'axios';
 import useSWR, { mutate } from 'swr';
-import { InnloggetBruker } from '../../../komponenter/src/types/BrukerContextType';
+import { InnloggetBruker } from '~/types/BrukerContextType';
 import { Feature } from '../featureToggles/features';
 import { Filter } from '~/types/filter';
 

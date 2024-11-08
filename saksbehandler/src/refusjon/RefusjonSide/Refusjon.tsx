@@ -13,7 +13,7 @@ import FeilSide from './FeilSide';
 import HenterInntekterBoks from '~/HenterInntekterBoks';
 import RefusjonSide from './RefusjonSide';
 import { useInnloggetBruker } from '../../bruker/BrukerContext';
-import { BrukerContextType } from '../../../../komponenter/src/types/BrukerContextType';
+import { BrukerContextType } from '~/types/BrukerContextType';
 import HendelsesLogg from '../Hendelseslogg/Hendelseslogg';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
