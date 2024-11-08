@@ -1,5 +1,5 @@
 import { BodyLong, ErrorMessage, Heading, Tag } from '@navikt/ds-react';
-import { FunctionComponent, ReactElement, useState } from 'react';
+import React, { FunctionComponent, ReactElement, useState } from 'react';
 import Boks from '~/Boks/Boks';
 import { statusTekst, tiltakstypeTekst } from '~/types/messages';
 import { Refusjon } from '~/types/refusjon';
@@ -11,7 +11,7 @@ import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
 import TilskuddssatsVTAO from './TilskuddssatsVTAO';
 import SummeringBoksVTAO from './SummeringBoksVTAO';
 import { InnloggetBruker } from '~/types/BrukerContextType';
-import OpprettKorreksjonVTAOKnapp from '../../../../saksbehandler/src/komponenter/OpprettKorreksjonVTAOKnapp';
+import OpprettKorreksjonVTAOKnapp from '../../Knapp/OpprettKorreksjonVTAOKnapp';
 import StatusmeldingVTAO from './StatusmeldingVTAO';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
@@ -38,12 +38,13 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     }
 };
 
-type Props = {
+interface Props {
     refusjon: Refusjon;
     innloggetBruker: InnloggetBruker;
+    klikkOpprettKorreksjon?: () => Promise<void>;
 };
 
-const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruker }) => {
+const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruker, klikkOpprettKorreksjon }) => {
     const [feilmelding, setFeilmelding] = useState<string>('');
     return (
         <>
@@ -52,7 +53,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     {innloggetBruker.harKorreksjonTilgang &&
                         refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
-                        !refusjon.korreksjonId && <OpprettKorreksjonVTAOKnapp setFeilmelding={setFeilmelding} />}
+                        !refusjon.korreksjonId && <OpprettKorreksjonVTAOKnapp setFeilmelding={setFeilmelding} klikkOpprettKorreksjon={klikkOpprettKorreksjon}  />}
                     <div style={{ marginBottom: '10px', float: 'right' }}>{etikettForRefusjonStatus(refusjon)}</div>
                 </div>
 
@@ -62,7 +63,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                 </Heading>
                 <VerticalSpacer rem={2} />
                 <BodyLong>
-                    Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Tilskuddssatsen er 6 808
+                    Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Tilskuddssatsen er 6808
                     kroner per måned. Satsen settes årlig av departementet og avtale- og refusjonsløsningen vil
                     automatisk oppdateres når det kommer nye satser.
                 </BodyLong>
@@ -77,9 +78,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                 <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
                 <VerticalSpacer rem={1} />
                 <SummeringBoksVTAO
-                    erForKorreksjon={false}
                     refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
-                    status={refusjon.status}
                 />
             </Boks>
         </>

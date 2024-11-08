@@ -1,14 +1,9 @@
 import React, { FunctionComponent } from 'react';
-
 import { Alert, BodyShort } from '@navikt/ds-react';
 import { RefusjonStatus } from '~/types/status';
 
-interface Props {
-    status: RefusjonStatus;
-}
-
-const Statusmelding: FunctionComponent<Props> = (props) => {
-    switch (props.status) {
+const Statusmelding: FunctionComponent<{status: RefusjonStatus}> = ({status}) => {
+    switch (status) {
         case RefusjonStatus.UTBETALING_FEILET:
             return (
                 <Alert variant="warning" size="small">

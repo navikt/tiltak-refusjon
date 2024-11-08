@@ -1,11 +1,11 @@
 import React, { FunctionComponent, Suspense } from 'react';
 import { Alert } from '@navikt/ds-react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import TilbakeTilOversikt from '../../komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { useHentRefusjon } from '../../services/rest-service';
+import { opprettKorreksjonsutkast, useHentRefusjon } from '../../services/rest-service';
 import ForlengFrist from '../ForlengFrist/ForlengFrist';
 import KvitteringSide from '../KvitteringSide/KvitteringSide';
 import MerkForUnntakOmInntekterToMånederFrem from '../MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
@@ -18,6 +18,7 @@ import HendelsesLogg from '../Hendelseslogg/Hendelseslogg';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
+import { Korreksjonsgrunn } from '~/types/refusjon';
 
 const Fleks = styled.div`
     display: flex;
@@ -50,6 +51,17 @@ const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
     const refusjon = useHentRefusjon(refusjonId!);
     const brukerContext: BrukerContextType = useInnloggetBruker();
+    const navigate = useNavigate();
+
+    const klikkOpprettKorreksjon = async () => {
+        const oppdatertRefusjon = await opprettKorreksjonsutkast(
+            refusjonId!,
+            [Korreksjonsgrunn.DELTAKER_HAR_IKKE_VÆRT_TILSTEDE_I_PERIODEN],
+            undefined,
+            undefined
+        )
+        navigate('/korreksjon/' + oppdatertRefusjon.korreksjonId);
+    } 
 
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
@@ -119,7 +131,7 @@ const Komponent: FunctionComponent = () => {
                     </Fleks>
                     <VerticalSpacer rem={1} />
                     {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                        <KvitteringSideVTAO refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
+                        <KvitteringSideVTAO refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} klikkOpprettKorreksjon={klikkOpprettKorreksjon}/>
                     ) : (
                         <KvitteringSide refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
                     )}

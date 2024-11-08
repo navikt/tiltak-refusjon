@@ -5,16 +5,12 @@ import { formatterPeriode } from '../../utils/datoUtils';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import Boks from '~/Boks';
 import VerticalSpacer from '~/VerticalSpacer';
-import { KorreksjonStatus, RefusjonStatus } from '~/types/status';
 import { formatterPenger } from '~/utils/PengeUtils';
 
-type Props = {
-    refusjonsgrunnlag: Refusjonsgrunnlag;
-    status: RefusjonStatus | KorreksjonStatus;
-    erForKorreksjon: boolean;
-};
+const SummeringBoksVTAO: FunctionComponent<{refusjonsgrunnlag: Refusjonsgrunnlag}> = ({refusjonsgrunnlag}) => {
 
-const SummeringBoksVTAO: FunctionComponent<Props> = (props) => {
+    const { bedriftKontonummer, tilskuddsgrunnlag } = refusjonsgrunnlag;
+
     return (
         <Boks variant="blå">
             <div style={{ margin: '0.5rem 1rem 0 0' }}>
@@ -24,12 +20,12 @@ const SummeringBoksVTAO: FunctionComponent<Props> = (props) => {
                 <Label>Dere får utbetalt</Label>
                 <VerticalSpacer rem={0.5} />
                 <BodyShort size="small">
-                    <b>{formatterPenger(props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp || 0)}</b> for perioden{' '}
+                    <b>{formatterPenger(tilskuddsgrunnlag.tilskuddsbeløp || 0)}</b> for perioden{' '}
                     {formatterPeriode(
-                        props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
-                        props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
+                        tilskuddsgrunnlag.tilskuddFom,
+                        tilskuddsgrunnlag.tilskuddTom
                     )}{' '}
-                    til kontonummer {props.refusjonsgrunnlag.bedriftKontonummer}
+                    til kontonummer {bedriftKontonummer}
                 </BodyShort>
                 <VerticalSpacer rem={1} />
                 <BodyShort size="small">

@@ -5,7 +5,7 @@ import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import { storForbokstav } from '~/utils/stringUtils';
 import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
-import { statusTekst } from '~/types/messages';
+import { statusTekst, tiltakstypeTekst } from '~/types/messages';
 import EksternLenke from '~/EksternLenke/EksternLenke';
 
 interface Properties {
@@ -18,7 +18,7 @@ const RefusjonIngress: FunctionComponent<Properties> = ({ refusjon }: PropsWithC
         <>
             <div className={cls.element('ingress')}>
                 <Heading level="1" size="large" role="heading">
-                    Beregning av refusjon for {storForbokstav(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype)}
+                    Beregning av refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
                 </Heading>
                 <Tag variant="info" size="small">
                     {storForbokstav(statusTekst[refusjon.status])}{' '}
