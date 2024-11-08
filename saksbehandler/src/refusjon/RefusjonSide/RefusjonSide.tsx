@@ -13,6 +13,7 @@ import InntekterFraTiltaketSvar from './HarTattStillingTilAlleInntektsLinjerNy';
 import StatusTekst from '~/StatusTekst';
 import EksternLenke from '~/EksternLenke/EksternLenke';
 import Boks from '~/Boks';
+import { tiltakstypeTekst } from '~/types/messages';
 
 const RefusjonSide: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
@@ -32,7 +33,7 @@ const RefusjonSide: FunctionComponent = () => {
             <VerticalSpacer rem={2} />
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Heading size="large">Beregning av refusjon</Heading>
+                <Heading size="large">Beregning av refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}</Heading>
                 <StatusTekst
                     status={refusjon.status}
                     tiltakstype={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}

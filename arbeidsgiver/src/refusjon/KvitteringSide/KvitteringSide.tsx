@@ -18,7 +18,7 @@ import Boks from '~/Boks';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { storForbokstav } from '~/utils/stringUtils';
-import { statusTekst } from '~/types/messages';
+import { statusTekst, tiltakstypeTekst } from '~/types/messages';
 import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
@@ -56,7 +56,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon }) => {
         <Boks variant="hvit">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading size="large" role="heading">
-                    Refusjon for {storForbokstav(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype)}
+                    Refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
                 </Heading>
                 {etikettForRefusjonStatus(refusjon)}
             </div>

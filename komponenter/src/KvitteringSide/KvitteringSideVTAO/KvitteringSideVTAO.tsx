@@ -1,7 +1,7 @@
 import { BodyLong, ErrorMessage, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent, ReactElement, useState } from 'react';
 import Boks from '~/Boks/Boks';
-import { statusTekst } from '~/types/messages';
+import { statusTekst, tiltakstypeTekst } from '~/types/messages';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
@@ -58,7 +58,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
 
                 <VerticalSpacer rem={3} />
                 <Heading level="2" size="large">
-                    Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
+                    Refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
                 </Heading>
                 <VerticalSpacer rem={2} />
                 <BodyLong>

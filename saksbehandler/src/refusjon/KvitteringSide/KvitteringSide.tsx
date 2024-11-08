@@ -19,7 +19,7 @@ import Statusmelding from '~/KvitteringSide/Statusmelding';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { storForbokstav } from '~/utils/stringUtils';
-import { statusTekst } from '~/types/messages';
+import { statusTekst, tiltakstypeTekst } from '~/types/messages';
 import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import Boks from '~/Boks';
 
@@ -56,7 +56,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker })
             <VerticalSpacer rem={2} />
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading size="large" role="heading">
-                    Refusjon for {storForbokstav(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype)}
+                    Refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
                 </Heading>
                 {etikettForRefusjonStatus(refusjon)}
             </div>
