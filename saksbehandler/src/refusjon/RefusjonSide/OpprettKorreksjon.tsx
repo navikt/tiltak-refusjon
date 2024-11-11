@@ -7,6 +7,7 @@ import { opprettKorreksjonsutkast } from '../../services/rest-service';
 import { Button, BodyShort, ErrorMessage, Checkbox, CheckboxGroup, TextField, Textarea } from '@navikt/ds-react';
 import { Korreksjonsgrunn } from '~/types/refusjon';
 import { korreksjonsgrunnTekst } from '~/types/messages';
+import LagreOgAvbrytKnapp from '@/komponenter/LagreOgAvbrytKnapp';
 
 const OpprettKorreksjon: FunctionComponent<{}> = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
@@ -16,6 +17,23 @@ const OpprettKorreksjon: FunctionComponent<{}> = () => {
     const [unntakOmInntekterFremitid, setUnntakOmInntekterFremitid] = useState<number>();
     const [feilmelding, setFeilmelding] = useState<string>('');
     const [annenKorreksjonsGrunn, setAnnenKorreksjonsGrunn] = useState<string>('');
+
+    const nykorreksjon = async () => {
+        try {
+            const korreksjon = await opprettKorreksjonsutkast(
+                refusjonId!,
+                Array.from(grunner),
+                unntakOmInntekterFremitid,
+                annenKorreksjonsGrunn?.trim() === '' ? undefined : annenKorreksjonsGrunn
+            );
+            navigate('/refusjon/' + korreksjon.id);
+        } catch (error) {
+            const feilmelding =
+                'feilmelding' in (error as any) ? (error as any).feilmelding : 'Uventet feil';
+            setFeilmelding(feilmelding);
+        }
+    }
+
 
     return (
         <>
@@ -29,20 +47,13 @@ const OpprettKorreksjon: FunctionComponent<{}> = () => {
                     setÅpen(false);
                 }}
                 bekreft={async () => {
-                    try {
-                        const korreksjon = await opprettKorreksjonsutkast(
-                            refusjonId!,
-                            Array.from(grunner),
-                            unntakOmInntekterFremitid,
-                            annenKorreksjonsGrunn?.trim() === '' ? undefined : annenKorreksjonsGrunn
-                        );
-                        navigate('/refusjon/' + korreksjon.id);
-                    } catch (error) {
-                        const feilmelding =
-                            'feilmelding' in (error as any) ? (error as any).feilmelding : 'Uventet feil';
-                        setFeilmelding(feilmelding);
-                    }
+                    nykorreksjon()
                 }}
+                lagreKnapp = {
+                    <LagreOgAvbrytKnapp lagreFunksjon={() => nykorreksjon()} avbryt={() => {
+                        setFeilmelding(''); setÅpen(false)}}>
+                        OK 
+                    </LagreOgAvbrytKnapp>}  
                 tittel={'Opprett korreksjonsutkast'}
             >
                 <BodyShort size="small">Hvorfor skal det korrigeres?</BodyShort>

@@ -10,6 +10,7 @@ interface Props {
     bekreft: () => Promise<any>;
     tittel: string;
     containerStyle?: CSSProperties;
+    lagreKnapp: React.ReactNode;
 }
 
 const BekreftelseModal: FunctionComponent<Props & PropsWithChildren> = (props) => {
@@ -30,9 +31,12 @@ const BekreftelseModal: FunctionComponent<Props & PropsWithChildren> = (props) =
                 </Modal.Header>
                 <Modal.Body>{props.children}</Modal.Body>
                 <Modal.Footer>
+                    {props.lagreKnapp}
+                    {/*
                     <LagreOgAvbrytKnapp lagreFunksjon={props.bekreft} avbryt={() => props.lukkModal()}>
                         OK
                     </LagreOgAvbrytKnapp>
+                    */}
                 </Modal.Footer>
             </Modal>
         </div>

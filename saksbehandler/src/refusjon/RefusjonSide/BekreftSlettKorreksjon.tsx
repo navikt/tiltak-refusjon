@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import BekreftelseModal from '~/bekreftelse-modal/BekreftelseModal';
 import { slettKorreksjonsutkast, useHentKorreksjon } from '../../services/rest-service';
 import { BodyShort, Button } from '@navikt/ds-react';
+import LagreOgAvbrytKnapp from '@/komponenter/LagreOgAvbrytKnapp';
 
 const BekreftSlettKorreksjon: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
@@ -27,6 +28,11 @@ const BekreftSlettKorreksjon: FunctionComponent = () => {
                     await slettKorreksjonsutkast(korreksjonId!);
                     navigate('/refusjon/' + korreksjon.korrigererRefusjonId);
                 }}
+                lagreKnapp = {<LagreOgAvbrytKnapp lagreFunksjon={async () => {
+                    await slettKorreksjonsutkast(korreksjonId!);
+                    navigate('/refusjon/' + korreksjon.korrigererRefusjonId)}} avbryt={() => setÅpen(false)}>
+                    OK 
+                </LagreOgAvbrytKnapp>}  
                 tittel={'Slett korreksjonsutkast'}
             >
                 <BodyShort size="small">Vil du slette utkastet?</BodyShort>

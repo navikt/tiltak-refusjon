@@ -18,6 +18,7 @@ import {
 import GrunnlagTilForlengelse from './GrunnlagTilForlengelse';
 import { FeilkodeError } from '../../types/errors';
 import BEMHelper from '~/utils/bem';
+import LagreOgAvbrytKnapp from '@/komponenter/LagreOgAvbrytKnapp';
 
 const cls = BEMHelper('forleng-frist');
 
@@ -101,6 +102,10 @@ const ForlengFrist: FunctionComponent = () => {
                 bekreft={sjekkInnsendingsInformasjon}
                 tittel={'Forleng refusjonsfrist'}
                 containerStyle={{ minWidth: 'unset' }}
+                lagreKnapp={
+                <LagreOgAvbrytKnapp lagreFunksjon={sjekkInnsendingsInformasjon} avbryt={() => lukkModalOgResettState()}>
+                OK
+                </LagreOgAvbrytKnapp>}
             >
                 <div className={cls.className}>
                     <div className={cls.element('container')}>

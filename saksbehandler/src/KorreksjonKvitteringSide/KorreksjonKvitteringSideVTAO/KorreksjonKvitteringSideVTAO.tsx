@@ -33,14 +33,7 @@ const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
             />
             <VerticalSpacer rem={2} />
             <KorreksjonUtregningVTAO
-                refusjonsnummer={{
-                    avtalenr: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                    løpenummer: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                }}
-                erKorreksjon={true}
-                beregning={korreksjon.refusjonsgrunnlag.beregning}
                 tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
             />
             <VerticalSpacer rem={2} />
             {(korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp || 0) > 0 && (
