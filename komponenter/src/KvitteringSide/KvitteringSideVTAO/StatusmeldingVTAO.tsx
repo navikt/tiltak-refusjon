@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Alert, BodyShort } from '@navikt/ds-react';
 import { RefusjonStatus } from '~/types/status';
 
-const Statusmelding: FunctionComponent<{status: RefusjonStatus}> = ({status}) => {
+const Statusmelding: FunctionComponent<{ status: RefusjonStatus }> = ({ status }) => {
     switch (status) {
         case RefusjonStatus.UTBETALING_FEILET:
             return (

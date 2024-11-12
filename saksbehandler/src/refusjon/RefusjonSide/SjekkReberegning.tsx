@@ -35,8 +35,9 @@ const SjekkReberegning: FunctionComponent = () => {
                 containerStyle={{ minWidth: '40rem' }}
                 lagreKnapp={
                     <LagreOgAvbrytKnapp lagreFunksjon={async () => setÅpen(false)} avbryt={() => setÅpen(false)}>
-                        OK 
-                    </LagreOgAvbrytKnapp>} 
+                        OK
+                    </LagreOgAvbrytKnapp>
+                }
             >
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>

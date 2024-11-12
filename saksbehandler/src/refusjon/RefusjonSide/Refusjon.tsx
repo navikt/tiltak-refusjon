@@ -19,6 +19,7 @@ import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import { Korreksjonsgrunn } from '~/types/refusjon';
+import { Tiltak } from '~/types/tiltak';
 
 const Fleks = styled.div`
     display: flex;
@@ -53,15 +54,26 @@ const Komponent: FunctionComponent = () => {
     const brukerContext: BrukerContextType = useInnloggetBruker();
     const navigate = useNavigate();
 
-    const klikkOpprettKorreksjon = async () => {
-        const oppdatertRefusjon = await opprettKorreksjonsutkast(
-            refusjonId!,
-            [Korreksjonsgrunn.DELTAKER_HAR_IKKE_VÆRT_TILSTEDE_I_PERIODEN],
-            undefined,
-            undefined
-        )
+    const opprettKorreksjon = async (grunner: Korreksjonsgrunn[], unntakOmInntekterFremitid?: number, annenKorreksjonsGrunn?: string) => {
+        let oppdatertRefusjon;
+        if(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === Tiltak.VTAO){
+            oppdatertRefusjon = await opprettKorreksjonsutkast(
+                refusjonId!,
+                [Korreksjonsgrunn.DELTAKER_HAR_IKKE_VÆRT_TILSTEDE_I_PERIODEN],
+                undefined,
+                undefined
+            );
+        }
+        else{
+            oppdatertRefusjon = await opprettKorreksjonsutkast(
+                refusjonId!,
+                grunner,
+                unntakOmInntekterFremitid,
+                annenKorreksjonsGrunn
+            );
+        }
         navigate('/korreksjon/' + oppdatertRefusjon.korreksjonId);
-    } 
+    };
 
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
@@ -131,7 +143,11 @@ const Komponent: FunctionComponent = () => {
                     </Fleks>
                     <VerticalSpacer rem={1} />
                     {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                        <KvitteringSideVTAO refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} klikkOpprettKorreksjon={klikkOpprettKorreksjon}/>
+                        <KvitteringSideVTAO
+                            refusjon={refusjon}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                            opprettKorreksjon={opprettKorreksjon}
+                        />
                     ) : (
                         <KvitteringSide refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
                     )}

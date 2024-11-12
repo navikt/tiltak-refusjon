@@ -1,6 +1,5 @@
 import React, { CSSProperties, FunctionComponent, PropsWithChildren } from 'react';
 import { Modal, Heading } from '@navikt/ds-react';
-import LagreOgAvbrytKnapp from '../../../saksbehandler/src/komponenter/LagreOgAvbrytKnapp';
 import './bekreftelseModal.less';
 import BEMHelper from '~/utils/bem';
 
@@ -30,14 +29,7 @@ const BekreftelseModal: FunctionComponent<Props & PropsWithChildren> = (props) =
                     </Heading>
                 </Modal.Header>
                 <Modal.Body>{props.children}</Modal.Body>
-                <Modal.Footer>
-                    {props.lagreKnapp}
-                    {/*
-                    <LagreOgAvbrytKnapp lagreFunksjon={props.bekreft} avbryt={() => props.lukkModal()}>
-                        OK
-                    </LagreOgAvbrytKnapp>
-                    */}
-                </Modal.Footer>
+                <Modal.Footer>{props.lagreKnapp}</Modal.Footer>
             </Modal>
         </div>
     );

@@ -103,9 +103,13 @@ const ForlengFrist: FunctionComponent = () => {
                 tittel={'Forleng refusjonsfrist'}
                 containerStyle={{ minWidth: 'unset' }}
                 lagreKnapp={
-                <LagreOgAvbrytKnapp lagreFunksjon={sjekkInnsendingsInformasjon} avbryt={() => lukkModalOgResettState()}>
-                OK
-                </LagreOgAvbrytKnapp>}
+                    <LagreOgAvbrytKnapp
+                        lagreFunksjon={sjekkInnsendingsInformasjon}
+                        avbryt={() => lukkModalOgResettState()}
+                    >
+                        OK
+                    </LagreOgAvbrytKnapp>
+                }
             >
                 <div className={cls.className}>
                     <div className={cls.element('container')}>

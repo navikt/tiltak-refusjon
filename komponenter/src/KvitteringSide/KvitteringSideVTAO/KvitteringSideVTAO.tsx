@@ -2,7 +2,7 @@ import { BodyLong, ErrorMessage, Heading, Tag } from '@navikt/ds-react';
 import React, { FunctionComponent, ReactElement, useState } from 'react';
 import Boks from '~/Boks/Boks';
 import { statusTekst, tiltakstypeTekst } from '~/types/messages';
-import { Refusjon } from '~/types/refusjon';
+import { Korreksjonsgrunn, Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
@@ -11,7 +11,6 @@ import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
 import TilskuddssatsVTAO from './TilskuddssatsVTAO';
 import SummeringBoksVTAO from './SummeringBoksVTAO';
 import { InnloggetBruker } from '~/types/BrukerContextType';
-import OpprettKorreksjonVTAOKnapp from '../../Knapp/OpprettKorreksjonVTAOKnapp';
 import StatusmeldingVTAO from './StatusmeldingVTAO';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
@@ -41,10 +40,10 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
 interface Props {
     refusjon: Refusjon;
     innloggetBruker: InnloggetBruker;
-    klikkOpprettKorreksjon?: () => Promise<void>;
-};
+    opprettKorreksjon?: (grunner: Korreksjonsgrunn[], unntakOmInntekterFremitid?: number, annenKorreksjonsGrunn?: string) => Promise<void>;
+}
 
-const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruker, klikkOpprettKorreksjon }) => {
+const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruker, opprettKorreksjon }) => {
     const [feilmelding, setFeilmelding] = useState<string>('');
     return (
         <>
@@ -53,7 +52,12 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     {innloggetBruker.harKorreksjonTilgang &&
                         refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
-                        !refusjon.korreksjonId && <OpprettKorreksjonVTAOKnapp setFeilmelding={setFeilmelding} klikkOpprettKorreksjon={klikkOpprettKorreksjon}  />}
+                        !refusjon.korreksjonId && (
+                            <OpprettKorreksjon
+                                setFeilmelding={setFeilmelding}
+                                opprettKorreksjon={opprettKorreksjon}
+                            />
+                        )}
                     <div style={{ marginBottom: '10px', float: 'right' }}>{etikettForRefusjonStatus(refusjon)}</div>
                 </div>
 
@@ -63,9 +67,9 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                 </Heading>
                 <VerticalSpacer rem={2} />
                 <BodyLong>
-                    Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Tilskuddssatsen er 6808
-                    kroner per måned. Satsen settes årlig av departementet og avtale- og refusjonsløsningen vil
-                    automatisk oppdateres når det kommer nye satser.
+                    Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Tilskuddssatsen er 6808 kroner
+                    per måned. Satsen settes årlig av departementet og avtale- og refusjonsløsningen vil automatisk
+                    oppdateres når det kommer nye satser.
                 </BodyLong>
                 <StatusmeldingVTAO status={refusjon.status} />
                 <VerticalSpacer rem={1} />
@@ -77,9 +81,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                 <VerticalSpacer rem={2} />
                 <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
                 <VerticalSpacer rem={1} />
-                <SummeringBoksVTAO
-                    refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
-                />
+                <SummeringBoksVTAO refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
             </Boks>
         </>
     );

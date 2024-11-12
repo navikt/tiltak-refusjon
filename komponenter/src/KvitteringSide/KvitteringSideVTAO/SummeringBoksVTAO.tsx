@@ -7,8 +7,7 @@ import Boks from '~/Boks';
 import VerticalSpacer from '~/VerticalSpacer';
 import { formatterPenger } from '~/utils/PengeUtils';
 
-const SummeringBoksVTAO: FunctionComponent<{refusjonsgrunnlag: Refusjonsgrunnlag}> = ({refusjonsgrunnlag}) => {
-
+const SummeringBoksVTAO: FunctionComponent<{ refusjonsgrunnlag: Refusjonsgrunnlag }> = ({ refusjonsgrunnlag }) => {
     const { bedriftKontonummer, tilskuddsgrunnlag } = refusjonsgrunnlag;
 
     return (
@@ -21,11 +20,8 @@ const SummeringBoksVTAO: FunctionComponent<{refusjonsgrunnlag: Refusjonsgrunnlag
                 <VerticalSpacer rem={0.5} />
                 <BodyShort size="small">
                     <b>{formatterPenger(tilskuddsgrunnlag.tilskuddsbeløp || 0)}</b> for perioden{' '}
-                    {formatterPeriode(
-                        tilskuddsgrunnlag.tilskuddFom,
-                        tilskuddsgrunnlag.tilskuddTom
-                    )}{' '}
-                    til kontonummer {bedriftKontonummer}
+                    {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)} til kontonummer{' '}
+                    {bedriftKontonummer}
                 </BodyShort>
                 <VerticalSpacer rem={1} />
                 <BodyShort size="small">

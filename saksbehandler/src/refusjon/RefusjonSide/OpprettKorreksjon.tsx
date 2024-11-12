@@ -1,17 +1,15 @@
 import React, { ChangeEvent, FunctionComponent, useState } from 'react';
-import { useParams } from 'react-router';
-import { useNavigate } from 'react-router-dom';
 import BekreftelseModal from '~/bekreftelse-modal/BekreftelseModal';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
-import { opprettKorreksjonsutkast } from '../../services/rest-service';
+import VerticalSpacer from '~/VerticalSpacer';
 import { Button, BodyShort, ErrorMessage, Checkbox, CheckboxGroup, TextField, Textarea } from '@navikt/ds-react';
 import { Korreksjonsgrunn } from '~/types/refusjon';
 import { korreksjonsgrunnTekst } from '~/types/messages';
 import LagreOgAvbrytKnapp from '@/komponenter/LagreOgAvbrytKnapp';
+import { Tiltak } from '~/types/tiltak';
 
-const OpprettKorreksjon: FunctionComponent<{}> = () => {
-    const { refusjonId } = useParams<{ refusjonId: string }>();
-    const navigate = useNavigate();
+const OpprettKorreksjon: FunctionComponent<{tiltakType : Tiltak, opprettKorreksjon: (grunner: Korreksjonsgrunn[], unntakOmInntekterFremitid?: number, annenKorreksjonsGrunn?: string) => Promise<void> }> = ({tiltakType, opprettKorreksjon}) => {
+
+
     const [åpen, setÅpen] = useState(false);
     const [grunner, setGrunner] = useState<Korreksjonsgrunn[]>([]);
     const [unntakOmInntekterFremitid, setUnntakOmInntekterFremitid] = useState<number>();
@@ -19,25 +17,31 @@ const OpprettKorreksjon: FunctionComponent<{}> = () => {
     const [annenKorreksjonsGrunn, setAnnenKorreksjonsGrunn] = useState<string>('');
 
     const nykorreksjon = async () => {
+
         try {
-            const korreksjon = await opprettKorreksjonsutkast(
-                refusjonId!,
-                Array.from(grunner),
-                unntakOmInntekterFremitid,
-                annenKorreksjonsGrunn?.trim() === '' ? undefined : annenKorreksjonsGrunn
-            );
-            navigate('/refusjon/' + korreksjon.id);
+            await opprettKorreksjon(grunner, unntakOmInntekterFremitid, annenKorreksjonsGrunn);
         } catch (error) {
-            const feilmelding =
-                'feilmelding' in (error as any) ? (error as any).feilmelding : 'Uventet feil';
+            const feilmelding = 'feilmelding' in (error as any) ? (error as any).feilmelding : 'Uventet feil';
             setFeilmelding(feilmelding);
         }
-    }
-
+    };
 
     return (
         <>
-            <Button variant="secondary" onClick={() => setÅpen(true)}>
+            <Button variant="secondary" onClick={async () => {
+                if(tiltakType === Tiltak.VTAO) {
+                    try {
+                        if (nykorreksjon !== undefined) {
+                            await nykorreksjon();
+                        }
+                    } catch (error) {
+                        setFeilmelding('Feil ved oppretting av korreksjonsutkast');
+                    }
+                }
+                else {
+                    setÅpen(true);
+                }
+            }}>
                 Opprett korreksjonsutkast
             </Button>
             <BekreftelseModal
@@ -47,13 +51,26 @@ const OpprettKorreksjon: FunctionComponent<{}> = () => {
                     setÅpen(false);
                 }}
                 bekreft={async () => {
-                    nykorreksjon()
+                    try {
+                        if (nykorreksjon !== undefined) {
+                            await nykorreksjon();
+                        }
+                    } catch (error) {
+                        setFeilmelding('Feil ved oppretting av korreksjonsutkast');
+                    }
+                    nykorreksjon();
                 }}
-                lagreKnapp = {
-                    <LagreOgAvbrytKnapp lagreFunksjon={() => nykorreksjon()} avbryt={() => {
-                        setFeilmelding(''); setÅpen(false)}}>
-                        OK 
-                    </LagreOgAvbrytKnapp>}  
+                lagreKnapp={
+                    <LagreOgAvbrytKnapp
+                        lagreFunksjon={() => nykorreksjon()}
+                        avbryt={() => {
+                            setFeilmelding('');
+                            setÅpen(false);
+                        }}
+                    >
+                        OK
+                    </LagreOgAvbrytKnapp>
+                }
                 tittel={'Opprett korreksjonsutkast'}
             >
                 <BodyShort size="small">Hvorfor skal det korrigeres?</BodyShort>

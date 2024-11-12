@@ -50,13 +50,13 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker })
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 {innloggetBruker.harKorreksjonTilgang &&
                     refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
-                    !refusjon.korreksjonId && <OpprettKorreksjon />}
+                    !refusjon.korreksjonId && <OpprettKorreksjon tiltakType={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype} />}
                 {featureToggles[Feature.Reberegning] && <SjekkReberegning />}
             </div>
             <VerticalSpacer rem={2} />
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading size="large" role="heading">
-                    Refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
+                    Refusjon for {tiltakstypeTekst[refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
                 </Heading>
                 {etikettForRefusjonStatus(refusjon)}
             </div>

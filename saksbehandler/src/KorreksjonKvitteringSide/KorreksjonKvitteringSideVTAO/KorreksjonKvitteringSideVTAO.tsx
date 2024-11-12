@@ -32,9 +32,7 @@ const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
                 bedriftKontonummerInnhentetTidspunkt={korreksjon.refusjonsgrunnlag.bedriftKontonummerInnhentetTidspunkt}
             />
             <VerticalSpacer rem={2} />
-            <KorreksjonUtregningVTAO
-                tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-            />
+            <KorreksjonUtregningVTAO tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
             <VerticalSpacer rem={2} />
             {(korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp || 0) > 0 && (
                 <Alert variant="warning">

@@ -28,11 +28,17 @@ const BekreftSlettKorreksjon: FunctionComponent = () => {
                     await slettKorreksjonsutkast(korreksjonId!);
                     navigate('/refusjon/' + korreksjon.korrigererRefusjonId);
                 }}
-                lagreKnapp = {<LagreOgAvbrytKnapp lagreFunksjon={async () => {
-                    await slettKorreksjonsutkast(korreksjonId!);
-                    navigate('/refusjon/' + korreksjon.korrigererRefusjonId)}} avbryt={() => setÅpen(false)}>
-                    OK 
-                </LagreOgAvbrytKnapp>}  
+                lagreKnapp={
+                    <LagreOgAvbrytKnapp
+                        lagreFunksjon={async () => {
+                            await slettKorreksjonsutkast(korreksjonId!);
+                            navigate('/refusjon/' + korreksjon.korrigererRefusjonId);
+                        }}
+                        avbryt={() => setÅpen(false)}
+                    >
+                        OK
+                    </LagreOgAvbrytKnapp>
+                }
                 tittel={'Slett korreksjonsutkast'}
             >
                 <BodyShort size="small">Vil du slette utkastet?</BodyShort>
