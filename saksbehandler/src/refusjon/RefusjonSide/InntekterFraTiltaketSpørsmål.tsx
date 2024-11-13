@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
 import styled from 'styled-components';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
 import { endreBruttolønn, useHentKorreksjon } from '../../services/rest-service';
 

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
 import { formatterPenger } from '../../utils/PengeUtils';
 

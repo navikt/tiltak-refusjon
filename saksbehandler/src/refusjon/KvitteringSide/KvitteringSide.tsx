@@ -3,7 +3,7 @@ import { FunctionComponent, ReactElement } from 'react';
 import { InnloggetBruker } from '../../bruker/BrukerContextType';
 import { useFeatureToggles } from '../../featureToggles/FeatureToggleProvider';
 import { Feature } from '../../featureToggles/features';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import InformasjonFraAvtalen from '../RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraAMeldingenGammel from '../RefusjonSide/InntekterFraAmeldingenGammel';

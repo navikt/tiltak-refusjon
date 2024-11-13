@@ -2,7 +2,7 @@ import { Button, HelpText, Switch, TextField } from '@navikt/ds-react';
 import { FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
 import LagreKnapp from '../../komponenter/LagreKnapp';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import BekreftelseModal from '../../komponenter/bekreftelse-modal/BekreftelseModal';
 import { sjekkReberegning, useHentRefusjon } from '../../services/rest-service';
 

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, Fragment, useEffect } from 'react';
 import { ExpansionCard, RadioGroup, Radio } from '@navikt/ds-react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { Filter, RefusjonsAktor, useFilter } from './FilterContext';
 import { søkevalg } from './søkeValg';
 

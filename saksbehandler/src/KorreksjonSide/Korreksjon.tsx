@@ -3,7 +3,7 @@ import { Alert } from '@navikt/ds-react';
 import { useParams } from 'react-router';
 import { useHentKorreksjon } from '../services/rest-service';
 
-import VerticalSpacer from '../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import KorreksjonSide from './KorreksjonSide';
 
 import TilbakeTilOversikt from '../komponenter/tilbake-til-oversikt/TilbakeTilOversikt';

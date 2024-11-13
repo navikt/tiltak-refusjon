@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 import { merkForUnntakOmInntekterFremITid } from '../../services/rest-service';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { BodyShort, TextField, Button, Modal, Heading } from '@navikt/ds-react';
 
 import { useForm, SubmitHandler } from 'react-hook-form';

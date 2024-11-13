@@ -1,6 +1,6 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import VerticalSpacer from '../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import BekreftOppgjørKorreksjon from '../refusjon/RefusjonSide/BekreftOppgjørKorreksjon';
 import BekreftSlettKorreksjon from '../refusjon/RefusjonSide/BekreftSlettKorreksjon';
 import BekreftTilbakekrevKorreksjon from '../refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';

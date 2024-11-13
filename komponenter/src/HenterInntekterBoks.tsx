@@ -1,8 +1,7 @@
-import VerticalSpacer from '../../saksbehandler/src/komponenter/VerticalSpacer';
-import { BodyShort, Loader } from '@navikt/ds-react';
-
 import React, { FunctionComponent } from 'react';
+import { BodyShort, Loader } from '@navikt/ds-react';
 import Boks from '~/Boks';
+import VerticalSpacer from '~/VerticalSpacer';
 
 const HenterInntekterBoks: FunctionComponent = () => {
     return (
