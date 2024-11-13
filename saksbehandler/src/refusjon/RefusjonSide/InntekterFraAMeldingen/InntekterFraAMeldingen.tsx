@@ -1,6 +1,6 @@
 import { Alert, Heading } from '@navikt/ds-react';
 import { Fragment, FunctionComponent } from 'react';
-import VerticalSpacer from '../../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
 import './inntektsMelding.less';
 import InntektsmeldingTabellBody from './inntektsmeldingTabell/InntektsmeldingTabellBody';

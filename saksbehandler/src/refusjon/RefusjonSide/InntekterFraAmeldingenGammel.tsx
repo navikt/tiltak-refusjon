@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 import styled from 'styled-components';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { formatterPenger } from '../../utils/PengeUtils';
 import sortBy from 'lodash.sortby';
 import { lønnsbeskrivelseTekst } from '~/types/messages';

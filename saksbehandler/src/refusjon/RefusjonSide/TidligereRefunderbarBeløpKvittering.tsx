@@ -1,8 +1,6 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
-
+import VerticalSpacer from '~/VerticalSpacer';
 import { formatterPenger } from '../../utils/PengeUtils';
-
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
 import { Alert, Radio, RadioGroup, TextField, Heading, Label, BodyShort } from '@navikt/ds-react';
 
-import VerticalSpacer from '../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
 import { settTidligereRefunderbarBeløp } from '../services/rest-service';
 import { useParams } from 'react-router-dom';

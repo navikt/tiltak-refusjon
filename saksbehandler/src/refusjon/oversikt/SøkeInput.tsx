@@ -1,5 +1,5 @@
 import React, { FormEvent, FunctionComponent, useState } from 'react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { Search } from '@navikt/ds-icons';
 import { TextField, TextFieldProps, Button } from '@navikt/ds-react';
 

@@ -1,7 +1,7 @@
 import { formatterPenger } from '@/utils/PengeUtils';
 import { Alert, BodyShort, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import VerticalSpacer from '../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
 import InformasjonFraAvtalen from '../refusjon/RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';

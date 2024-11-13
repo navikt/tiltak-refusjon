@@ -3,7 +3,7 @@ import { ChangeEvent, FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFeatureToggles } from '../featureToggles/FeatureToggleProvider';
 import { Feature } from '../featureToggles/features';
-import VerticalSpacer from '../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { settHarFerietrekkForSammeMåned, settMinusbeløpManuelt } from '../services/rest-service';
 
 type Props = {

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import VisRefusjonerFilter from './VisRefusjonerFilter';
 import StatusFilter from '~/Filtermeny/StatusFilter/StatusFilter';
 import TiltakFilter from '~/Filtermeny/TiltakFilter/TiltakFilter';

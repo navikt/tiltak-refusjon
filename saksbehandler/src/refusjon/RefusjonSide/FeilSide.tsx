@@ -1,7 +1,7 @@
 import { Alert, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useParams } from 'react-router';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 import { useHentRefusjon } from '../../services/rest-service';
 import InformasjonFraAvtalen from './InformasjonFraAvtalen';
 import { tiltakstypeTekst } from '~/types/messages';

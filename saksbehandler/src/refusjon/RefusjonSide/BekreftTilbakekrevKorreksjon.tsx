@@ -3,7 +3,7 @@ import { Alert, BodyShort, Button } from '@navikt/ds-react';
 import { useParams } from 'react-router';
 import BekreftelseModal from '../../komponenter/bekreftelse-modal/BekreftelseModal';
 import { fullførKorreksjonVedTilbakekreving } from '../../services/rest-service';
-import VerticalSpacer from '../../komponenter/VerticalSpacer';
+import VerticalSpacer from '~/VerticalSpacer';
 
 const BekreftTilbakekrevKorreksjon: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
