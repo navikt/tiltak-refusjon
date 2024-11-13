@@ -4,7 +4,7 @@ import { InnloggetBruker } from '../bruker/BrukerContextType';
 import { Feature } from '../featureToggles/features';
 import { Filter } from '~/types/filter';
 
-import { ApiError, FeilkodeError } from '../types/errors';
+import { ApiError, FeilkodeError } from '../../../komponenter/src/types/errors';
 import { Beregning, Hendelse, Korreksjon, Korreksjonsgrunn, PageableRefusjon, Refusjon } from '~/types/refusjon';
 import { useFilter } from '@/refusjon/oversikt/FilterContext';
 

@@ -1,8 +1,8 @@
 import React, { CSSProperties, FunctionComponent, PropsWithChildren } from 'react';
 import { Modal, Heading } from '@navikt/ds-react';
-import LagreOgAvbrytKnapp from '../LagreOgAvbrytKnapp';
 import './bekreftelseModal.less';
 import BEMHelper from '~/utils/bem';
+import LagreOgAvbrytKnapp from '~/knapp/LagreOgAvbrytKnapp';
 
 interface Props {
     isOpen: boolean;
