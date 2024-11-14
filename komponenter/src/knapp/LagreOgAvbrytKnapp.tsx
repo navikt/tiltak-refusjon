@@ -1,9 +1,8 @@
 import React, { FunctionComponent, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { Alert, Button, ButtonProps } from '@navikt/ds-react';
-import { Nettressurs, Status } from '../nettressurs';
-
-import { handterFeil } from '../utils/apiFeilUtils';
 import VerticalSpacer from '~/VerticalSpacer';
+import { Nettressurs, Status } from '~/nettressurs';
+import { handterFeil } from '~/utils/apiFeilUtils';
 
 type Props = {
     lagreFunksjon: () => Promise<any>;

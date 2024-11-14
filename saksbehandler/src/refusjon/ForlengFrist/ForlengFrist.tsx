@@ -16,7 +16,7 @@ import {
     getDateStringFraDatoVelger,
 } from './forlengFristUtils';
 import GrunnlagTilForlengelse from './GrunnlagTilForlengelse';
-import { FeilkodeError } from '../../types/errors';
+import { FeilkodeError } from '~/types/errors';
 import BEMHelper from '~/utils/bem';
 
 const cls = BEMHelper('forleng-frist');

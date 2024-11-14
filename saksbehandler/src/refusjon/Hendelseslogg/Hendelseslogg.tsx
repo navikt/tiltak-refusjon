@@ -7,7 +7,7 @@ import HendelseIkon from './HendelseIkon';
 import './Hendelseslogg.less';
 
 import { hentHendelser } from '../../services/rest-service';
-import { Nettressurs, Status } from '../../nettressurs';
+import { Nettressurs, Status } from '~/nettressurs';
 import BEMHelper from '~/utils/bem';
 import { hendelseTekst } from '~/types/messages';
 import { Hendelse, HendelseType } from '~/types/refusjon';
