@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import BekreftelseModal from '../../komponenter/bekreftelse-modal/BekreftelseModal';
+import BekreftelseModal from '~/BekreftelseModal';
 import VerticalSpacer from '~/VerticalSpacer';
 
 import { opprettKorreksjonsutkast } from '../../services/rest-service';
