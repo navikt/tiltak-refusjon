@@ -9,7 +9,7 @@ import InntekterFraAMeldingen from '../RefusjonSide/InntekterFraAMeldingen/Innte
 import InntekterFraAMeldingenGammel from '../RefusjonSide/InntekterFraAmeldingenGammel';
 import HarTattStillingTilAlleInntektsLinjerNy from '../RefusjonSide/HarTattStillingTilAlleInntektsLinjerNy';
 import HarTattStillingTilAlleInntektsLinjerGammel from '../RefusjonSide/HarTattStillingTilAlleInntektsLinjerGammel';
-import OpprettKorreksjon from '~/Knapp/OpprettKorreksjon';
+import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
 import SjekkReberegning from '../RefusjonSide/SjekkReberegning';
 import SummeringBoks from '../RefusjonSide/SummeringBoks';
 import SummeringBoksNullbeløp from '../RefusjonSide/SummeringBoksNullbeløp';

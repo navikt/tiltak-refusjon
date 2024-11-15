@@ -62,8 +62,8 @@ const OpprettKorreksjon: FunctionComponent<{
                         }
                     } catch (error) {
                         const feilmelding =
-                            'feilmelding' in (error as any) ? (error as any).feilmelding : 'Uventet feil';
-                        setFeilmelding('Feil ved oppretting av korreksjonsutkast');
+                            'feilmelding' in (error as any) ? (error as any).feilmelding : 'Feil ved oppretting av korreksjonsutkast';
+                        setFeilmelding(feilmelding);
                     }
                     nykorreksjon();
                 }}
