@@ -7,7 +7,6 @@ import 'react-day-picker/dist/style.css';
 import { useParams } from 'react-router';
 import BekreftelseModal from '~/BekreftelseModal';
 import { forlengFrist, useHentRefusjon } from '../../services/rest-service';
-
 import './ForlengFrist.less';
 import {
     finnFeilMeldingFraInputDialog,
@@ -18,7 +17,6 @@ import {
 import GrunnlagTilForlengelse from './GrunnlagTilForlengelse';
 import { FeilkodeError } from '~/types/errors';
 import BEMHelper from '~/utils/bem';
-import LagreOgAvbrytKnapp from '~/knapp/LagreOgAvbrytKnapp';
 
 const cls = BEMHelper('forleng-frist');
 
@@ -102,14 +100,6 @@ const ForlengFrist: FunctionComponent = () => {
                 bekreft={sjekkInnsendingsInformasjon}
                 tittel={'Forleng refusjonsfrist'}
                 containerStyle={{ minWidth: 'unset' }}
-                lagreKnapp={
-                    <LagreOgAvbrytKnapp
-                        lagreFunksjon={sjekkInnsendingsInformasjon}
-                        avbryt={() => lukkModalOgResettState()}
-                    >
-                        OK
-                    </LagreOgAvbrytKnapp>
-                }
             >
                 <div className={cls.className}>
                     <div className={cls.element('container')}>

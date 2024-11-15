@@ -3,7 +3,6 @@ import { useParams } from 'react-router';
 import BekreftelseModal from '~/BekreftelseModal';
 import { fullførKorreksjonVedOppgjort } from '../../services/rest-service';
 import { BodyShort, Button } from '@navikt/ds-react';
-import LagreOgAvbrytKnapp from '~/knapp/LagreOgAvbrytKnapp';
 
 const BekreftOppgjørKorreksjon: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
@@ -18,14 +17,6 @@ const BekreftOppgjørKorreksjon: FunctionComponent = () => {
                 lukkModal={() => setisOpen(false)}
                 tittel="Merk korreksjon som oppgjort"
                 bekreft={() => fullførKorreksjonVedOppgjort(korreksjonId!)}
-                lagreKnapp={
-                    <LagreOgAvbrytKnapp
-                        lagreFunksjon={() => fullførKorreksjonVedOppgjort(korreksjonId!)}
-                        avbryt={() => setisOpen(false)}
-                    >
-                        OK
-                    </LagreOgAvbrytKnapp>
-                }
             >
                 <BodyShort size="small">
                     Ved å fullføre korreksjonen vil arbeidsgiver få en bekreftelse på at utbetalt beløp er riktig.

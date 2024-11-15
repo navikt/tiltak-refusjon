@@ -5,7 +5,6 @@ import { Button, BodyShort, ErrorMessage, Checkbox, CheckboxGroup, TextField, Te
 import { Korreksjonsgrunn } from '~/types/refusjon';
 import { korreksjonsgrunnTekst } from '~/types/messages';
 import { Tiltak } from '~/types/tiltak';
-import LagreOgAvbrytKnapp from '~/knapp/LagreOgAvbrytKnapp';
 
 const OpprettKorreksjon: FunctionComponent<{
     tiltakType: Tiltak;
@@ -68,17 +67,6 @@ const OpprettKorreksjon: FunctionComponent<{
                     }
                     nykorreksjon();
                 }}
-                lagreKnapp={
-                    <LagreOgAvbrytKnapp
-                        lagreFunksjon={() => nykorreksjon()}
-                        avbryt={() => {
-                            setFeilmelding('');
-                            setÅpen(false);
-                        }}
-                    >
-                        OK
-                    </LagreOgAvbrytKnapp>
-                }
                 tittel={'Opprett korreksjonsutkast'}
             >
                 <BodyShort size="small">Hvorfor skal det korrigeres?</BodyShort>
