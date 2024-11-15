@@ -7,6 +7,11 @@ export const tiltakstypeTekst: { [key in Tiltak]: string } = {
     VARIG_LONNSTILSKUDD: 'varig lønnstilskudd',
     MENTOR: 'mentor',
     SOMMERJOBB: 'sommerjobb',
+    VTAO: 'varig tilrettelagt arbeid i ordinær virksomhet',
+};
+
+export const tiltakstypeTekstKort: { [key in Tiltak]: string } = {
+    ...tiltakstypeTekst,
     VTAO: 'VTA-O',
 };
 
@@ -194,6 +199,7 @@ export const korreksjonsgrunnTekst: { [key in Korreksjonsgrunn]: string } = {
     ANNEN_GRUNN: 'Annen grunn',
     UTBETALT_HELE_TILSKUDDSBELØP: 'Utbetalt hele tilskuddsbeløpet',
     INNTEKTER_RAPPORTERT_ETTER_TILSKUDDSPERIODE: 'Inntekter rapportert etter tilskuddsperioden',
+    DELTAKER_HAR_IKKE_VÆRT_TILSTEDE_I_PERIODEN: 'Deltaker har ikke vært tilstede i perioden',
 };
 
 export const hendelseTekst: { [key in HendelseType]: string } = {

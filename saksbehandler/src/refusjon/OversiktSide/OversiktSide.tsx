@@ -6,7 +6,7 @@ import './OversiktSide.less';
 import Banner from '../oversikt/Banner';
 import BannerLaster from '../oversikt/BannerLaster';
 import BEMHelper from '~/utils/bem';
-import { BrukerContextType } from '@/bruker/BrukerContextType';
+import { BrukerContextType } from '~/types/brukerContextType';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { useFilter } from '../oversikt/FilterContext';
 import { useFeatureToggles } from '../../featureToggles/FeatureToggleProvider';

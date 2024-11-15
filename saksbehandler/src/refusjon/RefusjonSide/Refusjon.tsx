@@ -1,11 +1,11 @@
 import React, { FunctionComponent, Suspense } from 'react';
 import { Alert } from '@navikt/ds-react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import TilbakeTilOversikt from '../../komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '~/VerticalSpacer';
-import { useHentRefusjon } from '../../services/rest-service';
+import { opprettKorreksjonsutkast, useHentRefusjon } from '../../services/rest-service';
 import ForlengFrist from '../ForlengFrist/ForlengFrist';
 import KvitteringSide from '../KvitteringSide/KvitteringSide';
 import MerkForUnntakOmInntekterToMånederFrem from '../MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
@@ -13,11 +13,13 @@ import FeilSide from './FeilSide';
 import HenterInntekterBoks from '~/HenterInntekterBoks';
 import RefusjonSide from './RefusjonSide';
 import { useInnloggetBruker } from '../../bruker/BrukerContext';
-import { BrukerContextType } from '../../bruker/BrukerContextType';
+import { BrukerContextType } from '~/types/brukerContextType';
 import HendelsesLogg from '../Hendelseslogg/Hendelseslogg';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
+import { Korreksjonsgrunn } from '~/types/refusjon';
+import { Tiltak } from '~/types/tiltak';
 
 const Fleks = styled.div`
     display: flex;
@@ -50,6 +52,31 @@ const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
     const refusjon = useHentRefusjon(refusjonId!);
     const brukerContext: BrukerContextType = useInnloggetBruker();
+    const navigate = useNavigate();
+
+    const opprettKorreksjon = async (
+        grunner: Korreksjonsgrunn[],
+        unntakOmInntekterFremitid?: number,
+        annenKorreksjonsGrunn?: string
+    ) => {
+        let oppdatertRefusjon;
+        if (refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === Tiltak.VTAO) {
+            oppdatertRefusjon = await opprettKorreksjonsutkast(
+                refusjonId!,
+                [Korreksjonsgrunn.DELTAKER_HAR_IKKE_VÆRT_TILSTEDE_I_PERIODEN],
+                undefined,
+                undefined
+            );
+        } else {
+            oppdatertRefusjon = await opprettKorreksjonsutkast(
+                refusjonId!,
+                grunner,
+                unntakOmInntekterFremitid,
+                annenKorreksjonsGrunn
+            );
+        }
+        navigate('/korreksjon/' + oppdatertRefusjon.korreksjonId);
+    };
 
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
@@ -118,10 +145,15 @@ const Komponent: FunctionComponent = () => {
                         <HendelsesLogg refusjonId={refusjonId} />
                     </Fleks>
                     <VerticalSpacer rem={1} />
+
                     {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
                         <KvitteringSideVTAO refusjon={refusjon} />
                     ) : (
-                        <KvitteringSide refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
+                        <KvitteringSide
+                            refusjon={refusjon}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                            opprettKorreksjon={opprettKorreksjon}
+                        />
                     )}
                 </>
             );

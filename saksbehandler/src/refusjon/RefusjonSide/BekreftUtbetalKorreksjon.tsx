@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import VerticalSpacer from '~/VerticalSpacer';
 import BekreftelseModal from '~/BekreftelseModal';
 import { useHentKorreksjon, utbetalKorreksjon } from '../../services/rest-service';
+import LagreOgAvbrytKnapp from '~/knapp/LagreOgAvbrytKnapp';
 
 const BekreftUtbetalKorreksjon: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
@@ -21,6 +22,14 @@ const BekreftUtbetalKorreksjon: FunctionComponent = () => {
                 lukkModal={() => setisOpen(false)}
                 tittel="Send korreksjon til utbetaling"
                 bekreft={() => utbetalKorreksjon(korreksjonId!)}
+                lagreKnapp={
+                    <LagreOgAvbrytKnapp
+                        lagreFunksjon={() => utbetalKorreksjon(korreksjonId!)}
+                        avbryt={() => utbetalKorreksjon(korreksjonId!)}
+                    >
+                        OK
+                    </LagreOgAvbrytKnapp>
+                }
             >
                 <BodyShort size="small">
                     Korreksjonen vil bli kostnadsført på den samme enheten som den opprinnelige refusjonen. Refusjonen

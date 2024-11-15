@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { FunctionComponent, useState } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
-import { InnloggetBruker } from '../bruker/BrukerContextType';
+import { InnloggetBruker } from '~/types/brukerContextType';
 import { useCookies } from 'react-cookie';
 import { TextField, Button, Label } from '@navikt/ds-react';
 

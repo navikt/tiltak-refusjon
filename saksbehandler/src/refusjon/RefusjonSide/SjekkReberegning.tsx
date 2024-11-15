@@ -8,6 +8,7 @@ import { sjekkReberegning, useHentRefusjon } from '../../services/rest-service';
 
 import Utregning from './Utregning';
 import { Beregning } from '~/types/refusjon';
+import LagreOgAvbrytKnapp from '~/knapp/LagreOgAvbrytKnapp';
 
 const SjekkReberegning: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
@@ -32,6 +33,11 @@ const SjekkReberegning: FunctionComponent = () => {
                 tittel="Sjekk reberegning"
                 bekreft={async () => setÅpen(false)}
                 containerStyle={{ minWidth: '40rem' }}
+                lagreKnapp={
+                    <LagreOgAvbrytKnapp lagreFunksjon={async () => setÅpen(false)} avbryt={() => setÅpen(false)}>
+                        OK
+                    </LagreOgAvbrytKnapp>
+                }
             >
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>

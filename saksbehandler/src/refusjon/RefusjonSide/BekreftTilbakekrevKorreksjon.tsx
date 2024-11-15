@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import BekreftelseModal from '~/BekreftelseModal';
 import { fullførKorreksjonVedTilbakekreving } from '../../services/rest-service';
 import VerticalSpacer from '~/VerticalSpacer';
+import LagreOgAvbrytKnapp from '~/knapp/LagreOgAvbrytKnapp';
 
 const BekreftTilbakekrevKorreksjon: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
@@ -18,6 +19,14 @@ const BekreftTilbakekrevKorreksjon: FunctionComponent = () => {
                 lukkModal={() => setisOpen(false)}
                 tittel="Merk korreksjon for tilbakekreving"
                 bekreft={() => fullførKorreksjonVedTilbakekreving(korreksjonId!)}
+                lagreKnapp={
+                    <LagreOgAvbrytKnapp
+                        lagreFunksjon={() => fullførKorreksjonVedTilbakekreving(korreksjonId!)}
+                        avbryt={() => setisOpen(false)}
+                    >
+                        OK
+                    </LagreOgAvbrytKnapp>
+                }
             >
                 <BodyShort size="small">
                     Ved å fullføre korreksjonen vil arbeidsgiver få en bekreftelse på at utbetalt beløp er for høyt, og

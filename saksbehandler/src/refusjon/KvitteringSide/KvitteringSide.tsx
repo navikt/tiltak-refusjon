@@ -1,6 +1,6 @@
 import { Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent, ReactElement } from 'react';
-import { InnloggetBruker } from '../../bruker/BrukerContextType';
+import { InnloggetBruker } from '~/types/brukerContextType';
 import { useFeatureToggles } from '../../featureToggles/FeatureToggleProvider';
 import { Feature } from '../../featureToggles/features';
 import VerticalSpacer from '~/VerticalSpacer';
@@ -9,14 +9,14 @@ import InntekterFraAMeldingen from '../RefusjonSide/InntekterFraAMeldingen/Innte
 import InntekterFraAMeldingenGammel from '../RefusjonSide/InntekterFraAmeldingenGammel';
 import HarTattStillingTilAlleInntektsLinjerNy from '../RefusjonSide/HarTattStillingTilAlleInntektsLinjerNy';
 import HarTattStillingTilAlleInntektsLinjerGammel from '../RefusjonSide/HarTattStillingTilAlleInntektsLinjerGammel';
-import OpprettKorreksjon from '../RefusjonSide/OpprettKorreksjon';
+import OpprettKorreksjon from '~/Knapp/OpprettKorreksjon';
 import SjekkReberegning from '../RefusjonSide/SjekkReberegning';
 import SummeringBoks from '../RefusjonSide/SummeringBoks';
 import SummeringBoksNullbeløp from '../RefusjonSide/SummeringBoksNullbeløp';
 import TidligereRefunderbarBeløpKvittering from '../RefusjonSide/TidligereRefunderbarBeløpKvittering';
 import Utregning from '../RefusjonSide/Utregning';
 import Statusmelding from './Statusmelding';
-import { Refusjon } from '~/types/refusjon';
+import { Korreksjonsgrunn, Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { storForbokstav } from '~/utils/stringUtils';
 import { statusTekst } from '~/types/messages';
@@ -36,12 +36,17 @@ const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     );
 };
 
-type Props = {
+interface Props {
     refusjon: Refusjon;
     innloggetBruker: InnloggetBruker;
-};
+    opprettKorreksjon?: (
+        grunner: Korreksjonsgrunn[],
+        unntakOmInntekterFremitid?: number,
+        annenKorreksjonsGrunn?: string
+    ) => Promise<void>;
+}
 
-const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker }) => {
+const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker, opprettKorreksjon }) => {
     const refusjonsgrunnlag = refusjon.refusjonsgrunnlag;
     const featureToggles = useFeatureToggles();
 
@@ -50,7 +55,13 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker })
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 {innloggetBruker.harKorreksjonTilgang &&
                     refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
-                    !refusjon.korreksjonId && <OpprettKorreksjon />}
+                    opprettKorreksjon &&
+                    !refusjon.korreksjonId && (
+                        <OpprettKorreksjon
+                            tiltakType={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
+                            opprettKorreksjon={opprettKorreksjon}
+                        />
+                    )}
                 {featureToggles[Feature.Reberegning] && <SjekkReberegning />}
             </div>
             <VerticalSpacer rem={2} />

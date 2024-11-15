@@ -1,6 +1,6 @@
 import axios from 'axios';
 import useSWR, { mutate } from 'swr';
-import { InnloggetBruker } from '../bruker/BrukerContextType';
+import { InnloggetBruker } from '~/types/brukerContextType';
 import { Feature } from '../featureToggles/features';
 import { Filter } from '~/types/filter';
 import { Beregning, Hendelse, Korreksjon, Korreksjonsgrunn, PageableRefusjon, Refusjon } from '~/types/refusjon';
