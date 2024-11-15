@@ -2,6 +2,7 @@ import React, { CSSProperties, FunctionComponent, PropsWithChildren } from 'reac
 import { Modal, Heading } from '@navikt/ds-react';
 import './bekreftelseModal.less';
 import BEMHelper from '~/utils/bem';
+import LagreOgAvbrytKnapp from '~/knapp/LagreOgAvbrytKnapp';
 
 interface Props {
     isOpen: boolean;
@@ -9,7 +10,6 @@ interface Props {
     bekreft: () => Promise<any>;
     tittel: string;
     containerStyle?: CSSProperties;
-    lagreKnapp: React.ReactNode;
 }
 
 const BekreftelseModal: FunctionComponent<Props & PropsWithChildren> = (props) => {
@@ -30,7 +30,9 @@ const BekreftelseModal: FunctionComponent<Props & PropsWithChildren> = (props) =
                 </Modal.Header>
                 <Modal.Body>{props.children}</Modal.Body>
                 <Modal.Footer>
-                    <Modal.Footer>{props.lagreKnapp}</Modal.Footer>
+                    <LagreOgAvbrytKnapp lagreFunksjon={props.bekreft} avbryt={() => props.lukkModal()}>
+                        OK
+                    </LagreOgAvbrytKnapp>
                 </Modal.Footer>
             </Modal>
         </div>
