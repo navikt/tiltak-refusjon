@@ -7,7 +7,6 @@ import 'react-day-picker/dist/style.css';
 import { useParams } from 'react-router';
 import BekreftelseModal from '~/BekreftelseModal';
 import { forlengFrist, useHentRefusjon } from '../../services/rest-service';
-
 import './ForlengFrist.less';
 import {
     finnFeilMeldingFraInputDialog,

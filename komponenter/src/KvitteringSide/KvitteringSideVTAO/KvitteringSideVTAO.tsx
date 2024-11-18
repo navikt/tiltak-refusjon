@@ -35,9 +35,9 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     }
 };
 
-type Props = {
+interface Props {
     refusjon: Refusjon;
-};
+}
 
 const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon }) => (
     <Boks variant="hvit">

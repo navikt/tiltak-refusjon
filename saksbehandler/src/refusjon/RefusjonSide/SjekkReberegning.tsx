@@ -5,7 +5,6 @@ import LagreKnapp from '../../komponenter/LagreKnapp';
 import VerticalSpacer from '~/VerticalSpacer';
 import BekreftelseModal from '~/BekreftelseModal';
 import { sjekkReberegning, useHentRefusjon } from '../../services/rest-service';
-
 import Utregning from './Utregning';
 import { Beregning } from '~/types/refusjon';
 

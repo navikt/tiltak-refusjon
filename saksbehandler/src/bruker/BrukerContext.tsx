@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext, useEffect, useState, PropsWithChildren } from 'react';
 import { hentInnloggetBruker } from '../services/rest-service';
-import { BrukerContextType, InnloggetBruker } from './BrukerContextType';
+import { BrukerContextType, InnloggetBruker } from '~/types/brukerContextType';
 import LokalLogin from '../LokalLogin/LokalLogin';
 
 const BrukerContext = React.createContext<BrukerContextType | undefined>(undefined);
