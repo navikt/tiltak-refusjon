@@ -2,7 +2,7 @@ import { BodyLong, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent, ReactElement } from 'react';
 import Boks from '~/Boks/Boks';
 import { statusTekst } from '~/types/messages';
-import { Korreksjonsgrunn, Refusjon } from '~/types/refusjon';
+import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
@@ -10,7 +10,6 @@ import VerticalSpacer from '~/VerticalSpacer';
 import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
 import TilskuddssatsVTAO from './TilskuddssatsVTAO';
 import SummeringBoksVTAO from './SummeringBoksVTAO';
-import { InnloggetBruker } from '~/types/brukerContextType';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {

@@ -36,9 +36,7 @@ const OpprettKorreksjon: FunctionComponent<{
                 onClick={async () => {
                     if (tiltakType === Tiltak.VTAO) {
                         try {
-                            if (nykorreksjon !== undefined) {
-                                await nykorreksjon();
-                            }
+                            await nykorreksjon();
                         } catch (error) {
                             setFeilmelding('Feil ved oppretting av korreksjonsutkast');
                         }
@@ -57,15 +55,14 @@ const OpprettKorreksjon: FunctionComponent<{
                 }}
                 bekreft={async () => {
                     try {
-                        if (nykorreksjon !== undefined) {
-                            await nykorreksjon();
-                        }
+                        await nykorreksjon();
                     } catch (error) {
                         const feilmelding =
-                            'feilmelding' in (error as any) ? (error as any).feilmelding : 'Feil ved oppretting av korreksjonsutkast';
+                            'feilmelding' in (error as any)
+                                ? (error as any).feilmelding
+                                : 'Feil ved oppretting av korreksjonsutkast';
                         setFeilmelding(feilmelding);
                     }
-                    nykorreksjon();
                 }}
                 tittel={'Opprett korreksjonsutkast'}
             >
