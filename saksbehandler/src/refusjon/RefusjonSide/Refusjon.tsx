@@ -147,7 +147,11 @@ const Komponent: FunctionComponent = () => {
                     <VerticalSpacer rem={1} />
 
                     {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                        <KvitteringSideVTAO refusjon={refusjon} />
+                        <KvitteringSideVTAO
+                            refusjon={refusjon}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                            opprettKorreksjon={opprettKorreksjon}
+                        />
                     ) : (
                         <KvitteringSide
                             refusjon={refusjon}

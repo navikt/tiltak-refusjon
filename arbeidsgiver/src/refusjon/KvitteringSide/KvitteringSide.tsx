@@ -2,7 +2,6 @@ import { Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent, ReactElement } from 'react';
 import Utregning from '../../komponenter/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
-
 import InntekterFraAMeldingenGammel from '../RefusjonSide/InntekterFraAMeldingenGammel';
 import InntekterFraTiltaketSvar from '../RefusjonSide/InntekterFraTiltaketSvar';
 import InntekterFraTiltaketSvarGammel from '../RefusjonSide/InntekterFraTiltaketSvarGammel';
@@ -10,7 +9,6 @@ import SummeringBoks from '../RefusjonSide/SummeringBoks';
 import TidligereRefunderbarBeløpKvittering from '../RefusjonSide/TidligereRefunderbarBeløpKvittering';
 import InformasjonFraAvtalen from '../RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '../RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
-
 import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
 import Statusmelding from '~/KvitteringSide/Statusmelding';
 import SummeringBoksNullbeløp from '../RefusjonSide/SummeringsBoksNullbeløp';
@@ -18,7 +16,7 @@ import Boks from '~/Boks';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { storForbokstav } from '~/utils/stringUtils';
-import { statusTekst } from '~/types/messages';
+import { statusTekst, tiltakstypeTekst } from '~/types/messages';
 import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
@@ -56,7 +54,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon }) => {
         <Boks variant="hvit">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading size="large" role="heading">
-                    Kvittering for refusjon
+                    Refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
                 </Heading>
                 {etikettForRefusjonStatus(refusjon)}
             </div>

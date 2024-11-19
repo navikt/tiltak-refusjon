@@ -1,8 +1,8 @@
-import { BodyLong, Heading, Tag } from '@navikt/ds-react';
-import { FunctionComponent, ReactElement } from 'react';
+import { BodyLong, ErrorMessage, Heading, Tag } from '@navikt/ds-react';
+import { FunctionComponent, ReactElement, useState } from 'react';
 import Boks from '~/Boks/Boks';
 import { statusTekst } from '~/types/messages';
-import { Refusjon } from '~/types/refusjon';
+import { Korreksjonsgrunn, Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
@@ -10,6 +10,8 @@ import VerticalSpacer from '~/VerticalSpacer';
 import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
 import TilskuddssatsVTAO from './TilskuddssatsVTAO';
 import SummeringBoksVTAO from './SummeringBoksVTAO';
+import { InnloggetBruker } from '~/types/brukerContextType';
+import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -37,35 +39,59 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
 
 interface Props {
     refusjon: Refusjon;
+    innloggetBruker?: InnloggetBruker;
+    opprettKorreksjon?: (
+        grunner: Korreksjonsgrunn[],
+        unntakOmInntekterFremitid?: number,
+        annenKorreksjonsGrunn?: string
+    ) => Promise<void>;
 }
-
-const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon }) => (
-    <Boks variant="hvit">
-        <Tag style={{ float: 'right' }} variant={'info'}>
-            Status: For tidlig
-        </Tag>
-        <VerticalSpacer rem={3} />
-        <Heading level="2" size="large">
-            Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
-        </Heading>
-        <VerticalSpacer rem={1} />
-        <BodyLong>
-            Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Tilskuddssatsen er 6 808 kroner per
-            måned. Satsen settes årlig av departementet og avtale- og refusjonsløsningen vil automatisk oppdateres når
-            det kommer nye satser.
-        </BodyLong>
-        <VerticalSpacer rem={1} />
-
-        <InformasjonFraAvtalenVTAO refusjon={refusjon} />
-        <VerticalSpacer rem={2} />
-        <TilskuddssatsVTAO refusjon={refusjon} />
-        <VerticalSpacer rem={1} />
-        <SummeringBoksVTAO
-            erForKorreksjon={false}
-            refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
-            status={refusjon.status}
-        />
-    </Boks>
-);
+const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruker, opprettKorreksjon }) => {
+    const [feilmelding, setFeilmelding] = useState<string>('');
+    return (
+        <>
+            {feilmelding && <ErrorMessage>{feilmelding}</ErrorMessage>}
+            <Boks variant="hvit">
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    {innloggetBruker !== undefined && (
+                        <>
+                            {innloggetBruker.harKorreksjonTilgang &&
+                                refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
+                                !refusjon.korreksjonId &&
+                                opprettKorreksjon !== undefined && (
+                                    <OpprettKorreksjon
+                                        tiltakType={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
+                                        opprettKorreksjon={opprettKorreksjon}
+                                    />
+                                )}
+                            <div style={{ marginBottom: '10px', float: 'right' }}>
+                                {etikettForRefusjonStatus(refusjon)}
+                            </div>
+                        </>
+                    )}
+                </div>
+                <VerticalSpacer rem={3} />
+                <Heading level="2" size="large">
+                    Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
+                </Heading>
+                <VerticalSpacer rem={1} />
+                <BodyLong>
+                    Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Tilskuddssatsen er 6 808
+                    kroner per måned. Satsen settes årlig av departementet og avtale- og refusjonsløsningen vil
+                    automatisk oppdateres når det kommer nye satser.
+                </BodyLong>
+                <VerticalSpacer rem={1} />
+                <InformasjonFraAvtalenVTAO
+                    tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                    bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}
+                />
+                <VerticalSpacer rem={2} />
+                <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
+                <VerticalSpacer rem={1} />
+                <SummeringBoksVTAO refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
+            </Boks>
+        </>
+    );
+};
 
 export default KvitteringSideVTAO;
