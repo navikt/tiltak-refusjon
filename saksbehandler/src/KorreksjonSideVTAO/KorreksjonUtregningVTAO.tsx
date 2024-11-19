@@ -15,7 +15,7 @@ const KorreksjonUtregningVTAO: FunctionComponent<{ tilskuddsgrunnlag: Tilskuddsg
 
     return (
         <div className={cls.className}>
-            <Heading level="3" size="medium">
+            <Heading level="2" size="medium">
                 Utregningen
             </Heading>
             <VerticalSpacer rem={1} />
