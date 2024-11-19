@@ -41,29 +41,24 @@ const Komponent: FunctionComponent = () => {
 
     switch (korreksjon.status) {
         case KorreksjonStatus.UTKAST:
-            return (
-                <>
-                    {korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
+            return korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
                         <KorreksjonSideVTAO refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
                     ) : (
                         <KorreksjonSide korreksjon={korreksjon} />
-                    )}
-                </>
-            );
+                    )
+            ;
         case KorreksjonStatus.TILBAKEKREVING:
         case KorreksjonStatus.OPPGJORT:
         case KorreksjonStatus.TILLEGSUTBETALING:
         case KorreksjonStatus.TILLEGGSUTBETALING_UTBETALT:
         case KorreksjonStatus.TILLEGGSUTBETALING_FEILET:
-            return (
-                <>
-                    {korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
+            return korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
                         <KorreksjonKvitteringSideVTAO korreksjon={korreksjon} />
                     ) : (
                         <KorreksjonKvitteringSide korreksjon={korreksjon} />
-                    )}
-                </>
-            );
+                    )
+                
+            ;
     }
 };
 
