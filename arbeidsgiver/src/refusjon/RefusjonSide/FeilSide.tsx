@@ -1,9 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { useParams } from 'react-router';
 import VerticalSpacer from '~/VerticalSpacer';
-
 import { useHentRefusjon } from '../../services/rest-service';
-
 import { formatterPenger } from '~/utils/PengeUtils';
 import { Alert, Label, BodyShort, Heading } from '@navikt/ds-react';
 import Boks from '~/Boks';
@@ -26,7 +24,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
             <Alert variant={props.advarselType}>{props.feiltekst}</Alert>
             <VerticalSpacer rem={2} />
             <Heading level="2" size="large">
-                Refusjon av {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
+                Refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
             </Heading>
             <VerticalSpacer rem={1} />
             <Label>Periode:</Label>

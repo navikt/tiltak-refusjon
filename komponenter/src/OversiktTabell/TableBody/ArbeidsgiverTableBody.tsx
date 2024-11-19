@@ -6,7 +6,7 @@ import BEMHelper from '~/utils/bem';
 import { formatterDato, formatterPeriode } from '~/utils';
 import { Refusjon } from '~/types/refusjon';
 import { kunStorForbokstav } from '~/utils/stringUtils';
-import { tiltakstypeTekst } from '~/types/messages';
+import { tiltakstypeTekstKort } from '~/types/messages';
 import { NORSK_DATO_FORMAT_SHORT } from '~/utils/datoUtils';
 
 type Props = {
@@ -37,7 +37,7 @@ const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
                             aria-labelledby={cls.element('deltaker')}
                         >
                             {kunStorForbokstav(
-                                tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
+                                tiltakstypeTekstKort[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
                             )}
                         </BodyShort>
                     </Table.DataCell>

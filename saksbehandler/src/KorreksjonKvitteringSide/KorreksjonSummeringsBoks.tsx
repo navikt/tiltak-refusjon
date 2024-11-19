@@ -1,65 +1,49 @@
 import Pengesedler from '@/asset/image/pengesedler.svg?react';
 import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
 import VerticalSpacer from '~/VerticalSpacer';
-
 import { formatterPenger } from '../utils/PengeUtils';
-
 import { BodyShort, Label } from '@navikt/ds-react';
-import { Korreksjon, Refusjonsgrunnlag } from '~/types/refusjon';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { formatterPeriode } from '~/utils';
+import Boks from '~/Boks';
 
-const Boks = styled.div`
-    display: flex;
-    flex-direction: row;
-    border: 3px solid #cce1f3;
-    border-radius: 4px;
-    padding: 1.75rem;
-`;
-
-type Props = {
-    korreksjon: Korreksjon;
-    refusjonsgrunnlag: Refusjonsgrunnlag;
-};
-
-const KorreksjonSummeringBoks: FunctionComponent<Props> = (props) => {
+const KorreksjonSummeringBoks: FunctionComponent<{ refusjonsgrunnlag: Refusjonsgrunnlag }> = ({
+    refusjonsgrunnlag,
+}) => {
     return (
-        <Boks>
+        <Boks variant="blå">
             <div style={{ paddingRight: '1.5rem' }}>
                 <Pengesedler />
             </div>
             <div>
-                {props.refusjonsgrunnlag.beregning?.refusjonsbeløp != null &&
-                    props.refusjonsgrunnlag.beregning?.refusjonsbeløp < 0 && (
+                {refusjonsgrunnlag.beregning?.refusjonsbeløp != null &&
+                    refusjonsgrunnlag.beregning?.refusjonsbeløp < 0 && (
                         <>
                             <VerticalSpacer rem={0.5} />
                             <BodyShort size="small">
                                 Dere skylder{' '}
-                                <b>
-                                    {formatterPenger(Math.abs(props.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0))}
-                                </b>{' '}
-                                for perioden{' '}
+                                <b>{formatterPenger(Math.abs(refusjonsgrunnlag.beregning?.refusjonsbeløp || 0))}</b> for
+                                perioden{' '}
                                 {formatterPeriode(
-                                    props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
-                                    props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
+                                    refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
+                                    refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                                 )}{' '}
                                 Beløpet vil tilbakekreves.
                             </BodyShort>
                         </>
                     )}
-                {props.refusjonsgrunnlag.beregning?.refusjonsbeløp != null &&
-                    props.refusjonsgrunnlag.beregning?.refusjonsbeløp >= 0 && (
+                {refusjonsgrunnlag.beregning?.refusjonsbeløp != null &&
+                    refusjonsgrunnlag.beregning?.refusjonsbeløp >= 0 && (
                         <>
                             <Label>Dere får utbetalt</Label>
                             <VerticalSpacer rem={0.5} />
                             <BodyShort size="small">
-                                <b>{formatterPenger(props.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0)}</b> for
-                                perioden{' '}
+                                <b>{formatterPenger(refusjonsgrunnlag.beregning?.refusjonsbeløp || 0)}</b> for perioden{' '}
                                 {formatterPeriode(
-                                    props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
-                                    props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
+                                    refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
+                                    refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                                 )}{' '}
-                                til kontonummer {props.refusjonsgrunnlag.bedriftKontonummer}
+                                til kontonummer {refusjonsgrunnlag.bedriftKontonummer}
                             </BodyShort>
                         </>
                     )}
