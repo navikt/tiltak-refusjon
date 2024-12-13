@@ -34,7 +34,6 @@ const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
                         <BodyShort
                             size="small"
                             className={cls.element('title_row_column')}
-                            aria-labelledby={cls.element('deltaker')}
                         >
                             {kunStorForbokstav(
                                 tiltakstypeTekstKort[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
@@ -45,7 +44,6 @@ const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
                         <BodyShort
                             size="small"
                             className={cls.element('title_row_column')}
-                            aria-labelledby={cls.element('deltaker')}
                         >
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.bedriftNavn}{' '}
                         </BodyShort>
@@ -54,7 +52,6 @@ const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
                         <BodyShort
                             size="small"
                             className={cls.element('title_row_column')}
-                            aria-labelledby={cls.element('deltaker')}
                         >
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}{' '}
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
@@ -64,7 +61,6 @@ const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
                         <BodyShort
                             size="small"
                             className={cls.element('title_row_column')}
-                            aria-labelledby={cls.element('periode')}
                         >
                             {formatterPeriode(
                                 refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
@@ -88,7 +84,6 @@ const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
                         <BodyShort
                             size="small"
                             className={cls.element('title_row_column')}
-                            aria-labelledby={cls.element('frist-godkjenning')}
                         >
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'VTAO'
                                 ? formatterDato(refusjon.fristForGodkjenning)

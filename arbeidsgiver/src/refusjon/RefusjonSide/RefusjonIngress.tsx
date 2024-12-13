@@ -17,7 +17,7 @@ const RefusjonIngress: FunctionComponent<Properties> = ({ refusjon }: PropsWithC
     return (
         <>
             <div className={cls.element('ingress')}>
-                <Heading level="1" size="large" role="heading">
+                <Heading level="1" size="large" role="heading" aria-level={1}>
                     Beregning av refusjon for{' '}
                     {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
                 </Heading>

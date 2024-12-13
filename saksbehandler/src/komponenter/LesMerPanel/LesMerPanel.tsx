@@ -34,7 +34,7 @@ const LesMerPanel: React.FunctionComponent<PropsWithChildren<Props>> = ({
                     <span>{åpen ? lukkLabel : åpneLabel}</span>
                 </InfoToggler>
             </div>
-            <div className="les-mer-panel__innhold" aria-expanded={åpen} aria-hidden={!åpen}>
+            <div className="les-mer-panel__innhold">
                 <Collapse isOpened={åpen}>
                     <>{children}</>
                 </Collapse>
