@@ -31,37 +31,25 @@ const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
                     }}
                 >
                     <Table.DataCell>
-                        <BodyShort
-                            size="small"
-                            className={cls.element('title_row_column')}
-                        >
+                        <BodyShort size="small" className={cls.element('title_row_column')}>
                             {kunStorForbokstav(
                                 tiltakstypeTekstKort[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
                             )}
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
-                        <BodyShort
-                            size="small"
-                            className={cls.element('title_row_column')}
-                        >
+                        <BodyShort size="small" className={cls.element('title_row_column')}>
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.bedriftNavn}{' '}
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
-                        <BodyShort
-                            size="small"
-                            className={cls.element('title_row_column')}
-                        >
+                        <BodyShort size="small" className={cls.element('title_row_column')}>
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}{' '}
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
-                        <BodyShort
-                            size="small"
-                            className={cls.element('title_row_column')}
-                        >
+                        <BodyShort size="small" className={cls.element('title_row_column')}>
                             {formatterPeriode(
                                 refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                 refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
@@ -81,10 +69,7 @@ const TableBodyArbeidsgiver: FunctionComponent<Props> = (props) => {
                         </div>
                     </Table.DataCell>
                     <Table.DataCell>
-                        <BodyShort
-                            size="small"
-                            className={cls.element('title_row_column')}
-                        >
+                        <BodyShort size="small" className={cls.element('title_row_column')}>
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'VTAO'
                                 ? formatterDato(refusjon.fristForGodkjenning)
                                 : ''}

@@ -16,7 +16,7 @@ const TilskuddssatsVTAO: FunctionComponent<Props> = ({ tilskuddsgrunnlag }) => {
             <Heading level="3" size="small">
                 Refusjon for {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
             </Heading>
-            <VerticalSpacer rem={1.01}/>
+            <VerticalSpacer rem={1} />
             <TextField
                 style={{ width: '40%' }}
                 label="Månedlig tilskuddssats"

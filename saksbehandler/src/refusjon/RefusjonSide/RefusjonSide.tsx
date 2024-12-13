@@ -33,7 +33,7 @@ const RefusjonSide: FunctionComponent = () => {
             <VerticalSpacer rem={2} />
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Heading size="large" level='1'>
+                <Heading size="large" level="1">
                     Beregning av refusjon for{' '}
                     {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
                 </Heading>
