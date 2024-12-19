@@ -12,6 +12,8 @@ import TilskuddssatsVTAO from './TilskuddssatsVTAO';
 import SummeringBoksVTAO from './SummeringBoksVTAO';
 import { InnloggetBruker } from '~/types/brukerContextType';
 import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
+import Statusmelding from '~/KvitteringSide/Statusmelding';
+import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -70,10 +72,20 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                         </>
                     )}
                 </div>
-                <VerticalSpacer rem={3} />
-                <Heading level="2" size="large">
-                    Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
-                </Heading>
+                <div style={{ display: 'flex',  justifyContent: 'space-between', flexDirection: 'row-reverse' }}>
+                    <div style={{ marginLeft: '5rem' }}>
+                        <LagreSomPdfKnapp avtaleId={refusjon.id} />
+                    </div>
+                    {etikettForRefusjonStatus(refusjon)}
+                </div>
+                <VerticalSpacer rem={1} />
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Heading level="2" size="large">
+                        Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
+                    </Heading>
+                </div>
+                <VerticalSpacer rem={1} />
+                <Statusmelding status={refusjon.status} />
                 <VerticalSpacer rem={1} />
                 <BodyLong>
                     Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Tilskuddssatsen er 6 808
