@@ -51,55 +51,54 @@ interface Props {
 }
 const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruker, opprettKorreksjon }) => {
     return (
-        <>
-            <Boks variant="hvit">
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    {innloggetBruker !== undefined &&
-                        innloggetBruker.harKorreksjonTilgang &&
-                        refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
-                        !refusjon.korreksjonId &&
-                        opprettKorreksjon !== undefined && (
-                            <OpprettKorreksjon
-                                tiltakType={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
-                                opprettKorreksjon={opprettKorreksjon}
-                            />
-                        )}
-                </div>
-                <VerticalSpacer rem={1} />
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Heading level="2" size="large">
-                        Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
-                    </Heading>
-                    {etikettForRefusjonStatus(refusjon)}
-                </div>
-                <VerticalSpacer rem={1} />
-                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
-                    <Statusmelding
-                        status={refusjon.status}
-                        sendesDato={formatterDato(
-                            moment(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom).add(1, 'days').toString()
-                        )}
-                        vtao={true}
-                        sendtTidspunkt={refusjon.godkjentAvArbeidsgiver}
-                    />
-                    <LagreSomPdfKnapp avtaleId={refusjon.id} />
-                </div>
-                <VerticalSpacer rem={2} />
-                <BodyLong>
-                    Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Satsen settes årlig av
-                    departementet og avtale- og refusjonsløsningen vil automatisk oppdateres når det kommer nye satser.
-                </BodyLong>
-                <VerticalSpacer rem={1} />
-                <InformasjonFraAvtalenVTAO
-                    tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                    bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}
+        <Boks variant="hvit">
+            {innloggetBruker !== undefined &&
+                innloggetBruker.harKorreksjonTilgang &&
+                refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
+                !refusjon.korreksjonId &&
+                opprettKorreksjon !== undefined && (
+                    <>
+                        <OpprettKorreksjon
+                            tiltakType={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
+                            opprettKorreksjon={opprettKorreksjon}
+                        />
+                        <VerticalSpacer rem={1} />
+                    </>
+                )}
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Heading level="2" size="large">
+                    Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
+                </Heading>
+                {etikettForRefusjonStatus(refusjon)}
+            </div>
+            <VerticalSpacer rem={1} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
+                <Statusmelding
+                    status={refusjon.status}
+                    sendesDato={formatterDato(
+                        moment(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom).add(1, 'days').toString()
+                    )}
+                    vtao={true}
+                    sendtTidspunkt={refusjon.godkjentAvArbeidsgiver}
                 />
-                <VerticalSpacer rem={2} />
-                <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
-                <VerticalSpacer rem={1} />
-                <SummeringBoksVTAO refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
-            </Boks>
-        </>
+                <LagreSomPdfKnapp avtaleId={refusjon.id} />
+            </div>
+            <VerticalSpacer rem={2} />
+            <BodyLong>
+                Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Satsen settes årlig av
+                departementet og avtale- og refusjonsløsningen vil automatisk oppdateres når det kommer nye satser.
+            </BodyLong>
+            <VerticalSpacer rem={1} />
+            <InformasjonFraAvtalenVTAO
+                tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}
+            />
+            <VerticalSpacer rem={2} />
+            <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
+            <VerticalSpacer rem={1} />
+            <SummeringBoksVTAO refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
+        </Boks>
     );
 };
 
