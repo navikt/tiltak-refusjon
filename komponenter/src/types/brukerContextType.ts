@@ -8,6 +8,7 @@ export interface BrukerContextType {
 export interface InnloggetBruker {
     identifikator: string;
     harKorreksjonTilgang: boolean;
+    rolle: 'BESLUTTER' | 'ARBEIDSGIVER';
     // organisasjoner: Organisasjon[];
     // tilganger: Bedrift[];
 }

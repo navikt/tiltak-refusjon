@@ -25,9 +25,6 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     } else if (refusjon.status === RefusjonStatus.UTBETALT) {
         return (
             <Tag variant="info">
-                {storForbokstav(statusTekst[RefusjonStatus.SENDT_KRAV])}{' '}
-                {refusjon.godkjentAvArbeidsgiver && formatterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_FORMAT)}
-                {', '}
                 {storForbokstav(statusTekst[refusjon.status])}{' '}
                 {refusjon.utbetaltTidspunkt && formatterDato(refusjon.utbetaltTidspunkt, NORSK_DATO_FORMAT)}
             </Tag>
@@ -59,11 +56,9 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon }) => {
                 {etikettForRefusjonStatus(refusjon)}
             </div>
             <VerticalSpacer rem={1} />
-            <div style={{ display: 'flex' }}>
-                <Statusmelding status={refusjon.status} />
-                <div style={{ marginLeft: '5rem' }}>
-                    <LagreSomPdfKnapp avtaleId={refusjon.id} />
-                </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
+                <Statusmelding status={refusjon.status} sendtTidspunkt={refusjon.godkjentAvArbeidsgiver} />
+                <LagreSomPdfKnapp avtaleId={refusjon.id} />
             </div>
 
             <VerticalSpacer rem={2} />
