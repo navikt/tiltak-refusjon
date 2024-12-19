@@ -82,7 +82,9 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                     vtao={true}
                     sendtTidspunkt={refusjon.godkjentAvArbeidsgiver}
                 />
-                <LagreSomPdfKnapp avtaleId={refusjon.id} />
+                {innloggetBruker !== undefined && innloggetBruker.rolle == 'ARBEIDSGIVER' && (
+                    <LagreSomPdfKnapp avtaleId={refusjon.id} />
+                )}
             </div>
             <VerticalSpacer rem={2} />
             <BodyLong>
