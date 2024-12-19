@@ -138,7 +138,10 @@ const refusjonMinusbelop: Refusjon = {
 
 export const RefusjonMinusbelop: Story = {
     name: 'Refusjon med minusbeløp',
-    args: { refusjon: refusjonMinusbelop, innloggetBruker: { identifikator: '', harKorreksjonTilgang: false } },
+    args: {
+        refusjon: refusjonMinusbelop,
+        innloggetBruker: { identifikator: '', harKorreksjonTilgang: false, rolle: 'ARBEIDSGIVER' },
+    },
     decorators: [
         (Story, args) => (
             <div>
