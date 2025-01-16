@@ -1,8 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { Alert, BodyShort } from '@navikt/ds-react';
 import { RefusjonStatus } from '~/types/status';
+import { formatterDato, NORSK_DATO_FORMAT } from '~/utils/datoUtils';
 
-const Statusmelding: FunctionComponent<{ status: RefusjonStatus }> = ({ status }) => {
+const Statusmelding: FunctionComponent<{
+    status: RefusjonStatus;
+    sendtTidspunkt?: string;
+    sendesDato?: string;
+    vtao?: boolean;
+}> = ({ status, sendtTidspunkt, sendesDato, vtao }) => {
     switch (status) {
         case RefusjonStatus.UTBETALING_FEILET:
             return (
@@ -12,11 +18,14 @@ const Statusmelding: FunctionComponent<{ status: RefusjonStatus }> = ({ status }
                 </Alert>
             );
         case RefusjonStatus.UTBETALT:
-            return (
-                <BodyShort size="small">
-                    Refusjonskravet er utbetalt. Det vil ta 3–4 dager før pengene kommer på kontoen.
-                </BodyShort>
-            );
+            if (sendtTidspunkt) {
+                return (
+                    <BodyShort size="small">
+                        Refusjonskravet ble sendt {formatterDato(sendtTidspunkt, NORSK_DATO_FORMAT)} og er nå utbetalt.
+                    </BodyShort>
+                );
+            }
+            return <BodyShort size="small">Refusjonskravet er utbetalt.</BodyShort>;
         case RefusjonStatus.GODKJENT_MINUSBELØP:
         case RefusjonStatus.GODKJENT_NULLBELØP:
             return (
@@ -24,6 +33,11 @@ const Statusmelding: FunctionComponent<{ status: RefusjonStatus }> = ({ status }
                     Refusjonskravet er godkjent. Denne refusjonen vil bli tatt vare på i oversikten.
                 </BodyShort>
             );
+        case RefusjonStatus.FOR_TIDLIG:
+            if (vtao) {
+                return <BodyShort size="small">Refusjonskravet vil sendes inn automatisk den {sendesDato}.</BodyShort>;
+            }
+            return <BodyShort size="small">Refusjonskravet kan ikke sendes inn enda.</BodyShort>;
         default:
             return (
                 <BodyShort size="small">

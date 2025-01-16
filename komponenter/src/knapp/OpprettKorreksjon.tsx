@@ -76,10 +76,8 @@ const OpprettKorreksjon: FunctionComponent<{
                         Korreksjonsgrunn.OPPDATERT_AMELDING,
                         Korreksjonsgrunn.ANNEN_GRUNN,
                     ].map((it, index) => (
-                        <>
-                            <Checkbox key={index} value={it}>
-                                {korreksjonsgrunnTekst[it]}
-                            </Checkbox>
+                        <React.Fragment key={index}>
+                            <Checkbox value={it}>{korreksjonsgrunnTekst[it]}</Checkbox>
                             {it === Korreksjonsgrunn.HENT_INNTEKTER_TO_MÅNEDER_FREM &&
                                 grunner.includes(Korreksjonsgrunn.HENT_INNTEKTER_TO_MÅNEDER_FREM) && (
                                     <TextField
@@ -107,7 +105,7 @@ const OpprettKorreksjon: FunctionComponent<{
                                     onChange={(event) => setAnnenKorreksjonsGrunn(event.target.value)}
                                 />
                             )}
-                        </>
+                        </React.Fragment>
                     ))}
                     {feilmelding && <ErrorMessage>{feilmelding}</ErrorMessage>}
                 </CheckboxGroup>

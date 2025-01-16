@@ -80,6 +80,18 @@ const Komponent: FunctionComponent = () => {
 
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
+            if (refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype == 'VTAO') {
+                return (
+                    <>
+                        <Fleks>
+                            <HendelsesLogg refusjonId={refusjonId} />
+                        </Fleks>
+                        <VerticalSpacer rem={1} />
+
+                        <KvitteringSideVTAO refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
+                    </>
+                );
+            }
             return (
                 <>
                     <Fleks>

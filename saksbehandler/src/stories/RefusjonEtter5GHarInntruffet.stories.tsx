@@ -21,6 +21,7 @@ type Story = StoryObj<typeof meta>;
 const innloggetBruker: InnloggetBruker = {
     harKorreksjonTilgang: false,
     identifikator: '123456',
+    rolle: 'ARBEIDSGIVER',
 };
 
 const etter5GRefusjon: Refusjon = {

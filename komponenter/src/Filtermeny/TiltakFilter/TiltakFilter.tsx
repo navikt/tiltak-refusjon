@@ -7,6 +7,7 @@ interface OptionProps {
     value: string;
     label?: string;
     hidden?: boolean;
+    description?: string;
 }
 
 interface Props {
@@ -23,7 +24,8 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, option
         { value: Tiltak.SOMMERJOBB, label: 'Sommerjobb' },
         {
             value: Tiltak.VTAO,
-            label: 'Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)',
+            label: 'VTA-O',
+            description: 'Varig tilrettelagt arbeid i ordinær virksomhet',
             hidden: options.skjulVTAO,
         },
     ];
@@ -49,6 +51,7 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, option
                                     key={index}
                                     role="radio"
                                     value={option.value}
+                                    description={option.description}
                                     onChange={(event) => {
                                         const nyTiltaktype = event.currentTarget.value as Tiltak;
                                         oppdaterFilter({ tiltakstype: nyTiltaktype || undefined });
