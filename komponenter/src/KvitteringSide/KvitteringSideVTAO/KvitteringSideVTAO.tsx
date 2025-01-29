@@ -88,8 +88,8 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
             </div>
             <VerticalSpacer rem={2} />
             <BodyLong>
-                Arbeidsgiveren får et tilskudd fra NAV for varig tilrettelagt arbeid. Satsen settes årlig av
-                departementet og avtale- og refusjonsløsningen vil automatisk oppdateres når det kommer nye satser.
+                Dere får et tilskudd fra NAV for varig tilrettelagt arbeid. Satsen settes årlig av departementet og
+                avtale- og refusjonsløsningen vil automatisk oppdateres når det kommer nye satser.
             </BodyLong>
             <VerticalSpacer rem={1} />
             <InformasjonFraAvtalenVTAO
