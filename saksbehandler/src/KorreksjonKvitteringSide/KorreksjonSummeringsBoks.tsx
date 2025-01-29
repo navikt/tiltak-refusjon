@@ -27,8 +27,8 @@ const KorreksjonSummeringBoks: FunctionComponent<{ refusjonsgrunnlag: Refusjonsg
                                 {formatterPeriode(
                                     refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                     refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
-                                )}{' '}
-                                Beløpet vil tilbakekreves.
+                                )}
+                                . Beløpet vil tilbakekreves.
                             </BodyShort>
                         </>
                     )}
