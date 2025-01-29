@@ -104,7 +104,9 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                     </Table.DataCell>
                     <Table.DataCell>
                         <BodyShort size="small" aria-labelledby={cls.element('frist-godkjenning')}>
-                            {formatterDato(refusjon.fristForGodkjenning)}
+                            {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'VTAO'
+                                ? formatterDato(refusjon.fristForGodkjenning)
+                                : ''}
                         </BodyShort>
                     </Table.DataCell>
                 </Table.Row>
