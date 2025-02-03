@@ -110,7 +110,11 @@ const Komponent: FunctionComponent = () => {
             return (
                 <>
                     <Fleks>
-                        <ForlengFrist />
+                        <ForlengFrist
+                            refusjonId={refusjon.id}
+                            tidligsteFrist={refusjon.fristForGodkjenning}
+                            senesteFrist={refusjon.senestMuligeGodkjenningsfrist}
+                        />
                         {brukerContext.innloggetBruker.harKorreksjonTilgang && (
                             <MerkForUnntakOmInntekterToMånederFrem refusjon={refusjon} />
                         )}

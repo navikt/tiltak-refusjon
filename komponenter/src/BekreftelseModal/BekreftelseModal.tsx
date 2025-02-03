@@ -23,17 +23,22 @@ const BekreftelseModal: FunctionComponent<Props & PropsWithChildren> = (props) =
                 className={cls.element('container')}
                 style={props.containerStyle}
             >
-                <Modal.Header>
-                    <Heading size="large" className={cls.element('tittel')}>
-                        {props.tittel}
-                    </Heading>
-                </Modal.Header>
-                <Modal.Body>{props.children}</Modal.Body>
-                <Modal.Footer>
-                    <LagreOgAvbrytKnapp lagreFunksjon={props.bekreft} avbryt={() => props.lukkModal()}>
-                        OK
-                    </LagreOgAvbrytKnapp>
-                </Modal.Footer>
+                {/* Rydder feilmeldinger fra api-kall i LagreOgAvbrytKnapp når modal lukkes */}
+                {props.isOpen && (
+                    <>
+                        <Modal.Header>
+                            <Heading size="large" className={cls.element('tittel')}>
+                                {props.tittel}
+                            </Heading>
+                        </Modal.Header>
+                        <Modal.Body>{props.children}</Modal.Body>
+                        <Modal.Footer>
+                            <LagreOgAvbrytKnapp lagreFunksjon={props.bekreft} avbryt={() => props.lukkModal()}>
+                                OK
+                            </LagreOgAvbrytKnapp>
+                        </Modal.Footer>
+                    </>
+                )}
             </Modal>
         </div>
     );

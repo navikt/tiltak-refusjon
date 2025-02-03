@@ -1,3 +1,5 @@
+import { format, parse } from 'date-fns';
+
 export interface ForlengeDatoSkjemaGruppeFeil {
     id: string;
     feilMelding: string;
@@ -27,22 +29,23 @@ export const disableAfter = (sisteFristDato: string, antallMnd: number): string 
         .join('-');
 };
 
-export const getDateStringFraDatoVelger = (datoFraDatoVelger: Date): string => {
-    return datoFraDatoVelger
-        .toLocaleDateString('no-No')
-        .split('.')
-        .map((d, i) => (d.length === 1 ? '0'.concat(d) : d))
-        .join('.');
+const datoTilISOString = (dato: Date): string => {
+    return format(dato, 'yyyy-MM-dd');
 };
 
-export const formatDateToIsoDateFormat = (date: string): string => {
-    const d = date
-        .split('.')
-        .map((d, i) => (d.length === 1 ? '0'.concat(d) : d))
-        .join('.')
-        .split('.');
-    return d.length === 3 ? d[2].concat('-').concat(d[1]).concat('-').concat(d[0]) : date;
+export const datoTilNorskString = (dato: Date): string => {
+    return format(dato, 'dd.MM.yyyy');
 };
+
+export const parseNorskDato = (date: string): Date => {
+    return parse(date, 'dd.MM.yyyy', new Date());
+};
+
+export const norskDatoTilISOString = (date: string): string => {
+    return datoTilISOString(parse(date, 'dd.MM.yyyy', new Date()));
+};
+
+export const erGyldigDato = (dato: Date) => !isNaN(dato.getTime());
 
 export const finnFeilMeldingFraInputDialog = (
     id: string[],
