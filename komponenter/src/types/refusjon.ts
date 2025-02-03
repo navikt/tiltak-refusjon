@@ -26,6 +26,7 @@ export interface Refusjon {
     sistEndret: string;
     åpnetFørsteGang: string;
     harInntektIAlleMåneder: boolean;
+    senestMuligeGodkjenningsfrist: string;
 }
 
 export interface Korreksjon {
