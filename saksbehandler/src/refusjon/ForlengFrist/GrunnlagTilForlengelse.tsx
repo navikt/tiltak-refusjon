@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import { ForlengeDatoSkjemaGruppeFeil, finnFeilMeldingFraInputDialog } from './forlengFristUtils';
 import { RadioGroup, Radio, Textarea, Fieldset } from '@navikt/ds-react';
 
@@ -12,27 +12,26 @@ interface Props {
 
 const GrunnlagTilForlengelse: FunctionComponent<Props> = (props) => {
     const { grunnlag, setGrunnlag, annetGrunnlag, setAnnetGrunnlag, skjemaGruppeFeilmeldinger } = props;
+
     return (
         <div>
             <Fieldset legend>
                 <RadioGroup
                     error={finnFeilMeldingFraInputDialog(['mangler-grunnlag'], skjemaGruppeFeilmeldinger)}
                     legend="Årsaker til forlengelse av refusjonsfristen?"
+                    value={grunnlag}
+                    onChange={setGrunnlag}
                 >
-                    <Radio value="" name="begrunnelse" onClick={() => setGrunnlag('Ikke-tilgang')}>
+                    <Radio value="Ikke-tilgang" name="begrunnelse">
                         Ikke tilgang
                     </Radio>
-                    <Radio value={true} name="begrunnelse" onClick={() => setGrunnlag('Finner ikke inntekt')}>
+                    <Radio value="Finner ikke inntekt" name="begrunnelse">
                         Finner ikke inntekt fra a-melding
                     </Radio>
-                    <Radio
-                        value={true}
-                        name="begrunnelse"
-                        onClick={() => setGrunnlag('Ikke mottatt SMS med lenke til refusjon og varsel')}
-                    >
+                    <Radio value="Ikke mottatt SMS med lenke til refusjon og varsel" name="begrunnelse">
                         Ikke mottatt SMS med lenke til refusjon og varsel
                     </Radio>
-                    <Radio value={true} name="begrunnelse" onClick={() => setGrunnlag('Annet')}>
+                    <Radio value="Annet" name="begrunnelse">
                         Annet
                     </Radio>
                 </RadioGroup>
