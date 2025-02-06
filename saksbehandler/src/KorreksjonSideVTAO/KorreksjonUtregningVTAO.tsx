@@ -3,14 +3,15 @@ import MinusTegn from '@/asset/image/minusTegn.svg?react';
 import { Heading, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import '../refusjon/RefusjonSide/Utregning.less';
-import { Tilskuddsgrunnlag } from '~/types/refusjon';
+import { Refusjonsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import VerticalSpacer from '~/VerticalSpacer';
 import { formatterPenger } from '~/utils/PengeUtils';
 
-const KorreksjonUtregningVTAO: FunctionComponent<{ tilskuddsgrunnlag: Tilskuddsgrunnlag }> = ({
-    tilskuddsgrunnlag,
+const KorreksjonUtregningVTAO: FunctionComponent<{ refusjonsgrunnlag: Refusjonsgrunnlag }> = ({
+    refusjonsgrunnlag,
 }) => {
+    const { tilskuddsgrunnlag, beregning } = refusjonsgrunnlag;
     const cls = BEMHelper('utregning');
 
     return (
@@ -34,8 +35,8 @@ const KorreksjonUtregningVTAO: FunctionComponent<{ tilskuddsgrunnlag: Tilskuddsg
                             <ErlikTegn height={'0.80rem'} width={'0.80rem'} />{' '}
                         </Table.DataCell>
                         <Table.DataCell align="right" style={{ width: '7rem' }}>
-                            <MinusTegn height={'0.80rem'} width={'0.80rem'} />
-                            {formatterPenger(Math.abs(tilskuddsgrunnlag.tilskuddsbeløp))}
+                            <MinusTegn style={{ display: 'inline' }} height={'0.80rem'} width={'0.80rem'} />
+                            {formatterPenger(Math.abs(beregning!!.refusjonsbeløp))}
                         </Table.DataCell>
                     </Table.Row>
                 </Table.Body>

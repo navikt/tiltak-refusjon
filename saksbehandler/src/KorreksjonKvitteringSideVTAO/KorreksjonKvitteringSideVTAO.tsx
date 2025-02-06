@@ -32,22 +32,18 @@ const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
                 bedriftKontonummerInnhentetTidspunkt={korreksjon.refusjonsgrunnlag.bedriftKontonummerInnhentetTidspunkt}
             />
             <VerticalSpacer rem={2} />
-            <KorreksjonUtregningVTAO tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
+            <KorreksjonUtregningVTAO refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
             <VerticalSpacer rem={2} />
-            {(korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp || 0) > 0 && (
+            {(korreksjon.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0) < 0 && (
                 <Alert variant="warning">
                     <BodyShort>
                         <b>Beslutter NAV:</b> Du må vurdere tilbakekreving i samsvar med gjeldene rutine på{' '}
-                        <b>
-                            {formatterPenger(
-                                Math.abs(korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp || 0)
-                            )}
-                        </b>
+                        <b>{formatterPenger(Math.abs(korreksjon.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0))}</b>
                     </BodyShort>
                 </Alert>
             )}
             <VerticalSpacer rem={2} />
-            <KorreksjonSummeringBoksVTAO tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
+            <KorreksjonSummeringBoksVTAO refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
         </Boks>
     );
 };
