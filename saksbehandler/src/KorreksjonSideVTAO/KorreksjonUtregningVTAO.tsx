@@ -34,7 +34,7 @@ const KorreksjonUtregningVTAO: FunctionComponent<{ tilskuddsgrunnlag: Tilskuddsg
                             <ErlikTegn height={'0.80rem'} width={'0.80rem'} />{' '}
                         </Table.DataCell>
                         <Table.DataCell align="right" style={{ width: '7rem' }}>
-                            <MinusTegn height={'0.80rem'} width={'0.80rem'} />
+                            <MinusTegn style={{ display: 'inline-block' }} height={'0.80rem'} width={'0.80rem'} />
                             {formatterPenger(Math.abs(tilskuddsgrunnlag.tilskuddsbeløp))}
                         </Table.DataCell>
                     </Table.Row>
