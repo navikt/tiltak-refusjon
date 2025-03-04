@@ -6,18 +6,21 @@ import FeilSide from './FeilSide';
 import RefusjonSide from './RefusjonSide';
 import { BodyShort } from '@navikt/ds-react';
 import { useParams } from 'react-router-dom';
-import { oppdaterRefusjonFetcher, useHentKorreksjon, useHentRefusjon } from '../../services/rest-service';
+import { oppdaterRefusjonFetcher, useHentKorreksjon, useHentRefusjon } from '@/services/rest-service';
 import useSWRMutation from 'swr/mutation';
 import { mutate } from 'swr';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
 import { Refusjon as RefusjonType } from '~/types/refusjon';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
+import { BrukerContextType } from '~/types/brukerContextType';
+import { useInnloggetBruker } from '@/bruker/BrukerContext';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
     const refusjon = useHentRefusjon(refusjonId);
     const erLastet = useRef(false);
+    const brukerContext: BrukerContextType = useInnloggetBruker();
 
     const { trigger, isMutating, reset } = useSWRMutation(`/refusjon/${refusjonId}`, oppdaterRefusjonFetcher);
 
@@ -47,7 +50,7 @@ const Komponent: FunctionComponent = () => {
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
             return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAO refusjon={refusjon} />
+                <KvitteringSideVTAO innloggetBruker={brukerContext.innloggetBruker} refusjon={refusjon} />
             ) : (
                 <FeilSide
                     advarselType="info"
@@ -86,7 +89,7 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.UTBETALT:
         case RefusjonStatus.UTBETALING_FEILET:
             return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAO refusjon={refusjon} />
+                <KvitteringSideVTAO innloggetBruker={brukerContext.innloggetBruker} refusjon={refusjon} />
             ) : (
                 <KvitteringSide refusjon={refusjon} />
             );

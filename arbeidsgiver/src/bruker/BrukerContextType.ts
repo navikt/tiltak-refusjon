@@ -1,10 +1,9 @@
 import { Organisasjon } from '@navikt/bedriftsmeny/lib/types/organisasjon';
 import { Bedriftvalg } from './bedriftsmenyRefusjon/api/api';
 import { Dispatch, SetStateAction } from 'react';
+import { InnloggetBruker as FellesInnloggetBruker } from '~/types/brukerContextType';
 
 export type Bedrift = string;
-
-export type Bedriftliste = Array<Bedrift> | undefined;
 
 export interface BrukerContextType {
     innloggetBruker: InnloggetBruker;
@@ -12,8 +11,7 @@ export interface BrukerContextType {
     setValgtBedrift: Dispatch<SetStateAction<Bedriftvalg>>;
 }
 
-export interface InnloggetBruker {
-    identifikator: string;
+export interface InnloggetBruker extends FellesInnloggetBruker {
     organisasjoner: Organisasjon[];
     tilganger: Bedrift[];
 }
