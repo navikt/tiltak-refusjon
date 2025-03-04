@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Alert, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
 import moment from 'moment';
 import { Tilskuddsgrunnlag } from '~/types/refusjon';
@@ -6,20 +6,28 @@ import Boks from '~/Boks';
 import VerticalSpacer from '~/VerticalSpacer';
 import IkonRad from '~/IkonRad/IkonRad';
 import EksternLenke from '~/EksternLenke/EksternLenke';
-import { formatterDato, formatterPeriode } from '~/utils';
+import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { InnloggetRolle } from '~/types/brukerContextType';
 
 interface Props {
     tilskuddsgrunnlag: Tilskuddsgrunnlag;
     bedriftKontonummer: string | null | undefined;
     åpnetFørsteGang?: string;
+    bedriftKontonummerInnhentetTidspunkt?: string;
+    innloggetRolle?: InnloggetRolle;
 }
 
 const InformasjonFraAvtalenVTAO: FunctionComponent<Props> = ({
     tilskuddsgrunnlag,
     bedriftKontonummer,
     åpnetFørsteGang,
+    bedriftKontonummerInnhentetTidspunkt,
+    innloggetRolle,
 }) => {
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${tilskuddsgrunnlag.avtaleId}`;
+
+    const erArbeidsgiver = innloggetRolle === 'ARBEIDSGIVER';
+
     return (
         <Boks variant="grå">
             <Heading level="3" size="small">
@@ -60,8 +68,20 @@ const InformasjonFraAvtalenVTAO: FunctionComponent<Props> = ({
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Kontonummer:</Label>
-                {bedriftKontonummer === null && !åpnetFørsteGang && <Loader type="L" />}
-                {bedriftKontonummer && (
+                {bedriftKontonummer === null && erArbeidsgiver && <Loader type="L" />}
+                {!erArbeidsgiver && (
+                    <BodyShort size="small">
+                        {bedriftKontonummerInnhentetTidspunkt ? (
+                            <>
+                                {bedriftKontonummer ?? 'Ikke funnet'} (hentet{' '}
+                                {formatterDato(bedriftKontonummerInnhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)})
+                            </>
+                        ) : (
+                            'Ikke oppgitt'
+                        )}
+                    </BodyShort>
+                )}
+                {bedriftKontonummer && erArbeidsgiver && (
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <BodyShort size="small">{bedriftKontonummer}</BodyShort>
                     </div>

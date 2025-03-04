@@ -18,7 +18,7 @@ import moment from 'moment';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     const statusetikettTekst =
-        refusjon.status == RefusjonStatus.FOR_TIDLIG
+        refusjon.status === RefusjonStatus.FOR_TIDLIG
             ? `sendes ${formatterDato(moment(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom).add(1, 'days').toString())}`
             : statusTekst[refusjon.status];
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -50,6 +50,8 @@ interface Props {
     ) => Promise<void>;
 }
 const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruker, opprettKorreksjon }) => {
+    const innloggetRolle = innloggetBruker?.rolle;
+
     return (
         <Boks variant="hvit">
             {innloggetBruker !== undefined &&
@@ -82,7 +84,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
                     vtao={true}
                     sendtTidspunkt={refusjon.godkjentAvArbeidsgiver}
                 />
-                {innloggetBruker !== undefined && innloggetBruker.rolle == 'ARBEIDSGIVER' && (
+                {innloggetBruker !== undefined && innloggetBruker.rolle === 'ARBEIDSGIVER' && (
                     <LagreSomPdfKnapp avtaleId={refusjon.id} />
                 )}
             </div>
@@ -95,6 +97,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
             <InformasjonFraAvtalenVTAO
                 tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}
+                innloggetRolle={innloggetRolle}
             />
             <VerticalSpacer rem={2} />
             <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
