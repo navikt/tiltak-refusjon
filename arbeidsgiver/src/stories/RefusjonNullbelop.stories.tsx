@@ -330,6 +330,7 @@ const refusjonMedNullbelop: Refusjon = {
     sistEndret: '2024-01-19T12:51:16.363278Z',
     harTattStillingTilAlleInntektslinjer: true,
     harInntektIAlleMåneder: false,
+    senestMuligeGodkjenningsfrist: '2024-04-29',
 };
 
 export const RefusjonNullbelop: Story = {

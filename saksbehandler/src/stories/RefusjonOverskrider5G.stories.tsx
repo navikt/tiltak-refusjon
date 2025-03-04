@@ -106,6 +106,7 @@ const over5gRefusjon: Refusjon = {
     harTattStillingTilAlleInntektslinjer: true,
     åpnetFørsteGang: '2024-01-22T15:55:56.514591Z',
     sistEndret: '2024-01-22T15:56:06.292479Z',
+    senestMuligeGodkjenningsfrist: '2024-04-29',
 };
 
 export const RefusjonOverskrider5G: Story = {

@@ -105,6 +105,7 @@ const førOver5GRefusjon: Refusjon = {
     sistEndret: '2024-02-01T13:36:16.955213Z',
     harTattStillingTilAlleInntektslinjer: true,
     harInntektIAlleMåneder: false,
+    senestMuligeGodkjenningsfrist: '2024-04-29',
 };
 
 export const RefusjonFør5G: Story = {
@@ -200,6 +201,7 @@ const over5gRefusjon: Refusjon = {
     sistEndret: '2024-02-01T13:36:34.652733Z',
     harTattStillingTilAlleInntektslinjer: true,
     harInntektIAlleMåneder: false,
+    senestMuligeGodkjenningsfrist: '2024-04-29',
 };
 
 export const RefusjonOverskrider5G: Story = {
@@ -295,6 +297,7 @@ const etter5GRefusjon: Refusjon = {
     sistEndret: '2024-02-01T13:39:56.115464Z',
     harTattStillingTilAlleInntektslinjer: true,
     harInntektIAlleMåneder: false,
+    senestMuligeGodkjenningsfrist: '2024-04-29',
 };
 
 export const RefusjonEtter5G: Story = {

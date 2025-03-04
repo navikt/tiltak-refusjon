@@ -137,6 +137,7 @@ const refusjon: Refusjon = {
     sistEndret: '2024-01-22T15:22:39.250746Z',
     harTattStillingTilAlleInntektslinjer: true,
     harInntektIAlleMåneder: false,
+    senestMuligeGodkjenningsfrist: '2024-04-29',
 };
 
 const korreksjon: Korreksjon = {
