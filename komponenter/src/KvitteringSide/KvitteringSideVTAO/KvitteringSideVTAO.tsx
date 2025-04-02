@@ -16,10 +16,24 @@ import Statusmelding from '~/KvitteringSide/Statusmelding';
 import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
 import moment from 'moment';
 
+/**
+ * For etterregistrerte avtaler av typen VTA-O vil det eksistere refusjoner som er "for tidlig",
+ * hvor tilskuddsperioden var langt tilbake i tid, men de har allikevel ikke blitt sendt ut enda.
+ * Da vil det se minst rart ut hvis vi sier at de sendes i morgen.
+ */
+const refusjonSendesDato = (refusjon: Refusjon): string => {
+    const enDagEtterTilskuddsperioden = moment(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom).add(1, 'days');
+    const morgendagensDato = moment().add(1, 'days');
+    const tidligsteDato = enDagEtterTilskuddsperioden.isBefore(morgendagensDato)
+        ? morgendagensDato
+        : enDagEtterTilskuddsperioden;
+    return formatterDato(tidligsteDato.toString());
+};
+
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     const statusetikettTekst =
         refusjon.status === RefusjonStatus.FOR_TIDLIG
-            ? `sendes ${formatterDato(moment(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom).add(1, 'days').toString())}`
+            ? `sendes ${refusjonSendesDato(refusjon)}`
             : statusTekst[refusjon.status];
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
         return <Tag variant="error">{storForbokstav(statusetikettTekst)} </Tag>;
@@ -78,9 +92,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
                 <Statusmelding
                     status={refusjon.status}
-                    sendesDato={formatterDato(
-                        moment(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom).add(1, 'days').toString()
-                    )}
+                    sendesDato={refusjonSendesDato(refusjon)}
                     vtao={true}
                     sendtTidspunkt={refusjon.godkjentAvArbeidsgiver}
                 />
