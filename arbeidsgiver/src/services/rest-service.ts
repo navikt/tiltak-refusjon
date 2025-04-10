@@ -1,9 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
 import useSWR, { SWRConfiguration, mutate } from 'swr';
-import { BrukerContextType, InnloggetBruker } from '../bruker/BrukerContextType';
-import { BedriftvalgType } from '../bruker/bedriftsmenyRefusjon/api/api';
-import { Korreksjon, PageableRefusjon, Refusjon } from '~/types/refusjon';
-import { Filter } from '~/types/filter';
+
+import { Aktsomhet, Filter, Korreksjon, PageableRefusjon, Refusjon } from '~/types';
+
+import { BrukerContextType, InnloggetBruker } from '@/bruker/BrukerContextType';
+import { BedriftvalgType } from '@/bruker/bedriftsmenyRefusjon/api/api';
 
 export class FeilkodeError extends Error {}
 export class ApiError extends Error {}
@@ -228,4 +229,8 @@ export const hentInntekterLengerFrem = async (
         }
     );
     await mutate(`/refusjon/${refusjonId}`);
+};
+
+export const useAvtaleKreverAktsomhet = (refusjonId?: string) => {
+    return useSWR<Aktsomhet>(`/refusjon/${refusjonId}/aktsomhet`, swrConfig);
 };
