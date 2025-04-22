@@ -7,6 +7,7 @@ import { Refusjon } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
 import BEMHelper from '~/utils/bem';
 import { kunStorForbokstav } from '~/utils/stringUtils';
+import  NavnsMedDiskresjonskode from '~/OversiktTabell/NavnsMedDiskresjonskode';
 
 type Props = {
     refusjoner: Refusjon[];
@@ -63,11 +64,19 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
+                        <NavnsMedDiskresjonskode
+                            fornavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}
+                            etternavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
+                            diskresjonskode={
+                                refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.diskresjonskode
+                            }>
+                        </NavnsMedDiskresjonskode>
                         <BodyShort size="small" aria-labelledby={cls.element('deltaker')}>
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}{' '}
                             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
                         </BodyShort>
                     </Table.DataCell>
+                    {}
                     <Table.DataCell>
                         <BodyShort
                             size="small"
