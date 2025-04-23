@@ -53,6 +53,7 @@ const KorreksjonSide: FunctionComponent<Props> = ({ korreksjon }) => {
             </BodyShort>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
+                refusjonId={korreksjon.korrigererRefusjonId}
                 tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={korreksjon.refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={korreksjon.refusjonsgrunnlag.bedriftKontonummer}

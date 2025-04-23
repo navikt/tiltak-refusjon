@@ -6,6 +6,7 @@ import { Filter } from '~/types/filter';
 import { Beregning, Hendelse, Korreksjon, Korreksjonsgrunn, PageableRefusjon, Refusjon } from '~/types/refusjon';
 import { useFilter } from '@/refusjon/oversikt/FilterContext';
 import { ApiError, FeilkodeError } from '~/types/errors';
+import { Aktsomhet } from '~/types';
 
 const api = axios.create({
     baseURL: '/api/saksbehandler',
@@ -203,4 +204,8 @@ export const settHarFerietrekkForSammeMåned = async (korreksjonId: string, harF
     });
     await mutate(`/korreksjon/${korreksjonId}`);
     return response.data;
+};
+
+export const useAvtaleKreverAktsomhet = (refusjonId?: string) => {
+    return useSWR<Aktsomhet>(`/refusjon/${refusjonId}/aktsomhet`, swrConfig);
 };
