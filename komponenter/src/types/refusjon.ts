@@ -1,4 +1,3 @@
-import { Diskresjonskode } from './aktsomhet';
 import { KorreksjonStatus, RefusjonStatus } from './status';
 import { Tiltak } from './tiltak';
 import { Diskresjonskode } from './aktsomhet';
