@@ -1,3 +1,4 @@
+import { Diskresjonskode } from './aktsomhet';
 import { KorreksjonStatus, RefusjonStatus } from './status';
 import { Tiltak } from './tiltak';
 import { Diskresjonskode } from './aktsomhet';
@@ -37,7 +38,11 @@ export interface Refusjon {
     åpnetFørsteGang: string;
     harInntektIAlleMåneder: boolean;
     senestMuligeGodkjenningsfrist: string;
+<<<<<<< HEAD
     diskresjonskode: Diskresjonskode;
+=======
+    diskresjonskode: Diskresjonskode
+>>>>>>> 936fa13 (Lagt til Addressesperre tags på refusjon)
 }
 
 export interface Korreksjon {
