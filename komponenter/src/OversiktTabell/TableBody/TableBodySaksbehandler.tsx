@@ -3,21 +3,21 @@ import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StatusTekst from '~/StatusTekst';
 import { tiltakstypeTekstKort } from '~/types/messages';
-import { Refusjon } from '~/types/refusjon';
+import { BegrensetRefusjon } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
 import BEMHelper from '~/utils/bem';
 import { kunStorForbokstav } from '~/utils/stringUtils';
 import  NavnMedDiskresjonskode from '~/OversiktTabell/NavnMedDiskresjonskode';
 
 type Props = {
-    refusjoner: Refusjon[];
+    refusjoner: BegrensetRefusjon[];
 };
 const cls = BEMHelper('oversiktTabell');
 
 const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
     const navigate = useNavigate();
 
-    const navigerTilRefusjonEllerKorreksjon = (refusjon: Refusjon) => {
+    const navigerTilRefusjonEllerKorreksjon = (refusjon: BegrensetRefusjon) => {
         if (refusjon.korreksjonId) {
             navigate({
                 pathname: `/korreksjon/${refusjon.korreksjonId}`,

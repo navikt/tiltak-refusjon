@@ -1,13 +1,23 @@
 import { Diskresjonskode } from './aktsomhet';
 import { KorreksjonStatus, RefusjonStatus } from './status';
 import { Tiltak } from './tiltak';
+import { Diskresjonskode } from './aktsomhet';
 
 export interface PageableRefusjon {
     currentPage: number;
-    refusjoner: Refusjon[];
+    refusjoner: BegrensetRefusjon[];
     size: number;
     totalItems: number;
     totalPages: number;
+}
+
+export interface BegrensetRefusjon {
+    id: string;
+    status: RefusjonStatus;
+    fristForGodkjenning: string;
+    korreksjonId?: string;
+    refusjonsgrunnlag: Refusjonsgrunnlag;
+    diskresjonskode: Diskresjonskode;
 }
 
 export interface Refusjon {
@@ -140,7 +150,7 @@ export enum Korreksjonsgrunn {
 
 export interface PageableRefusjon {
     currentPage: number;
-    refusjoner: Refusjon[];
+    refusjoner: BegrensetRefusjon[];
     size: number;
     totalItems: number;
     totalPages: number;
