@@ -7,7 +7,7 @@ import { Refusjon } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
 import BEMHelper from '~/utils/bem';
 import { kunStorForbokstav } from '~/utils/stringUtils';
-import  NavnsMedDiskresjonskode from '~/OversiktTabell/NavnsMedDiskresjonskode';
+import  NavnMedDiskresjonskode from '~/OversiktTabell/NavnMedDiskresjonskode';
 
 type Props = {
     refusjoner: Refusjon[];
@@ -44,7 +44,6 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                     <Table.DataCell>
                         <BodyShort
                             size="small"
-                            className={cls.element('title_row_column')}
                             aria-labelledby={cls.element('deltaker')}
                         >
                             {kunStorForbokstav(
@@ -64,23 +63,20 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
-                        <NavnsMedDiskresjonskode
+                        <BodyShort size="small" aria-labelledby={cls.element('deltaker')}>
+                        <NavnMedDiskresjonskode
                             fornavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}
                             etternavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
                             diskresjonskode={
-                                refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.diskresjonskode
+                                refusjon.diskresjonskode
                             }>
-                        </NavnsMedDiskresjonskode>
-                        <BodyShort size="small" aria-labelledby={cls.element('deltaker')}>
-                            {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}{' '}
-                            {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
+                        </NavnMedDiskresjonskode>
                         </BodyShort>
                     </Table.DataCell>
                     {}
                     <Table.DataCell>
                         <BodyShort
                             size="small"
-                            className={cls.element('title_row_column')}
                             aria-labelledby={cls.element('periode')}
                         >
                             {formatterPeriode(
@@ -101,7 +97,6 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
-                        <div className={cls.element('title_row_column')}>
                             <StatusTekst
                                 status={refusjon.status}
                                 tiltakstype={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
@@ -109,7 +104,6 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                                 tilskuddTom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom}
                                 fratrekkRefunderbarBeløp={refusjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp}
                             />
-                        </div>
                     </Table.DataCell>
                     <Table.DataCell>
                         <BodyShort size="small" aria-labelledby={cls.element('frist-godkjenning')}>

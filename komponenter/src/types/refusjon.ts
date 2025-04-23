@@ -1,3 +1,4 @@
+import { Diskresjonskode } from './aktsomhet';
 import { KorreksjonStatus, RefusjonStatus } from './status';
 import { Tiltak } from './tiltak';
 
@@ -27,6 +28,7 @@ export interface Refusjon {
     åpnetFørsteGang: string;
     harInntektIAlleMåneder: boolean;
     senestMuligeGodkjenningsfrist: string;
+    diskresjonskode: Diskresjonskode
 }
 
 export interface Korreksjon {
