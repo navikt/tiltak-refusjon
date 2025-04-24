@@ -57,6 +57,7 @@ const RefusjonSide: FunctionComponent = () => {
             </BodyShort>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
+                refusjonId={refusjon.id}
                 tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={refusjon.refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}

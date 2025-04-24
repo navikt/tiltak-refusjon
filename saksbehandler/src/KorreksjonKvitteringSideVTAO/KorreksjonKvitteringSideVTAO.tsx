@@ -26,6 +26,7 @@ const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
             </div>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
+                refusjonId={korreksjon.korrigererRefusjonId}
                 tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={korreksjon.refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={korreksjon.refusjonsgrunnlag.bedriftKontonummer}

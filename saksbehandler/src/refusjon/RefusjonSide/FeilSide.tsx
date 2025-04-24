@@ -29,6 +29,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
             </Heading>
             <VerticalSpacer rem={1} />
             <InformasjonFraAvtalen
+                refusjonId={refusjon.id}
                 tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={refusjon.refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}

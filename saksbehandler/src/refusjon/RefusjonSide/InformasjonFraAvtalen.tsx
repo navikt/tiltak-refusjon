@@ -1,26 +1,29 @@
-import React, { FunctionComponent } from 'react';
-
-import VerticalSpacer from '~/VerticalSpacer';
-
-import { formatterPenger } from '../../utils/PengeUtils';
-
+import React from 'react';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
-import Rad from '@/komponenter/Rad/Rad';
 
-import { Tilskuddsgrunnlag } from '~/types/refusjon';
-import { tiltakstypeTekst } from '~/types/messages';
-import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
-import EksternLenke from '~/EksternLenke/EksternLenke';
 import Boks from '~/Boks';
+import EksternLenke from '~/EksternLenke/EksternLenke';
+import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
+import Rad from '@/komponenter/Rad/Rad';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Tilskuddsgrunnlag } from '~/types/refusjon';
+import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formatterPenger } from '@/utils/PengeUtils';
+import { tiltakstypeTekst } from '~/types/messages';
+import { useAvtaleKreverAktsomhet } from '@/services/rest-service';
 
-const InformasjonFraAvtalen: FunctionComponent<{
+interface Props {
+    refusjonId?: string;
     tilskuddsgrunnlag: Tilskuddsgrunnlag;
     fristForGodkjenning?: string;
     forrigeFristForGodkjenning?: string;
     bedriftKid: string | null | undefined;
     bedriftKontonummer: string | null | undefined;
     bedriftKontonummerInnhentetTidspunkt: string | null | undefined;
-}> = (props) => {
+}
+
+const InformasjonFraAvtalen = (props: Props) => {
+    const { data } = useAvtaleKreverAktsomhet(props.refusjonId);
     const avtaleLenke = `https://tiltaksgjennomforing.intern.nav.no/tiltaksgjennomforing/avtale/${props.tilskuddsgrunnlag.avtaleId}`;
     const refusjonsnummer = `${props.tilskuddsgrunnlag.avtaleNr}-${props.tilskuddsgrunnlag.løpenummer}`;
 
@@ -28,6 +31,7 @@ const InformasjonFraAvtalen: FunctionComponent<{
         <Boks variant="grå">
             <Heading size="small">Informasjon hentet fra avtalen</Heading>
             <VerticalSpacer rem={1} />
+            {data?.kreverAktsomhet && <HemmeligAdresseVarsel aktsomhet={data} />}
             <Rad>
                 <EksternLenke href={avtaleLenke}>
                     Avtale om {tiltakstypeTekst[props.tilskuddsgrunnlag.tiltakstype]}

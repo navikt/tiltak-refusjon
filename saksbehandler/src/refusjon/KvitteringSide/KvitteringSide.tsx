@@ -75,6 +75,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker, o
             <Statusmelding status={refusjon.status} />
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
+                refusjonId={refusjon.id}
                 tilskuddsgrunnlag={refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={refusjonsgrunnlag.bedriftKontonummer}
