@@ -1,6 +1,7 @@
 import KvitteringKorreksjon from '@/refusjon/KvitteringKorreksjon/KvitteringKorreksjon';
 
 import { Meta, StoryObj } from '@storybook/react';
+import { Diskresjonskode } from '~/types';
 import { Korreksjon, Korreksjonsgrunn, Refusjon } from '~/types/refusjon';
 import { KorreksjonStatus, RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
@@ -138,6 +139,7 @@ const refusjon: Refusjon = {
     sistEndret: '2024-01-22T15:56:06.292479Z',
     harTattStillingTilAlleInntektslinjer: true,
     senestMuligeGodkjenningsfrist: '2024-04-29',
+    diskresjonskode: Diskresjonskode.UGRADERT,
 };
 
 const korreksjon: Korreksjon = {

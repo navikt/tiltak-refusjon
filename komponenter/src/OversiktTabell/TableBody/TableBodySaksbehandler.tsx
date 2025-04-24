@@ -68,7 +68,6 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                             ></NavnMedDiskresjonskode>
                         </BodyShort>
                     </Table.DataCell>
-                    {}
                     <Table.DataCell>
                         <BodyShort size="small" aria-labelledby={cls.element('periode')}>
                             {formatterPeriode(

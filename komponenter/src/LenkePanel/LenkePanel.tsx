@@ -1,12 +1,12 @@
 import BEMHelper from '~/utils/bem';
 import React, { FunctionComponent } from 'react';
 import { LinkPanel, Pagination, BodyShort } from '@navikt/ds-react';
-import { Refusjon } from '~/types/refusjon';
+import { BegrensetRefusjon } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
 import StatusTekst from '~/StatusTekst/StatusTekst';
 import { useNavigate } from 'react-router-dom';
 interface Props {
-    refusjoner: Refusjon[];
+    refusjoner: BegrensetRefusjon[];
 }
 const LenkePanel: FunctionComponent<Props> = ({ refusjoner }) => {
     const cls = BEMHelper('oversikt');
