@@ -1,0 +1,25 @@
+name: Bygg branch
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!main'
+
+jobs:
+  build:
+    name: Bygg branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sjekk ut kode
+        uses: actions/checkout@v4
+      - name: Installer
+        run: npm ci
+      - name: Prettier
+        run: npm run prettier
+      - name: Linting
+        run: npm run lint
+      - name: Bygg Saksbehandler
+        run: npm run test-and-build -w saksbehandler
+      - name: Bygg arbeidsgiver
+        run: npm run test-and-build -w arbeidsgiver
