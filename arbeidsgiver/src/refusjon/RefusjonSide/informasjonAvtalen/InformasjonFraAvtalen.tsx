@@ -30,9 +30,7 @@ const InformasjonFraAvtalen: FunctionComponent<Props> = ({ refusjon }) => {
                 Informasjon hentet fra avtalen
             </Heading>
             <VerticalSpacer rem={1} />
-            {data?.kreverAktsomhet && (
-                <HemmeligAdresseVarsel aktsomhet={data} />
-            )}
+            {data?.kreverAktsomhet && <HemmeligAdresseVarsel aktsomhet={data} />}
             <IkonRad>
                 <EksternLenke href={avtaleLenke}>
                     Avtale om {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}

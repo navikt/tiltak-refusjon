@@ -31,9 +31,7 @@ const InformasjonFraAvtalen = (props: Props) => {
         <Boks variant="grå">
             <Heading size="small">Informasjon hentet fra avtalen</Heading>
             <VerticalSpacer rem={1} />
-            {data?.kreverAktsomhet && (
-                <HemmeligAdresseVarsel aktsomhet={data} />
-            )}
+            {data?.kreverAktsomhet && <HemmeligAdresseVarsel aktsomhet={data} />}
             <Rad>
                 <EksternLenke href={avtaleLenke}>
                     Avtale om {tiltakstypeTekst[props.tilskuddsgrunnlag.tiltakstype]}
