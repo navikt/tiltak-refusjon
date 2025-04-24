@@ -37,7 +37,7 @@ export interface Refusjon {
     åpnetFørsteGang: string;
     harInntektIAlleMåneder: boolean;
     senestMuligeGodkjenningsfrist: string;
-    diskresjonskode: Diskresjonskode
+    diskresjonskode: Diskresjonskode;
 }
 
 export interface Korreksjon {

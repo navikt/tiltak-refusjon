@@ -7,7 +7,7 @@ import { BegrensetRefusjon } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
 import BEMHelper from '~/utils/bem';
 import { kunStorForbokstav } from '~/utils/stringUtils';
-import  NavnMedDiskresjonskode from '~/OversiktTabell/NavnMedDiskresjonskode';
+import NavnMedDiskresjonskode from '~/OversiktTabell/NavnMedDiskresjonskode';
 
 type Props = {
     refusjoner: BegrensetRefusjon[];
@@ -42,10 +42,7 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                     }}
                 >
                     <Table.DataCell>
-                        <BodyShort
-                            size="small"
-                            aria-labelledby={cls.element('deltaker')}
-                        >
+                        <BodyShort size="small" aria-labelledby={cls.element('deltaker')}>
                             {kunStorForbokstav(
                                 tiltakstypeTekstKort[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
                             )}
@@ -64,21 +61,16 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                     </Table.DataCell>
                     <Table.DataCell>
                         <BodyShort size="small" aria-labelledby={cls.element('deltaker')}>
-                        <NavnMedDiskresjonskode
-                            fornavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}
-                            etternavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
-                            diskresjonskode={
-                                refusjon.diskresjonskode
-                            }>
-                        </NavnMedDiskresjonskode>
+                            <NavnMedDiskresjonskode
+                                fornavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}
+                                etternavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
+                                diskresjonskode={refusjon.diskresjonskode}
+                            ></NavnMedDiskresjonskode>
                         </BodyShort>
                     </Table.DataCell>
                     {}
                     <Table.DataCell>
-                        <BodyShort
-                            size="small"
-                            aria-labelledby={cls.element('periode')}
-                        >
+                        <BodyShort size="small" aria-labelledby={cls.element('periode')}>
                             {formatterPeriode(
                                 refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                 refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
@@ -97,13 +89,13 @@ const TabellBodySaksbehandler: FunctionComponent<Props> = (props) => {
                         </BodyShort>
                     </Table.DataCell>
                     <Table.DataCell>
-                            <StatusTekst
-                                status={refusjon.status}
-                                tiltakstype={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
-                                tilskuddFom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom}
-                                tilskuddTom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom}
-                                fratrekkRefunderbarBeløp={refusjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp}
-                            />
+                        <StatusTekst
+                            status={refusjon.status}
+                            tiltakstype={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
+                            tilskuddFom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom}
+                            tilskuddTom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom}
+                            fratrekkRefunderbarBeløp={refusjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp}
+                        />
                     </Table.DataCell>
                     <Table.DataCell>
                         <BodyShort size="small" aria-labelledby={cls.element('frist-godkjenning')}>
