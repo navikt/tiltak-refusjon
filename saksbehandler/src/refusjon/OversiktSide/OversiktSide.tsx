@@ -21,7 +21,7 @@ const OversiktSide: FunctionComponent = () => {
 
     const options = {
         erArbeidsgiver: false,
-        harKorreksjonTilgang: brukerContext.innloggetBruker.harKorreksjonTilgang,
+        harKorreksjonTilgang: brukerContext.innloggetBruker.harKorreksjonTilgang ?? false,
         skjulVTAO: !featureToggles[Feature.VtaoToggle],
     };
 
