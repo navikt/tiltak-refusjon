@@ -1,15 +1,18 @@
-import React, { FunctionComponent } from 'react';
-import { Alert, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
+import React from 'react';
 import moment from 'moment';
-import { Tilskuddsgrunnlag } from '~/types/refusjon';
+import { Alert, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
+
 import Boks from '~/Boks';
-import VerticalSpacer from '~/VerticalSpacer';
-import IkonRad from '~/IkonRad/IkonRad';
 import EksternLenke from '~/EksternLenke/EksternLenke';
-import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
+import IkonRad from '~/IkonRad/IkonRad';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, Tilskuddsgrunnlag } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
+import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 
 interface Props {
+    aktsomhet?: Aktsomhet;
     tilskuddsgrunnlag: Tilskuddsgrunnlag;
     bedriftKontonummer: string | null | undefined;
     åpnetFørsteGang?: string;
@@ -17,15 +20,16 @@ interface Props {
     innloggetRolle?: InnloggetRolle;
 }
 
-const InformasjonFraAvtalenVTAO: FunctionComponent<Props> = ({
-    tilskuddsgrunnlag,
-    bedriftKontonummer,
-    åpnetFørsteGang,
-    bedriftKontonummerInnhentetTidspunkt,
-    innloggetRolle,
-}) => {
+const InformasjonFraAvtalenVTAO = (props: Props) => {
+    const {
+        aktsomhet,
+        tilskuddsgrunnlag,
+        bedriftKontonummer,
+        åpnetFørsteGang,
+        bedriftKontonummerInnhentetTidspunkt,
+        innloggetRolle,
+    } = props;
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${tilskuddsgrunnlag.avtaleId}`;
-
     const erArbeidsgiver = innloggetRolle === 'ARBEIDSGIVER';
 
     return (
@@ -34,6 +38,7 @@ const InformasjonFraAvtalenVTAO: FunctionComponent<Props> = ({
                 Informasjon hentet fra avtalen
             </Heading>
             <VerticalSpacer rem={1} />
+            {aktsomhet?.kreverAktsomhet && <HemmeligAdresseVarsel aktsomhet={aktsomhet} />}
             <IkonRad>
                 <EksternLenke href={avtaleLenke}>Avtale om varig tilrettelagt arbeid i ordinær virksomhet</EksternLenke>
             </IkonRad>

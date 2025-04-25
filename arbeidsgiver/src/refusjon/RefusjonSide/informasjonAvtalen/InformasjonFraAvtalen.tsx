@@ -11,7 +11,7 @@ import { tiltakstypeTekst } from '~/types/messages';
 import { formatterDato, formatterPeriode } from '~/utils';
 import { Refusjon } from '~/types/refusjon';
 import EksternLenke from '~/EksternLenke/EksternLenke';
-import { useAvtaleKreverAktsomhet } from '@/services/rest-service';
+import { useRefusjonKreverAktsomhet } from '@/services/rest-service';
 import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 };
 
 const InformasjonFraAvtalen: FunctionComponent<Props> = ({ refusjon }) => {
-    const { data } = useAvtaleKreverAktsomhet(refusjon.id);
+    const { data } = useRefusjonKreverAktsomhet(refusjon.id);
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleId}`;
 
     const refusjonsnummer = `${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}`;

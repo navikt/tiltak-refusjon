@@ -10,7 +10,7 @@ import { Tilskuddsgrunnlag } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { formatterPenger } from '@/utils/PengeUtils';
 import { tiltakstypeTekst } from '~/types/messages';
-import { useAvtaleKreverAktsomhet } from '@/services/rest-service';
+import { useRefusjonKreverAktsomhet } from '@/services/rest-service';
 
 interface Props {
     refusjonId?: string;
@@ -23,7 +23,7 @@ interface Props {
 }
 
 const InformasjonFraAvtalen = (props: Props) => {
-    const { data } = useAvtaleKreverAktsomhet(props.refusjonId);
+    const { data } = useRefusjonKreverAktsomhet(props.refusjonId);
     const avtaleLenke = `https://tiltaksgjennomforing.intern.nav.no/tiltaksgjennomforing/avtale/${props.tilskuddsgrunnlag.avtaleId}`;
     const refusjonsnummer = `${props.tilskuddsgrunnlag.avtaleNr}-${props.tilskuddsgrunnlag.løpenummer}`;
 

@@ -1,5 +1,4 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
 
 import BekreftSlettKorreksjon from '../refusjon/RefusjonSide/BekreftSlettKorreksjon';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
@@ -9,13 +8,17 @@ import TilskuddssatsVTAO from '~/KvitteringSide/KvitteringSideVTAO/Tilskuddssats
 import BekreftTilbakekrevKorreksjon from '@/refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';
 import VerticalSpacer from '~/VerticalSpacer';
 import KorreksjonUtregningVTAO from './KorreksjonUtregningVTAO';
+import { useRefusjonKreverAktsomhet } from '@/services/rest-service';
 
 type Props = {
+    refusjonId: string;
     refusjonsgrunnlag: Refusjonsgrunnlag;
 };
 
-const KorreksjonSideVTAO: FunctionComponent<Props> = ({ refusjonsgrunnlag }) => {
+const KorreksjonSideVTAO = (props: Props) => {
+    const { refusjonId, refusjonsgrunnlag } = props;
     const { bedriftKontonummer, tilskuddsgrunnlag } = refusjonsgrunnlag;
+    const { data: aktsomhet } = useRefusjonKreverAktsomhet(refusjonId);
 
     return (
         <Boks variant="hvit">
@@ -32,6 +35,7 @@ const KorreksjonSideVTAO: FunctionComponent<Props> = ({ refusjonsgrunnlag }) => 
             </BodyShort>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalenVTAO
+                aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={tilskuddsgrunnlag}
                 bedriftKontonummer={bedriftKontonummer}
                 åpnetFørsteGang={'Trengs ikke på korreksjon'}

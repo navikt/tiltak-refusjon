@@ -42,7 +42,10 @@ const Komponent: FunctionComponent = () => {
     switch (korreksjon.status) {
         case KorreksjonStatus.UTKAST:
             return korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KorreksjonSideVTAO refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
+                <KorreksjonSideVTAO
+                    refusjonId={korreksjon.korrigererRefusjonId}
+                    refusjonsgrunnlag={korreksjon.refusjonsgrunnlag}
+                />
             ) : (
                 <KorreksjonSide korreksjon={korreksjon} />
             );

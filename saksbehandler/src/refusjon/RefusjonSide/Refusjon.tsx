@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import TilbakeTilOversikt from '../../komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '~/VerticalSpacer';
-import { opprettKorreksjonsutkast, useHentRefusjon } from '../../services/rest-service';
+import { opprettKorreksjonsutkast, useHentRefusjon } from '@/services/rest-service';
 import ForlengFrist from '../ForlengFrist/ForlengFrist';
 import KvitteringSide from '../KvitteringSide/KvitteringSide';
-import MerkForUnntakOmInntekterToMånederFrem from '../MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
+import MerkForUnntakOmInntekterToMånederFrem from '@/refusjon/MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
 import FeilSide from './FeilSide';
 import HenterInntekterBoks from '~/HenterInntekterBoks';
 import RefusjonSide from './RefusjonSide';
-import { useInnloggetBruker } from '../../bruker/BrukerContext';
+import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { BrukerContextType } from '~/types/brukerContextType';
 import HendelsesLogg from '../Hendelseslogg/Hendelseslogg';
 import { RefusjonStatus } from '~/types/status';
@@ -20,6 +20,7 @@ import { formatterDato } from '~/utils';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import { Korreksjonsgrunn } from '~/types/refusjon';
 import { Tiltak } from '~/types/tiltak';
+import AktsomhetWrapper from '@/komponenter/aktsomhet-wrapper';
 
 const Fleks = styled.div`
     display: flex;
@@ -88,7 +89,15 @@ const Komponent: FunctionComponent = () => {
                         </Fleks>
                         <VerticalSpacer rem={1} />
 
-                        <KvitteringSideVTAO refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
+                        <AktsomhetWrapper refusjonId={refusjonId}>
+                            {(aktsomhet) => (
+                                <KvitteringSideVTAO
+                                    aktsomhet={aktsomhet}
+                                    refusjon={refusjon}
+                                    innloggetBruker={brukerContext.innloggetBruker}
+                                />
+                            )}
+                        </AktsomhetWrapper>
                     </>
                 );
             }
@@ -163,11 +172,16 @@ const Komponent: FunctionComponent = () => {
                     <VerticalSpacer rem={1} />
 
                     {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                        <KvitteringSideVTAO
-                            refusjon={refusjon}
-                            innloggetBruker={brukerContext.innloggetBruker}
-                            opprettKorreksjon={opprettKorreksjon}
-                        />
+                        <AktsomhetWrapper refusjonId={refusjonId}>
+                            {(aktsomhet) => (
+                                <KvitteringSideVTAO
+                                    aktsomhet={aktsomhet}
+                                    refusjon={refusjon}
+                                    innloggetBruker={brukerContext.innloggetBruker}
+                                    opprettKorreksjon={opprettKorreksjon}
+                                />
+                            )}
+                        </AktsomhetWrapper>
                     ) : (
                         <KvitteringSide
                             refusjon={refusjon}

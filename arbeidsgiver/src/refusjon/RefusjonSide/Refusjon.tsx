@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useRef } from 'react';
-import TilbakeTilOversikt from '../../komponenter/TilbakeTilOversikt';
-import KvitteringKorreksjon from '../KvitteringKorreksjon/KvitteringKorreksjon';
-import KvitteringSide from '../KvitteringSide/KvitteringSide';
+import TilbakeTilOversikt from '@/komponenter/TilbakeTilOversikt';
+import KvitteringKorreksjon from '@/refusjon/KvitteringKorreksjon/KvitteringKorreksjon';
+import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import FeilSide from './FeilSide';
 import RefusjonSide from './RefusjonSide';
 import { BodyShort } from '@navikt/ds-react';
@@ -12,9 +12,10 @@ import { mutate } from 'swr';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
 import { Refusjon as RefusjonType } from '~/types/refusjon';
-import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import { BrukerContextType } from '~/types/brukerContextType';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
+import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
+import AktsomhetWrapper from '@/komponenter/aktsomhet-wrapper';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -50,7 +51,15 @@ const Komponent: FunctionComponent = () => {
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
             return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAO innloggetBruker={brukerContext.innloggetBruker} refusjon={refusjon} />
+                <AktsomhetWrapper refusjonId={refusjon.id}>
+                    {(aktsomhet) => (
+                        <KvitteringSideVTAO
+                            aktsomhet={aktsomhet}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                            refusjon={refusjon}
+                        />
+                    )}
+                </AktsomhetWrapper>
             ) : (
                 <FeilSide
                     advarselType="info"
@@ -89,7 +98,15 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.UTBETALT:
         case RefusjonStatus.UTBETALING_FEILET:
             return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAO innloggetBruker={brukerContext.innloggetBruker} refusjon={refusjon} />
+                <AktsomhetWrapper refusjonId={refusjon.id}>
+                    {(aktsomhet) => (
+                        <KvitteringSideVTAO
+                            aktsomhet={aktsomhet}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                            refusjon={refusjon}
+                        />
+                    )}
+                </AktsomhetWrapper>
             ) : (
                 <KvitteringSide refusjon={refusjon} />
             );

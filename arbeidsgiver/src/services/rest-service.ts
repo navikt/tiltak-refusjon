@@ -231,6 +231,6 @@ export const hentInntekterLengerFrem = async (
     await mutate(`/refusjon/${refusjonId}`);
 };
 
-export const useAvtaleKreverAktsomhet = (refusjonId?: string) => {
+export const useRefusjonKreverAktsomhet = (refusjonId?: string) => {
     return useSWR<Aktsomhet>(refusjonId ? `/refusjon/${refusjonId}/aktsomhet` : undefined, swrConfig);
 };

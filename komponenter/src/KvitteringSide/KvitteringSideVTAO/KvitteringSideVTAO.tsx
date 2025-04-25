@@ -1,20 +1,20 @@
+import moment from 'moment';
 import { BodyLong, Heading, Tag } from '@navikt/ds-react';
 import { FunctionComponent, ReactElement } from 'react';
+
 import Boks from '~/Boks/Boks';
-import { statusTekst } from '~/types/messages';
-import { Korreksjonsgrunn, Refusjon } from '~/types/refusjon';
-import { RefusjonStatus } from '~/types/status';
-import { formatterDato, NORSK_DATO_FORMAT } from '~/utils';
-import { storForbokstav } from '~/utils/stringUtils';
-import VerticalSpacer from '~/VerticalSpacer';
-import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
-import TilskuddssatsVTAO from './TilskuddssatsVTAO';
-import SummeringBoksVTAO from './SummeringBoksVTAO';
-import { InnloggetBruker } from '~/types/brukerContextType';
+import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
 import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
 import Statusmelding from '~/KvitteringSide/Statusmelding';
-import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
-import moment from 'moment';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, RefusjonStatus, Korreksjonsgrunn, Refusjon, statusTekst } from '~/types';
+import { InnloggetBruker } from '~/types/brukerContextType';
+import { formatterDato, NORSK_DATO_FORMAT } from '~/utils';
+import { storForbokstav } from '~/utils/stringUtils';
+
+import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
+import SummeringBoksVTAO from './SummeringBoksVTAO';
+import TilskuddssatsVTAO from './TilskuddssatsVTAO';
 
 /**
  * For etterregistrerte avtaler av typen VTA-O vil det eksistere refusjoner som er "for tidlig",
@@ -55,6 +55,7 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
 };
 
 interface Props {
+    aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
     innloggetBruker?: InnloggetBruker;
     opprettKorreksjon?: (
@@ -63,7 +64,8 @@ interface Props {
         annenKorreksjonsGrunn?: string
     ) => Promise<void>;
 }
-const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruker, opprettKorreksjon }) => {
+const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
+    const { refusjon, innloggetBruker, opprettKorreksjon, aktsomhet } = props;
     const innloggetRolle = innloggetBruker?.rolle;
 
     return (
@@ -107,6 +109,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = ({ refusjon, innloggetBruke
             </BodyLong>
             <VerticalSpacer rem={1} />
             <InformasjonFraAvtalenVTAO
+                aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}
                 innloggetRolle={innloggetRolle}

@@ -206,6 +206,6 @@ export const settHarFerietrekkForSammeMåned = async (korreksjonId: string, harF
     return response.data;
 };
 
-export const useAvtaleKreverAktsomhet = (refusjonId?: string) => {
+export const useRefusjonKreverAktsomhet = (refusjonId?: string) => {
     return useSWR<Aktsomhet>(`/refusjon/${refusjonId}/aktsomhet`, swrConfig);
 };
