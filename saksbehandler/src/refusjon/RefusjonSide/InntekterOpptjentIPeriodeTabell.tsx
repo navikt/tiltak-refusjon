@@ -1,35 +1,18 @@
 import { Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import styled from 'styled-components';
-
-import { inntektBeskrivelse } from './InntekterFraAMeldingen/InntekterFraAMeldingen';
 import sumBy from 'lodash.sumby';
 import sortBy from 'lodash.sortby';
+
+import { inntektBeskrivelse } from './InntekterFraAMeldingen/InntekterFraAMeldingen';
 import { Inntektslinje } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+
+import styles from './InntekterOpptjentIPeriodeTabell.module.less';
 
 type Props = {
     inntekter: Inntektslinje[];
     månedsNavn: string;
 };
-
-const InntekterTabell = styled.table`
-    width: 100%;
-    th,
-    td {
-        text-align: left;
-        padding: 0.35rem 0.5rem;
-    }
-    th:first-child,
-    td:first-child {
-        padding: 0.35rem 0;
-    }
-    th:last-child,
-    td:last-child {
-        text-align: right;
-        padding: 0.35rem 0;
-    }
-`;
 
 const InntekterOpptjentIPeriodeTabell: FunctionComponent<Props> = (props) => {
     const inntekterHuketAvForOpptjentIPeriode = props.inntekter.filter((inntekt) => inntekt.erOpptjentIPeriode);
@@ -47,7 +30,7 @@ const InntekterOpptjentIPeriodeTabell: FunctionComponent<Props> = (props) => {
 
     return (
         <div>
-            <InntekterTabell>
+            <table className={styles.inntekterTabell}>
                 <thead>
                     <tr>
                         <th>Beskriv&shy;else</th>
@@ -78,7 +61,7 @@ const InntekterOpptjentIPeriodeTabell: FunctionComponent<Props> = (props) => {
                         </tr>
                     ))}
                 </tbody>
-            </InntekterTabell>
+            </table>
             <br />
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Label>Sum bruttolønn</Label>

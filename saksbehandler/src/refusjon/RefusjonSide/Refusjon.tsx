@@ -2,9 +2,7 @@ import React, { FunctionComponent, Suspense } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
-import FeilSide from './FeilSide';
 import ForlengFrist from '@/refusjon/ForlengFrist/ForlengFrist';
 import HendelsesLogg from '@/refusjon/Hendelseslogg/Hendelseslogg';
 import HenterInntekterBoks from '~/HenterInntekterBoks';
@@ -13,22 +11,14 @@ import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import MerkForUnntakOmInntekterToMånederFrem from '@/refusjon/MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
 import TilbakeTilOversikt from '@/komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '~/VerticalSpacer';
-import { BrukerContextType } from '~/types/brukerContextType';
-import { RefusjonStatus } from '~/types/status';
-import { Tiltak, Korreksjonsgrunn } from '~/types';
+import { Tiltak, Korreksjonsgrunn, RefusjonStatus, BrukerContextType } from '~/types';
 import { formatterDato } from '~/utils';
 import { opprettKorreksjonsutkast, useHentRefusjon, useRefusjonKreverAktsomhet } from '@/services/rest-service';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 
+import FeilSide from './FeilSide';
 import RefusjonSide from './RefusjonSide';
-
-const Fleks = styled.div`
-    display: flex;
-
-    > * {
-        margin-right: 1rem;
-    }
-`;
+import styles from './Refusjon.module.less';
 
 const Advarsler: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
@@ -86,9 +76,9 @@ const Komponent: FunctionComponent = () => {
             if (refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype == 'VTAO') {
                 return (
                     <>
-                        <Fleks>
+                        <div className={styles.fleks}>
                             <HendelsesLogg refusjonId={refusjonId} />
-                        </Fleks>
+                        </div>
                         <VerticalSpacer rem={1} />
                         <KvitteringSideVTAO
                             aktsomhet={aktsomhet}
@@ -100,9 +90,9 @@ const Komponent: FunctionComponent = () => {
             }
             return (
                 <>
-                    <Fleks>
+                    <div className={styles.fleks}>
                         <HendelsesLogg refusjonId={refusjonId} />
-                    </Fleks>
+                    </div>
                     <VerticalSpacer rem={1} />
                     <FeilSide
                         aktsomhet={aktsomhet}
@@ -117,7 +107,7 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.KLAR_FOR_INNSENDING:
             return (
                 <>
-                    <Fleks>
+                    <div className={styles.fleks}>
                         <ForlengFrist
                             refusjonId={refusjon.id}
                             tidligsteFrist={refusjon.fristForGodkjenning}
@@ -127,7 +117,7 @@ const Komponent: FunctionComponent = () => {
                             <MerkForUnntakOmInntekterToMånederFrem refusjon={refusjon} />
                         )}
                         <HendelsesLogg refusjonId={refusjonId} />
-                    </Fleks>
+                    </div>
                     <VerticalSpacer rem={1} />
                     <RefusjonSide aktsomhet={aktsomhet} refusjon={refusjon} />
                 </>
@@ -135,9 +125,9 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.UTGÅTT:
             return (
                 <>
-                    <Fleks>
+                    <div className={styles.fleks}>
                         <HendelsesLogg refusjonId={refusjonId} />
-                    </Fleks>
+                    </div>
                     <VerticalSpacer rem={1} />
                     <FeilSide
                         aktsomhet={aktsomhet}
@@ -152,9 +142,9 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.ANNULLERT:
             return (
                 <>
-                    <Fleks>
+                    <div className={styles.fleks}>
                         <HendelsesLogg refusjonId={refusjonId} />
-                    </Fleks>
+                    </div>
                     <VerticalSpacer rem={1} />
                     <FeilSide
                         aktsomhet={aktsomhet}
@@ -172,9 +162,9 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.KORRIGERT:
             return (
                 <>
-                    <Fleks>
+                    <div className={styles.fleks}>
                         <HendelsesLogg refusjonId={refusjonId} />
-                    </Fleks>
+                    </div>
                     <VerticalSpacer rem={1} />
 
                     {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
