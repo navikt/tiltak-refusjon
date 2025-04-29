@@ -64,6 +64,7 @@
         "@types/react-responsive": "^8.0.5",
         "@vitejs/plugin-react": "^4.4.1",
         "cross-env": "^7.0.3",
+        "jsdom": "^26.1.0",
         "less": "^4.3.0",
         "pretty-quick": "^4.1.1",
         "storybook": "^8.6.12",

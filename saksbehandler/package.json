@@ -59,6 +59,7 @@
         "@types/react-responsive": "^8.0.2",
         "@types/styled-components": "^5.1.10",
         "@vitejs/plugin-react": "^4.4.1",
+        "jsdom": "^26.1.0",
         "less": "^4.3.0",
         "storybook": "^8.6.12",
         "typescript": "^5.8.3",
