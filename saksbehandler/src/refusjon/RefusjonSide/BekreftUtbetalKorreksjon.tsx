@@ -20,7 +20,9 @@ const BekreftUtbetalKorreksjon: FunctionComponent = () => {
                 isOpen={isOpen}
                 lukkModal={() => setisOpen(false)}
                 tittel="Send korreksjon til utbetaling"
-                bekreft={() => utbetalKorreksjon(korreksjonId!)}
+                bekreft={async () => {
+                    await utbetalKorreksjon(korreksjonId!);
+                }}
             >
                 <BodyShort size="small">
                     Korreksjonen vil bli kostnadsført på den samme enheten som den opprinnelige refusjonen. Refusjonen

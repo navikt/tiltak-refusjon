@@ -49,11 +49,7 @@ const LagreOgAvbrytKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Button
-                    style={{ padding: '0.5rem 3rem', marginRight: '0.5rem' }}
-                    variant="secondary"
-                    onClick={avbryt}
-                >
+                <Button style={{ padding: '0.5rem 3rem', marginRight: '0.5rem' }} variant="secondary" onClick={avbryt}>
                     Avbryt
                 </Button>
                 <Button

@@ -17,7 +17,7 @@ interface Props {
     ikkePenger?: boolean;
     border?: 'NORMAL' | 'TYKK' | 'INGEN';
     tilskuddsgunnlag?: Tilskuddsgrunnlag;
-    className?: String;
+    className?: string;
     utgår?: boolean;
 }
 

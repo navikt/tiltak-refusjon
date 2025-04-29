@@ -21,7 +21,7 @@ const LagreKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
             setNetverkStatus({ status: Status.LasterInn });
             await props.lagreFunksjon().then(() => setNetverkStatus({ status: Status.Sendt }));
         } catch (e) {
-            const error = e as (Error & { feilmelding?: string });
+            const error = e as Error & { feilmelding?: string };
             setNetverkStatus({ status: Status.Feil, error: error.feilmelding ?? 'Uventet feil' });
             handterFeil(error, setFeilmelding);
         }

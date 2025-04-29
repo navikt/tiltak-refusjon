@@ -60,7 +60,6 @@ const BedriftsmenyRefusjon: FunctionComponent<Props> = (props: PropsWithChildren
                 }
             });
         }
-
     }, [organisasjoner]);
 
     useSize({ desktopview, setDesktopview });

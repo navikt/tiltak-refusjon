@@ -15,12 +15,7 @@ interface Props {
 }
 
 const BruttolønnUtbetaltInput = (props: Props) => {
-    const {
-        refusjon,
-        inntektsgrunnlag,
-        endreBruttolønn,
-        setVisRefusjonInnsending,
-    } = props;
+    const { refusjon, inntektsgrunnlag, endreBruttolønn, setVisRefusjonInnsending } = props;
     const cls = BEMHelper('refusjonside');
     const sumInntekterOpptjent: number = sumInntekterOpptjentIPeriode(inntektsgrunnlag);
     const { tilskuddsgrunnlag } = refusjon.refusjonsgrunnlag;

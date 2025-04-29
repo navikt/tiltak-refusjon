@@ -49,17 +49,15 @@ export default defineConfig({
             '/dekoratoren/api/auth': {
                 target: 'http://localhost:3001',
                 bypass(req, res) {
-                    axios
-                        .get('http://localhost:8081/api/arbeidsgiver/innlogget-bruker', { headers: req.headers })
-                        .then(
-                            (response: { data: Record<string, object> }) => {
-                                res?.end(JSON.stringify({ ...response.data, ident: response.data.identifikator || '' }));
-                            },
-                            (error: Error) => {
-                                console.error('Feil i dekorator-auth', error);
-                                res?.end(JSON.stringify({ authenticated: false }));
-                            }
-                        );
+                    axios.get('http://localhost:8081/api/arbeidsgiver/innlogget-bruker', { headers: req.headers }).then(
+                        (response: { data: Record<string, object> }) => {
+                            res?.end(JSON.stringify({ ...response.data, ident: response.data.identifikator || '' }));
+                        },
+                        (error: Error) => {
+                            console.error('Feil i dekorator-auth', error);
+                            res?.end(JSON.stringify({ authenticated: false }));
+                        }
+                    );
                 },
             },
             '/logout': {

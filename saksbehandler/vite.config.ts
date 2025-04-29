@@ -35,7 +35,9 @@ export default defineConfig({
                         })
                         .then(
                             (response) => {
-                                res?.end(JSON.stringify({ ...response.data, ident: response.data.identifikator || '' }));
+                                res?.end(
+                                    JSON.stringify({ ...response.data, ident: response.data.identifikator || '' })
+                                );
                             },
                             () => {
                                 res?.end(JSON.stringify({ authenticated: false }));

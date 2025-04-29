@@ -70,11 +70,7 @@ export const endreBruttolønn = async (
     return response.data;
 };
 
-export const lagreBedriftKID = async (
-    refusjonId: string,
-    sistEndret: string,
-    bedriftKID: string | undefined
-) => {
+export const lagreBedriftKID = async (refusjonId: string, sistEndret: string, bedriftKID: string | undefined) => {
     if (bedriftKID?.trim().length === 0) {
         bedriftKID = undefined;
     }

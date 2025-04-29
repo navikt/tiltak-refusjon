@@ -33,7 +33,9 @@ jobs:
         run: npm run prettier
       - name: Linting
         run: npm run lint
-      - name: Frontend build
+      - name: Komponenter - bygg
+        run: npm run build -w kompoenter
+      - name: Arbeidsgiver - test og bygg
         run: npm run test-and-build -w arbeidsgiver
       - name: Sett opp sentry release
         run: npm run release -w arbeidsgiver

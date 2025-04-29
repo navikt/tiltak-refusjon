@@ -41,7 +41,6 @@ const KIDInputValidator: FunctionComponent = () => {
             }
             setKid(refusjon.refusjonsgrunnlag.bedriftKid);
         }
-
     }, [refusjon?.refusjonsgrunnlag?.bedriftKid]);
 
     return (

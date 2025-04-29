@@ -24,7 +24,7 @@ const OpprettKorreksjon: FunctionComponent<{
         try {
             await opprettKorreksjon(grunner, unntakOmInntekterFremitid, annenKorreksjonsGrunn);
         } catch (e) {
-            const error = e as (Error & { feilmelding?: string });
+            const error = e as Error & { feilmelding?: string };
             const feilmelding = error.feilmelding ? error.feilmelding : 'Uventet feil';
             setFeilmelding(feilmelding);
         }
@@ -58,7 +58,7 @@ const OpprettKorreksjon: FunctionComponent<{
                     try {
                         await nykorreksjon();
                     } catch (e) {
-                        const error = e as (Error & { feilmelding?: string });
+                        const error = e as Error & { feilmelding?: string };
                         const feilmelding = error.feilmelding
                             ? error.feilmelding
                             : 'Feil ved oppretting av korreksjonsutkast';

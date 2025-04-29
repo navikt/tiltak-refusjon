@@ -12,7 +12,7 @@ interface Properties {
 
 const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properties>) => {
     const location = useLocation();
-    const [listener, setListener] = useState<(props: { action: string; location: Location; }) => void>();
+    const [listener, setListener] = useState<(props: { action: string; location: Location }) => void>();
     const { organisasjoner, valgtBedrift, setValgtBedrift } = props;
 
     useEffect(() => {
