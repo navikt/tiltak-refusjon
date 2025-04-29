@@ -17,6 +17,12 @@ export default defineConfig({
     },
     plugins: [react(), svgr()],
 
+    css: {
+        modules: {
+            localsConvention: 'camelCaseOnly',
+        },
+    },
+
     server: {
         port: 3002,
         proxy: {
