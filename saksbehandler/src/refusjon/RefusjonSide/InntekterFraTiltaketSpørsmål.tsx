@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
 
 import BEMHelper from '~/utils/bem';
@@ -68,7 +68,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
             </BodyShort>
             <VerticalSpacer rem={1} />
             <InntekterOpptjentIPeriodeTabell
-                inntekter={props.refusjonsgrunnlag.inntektsgrunnlag?.inntekter!}
+                inntekter={props.refusjonsgrunnlag.inntektsgrunnlag?.inntekter ?? []}
                 månedsNavn={månedNavn}
             />
             <VerticalSpacer rem={1} />
@@ -113,10 +113,10 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
                         label={`Skriv inn bruttolønn utbetalt for ${
                             tiltakstypeTekst[refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
                         }`}
-                        onChange={(event: any) => {
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                             const verdi = event.currentTarget.value;
                             if (verdi.match(/^\d*$/) && parseInt(verdi, 10) <= sumInntekterOpptjent) {
-                                setEndretBruttoLønn(verdi as number);
+                                setEndretBruttoLønn(Number(verdi));
                             }
                         }}
                         onBlur={() => endreBruttolønn(korreksjonId!, false, endretBruttoLønn)}

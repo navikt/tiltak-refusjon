@@ -1,5 +1,5 @@
 import { Table } from '@navikt/ds-react';
-import { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent } from 'react';
 import BEMHelper from '../utils/bem';
 import './OversiktTabell.less';
 

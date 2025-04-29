@@ -254,7 +254,7 @@ const refusjondata: Refusjonsgrunnlag & {
 export const Belopsgrense: Story = {
     name: 'Lønn overskrider tilskuddsbeløp',
     args: refusjondata,
-    render: (args) => (
+    render: () => (
         <div>
             <h1>Arbeidsgiver har oppgitt for høy lønn</h1>
             I denne refusjonen har arbeidsgiver valgt så mange inntektslinjer at de overskrider tilskuddsbeløpet. Dermed

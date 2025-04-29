@@ -22,7 +22,7 @@ const InntekterFraTiltaketSvar: FunctionComponent<Props> = (props) => {
         <div>
             <Label>
                 Er inntektene som vi har hentet (
-                {formatterPenger(props.refusjonsgrunnlag.inntektsgrunnlag!!.bruttoLønn)}) kun fra tiltaket{' '}
+                {formatterPenger(props.refusjonsgrunnlag.inntektsgrunnlag!.bruttoLønn)}) kun fra tiltaket{' '}
                 {tiltakstypeTekst[props.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}?{' '}
             </Label>
             <BodyShort size="small">{props.refusjonsgrunnlag.inntekterKunFraTiltaket ? 'Ja' : 'Nei'}</BodyShort>

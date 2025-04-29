@@ -1,6 +1,6 @@
 import BEMHelper from '~/utils/bem';
 import React, { FunctionComponent } from 'react';
-import { LinkPanel, Pagination, BodyShort } from '@navikt/ds-react';
+import { LinkPanel, BodyShort } from '@navikt/ds-react';
 import { BegrensetRefusjon } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
 import StatusTekst from '~/StatusTekst/StatusTekst';

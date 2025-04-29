@@ -1,4 +1,4 @@
-import React, { FunctionComponent, PropsWithChildren, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import './bedriftsmeny.less';
 import { MenyContext } from '../BedriftsmenyRefusjon';
@@ -9,7 +9,7 @@ import { ClsBedriftsmeny } from '../api/api';
 import Infolinje from '../menyInnhold/infolinje/Infolinje';
 import BEMHelper from '~/utils/bem';
 
-const Bedriftsmeny: FunctionComponent<{}> = (props: PropsWithChildren<{}>) => {
+const Bedriftsmeny = () => {
     const cls = BEMHelper(ClsBedriftsmeny.BEDRIFTSMENY);
     const context = useContext(MenyContext);
     const {

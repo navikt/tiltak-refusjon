@@ -5,13 +5,13 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Alert, Button, ButtonProps } from '@navikt/ds-react';
 
 type Props = {
-    lagreFunksjon: () => Promise<any>;
+    lagreFunksjon: () => Promise<void>;
     avbryt: () => void;
     attributes?: ButtonProps & HTMLAttributes<HTMLDivElement>;
 };
 
 const LagreOgAvbrytKnapp: FunctionComponent<Props & ButtonProps> = (props: PropsWithChildren<Props & ButtonProps>) => {
-    const [oppslag, setOppslag] = useState<Nettressurs<any>>({ status: Status.IkkeLastet });
+    const [oppslag, setOppslag] = useState<Nettressurs<void>>({ status: Status.IkkeLastet });
     const [feilmelding, setFeilmelding] = useState('');
 
     const knappBaseProps = Object.assign({}, props.attributes);
@@ -21,7 +21,8 @@ const LagreOgAvbrytKnapp: FunctionComponent<Props & ButtonProps> = (props: Props
         try {
             setOppslag({ status: Status.LasterInn });
             await props.lagreFunksjon().then(() => setOppslag({ status: Status.Sendt }));
-        } catch (error: any) {
+        } catch (e) {
+            const error = e as Error & { feilmelding?: string };
             setOppslag({ status: Status.Feil, error: error.feilmelding ?? 'Uventet feil' });
             handterFeil(error, setFeilmelding);
         }

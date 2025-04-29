@@ -171,7 +171,7 @@ const refusjon2 = {
 export const Minusbelop: Story = {
     name: 'Minusbeløp grunnet ferietrekk',
     args: {},
-    render: (args) => (
+    render: () => (
         <div>
             <h1>Minusbeløp som gjøres opp i påfølgende periode</h1>
             <h2>Utregning: Refusjon 1</h2>

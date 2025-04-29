@@ -175,7 +175,7 @@ const refusjondata = {
 export const Belopsgrense: Story = {
     name: 'Lønn overskrider tilskuddsbeløp',
     args: {},
-    render: (args) => (
+    render: () => (
         <div>
             <h1>Arbeidsgiver har oppgitt for høy lønn</h1>
             I denne refusjonen har arbeidsgiver valgt så mange inntektslinjer at de overskrider tilskuddsbeløpet. Dermed
@@ -346,7 +346,7 @@ const refusjondata5G = {
 export const Belopsgrense5G: Story = {
     name: 'Lønn overskrider 5G',
     args: {},
-    render: (args) => (
+    render: () => (
         <div>
             <h1>Arbeidsgiver har oppgitt for høy lønn</h1>
             I denne refusjonen har arbeidsgiver valgt så mange inntektslinjer at de overskrider tilskuddsbeløpet. Dermed

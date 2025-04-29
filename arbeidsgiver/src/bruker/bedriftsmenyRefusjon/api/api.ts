@@ -60,7 +60,7 @@ export enum BedriftvalgType {
 }
 
 interface IndexObjectOfBedriftvalg {
-    [key: string]: any;
+    [key: string]: BedriftvalgType | Array<Organisasjon> | PageData | StatusFeilBedriftmeny[] | undefined;
 }
 
 export interface Bedriftvalg extends IndexObjectOfBedriftvalg {

@@ -24,8 +24,8 @@ const cls = BEMHelper('forleng-frist');
 const ForlengFristModalKropp: FunctionComponent<{
     tidligsteFrist: string;
     senesteFrist: string;
-    lukkModal: () => any;
-    oppdatereRefusjonFrist: (dato: string, grunnlag: string, annetGrunnlag: string) => any;
+    lukkModal: () => void;
+    oppdatereRefusjonFrist: (dato: string, grunnlag: string, annetGrunnlag: string) => Promise<void>;
 }> = ({ tidligsteFrist, senesteFrist, oppdatereRefusjonFrist, lukkModal }) => {
     const tidligsteFristDato = new Date(Date.parse(tidligsteFrist));
     const senesteFristDato = new Date(Date.parse(senesteFrist));

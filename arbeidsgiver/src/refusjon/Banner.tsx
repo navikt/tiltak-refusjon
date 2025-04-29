@@ -1,20 +1,18 @@
-import { Organisasjon } from '@navikt/bedriftsmeny/lib/types/organisasjon';
 import { History } from 'history';
 import React, { FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
-import { To } from 'react-router-dom';
+import { useLocation, useNavigate, Location } from 'react-router';
 import BedriftsmenyRefusjon from '../bruker/bedriftsmenyRefusjon/BedriftsmenyRefusjon';
-import { Bedriftvalg } from '../bruker/bedriftsmenyRefusjon/api/api';
+import { Bedriftvalg, Organisasjon } from '../bruker/bedriftsmenyRefusjon/api/api';
 
 interface Properties {
-    organisasjoner: Array<Organisasjon>;
+    organisasjoner: Organisasjon[];
     valgtBedrift: Bedriftvalg | undefined;
     setValgtBedrift: (org: Bedriftvalg) => void;
 }
 
 const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properties>) => {
     const location = useLocation();
-    const [listener, setListener] = useState<any>();
+    const [listener, setListener] = useState<(props: { action: string; location: Location; }) => void>();
     const { organisasjoner, valgtBedrift, setValgtBedrift } = props;
 
     useEffect(() => {
@@ -26,7 +24,7 @@ const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properti
     const navigate = useNavigate();
 
     const customHistory: Pick<History, 'listen' | 'replace'> = {
-        replace: (to: To) => {
+        replace: (to) => {
             navigate(to, { replace: true });
         },
         listen: (nyListener) => () => {
@@ -39,7 +37,7 @@ const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properti
             organisasjoner={organisasjoner}
             valgtBedrift={valgtBedrift}
             setValgtBedrift={setValgtBedrift}
-            history={customHistory as any}
+            history={customHistory as History}
             sendCallbackAlleClick={true}
         />
     );

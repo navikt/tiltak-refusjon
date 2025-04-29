@@ -30,7 +30,7 @@ type Props = {
     kvitteringVisning: boolean;
 };
 
-const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon, kvitteringVisning }) => {
+const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon }) => {
     const cls = BEMHelper('inntekterFraAMeldingen');
 
     const antallInntekterSomErMedIGrunnlag = korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.inntekter.filter(
@@ -51,7 +51,7 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
         (inntekt) => inntekt.måned
     );
     const inntektGrupperListe = Object.entries(inntektGrupperObjekt);
-    let inntektGrupperListeSortert = sortBy(inntektGrupperListe, [(i) => i[0]]);
+    const inntektGrupperListeSortert = sortBy(inntektGrupperListe, [(i) => i[0]]);
 
     const månedNavn = månedsNavn(korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom);
 
@@ -76,7 +76,7 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                     <>
                         <div>
                             <VerticalSpacer rem={1} />
-                            {inntektGrupperListeSortert.map(([aarManed, inntektslinjer]) => (
+                            {inntektGrupperListeSortert.map(([aarManed]) => (
                                 <Fragment key={aarManed}>
                                     <Heading
                                         level="3"

@@ -8,7 +8,7 @@ export const appendUrl = (orgnummer: string, history: History): void => {
     const currentUrl = new URL(window.location.href);
     currentUrl.searchParams.set(ORGNUMMER_PARAMETER, orgnummer);
     const { search } = currentUrl;
-    (history as any).replace({ search });
+    history.replace({ search });
 };
 
 export const hentUnderenheter = (organisasjonstre: Organisasjonlist): Organisasjon[] =>
@@ -57,27 +57,3 @@ export const bedriftContextInitialisert = (
         (valgtOrganisasjoner === orgnummerFraUrl && orgnummerFraUrl?.length > 0)
     );
 };
-
-export function compareBedriftvalg(
-    valgtorg: Bedriftvalg,
-    valgtBedrift: Bedriftvalg | undefined,
-    keys?: string[]
-): boolean {
-    let erLik: boolean = !!valgtBedrift;
-    if (valgtBedrift) {
-        const objectKeys = keys ?? Object.keys(valgtorg);
-        for (const key of objectKeys) {
-            if (typeof valgtorg[key] === 'object') {
-                const subkeys = Object.keys(valgtorg[key]);
-                for (const subkey of subkeys) {
-                    if (valgtorg[key][subkey] !== valgtBedrift[key][subkey]) {
-                        erLik = false;
-                    }
-                }
-            } else if (valgtorg[key] !== valgtBedrift[key]) {
-                erLik = false;
-            }
-        }
-    }
-    return erLik;
-}

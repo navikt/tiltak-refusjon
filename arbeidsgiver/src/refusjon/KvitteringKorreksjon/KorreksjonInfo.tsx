@@ -13,6 +13,8 @@ type Props = {
 };
 
 const KorreksjonInfo: FunctionComponent<Props> = (props) => {
+    const refusjonsbelop = props.korreksjon.refusjonsgrunnlag.beregning?.refusjonsbeløp ?? 0;
+
     const Korreksjonsgrunner = () => (
         <>
             <BodyShort size="small">
@@ -36,7 +38,7 @@ const KorreksjonInfo: FunctionComponent<Props> = (props) => {
                     <BodyShort size="small">
                         Det er blitt foretatt en ny beregning av refusjonen for sommerjobb. Det tidligere utbetalte
                         beløpet er fratrukket i denne korrigerte beregningen. Det vil bli etterbetalt{' '}
-                        <b>{formatterPenger(props.korreksjon.refusjonsgrunnlag.beregning?.refusjonsbeløp!)}</b>. Denne
+                        <b>{formatterPenger(refusjonsbelop)}</b>. Denne
                         korreksjonen ble registrert {formatterDato(props.korreksjon.godkjentTidspunkt!)}. Pengene vil
                         være på konto i løpet av 3-4 dager etter dette.
                     </BodyShort>
@@ -52,7 +54,7 @@ const KorreksjonInfo: FunctionComponent<Props> = (props) => {
                         {tiltakstypeTekst[props.korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}. Denne
                         korreksjonen er nå utbetalt. Det tidligere utbetalte beløpet er fratrukket i denne korrigerte
                         beregningen. Det er nå etterbetalt{' '}
-                        <b>{formatterPenger(props.korreksjon.refusjonsgrunnlag.beregning?.refusjonsbeløp!)}</b>. Denne
+                        <b>{formatterPenger(refusjonsbelop)}</b>. Denne
                         korreksjonen ble registrert {formatterDato(props.korreksjon.godkjentTidspunkt!)}.
                     </BodyShort>
                     <VerticalSpacer rem={1} />
@@ -66,7 +68,7 @@ const KorreksjonInfo: FunctionComponent<Props> = (props) => {
                         Det er blitt foretatt en ny beregning av refusjonen for sommerjobb. Det tidligere utbetalte
                         beløpet er fratrukket i denne korrigerte beregningen. Den nye beregningen viser at det vil
                         kreves tilbake{' '}
-                        <b>{formatterPenger(props.korreksjon.refusjonsgrunnlag.beregning?.refusjonsbeløp! * -1)}</b>.
+                        <b>{formatterPenger(refusjonsbelop * -1)}</b>.
                     </BodyShort>
                     <BodyShort size="small">
                         {' '}

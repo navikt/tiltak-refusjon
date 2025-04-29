@@ -5,7 +5,7 @@ import * as Sentry from '@sentry/react';
 const ErrorBoundary: FunctionComponent<PropsWithChildren> = (props) => {
     return (
         <Sentry.ErrorBoundary
-            fallback={({ error, componentStack, resetError }) => (
+            fallback={({ error }) => (
                 <>
                     <Alert variant="warning">
                         <Heading size="small" style={{ margin: '0.5rem' }}>

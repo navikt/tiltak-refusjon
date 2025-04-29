@@ -288,7 +288,7 @@ const korreksjonsdata = {
 export const MinusbelopKorreksjon: Story = {
     name: 'Korrigering av minusbeløp',
     args: {},
-    render: (args) => (
+    render: () => (
         <div>
             <h1>Korreksjon: Juster opp lønn for å fjerne minusbeløp</h1>
             <h2>Utregning: Refusjon</h2>

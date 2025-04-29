@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Alert, TextField } from '@navikt/ds-react';
 
 import { sumInntekterOpptjentIPeriode } from '@/utils/inntekterUtiles';
@@ -7,23 +7,20 @@ import { Inntektsgrunnlag, Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import { tiltakstypeTekst } from '~/types/messages';
 
-interface Properties {
+interface Props {
     refusjon: Refusjon;
     inntektsgrunnlag: Inntektsgrunnlag;
-    setEndringBruttoLønn: React.Dispatch<SetStateAction<string>>;
-    endringBruttoLønn: string;
-    delayEndreBruttolønn: Function;
+    endreBruttolønn: (value: number) => void;
     setVisRefusjonInnsending: Dispatch<SetStateAction<boolean>>;
 }
 
-const BruttolønnUtbetaltInput: FunctionComponent<Properties> = ({
-    refusjon,
-    inntektsgrunnlag,
-    setEndringBruttoLønn,
-    endringBruttoLønn,
-    delayEndreBruttolønn,
-    setVisRefusjonInnsending,
-}: PropsWithChildren<Properties>) => {
+const BruttolønnUtbetaltInput = (props: Props) => {
+    const {
+        refusjon,
+        inntektsgrunnlag,
+        endreBruttolønn,
+        setVisRefusjonInnsending,
+    } = props;
     const cls = BEMHelper('refusjonside');
     const sumInntekterOpptjent: number = sumInntekterOpptjentIPeriode(inntektsgrunnlag);
     const { tilskuddsgrunnlag } = refusjon.refusjonsgrunnlag;
@@ -46,7 +43,6 @@ const BruttolønnUtbetaltInput: FunctionComponent<Properties> = ({
 
                     if (verdi.trim().length > 0 && !verdi.match(/^\d*$/)) {
                         setLokalBruttolønnVerdi(lokalBruttolønnVerdi);
-                        setEndringBruttoLønn('0');
                         setVisRefusjonInnsending(false);
                         return;
                     }
@@ -54,12 +50,10 @@ const BruttolønnUtbetaltInput: FunctionComponent<Properties> = ({
                         setFeilmelding(
                             `Beløpet er høyre enn sum bruttolønn. Det må være det samme eller lavere enn ${sumInntekterOpptjent} kr.`
                         );
-                        setEndringBruttoLønn('0');
                         setVisRefusjonInnsending(false);
                         return;
                     }
 
-                    setEndringBruttoLønn(verdi);
                     setFeilmelding('');
                     if (verdi.trim().length === 0) setVisRefusjonInnsending(false);
                 }}
@@ -71,9 +65,7 @@ const BruttolønnUtbetaltInput: FunctionComponent<Properties> = ({
                     } else {
                         setVisRefusjonInnsending(true);
                     }
-                    delayEndreBruttolønn(refusjon.id!, false, refusjon.sistEndret, parseInt(verdi, 10));
-
-                    setEndringBruttoLønn(verdi);
+                    endreBruttolønn(parseInt(verdi, 10));
                 }}
                 value={lokalBruttolønnVerdi}
             />

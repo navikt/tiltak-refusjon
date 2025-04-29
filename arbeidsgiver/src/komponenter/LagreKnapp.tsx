@@ -10,7 +10,7 @@ type Props = {
 };
 
 const LagreKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
-    const [netverkStatus, setNetverkStatus] = useState<Nettressurs<any>>({ status: Status.IkkeLastet });
+    const [netverkStatus, setNetverkStatus] = useState<Nettressurs<void>>({ status: Status.IkkeLastet });
     const [feilmelding, setFeilmelding] = useState('');
 
     const knappBaseProps = Object.assign({}, props);
@@ -20,7 +20,8 @@ const LagreKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
         try {
             setNetverkStatus({ status: Status.LasterInn });
             await props.lagreFunksjon().then(() => setNetverkStatus({ status: Status.Sendt }));
-        } catch (error: any) {
+        } catch (e) {
+            const error = e as (Error & { feilmelding?: string });
             setNetverkStatus({ status: Status.Feil, error: error.feilmelding ?? 'Uventet feil' });
             handterFeil(error, setFeilmelding);
         }

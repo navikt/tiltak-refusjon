@@ -31,7 +31,7 @@ const KIDInputValidator: FunctionComponent = () => {
             if (
                 refusjon.refusjonsgrunnlag.bedriftKid?.length > 0 &&
                 (!validator.kidnummer(refusjon.refusjonsgrunnlag.bedriftKid) ||
-                    bedriftKidRegex.test(refusjon?.refusjonsgrunnlag?.bedriftKid!))
+                    bedriftKidRegex.test(refusjon?.refusjonsgrunnlag?.bedriftKid ?? ''))
             ) {
                 if (!feilListe.includes('bedriftKid')) {
                     setFeilListe([...feilListe, 'bedriftKid']);
@@ -41,7 +41,7 @@ const KIDInputValidator: FunctionComponent = () => {
             }
             setKid(refusjon.refusjonsgrunnlag.bedriftKid);
         }
-        // eslint-disable-next-line
+
     }, [refusjon?.refusjonsgrunnlag?.bedriftKid]);
 
     return (
@@ -67,7 +67,7 @@ const KIDInputValidator: FunctionComponent = () => {
                     if (
                         kid &&
                         kid?.length !== 0 &&
-                        (bedriftKidRegex.test(refusjon?.refusjonsgrunnlag?.bedriftKid!) ||
+                        (bedriftKidRegex.test(refusjon?.refusjonsgrunnlag?.bedriftKid ?? '') ||
                             !validator.kidnummer(refusjon.refusjonsgrunnlag.bedriftKid))
                     ) {
                         if (!feilListe.includes('bedriftKid')) {

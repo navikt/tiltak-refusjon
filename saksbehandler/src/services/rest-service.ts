@@ -54,9 +54,9 @@ export const useHentRefusjoner = (filter: Filter) => {
     return data;
 };
 
-const removeEmpty = (obj: any) => {
-    Object.keys(obj).forEach((k) => !obj[k] && delete obj[k]);
-    return obj;
+const removeEmpty = <T>(obj: object): T => {
+    Object.keys(obj).forEach((k) => !(obj as never)[k] && delete (obj as never)[k]);
+    return obj as T;
 };
 
 export const useHentRefusjon = (refusjonId: string) => {
@@ -170,7 +170,7 @@ export const settTidligereRefunderbarBeløp = async (
     korreksjonId: string,
     fratrekkRefunderbarBeløp: boolean | null,
     refunderbarBeløp?: number | null
-): Promise<any> => {
+) => {
     const response = await api.post(`/korreksjon/${korreksjonId}/fratrekk-sykepenger`, {
         fratrekkRefunderbarBeløp,
         refunderbarBeløp,

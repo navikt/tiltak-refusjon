@@ -12,8 +12,8 @@ export type SettRefusjonsgrunnlagVerdi = <K extends keyof NonNullable<Refusjonsg
 export interface Context {
     refusjon: Refusjon;
     settRefusjonsgrunnlagVerdi: SettRefusjonsgrunnlagVerdi;
-    feilListe: String[];
-    setFeilListe: (feilListe: String[]) => void;
+    feilListe: string[];
+    setFeilListe: (feilListe: string[]) => void;
     ulagredeEndringer: boolean;
 }
 
@@ -22,7 +22,7 @@ export const RefusjonContext = React.createContext<Context>({} as Context);
 const RefusjonProvider: FunctionComponent<PropsWithChildren> = (props) => {
     const [refusjon, setRefusjon] = useState<Refusjon>({} as Refusjon);
     const [ulagredeEndringer, setUlagredeEndringer] = useState(false);
-    const [feilListe, setFeilListe] = useState<String[]>([]);
+    const [feilListe, setFeilListe] = useState<string[]>([]);
 
     const { refusjonId } = useParams();
     const nyRefusjon = useHentRefusjon(refusjonId);

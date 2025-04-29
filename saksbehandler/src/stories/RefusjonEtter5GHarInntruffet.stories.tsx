@@ -2,7 +2,7 @@ import { InnloggetBruker } from '~/types/brukerContextType';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 
 import { Meta, StoryObj } from '@storybook/react';
-import { BegrensetRefusjon, Refusjon } from '~/types/refusjon';
+import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
 import { Diskresjonskode } from '~/types';

@@ -35,7 +35,7 @@ const Komponent: FunctionComponent = () => {
         const asyncTrigger = async () => {
             try {
                 await trigger(refusjon.sistEndret ? refusjon.sistEndret : '');
-            } catch (error: any) {
+            } catch {
                 reset();
                 mutate(`/refusjon/${refusjonId}`);
             }

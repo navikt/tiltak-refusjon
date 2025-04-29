@@ -53,7 +53,7 @@ const finJuridiskUtenUnderenheter = (organisasjonlist: OrganisasjonEnhet[]) =>
     organisasjonlist.filter((juridiskenhet) => juridiskenhet.Underenheter?.length === 0).map((o) => o.JuridiskEnhet);
 
 function oppdatertFeilstatus(organisasjonlist: OrganisasjonEnhet[]) {
-    let feilstatus: Array<StatusFeilBedriftmeny> | undefined = [];
+    const feilstatus: Array<StatusFeilBedriftmeny> | undefined = [];
     const JuridiskUtenUnderenheter: Organisasjon[] = finJuridiskUtenUnderenheter(organisasjonlist);
 
     if (JuridiskUtenUnderenheter?.length > 0) {
