@@ -1,25 +1,28 @@
-import { formatterPenger } from '@/utils/PengeUtils';
 import { Alert, BodyShort, Heading, Tag } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
-import VerticalSpacer from '~/VerticalSpacer';
-import InformasjonFraAvtalen from '../refusjon/RefusjonSide/InformasjonFraAvtalen';
-import InntekterFraAMeldingen from '../refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
-import InntekterFraAMeldingenGammel from '../refusjon/RefusjonSide/InntekterFraAmeldingenGammel';
-import HarTattStillingTilAlleInntektsLinjerNy from '../refusjon/RefusjonSide/HarTattStillingTilAlleInntektsLinjerNy';
-import HarTattStillingTilAlleInntektsLinjerGammel from '../refusjon/RefusjonSide/HarTattStillingTilAlleInntektsLinjerGammel';
-import TidligereRefunderbarBeløpKvittering from '../refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
-import Utregning from '../refusjon/RefusjonSide/Utregning';
-import KorreksjonSummeringBoks from './KorreksjonSummeringsBoks';
-import { Korreksjon } from '~/types/refusjon';
-import { storForbokstav } from '~/utils/stringUtils';
-import { korreksjonStatusTekst } from '~/types/messages';
+
 import Boks from '~/Boks';
+import HarTattStillingTilAlleInntektsLinjerGammel from '@/refusjon/RefusjonSide/HarTattStillingTilAlleInntektsLinjerGammel';
+import HarTattStillingTilAlleInntektsLinjerNy from '@/refusjon/RefusjonSide/HarTattStillingTilAlleInntektsLinjerNy';
+import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen';
+import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
+import InntekterFraAMeldingenGammel from '@/refusjon/RefusjonSide/InntekterFraAmeldingenGammel';
+import TidligereRefunderbarBeløpKvittering from '@/refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
+import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, korreksjonStatusTekst, Korreksjon } from '~/types';
+import { formatterPenger } from '@/utils/PengeUtils';
+import { storForbokstav } from '~/utils/stringUtils';
 
-type Props = {
+import KorreksjonSummeringBoks from './KorreksjonSummeringsBoks';
+
+interface Props {
+    aktsomhet?: Aktsomhet;
     korreksjon: Korreksjon;
-};
+}
 
-const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
+const KorreksjonKvitteringSide = (props: Props) => {
+    const { aktsomhet, korreksjon } = props;
+
     return (
         <Boks variant="hvit">
             <VerticalSpacer rem={2} />
@@ -31,7 +34,7 @@ const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
             </div>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
-                refusjonId={korreksjon.korrigererRefusjonId}
+                aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={korreksjon.refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={korreksjon.refusjonsgrunnlag.bedriftKontonummer}

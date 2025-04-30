@@ -1,24 +1,22 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
 
-import BekreftSlettKorreksjon from '../refusjon/RefusjonSide/BekreftSlettKorreksjon';
-import { Refusjonsgrunnlag } from '~/types/refusjon';
+import BekreftSlettKorreksjon from '@/refusjon/RefusjonSide/BekreftSlettKorreksjon';
+import BekreftTilbakekrevKorreksjon from '@/refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';
 import Boks from '~/Boks';
 import InformasjonFraAvtalenVTAO from '~/KvitteringSide/KvitteringSideVTAO/InformasjonFraAvtaleVTAO';
-import TilskuddssatsVTAO from '~/KvitteringSide/KvitteringSideVTAO/TilskuddssatsVTAO';
-import BekreftTilbakekrevKorreksjon from '@/refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';
-import VerticalSpacer from '~/VerticalSpacer';
 import KorreksjonUtregningVTAO from './KorreksjonUtregningVTAO';
-import { useRefusjonKreverAktsomhet } from '@/services/rest-service';
+import TilskuddssatsVTAO from '~/KvitteringSide/KvitteringSideVTAO/TilskuddssatsVTAO';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, Refusjonsgrunnlag } from '~/types';
 
-type Props = {
-    refusjonId: string;
+interface Props {
+    aktsomhet?: Aktsomhet;
     refusjonsgrunnlag: Refusjonsgrunnlag;
-};
+}
 
 const KorreksjonSideVTAO = (props: Props) => {
-    const { refusjonId, refusjonsgrunnlag } = props;
+    const { aktsomhet, refusjonsgrunnlag } = props;
     const { bedriftKontonummer, tilskuddsgrunnlag } = refusjonsgrunnlag;
-    const { data: aktsomhet } = useRefusjonKreverAktsomhet(refusjonId);
 
     return (
         <Boks variant="hvit">
