@@ -207,5 +207,5 @@ export const settHarFerietrekkForSammeMåned = async (korreksjonId: string, harF
 };
 
 export const useRefusjonKreverAktsomhet = (refusjonId?: string) => {
-    return useSWR<Aktsomhet>(`/refusjon/${refusjonId}/aktsomhet`, swrConfig);
+    return useSWR<Aktsomhet>(`/refusjon/${refusjonId}/aktsomhet`, { ...swrConfig, suspense: false });
 };

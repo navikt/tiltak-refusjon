@@ -232,5 +232,5 @@ export const hentInntekterLengerFrem = async (
 };
 
 export const useRefusjonKreverAktsomhet = (refusjonId?: string) => {
-    return useSWR<Aktsomhet>(refusjonId ? `/refusjon/${refusjonId}/aktsomhet` : undefined, swrConfig);
+    return useSWR<Aktsomhet>(refusjonId ? `/refusjon/${refusjonId}/aktsomhet` : undefined, { ...swrConfig, suspense: false });
 };
