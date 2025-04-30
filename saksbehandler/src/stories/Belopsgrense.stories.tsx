@@ -167,7 +167,7 @@ const refusjondata = {
             },
         ],
         bruttoLønn: 42846,
-        id: '01HKMQG513917TYAVNFSF1WB36',
+        id: 'REFUSJON_ID',
         innhentetTidspunkt: '2024-01-08T15:26:50.019561',
     },
 };

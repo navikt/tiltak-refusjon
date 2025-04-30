@@ -123,7 +123,7 @@ const refusjonMinusbelop: Refusjon = {
     },
     bedriftNr: '999999999',
     deltakerFnr: '28061827902',
-    id: '01HMGZ78M9W9A3CM4SFGHTH3M5',
+    id: 'REFUSJON_ID',
     fristForGodkjenning: '2024-02-29',
     forrigeFristForGodkjenning: undefined,
     unntakOmInntekterFremitid: 0,

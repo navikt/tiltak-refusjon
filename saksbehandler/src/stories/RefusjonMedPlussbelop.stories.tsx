@@ -134,7 +134,7 @@ const refusjonPlussbelop: Refusjon = {
     },
     bedriftNr: '999999999',
     deltakerFnr: '28128521498',
-    id: '01HMGY26W4BXX44P6EAJNEN21E',
+    id: 'REFUSJON_ID',
     fristForGodkjenning: '2024-02-29',
     forrigeFristForGodkjenning: undefined,
     unntakOmInntekterFremitid: 0,

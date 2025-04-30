@@ -97,7 +97,7 @@ const førOver5GRefusjon: Refusjon = {
     },
     bedriftNr: '999999999',
     deltakerFnr: '08098138758',
-    id: '01HNJE38VP9H59D98ZQ97C594G',
+    id: 'REFUSJON_ID',
     fristForGodkjenning: '2024-03-31',
     forrigeFristForGodkjenning: undefined,
     unntakOmInntekterFremitid: 0,

@@ -122,7 +122,7 @@ const korreksjon: Korreksjon = {
     },
     deltakerFnr: '28061827902',
     bedriftNr: '999999999',
-    id: '01HMRW9JTD7GRJGSPSGAJQN20N',
+    id: 'KORREKSJON_ID',
     korreksjonsgrunner: [Korreksjonsgrunn.HENT_INNTEKTER_PÅ_NYTT],
     status: KorreksjonStatus.TILBAKEKREVING,
     kostnadssted: undefined,
