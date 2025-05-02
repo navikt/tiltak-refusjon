@@ -4,9 +4,9 @@ Tiltak-refusjon bruker [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/
 
 Workspaces:
 
--   [arbeidsgiver](./arbeidsgiver)
--   [saksbehandler](./saksbehandler)
--   [komponenter](./komponenter)
+- [arbeidsgiver](./arbeidsgiver)
+- [saksbehandler](./saksbehandler)
+- [komponenter](./komponenter)
 
 ### Hvordan funker komponenter?
 
