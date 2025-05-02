@@ -1,27 +1,24 @@
-import KIDInputValidator from '../../../komponenter/KIDInputValidator/KIDInputValidator';
-import { FunctionComponent } from 'react';
-
-import VerticalSpacer from '~/VerticalSpacer';
-
-import { formatterPenger } from '~/utils/PengeUtils';
 import { Alert, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
-import IkonRad from '~/IkonRad/IkonRad';
+
 import Boks from '~/Boks';
-import { tiltakstypeTekst } from '~/types/messages';
-import { formatterDato, formatterPeriode } from '~/utils';
-import { Refusjon } from '~/types/refusjon';
 import EksternLenke from '~/EksternLenke/EksternLenke';
-import { useAvtaleKreverAktsomhet } from '@/services/rest-service';
 import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
+import IkonRad from '~/IkonRad/IkonRad';
+import KIDInputValidator from '@/komponenter/KIDInputValidator/KIDInputValidator';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, tiltakstypeTekst } from '~/types';
+import { Refusjon } from '~/types/refusjon';
+import { formatterDato, formatterPeriode } from '~/utils';
+import { formatterPenger } from '~/utils/PengeUtils';
 
-type Props = {
+interface Props {
+    aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
-};
+}
 
-const InformasjonFraAvtalen: FunctionComponent<Props> = ({ refusjon }) => {
-    const { data } = useAvtaleKreverAktsomhet(refusjon.id);
+const InformasjonFraAvtalen = (props: Props) => {
+    const { refusjon, aktsomhet } = props;
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleId}`;
-
     const refusjonsnummer = `${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}`;
 
     return (
@@ -30,7 +27,7 @@ const InformasjonFraAvtalen: FunctionComponent<Props> = ({ refusjon }) => {
                 Informasjon hentet fra avtalen
             </Heading>
             <VerticalSpacer rem={1} />
-            {data?.kreverAktsomhet && <HemmeligAdresseVarsel aktsomhet={data} />}
+            {aktsomhet?.kreverAktsomhet && <HemmeligAdresseVarsel aktsomhet={aktsomhet} />}
             <IkonRad>
                 <EksternLenke href={avtaleLenke}>
                     Avtale om {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}

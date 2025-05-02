@@ -1,28 +1,29 @@
 import { ExpansionCard, Heading, Tag } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
-import Utregning from '../../komponenter/Utregning';
-import VerticalSpacer from '~/VerticalSpacer';
 
-import InntekterFraTiltaketSvar from '../RefusjonSide/InntekterFraTiltaketSvar';
-import SummeringBoks from '../RefusjonSide/SummeringBoks';
-import InformasjonFraAvtalen from '../RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
-import InntekterFraAMeldingen from '../RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
+import Boks from '~/Boks';
+import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
+import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
+import InntekterFraTiltaketSvar from '@/refusjon/RefusjonSide/InntekterFraTiltaketSvar';
+import KorreksjonInfo from './KorreksjonInfo';
+import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
+import Utregning from '@/komponenter/Utregning';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, KorreksjonStatus, korreksjonStatusTekst } from '~/types';
+import { Korreksjon, Refusjon } from '~/types/refusjon';
+import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { storForbokstav } from '~/utils/stringUtils';
 
 import InntekterFraAMeldingenKorreksjon from './InntekterFraAMeldingenKorreksjon';
-import KorreksjonInfo from './KorreksjonInfo';
-import Boks from '~/Boks';
-import { Korreksjon, Refusjon } from '~/types/refusjon';
-import { storForbokstav } from '~/utils/stringUtils';
-import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
-import { korreksjonStatusTekst } from '~/types/messages';
-import { KorreksjonStatus } from '~/types/status';
 
-type Props = {
+interface Props {
+    aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
     korreksjon: Korreksjon;
-};
+}
 
-const KvitteringKorreksjon: FunctionComponent<Props> = ({ refusjon, korreksjon }) => {
+const KvitteringKorreksjon = (props: Props) => {
+    const { refusjon, korreksjon, aktsomhet } = props;
+
     return (
         <>
             <Boks variant="hvit">
@@ -39,7 +40,7 @@ const KvitteringKorreksjon: FunctionComponent<Props> = ({ refusjon, korreksjon }
                 <VerticalSpacer rem={1} />
                 <KorreksjonInfo korreksjon={korreksjon} />
                 <VerticalSpacer rem={2} />
-                <InformasjonFraAvtalen refusjon={refusjon} />
+                <InformasjonFraAvtalen refusjon={refusjon} aktsomhet={aktsomhet} />
                 <VerticalSpacer rem={2} />
                 <InntekterFraAMeldingenKorreksjon korreksjon={korreksjon} kvitteringVisning={true} />
                 <VerticalSpacer rem={2} />

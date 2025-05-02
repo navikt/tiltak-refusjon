@@ -3,26 +3,28 @@ import { Alert } from '@navikt/ds-react';
 import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import TilbakeTilOversikt from '../../komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
-import VerticalSpacer from '~/VerticalSpacer';
-import { opprettKorreksjonsutkast, useHentRefusjon } from '../../services/rest-service';
-import ForlengFrist from '../ForlengFrist/ForlengFrist';
-import KvitteringSide from '../KvitteringSide/KvitteringSide';
-import MerkForUnntakOmInntekterToMånederFrem from '../MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
+
 import FeilSide from './FeilSide';
+import ForlengFrist from '@/refusjon/ForlengFrist/ForlengFrist';
+import HendelsesLogg from '@/refusjon/Hendelseslogg/Hendelseslogg';
 import HenterInntekterBoks from '~/HenterInntekterBoks';
-import RefusjonSide from './RefusjonSide';
-import { useInnloggetBruker } from '../../bruker/BrukerContext';
-import { BrukerContextType } from '~/types/brukerContextType';
-import HendelsesLogg from '../Hendelseslogg/Hendelseslogg';
-import { RefusjonStatus } from '~/types/status';
-import { formatterDato } from '~/utils';
+import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
-import { Korreksjonsgrunn } from '~/types/refusjon';
-import { Tiltak } from '~/types/tiltak';
+import MerkForUnntakOmInntekterToMånederFrem from '@/refusjon/MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
+import TilbakeTilOversikt from '@/komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
+import VerticalSpacer from '~/VerticalSpacer';
+import { BrukerContextType } from '~/types/brukerContextType';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak, Korreksjonsgrunn } from '~/types';
+import { formatterDato } from '~/utils';
+import { opprettKorreksjonsutkast, useHentRefusjon, useRefusjonKreverAktsomhet } from '@/services/rest-service';
+import { useInnloggetBruker } from '@/bruker/BrukerContext';
+
+import RefusjonSide from './RefusjonSide';
 
 const Fleks = styled.div`
     display: flex;
+
     > * {
         margin-right: 1rem;
     }
@@ -53,6 +55,7 @@ const Komponent: FunctionComponent = () => {
     const refusjon = useHentRefusjon(refusjonId!);
     const brukerContext: BrukerContextType = useInnloggetBruker();
     const navigate = useNavigate();
+    const { data: aktsomhet } = useRefusjonKreverAktsomhet(refusjon.id);
 
     const opprettKorreksjon = async (
         grunner: Korreksjonsgrunn[],
@@ -87,8 +90,11 @@ const Komponent: FunctionComponent = () => {
                             <HendelsesLogg refusjonId={refusjonId} />
                         </Fleks>
                         <VerticalSpacer rem={1} />
-
-                        <KvitteringSideVTAO refusjon={refusjon} innloggetBruker={brukerContext.innloggetBruker} />
+                        <KvitteringSideVTAO
+                            aktsomhet={aktsomhet}
+                            refusjon={refusjon}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                        />
                     </>
                 );
             }
@@ -99,6 +105,8 @@ const Komponent: FunctionComponent = () => {
                     </Fleks>
                     <VerticalSpacer rem={1} />
                     <FeilSide
+                        aktsomhet={aktsomhet}
+                        refusjon={refusjon}
                         advarselType="info"
                         feiltekst={`Du kan søke om refusjon fra ${formatterDato(
                             refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
@@ -121,7 +129,7 @@ const Komponent: FunctionComponent = () => {
                         <HendelsesLogg refusjonId={refusjonId} />
                     </Fleks>
                     <VerticalSpacer rem={1} />
-                    <RefusjonSide />
+                    <RefusjonSide aktsomhet={aktsomhet} refusjon={refusjon} />
                 </>
             );
         case RefusjonStatus.UTGÅTT:
@@ -132,6 +140,8 @@ const Komponent: FunctionComponent = () => {
                     </Fleks>
                     <VerticalSpacer rem={1} />
                     <FeilSide
+                        aktsomhet={aktsomhet}
+                        refusjon={refusjon}
                         advarselType="warning"
                         feiltekst={`Fristen for å søke om refusjon for denne perioden gikk ut ${formatterDato(
                             refusjon.fristForGodkjenning
@@ -146,7 +156,12 @@ const Komponent: FunctionComponent = () => {
                         <HendelsesLogg refusjonId={refusjonId} />
                     </Fleks>
                     <VerticalSpacer rem={1} />
-                    <FeilSide advarselType="warning" feiltekst="Refusjonen er annullert. Avtalen ble annullert." />
+                    <FeilSide
+                        aktsomhet={aktsomhet}
+                        refusjon={refusjon}
+                        advarselType="warning"
+                        feiltekst="Refusjonen er annullert. Avtalen ble annullert."
+                    />
                 </>
             );
         case RefusjonStatus.SENDT_KRAV:
@@ -164,12 +179,14 @@ const Komponent: FunctionComponent = () => {
 
                     {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
                         <KvitteringSideVTAO
+                            aktsomhet={aktsomhet}
                             refusjon={refusjon}
                             innloggetBruker={brukerContext.innloggetBruker}
                             opprettKorreksjon={opprettKorreksjon}
                         />
                     ) : (
                         <KvitteringSide
+                            aktsomhet={aktsomhet}
                             refusjon={refusjon}
                             innloggetBruker={brukerContext.innloggetBruker}
                             opprettKorreksjon={opprettKorreksjon}

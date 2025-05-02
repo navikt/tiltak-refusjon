@@ -3,13 +3,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { BodyLong, Button, Loader, Modal } from '@navikt/ds-react';
 import { Locked } from '@navikt/ds-icons';
 
-import { useAvtaleKreverAktsomhet } from '@/services/rest-service';
+import { useRefusjonKreverAktsomhet } from '@/services/rest-service';
 
 import styles from './RefusjonKontroll.module.less';
 
 const RefusjonKontroll: FunctionComponent<PropsWithChildren> = (props) => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
-    const { isLoading, data } = useAvtaleKreverAktsomhet(refusjonId);
+    const { isLoading, data } = useRefusjonKreverAktsomhet(refusjonId);
 
     const navigate = useNavigate();
     const ref = useRef<HTMLDialogElement>(null);

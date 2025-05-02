@@ -1,20 +1,21 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
 
-import BekreftSlettKorreksjon from '../refusjon/RefusjonSide/BekreftSlettKorreksjon';
-import { Refusjonsgrunnlag } from '~/types/refusjon';
+import BekreftSlettKorreksjon from '@/refusjon/RefusjonSide/BekreftSlettKorreksjon';
+import BekreftTilbakekrevKorreksjon from '@/refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';
 import Boks from '~/Boks';
 import InformasjonFraAvtalenVTAO from '~/KvitteringSide/KvitteringSideVTAO/InformasjonFraAvtaleVTAO';
-import TilskuddssatsVTAO from '~/KvitteringSide/KvitteringSideVTAO/TilskuddssatsVTAO';
-import BekreftTilbakekrevKorreksjon from '@/refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';
-import VerticalSpacer from '~/VerticalSpacer';
 import KorreksjonUtregningVTAO from './KorreksjonUtregningVTAO';
+import TilskuddssatsVTAO from '~/KvitteringSide/KvitteringSideVTAO/TilskuddssatsVTAO';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, Refusjonsgrunnlag } from '~/types';
 
-type Props = {
+interface Props {
+    aktsomhet?: Aktsomhet;
     refusjonsgrunnlag: Refusjonsgrunnlag;
-};
+}
 
-const KorreksjonSideVTAO: FunctionComponent<Props> = ({ refusjonsgrunnlag }) => {
+const KorreksjonSideVTAO = (props: Props) => {
+    const { aktsomhet, refusjonsgrunnlag } = props;
     const { bedriftKontonummer, tilskuddsgrunnlag } = refusjonsgrunnlag;
 
     return (
@@ -32,6 +33,7 @@ const KorreksjonSideVTAO: FunctionComponent<Props> = ({ refusjonsgrunnlag }) => 
             </BodyShort>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalenVTAO
+                aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={tilskuddsgrunnlag}
                 bedriftKontonummer={bedriftKontonummer}
                 åpnetFørsteGang={'Trengs ikke på korreksjon'}

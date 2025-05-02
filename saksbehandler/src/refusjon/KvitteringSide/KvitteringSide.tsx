@@ -1,27 +1,27 @@
+import { ReactElement } from 'react';
 import { Heading, Tag } from '@navikt/ds-react';
-import { FunctionComponent, ReactElement } from 'react';
-import { InnloggetBruker } from '~/types/brukerContextType';
-import { useFeatureToggles } from '../../featureToggles/FeatureToggleProvider';
-import { Feature } from '../../featureToggles/features';
-import VerticalSpacer from '~/VerticalSpacer';
-import InformasjonFraAvtalen from '../RefusjonSide/InformasjonFraAvtalen';
-import InntekterFraAMeldingen from '../RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
-import InntekterFraAMeldingenGammel from '../RefusjonSide/InntekterFraAmeldingenGammel';
-import HarTattStillingTilAlleInntektsLinjerNy from '../RefusjonSide/HarTattStillingTilAlleInntektsLinjerNy';
-import HarTattStillingTilAlleInntektsLinjerGammel from '../RefusjonSide/HarTattStillingTilAlleInntektsLinjerGammel';
-import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
-import SjekkReberegning from '../RefusjonSide/SjekkReberegning';
-import SummeringBoks from '../RefusjonSide/SummeringBoks';
-import SummeringBoksNullbeløp from '../RefusjonSide/SummeringBoksNullbeløp';
-import TidligereRefunderbarBeløpKvittering from '../RefusjonSide/TidligereRefunderbarBeløpKvittering';
-import Utregning from '../RefusjonSide/Utregning';
-import Statusmelding from './Statusmelding';
-import { Korreksjonsgrunn, Refusjon } from '~/types/refusjon';
-import { RefusjonStatus } from '~/types/status';
-import { storForbokstav } from '~/utils/stringUtils';
-import { statusTekst, tiltakstypeTekst } from '~/types/messages';
-import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+
 import Boks from '~/Boks';
+import HarTattStillingTilAlleInntektsLinjerGammel from '@/refusjon/RefusjonSide/HarTattStillingTilAlleInntektsLinjerGammel';
+import HarTattStillingTilAlleInntektsLinjerNy from '@/refusjon/RefusjonSide/HarTattStillingTilAlleInntektsLinjerNy';
+import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen';
+import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
+import InntekterFraAMeldingenGammel from '@/refusjon/RefusjonSide/InntekterFraAmeldingenGammel';
+import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
+import SjekkReberegning from '@/refusjon/RefusjonSide/SjekkReberegning';
+import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
+import SummeringBoksNullbeløp from '@/refusjon/RefusjonSide/SummeringBoksNullbeløp';
+import TidligereRefunderbarBeløpKvittering from '@/refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
+import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, RefusjonStatus, statusTekst, tiltakstypeTekst, Korreksjonsgrunn, Refusjon } from '~/types';
+import { Feature } from '@/featureToggles/features';
+import { InnloggetBruker } from '~/types/brukerContextType';
+import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { storForbokstav } from '~/utils/stringUtils';
+import { useFeatureToggles } from '@/featureToggles/FeatureToggleProvider';
+
+import Statusmelding from './Statusmelding';
 
 const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -37,6 +37,7 @@ const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
 };
 
 interface Props {
+    aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
     innloggetBruker: InnloggetBruker;
     opprettKorreksjon?: (
@@ -46,7 +47,8 @@ interface Props {
     ) => Promise<void>;
 }
 
-const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker, opprettKorreksjon }) => {
+const KvitteringSide = (props: Props) => {
+    const { aktsomhet, refusjon, innloggetBruker, opprettKorreksjon } = props;
     const refusjonsgrunnlag = refusjon.refusjonsgrunnlag;
     const featureToggles = useFeatureToggles();
 
@@ -75,7 +77,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon, innloggetBruker, o
             <Statusmelding status={refusjon.status} />
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
-                refusjonId={refusjon.id}
+                aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={refusjonsgrunnlag.bedriftKontonummer}

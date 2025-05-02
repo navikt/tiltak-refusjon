@@ -1,23 +1,22 @@
 import { Heading, Tag } from '@navikt/ds-react';
-import { FunctionComponent, ReactElement } from 'react';
-import Utregning from '../../komponenter/Utregning';
-import VerticalSpacer from '~/VerticalSpacer';
-import InntekterFraAMeldingenGammel from '../RefusjonSide/InntekterFraAMeldingenGammel';
-import InntekterFraTiltaketSvar from '../RefusjonSide/InntekterFraTiltaketSvar';
-import InntekterFraTiltaketSvarGammel from '../RefusjonSide/InntekterFraTiltaketSvarGammel';
-import SummeringBoks from '../RefusjonSide/SummeringBoks';
-import TidligereRefunderbarBeløpKvittering from '../RefusjonSide/TidligereRefunderbarBeløpKvittering';
-import InformasjonFraAvtalen from '../RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
-import InntekterFraAMeldingen from '../RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
+import { ReactElement } from 'react';
+
+import Boks from '~/Boks';
+import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
+import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
+import InntekterFraAMeldingenGammel from '@/refusjon/RefusjonSide/InntekterFraAMeldingenGammel';
+import InntekterFraTiltaketSvar from '@/refusjon/RefusjonSide/InntekterFraTiltaketSvar';
+import InntekterFraTiltaketSvarGammel from '@/refusjon/RefusjonSide/InntekterFraTiltaketSvarGammel';
 import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
 import Statusmelding from '~/KvitteringSide/Statusmelding';
-import SummeringBoksNullbeløp from '../RefusjonSide/SummeringsBoksNullbeløp';
-import Boks from '~/Boks';
-import { Refusjon } from '~/types/refusjon';
-import { RefusjonStatus } from '~/types/status';
-import { storForbokstav } from '~/utils/stringUtils';
-import { statusTekst, tiltakstypeTekst } from '~/types/messages';
+import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
+import SummeringBoksNullbeløp from '@/refusjon/RefusjonSide/SummeringsBoksNullbeløp';
+import TidligereRefunderbarBeløpKvittering from '@/refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
+import Utregning from '@/komponenter/Utregning';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, statusTekst, tiltakstypeTekst, RefusjonStatus, Refusjon } from '~/types';
 import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { storForbokstav } from '~/utils/stringUtils';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -40,12 +39,16 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     }
 };
 
-type Props = {
+interface Props {
+    aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
-};
+}
 
-const KvitteringSide: FunctionComponent<Props> = ({ refusjon }) => {
-    if (!refusjon.refusjonsgrunnlag.inntektsgrunnlag) return null;
+const KvitteringSide = (props: Props) => {
+    const { refusjon, aktsomhet } = props;
+    if (!refusjon.refusjonsgrunnlag.inntektsgrunnlag) {
+        return null;
+    }
 
     return (
         <Boks variant="hvit">
@@ -62,7 +65,7 @@ const KvitteringSide: FunctionComponent<Props> = ({ refusjon }) => {
             </div>
 
             <VerticalSpacer rem={2} />
-            <InformasjonFraAvtalen refusjon={refusjon} />
+            <InformasjonFraAvtalen refusjon={refusjon} aktsomhet={aktsomhet} />
             <VerticalSpacer rem={2} />
             {refusjon.refusjonsgrunnlag.inntektsgrunnlag.inntekter.find(
                 // Dersom det ikke finnes en eneste inntektslinje som har blitt huket av (ja eller nei), så viser vi gammel versjon av InntekterFraAMeldingen

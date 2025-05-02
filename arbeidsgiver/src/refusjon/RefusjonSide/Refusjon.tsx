@@ -1,26 +1,33 @@
 import React, { FunctionComponent, useEffect, useRef } from 'react';
-import TilbakeTilOversikt from '../../komponenter/TilbakeTilOversikt';
-import KvitteringKorreksjon from '../KvitteringKorreksjon/KvitteringKorreksjon';
-import KvitteringSide from '../KvitteringSide/KvitteringSide';
+import TilbakeTilOversikt from '@/komponenter/TilbakeTilOversikt';
+import KvitteringKorreksjon from '@/refusjon/KvitteringKorreksjon/KvitteringKorreksjon';
+import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import FeilSide from './FeilSide';
 import RefusjonSide from './RefusjonSide';
 import { BodyShort } from '@navikt/ds-react';
 import { useParams } from 'react-router-dom';
-import { oppdaterRefusjonFetcher, useHentKorreksjon, useHentRefusjon } from '@/services/rest-service';
+import {
+    oppdaterRefusjonFetcher,
+    useHentKorreksjon,
+    useHentRefusjon,
+    useRefusjonKreverAktsomhet,
+} from '@/services/rest-service';
 import useSWRMutation from 'swr/mutation';
 import { mutate } from 'swr';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato } from '~/utils';
 import { Refusjon as RefusjonType } from '~/types/refusjon';
-import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import { BrukerContextType } from '~/types/brukerContextType';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
+import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
+import { Aktsomhet } from '~/types';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
     const refusjon = useHentRefusjon(refusjonId);
     const erLastet = useRef(false);
     const brukerContext: BrukerContextType = useInnloggetBruker();
+    const { data: aktsomhet } = useRefusjonKreverAktsomhet(refusjon.id);
 
     const { trigger, isMutating, reset } = useSWRMutation(`/refusjon/${refusjonId}`, oppdaterRefusjonFetcher);
 
@@ -50,7 +57,11 @@ const Komponent: FunctionComponent = () => {
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
             return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAO innloggetBruker={brukerContext.innloggetBruker} refusjon={refusjon} />
+                <KvitteringSideVTAO
+                    aktsomhet={aktsomhet}
+                    innloggetBruker={brukerContext.innloggetBruker}
+                    refusjon={refusjon}
+                />
             ) : (
                 <FeilSide
                     advarselType="info"
@@ -71,7 +82,7 @@ const Komponent: FunctionComponent = () => {
                 />
             );
         case RefusjonStatus.KLAR_FOR_INNSENDING:
-            return <RefusjonSide />;
+            return <RefusjonSide aktsomhet={aktsomhet} refusjon={refusjon} />;
         case RefusjonStatus.UTGÅTT:
             return (
                 <FeilSide
@@ -89,19 +100,23 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.UTBETALT:
         case RefusjonStatus.UTBETALING_FEILET:
             return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAO innloggetBruker={brukerContext.innloggetBruker} refusjon={refusjon} />
+                <KvitteringSideVTAO
+                    aktsomhet={aktsomhet}
+                    innloggetBruker={brukerContext.innloggetBruker}
+                    refusjon={refusjon}
+                />
             ) : (
-                <KvitteringSide refusjon={refusjon} />
+                <KvitteringSide aktsomhet={aktsomhet} refusjon={refusjon} />
             );
         case RefusjonStatus.KORRIGERT: {
-            return <Korreksjonskvittering refusjon={refusjon} />;
+            return <Korreksjonskvittering aktsomhet={aktsomhet} refusjon={refusjon} />;
         }
     }
 };
 
-const Korreksjonskvittering: FunctionComponent<{ refusjon: RefusjonType }> = ({ refusjon }) => {
+const Korreksjonskvittering = ({ refusjon, aktsomhet }: { refusjon: RefusjonType; aktsomhet?: Aktsomhet }) => {
     const korreksjon = useHentKorreksjon(refusjon.korreksjonId!);
-    return <KvitteringKorreksjon refusjon={refusjon} korreksjon={korreksjon} />;
+    return <KvitteringKorreksjon refusjon={refusjon} korreksjon={korreksjon} aktsomhet={aktsomhet} />;
 };
 
 const Refusjon: FunctionComponent = () => {
