@@ -1,1 +1,1 @@
-npm run prettier:fix -- --log-level silent && npm run pretty-svg -w arbeidsgiver
+npm run prettier:fix -- --log-level silent && npm run lint:fix && npm run pretty-svg -w arbeidsgiver

@@ -8,6 +8,7 @@
     ],
     "scripts": {
         "lint": "eslint --max-warnings=0",
+        "lint:fix": "eslint --max-warnings=0 --fix",
         "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
         "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
         "prepare": "husky"
