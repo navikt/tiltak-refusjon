@@ -34,7 +34,7 @@ jobs:
       - name: Linting
         run: npm run lint
       - name: Komponenter - bygg
-        run: npm run build -w kompoenter
+        run: npm run build -w komponenter
       - name: Arbeidsgiver - test og bygg
         run: npm run test-and-build -w arbeidsgiver
       - name: Sett opp sentry release
