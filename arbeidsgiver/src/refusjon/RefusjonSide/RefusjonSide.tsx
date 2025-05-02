@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import Boks from '~/Boks';
 import { Aktsomhet, Refusjon } from '~/types';
-import { godkjennRefusjon, useHentRefusjon } from '@/services/rest-service';
+import { godkjennRefusjon } from '@/services/rest-service';
 import { innSendingRefusjon, UtbetaltStatus } from '@/utils/amplitude-utils';
 
 import InformasjonFraAvtalen from './informasjonAvtalen/InformasjonFraAvtalen';
