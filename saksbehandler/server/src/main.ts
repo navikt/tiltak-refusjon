@@ -1,9 +1,10 @@
-const azure = require('./auth/azure');
-const routes = require('./routes');
-const cors = require('./cors');
-const express = require('express');
-const logger = require('./logger');
-const { startLabs } = require('./labs');
+import express from 'express';
+
+import * as azure from './auth/azure';
+import routes from './routes';
+import cors from './cors';
+import logger from './logger';
+import { startLabs } from './labs';
 
 const server = express();
 
@@ -21,7 +22,7 @@ async function startApp() {
         const azureJwksClient = azure.azureJwksClient();
 
         // setup routes
-        server.use('/', routes.setup(azureAuthClient, tokenEndpoint, azureJwksClient));
+        server.use('/', routes(azureAuthClient, tokenEndpoint, azureJwksClient));
 
         const port = 3000;
         server.listen(port, () => logger.info(`Listening on port ${port}`));

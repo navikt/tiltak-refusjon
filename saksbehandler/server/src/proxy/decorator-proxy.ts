@@ -1,13 +1,16 @@
-const config = require('../config');
-const authUtils = require('../auth/utils');
-const { createProxyMiddleware } = require('http-proxy-middleware');
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import { Router } from 'express';
 
-const setup = (router, authClient, tokenEndpoint) => {
+import * as config from '../config';
+import { getOnBehalfOfAccessToken } from '../auth/utils';
+import { TokenEndpoint, Client } from '../auth/azure';
+
+export default (router: Router, authClient: Client, tokenEndpoint: TokenEndpoint) => {
     router.use(
         '/modiacontextholder',
         async (req, res, next) => {
             try {
-                const accessToken = await authUtils.getOnBehalfOfAccessToken(
+                const accessToken = await getOnBehalfOfAccessToken(
                     authClient,
                     tokenEndpoint,
                     req,
@@ -31,5 +34,3 @@ const setup = (router, authClient, tokenEndpoint) => {
         res.redirect(config.decorator().host + req.originalUrl.replace('/internarbeidsflatedecorator', ''));
     });
 };
-
-module.exports = { setup };

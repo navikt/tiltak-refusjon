@@ -1,15 +1,14 @@
-require('dotenv/config');
-const logger = require('./logger');
+import logger from './logger';
 
-const envVar = ({ name, required = true }) => {
+export const envVar = ({ name, required = true }: { name: string; required?: boolean }) => {
     if (!process.env[name] && required) {
         logger.error(`Missing required environment variable '${name}'`);
         process.exit(1);
     }
-    return process.env[name];
+    return process.env[name] ?? '';
 };
 
-const server = () => {
+export const server = () => {
     return {
         host: envVar({ name: 'HOST', required: false }) || 'localhost', // should be equivalent to the URL this application is hosted on for correct CORS origin header
         port: envVar({ name: 'PORT', required: false }) || 3000,
@@ -19,22 +18,20 @@ const server = () => {
     };
 };
 
-const azureAd = () => {
+export const azureAd = () => {
     return {
         discoveryUrl: envVar({ name: 'AZURE_APP_WELL_KNOWN_URL' }),
         clientId: envVar({ name: 'AZURE_APP_CLIENT_ID' }),
-        clientJwks: JSON.parse(envVar({ name: 'AZURE_APP_JWKS' })),
+        clientJwks: envVar({ name: 'AZURE_APP_JWKS' }),
         openIdJwksUri: envVar({ name: 'AZURE_OPENID_CONFIG_JWKS_URI' }),
         redirectUri: envVar({ name: 'AAD_REDIRECT_URL' }),
         logoutRedirectUri: envVar({ name: 'AAD_LOGOUT_REDIRECT_URL' }),
-        tokenEndpointAuthMethod: 'private_key_jwt',
         responseTypes: ['code'],
         responseMode: 'query',
-        tokenEndpointAuthSigningAlg: 'RS256',
     };
 };
 
-const api = () => {
+export const api = () => {
     logger.info(`Loading reverse proxy config from API_* [CLIENT_ID, URL]`);
     const scopes = envVar({ name: 'API_SCOPES', required: false });
     return {
@@ -44,16 +41,8 @@ const api = () => {
     };
 };
 
-const decorator = () => {
+export const decorator = () => {
     return {
         host: envVar({ name: 'DECORATOR_HOST' }),
     };
-};
-
-module.exports = {
-    server,
-    azureAd,
-    api,
-    decorator,
-    envVar,
 };

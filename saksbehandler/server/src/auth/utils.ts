@@ -1,11 +1,24 @@
-const config = require('../config');
-const logger = require('../logger');
+import { Request } from 'express';
 
-const getOnBehalfOfAccessToken = (authClient, tokenEndpoint, req, scope) => {
+import * as config from '../config';
+import logger from '../logger';
+
+import { TokenEndpoint, Client } from './azure';
+
+const appendDefaultScope = (scope: string) => `${scope}/.default`;
+
+const formatClientIdScopeForV2Clients = (clientId: string) => appendDefaultScope(`api://${clientId}`);
+
+export const getOnBehalfOfAccessToken = (
+    client: Client,
+    tokenEndpoint: TokenEndpoint,
+    req: Request,
+    scope?: string
+) => {
     return new Promise((resolve, reject) => {
         const apiConfig = config.api();
-        const token = req.headers.authorization.replace('Bearer', '').trim();
-        authClient
+        const token = req.headers.authorization?.replace('Bearer', '').trim();
+        client
             .grant(
                 {
                     grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
@@ -28,13 +41,4 @@ const getOnBehalfOfAccessToken = (authClient, tokenEndpoint, req, scope) => {
                 reject(err);
             });
     });
-};
-
-const appendDefaultScope = (scope) => `${scope}/.default`;
-
-const formatClientIdScopeForV2Clients = (clientId) => appendDefaultScope(`api://${clientId}`);
-
-module.exports = {
-    getOnBehalfOfAccessToken,
-    appendDefaultScope,
 };
