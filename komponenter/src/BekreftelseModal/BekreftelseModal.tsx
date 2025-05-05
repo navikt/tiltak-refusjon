@@ -7,7 +7,7 @@ import LagreOgAvbrytKnapp from '~/knapp/LagreOgAvbrytKnapp';
 interface Props {
     isOpen: boolean;
     lukkModal: () => void;
-    bekreft: () => Promise<any>;
+    bekreft: () => Promise<void>;
     tittel: string;
     containerStyle?: CSSProperties;
 }

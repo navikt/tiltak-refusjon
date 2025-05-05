@@ -59,7 +59,7 @@ const ModalForm: FunctionComponent<{ refusjon: Refusjon; setOpen: (open: boolean
         try {
             await merkForUnntakOmInntekterFremITid(refusjon.id, data.merking);
             setOpen(false);
-        } catch (error) {
+        } catch {
             setError('merking', { type: 'manual', message: 'Noe gikk galt' });
         }
     };

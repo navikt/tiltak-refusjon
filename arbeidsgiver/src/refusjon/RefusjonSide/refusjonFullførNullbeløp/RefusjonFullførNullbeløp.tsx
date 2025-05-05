@@ -25,9 +25,9 @@ const RefusjonFullførNullbeløp: FunctionComponent = () => {
                 navigate({ pathname: `/refusjon/${refusjon.id}/kvittering`, search: window.location.search });
                 innSendingRefusjon(UtbetaltStatus.OK, refusjon, undefined);
             });
-        } catch (error: any) {
+        } catch (error) {
             console.log('feil ved innsending:', error);
-            innSendingRefusjon(UtbetaltStatus.FEILET, refusjon, error);
+            innSendingRefusjon(UtbetaltStatus.FEILET, refusjon, error as Error);
             throw error;
         }
     };

@@ -5,12 +5,12 @@ import { Nettressurs, Status } from '~/nettressurs';
 import { handterFeil } from '~/utils/apiFeilUtils';
 
 type Props = {
-    lagreFunksjon: () => Promise<any>;
+    lagreFunksjon: () => Promise<void>;
     avbryt: () => void;
 } & HTMLAttributes<HTMLDivElement>;
 
 const LagreOgAvbrytKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
-    const [oppslag, setOppslag] = useState<Nettressurs<any>>({ status: Status.IkkeLastet });
+    const [oppslag, setOppslag] = useState<Nettressurs<void>>({ status: Status.IkkeLastet });
     const [feilmelding, setFeilmelding] = useState('');
 
     // Fungerer i praksis som "omit avbryt og lagrefunksjon"
@@ -21,7 +21,7 @@ const LagreOgAvbrytKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
     const onClick = async () => {
         try {
             setOppslag({ status: Status.LasterInn });
-            await props.lagreFunksjon();
+            await lagreFunksjon();
             setOppslag({ status: Status.Sendt });
         } catch (error) {
             if (error instanceof Error) {
@@ -49,11 +49,7 @@ const LagreOgAvbrytKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Button
-                    style={{ padding: '0.5rem 3rem', marginRight: '0.5rem' }}
-                    variant="secondary"
-                    onClick={props.avbryt}
-                >
+                <Button style={{ padding: '0.5rem 3rem', marginRight: '0.5rem' }} variant="secondary" onClick={avbryt}>
                     Avbryt
                 </Button>
                 <Button

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import TriangleUp from '~/assets/image/triangleUp.svg?react';
 import TriangleDown from '~/assets/image/triangleDown.svg?react';
 import BEMHelper from '~/utils/bem';

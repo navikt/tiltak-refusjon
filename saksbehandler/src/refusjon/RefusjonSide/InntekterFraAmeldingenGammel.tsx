@@ -1,38 +1,15 @@
 import React, { FunctionComponent } from 'react';
-import { Alert, BodyShort, Heading } from '@navikt/ds-react';
-import styled from 'styled-components';
+
+import Boks from '~/Boks';
 import VerticalSpacer from '~/VerticalSpacer';
-import { formatterPenger } from '../../utils/PengeUtils';
 import sortBy from 'lodash.sortby';
-import { lønnsbeskrivelseTekst } from '~/types/messages';
+import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 import { Inntektsgrunnlag } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
-import Boks from '~/Boks';
+import { formatterPenger } from '@/utils/PengeUtils';
+import { lønnsbeskrivelseTekst } from '~/types/messages';
 
-const Fleks = styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: baseline;
-`;
-
-const InntekterTabell = styled.table`
-    width: 100%;
-    th,
-    td {
-        text-align: left;
-        padding: 0.35rem 0.5rem;
-    }
-    th:first-child,
-    td:first-child {
-        padding: 0.35rem 0;
-    }
-    th:last-child,
-    td:last-child {
-        text-align: right;
-        padding: 0.35rem 0;
-    }
-`;
+import styles from './InntekterFraAmeldingenGammel.module.less';
 
 const inntektBeskrivelse = (beskrivelse: string | undefined) => {
     if (beskrivelse === undefined) {
@@ -60,7 +37,7 @@ const InntekterFraAMeldingenGammel: FunctionComponent<{
 
     return (
         <Boks variant="grå">
-            <Fleks>
+            <div className={styles.fle}>
                 <Heading size="small" style={{ marginBottom: '1rem' }}>
                     Inntekter hentet fra a-meldingen
                 </Heading>
@@ -70,7 +47,7 @@ const InntekterFraAMeldingenGammel: FunctionComponent<{
                         {formatterDato(props.inntektsgrunnlag.innhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)}
                     </BodyShort>
                 )}
-            </Fleks>
+            </div>
             {props.inntektsgrunnlag?.bruttoLønn !== undefined && props.inntektsgrunnlag?.bruttoLønn !== null && (
                 <i>Her hentes inntekter rapportert inn til a-meldingen i tilskuddsperioden og en måned etter.</i>
             )}
@@ -78,7 +55,7 @@ const InntekterFraAMeldingenGammel: FunctionComponent<{
                 props.inntektsgrunnlag.inntekter.find((inntekt) => inntekt.erMedIInntektsgrunnlag) && (
                     <>
                         <VerticalSpacer rem={1} />
-                        <InntekterTabell>
+                        <table className={styles.inntekterTabell}>
                             <thead>
                                 <tr>
                                     <th>Beskriv&shy;else</th>
@@ -126,7 +103,7 @@ const InntekterFraAMeldingenGammel: FunctionComponent<{
                                     </tr>
                                 )}
                             </tbody>
-                        </InntekterTabell>
+                        </table>
                     </>
                 )}
             {ingenInntekter && (

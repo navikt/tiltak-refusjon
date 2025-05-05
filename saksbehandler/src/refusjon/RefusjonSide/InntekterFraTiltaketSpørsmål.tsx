@@ -1,25 +1,18 @@
-import { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
-import styled from 'styled-components';
+
+import BEMHelper from '~/utils/bem';
 import VerticalSpacer from '~/VerticalSpacer';
-
-import { endreBruttolønn, useHentKorreksjon } from '../../services/rest-service';
-
-import { sumInntekterOpptjentIPeriode } from '../../utils/inntekterUtils';
-import { formatterPenger } from '../../utils/PengeUtils';
-
-import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import { BodyShort, Heading, Label, Radio, RadioGroup, TextField } from '@navikt/ds-react';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
-import BEMHelper from '~/utils/bem';
+import { endreBruttolønn, useHentKorreksjon } from '@/services/rest-service';
+import { formatterPenger } from '@/utils/PengeUtils';
 import { formatterPeriode, månedsNavn } from '~/utils';
+import { sumInntekterOpptjentIPeriode } from '@/utils/inntekterUtils';
 import { tiltakstypeTekst } from '~/types/messages';
 
-export const GrønnBoks = styled.div`
-    background-color: #ccf1d6;
-    padding: 1em;
-    border: 4px solid #99dead;
-`;
+import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
+import styles from './InntekterFraTiltaketSpørsmål.module.less';
 
 const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Refusjonsgrunnlag }> = (props) => {
     const cls = BEMHelper('refusjonside');
@@ -63,7 +56,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
     const månedNavn = månedsNavn(props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom);
 
     return (
-        <GrønnBoks>
+        <div className={styles.gronnBoks}>
             <Heading size="small">
                 Inntekter som skal refunderes for{' '}
                 {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
@@ -75,7 +68,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
             </BodyShort>
             <VerticalSpacer rem={1} />
             <InntekterOpptjentIPeriodeTabell
-                inntekter={props.refusjonsgrunnlag.inntektsgrunnlag?.inntekter!}
+                inntekter={props.refusjonsgrunnlag.inntektsgrunnlag?.inntekter ?? []}
                 månedsNavn={månedNavn}
             />
             <VerticalSpacer rem={1} />
@@ -120,10 +113,10 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
                         label={`Skriv inn bruttolønn utbetalt for ${
                             tiltakstypeTekst[refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
                         }`}
-                        onChange={(event: any) => {
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                             const verdi = event.currentTarget.value;
                             if (verdi.match(/^\d*$/) && parseInt(verdi, 10) <= sumInntekterOpptjent) {
-                                setEndretBruttoLønn(verdi as number);
+                                setEndretBruttoLønn(Number(verdi));
                             }
                         }}
                         onBlur={() => endreBruttolønn(korreksjonId!, false, endretBruttoLønn)}
@@ -131,7 +124,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
                     />
                 </>
             )}
-        </GrønnBoks>
+        </div>
     );
 };
 

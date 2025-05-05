@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import Boks from '~/Boks';
 import { Aktsomhet, Refusjon } from '~/types';
-import { godkjennRefusjon, useHentRefusjon } from '@/services/rest-service';
+import { godkjennRefusjon } from '@/services/rest-service';
 import { innSendingRefusjon, UtbetaltStatus } from '@/utils/amplitude-utils';
 
 import InformasjonFraAvtalen from './informasjonAvtalen/InformasjonFraAvtalen';
@@ -35,9 +35,9 @@ const RefusjonSide = (props: Props) => {
                 navigate({ pathname: `/refusjon/${refusjon.id}/kvittering`, search: window.location.search });
                 innSendingRefusjon(UtbetaltStatus.OK, refusjon, undefined);
             });
-        } catch (error: any) {
+        } catch (error) {
             console.log('feil ved innsending:', error);
-            innSendingRefusjon(UtbetaltStatus.FEILET, refusjon, error);
+            innSendingRefusjon(UtbetaltStatus.FEILET, refusjon, error as Error);
             throw error;
         }
     };

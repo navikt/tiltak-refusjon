@@ -30,7 +30,7 @@ export const SøkeInput: FunctionComponent<Props & { textFieldProps?: TextFieldP
         setFeil(undefined);
     };
 
-    const enterKlikk = (event: any) => {
+    const enterKlikk = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             const nyttSøkeord = event.currentTarget.value;
             setSøkeord(nyttSøkeord);

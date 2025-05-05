@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, Fragment, useEffect } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import { ExpansionCard, RadioGroup, Radio } from '@navikt/ds-react';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Filter, RefusjonsAktor, useFilter } from './FilterContext';

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import svgr from 'vite-plugin-svgr';
-const axios = require('axios');
+import axios from 'axios';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -17,6 +17,12 @@ export default defineConfig({
     },
     plugins: [react(), svgr()],
 
+    css: {
+        modules: {
+            localsConvention: 'camelCaseOnly',
+        },
+    },
+
     server: {
         port: 3002,
         proxy: {
@@ -28,17 +34,19 @@ export default defineConfig({
             },
             '/modiacontextholder/api/decorator': {
                 target: 'http://localhost:8081',
-                bypass(req, res, options) {
+                bypass(req, res) {
                     axios
                         .get('http://localhost:8081/api/saksbehandler/innlogget-bruker', {
                             headers: req.headers,
                         })
                         .then(
                             (response) => {
-                                res.end(JSON.stringify({ ...response.data, ident: response.data.identifikator || '' }));
+                                res?.end(
+                                    JSON.stringify({ ...response.data, ident: response.data.identifikator || '' })
+                                );
                             },
-                            (error) => {
-                                res.end(JSON.stringify({ authenticated: false }));
+                            () => {
+                                res?.end(JSON.stringify({ authenticated: false }));
                             }
                         );
                 },

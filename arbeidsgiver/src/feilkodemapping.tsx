@@ -14,7 +14,7 @@ export type Feilkode =
     | 'FERIETREKK_TRUKKET_FOR_SAMME_MÅNED'
     | 'SAMTIDIGE_ENDRINGER';
 
-export const Feilmeldinger: { [key in Feilkode]: string } = {
+export const Feilmeldinger: Record<Feilkode, string> = {
     INGEN_BEDRIFTKONTONUMMER: 'Mangler kontonummer for bedriften',
     INGEN_INNTEKTER: 'Ingen inntekter for perioden ble funnet',
     EREG_MANGLER_ADRESSEINFO:

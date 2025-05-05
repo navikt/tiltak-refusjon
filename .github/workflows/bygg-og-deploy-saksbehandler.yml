@@ -34,7 +34,9 @@ jobs:
         run: npm run prettier
       - name: Linting
         run: npm run lint
-      - name: Frontend - test, lint og bygg
+      - name: Komponenter - bygg
+        run: npm run build -w komponenter
+      - name: Saksbehandler - test og bygg
         run: npm run test-and-build -w saksbehandler
       - name: Push docker image to GAR
         uses: nais/docker-build-push@v0

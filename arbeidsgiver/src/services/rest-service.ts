@@ -18,7 +18,7 @@ const api = axios.create({
     validateStatus: (status) => status < 400,
 });
 
-const axiosFetcher = (url: string): Promise<any> => api.get(url).then((res: AxiosResponse<any>) => res.data);
+const axiosFetcher = <T>(url: string): Promise<T> => api.get(url).then((res: AxiosResponse) => res.data);
 
 const swrConfig: SWRConfiguration = {
     fetcher: axiosFetcher,
@@ -53,7 +53,7 @@ export const endreBruttolønn = async (
     inntekterKunFraTiltaket: boolean | null,
     sistEndret: string,
     bruttoLønn?: number | null
-): Promise<any> => {
+) => {
     const response = await api.post(
         `/refusjon/${refusjonId}/endre-bruttolønn`,
         {
@@ -70,11 +70,7 @@ export const endreBruttolønn = async (
     return response.data;
 };
 
-export const lagreBedriftKID = async (
-    refusjonId: string,
-    sistEndret: string,
-    bedriftKID: string | undefined
-): Promise<any> => {
+export const lagreBedriftKID = async (refusjonId: string, sistEndret: string, bedriftKID: string | undefined) => {
     if (bedriftKID?.trim().length === 0) {
         bedriftKID = undefined;
     }
@@ -98,7 +94,7 @@ export const settTidligereRefunderbarBeløp = async (
     fratrekkRefunderbarBeløp: boolean | null,
     sistEndret: string,
     refunderbarBeløp?: number | null
-): Promise<any> => {
+) => {
     const response = await api.post(
         `/refusjon/${refusjonId}/fratrekk-sykepenger`,
         {
@@ -136,7 +132,7 @@ export const setInntektslinjeOpptjentIPeriode = async (
     await mutate(`/refusjon/${refusjonId}`);
 };
 
-export const godkjennRefusjon = async (refusjonId: string, sistEndret: string): Promise<any> => {
+export const godkjennRefusjon = async (refusjonId: string, sistEndret: string) => {
     const response = await api.post(`/refusjon/${refusjonId}/godkjenn`, null, {
         headers: {
             'If-Unmodified-Since': sistEndret,
@@ -146,7 +142,7 @@ export const godkjennRefusjon = async (refusjonId: string, sistEndret: string): 
     return response.data;
 };
 
-export const godkjennRefusjonMedNullbeløp = async (refusjonId: string, sistEndret: string): Promise<any> => {
+export const godkjennRefusjonMedNullbeløp = async (refusjonId: string, sistEndret: string) => {
     const response = await api.post(`/refusjon/${refusjonId}/godkjenn-nullbeløp`, null, {
         headers: {
             'If-Unmodified-Since': sistEndret,
@@ -178,12 +174,12 @@ export const HentRefusjonForMangeOrganisasjoner = (bedriftlist: string, filter: 
     return data!;
 };
 
-const removeEmpty = (obj: any) => {
-    Object.keys(obj).forEach((k) => !obj[k] && delete obj[k]);
-    return obj;
+const removeEmpty = <T>(obj: object): T => {
+    Object.keys(obj).forEach((k) => !(obj as never)[k] && delete (obj as never)[k]);
+    return obj as T;
 };
 
-export const useHentRefusjon = (refusjonId?: string, sistEndret?: string): Refusjon => {
+export const useHentRefusjon = (refusjonId?: string): Refusjon => {
     const parameter = refusjonId ? `/refusjon/${refusjonId}` : null;
     const { data } = useSWR<Refusjon>(parameter, swrConfig);
     return data!;

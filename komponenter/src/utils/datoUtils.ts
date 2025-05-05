@@ -13,7 +13,7 @@ export const formatterDato = (dato: string, format: string = NORSK_DATO_FORMAT) 
     try {
         const formattertDato = moment(dato).format(format);
         return !formattertDato.includes('NaN') ? formattertDato : dato;
-    } catch (e) {
+    } catch {
         // Kunne ikke caste stringen til dato.
         return dato;
     }
@@ -27,7 +27,7 @@ export const getMåned = (dato: string) => {
     try {
         const formattertDato = moment(dato).format('MMMM');
         return !formattertDato.includes('NaN') ? storForbokstav(formattertDato) : dato;
-    } catch (e) {
+    } catch {
         // Kunne ikke caste stringen til dato.
         return dato;
     }
@@ -42,7 +42,7 @@ export const getEnheterMellom = (
 ): string[] => {
     const dateStart = moment(datoFom);
     const dateEnd = moment(datoTom);
-    let timeValues = [];
+    const timeValues = [];
 
     while (dateStart.format(compareFormat) !== dateEnd.format(compareFormat)) {
         timeValues.push(dateStart.format(returnFormat));

@@ -10,7 +10,7 @@ export interface FeatureToggles {
 
 const FeatureToggleContext = createContext<FeatureToggles>({});
 
-export const FeatureToggleProvider = (props: any) => {
+export const FeatureToggleProvider = (props: React.PropsWithChildren) => {
     const [featureToggles, setFeatureToggles] = useState<FeatureToggles>({});
 
     useEffect(() => {

@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import { MenyContext } from '../../BedriftsmenyRefusjon';
 import { Alert, BodyShort } from '@navikt/ds-react';
 import BEMHelper from '~/utils/bem';
 
-const TomtSok: FunctionComponent<{}> = () => {
+const TomtSok = () => {
     const cls = BEMHelper('bedriftliste');
     const { sokefelt } = useContext(MenyContext);
     const ingenSoketreff = sokefelt.aktivt && sokefelt.antallTreff === 0;

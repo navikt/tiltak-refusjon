@@ -21,7 +21,7 @@ const RefusjonGodkjennModal: FunctionComponent<Properties> = ({
     godkjennRefusjonen,
 }: PropsWithChildren<Properties>) => {
     const { tilskuddsgrunnlag, beregning } = refusjon.refusjonsgrunnlag;
-    if (beregning?.refusjonsbeløp! > 0) {
+    if (beregning?.refusjonsbeløp ?? 0 > 0) {
         return (
             <GodkjennModal
                 isOpen={visGodkjennModal}
@@ -40,7 +40,7 @@ const RefusjonGodkjennModal: FunctionComponent<Properties> = ({
                 </BodyShort>
                 <VerticalSpacer rem={1} />
                 <BodyShort size="small">
-                    Hvis refusjonsbeløpet på <b>{formatterPenger(beregning?.refusjonsbeløp!)}</b> ikke stemmer, ta
+                    Hvis refusjonsbeløpet på <b>{formatterPenger(beregning?.refusjonsbeløp)}</b> ikke stemmer, ta
                     kontakt med veileder før du klikker Send inn.
                 </BodyShort>
             </GodkjennModal>
@@ -63,7 +63,7 @@ const RefusjonGodkjennModal: FunctionComponent<Properties> = ({
                 </BodyShort>
                 <VerticalSpacer rem={1} />
                 <BodyShort size="small">
-                    Hvis beløpet på <b>{formatterPenger(beregning?.refusjonsbeløp!)}</b> ikke stemmer, ta kontakt med
+                    Hvis beløpet på <b>{formatterPenger(beregning?.refusjonsbeløp)}</b> ikke stemmer, ta kontakt med
                     veileder før du klikker Send inn.
                 </BodyShort>
             </GodkjennModal>

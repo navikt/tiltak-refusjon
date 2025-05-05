@@ -21,7 +21,6 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<Properties> = ({ setVisR
     const { inntektsgrunnlag, tilskuddsgrunnlag, inntekterKunFraTiltaket, endretBruttoLønn } =
         refusjon.refusjonsgrunnlag;
     const [inntekterKunTiltaket, setInntekterKunTiltaket] = useState<boolean | undefined>(inntekterKunFraTiltaket);
-    const [endringBruttoLønn, setEndringBruttoLønn] = useState<string>(endretBruttoLønn?.toString() ?? '');
 
     const refusjonNummer = `${tilskuddsgrunnlag.avtaleNr}-${tilskuddsgrunnlag.løpenummer}`;
     const periode = formatterPeriode(
@@ -32,7 +31,6 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<Properties> = ({ setVisR
 
     useEffect(() => {
         setInntekterKunTiltaket(inntekterKunFraTiltaket);
-        setEndringBruttoLønn(endretBruttoLønn?.toString() ?? '');
     }, [inntekterKunFraTiltaket, endretBruttoLønn]);
 
     if (
@@ -85,7 +83,6 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<Properties> = ({ setVisR
                     value={true}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         setInntekterKunTiltaket(event.currentTarget.checked);
-                        setEndringBruttoLønn('');
                         delayEndreBruttolønn(refusjonId!, true, refusjon.sistEndret, undefined);
                         setVisRefusjonInnsending(true);
                     }}
@@ -109,10 +106,10 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<Properties> = ({ setVisR
                     <VerticalSpacer rem={1} />
                     <BruttolønnUtbetaltInput
                         setVisRefusjonInnsending={setVisRefusjonInnsending}
-                        delayEndreBruttolønn={delayEndreBruttolønn}
-                        endringBruttoLønn={endringBruttoLønn}
+                        endreBruttolønn={(value: number) => {
+                            delayEndreBruttolønn(refusjonId!, true, refusjon.sistEndret, value);
+                        }}
                         inntektsgrunnlag={inntektsgrunnlag}
-                        setEndringBruttoLønn={setEndringBruttoLønn}
                         refusjon={refusjon}
                     />
                 </>
