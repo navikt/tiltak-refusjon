@@ -3,15 +3,14 @@ import helmet from 'helmet';
 import compression from 'compression';
 
 import routes from '@/routes';
-import { startLabs } from '@/labs';
 
 const server = express();
 
-async function startApp() {
+function startApp() {
     try {
+        server.use(compression());
         server.use(express.json());
         server.use(express.urlencoded({ extended: true }));
-        server.use(compression());
         server.disable('x-powered-by');
 
         server.use(
@@ -39,8 +38,4 @@ async function startApp() {
     }
 }
 
-if (process.env.MILJO === 'dev-gcp-labs') {
-    startLabs(express()).catch((err) => console.info(err));
-} else {
-    startApp().catch((err) => console.error(err));
-}
+startApp();

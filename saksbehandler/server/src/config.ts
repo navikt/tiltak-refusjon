@@ -6,12 +6,12 @@ const envVar = ({ name, required = true }: { name: string; required?: boolean })
     return process.env[name] ?? '';
 };
 
-export const apiConfig = {
+export const apiConfig = () => ({
     clientId: envVar({ name: 'API_CLIENT_ID' }),
     url: envVar({ name: 'API_URL' }),
-};
+});
 
-export const decoratorConfig = {
+export const decoratorConfig = () => ({
     host: envVar({ name: 'DECORATOR_HOST' }),
     modiaContextHolderScope: envVar({ name: 'MODIA_CONTEXT_HOLDER_SCOPE', required: false }),
-};
+});

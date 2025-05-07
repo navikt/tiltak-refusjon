@@ -24,8 +24,6 @@ spec:
       value: dev-gcp-labs
     - name: DECORATOR_HOST
       value: https://cdn.nav.no/personoversikt/internarbeidsflate-decorator-v3/dev/latest/dist/
-    - name: DECORATOR_CORS
-      value: https://modiacontextholder.intern.dev.nav.no
     - name: API_URL
       value: http://tiltak-refusjon-api-labs
   accessPolicy:

@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 
 import apiProxy from '@/proxy/api-proxy';
+import labsProxy from '@/proxy/labs-proxy';
 import decoratorProxy from '@/proxy/decorator-proxy';
 import { isTokenValid } from '@/auth/token';
 
@@ -16,30 +17,36 @@ export default () => {
         res.status(200).send('Ready');
     });
 
-    router.get('/login', (_, res) => {
-        res.redirect('/oauth2/login');
-    });
-    router.get('/logout', (_, res) => {
-        res.redirect('/oauth2/logout');
-    });
+    if (process.env.MILJO === 'dev-gcp-labs') {
+        router.use('/logout', (_, res) => {
+            res.clearCookie('aad-token');
+            res.redirect('/');
+        });
 
-    router.use(async (req, res, next) => {
-        if (!req.headers.authorization) {
-            console.log('Mangler authorization header');
-            res.sendStatus(401);
-        } else if (await isTokenValid(req)) {
-            console.log('Token er gyldig');
-            next();
-        } else {
-            console.log('Token er ugyldig');
-            res.redirect('/login');
-        }
-    });
+        labsProxy(router);
+    } else {
+        router.get('/login', (_, res) => {
+            res.redirect('/oauth2/login');
+        });
+        router.get('/logout', (_, res) => {
+            res.redirect('/oauth2/logout');
+        });
 
-    apiProxy(router);
-    decoratorProxy(router);
+        router.use(async (req, res, next) => {
+            if (!req.headers.authorization) {
+                res.sendStatus(401);
+            } else if (await isTokenValid(req)) {
+                next();
+            } else {
+                res.redirect('/login');
+            }
+        });
 
-    // serve static files
+        apiProxy(router);
+    }
+
+    decoratorProxy(router, process.env.MILJO === 'dev-gcp-labs');
+
     router.use(express.static(path.join(__dirname, '../build')));
 
     router.get('/{*splat}', (req, res) => {
