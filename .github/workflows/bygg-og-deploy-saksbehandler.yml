@@ -24,12 +24,17 @@ jobs:
       - name: Konfigurer Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          registry-url: 'https://npm.pkg.github.com'
       - name: Frontend npm install
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Server npm install
         run: npm ci
         working-directory: saksbehandler/server
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Prettier
         run: npm run prettier
       - name: Linting
