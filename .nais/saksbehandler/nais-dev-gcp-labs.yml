@@ -28,8 +28,6 @@ spec:
       value: https://modiacontextholder.intern.dev.nav.no
     - name: API_URL
       value: http://tiltak-refusjon-api-labs
-    - name: HOST
-      value: https://tiltak-refusjon-saksbehandler-labs.ekstern.dev.nav.no
   accessPolicy:
     outbound:
       rules:

@@ -5,21 +5,15 @@
     "license": "MIT",
     "scripts": {
         "build": "esbuild src/main.ts --bundle --platform=node --outfile=./dist/index.cjs --packages=external",
-        "postbuild": "cp package-lock.json ./dist && cp -r node_modules ./dist"
+        "postbuild": "cp package-lock.json ./dist && cp -r node_modules ./dist",
+        "prebuild": "tsc"
     },
     "dependencies": {
-        "axios": "1.7.7",
-        "express": "4.20.0",
-        "express-async-handler": "1.2.0",
-        "express-http-proxy": "2.1.1",
-        "helmet": "7.1.0",
-        "http-proxy-middleware": "3.0.2",
-        "jsonwebtoken": "9.0.2",
-        "jwks-rsa": "3.1.0",
-        "node-cache": "5.1.2",
-        "openid-client": "5.7.0",
-        "tunnel": "0.0.6",
-        "winston": "3.14.2"
+        "@navikt/oasis": "^3.8.0",
+        "compression": "^1.8.0",
+        "express": "^5.1.0",
+        "helmet": "^8.1.0",
+        "http-proxy-middleware": "^3.0.5"
     },
     "devDependencies": {
         "@types/express-http-proxy": "^1.6.6",

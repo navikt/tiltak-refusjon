@@ -32,18 +32,12 @@ spec:
   env:
     - name: MILJO
       value: dev-gcp
-    - name: AAD_REDIRECT_URL
-      value: https://tiltak-refusjon.intern.dev.nav.no/oauth2/callback
-    - name: AAD_LOGOUT_REDIRECT_URL
-      value: https://tiltak-refusjon.intern.dev.nav.no/oauth2/callback
     - name: API_CLIENT_ID
       value: dev-gcp.arbeidsgiver.tiltak-refusjon-api
     - name: DECORATOR_HOST
       value: https://cdn.nav.no/personoversikt/internarbeidsflate-decorator-v3/dev/latest/dist
     - name: API_URL
       value: http://tiltak-refusjon-api
-    - name: HOST
-      value: https://tiltak-refusjon.intern.dev.nav.no
     - name: MODIA_CONTEXT_HOLDER_SCOPE
       value: api://dev-gcp.personoversikt.modiacontextholder/.default
   observability:
