@@ -1,9 +1,10 @@
-const express = require('express');
-const path = require('path');
-const { createProxyMiddleware } = require('http-proxy-middleware');
-const logger = require('./logger');
+import express, { Express } from 'express';
+import path from 'path';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
-async function startLabs(server) {
+import logger from './logger';
+
+export async function startLabs(server: Express) {
     const page = path.resolve(__dirname, '../build', 'index.html');
 
     try {
@@ -22,7 +23,7 @@ async function startLabs(server) {
                 target: 'http://tiltak-refusjon-api-labs/api',
                 changeOrigin: true,
                 on: {
-                    proxyReq: (proxyReq, req, res, options) => {
+                    proxyReq: (proxyReq, req, res) => {
                         const cookies = req.headers?.cookie?.split(';');
                         const cookieWithFakeToken = cookies?.filter((c) => c.includes('aad-token'));
                         if (!cookieWithFakeToken?.length) {
@@ -53,5 +54,3 @@ async function startLabs(server) {
         logger.error('Error during start-up', error);
     }
 }
-
-module.exports = { startLabs };

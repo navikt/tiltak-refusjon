@@ -1,8 +1,9 @@
-const config = require('../config');
-const tunnel = require('tunnel');
-const logger = require('../logger');
+import tunnel from 'tunnel';
 
-const agent = () => {
+import * as config from '../config';
+import logger from '../logger';
+
+export default () => {
     const proxyUri = config.server().proxy;
     if (proxyUri) {
         logger.info(`Proxying requests via ${proxyUri} for openid-client`);
@@ -18,5 +19,3 @@ const agent = () => {
         return null;
     }
 };
-
-module.exports = { agent };
