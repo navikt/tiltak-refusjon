@@ -25,10 +25,12 @@ const Landingsside: FunctionComponent = () => {
                     Dette er en løsning for å søke om refusjon for{' '}
                     <Link href={'https://www.nav.no/arbeidsgiver/midlertidig-lonnstilskudd'}>
                         midlertidig lønnstilskudd
-                    </Link> {' '}
+                    </Link>{' '}
                     <Link href={'https://www.nav.no/arbeidsgiver/varig-lonnstilskudd'}> varig lønnstilskudd </Link>,{' '}
                     <Link href={'https://www.nav.no/arbeidsgiver/sommerjobb'}>sommerjobb</Link> og{' '}
-                    <Link href={'https://www.nav.no/arbeidsgiver/varig-tilrettelagt-arbeid'}>varig tilrettelagt arbeid i ordinær virksomhet.</Link>{' '}
+                    <Link href={'https://www.nav.no/arbeidsgiver/varig-tilrettelagt-arbeid'}>
+                        varig tilrettelagt arbeid i ordinær virksomhet.
+                    </Link>{' '}
                 </BodyShort>
                 <VerticalSpacer rem={2} />
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
