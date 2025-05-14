@@ -11,10 +11,10 @@ on:
 
 jobs:
   bygg:
+    name: Bygg og deploy
     permissions:
       contents: read
       id-token: write
-    name: Bygg og deploy
     runs-on: ubuntu-latest
     outputs:
       image: ${{ steps.docker-build-push.outputs.image }}
@@ -41,9 +41,9 @@ jobs:
         run: npm run lint
       - name: Komponenter - bygg
         run: npm run build -w komponenter
-      - name: Saksbehandler - test og bygg
+      - name: Test og bygg
         run: npm run test-and-build -w saksbehandler
-      - name: Server - bygg
+      - name: Bygg - Server
         run: npm run build
         working-directory: saksbehandler/server
       - name: Push docker image to GAR

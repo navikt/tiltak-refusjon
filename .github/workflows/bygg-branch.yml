@@ -27,14 +27,24 @@ jobs:
         working-directory: saksbehandler/server
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Installer - Arbeidsgiver/Server
+        run: npm ci
+        working-directory: arbeidsgiver/server
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Prettier
         run: npm run prettier
       - name: Linting
         run: npm run lint
-      - name: Bygg - Saksbehandler
+      - name: Komponenter - bygg
+        run: npm run build -w komponenter
+      - name: Test og bygg - Saksbehandler
         run: npm run test-and-build -w saksbehandler
       - name: Bygg - Saksbehandler/Server
         run: npm run build
         working-directory: saksbehandler/server
-      - name: Bygg - Arbeidsgiver
+      - name: Test og bygg - Arbeidsgiver
         run: npm run test-and-build -w arbeidsgiver
+      - name: Bygg - Arbeidsgiver/Server
+        run: npm run build
+        working-directory: arbeidsgiver/server

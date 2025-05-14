@@ -24,19 +24,31 @@ jobs:
     steps:
       - name: Sjekk ut kode
         uses: actions/checkout@v4
-      - name: Server yarn install
+      - name: Konfigurer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://npm.pkg.github.com'
+      - name: Installer
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Installer - Server
+        run: npm ci
         working-directory: arbeidsgiver/server
-        run: npm ci
-      - name: Frontend install
-        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Prettier
         run: npm run prettier
       - name: Linting
         run: npm run lint
       - name: Komponenter - bygg
         run: npm run build -w komponenter
-      - name: Arbeidsgiver - test og bygg
+      - name: Test og bygg
         run: npm run test-and-build -w arbeidsgiver
+      - name: Bygg - Server
+        run: npm run build
+        working-directory: arbeidsgiver/server
       - name: Sett opp sentry release
         run: npm run release -w arbeidsgiver
       - name: Push docker image to GAR
