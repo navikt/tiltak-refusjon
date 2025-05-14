@@ -33,9 +33,7 @@ export default () => {
         });
 
         router.use(async (req, res, next) => {
-            if (!req.headers.authorization) {
-                res.sendStatus(401);
-            } else if (await isTokenValid(req)) {
+            if (req.headers.authorization && (await isTokenValid(req))) {
                 next();
             } else {
                 res.redirect('/login');
