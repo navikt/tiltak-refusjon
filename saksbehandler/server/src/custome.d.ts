@@ -1,1 +1,1 @@
-declare module 'tunnel';
+declare module 'compression';
