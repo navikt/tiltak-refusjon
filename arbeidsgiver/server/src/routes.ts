@@ -3,6 +3,7 @@ import path from 'path';
 
 import apiProxy from '@/proxy/api-proxy';
 import decoratorProxy from '@/proxy/decorator-proxy';
+import navDekorator from '@/dekorator/nav-dekoratoren';
 import { isTokenValid } from '@/auth/token';
 
 const router = express.Router();
@@ -36,10 +37,7 @@ export default () => {
     decoratorProxy(router, isLabs);
 
     router.use(express.static(path.join(__dirname, '../build')));
-
-    router.get('/{*splat}', (_, res) => {
-        res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
-    });
+    router.get('/{*splat}', navDekorator(path.resolve(__dirname, '../build', 'index.html')));
 
     return router;
 };
