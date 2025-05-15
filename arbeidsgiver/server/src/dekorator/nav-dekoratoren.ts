@@ -20,6 +20,5 @@ export default (indexFilepath: string): Handler => {
         } catch (error) {
             console.log('Feil ved henting av dekorator: ', error);
         }
-    }
-
-}
+    };
+};
