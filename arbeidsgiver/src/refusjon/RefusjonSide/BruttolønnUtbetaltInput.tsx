@@ -10,12 +10,19 @@ import { tiltakstypeTekst } from '~/types/messages';
 interface Props {
     refusjon: Refusjon;
     inntektsgrunnlag: Inntektsgrunnlag;
-    endreBruttolønn: (value: number) => void;
+    setEndringBruttoLønn: React.Dispatch<SetStateAction<string>>;
+    endringBruttoLønn: string;
+    delayEndreBruttolønn: (
+        refusjonId: string,
+        inntekterKunFraTiltaket: boolean | null,
+        sistEndret: string,
+        bruttoLønn?: number | null | undefined
+    ) => void;
     setVisRefusjonInnsending: Dispatch<SetStateAction<boolean>>;
 }
 
 const BruttolønnUtbetaltInput = (props: Props) => {
-    const { refusjon, inntektsgrunnlag, endreBruttolønn, setVisRefusjonInnsending } = props;
+    const { refusjon, inntektsgrunnlag, setEndringBruttoLønn, delayEndreBruttolønn, setVisRefusjonInnsending } = props;
     const cls = BEMHelper('refusjonside');
     const sumInntekterOpptjent: number = sumInntekterOpptjentIPeriode(inntektsgrunnlag);
     const { tilskuddsgrunnlag } = refusjon.refusjonsgrunnlag;
@@ -38,6 +45,7 @@ const BruttolønnUtbetaltInput = (props: Props) => {
 
                     if (verdi.trim().length > 0 && !verdi.match(/^\d*$/)) {
                         setLokalBruttolønnVerdi(lokalBruttolønnVerdi);
+                        setEndringBruttoLønn('0');
                         setVisRefusjonInnsending(false);
                         return;
                     }
@@ -45,10 +53,12 @@ const BruttolønnUtbetaltInput = (props: Props) => {
                         setFeilmelding(
                             `Beløpet er høyre enn sum bruttolønn. Det må være det samme eller lavere enn ${sumInntekterOpptjent} kr.`
                         );
+                        setEndringBruttoLønn('0');
                         setVisRefusjonInnsending(false);
                         return;
                     }
 
+                    setEndringBruttoLønn(verdi);
                     setFeilmelding('');
                     if (verdi.trim().length === 0) setVisRefusjonInnsending(false);
                 }}
@@ -60,7 +70,9 @@ const BruttolønnUtbetaltInput = (props: Props) => {
                     } else {
                         setVisRefusjonInnsending(true);
                     }
-                    endreBruttolønn(parseInt(verdi, 10));
+                    delayEndreBruttolønn(refusjon.id!, false, refusjon.sistEndret, parseInt(verdi, 10));
+
+                    setEndringBruttoLønn(verdi);
                 }}
                 value={lokalBruttolønnVerdi}
             />
