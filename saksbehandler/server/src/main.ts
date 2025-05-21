@@ -9,6 +9,7 @@ const server = express();
 function startApp() {
     try {
         server.use(compression());
+        server.use(express.json());
         server.disable('x-powered-by');
 
         server.use(
