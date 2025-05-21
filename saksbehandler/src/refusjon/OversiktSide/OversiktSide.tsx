@@ -9,20 +9,16 @@ import BEMHelper from '~/utils/bem';
 import { BrukerContextType } from '~/types/brukerContextType';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { useFilter } from '../oversikt/FilterContext';
-import { useFeatureToggles } from '../../featureToggles/FeatureToggleProvider';
-import { Feature } from '@/featureToggles/features';
 
 const cls = BEMHelper('OversiktSide');
 
 const OversiktSide: FunctionComponent = () => {
     const { filter, oppdaterFilter } = useFilter();
-    const featureToggles = useFeatureToggles();
     const brukerContext: BrukerContextType = useInnloggetBruker();
 
     const options = {
         erArbeidsgiver: false,
         harKorreksjonTilgang: brukerContext.innloggetBruker.harKorreksjonTilgang ?? false,
-        skjulVTAO: !featureToggles[Feature.VtaoToggle],
     };
 
     return (

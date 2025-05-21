@@ -13,10 +13,9 @@ interface OptionProps {
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean; skjulVTAO: boolean };
 }
 
-const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, options }) => {
+const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
     const refusjonFilterTiltak: OptionProps[] = [
         { value: '', label: 'Alle' },
         { value: Tiltak.MIDLERTIDIG_LØNNSTILSKUDD, label: 'Midlertidig lønnstilskudd' },
@@ -26,7 +25,6 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, option
             value: Tiltak.VTAO,
             label: 'VTA-O',
             description: 'Varig tilrettelagt arbeid i ordinær virksomhet',
-            hidden: options.skjulVTAO,
         },
     ];
 
