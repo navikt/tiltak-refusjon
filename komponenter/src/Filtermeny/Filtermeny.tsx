@@ -8,7 +8,7 @@ import { brukerflate } from '~/utils/amplitude-utils';
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean; skjulVTAO: boolean };
+    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean };
 }
 
 const Filtermeny: FunctionComponent<Props> = ({ filter, oppdaterFilter, options }) => {
@@ -18,7 +18,7 @@ const Filtermeny: FunctionComponent<Props> = ({ filter, oppdaterFilter, options 
         <div>
             <StatusFilter filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
             <div style={{ marginTop: '0.75rem' }} />
-            <TiltakFilter filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
+            <TiltakFilter filter={filter} oppdaterFilter={oppdaterFilter} />
         </div>
     );
 };
