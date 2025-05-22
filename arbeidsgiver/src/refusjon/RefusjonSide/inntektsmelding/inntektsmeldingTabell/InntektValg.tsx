@@ -1,9 +1,10 @@
 import React, { ChangeEvent, FunctionComponent } from 'react';
 import { Radio, RadioGroup } from '@navikt/ds-react';
-import { FeilkodeError, setInntektslinjeOpptjentIPeriode } from '../../../../services/rest-service';
+import { setInntektslinjeOpptjentIPeriode } from '../../../../services/rest-service';
 
 import { mutate } from 'swr';
 import { Inntektslinje } from '~/types/refusjon';
+import { FeilkodeError } from '~/types';
 
 interface Props {
     inntekt: Inntektslinje;
@@ -21,7 +22,7 @@ const InntektValg: FunctionComponent<Props> = ({ inntekt, kvitteringVisning, ref
     ): Promise<void> =>
         setInntektslinjeOpptjentIPeriode(refusjonId, inntektslinjeId, erOpptjentIPeriode, sistEndret).catch(
             (err: FeilkodeError) => {
-                if (err.message === 'SAMTIDIGE_ENDRINGER') {
+                if (err.feilkode === 'SAMTIDIGE_ENDRINGER') {
                     mutate(`/refusjon/${refusjonId}`);
                 }
                 console.error('err ', err.message);
