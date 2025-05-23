@@ -27,8 +27,10 @@ spec:
     outbound:
       rules:
         {{#each outbound}}
-          - application: "{{this}}"
+        - application: "{{this}}"
         {{/each}}
+        - application: nav-dekoratoren
+          namespace: personbruker
       external:
       {{#each host}}
         - host: "{{this}}"
