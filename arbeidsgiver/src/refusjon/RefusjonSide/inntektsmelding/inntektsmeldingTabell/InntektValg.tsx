@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FunctionComponent } from 'react';
 import { Radio, RadioGroup } from '@navikt/ds-react';
-import { setInntektslinjeOpptjentIPeriode } from '../../../../services/rest-service';
+import { setInntektslinjeOpptjentIPeriode } from '@/services/rest-service';
 
 import { mutate } from 'swr';
 import { Inntektslinje } from '~/types/refusjon';
