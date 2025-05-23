@@ -36,7 +36,6 @@ const RefusjonSide = (props: Props) => {
                 innSendingRefusjon(UtbetaltStatus.OK, refusjon, undefined);
             });
         } catch (error) {
-            console.log('feil ved innsending:', error);
             innSendingRefusjon(UtbetaltStatus.FEILET, refusjon, error as Error);
             throw error;
         }

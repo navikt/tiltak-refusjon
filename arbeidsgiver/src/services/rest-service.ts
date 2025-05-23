@@ -1,13 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
 import useSWR, { SWRConfiguration, mutate } from 'swr';
 
-import { Aktsomhet, Filter, Korreksjon, PageableRefusjon, Refusjon } from '~/types';
+import { Aktsomhet, ApiError, FeilkodeError, Filter, Korreksjon, PageableRefusjon, Refusjon } from '~/types';
 
 import { BrukerContextType, InnloggetBruker } from '@/bruker/BrukerContextType';
 import { BedriftvalgType } from '@/bruker/bedriftsmenyRefusjon/api/api';
 
-export class FeilkodeError extends Error {}
-export class ApiError extends Error {}
 export class AutentiseringError extends ApiError {}
 
 const api = axios.create({
