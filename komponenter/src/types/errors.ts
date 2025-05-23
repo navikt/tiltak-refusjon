@@ -2,7 +2,7 @@ import { Feilkode, Feilmeldinger } from '~/feilkodemapping';
 
 export class ApiError extends Error {}
 export class FeilkodeError extends Error {
-    feilkode: string;
+    feilkode: Feilkode;
     feilmelding: string;
 
     constructor(feilkode: Feilkode) {
