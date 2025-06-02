@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Info from './Info';
-import { Pagination } from '@navikt/ds-react';
-import { useHentRefusjoner } from '../../services/rest-service';
+import { Pagination, Select } from '@navikt/ds-react';
+import { useHentRefusjoner } from '@/services/rest-service';
 
 import { useFilter } from './FilterContext';
 import OversiktTabell from '~/OversiktTabell';
@@ -41,6 +41,17 @@ const Oversikt: FunctionComponent = () => {
                 boundaryCount={1}
                 siblingCount={1}
             />
+            <Select
+                label="Gå til side"
+                onChange={(e) => oppdaterFilter({ page: parseInt(e.target.value, 10) })}
+                value={refusjonerPage.currentPage}
+            >
+                {[...Array(refusjonerPage.totalPages)].map((_, i) => (
+                    <option value={i} key={i}>
+                        {i + 1}
+                    </option>
+                ))}
+            </Select>
         </nav>
     );
 };
