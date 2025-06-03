@@ -5,11 +5,10 @@ ENV NODE_ENV $NODE_ENV
 
 ENV NODE_EXTRA_CA_CERTS /etc/ssl/ca-bundle.pem
 
-COPY ./arbeidsgiver/server/node_modules ./node_modules
-COPY ./arbeidsgiver/server/src .
+COPY ./arbeidsgiver/server/dist .
 COPY ./arbeidsgiver/dist ./build
 
 EXPOSE 3000
 
 ENTRYPOINT ["sh", "-c"]
-CMD ["node main.js"]
+CMD ["node index.cjs"]
