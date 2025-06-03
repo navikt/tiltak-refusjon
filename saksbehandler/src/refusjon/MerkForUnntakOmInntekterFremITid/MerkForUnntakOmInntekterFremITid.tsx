@@ -8,7 +8,6 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Refusjon } from '~/types/refusjon';
 import { FeilkodeError } from '~/types';
-import { Feilkode, Feilmeldinger } from '~/feilkodemapping';
 
 const schema = z.object({
     merking: z.coerce
@@ -63,8 +62,7 @@ const ModalForm: FunctionComponent<{ refusjon: Refusjon; setOpen: (open: boolean
             setOpen(false);
         } catch (error) {
             if (error instanceof FeilkodeError) {
-                const feilmeldingTekst = Feilmeldinger[error.message as Feilkode];
-                setError('merking', { type: 'manual', message: feilmeldingTekst });
+                setError('merking', { type: 'manual', message: error.feilmelding });
             } else {
                 setError('merking', { type: 'manual', message: 'Noe gikk galt' });
             }
