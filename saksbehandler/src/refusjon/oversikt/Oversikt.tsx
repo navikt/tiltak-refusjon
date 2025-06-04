@@ -12,6 +12,7 @@ import './Oversikt.less';
 import BEMHelper from '~/utils/bem';
 import LenkePanel from '~/LenkePanel/LenkePanel';
 const cls = BEMHelper('oversikt');
+const clsPagination = BEMHelper('avtaleoversikt-pagination');
 
 const Oversikt: FunctionComponent = () => {
     const { filter, oppdaterFilter } = useFilter();
@@ -33,8 +34,9 @@ const Oversikt: FunctionComponent = () => {
                 tableHeader={<SaksbehanderTableHeader />}
                 tableBody={<TabellBodySaksbehandler refusjoner={refusjonerPage.refusjoner} />}
             />
+            <div className={clsPagination.className}>
             <Pagination
-                className={cls.element('pagination')}
+                className={clsPagination.element('pagination')}
                 page={refusjonerPage.currentPage + 1}
                 onPageChange={(x) => oppdaterFilter({ page: x - 1 })}
                 count={refusjonerPage.totalPages}
@@ -42,7 +44,8 @@ const Oversikt: FunctionComponent = () => {
                 siblingCount={1}
             />
             <Select
-                label="Gå til side"
+                label=""
+                className={clsPagination.element('page-select')}
                 onChange={(e) => oppdaterFilter({ page: parseInt(e.target.value, 10) })}
                 value={refusjonerPage.currentPage}
             >
@@ -52,6 +55,7 @@ const Oversikt: FunctionComponent = () => {
                     </option>
                 ))}
             </Select>
+                </div>
         </nav>
     );
 };
