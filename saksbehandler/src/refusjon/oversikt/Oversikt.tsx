@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Info from './Info';
-import { Pagination } from '@navikt/ds-react';
-import { useHentRefusjoner } from '../../services/rest-service';
+import { Pagination, Select } from '@navikt/ds-react';
+import { useHentRefusjoner } from '@/services/rest-service';
 
 import { useFilter } from './FilterContext';
 import OversiktTabell from '~/OversiktTabell';
@@ -12,6 +12,7 @@ import './Oversikt.less';
 import BEMHelper from '~/utils/bem';
 import LenkePanel from '~/LenkePanel/LenkePanel';
 const cls = BEMHelper('oversikt');
+const clsPagination = BEMHelper('avtaleoversikt-pagination');
 
 const Oversikt: FunctionComponent = () => {
     const { filter, oppdaterFilter } = useFilter();
@@ -33,14 +34,28 @@ const Oversikt: FunctionComponent = () => {
                 tableHeader={<SaksbehanderTableHeader />}
                 tableBody={<TabellBodySaksbehandler refusjoner={refusjonerPage.refusjoner} />}
             />
+            <div className={clsPagination.className}>
             <Pagination
-                className={cls.element('pagination')}
+                className={clsPagination.element('pagination')}
                 page={refusjonerPage.currentPage + 1}
                 onPageChange={(x) => oppdaterFilter({ page: x - 1 })}
                 count={refusjonerPage.totalPages}
                 boundaryCount={1}
                 siblingCount={1}
             />
+            <Select
+                label=""
+                className={clsPagination.element('page-select')}
+                onChange={(e) => oppdaterFilter({ page: parseInt(e.target.value, 10) })}
+                value={refusjonerPage.currentPage}
+            >
+                {[...Array(refusjonerPage.totalPages)].map((_, i) => (
+                    <option value={i} key={i}>
+                        {i + 1}
+                    </option>
+                ))}
+            </Select>
+                </div>
         </nav>
     );
 };
