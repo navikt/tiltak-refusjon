@@ -23,8 +23,9 @@ const OpprettKorreksjon: FunctionComponent<{
     const nykorreksjon = async () => {
         try {
             await opprettKorreksjon(grunner, unntakOmInntekterFremitid, annenKorreksjonsGrunn);
-        } catch (error) {
-            const feilmelding = 'feilmelding' in (error as any) ? (error as any).feilmelding : 'Uventet feil';
+        } catch (e) {
+            const error = e as Error & { feilmelding?: string };
+            const feilmelding = error.feilmelding ? error.feilmelding : 'Uventet feil';
             setFeilmelding(feilmelding);
         }
     };
@@ -37,7 +38,7 @@ const OpprettKorreksjon: FunctionComponent<{
                     if (tiltakType === Tiltak.VTAO) {
                         try {
                             await nykorreksjon();
-                        } catch (error) {
+                        } catch {
                             setFeilmelding('Feil ved oppretting av korreksjonsutkast');
                         }
                     } else {
@@ -56,11 +57,11 @@ const OpprettKorreksjon: FunctionComponent<{
                 bekreft={async () => {
                     try {
                         await nykorreksjon();
-                    } catch (error) {
-                        const feilmelding =
-                            'feilmelding' in (error as any)
-                                ? (error as any).feilmelding
-                                : 'Feil ved oppretting av korreksjonsutkast';
+                    } catch (e) {
+                        const error = e as Error & { feilmelding?: string };
+                        const feilmelding = error.feilmelding
+                            ? error.feilmelding
+                            : 'Feil ved oppretting av korreksjonsutkast';
                         setFeilmelding(feilmelding);
                     }
                 }}

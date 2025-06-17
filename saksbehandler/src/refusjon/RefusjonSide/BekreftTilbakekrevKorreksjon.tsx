@@ -17,7 +17,9 @@ const BekreftTilbakekrevKorreksjon: FunctionComponent = () => {
                 isOpen={isOpen}
                 lukkModal={() => setisOpen(false)}
                 tittel="Merk korreksjon for tilbakekreving"
-                bekreft={() => fullførKorreksjonVedTilbakekreving(korreksjonId!)}
+                bekreft={async () => {
+                    await fullførKorreksjonVedTilbakekreving(korreksjonId!);
+                }}
             >
                 <BodyShort size="small">
                     Ved å fullføre korreksjonen vil arbeidsgiver få en bekreftelse på at utbetalt beløp er for høyt, og

@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Alert, TextField } from '@navikt/ds-react';
 
 import { sumInntekterOpptjentIPeriode } from '@/utils/inntekterUtiles';
@@ -7,23 +7,22 @@ import { Inntektsgrunnlag, Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import { tiltakstypeTekst } from '~/types/messages';
 
-interface Properties {
+interface Props {
     refusjon: Refusjon;
     inntektsgrunnlag: Inntektsgrunnlag;
     setEndringBruttoLønn: React.Dispatch<SetStateAction<string>>;
     endringBruttoLønn: string;
-    delayEndreBruttolønn: Function;
+    delayEndreBruttolønn: (
+        refusjonId: string,
+        inntekterKunFraTiltaket: boolean | null,
+        sistEndret: string,
+        bruttoLønn?: number | null | undefined
+    ) => void;
     setVisRefusjonInnsending: Dispatch<SetStateAction<boolean>>;
 }
 
-const BruttolønnUtbetaltInput: FunctionComponent<Properties> = ({
-    refusjon,
-    inntektsgrunnlag,
-    setEndringBruttoLønn,
-    endringBruttoLønn,
-    delayEndreBruttolønn,
-    setVisRefusjonInnsending,
-}: PropsWithChildren<Properties>) => {
+const BruttolønnUtbetaltInput = (props: Props) => {
+    const { refusjon, inntektsgrunnlag, setEndringBruttoLønn, delayEndreBruttolønn, setVisRefusjonInnsending } = props;
     const cls = BEMHelper('refusjonside');
     const sumInntekterOpptjent: number = sumInntekterOpptjentIPeriode(inntektsgrunnlag);
     const { tilskuddsgrunnlag } = refusjon.refusjonsgrunnlag;

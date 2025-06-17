@@ -6,7 +6,7 @@ import HenterInntekterBoks from '~/HenterInntekterBoks';
 
 const ErrorOgSuspenseHandler: FunctionComponent<PropsWithChildren> = (props) => (
     <Sentry.ErrorBoundary
-        fallback={({ error, componentStack, resetError }) => (
+        fallback={() => (
             <Alert variant="error" size="small">
                 Feil ved lasting.
             </Alert>

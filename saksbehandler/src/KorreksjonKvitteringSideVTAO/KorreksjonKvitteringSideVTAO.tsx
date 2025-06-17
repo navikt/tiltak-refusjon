@@ -1,20 +1,23 @@
 import { formatterPenger } from '@/utils/PengeUtils';
 import { Alert, BodyShort, Heading, Tag } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
-import { Korreksjon } from '~/types/refusjon';
-import { storForbokstav } from '~/utils/stringUtils';
-import { korreksjonStatusTekst } from '~/types/messages';
+
 import Boks from '~/Boks';
-import VerticalSpacer from '~/VerticalSpacer';
-import KorreksjonUtregningVTAO from '@/KorreksjonSideVTAO/KorreksjonUtregningVTAO';
-import KorreksjonSummeringBoksVTAO from './KorreksjonSummeringBoksVTAO';
 import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen';
+import KorreksjonSummeringBoksVTAO from './KorreksjonSummeringBoksVTAO';
+import KorreksjonUtregningVTAO from '@/KorreksjonSideVTAO/KorreksjonUtregningVTAO';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, Korreksjon } from '~/types';
+import { korreksjonStatusTekst } from '~/types/messages';
+import { storForbokstav } from '~/utils/stringUtils';
 
-type Props = {
+interface Props {
+    aktsomhet?: Aktsomhet;
     korreksjon: Korreksjon;
-};
+}
 
-const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
+const KorreksjonKvitteringSide = (props: Props) => {
+    const { aktsomhet, korreksjon } = props;
+
     return (
         <Boks variant="hvit">
             <VerticalSpacer rem={2} />
@@ -26,6 +29,7 @@ const KorreksjonKvitteringSide: FunctionComponent<Props> = ({ korreksjon }) => {
             </div>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
+                aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={korreksjon.refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={korreksjon.refusjonsgrunnlag.bedriftKontonummer}

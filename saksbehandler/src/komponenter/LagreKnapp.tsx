@@ -4,13 +4,12 @@ import { Nettressurs, Status } from '~/nettressurs';
 import VerticalSpacer from '~/VerticalSpacer';
 
 type Props = {
-    lagreFunksjon: () => Promise<any>;
+    lagreFunksjon: () => Promise<void>;
 } & HTMLAttributes<HTMLDivElement>;
 
 const LagreKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
-    const [oppslag, setOppslag] = useState<Nettressurs<any>>({ status: Status.IkkeLastet });
+    const [oppslag, setOppslag] = useState<Nettressurs<void>>({ status: Status.IkkeLastet });
 
-    // Fungerer i praksis som "omit lagreFunksjon"
     const { lagreFunksjon, ...knappBaseProps } = props;
 
     const feilRef = useRef<HTMLDivElement>(null);
@@ -18,10 +17,11 @@ const LagreKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
     const onClick = async () => {
         try {
             setOppslag({ status: Status.LasterInn });
-            await props.lagreFunksjon();
+            await lagreFunksjon();
             setOppslag({ status: Status.Sendt });
-        } catch (error) {
-            const feilmelding = 'felmelding' in (error as any) ? (error as any).feilmelding : 'Uventet feil';
+        } catch (e) {
+            const error = e as Error & { feilmelding?: string };
+            const feilmelding = error.feilmelding ? error.feilmelding : 'Uventet feil';
             setOppslag({ status: Status.Feil, error: feilmelding });
         }
     };

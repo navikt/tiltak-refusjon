@@ -1,25 +1,28 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
+
+import BekreftOppgjørKorreksjon from '@/refusjon/RefusjonSide/BekreftOppgjørKorreksjon';
+import BekreftSlettKorreksjon from '@/refusjon/RefusjonSide/BekreftSlettKorreksjon';
+import BekreftTilbakekrevKorreksjon from '@/refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';
+import BekreftUtbetalKorreksjon from '@/refusjon/RefusjonSide/BekreftUtbetalKorreksjon';
+import Boks from '~/Boks';
+import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen';
+import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
+import InntekterFraTiltaketSpørsmål from '@/refusjon/RefusjonSide/InntekterFraTiltaketSpørsmål';
+import Utregning from '@/refusjon/RefusjonSide/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
-import BekreftOppgjørKorreksjon from '../refusjon/RefusjonSide/BekreftOppgjørKorreksjon';
-import BekreftSlettKorreksjon from '../refusjon/RefusjonSide/BekreftSlettKorreksjon';
-import BekreftTilbakekrevKorreksjon from '../refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';
-import BekreftUtbetalKorreksjon from '../refusjon/RefusjonSide/BekreftUtbetalKorreksjon';
-import InformasjonFraAvtalen from '../refusjon/RefusjonSide/InformasjonFraAvtalen';
-import InntekterFraAMeldingen from '../refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
-import InntekterFraTiltaketSpørsmål from '../refusjon/RefusjonSide/InntekterFraTiltaketSpørsmål';
-import Utregning from '../refusjon/RefusjonSide/Utregning';
+import { Aktsomhet, Korreksjon, KorreksjonStatus } from '~/types';
+
 import OverstyrMinusbeløpOgFerietrekk from './OverstyrMinusbeløpOgFerietrekk';
 import TidligereRefunderbarBeløp from './TidligereRefunderbarBeløp';
-import { KorreksjonStatus } from '~/types/status';
-import { Korreksjon } from '~/types/refusjon';
-import Boks from '~/Boks';
 
-type Props = {
+interface Props {
+    aktsomhet?: Aktsomhet;
     korreksjon: Korreksjon;
-};
+}
 
-const KorreksjonSide: FunctionComponent<Props> = ({ korreksjon }) => {
+const KorreksjonSide = (props: Props) => {
+    const { aktsomhet, korreksjon } = props;
+
     const korreksjonstype = (): KorreksjonStatus | null => {
         if (!korreksjon.refusjonsgrunnlag.beregning) {
             return null;
@@ -53,6 +56,7 @@ const KorreksjonSide: FunctionComponent<Props> = ({ korreksjon }) => {
             </BodyShort>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
+                aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={korreksjon.refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={korreksjon.refusjonsgrunnlag.bedriftKontonummer}

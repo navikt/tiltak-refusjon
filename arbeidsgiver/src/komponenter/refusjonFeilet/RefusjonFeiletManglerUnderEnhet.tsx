@@ -31,7 +31,7 @@ const RefusjonFeiletManglerUnderEnhet: FunctionComponent<Props> = ({ bedriftvalg
                         <SystemError width={24} height={24} />
                     </div>
                 </div>
-                {orgMedFeilstatusJuridiskEnhetMangler?.map((org: Organisasjon, index: number) => {
+                {orgMedFeilstatusJuridiskEnhetMangler?.map((org: Organisasjon) => {
                     return (
                         <ExpansionCard size="small" aria-label="Small-variant" defaultOpen={true}>
                             <ExpansionCard.Header>

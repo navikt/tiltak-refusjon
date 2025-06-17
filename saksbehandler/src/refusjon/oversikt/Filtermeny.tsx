@@ -8,7 +8,7 @@ import { Filter } from '~/types/filter';
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean; skjulVTAO: boolean };
+    options: { erArbeidsgiver: boolean; harKorreksjonTilgang: boolean };
 }
 
 const Filtermeny: FunctionComponent<Props> = ({ filter, oppdaterFilter, options }) => {
@@ -18,7 +18,7 @@ const Filtermeny: FunctionComponent<Props> = ({ filter, oppdaterFilter, options 
             <VerticalSpacer rem={1.25} />
             <StatusFilter filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
             <VerticalSpacer rem={1.25} />
-            <TiltakFilter filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
+            <TiltakFilter filter={filter} oppdaterFilter={oppdaterFilter} />
             <VerticalSpacer rem={1.25} />
         </div>
     );

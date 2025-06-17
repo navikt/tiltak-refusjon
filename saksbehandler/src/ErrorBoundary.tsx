@@ -5,14 +5,14 @@ import * as Sentry from '@sentry/react';
 const ErrorBoundary: FunctionComponent<PropsWithChildren> = (props) => {
     return (
         <Sentry.ErrorBoundary
-            fallback={({ error, componentStack, resetError }) => (
+            fallback={({ error }) => (
                 <>
                     <Alert variant="warning">
                         <Heading size="small" style={{ margin: '0.5rem' }}>
                             Det har oppstått en uventet feil. Forsøk å laste siden på nytt.
                         </Heading>
                         <BodyShort size="small">
-                            Teknisk feilkode: <i>{error.toString()}</i>
+                            Teknisk feilkode: <i>{(error as Error).toString()}</i>
                         </BodyShort>
                     </Alert>
                 </>

@@ -1,6 +1,7 @@
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 
 import type { Meta, StoryObj } from '@storybook/react';
+import { Diskresjonskode } from '~/types';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
@@ -146,6 +147,7 @@ const refusjonPlussbelop: Refusjon = {
     åpnetFørsteGang: '2024-01-22T15:55:56.514591Z',
     sistEndret: '2024-01-22T15:56:06.292479Z',
     senestMuligeGodkjenningsfrist: '2024-04-29',
+    diskresjonskode: Diskresjonskode.UGRADERT,
 };
 
 export const RefusjonPlussbelop: Story = {

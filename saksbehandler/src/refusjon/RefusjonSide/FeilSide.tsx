@@ -1,27 +1,27 @@
 import { Alert, Heading } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
-import { useParams } from 'react-router';
-import VerticalSpacer from '~/VerticalSpacer';
-import { useHentRefusjon } from '../../services/rest-service';
-import InformasjonFraAvtalen from './InformasjonFraAvtalen';
-import { tiltakstypeTekst } from '~/types/messages';
+
 import Boks from '~/Boks';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, Refusjon, tiltakstypeTekst } from '~/types';
+
+import InformasjonFraAvtalen from './InformasjonFraAvtalen';
 
 type AlertStripeType = 'info' | 'success' | 'warning' | 'error';
 
-type Props = {
+interface Props {
+    aktsomhet?: Aktsomhet;
+    refusjon: Refusjon;
     feiltekst: string;
     advarselType: AlertStripeType;
-};
+}
 
-const FeilSide: FunctionComponent<Props> = (props) => {
-    const { refusjonId } = useParams<{ refusjonId: string }>();
-    const refusjon = useHentRefusjon(refusjonId!);
+const FeilSide = (props: Props) => {
+    const { aktsomhet, refusjon, feiltekst, advarselType } = props;
 
     return (
         <Boks variant="hvit">
-            <Alert variant={props.advarselType} size="small">
-                {props.feiltekst}
+            <Alert variant={advarselType} size="small">
+                {feiltekst}
             </Alert>
             <VerticalSpacer rem={2} />
             <Heading size="large">
@@ -29,6 +29,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
             </Heading>
             <VerticalSpacer rem={1} />
             <InformasjonFraAvtalen
+                aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={refusjon.refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}

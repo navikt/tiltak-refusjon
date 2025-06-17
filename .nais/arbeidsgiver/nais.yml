@@ -27,8 +27,10 @@ spec:
     outbound:
       rules:
         {{#each outbound}}
-          - application: "{{this}}"
+        - application: "{{this}}"
         {{/each}}
+        - application: nav-dekoratoren
+          namespace: personbruker
       external:
       {{#each host}}
         - host: "{{this}}"
@@ -37,6 +39,10 @@ spec:
     autoInstrumentation:
       enabled: true
       runtime: nodejs
+    logging:
+      destinations:
+        - id: elastic
+        - id: loki
   {{#if labs}}
   replicas:
     min: 1

@@ -21,14 +21,16 @@ const Landingsside: FunctionComponent = () => {
                     <Heading size="large">Tiltaksrefusjon</Heading>
                     <VerticalSpacer rem={2} />
                 </div>
-                <BodyShort size="small" style={{ marginLeft: '7rem' }}>
+                <BodyShort>
                     Dette er en løsning for å søke om refusjon for{' '}
-                    <Link href={'https://arbeidsgiver.nav.no/veiviserarbeidsgiver/tiltak/lonnstilskudd'}>
-                        lønnstilskudd
-                    </Link>
-                </BodyShort>
-                <BodyShort size="small" style={{ marginLeft: '13.8rem' }}>
-                    og <Link href={'https://www.nav.no/arbeidsgiver/sommerjobb'}>tilskudd til sommerjobb</Link>
+                    <Link href={'https://www.nav.no/arbeidsgiver/midlertidig-lonnstilskudd'}>
+                        midlertidig lønnstilskudd
+                    </Link>{' '}
+                    <Link href={'https://www.nav.no/arbeidsgiver/varig-lonnstilskudd'}> varig lønnstilskudd </Link>,{' '}
+                    <Link href={'https://www.nav.no/arbeidsgiver/sommerjobb'}>sommerjobb</Link> og{' '}
+                    <Link href={'https://www.nav.no/arbeidsgiver/varig-tilrettelagt-arbeid'}>
+                        varig tilrettelagt arbeid i ordinær virksomhet.
+                    </Link>{' '}
                 </BodyShort>
                 <VerticalSpacer rem={2} />
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -38,7 +40,7 @@ const Landingsside: FunctionComponent = () => {
                 </div>
                 <VerticalSpacer rem={2} />
                 <div>
-                    <BodyShort size="small">Før dere søker må dere:</BodyShort>
+                    <Heading size="medium">Før dere søker må dere:</Heading>
                 </div>
                 <VerticalSpacer rem={2} />
                 <div style={{ display: 'flex', alignItems: 'center' }}>

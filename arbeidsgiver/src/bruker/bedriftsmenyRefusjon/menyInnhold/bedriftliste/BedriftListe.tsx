@@ -1,4 +1,4 @@
-import React, { FunctionComponent, PropsWithChildren, useContext } from 'react';
+import React, { useContext } from 'react';
 import { MenyContext } from '../../BedriftsmenyRefusjon';
 import JuridiskEnhet from '@/asset/image/juridiskEnhet2.svg?react';
 import UnderEnhet from '@/asset/image/childNode.svg?react';
@@ -11,7 +11,7 @@ import TomtSok from './TomtSok';
 import { BodyShort, Checkbox, Label, Link } from '@navikt/ds-react';
 import BEMHelper from '~/utils/bem';
 
-const BedriftListe: FunctionComponent<{}> = (props: PropsWithChildren<{}>) => {
+const BedriftListe = () => {
     const cls = BEMHelper('bedriftliste');
     const context = useContext(MenyContext);
     const {
@@ -50,7 +50,7 @@ const BedriftListe: FunctionComponent<{}> = (props: PropsWithChildren<{}>) => {
                                 onChange={() => {
                                     if (bedriftvalg.type !== BedriftvalgType.ALLEBEDRIFTER) {
                                         const element = matchParentOrganisasjon(org);
-                                        if (!!element) {
+                                        if (element) {
                                             const valg = {
                                                 type: bedriftvalg.type,
                                                 valgtOrg: bedriftvalg.valgtOrg.filter((e) => e !== element),
@@ -140,7 +140,7 @@ const BedriftListe: FunctionComponent<{}> = (props: PropsWithChildren<{}>) => {
                                                     onChange={() => {
                                                         if (bedriftvalg.type !== BedriftvalgType.ALLEBEDRIFTER) {
                                                             const element = matchOrganisasjon(underenhet);
-                                                            if (!!element) {
+                                                            if (element) {
                                                                 const valg = {
                                                                     type: bedriftvalg.type,
                                                                     valgtOrg: bedriftvalg.valgtOrg.filter(

@@ -11,6 +11,7 @@ import { FeatureToggleProvider } from './featureToggles/FeatureToggleProvider';
 import { FilterProvider } from './refusjon/oversikt/FilterContext';
 import Korreksjon from './KorreksjonSide/Korreksjon';
 import ErrorBoundary from './ErrorBoundary';
+import { CookiesProvider } from 'react-cookie';
 
 function App() {
     return (
@@ -18,40 +19,42 @@ function App() {
             <ScrollToTop />
             <AdvarselBannerTestversjon />
             <InternflateDekoratør />
-            <BrukerProvider>
-                <FeatureToggleProvider>
-                    <FilterProvider>
-                        <div style={{ minHeight: '10rem', padding: '0.5rem' }}>
-                            <Routes>
-                                <Route
-                                    path="/"
-                                    element={
-                                        <ErrorBoundary>
-                                            <OversiktSide />
-                                        </ErrorBoundary>
-                                    }
-                                ></Route>
-                                <Route
-                                    path="/refusjon/:refusjonId"
-                                    element={
-                                        <ErrorBoundary>
-                                            <Refusjon />
-                                        </ErrorBoundary>
-                                    }
-                                ></Route>
-                                <Route
-                                    path="/korreksjon/:korreksjonId"
-                                    element={
-                                        <ErrorBoundary>
-                                            <Korreksjon />
-                                        </ErrorBoundary>
-                                    }
-                                ></Route>
-                            </Routes>
-                        </div>
-                    </FilterProvider>
-                </FeatureToggleProvider>
-            </BrukerProvider>
+            <CookiesProvider defaultSetOptions={{ path: '/' }}>
+                <BrukerProvider>
+                    <FeatureToggleProvider>
+                        <FilterProvider>
+                            <div style={{ minHeight: '10rem', padding: '0.5rem' }}>
+                                <Routes>
+                                    <Route
+                                        path="/"
+                                        element={
+                                            <ErrorBoundary>
+                                                <OversiktSide />
+                                            </ErrorBoundary>
+                                        }
+                                    ></Route>
+                                    <Route
+                                        path="/refusjon/:refusjonId"
+                                        element={
+                                            <ErrorBoundary>
+                                                <Refusjon />
+                                            </ErrorBoundary>
+                                        }
+                                    ></Route>
+                                    <Route
+                                        path="/korreksjon/:korreksjonId"
+                                        element={
+                                            <ErrorBoundary>
+                                                <Korreksjon />
+                                            </ErrorBoundary>
+                                        }
+                                    ></Route>
+                                </Routes>
+                            </div>
+                        </FilterProvider>
+                    </FeatureToggleProvider>
+                </BrukerProvider>
+            </CookiesProvider>
         </BrowserRouter>
     );
 }

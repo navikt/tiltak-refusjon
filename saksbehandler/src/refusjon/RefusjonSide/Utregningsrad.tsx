@@ -9,15 +9,15 @@ import { Tilskuddsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 
 interface Props {
-    labelIkon?: React.ReactNode;
+    labelIkon?: ReactNode;
     labelTekst: string | JSX.Element;
     labelSats?: number;
-    verdiOperator?: string | ReactNode;
+    verdiOperator?: ReactNode;
     verdi: number | string;
     ikkePenger?: boolean;
     border?: 'NORMAL' | 'TYKK' | 'INGEN';
     tilskuddsgunnlag?: Tilskuddsgrunnlag;
-    className?: String;
+    className?: string;
     utgår?: boolean;
 }
 
@@ -27,7 +27,7 @@ const Utregningsrad: FunctionComponent<PropsWithChildren<Props>> = (props) => {
     const setIkon = (ikon?: React.ReactNode) =>
         ikon ? ikon : <span className={cls.element('ikon-placeholder')} aria-hidden={true} />;
 
-    const setOperator = (operator?: string | ReactNode) =>
+    const setOperator = (operator?: ReactNode) =>
         operator ? (
             <Heading size="medium" className={cls.element('operator')}>
                 {operator}

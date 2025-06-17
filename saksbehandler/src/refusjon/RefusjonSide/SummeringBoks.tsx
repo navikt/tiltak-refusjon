@@ -1,21 +1,13 @@
-import Pengesedler from '@/asset/image/pengesedler.svg?react';
 import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
+
+import Pengesedler from '@/asset/image/pengesedler.svg?react';
 import VerticalSpacer from '~/VerticalSpacer';
-
-import { formatterPenger } from '../../utils/PengeUtils';
-
 import { BodyShort, Label } from '@navikt/ds-react';
 import { Refusjonsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
+import { formatterPenger } from '@/utils/PengeUtils';
 import { formatterPeriode } from '~/utils';
 
-const Boks = styled.div`
-    display: flex;
-    flex-direction: row;
-    border: 3px solid #cce1f3;
-    border-radius: 4px;
-    padding: 1.75rem;
-`;
+import styles from './SummeringBoks.module.less';
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
@@ -33,7 +25,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
     }
 
     return (
-        <Boks>
+        <div className={styles.boks}>
             <div style={{ paddingRight: '1.5rem' }}>
                 <Pengesedler />
             </div>
@@ -91,7 +83,8 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                                     <>
                                         Vi tar ikke hensyn til oppgitt refunderbar lønn (
                                         {formatterPenger(props.refusjonsgrunnlag.beregning?.tidligereRefundertBeløp)})
-                                        ved negativt refusjonsbeløp. Dette er altså ikke med i beregnet refusjonsbeløp.{' '}
+                                        ved negativt refusjonsbeløp. Dette er altså ikke med i beregnet
+                                        refusjonsbeløp.{' '}
                                     </>
                                 )}
                             </BodyShort>
@@ -110,7 +103,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                     </BodyShort>
                 </div>
             )}
-        </Boks>
+        </div>
     );
 };
 

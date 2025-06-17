@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import StatusTekst from '~/StatusTekst';
 import BEMHelper from '~/utils/bem';
 import { formatterDato, formatterPeriode } from '~/utils';
-import { Refusjon } from '~/types/refusjon';
+import { BegrensetRefusjon } from '~/types/refusjon';
 import { kunStorForbokstav } from '~/utils/stringUtils';
 import { tiltakstypeTekstKort } from '~/types/messages';
 import { NORSK_DATO_FORMAT_SHORT } from '~/utils/datoUtils';
 
 type Props = {
-    refusjoner: Refusjon[];
+    refusjoner: BegrensetRefusjon[];
 };
 const cls = BEMHelper('oversiktTabell');
 

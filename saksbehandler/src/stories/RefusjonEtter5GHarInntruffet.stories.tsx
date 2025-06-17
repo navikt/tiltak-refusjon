@@ -5,6 +5,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
+import { Diskresjonskode } from '~/types';
 
 const meta = {
     title: 'Refusjons Saksbehandler/KvitteringSide',
@@ -108,6 +109,7 @@ const etter5GRefusjon: Refusjon = {
     åpnetFørsteGang: '2024-01-22T15:55:56.514591Z',
     sistEndret: '2024-01-22T15:56:06.292479Z',
     senestMuligeGodkjenningsfrist: '2024-04-29',
+    diskresjonskode: Diskresjonskode.UGRADERT,
 };
 
 export const RefusjonEtter5G: Story = {

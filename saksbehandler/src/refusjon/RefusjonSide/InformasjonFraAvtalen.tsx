@@ -1,45 +1,56 @@
-import React, { FunctionComponent } from 'react';
-
-import VerticalSpacer from '~/VerticalSpacer';
-
-import { formatterPenger } from '../../utils/PengeUtils';
-
+import React from 'react';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
-import Rad from '@/komponenter/Rad/Rad';
 
-import { Tilskuddsgrunnlag } from '~/types/refusjon';
-import { tiltakstypeTekst } from '~/types/messages';
-import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
-import EksternLenke from '~/EksternLenke/EksternLenke';
 import Boks from '~/Boks';
+import EksternLenke from '~/EksternLenke/EksternLenke';
+import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
+import Rad from '@/komponenter/Rad/Rad';
+import VerticalSpacer from '~/VerticalSpacer';
+import { Aktsomhet, tiltakstypeTekst } from '~/types';
+import { Tilskuddsgrunnlag } from '~/types/refusjon';
+import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formatterPenger } from '@/utils/PengeUtils';
 
-const InformasjonFraAvtalen: FunctionComponent<{
+interface Props {
+    aktsomhet?: Aktsomhet;
     tilskuddsgrunnlag: Tilskuddsgrunnlag;
     fristForGodkjenning?: string;
     forrigeFristForGodkjenning?: string;
     bedriftKid: string | null | undefined;
     bedriftKontonummer: string | null | undefined;
     bedriftKontonummerInnhentetTidspunkt: string | null | undefined;
-}> = (props) => {
-    const avtaleLenke = `https://tiltaksgjennomforing.intern.nav.no/tiltaksgjennomforing/avtale/${props.tilskuddsgrunnlag.avtaleId}`;
-    const refusjonsnummer = `${props.tilskuddsgrunnlag.avtaleNr}-${props.tilskuddsgrunnlag.løpenummer}`;
+}
+
+const InformasjonFraAvtalen = (props: Props) => {
+    const {
+        aktsomhet,
+        tilskuddsgrunnlag,
+        fristForGodkjenning,
+        forrigeFristForGodkjenning,
+        bedriftKid,
+        bedriftKontonummer,
+        bedriftKontonummerInnhentetTidspunkt,
+    } = props;
+    const avtaleLenke = `https://tiltaksgjennomforing.intern.nav.no/tiltaksgjennomforing/avtale/${tilskuddsgrunnlag.avtaleId}`;
+    const refusjonsnummer = `${tilskuddsgrunnlag.avtaleNr}-${tilskuddsgrunnlag.løpenummer}`;
 
     return (
         <Boks variant="grå">
             <Heading size="small">Informasjon hentet fra avtalen</Heading>
             <VerticalSpacer rem={1} />
+            {aktsomhet?.kreverAktsomhet && <HemmeligAdresseVarsel aktsomhet={aktsomhet} />}
             <Rad>
                 <EksternLenke href={avtaleLenke}>
-                    Avtale om {tiltakstypeTekst[props.tilskuddsgrunnlag.tiltakstype]}
+                    Avtale om {tiltakstypeTekst[tilskuddsgrunnlag.tiltakstype]}
                 </EksternLenke>
             </Rad>
             <Rad noSpace={true}>
                 <Label>Bedriftsnavn: </Label>
-                <BodyShort size="small">{props.tilskuddsgrunnlag.bedriftNavn}</BodyShort>
+                <BodyShort size="small">{tilskuddsgrunnlag.bedriftNavn}</BodyShort>
             </Rad>
             <Rad>
                 <Label>Virksomhetsnummer: </Label>
-                <BodyShort size="small">{props.tilskuddsgrunnlag.bedriftNr}</BodyShort>
+                <BodyShort size="small">{tilskuddsgrunnlag.bedriftNr}</BodyShort>
             </Rad>
             <Rad>
                 <Label>Refusjonsnummer: </Label>
@@ -48,37 +59,37 @@ const InformasjonFraAvtalen: FunctionComponent<{
             <Rad>
                 <Label>Deltaker: </Label>
                 <BodyShort size="small">
-                    {props.tilskuddsgrunnlag.deltakerFornavn} {props.tilskuddsgrunnlag.deltakerEtternavn}
+                    {tilskuddsgrunnlag.deltakerFornavn} {tilskuddsgrunnlag.deltakerEtternavn}
                 </BodyShort>
             </Rad>
             <Rad>
                 <Label>Periode: </Label>
                 <BodyShort size="small">
-                    {formatterPeriode(props.tilskuddsgrunnlag.tilskuddFom, props.tilskuddsgrunnlag.tilskuddTom)}
+                    {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
                 </BodyShort>
             </Rad>
-            {props.fristForGodkjenning && (
+            {fristForGodkjenning && (
                 <Rad>
                     <Label>Frist: </Label>
                     <BodyShort size="small">
-                        {formatterDato(props.fristForGodkjenning)}
-                        {props.forrigeFristForGodkjenning
-                            ? `  (tidligere frist: ${formatterDato(props.forrigeFristForGodkjenning)})`
+                        {formatterDato(fristForGodkjenning)}
+                        {forrigeFristForGodkjenning
+                            ? `  (tidligere frist: ${formatterDato(forrigeFristForGodkjenning)})`
                             : ''}
                     </BodyShort>
                 </Rad>
             )}
             <Rad>
                 <Label>Avtalt beløp for perioden:</Label>
-                <BodyShort size="small">Inntil {formatterPenger(props.tilskuddsgrunnlag.tilskuddsbeløp)}</BodyShort>
+                <BodyShort size="small">Inntil {formatterPenger(tilskuddsgrunnlag.tilskuddsbeløp)}</BodyShort>
             </Rad>
             <Rad>
                 <Label>Kontonummer:</Label>
                 <BodyShort size="small">
-                    {props.bedriftKontonummerInnhentetTidspunkt ? (
+                    {bedriftKontonummerInnhentetTidspunkt ? (
                         <>
-                            {props.bedriftKontonummer ?? 'Ikke funnet'} (hentet{' '}
-                            {formatterDato(props.bedriftKontonummerInnhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)})
+                            {bedriftKontonummer ?? 'Ikke funnet'} (hentet{' '}
+                            {formatterDato(bedriftKontonummerInnhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)})
                         </>
                     ) : (
                         'Ikke oppgitt'
@@ -87,7 +98,7 @@ const InformasjonFraAvtalen: FunctionComponent<{
             </Rad>
             <Rad noSpace={true}>
                 <Label>KID:</Label>
-                <BodyShort size="small">{props.bedriftKid ? props.bedriftKid : 'Ikke oppgitt'}</BodyShort>
+                <BodyShort size="small">{bedriftKid ? bedriftKid : 'Ikke oppgitt'}</BodyShort>
             </Rad>
         </Boks>
     );

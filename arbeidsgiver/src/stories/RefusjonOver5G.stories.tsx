@@ -1,6 +1,7 @@
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 
 import { Meta, StoryObj } from '@storybook/react';
+import { Diskresjonskode } from '~/types';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
@@ -106,6 +107,7 @@ const førOver5GRefusjon: Refusjon = {
     harTattStillingTilAlleInntektslinjer: true,
     harInntektIAlleMåneder: false,
     senestMuligeGodkjenningsfrist: '2024-04-29',
+    diskresjonskode: Diskresjonskode.UGRADERT,
 };
 
 export const RefusjonFør5G: Story = {
@@ -202,6 +204,7 @@ const over5gRefusjon: Refusjon = {
     harTattStillingTilAlleInntektslinjer: true,
     harInntektIAlleMåneder: false,
     senestMuligeGodkjenningsfrist: '2024-04-29',
+    diskresjonskode: Diskresjonskode.UGRADERT,
 };
 
 export const RefusjonOverskrider5G: Story = {
@@ -298,6 +301,7 @@ const etter5GRefusjon: Refusjon = {
     harTattStillingTilAlleInntektslinjer: true,
     harInntektIAlleMåneder: false,
     senestMuligeGodkjenningsfrist: '2024-04-29',
+    diskresjonskode: Diskresjonskode.UGRADERT,
 };
 
 export const RefusjonEtter5G: Story = {

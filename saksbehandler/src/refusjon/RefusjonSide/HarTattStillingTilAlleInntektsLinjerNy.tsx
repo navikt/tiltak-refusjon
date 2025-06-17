@@ -1,15 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
 
-import { formatterPenger } from '../../utils/PengeUtils';
-
-import { GrønnBoks } from './InntekterFraTiltaketSpørsmål';
-import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
-import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import InntekterFraTiltaketSvarNyLabel from './HarTattStillingTilAlleInnteksLinjerNyLabel';
 import InntekterKunFraTiltaketSvar from './InntekterKunFraTiltaketSvar';
+import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
+import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
+import { formatterPenger } from '@/utils/PengeUtils';
 import { formatterPeriode, månedsNavn } from '~/utils';
+
+import styles from './InntekterFraTiltaketSpørsmål.module.less';
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
@@ -33,7 +33,7 @@ const HarTattStillingTilAlleInntektsLinjerNy: FunctionComponent<Props> = (props)
 
     return (
         <div>
-            <GrønnBoks>
+            <div className={styles.gronnBoks}>
                 <Heading size="small">
                     Inntekter som refunderes for{' '}
                     {formatterPeriode(
@@ -61,7 +61,7 @@ const HarTattStillingTilAlleInntektsLinjerNy: FunctionComponent<Props> = (props)
                             </BodyShort>
                         </>
                     )}
-            </GrønnBoks>
+            </div>
         </div>
     );
 };

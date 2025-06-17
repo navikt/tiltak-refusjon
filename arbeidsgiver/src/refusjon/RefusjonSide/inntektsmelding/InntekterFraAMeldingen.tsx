@@ -65,7 +65,7 @@ const InntekterFraAMeldingen: FunctionComponent<Props> = ({ refusjon, kvittering
 
     const inntektGrupperObjekt = groupBy(inntektsgrunnlag?.inntekter, (inntekt) => inntekt.måned);
     const inntektGrupperListe = Object.entries(inntektGrupperObjekt);
-    let inntektGrupperListeSortert = sortBy(inntektGrupperListe, [(i) => i[0]]);
+    const inntektGrupperListeSortert = sortBy(inntektGrupperListe, [(i) => i[0]]);
 
     return (
         <Boks variant="grå">

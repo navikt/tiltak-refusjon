@@ -1,23 +1,27 @@
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
-import { useParams } from 'react-router';
+
+import Boks from '~/Boks';
+import EksternLenke from '~/EksternLenke/EksternLenke';
+import StatusTekst from '~/StatusTekst';
 import VerticalSpacer from '~/VerticalSpacer';
-import { useHentRefusjon } from '../../services/rest-service';
+import { Aktsomhet, Refusjon, tiltakstypeTekst } from '~/types';
+
+import HarTattStillingTilAlleInntektsLinjerGammel from './HarTattStillingTilAlleInntektsLinjerGammel';
 import InformasjonFraAvtalen from './InformasjonFraAvtalen';
 import InntekterFraAMeldingen from './InntekterFraAMeldingen/InntekterFraAMeldingen';
-import HarTattStillingTilAlleInntektsLinjerGammel from './HarTattStillingTilAlleInntektsLinjerGammel';
-import './RefusjonSide.less';
+import InntekterFraTiltaketSvar from './HarTattStillingTilAlleInntektsLinjerNy';
 import TidligereRefunderbarBeløpKvittering from './TidligereRefunderbarBeløpKvittering';
 import Utregning from './Utregning';
-import InntekterFraTiltaketSvar from './HarTattStillingTilAlleInntektsLinjerNy';
-import StatusTekst from '~/StatusTekst';
-import EksternLenke from '~/EksternLenke/EksternLenke';
-import Boks from '~/Boks';
-import { tiltakstypeTekst } from '~/types/messages';
 
-const RefusjonSide: FunctionComponent = () => {
-    const { refusjonId } = useParams<{ refusjonId: string }>();
-    const refusjon = useHentRefusjon(refusjonId!);
+import './RefusjonSide.less';
+
+interface Props {
+    aktsomhet?: Aktsomhet;
+    refusjon: Refusjon;
+}
+
+const RefusjonSide = (props: Props) => {
+    const { aktsomhet, refusjon } = props;
 
     return (
         <Boks variant="hvit">
@@ -57,6 +61,7 @@ const RefusjonSide: FunctionComponent = () => {
             </BodyShort>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
+                aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 bedriftKid={refusjon.refusjonsgrunnlag.bedriftKid}
                 bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}

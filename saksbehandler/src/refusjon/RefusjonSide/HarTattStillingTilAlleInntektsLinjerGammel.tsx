@@ -16,7 +16,7 @@ const HarTattStillingTilAlleInntektsLinjerGammel: FunctionComponent<{ refusjonsg
         return null;
     }
 
-    const inntekterHuketAvForOpptjentIPeriode = props.refusjonsgrunnlag.inntektsgrunnlag!!.inntekter.filter(
+    const inntekterHuketAvForOpptjentIPeriode = props.refusjonsgrunnlag.inntektsgrunnlag!.inntekter.filter(
         (inntekt) => inntekt.erOpptjentIPeriode
     );
     const sumInntekterOpptjentIPeriode = sumBy(inntekterHuketAvForOpptjentIPeriode, 'beløp');

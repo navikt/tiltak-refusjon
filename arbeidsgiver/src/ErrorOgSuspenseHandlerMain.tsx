@@ -6,13 +6,13 @@ import Boks from '~/Boks';
 
 const ErrorOgSuspenseHandlerMain: FunctionComponent<PropsWithChildren> = (props) => (
     <Sentry.ErrorBoundary
-        fallback={({ error, componentStack, resetError }) => (
+        fallback={({ error }) => (
             <>
                 <Alert variant="warning" size="small">
                     <Heading size="small">Det har oppstått en uventet feil. Forsøk å laste siden på nytt.</Heading>
                     <VerticalSpacer rem={0.5} />
                     <BodyShort size="small">
-                        Teknisk feilkode: <i>{error?.message}</i>
+                        Teknisk feilkode: <i>{(error as Error)?.message}</i>
                     </BodyShort>
                 </Alert>
             </>

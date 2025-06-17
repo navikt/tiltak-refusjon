@@ -7,6 +7,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Refusjon } from '~/types/refusjon';
+import { FeilkodeError } from '~/types';
+import { Feilkode, Feilmeldinger } from '~/feilkodemapping';
 
 const schema = z.object({
     merking: z.coerce
@@ -60,7 +62,12 @@ const ModalForm: FunctionComponent<{ refusjon: Refusjon; setOpen: (open: boolean
             await merkForUnntakOmInntekterFremITid(refusjon.id, data.merking);
             setOpen(false);
         } catch (error) {
-            setError('merking', { type: 'manual', message: 'Noe gikk galt' });
+            if (error instanceof FeilkodeError) {
+                const feilmeldingTekst = Feilmeldinger[error.message as Feilkode];
+                setError('merking', { type: 'manual', message: feilmeldingTekst });
+            } else {
+                setError('merking', { type: 'manual', message: 'Noe gikk galt' });
+            }
         }
     };
 

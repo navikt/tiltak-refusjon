@@ -6,6 +6,7 @@ import { Filter } from '~/types/filter';
 import { Beregning, Hendelse, Korreksjon, Korreksjonsgrunn, PageableRefusjon, Refusjon } from '~/types/refusjon';
 import { useFilter } from '@/refusjon/oversikt/FilterContext';
 import { ApiError, FeilkodeError } from '~/types/errors';
+import { Aktsomhet } from '~/types';
 
 const api = axios.create({
     baseURL: '/api/saksbehandler',
@@ -53,9 +54,9 @@ export const useHentRefusjoner = (filter: Filter) => {
     return data;
 };
 
-const removeEmpty = (obj: any) => {
-    Object.keys(obj).forEach((k) => !obj[k] && delete obj[k]);
-    return obj;
+const removeEmpty = <T>(obj: object): T => {
+    Object.keys(obj).forEach((k) => !(obj as never)[k] && delete (obj as never)[k]);
+    return obj as T;
 };
 
 export const useHentRefusjon = (refusjonId: string) => {
@@ -169,7 +170,7 @@ export const settTidligereRefunderbarBeløp = async (
     korreksjonId: string,
     fratrekkRefunderbarBeløp: boolean | null,
     refunderbarBeløp?: number | null
-): Promise<any> => {
+) => {
     const response = await api.post(`/korreksjon/${korreksjonId}/fratrekk-sykepenger`, {
         fratrekkRefunderbarBeløp,
         refunderbarBeløp,
@@ -203,4 +204,8 @@ export const settHarFerietrekkForSammeMåned = async (korreksjonId: string, harF
     });
     await mutate(`/korreksjon/${korreksjonId}`);
     return response.data;
+};
+
+export const useRefusjonKreverAktsomhet = (refusjonId?: string) => {
+    return useSWR<Aktsomhet>(`/refusjon/${refusjonId}/aktsomhet`, { ...swrConfig, suspense: false });
 };

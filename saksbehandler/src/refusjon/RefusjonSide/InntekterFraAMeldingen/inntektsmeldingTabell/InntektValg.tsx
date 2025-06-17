@@ -22,7 +22,7 @@ const InntektValg: FunctionComponent<Props> = (props) => {
                         value="ja"
                         checked={props.inntekt.erOpptjentIPeriode}
                         onChange={() => {
-                            setInntektslinjeOpptjentIPeriode(props.korreksjonId!!, props.inntekt.id, true);
+                            setInntektslinjeOpptjentIPeriode(props.korreksjonId!, props.inntekt.id, true);
                         }}
                         name={props.inntekt.id}
                     >
@@ -34,7 +34,7 @@ const InntektValg: FunctionComponent<Props> = (props) => {
                             typeof props.inntekt.erOpptjentIPeriode === 'boolean' && !props.inntekt.erOpptjentIPeriode
                         }
                         onChange={() => {
-                            setInntektslinjeOpptjentIPeriode(props.korreksjonId!!, props.inntekt.id, false);
+                            setInntektslinjeOpptjentIPeriode(props.korreksjonId!, props.inntekt.id, false);
                         }}
                         name={props.inntekt.id}
                     >

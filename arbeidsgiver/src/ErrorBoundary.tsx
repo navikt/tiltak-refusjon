@@ -3,7 +3,7 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 // Denne er kopiert fra: https://reactjs.org/docs/concurrent-mode-suspense.html#handling-errors
 class ErrorBoundary extends React.Component<{ fallback: ReactNode } & PropsWithChildren> {
     state = { hasError: false, error: null };
-    static getDerivedStateFromError(error: any) {
+    static getDerivedStateFromError(error: Error) {
         return {
             hasError: true,
             error,

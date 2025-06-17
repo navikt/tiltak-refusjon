@@ -1,16 +1,16 @@
 import React, { FunctionComponent, Suspense } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useParams } from 'react-router';
-import { useHentKorreksjon } from '../services/rest-service';
-import VerticalSpacer from '~/VerticalSpacer';
-import KorreksjonSide from './KorreksjonSide';
-import TilbakeTilOversikt from '../komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import { Link } from 'react-router-dom';
-import KorreksjonKvitteringSide from '../KorreksjonKvitteringSide/KorreksjonKvitteringSide';
-import { korreksjonsgrunnTekst } from '~/types/messages';
-import { KorreksjonStatus } from '~/types/status';
-import KorreksjonSideVTAO from '@/KorreksjonSideVTAO/KorreksjonSideVTAO';
+
+import KorreksjonKvitteringSide from '@/KorreksjonKvitteringSide/KorreksjonKvitteringSide';
 import KorreksjonKvitteringSideVTAO from '@/KorreksjonKvitteringSideVTAO/KorreksjonKvitteringSideVTAO';
+import KorreksjonSide from './KorreksjonSide';
+import KorreksjonSideVTAO from '@/KorreksjonSideVTAO/KorreksjonSideVTAO';
+import TilbakeTilOversikt from '@/komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
+import VerticalSpacer from '~/VerticalSpacer';
+import { korreksjonsgrunnTekst, KorreksjonStatus } from '~/types';
+import { useHentKorreksjon, useRefusjonKreverAktsomhet } from '@/services/rest-service';
 
 const Advarsler: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
@@ -38,13 +38,14 @@ const Advarsler: FunctionComponent = () => {
 const Komponent: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
     const korreksjon = useHentKorreksjon(korreksjonId!);
+    const { data: aktsomhet } = useRefusjonKreverAktsomhet(korreksjon.korrigererRefusjonId);
 
     switch (korreksjon.status) {
         case KorreksjonStatus.UTKAST:
             return korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KorreksjonSideVTAO refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
+                <KorreksjonSideVTAO aktsomhet={aktsomhet} refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
             ) : (
-                <KorreksjonSide korreksjon={korreksjon} />
+                <KorreksjonSide aktsomhet={aktsomhet} korreksjon={korreksjon} />
             );
         case KorreksjonStatus.TILBAKEKREVING:
         case KorreksjonStatus.OPPGJORT:
@@ -52,9 +53,9 @@ const Komponent: FunctionComponent = () => {
         case KorreksjonStatus.TILLEGGSUTBETALING_UTBETALT:
         case KorreksjonStatus.TILLEGGSUTBETALING_FEILET:
             return korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KorreksjonKvitteringSideVTAO korreksjon={korreksjon} />
+                <KorreksjonKvitteringSideVTAO aktsomhet={aktsomhet} korreksjon={korreksjon} />
             ) : (
-                <KorreksjonKvitteringSide korreksjon={korreksjon} />
+                <KorreksjonKvitteringSide aktsomhet={aktsomhet} korreksjon={korreksjon} />
             );
     }
 };

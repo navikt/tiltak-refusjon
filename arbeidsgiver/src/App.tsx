@@ -13,6 +13,7 @@ import Refusjon from './refusjon/RefusjonSide/Refusjon';
 import { registrereBesok } from './utils/amplitude-utils';
 import RefusjonProvider from './RefusjonProvider';
 import { FilterProvider } from './refusjon/oversikt/FilterContext';
+import RefusjonKontroll from '@/komponenter/refusjon-kontroll/RefusjonKontroll';
 
 function App() {
     useEffect(() => {
@@ -46,7 +47,9 @@ function App() {
                                             element={
                                                 <ErrorOgSuspenseHandler>
                                                     <RefusjonProvider>
-                                                        <Refusjon />
+                                                        <RefusjonKontroll>
+                                                            <Refusjon />
+                                                        </RefusjonKontroll>
                                                     </RefusjonProvider>
                                                 </ErrorOgSuspenseHandler>
                                             }
