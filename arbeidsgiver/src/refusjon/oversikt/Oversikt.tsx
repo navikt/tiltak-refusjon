@@ -1,21 +1,18 @@
 import React, { FunctionComponent } from 'react';
-import { useInnloggetBruker } from '../../bruker/BrukerContext';
-import { useHentRefusjoner } from '../../services/rest-service';
-import { antallRefusjoner } from '../../utils/amplitude-utils';
+import { useInnloggetBruker } from '@/bruker/BrukerContext';
+import { useHentRefusjoner } from '@/services/rest-service';
+import { antallRefusjoner } from '@/utils/amplitude-utils';
 import FinnerIngenRefusjoner from './FinnerIngenRefusjon/FinnerIngenRefusjoner';
-import { BrukerContextType } from '../../bruker/BrukerContextType';
+import { BrukerContextType } from '@/bruker/BrukerContextType';
 import useOppdaterPagedata from '../../bruker/bedriftsmenyRefusjon/useOppdaterPagedata';
 import OversiktTabell from '~/OversiktTabell';
 import ArbeidsgiverTableBody from '~/OversiktTabell/TableBody/ArbeidsgiverTableBody';
 import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
 
-import { Pagination } from '@navikt/ds-react';
-import './oversikt.less';
-import BEMHelper from '~/utils/bem';
+import { Pagination, Select } from '@navikt/ds-react';
+import './Oversikt.less';
 import LenkePanel from '~/LenkePanel/LenkePanel';
 import { useFilter } from './FilterContext';
-
-const cls = BEMHelper('oversikt');
 
 const Oversikt: FunctionComponent = () => {
     const brukerContext: BrukerContextType = useInnloggetBruker();
@@ -28,7 +25,7 @@ const Oversikt: FunctionComponent = () => {
     antallRefusjoner(refusjoner.length > 0 ? refusjoner.length : 0);
 
     return (
-        <nav className={cls.className} aria-label="Main">
+        <nav className={"oversikt"} aria-label="Main">
             {refusjoner.length > 0 ? (
                 <>
                     <LenkePanel refusjoner={pageable.refusjoner} />
@@ -36,15 +33,28 @@ const Oversikt: FunctionComponent = () => {
                         tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />}
                         tableBody={<ArbeidsgiverTableBody refusjoner={pageable.refusjoner} />}
                     />
-                    <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}>
+                    <div className={"avtaleoversikt-pagination"}>
                         <Pagination
-                            className={cls.element('pagination')}
+                            className={"avtaleoversikt-pagination__pagination"}
                             page={pageable.currentPage + 1}
                             onPageChange={(x) => oppdaterFilter({ page: x - 1 })}
                             count={pageable.totalPages}
                             boundaryCount={1}
                             siblingCount={1}
                         />
+                        <Select
+                            label="Gå til side"
+                            hideLabel={true}
+                            className={"avtaleoversikt-pagination__page-select"}
+                            onChange={(e) => oppdaterFilter({ page: parseInt(e.target.value, 10) })}
+                            value={pageable.currentPage}
+                        >
+                            {[...Array(pageable.totalPages)].map((_, i) => (
+                                <option value={i} key={i}>
+                                    {i + 1}
+                                </option>
+                            ))}
+                        </Select>
                     </div>
                 </>
             ) : (
