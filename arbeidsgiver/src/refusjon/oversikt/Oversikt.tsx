@@ -13,6 +13,10 @@ import { Pagination, Select } from '@navikt/ds-react';
 import './Oversikt.less';
 import LenkePanel from '~/LenkePanel/LenkePanel';
 import { useFilter } from './FilterContext';
+import BEMHelper from '~/utils/bem';
+
+const cls = BEMHelper('oversikt');
+const clsPagination = BEMHelper('avtaleoversikt-pagination');
 
 const Oversikt: FunctionComponent = () => {
     const brukerContext: BrukerContextType = useInnloggetBruker();
@@ -25,7 +29,7 @@ const Oversikt: FunctionComponent = () => {
     antallRefusjoner(refusjoner.length > 0 ? refusjoner.length : 0);
 
     return (
-        <nav className={"oversikt"} aria-label="Main">
+        <nav className={cls.className} aria-label="Main">
             {refusjoner.length > 0 ? (
                 <>
                     <LenkePanel refusjoner={pageable.refusjoner} />
@@ -33,9 +37,9 @@ const Oversikt: FunctionComponent = () => {
                         tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />}
                         tableBody={<ArbeidsgiverTableBody refusjoner={pageable.refusjoner} />}
                     />
-                    <div className={"avtaleoversikt-pagination"}>
+                    <div className={clsPagination.className}>
                         <Pagination
-                            className={"avtaleoversikt-pagination__pagination"}
+                            className={clsPagination.element("pagination")}
                             page={pageable.currentPage + 1}
                             onPageChange={(x) => oppdaterFilter({ page: x - 1 })}
                             count={pageable.totalPages}
@@ -45,7 +49,7 @@ const Oversikt: FunctionComponent = () => {
                         <Select
                             label="Gå til side"
                             hideLabel={true}
-                            className={"avtaleoversikt-pagination__page-select"}
+                            className={clsPagination.element("page-select")}
                             onChange={(e) => oppdaterFilter({ page: parseInt(e.target.value, 10) })}
                             value={pageable.currentPage}
                         >
