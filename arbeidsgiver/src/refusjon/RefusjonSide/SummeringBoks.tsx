@@ -119,8 +119,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                                     <>
                                         Vi tar ikke hensyn til oppgitt refunderbar lønn (
                                         {formatterPenger(props.refusjonsgrunnlag.beregning?.tidligereRefundertBeløp)})
-                                        ved negativt refusjonsbeløp. Dette er altså ikke med i beregnet
-                                        refusjonsbeløp.{' '}
+                                        ved negativt refusjonsbeløp. Dette er altså ikke med i beregnet refusjonsbeløp.{' '}
                                     </>
                                 )}
                             </BodyShort>

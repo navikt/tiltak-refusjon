@@ -1,6 +1,5 @@
 import React from 'react';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
-
 import Boks from '~/Boks';
 import EksternLenke from '~/EksternLenke/EksternLenke';
 import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
