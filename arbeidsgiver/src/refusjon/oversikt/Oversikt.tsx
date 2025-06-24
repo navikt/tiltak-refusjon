@@ -4,19 +4,17 @@ import { useHentRefusjoner } from '@/services/rest-service';
 import { antallRefusjoner } from '@/utils/amplitude-utils';
 import FinnerIngenRefusjoner from './FinnerIngenRefusjon/FinnerIngenRefusjoner';
 import { BrukerContextType } from '@/bruker/BrukerContextType';
-import useOppdaterPagedata from '../../bruker/bedriftsmenyRefusjon/useOppdaterPagedata';
+import useOppdaterPagedata from '@/bruker/bedriftsmenyRefusjon/useOppdaterPagedata';
 import OversiktTabell from '~/OversiktTabell';
 import ArbeidsgiverTableBody from '~/OversiktTabell/TableBody/ArbeidsgiverTableBody';
 import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
-
-import { Pagination, Select } from '@navikt/ds-react';
-import './Oversikt.less';
+import './oversikt.less';
 import LenkePanel from '~/LenkePanel/LenkePanel';
 import { useFilter } from './FilterContext';
 import BEMHelper from '~/utils/bem';
+import Paginering from '~/OversiktTabell/Pagination/paginering';
 
 const cls = BEMHelper('oversikt');
-const clsPagination = BEMHelper('avtaleoversikt-pagination');
 
 const Oversikt: FunctionComponent = () => {
     const brukerContext: BrukerContextType = useInnloggetBruker();
@@ -37,29 +35,7 @@ const Oversikt: FunctionComponent = () => {
                         tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />}
                         tableBody={<ArbeidsgiverTableBody refusjoner={pageable.refusjoner} />}
                     />
-                    <div className={clsPagination.className}>
-                        <Pagination
-                            className={clsPagination.element("pagination")}
-                            page={pageable.currentPage + 1}
-                            onPageChange={(x) => oppdaterFilter({ page: x - 1 })}
-                            count={pageable.totalPages}
-                            boundaryCount={1}
-                            siblingCount={1}
-                        />
-                        <Select
-                            label="Gå til side"
-                            hideLabel={true}
-                            className={clsPagination.element("page-select")}
-                            onChange={(e) => oppdaterFilter({ page: parseInt(e.target.value, 10) })}
-                            value={pageable.currentPage}
-                        >
-                            {[...Array(pageable.totalPages)].map((_, i) => (
-                                <option value={i} key={i}>
-                                    {i + 1}
-                                </option>
-                            ))}
-                        </Select>
-                    </div>
+                    <Paginering pageable={pageable} oppdaterFilter={oppdaterFilter} />
                 </>
             ) : (
                 <FinnerIngenRefusjoner orgnr={brukerContext.valgtBedrift.valgtOrg?.[0].OrganizationNumber} />
