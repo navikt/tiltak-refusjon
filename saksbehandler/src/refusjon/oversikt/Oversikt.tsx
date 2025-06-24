@@ -1,16 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import Info from './Info';
-import { Pagination } from '@navikt/ds-react';
-import { useHentRefusjoner } from '../../services/rest-service';
+import { useHentRefusjoner } from '@/services/rest-service';
 
 import { useFilter } from './FilterContext';
 import OversiktTabell from '~/OversiktTabell';
-import TabellBodySaksbehandler from '~/OversiktTabell/TableBody/TableBodySaksbehandler';
-import SaksbehanderTableHeader from '~/OversiktTabell/TableHeader/SaksbehandlerTableHeader';
-
 import './Oversikt.less';
-import BEMHelper from '~/utils/bem';
 import LenkePanel from '~/LenkePanel/LenkePanel';
+import BEMHelper from '~/utils/bem';
+import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
+import ArbeidsgiverTableBody from '~/OversiktTabell/TableBody/ArbeidsgiverTableBody';
+import Paginering from '~/OversiktTabell/Pagination/paginering';
+
 const cls = BEMHelper('oversikt');
 
 const Oversikt: FunctionComponent = () => {
@@ -30,17 +30,10 @@ const Oversikt: FunctionComponent = () => {
         <nav className={cls.className} aria-label="Main" role={'list'}>
             <LenkePanel refusjoner={refusjonerPage.refusjoner} />
             <OversiktTabell
-                tableHeader={<SaksbehanderTableHeader />}
-                tableBody={<TabellBodySaksbehandler refusjoner={refusjonerPage.refusjoner} />}
+                tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />}
+                tableBody={<ArbeidsgiverTableBody refusjoner={refusjonerPage.refusjoner} />}
             />
-            <Pagination
-                className={cls.element('pagination')}
-                page={refusjonerPage.currentPage + 1}
-                onPageChange={(x) => oppdaterFilter({ page: x - 1 })}
-                count={refusjonerPage.totalPages}
-                boundaryCount={1}
-                siblingCount={1}
-            />
+            <Paginering pageable={refusjonerPage} oppdaterFilter={oppdaterFilter} />
         </nav>
     );
 };
