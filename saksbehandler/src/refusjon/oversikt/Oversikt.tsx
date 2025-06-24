@@ -29,14 +29,11 @@ const Oversikt: FunctionComponent = () => {
     return (
         <nav className={cls.className} aria-label="Main" role={'list'}>
             <LenkePanel refusjoner={refusjonerPage.refusjoner} />
-            <>
-                <LenkePanel refusjoner={refusjonerPage.refusjoner} />
-                <OversiktTabell
-                    tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />}
-                    tableBody={<ArbeidsgiverTableBody refusjoner={refusjonerPage.refusjoner} />}
-                />
-                <Paginering pageable={refusjonerPage} oppdaterFilter={oppdaterFilter} />
-            </>
+            <OversiktTabell
+                tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />}
+                tableBody={<ArbeidsgiverTableBody refusjoner={refusjonerPage.refusjoner} />}
+            />
+            <Paginering pageable={refusjonerPage} oppdaterFilter={oppdaterFilter} />
         </nav>
     );
 };
