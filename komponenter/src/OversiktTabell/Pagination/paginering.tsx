@@ -9,7 +9,6 @@ interface Props {
 }
 
 const Paginering = ({ pageable, oppdaterFilter }: Props) => {
-    console.log(styles);
     return (
         <div className={styles.pagination}>
             <AkselPagination
