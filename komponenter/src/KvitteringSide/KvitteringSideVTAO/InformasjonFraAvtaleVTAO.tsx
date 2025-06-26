@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import { Alert, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
-
 import Boks from '~/Boks';
 import EksternLenke from '~/EksternLenke/EksternLenke';
 import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
@@ -30,6 +29,7 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
         innloggetRolle,
     } = props;
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${tilskuddsgrunnlag.avtaleId}`;
+    const refusjonsnummer = `${tilskuddsgrunnlag.avtaleNr}-${tilskuddsgrunnlag.løpenummer}`;
     const erArbeidsgiver = innloggetRolle === 'ARBEIDSGIVER';
 
     return (
@@ -48,6 +48,11 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
                 <BodyShort size="small">
                     {tilskuddsgrunnlag.deltakerFornavn} {tilskuddsgrunnlag.deltakerEtternavn}
                 </BodyShort>
+            </IkonRad>
+            <VerticalSpacer rem={1} />
+            <IkonRad>
+                <Label>Refusjonsnummer: </Label>
+                <BodyShort size="small">{refusjonsnummer}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
@@ -99,7 +104,7 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
                     oppdatere det hos Altinn.
                 </EksternLenke>
             </BodyShort>
-            {bedriftKontonummer === null && åpnetFørsteGang && (
+            {bedriftKontonummer === null && !åpnetFørsteGang && (
                 <>
                     <VerticalSpacer rem={1} />
                     <Alert variant="error" size="small">
