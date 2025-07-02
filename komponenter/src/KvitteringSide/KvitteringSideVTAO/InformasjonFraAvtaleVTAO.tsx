@@ -9,6 +9,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Tilskuddsgrunnlag } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
 import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { lagId } from '~/utils/stringUtils';
 
 interface Props {
     aktsomhet?: Aktsomhet;
@@ -29,7 +30,12 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
         innloggetRolle,
     } = props;
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${tilskuddsgrunnlag.avtaleId}`;
-    const refusjonsnummer = `${tilskuddsgrunnlag.avtaleNr}-${tilskuddsgrunnlag.løpenummer}`;
+
+    const refusjonsnummer = lagId(
+        tilskuddsgrunnlag.avtaleNr,
+        tilskuddsgrunnlag.løpenummer,
+        tilskuddsgrunnlag.resendingsnummer
+    );
     const erArbeidsgiver = innloggetRolle === 'ARBEIDSGIVER';
 
     return (

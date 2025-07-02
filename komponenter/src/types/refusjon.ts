@@ -98,6 +98,7 @@ export interface Tilskuddsgrunnlag {
     tiltakstype: Tiltak;
     veilederNavIdent: string;
     enhet: string;
+    resendingsnummer?: number;
 }
 
 export interface Inntektsgrunnlag {
