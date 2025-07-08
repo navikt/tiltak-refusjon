@@ -41,21 +41,20 @@ const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properti
                     OrganizationNumber: underenhet.orgnr,
                     Name: underenhet.navn,
                     OrganizationForm: underenhet.organisasjonsform,
-                    Type: underenhet.organisasjonsform === 'BEDR' ? 'Business' : 'Enterprise',
-                    Status: 'Active', // Assuming all organizations are active
+                    Type: underenhet.organisasjonsform === 'BEDR' ? 'Business' : 'Enterprise', // TODO: Verifiser dette med fager.
+                    Status: 'Active', // Assuming all organizations are active // TODO: Verifiser dette med fager.
                     ParentOrganizationNumber: org.orgnr,
                 };
                 overOgUnderEnheter.push(underenhetObj);
             });
-            // overOgUnderEnheter.push(...org.underenheter);
         }
 
         const parent: Organisasjon = {
             OrganizationNumber: org.orgnr,
             Name: org.navn,
             OrganizationForm: org.organisasjonsform,
-            Type: org.organisasjonsform === 'BEDR' ? 'Business' : 'Enterprise',
-            Status: 'Active', // Assuming all organizations are active
+            Type: org.organisasjonsform === 'BEDR' ? 'Business' : 'Enterprise', // TODO: Verifser dette med fager.
+            Status: 'Active', // Assuming all organizations are active // TODO: Verifiser dette med fager.
             ParentOrganizationNumber:
                 props.organisasjonerNy.find((parentOrg) =>
                     parentOrg.underenheter?.some((underenhet) => underenhet.orgnr === org.orgnr)
@@ -64,35 +63,6 @@ const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properti
         overOgUnderEnheter.push(parent);
         return overOgUnderEnheter;
     });
-
-    // const isLeaf = (organisasjon: OrganisasjonNy) => {
-    //     return organisasjon.underenheter.length === 0;
-    // };
-    // const split = <T extends OrganisasjonNy>(predicate: (o: T) => boolean, liste: T[]): T[][] => {
-    //     const children = liste.filter(predicate);
-    //     const otherParents = liste.filter((e) => !predicate(e));
-    //     return [children, otherParents];
-    // };
-    // const flatUtHierarki = (organisasjonstre: OrganisasjonNy[]): OrganisasjonNy[] => {
-    //     const mapR = (parent: OrganisasjonNy): OrganisasjonNy[] => {
-    //         const [children, otherParents] = split(isLeaf, parent.underenheter);
-    //         return [
-    //             ...(children.length > 0
-    //                 ? [
-    //                       {
-    //                           ...parent,
-    //                           underenheter: children,
-    //                       },
-    //                   ]
-    //                 : []),
-    //             ...otherParents.flatMap(mapR),
-    //         ];
-    //     };
-    //     return organisasjonstre.flatMap((o) => mapR(o)).sort((a, b) => a.navn.localeCompare(b.navn));
-    // };
-
-    console.log('organisasjonerAltinn3', organisasjonerAltinn3);
-    // console.log('flatUtHierarki', flatUtHierarki(props.organisasjonerNy));
 
     return (
         <BedriftsmenyRefusjon
