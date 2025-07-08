@@ -12,6 +12,6 @@ export interface BrukerContextType {
 
 export interface InnloggetBruker extends FellesInnloggetBruker {
     organisasjoner: Organisasjon[];
-    organisasjonerNy: OrganisasjonNy[];  
+    organisasjonerNy: OrganisasjonNy[];
     tilganger: Bedrift[];
 }

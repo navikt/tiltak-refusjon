@@ -32,7 +32,6 @@ const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properti
         },
     };
 
-
     const organisasjonerAltinn3: Organisasjon[] = props.organisasjonerNy.flatMap((org: OrganisasjonNy) => {
         const overOgUnderEnheter: Organisasjon[] = [];
 
@@ -48,23 +47,23 @@ const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properti
                 };
                 overOgUnderEnheter.push(underenhetObj);
             });
-           // overOgUnderEnheter.push(...org.underenheter);
+            // overOgUnderEnheter.push(...org.underenheter);
         }
 
-        const parent: Organisasjon =  {
+        const parent: Organisasjon = {
             OrganizationNumber: org.orgnr,
             Name: org.navn,
             OrganizationForm: org.organisasjonsform,
             Type: org.organisasjonsform === 'BEDR' ? 'Business' : 'Enterprise',
             Status: 'Active', // Assuming all organizations are active
-            ParentOrganizationNumber: props.organisasjonerNy.find(
-                (parentOrg) => parentOrg.underenheter?.some((underenhet) => underenhet.orgnr === org.orgnr)
-            )?.orgnr || '',
+            ParentOrganizationNumber:
+                props.organisasjonerNy.find((parentOrg) =>
+                    parentOrg.underenheter?.some((underenhet) => underenhet.orgnr === org.orgnr)
+                )?.orgnr || '',
         };
         overOgUnderEnheter.push(parent);
         return overOgUnderEnheter;
     });
-    
 
     // const isLeaf = (organisasjon: OrganisasjonNy) => {
     //     return organisasjon.underenheter.length === 0;
@@ -93,7 +92,7 @@ const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properti
     // };
 
     console.log('organisasjonerAltinn3', organisasjonerAltinn3);
-   // console.log('flatUtHierarki', flatUtHierarki(props.organisasjonerNy));
+    // console.log('flatUtHierarki', flatUtHierarki(props.organisasjonerNy));
 
     return (
         <BedriftsmenyRefusjon
