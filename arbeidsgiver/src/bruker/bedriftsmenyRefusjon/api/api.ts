@@ -24,12 +24,6 @@ export interface Organisasjon {
     ParentOrganizationNumber: string;
 }
 
-export interface OrganisasjonNy {
-    orgnr: string;
-    navn: string;
-    organisasjonsform: string;
-    underenheter: OrganisasjonNy[];
-}
 
 export interface OrganisasjonEnhet {
     JuridiskEnhet: Organisasjon;
