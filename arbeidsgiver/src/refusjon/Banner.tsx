@@ -6,7 +6,6 @@ import { Bedriftvalg, Organisasjon } from '../bruker/bedriftsmenyRefusjon/api/ap
 
 interface Properties {
     organisasjoner: Organisasjon[];
-    organisasjonerNy: Organisasjon[];
     valgtBedrift: Bedriftvalg | undefined;
     setValgtBedrift: (org: Bedriftvalg) => void;
 }
@@ -32,41 +31,9 @@ const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properti
         },
     };
 
-    // const organisasjonerAltinn3: Organisasjon[] = props.organisasjonerNy.flatMap((org: OrganisasjonNy) => {
-    //     const overOgUnderEnheter: Organisasjon[] = [];
-
-    //     if (org.underenheter.length > 0) {
-    //         org.underenheter.forEach((underenhet) => {
-    //             const underenhetObj: Organisasjon = {
-    //                 OrganizationNumber: underenhet.orgnr,
-    //                 Name: underenhet.navn,
-    //                 OrganizationForm: underenhet.organisasjonsform,
-    //                 Type: underenhet.organisasjonsform === 'BEDR' ? 'Business' : 'Enterprise', // TODO: Verifiser dette med fager.
-    //                 Status: 'Active', // Assuming all organizations are active // TODO: Verifiser dette med fager.
-    //                 ParentOrganizationNumber: org.orgnr,
-    //             };
-    //             overOgUnderEnheter.push(underenhetObj);
-    //         });
-    //     }
-
-    //     const parent: Organisasjon = {
-    //         OrganizationNumber: org.orgnr,
-    //         Name: org.navn,
-    //         OrganizationForm: org.organisasjonsform,
-    //         Type: org.organisasjonsform === 'BEDR' ? 'Business' : 'Enterprise', // TODO: Verifser dette med fager.
-    //         Status: 'Active', // Assuming all organizations are active // TODO: Verifiser dette med fager.
-    //         ParentOrganizationNumber:
-    //             props.organisasjonerNy.find((parentOrg) =>
-    //                 parentOrg.underenheter?.some((underenhet) => underenhet.orgnr === org.orgnr)
-    //             )?.orgnr || '',
-    //     };
-    //     overOgUnderEnheter.push(parent);
-    //     return overOgUnderEnheter;
-    // });
-
     return (
         <BedriftsmenyRefusjon
-            organisasjoner={props.organisasjonerNy}
+            organisasjoner={props.organisasjoner}
             valgtBedrift={props.valgtBedrift}
             setValgtBedrift={props.setValgtBedrift}
             history={customHistory as History}
