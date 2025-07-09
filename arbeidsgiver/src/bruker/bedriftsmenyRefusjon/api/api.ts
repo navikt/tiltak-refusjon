@@ -24,7 +24,6 @@ export interface Organisasjon {
     ParentOrganizationNumber: string;
 }
 
-
 export interface OrganisasjonEnhet {
     JuridiskEnhet: Organisasjon;
     Underenheter: Array<Organisasjon>;
