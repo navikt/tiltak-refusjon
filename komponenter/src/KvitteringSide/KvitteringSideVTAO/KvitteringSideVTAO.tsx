@@ -110,10 +110,9 @@ const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
             <VerticalSpacer rem={1} />
             <InformasjonFraAvtalenVTAO
                 aktsomhet={aktsomhet}
-                tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}
-                bedriftKontonummerInnhentetTidspunkt={refusjon.refusjonsgrunnlag.bedriftKontonummerInnhentetTidspunkt}
                 innloggetRolle={innloggetRolle}
+                refusjonStatus={refusjon.status}
+                refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
             />
             <VerticalSpacer rem={2} />
             <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
