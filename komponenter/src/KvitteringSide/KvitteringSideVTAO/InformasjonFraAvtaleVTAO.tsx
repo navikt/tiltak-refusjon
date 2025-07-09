@@ -6,29 +6,29 @@ import EksternLenke from '~/EksternLenke/EksternLenke';
 import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
 import IkonRad from '~/IkonRad/IkonRad';
 import VerticalSpacer from '~/VerticalSpacer';
-import { Aktsomhet, Tilskuddsgrunnlag } from '~/types';
+import { Aktsomhet, Refusjonsgrunnlag, RefusjonStatus } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
 import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { lagId } from '~/utils/stringUtils';
+import KIDInputValidator from 'tiltak-refusjon-arbeidsgiver/src/komponenter/KIDInputValidator/KIDInputValidator';
 
 interface Props {
     aktsomhet?: Aktsomhet;
-    tilskuddsgrunnlag: Tilskuddsgrunnlag;
-    bedriftKontonummer: string | null | undefined;
-    åpnetFørsteGang?: string;
-    bedriftKontonummerInnhentetTidspunkt?: string;
     innloggetRolle?: InnloggetRolle;
+    refusjonStatus?: RefusjonStatus;
+    refusjonsgrunnlag: Refusjonsgrunnlag;
+    åpnetFørsteGang?: string;
 }
 
 const InformasjonFraAvtalenVTAO = (props: Props) => {
     const {
         aktsomhet,
-        tilskuddsgrunnlag,
-        bedriftKontonummer,
-        åpnetFørsteGang,
-        bedriftKontonummerInnhentetTidspunkt,
         innloggetRolle,
+        åpnetFørsteGang,
+        refusjonStatus = '',
+        refusjonsgrunnlag: { bedriftKid, bedriftKontonummer, bedriftKontonummerInnhentetTidspunkt, tilskuddsgrunnlag },
     } = props;
+
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${tilskuddsgrunnlag.avtaleId}`;
 
     const refusjonsnummer = lagId(
@@ -101,6 +101,18 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <BodyShort size="small">{bedriftKontonummer}</BodyShort>
                     </div>
+                )}
+            </IkonRad>
+            <VerticalSpacer rem={1} />
+            <IkonRad>
+                <Label>KID-nummer:</Label>
+                {['KLAR_FOR_INNSENDING', 'FOR_TIDLIG'].includes(refusjonStatus) ? (
+                    <>
+                        <KIDInputValidator />
+                        <BodyShort size="small">(Dette feltet er valgfritt)</BodyShort>
+                    </>
+                ) : (
+                    <BodyShort size="small">{bedriftKid || 'Ikke satt'}</BodyShort>
                 )}
             </IkonRad>
             <VerticalSpacer rem={1} />
