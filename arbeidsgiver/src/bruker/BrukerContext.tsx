@@ -70,7 +70,7 @@ export const BrukerProvider: FunctionComponent<PropsWithChildren> = (props) => {
             )}
             {innloggetBruker && (
                 <Banner
-                    organisasjonerNy={innloggetBruker.organisasjonerNy}
+                    organisasjonerNy={innloggetBruker.organisasjonerFraAltinn3}
                     organisasjoner={innloggetBruker.organisasjoner}
                     valgtBedrift={valgtBedrift}
                     setValgtBedrift={(org, nullstillFilter = true) => {
