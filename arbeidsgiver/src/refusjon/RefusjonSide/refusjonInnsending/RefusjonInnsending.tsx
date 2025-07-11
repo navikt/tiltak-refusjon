@@ -1,6 +1,5 @@
 import { Alert, ConfirmationPanel } from '@navikt/ds-react';
-import { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useContext, useState } from 'react';
-import { RefusjonContext } from '../../../RefusjonProvider';
+import { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useState } from 'react';
 import LagreKnapp from '../../../komponenter/LagreKnapp';
 import Utregning from '../../../komponenter/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
@@ -13,17 +12,17 @@ import BEMHelper from '~/utils/bem';
 interface Properties {
     refusjon: Refusjon;
     setVisGodkjennModal: Dispatch<SetStateAction<boolean>>;
+    feilmelding?: string;
 }
 
 const RefusjonInnsending: FunctionComponent<Properties> = ({
     refusjon,
     setVisGodkjennModal,
+    feilmelding,
 }: PropsWithChildren<Properties>) => {
     const [bekrefetKorrekteOpplysninger, setBekrefetKorrekteOpplysninger] = useState<boolean>(false);
     const [ikkeBekreftetFeilmelding, setIkkeBekreftetFeilmelding] = useState<string>('');
     const cls = BEMHelper('refusjonInnsending');
-
-    const { feilListe } = useContext(RefusjonContext);
 
     if (
         !refusjon.harTattStillingTilAlleInntektslinjer ||
@@ -80,14 +79,21 @@ const RefusjonInnsending: FunctionComponent<Properties> = ({
                 etter forutsetningene, jfr. Bevilgningsreglementet av 26.05.2005 § 10, 2. ledd
             </ConfirmationPanel>
 
-            {feilListe.includes('bedriftKid') && (
+            {feilmelding && (
                 <>
-                    <Alert variant="error">KID-nummeret du har fylt ut er ikke gyldig.</Alert>
+                    <Alert variant="error">{feilmelding}</Alert>
                     <VerticalSpacer rem={1} />
                 </>
             )}
 
-            <LagreKnapp variant="primary" lagreFunksjon={() => fullførRefusjon()}>
+            <LagreKnapp
+                variant="primary"
+                lagreFunksjon={async () => {
+                    if (!feilmelding) {
+                        await fullførRefusjon();
+                    }
+                }}
+            >
                 Fullfør
             </LagreKnapp>
         </div>

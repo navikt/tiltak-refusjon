@@ -7,7 +7,7 @@ import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
 import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
 import Statusmelding from '~/KvitteringSide/Statusmelding';
 import VerticalSpacer from '~/VerticalSpacer';
-import { Aktsomhet, RefusjonStatus, Korreksjonsgrunn, Refusjon, statusTekst } from '~/types';
+import { Aktsomhet, Korreksjonsgrunn, Refusjon, RefusjonStatus, statusTekst } from '~/types';
 import { InnloggetBruker } from '~/types/brukerContextType';
 import { formatterDato, NORSK_DATO_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
@@ -63,9 +63,11 @@ interface Props {
         unntakOmInntekterFremitid?: number,
         annenKorreksjonsGrunn?: string
     ) => Promise<void>;
+    settKid?: (kid?: string) => void;
 }
+
 const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
-    const { refusjon, innloggetBruker, opprettKorreksjon, aktsomhet } = props;
+    const { refusjon, innloggetBruker, opprettKorreksjon, aktsomhet, settKid } = props;
     const innloggetRolle = innloggetBruker?.rolle;
 
     return (
@@ -110,11 +112,11 @@ const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
             <VerticalSpacer rem={1} />
             <InformasjonFraAvtalenVTAO
                 aktsomhet={aktsomhet}
-                tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                bedriftKontonummer={refusjon.refusjonsgrunnlag.bedriftKontonummer}
-                bedriftKontonummerInnhentetTidspunkt={refusjon.refusjonsgrunnlag.bedriftKontonummerInnhentetTidspunkt}
                 innloggetRolle={innloggetRolle}
+                refusjonStatus={refusjon.status}
+                refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
                 åpnetFørsteGang={refusjon.åpnetFørsteGang}
+                settKid={settKid}
             />
             <VerticalSpacer rem={2} />
             <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />

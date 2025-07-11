@@ -16,7 +16,7 @@ interface Props {
 
 const KorreksjonSideVTAO = (props: Props) => {
     const { aktsomhet, refusjonsgrunnlag } = props;
-    const { bedriftKontonummer, tilskuddsgrunnlag } = refusjonsgrunnlag;
+    const { tilskuddsgrunnlag } = refusjonsgrunnlag;
 
     return (
         <Boks variant="hvit">
@@ -34,9 +34,8 @@ const KorreksjonSideVTAO = (props: Props) => {
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalenVTAO
                 aktsomhet={aktsomhet}
-                tilskuddsgrunnlag={tilskuddsgrunnlag}
-                bedriftKontonummer={bedriftKontonummer}
                 åpnetFørsteGang={'Trengs ikke på korreksjon'}
+                refusjonsgrunnlag={refusjonsgrunnlag}
             />
             <VerticalSpacer rem={2} />
             <TilskuddssatsVTAO tilskuddsgrunnlag={tilskuddsgrunnlag} />

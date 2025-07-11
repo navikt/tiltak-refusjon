@@ -11,7 +11,6 @@ import Landingsside from './Landingsside';
 import OversiktSide from './refusjon/OversiktSide/OversiktSide';
 import Refusjon from './refusjon/RefusjonSide/Refusjon';
 import { registrereBesok } from './utils/amplitude-utils';
-import RefusjonProvider from './RefusjonProvider';
 import { FilterProvider } from './refusjon/oversikt/FilterContext';
 import RefusjonKontroll from '@/komponenter/refusjon-kontroll/RefusjonKontroll';
 
@@ -46,11 +45,9 @@ function App() {
                                             path="/refusjon/:refusjonId/*"
                                             element={
                                                 <ErrorOgSuspenseHandler>
-                                                    <RefusjonProvider>
-                                                        <RefusjonKontroll>
-                                                            <Refusjon />
-                                                        </RefusjonKontroll>
-                                                    </RefusjonProvider>
+                                                    <RefusjonKontroll>
+                                                        <Refusjon />
+                                                    </RefusjonKontroll>
                                                 </ErrorOgSuspenseHandler>
                                             }
                                         />

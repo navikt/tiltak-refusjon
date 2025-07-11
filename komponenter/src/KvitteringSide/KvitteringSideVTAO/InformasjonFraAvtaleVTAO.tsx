@@ -1,41 +1,51 @@
 import React from 'react';
 import moment from 'moment';
 import { Alert, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
+
 import Boks from '~/Boks';
 import EksternLenke from '~/EksternLenke/EksternLenke';
 import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
 import IkonRad from '~/IkonRad/IkonRad';
+import KIDInputValidator from '~/KIDInputValidator';
 import VerticalSpacer from '~/VerticalSpacer';
-import { Aktsomhet, Tilskuddsgrunnlag } from '~/types';
+import { Aktsomhet, Refusjonsgrunnlag, RefusjonStatus } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
 import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { lagId } from '~/utils/stringUtils';
 
 interface Props {
     aktsomhet?: Aktsomhet;
-    tilskuddsgrunnlag: Tilskuddsgrunnlag;
-    bedriftKontonummer: string | null | undefined;
-    åpnetFørsteGang?: string;
-    bedriftKontonummerInnhentetTidspunkt?: string;
     innloggetRolle?: InnloggetRolle;
+    refusjonStatus?: RefusjonStatus;
+    refusjonsgrunnlag: Refusjonsgrunnlag;
+    åpnetFørsteGang?: string;
+    settKid?: (kid?: string) => void;
 }
 
 const InformasjonFraAvtalenVTAO = (props: Props) => {
     const {
         aktsomhet,
-        tilskuddsgrunnlag,
-        bedriftKontonummer,
-        åpnetFørsteGang,
-        bedriftKontonummerInnhentetTidspunkt,
         innloggetRolle,
+        refusjonStatus = '',
+        refusjonsgrunnlag: { bedriftKid, bedriftKontonummer, bedriftKontonummerInnhentetTidspunkt, tilskuddsgrunnlag },
+        åpnetFørsteGang,
+        settKid,
     } = props;
-    const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${tilskuddsgrunnlag.avtaleId}`;
 
-    const refusjonsnummer = lagId(
-        tilskuddsgrunnlag.avtaleNr,
-        tilskuddsgrunnlag.løpenummer,
-        tilskuddsgrunnlag.resendingsnummer
-    );
+    const {
+        deltakerFornavn,
+        deltakerEtternavn,
+        avtaleId,
+        avtaleNr,
+        løpenummer,
+        resendingsnummer,
+        avtaleFom,
+        avtaleTom,
+        tilskuddFom,
+        tilskuddTom,
+    } = tilskuddsgrunnlag;
+
+    const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${avtaleId}`;
     const erArbeidsgiver = innloggetRolle === 'ARBEIDSGIVER';
 
     return (
@@ -52,34 +62,28 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
             <IkonRad>
                 <Label>Deltaker: </Label>
                 <BodyShort size="small">
-                    {tilskuddsgrunnlag.deltakerFornavn} {tilskuddsgrunnlag.deltakerEtternavn}
+                    {deltakerFornavn} {deltakerEtternavn}
                 </BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Refusjonsnummer: </Label>
-                <BodyShort size="small">{refusjonsnummer}</BodyShort>
+                <BodyShort size="small">{lagId(avtaleNr, løpenummer, resendingsnummer)}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Avtaleperiode: </Label>
-                <BodyShort size="small">
-                    {formatterPeriode(tilskuddsgrunnlag.avtaleFom || '', tilskuddsgrunnlag.avtaleTom || '')}
-                </BodyShort>
+                <BodyShort size="small">{formatterPeriode(avtaleFom || '', avtaleTom || '')}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Tilskuddsperiode: </Label>
-                <BodyShort size="small">
-                    {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
-                </BodyShort>
+                <BodyShort size="small">{formatterPeriode(tilskuddFom, tilskuddTom)}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Forventet utbetalt: </Label>
-                <BodyShort size="small">
-                    {formatterDato(moment(tilskuddsgrunnlag.tilskuddTom).add(3, 'days').toString())}
-                </BodyShort>
+                <BodyShort size="small">{formatterDato(moment(tilskuddTom).add(3, 'days').toString())}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
@@ -101,6 +105,18 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <BodyShort size="small">{bedriftKontonummer}</BodyShort>
                     </div>
+                )}
+            </IkonRad>
+            <VerticalSpacer rem={1} />
+            <IkonRad>
+                <Label>KID-nummer:</Label>
+                {erArbeidsgiver && ['KLAR_FOR_INNSENDING', 'FOR_TIDLIG'].includes(refusjonStatus) ? (
+                    <>
+                        <KIDInputValidator kid={bedriftKid} onEndring={settKid} />
+                        <BodyShort size="small">(Dette feltet er valgfritt)</BodyShort>
+                    </>
+                ) : (
+                    <BodyShort size="small">{bedriftKid || 'Ikke oppgitt'}</BodyShort>
                 )}
             </IkonRad>
             <VerticalSpacer rem={1} />

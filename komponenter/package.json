@@ -7,6 +7,7 @@
         "@navikt/ds-react": "^7.20.0",
         "amplitude-js": "8.21.9",
         "moment": "^2.29.1",
+        "norsk-validator": "^1.2.0",
         "react": "^18.3.0",
         "react-responsive": "^10.0.1",
         "react-router-dom": "^7.5.3"
