@@ -110,7 +110,7 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
                     oppdatere det hos Altinn.
                 </EksternLenke>
             </BodyShort>
-            {bedriftKontonummer === null && !åpnetFørsteGang && (
+            {bedriftKontonummer === null && åpnetFørsteGang && (
                 <>
                     <VerticalSpacer rem={1} />
                     <Alert variant="error" size="small">
