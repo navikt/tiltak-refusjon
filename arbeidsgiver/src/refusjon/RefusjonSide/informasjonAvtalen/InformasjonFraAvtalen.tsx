@@ -4,22 +4,32 @@ import Boks from '~/Boks';
 import EksternLenke from '~/EksternLenke/EksternLenke';
 import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
 import IkonRad from '~/IkonRad/IkonRad';
-import KIDInputValidator from '@/komponenter/KIDInputValidator/KIDInputValidator';
+import KIDInputValidator from '~/KIDInputValidator';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, tiltakstypeTekst } from '~/types';
 import { Refusjon } from '~/types/refusjon';
 import { formatterDato, formatterPeriode } from '~/utils';
 import { formatterPenger } from '~/utils/PengeUtils';
+import React, { useCallback } from 'react';
+import { lagreBedriftKID } from '@/services/rest-service';
 
 interface Props {
     aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
+    onFeil?: (feil?: string) => void;
 }
 
 const InformasjonFraAvtalen = (props: Props) => {
-    const { refusjon, aktsomhet } = props;
+    const { refusjon, aktsomhet, onFeil = (f) => f } = props;
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleId}`;
     const refusjonsnummer = `${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}`;
+
+    const settKid = useCallback(
+        (kid?: string) => {
+            lagreBedriftKID(refusjon.id, refusjon.sistEndret, kid);
+        },
+        [refusjon.id, refusjon.sistEndret]
+    );
 
     return (
         <Boks variant="grå">
@@ -99,25 +109,22 @@ const InformasjonFraAvtalen = (props: Props) => {
                     <BodyShort size="small">{refusjon.refusjonsgrunnlag.bedriftKontonummer}</BodyShort>
                 )}
             </IkonRad>
-            {(!refusjon.refusjonsgrunnlag.bedriftKid || refusjon.refusjonsgrunnlag.bedriftKid.trim().length === 0) &&
-            refusjon.status !== 'KLAR_FOR_INNSENDING' ? (
-                <></>
-            ) : (
-                <>
-                    <VerticalSpacer rem={1} />
-                    <IkonRad>
-                        <Label>KID:</Label>
-                        {refusjon.status === 'KLAR_FOR_INNSENDING' ? (
-                            <>
-                                <KIDInputValidator />
-                                <BodyShort size="small">(Dette feltet er valgfritt)</BodyShort>
-                            </>
-                        ) : (
-                            <BodyShort size="small">{refusjon.refusjonsgrunnlag.bedriftKid}</BodyShort>
-                        )}
-                    </IkonRad>
-                </>
-            )}
+            <VerticalSpacer rem={1} />
+            <IkonRad>
+                <Label>KID-nummer:</Label>
+                {refusjon.status === 'KLAR_FOR_INNSENDING' ? (
+                    <>
+                        <KIDInputValidator
+                            kid={refusjon.refusjonsgrunnlag.bedriftKid}
+                            onEndring={settKid}
+                            onFeil={onFeil}
+                        />
+                        <BodyShort size="small">(Dette feltet er valgfritt)</BodyShort>
+                    </>
+                ) : (
+                    <BodyShort size="small">{refusjon.refusjonsgrunnlag.bedriftKid || 'Ikke oppgitt'}</BodyShort>
+                )}
+            </IkonRad>
             {refusjon.refusjonsgrunnlag.bedriftKontonummer === null && refusjon.åpnetFørsteGang && (
                 <>
                     <VerticalSpacer rem={1} />

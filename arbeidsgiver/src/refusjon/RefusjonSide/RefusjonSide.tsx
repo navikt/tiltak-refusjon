@@ -28,6 +28,7 @@ const RefusjonSide = (props: Props) => {
     const navigate = useNavigate();
     const [visGodkjennModal, setVisGodkjennModal] = useState<boolean>(false);
     const [visRefusjonInnsending, setVisRefusjonInnsending] = useState<boolean>(true);
+    const [feilmelding, setFeilmelding] = useState<string>();
 
     const godkjennRefusjonen = async (): Promise<void> => {
         try {
@@ -46,13 +47,17 @@ const RefusjonSide = (props: Props) => {
         <div role="main">
             <Boks variant="hvit">
                 <RefusjonIngress refusjon={refusjon} />
-                <InformasjonFraAvtalen refusjon={refusjon} aktsomhet={aktsomhet} />
+                <InformasjonFraAvtalen refusjon={refusjon} aktsomhet={aktsomhet} onFeil={setFeilmelding} />
                 <InntekterFraAMeldingen refusjon={refusjon} kvitteringVisning={false} />
                 <RefusjonFullførNullbeløp />
                 <InntekterFraTiltaketSpørsmål setVisRefusjonInnsending={setVisRefusjonInnsending} />
                 <TidligereRefunderbarBeløp refusjon={refusjon} />
                 {visRefusjonInnsending && (
-                    <RefusjonInnsending refusjon={refusjon} setVisGodkjennModal={setVisGodkjennModal} />
+                    <RefusjonInnsending
+                        refusjon={refusjon}
+                        setVisGodkjennModal={setVisGodkjennModal}
+                        feilmelding={feilmelding}
+                    />
                 )}
             </Boks>
             <RefusjonGodkjennModal

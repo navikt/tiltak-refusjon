@@ -13,8 +13,8 @@ const Statusmelding: FunctionComponent<{
         case RefusjonStatus.UTBETALING_FEILET:
             return (
                 <Alert variant="warning" size="small">
-                    Vi har problemer med utbetalingen. Sjekk at kontonummeret oppgitt i avtalen er i bruk. Ta kontakt
-                    med veileder for å få hjelp.
+                    Vi har problemer med utbetalingen. Sjekk at KID og kontonummeret er korrekt. Ta kontakt med veileder
+                    for å få hjelp.
                 </Alert>
             );
         case RefusjonStatus.UTBETALT:

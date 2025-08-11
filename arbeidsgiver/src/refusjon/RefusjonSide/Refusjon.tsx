@@ -19,8 +19,8 @@ import { formatterDato } from '~/utils';
 import { Refusjon as RefusjonType } from '~/types/refusjon';
 import { BrukerContextType } from '~/types/brukerContextType';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
-import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import { Aktsomhet } from '~/types';
+import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -57,7 +57,7 @@ const Komponent: FunctionComponent = () => {
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
             return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAO
+                <KvitteringSideVTAOArbeidsgiver
                     aktsomhet={aktsomhet}
                     innloggetBruker={brukerContext.innloggetBruker}
                     refusjon={refusjon}
@@ -100,7 +100,7 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.UTBETALT:
         case RefusjonStatus.UTBETALING_FEILET:
             return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAO
+                <KvitteringSideVTAOArbeidsgiver
                     aktsomhet={aktsomhet}
                     innloggetBruker={brukerContext.innloggetBruker}
                     refusjon={refusjon}
