@@ -7,11 +7,11 @@ import { Tiltak } from '~/types/tiltak';
 import { SortingOrder } from '~/types/filter';
 
 export interface Filter extends RefusjonsAktor {
-    status?: RefusjonStatus | undefined;
-    tiltakstype?: Tiltak | undefined;
-    sorting?: SortingOrder | undefined;
-    page?: number | undefined;
-    size?: number | undefined;
+    status?: RefusjonStatus;
+    tiltakstype?: Tiltak;
+    sorting?: SortingOrder;
+    page?: number;
+    size?: number;
 }
 
 export interface RefusjonsAktor {
@@ -83,10 +83,7 @@ export const FilterProvider: FunctionComponent<PropsWithChildren> = (props) => {
     };
 
     const oppdaterFilter = (nyttFilter: Partial<Filter>) => {
-        // Ved å sette inn "page: 0" i midten av objektet oppnår vi at alle andre endringer
-        // i filter fører til at paginering nullstilles, med mindre endringen ER paginering
-        // (da overstyres "page: 0" av den valgte siden i stedet)
-        const nyttMergedFilter = { ...filter, page: 0, ...nyttFilter };
+        const nyttMergedFilter = { ...filter, page: undefined, ...nyttFilter };
         setFilter(nyttMergedFilter);
         filterCookie.oppdatereSokeVerdiCookie({ ...nyttMergedFilter });
     };
