@@ -1,14 +1,17 @@
 import React, { FunctionComponent, Suspense } from 'react';
-import OversiktSkeleton from '../../komponenter/OversiktSkeleton/OversiktSkeleton';
-import Filtermeny from '../oversikt/Filtermeny';
-import Oversikt from '../oversikt/Oversikt';
-import './OversiktSide.less';
-import Banner from '../oversikt/Banner';
-import BannerLaster from '../oversikt/BannerLaster';
+
 import BEMHelper from '~/utils/bem';
+import Banner from '@/refusjon/oversikt/Banner';
+import Filtermeny from '@/refusjon/oversikt/Filtermeny';
+import IkkeTilgang403ErrorBoundary from '~/IkkeTilgang403ErrorBoundary';
+import Oversikt from '@/refusjon/oversikt/Oversikt';
+import OversiktSkeleton from '@/komponenter/OversiktSkeleton/OversiktSkeleton';
 import { BrukerContextType } from '~/types/brukerContextType';
+import { useFilter } from '@/refusjon/oversikt/FilterContext';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
-import { useFilter } from '../oversikt/FilterContext';
+
+import './OversiktSide.less';
+import { Path } from '@/router/Router';
 
 const cls = BEMHelper('OversiktSide');
 
@@ -24,9 +27,7 @@ const OversiktSide: FunctionComponent = () => {
     return (
         <div className={cls.className}>
             <div className={cls.element('banner')}>
-                <Suspense fallback={<BannerLaster />}>
-                    <Banner />
-                </Suspense>
+                <Banner />
             </div>
             <div className={cls.element('oversikt')}>
                 <div className={cls.element('wrapper')}>
@@ -34,9 +35,11 @@ const OversiktSide: FunctionComponent = () => {
                         <Filtermeny filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
                     </div>
                     <div className={cls.element('container')}>
-                        <Suspense fallback={<OversiktSkeleton />}>
-                            <Oversikt />
-                        </Suspense>
+                        <IkkeTilgang403ErrorBoundary filter={filter} pathTilForside={Path.OVERSIKT}>
+                            <Suspense fallback={<OversiktSkeleton />}>
+                                <Oversikt />
+                            </Suspense>
+                        </IkkeTilgang403ErrorBoundary>
                     </div>
                 </div>
             </div>

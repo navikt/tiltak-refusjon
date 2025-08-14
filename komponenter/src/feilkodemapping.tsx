@@ -12,7 +12,11 @@ export type Feilkode =
     | 'KOSTNADSSTED_MANGLER'
     | 'FOR_LANG_FORLENGELSE_AV_FRIST'
     | 'HAR_ALLERDE_UNNTAK_OM_INNTEKTER_1_MND_FREM'
-    | 'KORREKSJON_KOSTNADSSTED_ANNET_FYLKE';
+    | 'KORREKSJON_KOSTNADSSTED_ANNET_FYLKE'
+    | 'IKKE_TILGANG_TIL_DELTAKER_STRENGT_FORTROLIG'
+    | 'IKKE_TILGANG_TIL_DELTAKER_FORTROLIG'
+    | 'IKKE_TILGANG_TIL_DELTAKER_SKJERMET'
+    | 'IKKE_TILGANG_TIL_REFUSJON';
 
 export const Feilmeldinger: { [key in Feilkode]: string } = {
     TEKNISK_FEIL_INNTEKTSOPPSLAG: 'Feil ved inntektsoppslag.',
@@ -30,4 +34,12 @@ export const Feilmeldinger: { [key in Feilkode]: string } = {
     HAR_ALLERDE_UNNTAK_OM_INNTEKTER_1_MND_FREM:
         'Arbeidsgiver har allerede merket refusjonen for å hente 1 eksta måned.',
     KORREKSJON_KOSTNADSSTED_ANNET_FYLKE: 'Kostnadsstedet må være i samme fylke som refusjonen',
+    IKKE_TILGANG_TIL_DELTAKER_STRENGT_FORTROLIG:
+        'Dette er en refusjon med strengt fortrolige opplysninger. Du har ikke tilgang til denne refusjonen.',
+    IKKE_TILGANG_TIL_DELTAKER_FORTROLIG:
+        'Dette er en refusjon med fortrolige opplysninger. Du har ikke tilgang til denne refusjonen.',
+    IKKE_TILGANG_TIL_DELTAKER_SKJERMET:
+        'Dette er en refusjon med skjermede opplysninger. Du har ikke tilgang til denne refusjonen.',
+    IKKE_TILGANG_TIL_REFUSJON:
+        'Du har ikke tilgang til denne refusjonen. Vennligst påse at du har tilgang til enheten og deltaker.',
 };

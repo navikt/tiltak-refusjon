@@ -1,11 +1,16 @@
 import React, { FunctionComponent, Suspense } from 'react';
-import OversiktSkeleton from '../../komponenter/OversiktSkeleton/OversiktSkeleton';
-import Oversikt from '../oversikt/Oversikt';
-import './OversiktSide.less';
+
 import BEMHelper from '~/utils/bem';
-const cls = BEMHelper('OversiktSide');
 import Filtermeny from '~/Filtermeny/Filtermeny';
-import { useFilter } from '../oversikt/FilterContext';
+import Oversikt from '@/refusjon/oversikt/Oversikt';
+import OversiktSkeleton from '@/komponenter/OversiktSkeleton/OversiktSkeleton';
+import { useFilter } from '@/refusjon/oversikt/FilterContext';
+import IkkeTilgang403ErrorBoundary from '~/IkkeTilgang403ErrorBoundary';
+import { Path } from '@/router/Router';
+
+import './OversiktSide.less';
+
+const cls = BEMHelper('OversiktSide');
 
 const OversiktSide: FunctionComponent = () => {
     const { filter, oppdaterFilter } = useFilter();
@@ -21,9 +26,11 @@ const OversiktSide: FunctionComponent = () => {
                     <Filtermeny filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
                 </div>
                 <div className={cls.element('container')}>
-                    <Suspense fallback={<OversiktSkeleton />}>
-                        <Oversikt />
-                    </Suspense>
+                    <IkkeTilgang403ErrorBoundary filter={filter} pathTilForside={Path.REFUSJON_OVERSIKT}>
+                        <Suspense fallback={<OversiktSkeleton />}>
+                            <Oversikt />
+                        </Suspense>
+                    </IkkeTilgang403ErrorBoundary>
                 </div>
             </div>
         </div>
