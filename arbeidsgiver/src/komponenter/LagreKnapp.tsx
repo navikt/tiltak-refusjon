@@ -1,13 +1,10 @@
 import React, { FunctionComponent, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { Nettressurs, Status } from '../nettressurs';
-import { handterFeil } from '../utils/apiFeilUtils';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Alert, Button, ButtonProps } from '@navikt/ds-react';
+import { handterFeil } from '~/utils/apiFeilUtils';
 
-type Props = {
-    lagreFunksjon: () => Promise<void>;
-    attributes?: ButtonProps & HTMLAttributes<HTMLDivElement>;
-};
+type Props = { lagreFunksjon: () => Promise<void>; attributes?: ButtonProps & HTMLAttributes<HTMLDivElement> };
 
 const LagreKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
     const [netverkStatus, setNetverkStatus] = useState<Nettressurs<void>>({ status: Status.IkkeLastet });

@@ -16,7 +16,6 @@ import {
     datoTilNorskString,
 } from './forlengFristUtils';
 import GrunnlagTilForlengelse from './GrunnlagTilForlengelse';
-import { FeilkodeError } from '~/types/errors';
 import BEMHelper from '~/utils/bem';
 
 const cls = BEMHelper('forleng-frist');
@@ -70,7 +69,7 @@ const ForlengFristModalKropp: FunctionComponent<{
             setSkjemaGruppeFeilmeldinger([]);
             return oppdatereRefusjonFrist(datoFraInputFelt, grunnlag, annetGrunnlag);
         } else {
-            return Promise.reject(new FeilkodeError('Alle påkrevde felter må være utfylt'));
+            return Promise.reject(new Error('Alle påkrevde felter må være utfylt'));
         }
     };
 
@@ -92,10 +91,7 @@ const ForlengFristModalKropp: FunctionComponent<{
                         setDatoFraDatoVelger(day);
                     }}
                     locale={nb}
-                    disabled={{
-                        before: tidligsteFristDato,
-                        after: senesteFristDato,
-                    }}
+                    disabled={{ before: tidligsteFristDato, after: senesteFristDato }}
                 />
                 <div className={cls.element('text-wrapper')}>
                     <div className={cls.element('dato-input')}>
@@ -158,10 +154,7 @@ const ForlengFrist: FunctionComponent<{ refusjonId: string; tidligsteFrist: stri
 
     const oppdatereRefusjonFrist = async (dato: string, grunnlag: string, annetGrunnlag: string) => {
         const valgGrunn = grunnlag.includes('Annet') ? annetGrunnlag : grunnlag;
-        await forlengFrist(refusjonId!, {
-            nyFrist: norskDatoTilISOString(dato),
-            årsak: valgGrunn,
-        });
+        await forlengFrist(refusjonId!, { nyFrist: norskDatoTilISOString(dato), årsak: valgGrunn });
         setOpen(false);
     };
 

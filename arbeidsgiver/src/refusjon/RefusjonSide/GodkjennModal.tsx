@@ -1,7 +1,7 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
-import LagreOgAvbrytKnapp from '../../komponenter/LagreOgAvbrytKnapp';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Modal, Heading } from '@navikt/ds-react';
+import LagreOgAvbrytKnapp from '~/knapp/LagreOgAvbrytKnapp';
 
 type Props = {
     isOpen: boolean;

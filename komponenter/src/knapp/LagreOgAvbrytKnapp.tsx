@@ -4,10 +4,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Nettressurs, Status } from '~/nettressurs';
 import { handterFeil } from '~/utils/apiFeilUtils';
 
-type Props = {
-    lagreFunksjon: () => Promise<void>;
-    avbryt: () => void;
-} & HTMLAttributes<HTMLDivElement>;
+type Props = { lagreFunksjon: () => Promise<void>; avbryt: () => void } & HTMLAttributes<HTMLDivElement>;
 
 const LagreOgAvbrytKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
     const [oppslag, setOppslag] = useState<Nettressurs<void>>({ status: Status.IkkeLastet });
@@ -23,17 +20,14 @@ const LagreOgAvbrytKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
             setOppslag({ status: Status.LasterInn });
             await lagreFunksjon();
             setOppslag({ status: Status.Sendt });
-        } catch (error) {
+        } catch (error: unknown) {
             if (error instanceof Error) {
                 handterFeil(error, (melding) => {
                     setOppslag({ status: Status.Feil, error: melding });
                     setFeilmelding(melding);
                 });
             } else {
-                const feilmelding =
-                    !!error && typeof error === 'object' && 'feilmelding' in error
-                        ? (error.feilmelding as string)
-                        : 'Uventet feil';
+                const feilmelding = error as string;
                 setOppslag({ status: Status.Feil, error: feilmelding });
                 setFeilmelding(feilmelding);
             }
