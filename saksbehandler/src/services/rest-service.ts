@@ -1,11 +1,11 @@
 import axios from 'axios';
-import useSWR, { mutate } from 'swr';
+import useSWR, { mutate, SWRConfiguration } from 'swr';
 import { InnloggetBruker } from '~/types/brukerContextType';
 import { Feature } from '../featureToggles/features';
 import { Filter } from '~/types/filter';
 import { Beregning, Hendelse, Korreksjon, Korreksjonsgrunn, PageableRefusjon, Refusjon } from '~/types/refusjon';
 import { useFilter } from '@/refusjon/oversikt/FilterContext';
-import { ApiError, FeilkodeError } from '~/types/errors';
+import { ApiError, FeilkodeError, IkkeFunnetError, IkkeTilgangError } from '~/types/errors';
 import { Aktsomhet } from '~/types';
 
 const api = axios.create({
@@ -31,9 +31,16 @@ api.interceptors.response.use(
         if (error.response?.status === 400 && error.response?.headers.feilkode) {
             throw new FeilkodeError(error.response?.headers.feilkode);
         }
-        if (error.response?.status === 401 || error.response?.status === 403) {
+        if (error.response?.status === 401) {
             // Uinnlogget - vil ikke skje i miljø da appen er beskyttet
             return Promise.reject(error);
+        }
+        if (error.response?.status === 403) {
+            const feilmelding = error.response?.headers.feilkode || 'Bruker har ikke tilgang til ressursen.';
+            throw new IkkeTilgangError(feilmelding);
+        }
+        if (error.response?.status === 404) {
+            throw new IkkeFunnetError('Fant ikke ressursen.');
         }
         throw new ApiError('Feil ved kontakt mot baksystem.');
     }
@@ -44,13 +51,16 @@ export const hentInnloggetBruker = async () => {
     return response.data;
 };
 
-export const useHentRefusjoner = (filter: Filter) => {
+export const useHentRefusjoner = (filter: Filter, config: Partial<SWRConfiguration> = {}) => {
     const { sjekkForOnsketRefusjonAktør } = useFilter();
     const manglerSøkekriterier = !Object.entries(filter).filter(([key, value]) =>
         sjekkForOnsketRefusjonAktør(key, value)
     ).length;
     const urlSearchParams = new URLSearchParams(removeEmpty(filter));
-    const { data } = useSWR<PageableRefusjon>(manglerSøkekriterier ? null : `/refusjon?${urlSearchParams}`, swrConfig);
+    const { data } = useSWR<PageableRefusjon>(manglerSøkekriterier ? null : `/refusjon?${urlSearchParams}`, {
+        ...swrConfig,
+        ...config,
+    });
     return data;
 };
 

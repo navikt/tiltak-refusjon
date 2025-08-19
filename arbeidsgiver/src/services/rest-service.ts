@@ -1,14 +1,21 @@
 import axios, { AxiosResponse } from 'axios';
 import useSWR, { SWRConfiguration, mutate } from 'swr';
 
-import { Aktsomhet, Filter, Korreksjon, PageableRefusjon, Refusjon } from '~/types';
+import {
+    Aktsomhet,
+    ApiError,
+    AutentiseringError,
+    FeilkodeError,
+    Filter,
+    IkkeFunnetError,
+    IkkeTilgangError,
+    Korreksjon,
+    PageableRefusjon,
+    Refusjon,
+} from '~/types';
 
 import { BrukerContextType, InnloggetBruker } from '@/bruker/BrukerContextType';
 import { BedriftvalgType } from '@/bruker/bedriftsmenyRefusjon/api/api';
-
-export class FeilkodeError extends Error {}
-export class ApiError extends Error {}
-export class AutentiseringError extends ApiError {}
 
 const api = axios.create({
     baseURL: '/api/arbeidsgiver',
@@ -30,11 +37,18 @@ const swrConfig: SWRConfiguration = {
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (error.response?.status === 401 || error.response?.status === 403) {
+        if (error.response?.status === 401) {
             throw new AutentiseringError('Er ikke logget inn.');
         }
         if (error.response?.status === 400 && error.response?.headers.feilkode) {
             throw new FeilkodeError(error.response?.headers.feilkode);
+        }
+        if (error.response?.status === 403) {
+            const feilmelding = error.response?.headers.feilkode || 'Bruker har ikke tilgang til ressursen.';
+            throw new IkkeTilgangError(feilmelding);
+        }
+        if (error.response?.status === 404) {
+            throw new IkkeFunnetError('Fant ikke ressursen.');
         }
         throw new ApiError('Feil ved kontakt mot baksystem.');
     }

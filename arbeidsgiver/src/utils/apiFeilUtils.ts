@@ -1,5 +1,5 @@
-import { Feilkode, Feilmeldinger } from '../feilkodemapping';
-import { ApiError, FeilkodeError } from '../services/rest-service';
+import { Feilkode, Feilmeldinger } from '~/feilkodemapping';
+import { ApiError, FeilkodeError } from '~/types';
 
 export const handterFeil = (
     error: Error,
