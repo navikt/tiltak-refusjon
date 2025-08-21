@@ -21,7 +21,7 @@ export const basename = '/';
 export enum Path {
     LANDINGSSIDE = '/',
     REFUSJON_OVERSIKT = '/refusjon',
-    REFUSJON = '/refusjon/:refusjonId',
+    REFUSJON = '/refusjon/:refusjonId/*',
 }
 
 const router = createBrowserRouter(
