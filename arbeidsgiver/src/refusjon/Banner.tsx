@@ -1,6 +1,6 @@
 import { History } from 'history';
-import React, { FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
-import { useLocation, useNavigate, Location } from 'react-router';
+import { FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
+import { Location, useLocation, useNavigate } from 'react-router';
 import BedriftsmenyRefusjon from '../bruker/bedriftsmenyRefusjon/BedriftsmenyRefusjon';
 import { Bedriftvalg, Organisasjon } from '../bruker/bedriftsmenyRefusjon/api/api';
 
@@ -13,7 +13,6 @@ interface Properties {
 const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properties>) => {
     const location = useLocation();
     const [listener, setListener] = useState<(props: { action: string; location: Location }) => void>();
-    const { organisasjoner, valgtBedrift, setValgtBedrift } = props;
 
     useEffect(() => {
         if (listener) {
@@ -34,9 +33,9 @@ const Banner: FunctionComponent<Properties> = (props: PropsWithChildren<Properti
 
     return (
         <BedriftsmenyRefusjon
-            organisasjoner={organisasjoner}
-            valgtBedrift={valgtBedrift}
-            setValgtBedrift={setValgtBedrift}
+            organisasjoner={props.organisasjoner}
+            valgtBedrift={props.valgtBedrift}
+            setValgtBedrift={props.setValgtBedrift}
             history={customHistory as History}
             sendCallbackAlleClick={true}
         />
