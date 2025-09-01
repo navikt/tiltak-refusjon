@@ -8,6 +8,7 @@ import SummeringBoks from '../SummeringBoks';
 import './refusjonInnsending.less';
 import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
+import UtregningMentor from '@/komponenter/UtregningMentor';
 
 interface Properties {
     refusjon: Refusjon;
@@ -34,6 +35,7 @@ const RefusjonInnsending: FunctionComponent<Properties> = ({
     ) {
         return null;
     }
+
     const bekreftOpplysninger = () => {
         setBekrefetKorrekteOpplysninger(!bekrefetKorrekteOpplysninger);
         setIkkeBekreftetFeilmelding('');
@@ -48,18 +50,23 @@ const RefusjonInnsending: FunctionComponent<Properties> = ({
 
     return (
         <div className={cls.className}>
-            <Utregning
-                refusjonsnummer={{
-                    avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                    løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                }}
-                erKorreksjon={false}
-                forrigeRefusjonMinusBeløp={refusjon.refusjonsgrunnlag?.forrigeRefusjonMinusBeløp || 0}
-                beregning={refusjon.refusjonsgrunnlag.beregning}
-                tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
-                sumUtbetaltVarig={refusjon.refusjonsgrunnlag.sumUtbetaltVarig}
-            />
+            {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'MENTOR' ? (
+                <UtregningMentor tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
+            ) : (
+                <Utregning
+                    refusjonsnummer={{
+                        avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
+                        løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
+                    }}
+                    erKorreksjon={false}
+                    forrigeRefusjonMinusBeløp={refusjon.refusjonsgrunnlag?.forrigeRefusjonMinusBeløp || 0}
+                    beregning={refusjon.refusjonsgrunnlag.beregning}
+                    tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                    inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
+                    sumUtbetaltVarig={refusjon.refusjonsgrunnlag.sumUtbetaltVarig}
+                />
+            )}
+
             <SummeringBoks
                 erForKorreksjon={false}
                 refusjonsgrunnlag={refusjon.refusjonsgrunnlag}

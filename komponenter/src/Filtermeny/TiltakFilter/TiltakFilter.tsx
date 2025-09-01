@@ -26,6 +26,7 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
             label: 'VTA-O',
             description: 'Varig tilrettelagt arbeid i ordinær virksomhet',
         },
+        { value: Tiltak.MENTOR, label: 'Mentor' },
     ];
 
     return (

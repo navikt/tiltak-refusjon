@@ -16,6 +16,7 @@ import RefusjonInnsending from './refusjonInnsending/RefusjonInnsending';
 import TidligereRefunderbarBeløp from './TidligereRefunderbarBeløp';
 
 import './RefusjonSide.less';
+import UtregningMentor from '@/komponenter/UtregningMentor';
 
 interface Props {
     refusjon: Refusjon;
@@ -48,15 +49,25 @@ const RefusjonSide = (props: Props) => {
             <Boks variant="hvit">
                 <RefusjonIngress refusjon={refusjon} />
                 <InformasjonFraAvtalen refusjon={refusjon} aktsomhet={aktsomhet} onFeil={setFeilmelding} />
-                <InntekterFraAMeldingen refusjon={refusjon} kvitteringVisning={false} />
-                <RefusjonFullførNullbeløp />
-                <InntekterFraTiltaketSpørsmål setVisRefusjonInnsending={setVisRefusjonInnsending} />
-                <TidligereRefunderbarBeløp refusjon={refusjon} />
+                {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'MENTOR' && (
+                    <>
+                        <InntekterFraAMeldingen refusjon={refusjon} kvitteringVisning={false} />
+                        <RefusjonFullførNullbeløp />
+                        <InntekterFraTiltaketSpørsmål setVisRefusjonInnsending={setVisRefusjonInnsending} />
+                        <TidligereRefunderbarBeløp refusjon={refusjon} />
+                    </>
+                )}
                 {visRefusjonInnsending && (
                     <RefusjonInnsending
                         refusjon={refusjon}
                         setVisGodkjennModal={setVisGodkjennModal}
                         feilmelding={feilmelding}
+                    />
+                )}
+                {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'MENTOR' && (
+                    <UtregningMentor
+                        beregning={refusjon.refusjonsgrunnlag.beregning}
+                        tilskuddsgrunnlag={props.refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                     />
                 )}
             </Boks>
