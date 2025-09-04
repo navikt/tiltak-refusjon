@@ -1,8 +1,6 @@
 import Bygg from '@/asset/image/bygg.svg?react';
-import Endret from '@/asset/image/endret.svg?react';
 import ErlikTegn from '@/asset/image/erlikTegn.svg?react';
 import MinusTegn from '@/asset/image/minusTegn.svg?react';
-import Pengesekken from '@/asset/image/pengesekkdollar.svg?react';
 import PlussTegn from '@/asset/image/plussTegn.svg?react';
 import Sparegris from '@/asset/image/sparegris.svg?react';
 import Stranden from '@/asset/image/strand.svg?react';
@@ -13,6 +11,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import './Utregning.less';
 import { Beregning, Inntektsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
+import { erNil } from '~/utils/predicates';
 
 interface Props {
     refusjonsnummer?: {
@@ -20,7 +19,6 @@ interface Props {
         løpenummer: number;
     };
     erKorreksjon?: boolean;
-    beregning?: Beregning;
     tilskuddsgrunnlag: Tilskuddsgrunnlag;
     forrigeRefusjonMinusBeløp?: number;
     inntektsgrunnlag?: Inntektsgrunnlag;
@@ -30,27 +28,18 @@ interface Props {
 const UtregningMentor: FunctionComponent<Props> = (props) => {
     const cls = BEMHelper('utregning');
 
-    const { beregning } = props;
-    /*
-    const bruttoLønnsInntekter = props.inntektsgrunnlag?.inntekter.filter(
-        (inntekt) => inntekt.erMedIInntektsgrunnlag && inntekt.erOpptjentIPeriode === true
-    );
-    const ferietrekkInntekter = props.inntektsgrunnlag?.inntekter.filter(
-        (inntekt) => inntekt.beskrivelse === 'trekkILoennForFerie'
-    );
-    */
-    /*
-    const tilUtbetaling = (tykkBunn: boolean) => (
-        <Utregningsrad
-            labelIkon={<BankNoteIcon />}
-            labelTekst={'Refusjonsbeløp til utbetaling'}
-            verdiOperator={<ErlikTegn />}
-            verdi={(beregning?.refusjonsbeløp || 0) ?? 'kan ikke beregne'}
-            ikkePenger={beregning === undefined}
-            border={tykkBunn ? 'TYKK' : 'INGEN'}
-        />
-    );
-    */
+    const { tilskuddsgrunnlag } = props;
+
+    if (erNil(tilskuddsgrunnlag)) return null;
+
+    const lønn = tilskuddsgrunnlag.tilskuddsbeløp;
+    const feriepenger = (tilskuddsgrunnlag.tilskuddsbeløp / 100) * (tilskuddsgrunnlag.feriepengerSats * 100);
+    const tjenestepensjon = (tilskuddsgrunnlag.tilskuddsbeløp / 100) * (tilskuddsgrunnlag.otpSats * 100);
+
+    const arbeidsgiveravgift =
+        (tilskuddsgrunnlag.tilskuddsbeløp / 100) * (tilskuddsgrunnlag.arbeidsgiveravgiftSats * 100);
+
+    const sumUtgifter = lønn + feriepenger + tjenestepensjon + arbeidsgiveravgift;
 
     const antalltimer = (lønn: number) => {
         return lønn / 1000;
@@ -63,73 +52,38 @@ const UtregningMentor: FunctionComponent<Props> = (props) => {
             </Heading>
             <VerticalSpacer rem={1} />
             <Utregningsrad
-                labelTekst={`Bruttolønn i perioden. ${antalltimer(beregning?.lønn || 0)}`}
-                verdi={beregning?.lønn || 0}
+                labelTekst={`Bruttolønn i perioden. ${antalltimer(lønn || 0)}`}
+                verdi={lønn || 0}
             ></Utregningsrad>
-            {beregning && beregning.fratrekkLønnFerie !== 0 && (
-                <Utregningsrad
-                    labelIkon={<Stranden />}
-                    labelTekst="Fratrekk for ferie (hentet fra A-meldingen)"
-                    verdiOperator={beregning.fratrekkLønnFerie < 0 ? <MinusTegn /> : <PlussTegn />}
-                    verdi={
-                        beregning.fratrekkLønnFerie < 0 ? beregning.fratrekkLønnFerie * -1 : beregning.fratrekkLønnFerie
-                    }
-                ></Utregningsrad>
-            )}
             <>
                 <Utregningsrad
                     labelIkon={<Stranden />}
                     labelTekst="Feriepenger"
                     labelSats={props.tilskuddsgrunnlag.feriepengerSats}
-                    verdiOperator={(beregning?.feriepenger || 0) >= 0 ? <PlussTegn /> : <MinusTegn />}
-                    verdi={Math.abs(beregning?.feriepenger || 0)}
+                    verdiOperator={(feriepenger || 0) >= 0 ? <PlussTegn /> : <MinusTegn />}
+                    verdi={Math.abs(feriepenger || 0)}
                 />
                 <Utregningsrad
                     labelIkon={<Sparegris />}
                     labelTekst="Innskudd obligatorisk tjenestepensjon"
                     labelSats={props.tilskuddsgrunnlag.otpSats}
-                    verdiOperator={(beregning?.tjenestepensjon || 0) >= 0 ? <PlussTegn /> : <MinusTegn />}
-                    verdi={Math.abs(beregning?.tjenestepensjon || 0)}
+                    verdiOperator={(tjenestepensjon || 0) >= 0 ? <PlussTegn /> : <MinusTegn />}
+                    verdi={Math.abs(tjenestepensjon || 0)}
                 />
                 <Utregningsrad
                     labelIkon={<Bygg />}
                     labelTekst="Arbeidsgiveravgift"
                     labelSats={props.tilskuddsgrunnlag.arbeidsgiveravgiftSats}
-                    verdiOperator={(beregning?.arbeidsgiveravgift || 0) >= 0 ? <PlussTegn /> : <MinusTegn />}
-                    verdi={Math.abs(beregning?.arbeidsgiveravgift || 0)}
-                    border={beregning && beregning?.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
+                    verdiOperator={(arbeidsgiveravgift || 0) >= 0 ? <PlussTegn /> : <MinusTegn />}
+                    verdi={Math.abs(arbeidsgiveravgift || 0)}
                 />
-                {beregning && beregning?.tidligereRefundertBeløp > 0 ? (
-                    <>
-                        <Utregningsrad
-                            labelIkon={<Pengesekken />}
-                            labelTekst="Sum brutto lønnsutgifter"
-                            verdiOperator={<ErlikTegn />}
-                            verdi={beregning?.sumUtgifter || 0}
-                        />
-                        <Utregningsrad
-                            labelIkon={<Endret />}
-                            labelTekst="Refunderbar lønn"
-                            verdiOperator={<MinusTegn />}
-                            verdi={beregning?.tidligereRefundertBeløp}
-                        />
-                        <Utregningsrad
-                            className={cls.element('grå-utregningsrad')}
-                            labelTekst="Refusjonsgrunnlag"
-                            verdiOperator={<ErlikTegn />}
-                            verdi={beregning?.sumUtgifterFratrukketRefundertBeløp}
-                            border="TYKK"
-                        />
-                    </>
-                ) : (
-                    <Utregningsrad
-                        className={cls.element('grå-utregningsrad')}
-                        labelTekst="Refusjonsgrunnlag"
-                        verdiOperator={<ErlikTegn />}
-                        verdi={beregning?.sumUtgifter || 0}
-                        border="TYKK"
-                    />
-                )}
+                <Utregningsrad
+                    className={cls.element('grå-utregningsrad')}
+                    labelTekst="Refusjonsgrunnlag"
+                    verdiOperator={<ErlikTegn />}
+                    verdi={sumUtgifter || 0}
+                    border="TYKK"
+                />
             </>
         </div>
     );

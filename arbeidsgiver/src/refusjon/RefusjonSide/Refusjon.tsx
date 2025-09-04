@@ -21,6 +21,7 @@ import { BrukerContextType } from '~/types/brukerContextType';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
+import KvitteringSideMentorArbeidsgiver from '../KvitteringSide/KvitteringSideMentorArbeidsgiver';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -99,14 +100,23 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.GODKJENT_NULLBELØP:
         case RefusjonStatus.UTBETALT:
         case RefusjonStatus.UTBETALING_FEILET:
-            return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAOArbeidsgiver
-                    aktsomhet={aktsomhet}
-                    innloggetBruker={brukerContext.innloggetBruker}
-                    refusjon={refusjon}
-                />
-            ) : (
-                <KvitteringSide aktsomhet={aktsomhet} refusjon={refusjon} />
+            return (
+                <>
+                    {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'MENTOR' && (
+                        <KvitteringSideMentorArbeidsgiver aktsomhet={aktsomhet} refusjon={refusjon} />
+                    )}
+                    {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' && (
+                        <KvitteringSideVTAOArbeidsgiver
+                            aktsomhet={aktsomhet}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                            refusjon={refusjon}
+                        />
+                    )}
+                    {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'VTAO' &&
+                        refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'MENTOR' && (
+                            <KvitteringSide aktsomhet={aktsomhet} refusjon={refusjon} />
+                        )}
+                </>
             );
         case RefusjonStatus.KORRIGERT: {
             return <Korreksjonskvittering aktsomhet={aktsomhet} refusjon={refusjon} />;

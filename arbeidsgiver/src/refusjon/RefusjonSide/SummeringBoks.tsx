@@ -22,6 +22,8 @@ const erSisteTilskuddsperiodeIAvtalen = (tilskuddsgrunnlag: Tilskuddsgrunnlag) =
     tilskuddsgrunnlag.avtaleTom === tilskuddsgrunnlag.tilskuddTom;
 
 const SummeringBoks: FunctionComponent<Props> = (props) => {
+    const tilskuddsgrunnlag = props.refusjonsgrunnlag.tilskuddsgrunnlag;
+
     if (props.refusjonsgrunnlag.beregning?.refusjonsbeløp === undefined) {
         return null;
     }
