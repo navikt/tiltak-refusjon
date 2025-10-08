@@ -1,11 +1,11 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { Bedriftvalg, Feilstatus, StatusFeilBedriftmeny } from '../../bruker/bedriftsmenyRefusjon/api/api';
 
-import './refusjonFeilet.less';
-import RefusjonFeiletManglerUnderEnhet from './RefusjonFeiletManglerUnderEnhet';
 import { BodyShort, Heading } from '@navikt/ds-react';
 import Boks from '~/Boks';
 import BEMHelper from '~/utils/bem';
+import './refusjonFeilet.less';
+import RefusjonFeiletManglerUnderEnhet from './RefusjonFeiletManglerUnderEnhet';
 
 interface Props {
     bedriftvalg: Bedriftvalg;
@@ -23,16 +23,12 @@ const RefusjonFeilet: FunctionComponent<Props> = ({
                 For å få tilgang til refusjoner for din virksomhet må du ha en av disse Altinn-roller:
             </BodyShort>
             <ul className={cls.element('liste')}>
-                <li>ansvarlig revisor</li>
                 <li>lønn og personalmedarbeider</li>
                 <li>regnskapsfører lønn</li>
                 <li>regnskapsfører med signeringsrettighet</li>
-                <li>regnskapsfører uten signeringsrettighet</li>
-                <li>revisormedarbeider</li>
-                <li>norsk representant for utenlandsk enhet</li>
             </ul>
             <BodyShort size="small">
-                Du kan også ha rettigheten <b>inntektsmelding</b>.
+                Du kan også ha enkeltrettigheten <b>tiltaksrefusjon</b>.
             </BodyShort>
         </>
     );
