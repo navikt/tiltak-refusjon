@@ -3,12 +3,10 @@ import { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useStat
 import LagreKnapp from '../../../komponenter/LagreKnapp';
 import Utregning from '../../../komponenter/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
-
 import SummeringBoks from '../SummeringBoks';
 import './refusjonInnsending.less';
 import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
-import UtregningMentor from '@/komponenter/UtregningMentor';
 
 interface Properties {
     refusjon: Refusjon;

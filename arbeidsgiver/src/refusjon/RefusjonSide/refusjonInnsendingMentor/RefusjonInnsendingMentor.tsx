@@ -1,10 +1,7 @@
 import { Alert, ConfirmationPanel } from '@navikt/ds-react';
 import { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useState } from 'react';
 import LagreKnapp from '../../../komponenter/LagreKnapp';
-import Utregning from '../../../komponenter/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
-
-import SummeringBoks from '../SummeringBoks';
 import './refusjonInnsendingMentor.less';
 import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
@@ -46,9 +43,7 @@ const RefusjonInnsending: FunctionComponent<Properties> = ({
                 refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
                 status={refusjon.status}
             />
-
             <VerticalSpacer rem={1} />
-
             <ConfirmationPanel
                 className={cls.element('panel')}
                 onChange={() => bekreftOpplysninger()}
@@ -59,14 +54,12 @@ const RefusjonInnsending: FunctionComponent<Properties> = ({
                 NAV og Riksrevisjonen kan iverksette kontroll (for eksempel stikkprøvekontroll) med at midlene nyttes
                 etter forutsetningene, jfr. Bevilgningsreglementet av 26.05.2005 § 10, 2. ledd
             </ConfirmationPanel>
-
             {feilmelding && (
                 <>
                     <Alert variant="error">{feilmelding}</Alert>
                     <VerticalSpacer rem={1} />
                 </>
             )}
-
             <LagreKnapp
                 variant="primary"
                 lagreFunksjon={async () => {

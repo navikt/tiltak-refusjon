@@ -2,9 +2,7 @@ import Pengesedler from '@/asset/image/pengesedler.svg?react';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
-
 import { formatterPenger } from '~/utils/PengeUtils';
-
 import Boks from '~/Boks';
 import { Refusjonsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
@@ -22,8 +20,6 @@ const erSisteTilskuddsperiodeIAvtalen = (tilskuddsgrunnlag: Tilskuddsgrunnlag) =
     tilskuddsgrunnlag.avtaleTom === tilskuddsgrunnlag.tilskuddTom;
 
 const SummeringBoks: FunctionComponent<Props> = (props) => {
-    const tilskuddsgrunnlag = props.refusjonsgrunnlag.tilskuddsgrunnlag;
-
     if (props.refusjonsgrunnlag.beregning?.refusjonsbeløp === undefined) {
         return null;
     }

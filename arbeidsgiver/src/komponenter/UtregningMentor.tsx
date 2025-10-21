@@ -9,7 +9,7 @@ import { FunctionComponent } from 'react';
 import Utregningsrad from './Utregningsrad';
 import VerticalSpacer from '~/VerticalSpacer';
 import './Utregning.less';
-import { Beregning, Inntektsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
+import { Inntektsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import { erNil } from '~/utils/predicates';
 

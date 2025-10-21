@@ -1,18 +1,11 @@
 import { Heading, Tag } from '@navikt/ds-react';
 import { ReactElement } from 'react';
-
 import Boks from '~/Boks';
 import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
-import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
-import InntekterFraAMeldingenGammel from '@/refusjon/RefusjonSide/InntekterFraAMeldingenGammel';
-import InntekterFraTiltaketSvar from '@/refusjon/RefusjonSide/InntekterFraTiltaketSvar';
-import InntekterFraTiltaketSvarGammel from '@/refusjon/RefusjonSide/InntekterFraTiltaketSvarGammel';
 import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
 import Statusmelding from '~/KvitteringSide/Statusmelding';
 import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
 import SummeringBoksNullbeløp from '@/refusjon/RefusjonSide/SummeringsBoksNullbeløp';
-import TidligereRefunderbarBeløpKvittering from '@/refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
-import Utregning from '@/komponenter/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, statusTekst, tiltakstypeTekst, RefusjonStatus, Refusjon } from '~/types';
 import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
