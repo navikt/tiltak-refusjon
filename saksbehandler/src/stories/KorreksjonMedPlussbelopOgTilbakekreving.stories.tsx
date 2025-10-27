@@ -1,6 +1,6 @@
 import KorreksjonKvitteringSide from '@/KorreksjonKvitteringSide/KorreksjonKvitteringSide';
 
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import { Korreksjon, Korreksjonsgrunn } from '~/types/refusjon';
 import { KorreksjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
