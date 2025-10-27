@@ -1,0 +1,38 @@
+.utregning {
+    border: 4px solid #eee;
+    border-radius: 4px;
+    padding: 1.5rem;
+
+    &__inntekter {
+        background-color: #eee;
+        border-radius: 4px;
+        padding: 1.5rem;
+        display: grid;
+        grid-template-columns: auto 4rem 10.5rem 5rem 5rem;
+        column-gap: 1rem;
+        row-gap: 0.75rem;
+    }
+
+    &__korreksjons-oppsummering {
+        background-color: #f7f7f7;
+        border: 2px solid #eee;
+    }
+
+    &__grå-utregningsrad {
+        background-color: #f7f7f7;
+    }
+
+    table {
+        td {
+            padding: 1.2rem;
+        }
+
+        tbody {
+            tr {
+                &:last-child {
+                    border-bottom: 2px solid white;
+                }
+            }
+        }
+    }
+}

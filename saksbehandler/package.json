@@ -61,7 +61,6 @@
         "vite": "^6.3.3",
         "vite-plugin-svgr": "^4.3.0",
         "vitest": "^3.1.2",
-        "eslint-plugin-storybook": "9.1.15",
         "@storybook/addon-docs": "^9.1.15"
     },
     "optionalDependencies": {

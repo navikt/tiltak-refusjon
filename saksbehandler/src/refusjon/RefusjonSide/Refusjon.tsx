@@ -8,6 +8,7 @@ import HendelsesLogg from '@/refusjon/Hendelseslogg/Hendelseslogg';
 import HenterInntekterBoks from '~/HenterInntekterBoks';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
+import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
 import MerkForUnntakOmInntekterToMånederFrem from '@/refusjon/MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
 import TilbakeTilOversikt from '@/komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '~/VerticalSpacer';
@@ -81,6 +82,21 @@ const Komponent: FunctionComponent = () => {
                         </div>
                         <VerticalSpacer rem={1} />
                         <KvitteringSideVTAO
+                            aktsomhet={aktsomhet}
+                            refusjon={refusjon}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                        />
+                    </>
+                );
+            }
+            if (refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype == 'MENTOR') {
+                return (
+                    <>
+                        <div className={styles.fleks}>
+                            <HendelsesLogg refusjonId={refusjonId} />
+                        </div>
+                        <VerticalSpacer rem={1} />
+                        <KvitteringSideMentor
                             aktsomhet={aktsomhet}
                             refusjon={refusjon}
                             innloggetBruker={brukerContext.innloggetBruker}
