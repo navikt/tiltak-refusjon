@@ -11,7 +11,8 @@ import InntektsmeldingTabellHeader from './inntektsmeldingTabell/Inntektsmelding
 import IngenInntekter from './inntektsmeldingVarsel/IngenInntekter';
 import IngenRefunderbareInntekter from './inntektsmeldingVarsel/IngenRefunderbareInntekter';
 import Boks from '~/Boks';
-import { groupBy, sortBy } from 'lodash';
+import groupBy from 'lodash.groupby';
+import sortBy from 'lodash.sortby';
 import { lønnsbeskrivelseTekst } from '~/types/messages';
 import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';

@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash';
+import sortBy from 'lodash.sortby';
 import { FunctionComponent } from 'react';
 import { formatterPenger } from '~/utils/PengeUtils';
 
