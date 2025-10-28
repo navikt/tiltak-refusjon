@@ -1,5 +1,4 @@
-import sumBy from 'lodash.sumby';
-import sortBy from 'lodash.sortby';
+import { sortBy, sumBy } from 'lodash';
 import { Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 

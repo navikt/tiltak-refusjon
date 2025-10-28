@@ -1,5 +1,5 @@
 // DENNE KOMPONENTEN SKAL KUN BRUKES TIL VISNING AV KVITTERINGER PÅ REFUSJONER SOM ER SENDT INN FØR SPØRSMÅL OM INNTEKTSLINJE ER OPPTJENT I PERIODEN
-import sortBy from 'lodash.sortby';
+import { sortBy } from 'lodash';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
 
