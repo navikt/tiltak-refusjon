@@ -1,7 +1,7 @@
 import React, { FunctionComponent, Suspense } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useNavigate, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import ForlengFrist from '@/refusjon/ForlengFrist/ForlengFrist';
 import HendelsesLogg from '@/refusjon/Hendelseslogg/Hendelseslogg';

@@ -1,6 +1,6 @@
 import { Alert, Switch, TextField } from '@navikt/ds-react';
 import { ChangeEvent, FunctionComponent, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { useFeatureToggles } from '../featureToggles/FeatureToggleProvider';
 import { Feature } from '../featureToggles/features';
 import VerticalSpacer from '~/VerticalSpacer';

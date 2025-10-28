@@ -1,6 +1,6 @@
 import { BodyShort, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import StatusTekst from '~/StatusTekst';
 import BEMHelper from '~/utils/bem';
 import { formatterDato, formatterPeriode } from '~/utils';

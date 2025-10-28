@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import { godkjennRefusjonMedNullbeløp, useHentRefusjon } from '../../../services/rest-service';
 
 import LagreKnapp from '../../../komponenter/LagreKnapp';

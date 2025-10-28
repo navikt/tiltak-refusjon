@@ -1,10 +1,10 @@
 import BEMHelper from '~/utils/bem';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { LinkPanel, BodyShort } from '@navikt/ds-react';
 import { BegrensetRefusjon } from '~/types/refusjon';
 import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
 import StatusTekst from '~/StatusTekst/StatusTekst';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 interface Props {
     refusjoner: BegrensetRefusjon[];
 }

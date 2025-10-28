@@ -1,6 +1,5 @@
-import React from 'react';
 import { BodyShort, Box, Heading, List, Page, VStack, Button } from '@navikt/ds-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import Boks from '~/Boks';
 import { Feilkode, Feilmeldinger } from '~/feilkodemapping';

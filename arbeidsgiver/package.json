@@ -37,11 +37,12 @@
         "react-dom": "^18.3.0",
         "react-modal": "^3.16.1",
         "react-responsive": "^10.0.1",
-        "react-router-dom": "^7.5.3",
+        "react-router": "^7.9.4",
         "swr": "^2.2.0"
     },
     "devDependencies": {
         "@sentry/cli": "^2.43.1",
+        "@storybook/addon-docs": "^9.1.15",
         "@storybook/addon-links": "^9.1.15",
         "@storybook/addon-onboarding": "^9.1.15",
         "@storybook/react-vite": "^9.1.15",
@@ -67,9 +68,7 @@
         "typescript": "^5.8.3",
         "vite": "^6.3.3",
         "vite-plugin-svgr": "^4.3.0",
-        "vitest": "^3.1.2",
-        "eslint-plugin-storybook": "9.1.15",
-        "@storybook/addon-docs": "^9.1.15"
+        "vitest": "^3.1.2"
     },
     "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "^4.40.0"

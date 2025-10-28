@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { BodyShort, Box, Button, Heading, List, Page, VStack } from '@navikt/ds-react';
 
 import Boks from '~/Boks';
