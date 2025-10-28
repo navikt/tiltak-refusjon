@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Utregning from '@/refusjon/RefusjonSide/Utregning';
 import { Tiltak } from '~/types/tiltak';

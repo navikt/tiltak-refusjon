@@ -1,6 +1,6 @@
 import { InnloggetBruker } from '~/types/brukerContextType';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';

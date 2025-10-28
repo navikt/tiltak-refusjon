@@ -1,6 +1,6 @@
 import KvitteringKorreksjon from '@/refusjon/KvitteringKorreksjon/KvitteringKorreksjon';
 
-import { Meta, StoryObj } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react';
 import { Diskresjonskode } from '~/types';
 import { Korreksjon, Korreksjonsgrunn, Refusjon } from '~/types/refusjon';
 import { KorreksjonStatus, RefusjonStatus } from '~/types/status';
