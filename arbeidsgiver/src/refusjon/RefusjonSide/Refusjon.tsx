@@ -5,7 +5,7 @@ import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import FeilSide from './FeilSide';
 import RefusjonSide from './RefusjonSide';
 import { BodyShort } from '@navikt/ds-react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import {
     oppdaterRefusjonFetcher,
     useHentKorreksjon,

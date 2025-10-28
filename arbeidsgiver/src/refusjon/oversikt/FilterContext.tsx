@@ -1,6 +1,6 @@
 import React, { FunctionComponent, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { registrerMenyValg } from '../../utils/amplitude-utils';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 import { LogReturn } from 'amplitude-js';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';

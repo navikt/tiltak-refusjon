@@ -1,5 +1,4 @@
-import React from 'react';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router';
 import { CookiesProvider } from 'react-cookie';
 
 import router from '@/router';

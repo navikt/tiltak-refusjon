@@ -1,5 +1,5 @@
 import { History } from 'history';
-import React, { FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
+import { FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
 import { useLocation, useNavigate, Location } from 'react-router';
 import BedriftsmenyRefusjon from '../bruker/bedriftsmenyRefusjon/BedriftsmenyRefusjon';
 import { Bedriftvalg, Organisasjon } from '../bruker/bedriftsmenyRefusjon/api/api';

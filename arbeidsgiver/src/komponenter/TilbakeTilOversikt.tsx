@@ -1,6 +1,6 @@
 import { ChevronLeftIcon } from '@navikt/aksel-icons';
-import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { FunctionComponent } from 'react';
+import { Link } from 'react-router';
 
 const TilbakeTilOversikt: FunctionComponent = () => {
     return (

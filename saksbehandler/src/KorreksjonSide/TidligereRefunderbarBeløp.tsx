@@ -4,7 +4,7 @@ import { Alert, Radio, RadioGroup, TextField, Heading, Label, BodyShort } from '
 import VerticalSpacer from '~/VerticalSpacer';
 
 import { settTidligereRefunderbarBeløp } from '../services/rest-service';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import sumBy from 'lodash.sumby';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';

@@ -1,7 +1,7 @@
 import '@navikt/bedriftsmeny/lib/bedriftsmeny.css';
 
-import React, { useEffect } from 'react';
-import { RouterProvider } from 'react-router-dom';
+import { useEffect } from 'react';
+import { RouterProvider } from 'react-router';
 import { registrereBesok } from './utils/amplitude-utils';
 
 import router from '@/router';

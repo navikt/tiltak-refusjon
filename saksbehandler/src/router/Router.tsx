@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { createBrowserRouter, Outlet } from 'react-router';
 
 import AdvarselBannerTestversjon from '@/AdvarselBannerTestversjon/AdvarselBannerTestversjon';
 import ErrorBoundary from '@/ErrorBoundary';

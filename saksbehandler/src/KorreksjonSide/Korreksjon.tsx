@@ -1,7 +1,7 @@
 import React, { FunctionComponent, Suspense } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import KorreksjonKvitteringSide from '@/KorreksjonKvitteringSide/KorreksjonKvitteringSide';
 import KorreksjonKvitteringSideVTAO from '@/KorreksjonKvitteringSideVTAO/KorreksjonKvitteringSideVTAO';

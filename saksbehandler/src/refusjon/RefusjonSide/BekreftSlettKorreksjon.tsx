@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import BekreftelseModal from '~/BekreftelseModal';
 import { slettKorreksjonsutkast, useHentKorreksjon } from '../../services/rest-service';
 import { BodyShort, Button } from '@navikt/ds-react';
