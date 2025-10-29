@@ -9,6 +9,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Refusjonsgrunnlag, RefusjonStatus } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
 import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { visTallMedNorskFormatering } from '~/utils/PengeUtils';
 import { lagId } from '~/utils/stringUtils';
 
 interface Props {
@@ -43,6 +44,8 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
         resendingsnummer,
         tilskuddFom,
         tilskuddTom,
+        mentorAntallTimer,
+        mentorTimelonn,
     } = tilskuddsgrunnlag;
 
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${avtaleId}`;
@@ -68,7 +71,6 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
                 <Label>Bedriftens navn: </Label>
                 <BodyShort size="small">{bedriftNavn}</BodyShort>
             </IkonRad>
-            <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Arbeidsgivers navn: </Label>
                 <BodyShort size="small">{`${arbeidsgiverFornavn} ${arbeidsgiverEtternavn}`}</BodyShort>{' '}
@@ -82,7 +84,6 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
                     {deltakerFornavn} {deltakerEtternavn}
                 </BodyShort>
             </IkonRad>
-            <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Periode: </Label>
                 <BodyShort size="small">{formatterPeriode(tilskuddFom, tilskuddTom)}</BodyShort>
@@ -90,14 +91,12 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Avtalt antall timer med mentor i perioden: </Label>
-                <BodyShort size="small">10</BodyShort>
+                <BodyShort size="small">{visTallMedNorskFormatering(mentorAntallTimer || 0)}</BodyShort>
             </IkonRad>
-            <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Avtalt beløp for perioden: </Label>
-                <BodyShort size="small">1000</BodyShort>
+                <BodyShort size="small">{mentorTimelonn}</BodyShort>
             </IkonRad>
-            <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Kontonummer:</Label>
                 {bedriftKontonummer === null && erArbeidsgiver && <Loader type="L" />}
@@ -119,7 +118,6 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
                     </div>
                 )}
             </IkonRad>
-            <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>KID:</Label>
                 {erArbeidsgiver && ['KLAR_FOR_INNSENDING', 'FOR_TIDLIG'].includes(refusjonStatus) ? (

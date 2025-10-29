@@ -9,8 +9,8 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, tiltakstypeTekst } from '~/types';
 import { Refusjon } from '~/types/refusjon';
 import { formatterDato, formatterPeriode } from '~/utils';
-import { formatterPenger } from '~/utils/PengeUtils';
-import React, { useCallback } from 'react';
+import { formatterPenger, visTallMedNorskFormatering } from '~/utils/PengeUtils';
+import { useCallback } from 'react';
 import { lagreBedriftKID } from '@/services/rest-service';
 
 interface Props {
@@ -49,6 +49,10 @@ const InformasjonFraAvtalen = (props: Props) => {
                 <BodyShort size="small">{refusjonsnummer}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
+            <IkonRad>
+                <Label>Bedriftens navn: </Label>
+                <BodyShort size="small">{refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.bedriftNavn}</BodyShort>
+            </IkonRad>
             {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.arbeidsgiverFornavn && (
                 <>
                     <IkonRad>
@@ -65,10 +69,6 @@ const InformasjonFraAvtalen = (props: Props) => {
                     <VerticalSpacer rem={1} />
                 </>
             )}
-            <IkonRad>
-                <Label>Bedriftens navn: </Label>
-                <BodyShort size="small">{refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.bedriftNavn}</BodyShort>
-            </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Deltaker: </Label>
@@ -77,7 +77,7 @@ const InformasjonFraAvtalen = (props: Props) => {
                     {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
                 </BodyShort>
             </IkonRad>
-            <VerticalSpacer rem={1} />
+            <VerticalSpacer rem={0.5} />
             <IkonRad>
                 <Label>Periode: </Label>
                 <BodyShort size="small">
@@ -88,17 +88,31 @@ const InformasjonFraAvtalen = (props: Props) => {
                 </BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
-            <IkonRad>
-                <Label>Frist: </Label>
-                <BodyShort size="small">{formatterDato(refusjon.fristForGodkjenning)}</BodyShort>
-            </IkonRad>
+            {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'MENTOR' && (
+                <IkonRad>
+                    <Label>Frist: </Label>
+                    <BodyShort size="small">{formatterDato(refusjon.fristForGodkjenning)}</BodyShort>
+                </IkonRad>
+            )}
             <VerticalSpacer rem={1} />
+            {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'MENTOR' && (
+                <IkonRad>
+                    <Label>Avtalt antall timer med mentor i perioden:</Label>
+                    <BodyShort size="small">
+                        {visTallMedNorskFormatering(
+                            refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.mentorAntallTimer || 0
+                        )}
+                    </BodyShort>
+                </IkonRad>
+            )}
+            <VerticalSpacer rem={0.5} />
             <IkonRad>
                 <Label>Avtalt beløp for perioden:</Label>
                 <BodyShort size="small">
-                    Inntil {formatterPenger(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp)}
+                    {formatterPenger(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp)}
                 </BodyShort>
             </IkonRad>
+
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Kontonummer:</Label>

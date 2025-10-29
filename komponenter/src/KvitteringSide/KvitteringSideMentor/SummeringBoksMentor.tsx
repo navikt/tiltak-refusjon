@@ -21,7 +21,7 @@ const SummeringBoksMentor: FunctionComponent<Props> = (props) => {
                 <Label>Dere får utbetalt</Label>
                 <VerticalSpacer rem={0.5} />
                 <BodyShort size="small">
-                    <b>{formatterPenger(25620)}</b> for perioden{' '}
+                    <b>{formatterPenger(props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp)}</b> for perioden{' '}
                     {formatterPeriode(
                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
