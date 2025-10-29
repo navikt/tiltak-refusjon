@@ -16,6 +16,7 @@ import { formatterPenger, visTallMedNorskFormatering } from '~/utils/PengeUtils'
 import Utregningsrad from './Utregningsrad';
 
 import { Beregning, Tilskuddsgrunnlag } from '~/types/refusjon';
+import { erNil } from '~/utils/predicates';
 
 interface Props {
     beregning?: Beregning;
@@ -27,6 +28,10 @@ const UtregningMentor: FunctionComponent<Props> = (props) => {
 
     const { beregning, tilskuddsgrunnlag } = props;
     const { mentorAntallTimer = 0, mentorTimelonn = 0 } = tilskuddsgrunnlag;
+
+    if (erNil(beregning)) {
+        return;
+    }
 
     return (
         <ExpansionCard aria-label="Beregning av tilskudd" open={ekspandert} onToggle={setEkspandert} size="small">

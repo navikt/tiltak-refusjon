@@ -15,7 +15,7 @@ import UtregningMentor from './UtregningMentor';
 import SummeringBoksMentor from './SummeringBoksMentor';
 
 /**
- * For etterregistrerte avtaler av typen VTA-O vil det eksistere refusjoner som er "for tidlig",
+ * For etterregistrerte avtaler av typen MENTOR vil det eksistere refusjoner som er "for tidlig",
  * hvor tilskuddsperioden var langt tilbake i tid, men de har allikevel ikke blitt sendt ut enda.
  * Da vil det se minst rart ut hvis vi sier at de sendes i morgen.
  */
