@@ -21,6 +21,7 @@ import { BrukerContextType } from '~/types/brukerContextType';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
+import KvitteringSideMentorArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideMentorArbeidsgiver';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -28,6 +29,7 @@ const Komponent: FunctionComponent = () => {
     const erLastet = useRef(false);
     const brukerContext: BrukerContextType = useInnloggetBruker();
     const { data: aktsomhet } = useRefusjonKreverAktsomhet(refusjon.id);
+    const tiltakstype = refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype;
 
     const { trigger, isMutating, reset } = useSWRMutation(`/refusjon/${refusjonId}`, oppdaterRefusjonFetcher);
 
@@ -56,7 +58,10 @@ const Komponent: FunctionComponent = () => {
 
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
-            return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
+            if (tiltakstype === 'MENTOR') {
+                return <KvitteringSideMentorArbeidsgiver aktsomhet={aktsomhet} refusjon={refusjon} />;
+            }
+            return tiltakstype === 'VTAO' ? (
                 <KvitteringSideVTAOArbeidsgiver
                     aktsomhet={aktsomhet}
                     innloggetBruker={brukerContext.innloggetBruker}
@@ -99,14 +104,22 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.GODKJENT_NULLBELØP:
         case RefusjonStatus.UTBETALT:
         case RefusjonStatus.UTBETALING_FEILET:
-            return refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAOArbeidsgiver
-                    aktsomhet={aktsomhet}
-                    innloggetBruker={brukerContext.innloggetBruker}
-                    refusjon={refusjon}
-                />
-            ) : (
-                <KvitteringSide aktsomhet={aktsomhet} refusjon={refusjon} />
+            return (
+                <>
+                    {tiltakstype === 'MENTOR' && (
+                        <KvitteringSideMentorArbeidsgiver aktsomhet={aktsomhet} refusjon={refusjon} />
+                    )}
+                    {tiltakstype === 'VTAO' && (
+                        <KvitteringSideVTAOArbeidsgiver
+                            aktsomhet={aktsomhet}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                            refusjon={refusjon}
+                        />
+                    )}
+                    {tiltakstype !== 'VTAO' && tiltakstype !== 'MENTOR' && (
+                        <KvitteringSide aktsomhet={aktsomhet} refusjon={refusjon} />
+                    )}
+                </>
             );
         case RefusjonStatus.KORRIGERT: {
             return <Korreksjonskvittering aktsomhet={aktsomhet} refusjon={refusjon} />;
