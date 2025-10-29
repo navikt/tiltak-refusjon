@@ -99,6 +99,8 @@ export interface Tilskuddsgrunnlag {
     veilederNavIdent: string;
     enhet: string;
     resendingsnummer?: number;
+    mentorAntallTimer?: number;
+    mentorTimelonn?: number;
 }
 
 export interface Inntektsgrunnlag {

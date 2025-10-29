@@ -1,8 +1,7 @@
 import moment from 'moment';
-import { BodyLong, Heading, Tag } from '@navikt/ds-react';
+import { Box, Heading, Tag, VStack } from '@navikt/ds-react';
 import { FunctionComponent, ReactElement } from 'react';
 
-import Boks from '~/Boks/Boks';
 import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
 import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
 import Statusmelding from '~/KvitteringSide/Statusmelding';
@@ -11,10 +10,9 @@ import { Aktsomhet, Korreksjonsgrunn, Refusjon, RefusjonStatus, statusTekst } fr
 import { InnloggetBruker } from '~/types/brukerContextType';
 import { formatterDato, NORSK_DATO_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
-
-import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
-import SummeringBoksVTAO from './SummeringBoksVTAO';
-import TilskuddssatsVTAO from './TilskuddssatsVTAO';
+import InformasjonFraAvtalenMentor from './InformasjonFraAvtaleMentor';
+import UtregningMentor from './UtregningMentor';
+import SummeringBoksMentor from './SummeringBoksMentor';
 
 /**
  * For etterregistrerte avtaler av typen VTA-O vil det eksistere refusjoner som er "for tidlig",
@@ -66,59 +64,61 @@ interface Props {
     settKid?: (kid?: string) => void;
 }
 
-const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
+const KvitteringSideMentor: FunctionComponent<Props> = (props: Props) => {
     const { refusjon, innloggetBruker, opprettKorreksjon, aktsomhet, settKid } = props;
     const innloggetRolle = innloggetBruker?.rolle;
 
     return (
-        <Boks variant="hvit">
-            {innloggetBruker !== undefined &&
-                innloggetBruker.harKorreksjonTilgang &&
-                refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
-                !refusjon.korreksjonId &&
-                opprettKorreksjon !== undefined && (
-                    <>
-                        <OpprettKorreksjon
-                            tiltakType={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
-                            opprettKorreksjon={opprettKorreksjon}
-                        />
-                        <VerticalSpacer rem={1} />
-                    </>
-                )}
+        <VStack gap="space-16">
+            <Box>
+                {innloggetBruker !== undefined &&
+                    innloggetBruker.harKorreksjonTilgang &&
+                    refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
+                    !refusjon.korreksjonId &&
+                    opprettKorreksjon !== undefined && (
+                        <>
+                            <OpprettKorreksjon
+                                tiltakType={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
+                                opprettKorreksjon={opprettKorreksjon}
+                            />
+                            <VerticalSpacer rem={1} />
+                        </>
+                    )}
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Heading level="2" size="large">
-                    Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
-                </Heading>
-                {etikettForRefusjonStatus(refusjon)}
-            </div>
-            <VerticalSpacer rem={1} />
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
-                <Statusmelding status={refusjon.status} vtao={true} sendtTidspunkt={refusjon.godkjentAvArbeidsgiver} />
-                {innloggetBruker !== undefined && innloggetBruker.rolle === 'ARBEIDSGIVER' && (
-                    <LagreSomPdfKnapp avtaleId={refusjon.id} />
-                )}
-            </div>
-            <VerticalSpacer rem={2} />
-            <BodyLong>
-                Dere får et tilskudd fra NAV for varig tilrettelagt arbeid. Satsen settes årlig av departementet og
-                avtale- og refusjonsløsningen vil automatisk oppdateres når det kommer nye satser.
-            </BodyLong>
-            <VerticalSpacer rem={1} />
-            <InformasjonFraAvtalenVTAO
-                aktsomhet={aktsomhet}
-                innloggetRolle={innloggetRolle}
-                refusjonStatus={refusjon.status}
-                refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
-                åpnetFørsteGang={refusjon.åpnetFørsteGang}
-                settKid={settKid}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Heading level="2" size="large">
+                        Refusjon for Mentor
+                    </Heading>
+                    {etikettForRefusjonStatus(refusjon)}
+                </div>
+                <VerticalSpacer rem={1} />
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
+                    <Statusmelding
+                        status={refusjon.status}
+                        vtao={true}
+                        sendtTidspunkt={refusjon.godkjentAvArbeidsgiver}
+                    />
+                    {innloggetBruker !== undefined && innloggetBruker.rolle === 'ARBEIDSGIVER' && (
+                        <LagreSomPdfKnapp avtaleId={refusjon.id} />
+                    )}
+                </div>
+                <VerticalSpacer rem={1} />
+                <InformasjonFraAvtalenMentor
+                    aktsomhet={aktsomhet}
+                    innloggetRolle={innloggetRolle}
+                    refusjonStatus={refusjon.status}
+                    refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
+                    åpnetFørsteGang={refusjon.åpnetFørsteGang}
+                    settKid={settKid}
+                />
+            </Box>
+            <UtregningMentor
+                tilskuddsgrunnlag={props.refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                beregning={props.refusjon.refusjonsgrunnlag.beregning}
             />
-            <VerticalSpacer rem={2} />
-            <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
-            <VerticalSpacer rem={1} />
-            <SummeringBoksVTAO refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
-        </Boks>
+            <SummeringBoksMentor refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
+        </VStack>
     );
 };
 
-export default KvitteringSideVTAO;
+export default KvitteringSideMentor;
