@@ -3,9 +3,9 @@ import SommerIkon from '@/asset/image/sommer.svg?react';
 import { BodyShort, Button, Heading, Label, Link } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 
-import VerticalSpacer from '~/VerticalSpacer';
 import Boks from '~/Boks';
 import EksternLenke from '~/EksternLenke/EksternLenke';
+import VerticalSpacer from '~/VerticalSpacer';
 
 const Landingsside: FunctionComponent = () => {
     const gåTilOversikten = () => {
@@ -64,17 +64,13 @@ const Landingsside: FunctionComponent = () => {
                 </div>
                 <ul>
                     <li>
-                        Dere må ha enkeltrettigheten inntektsmelding eller en av følgende Altinn-roller for å få tilgang
-                        til løsningen:
+                        Dere må ha blitt tildelt enkeltrettigheten tiltaksrefusjon eller en av følgende Altinn-roller
+                        for å få tilgang til løsningen:
                     </li>
                     <div style={{ marginLeft: '2rem' }}>
-                        <li>ansvarlig revisor</li>
                         <li>lønn og personalmedarbeider</li>
                         <li>regnskapsfører lønn</li>
                         <li>regnskapsfører med signeringsrettighet</li>
-                        <li>regnskapsfører uten signeringsrettighet</li>
-                        <li>revisormedarbeider</li>
-                        <li>norsk representant for utenlandsk enhet</li>
                     </div>
                 </ul>
                 <BodyShort size="small">
