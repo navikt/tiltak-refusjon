@@ -9,7 +9,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Refusjonsgrunnlag, RefusjonStatus } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
 import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
-import { visTallMedNorskFormatering } from '~/utils/PengeUtils';
+import { formatterPenger, visTallMedNorskFormatering } from '~/utils/PengeUtils';
 import { lagId } from '~/utils/stringUtils';
 
 interface Props {
@@ -45,7 +45,7 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
         tilskuddFom,
         tilskuddTom,
         mentorAntallTimer,
-        mentorTimelonn,
+        tilskuddsbeløp,
     } = tilskuddsgrunnlag;
 
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${avtaleId}`;
@@ -95,7 +95,7 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
             </IkonRad>
             <IkonRad>
                 <Label>Avtalt beløp for perioden: </Label>
-                <BodyShort size="small">{mentorTimelonn}</BodyShort>
+                <BodyShort size="small">{formatterPenger(tilskuddsbeløp)}</BodyShort>
             </IkonRad>
             <IkonRad>
                 <Label>Kontonummer:</Label>
