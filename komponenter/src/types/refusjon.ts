@@ -1,6 +1,6 @@
+import { Diskresjonskode } from './aktsomhet';
 import { KorreksjonStatus, RefusjonStatus } from './status';
 import { Tiltak } from './tiltak';
-import { Diskresjonskode } from './aktsomhet';
 
 export interface PageableRefusjon {
     currentPage: number;
@@ -99,6 +99,10 @@ export interface Tilskuddsgrunnlag {
     veilederNavIdent: string;
     enhet: string;
     resendingsnummer?: number;
+    mentorAntallTimer?: number;
+    mentorTimelonn?: number;
+    mentorFornavn?: string;
+    mentorEtternavn?: string;
 }
 
 export interface Inntektsgrunnlag {

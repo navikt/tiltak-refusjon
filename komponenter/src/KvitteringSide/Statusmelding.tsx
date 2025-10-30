@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { Alert, BodyShort } from '@navikt/ds-react';
 import { RefusjonStatus } from '~/types/status';
 import { formatterDato, NORSK_DATO_FORMAT } from '~/utils/datoUtils';
@@ -6,9 +6,8 @@ import { formatterDato, NORSK_DATO_FORMAT } from '~/utils/datoUtils';
 const Statusmelding: FunctionComponent<{
     status: RefusjonStatus;
     sendtTidspunkt?: string;
-    sendesDato?: string;
     vtao?: boolean;
-}> = ({ status, sendtTidspunkt, sendesDato, vtao }) => {
+}> = ({ status, sendtTidspunkt, vtao }) => {
     switch (status) {
         case RefusjonStatus.UTBETALING_FEILET:
             return (
@@ -35,7 +34,11 @@ const Statusmelding: FunctionComponent<{
             );
         case RefusjonStatus.FOR_TIDLIG:
             if (vtao) {
-                return <BodyShort size="small">Refusjonskravet vil sendes inn automatisk den {sendesDato}.</BodyShort>;
+                return (
+                    <BodyShort size="small">
+                        Refusjonskravet sendes inn automatisk når gjeldende periode er avsluttet.
+                    </BodyShort>
+                );
             }
             return <BodyShort size="small">Refusjonskravet kan ikke sendes inn enda.</BodyShort>;
         default:
