@@ -1,56 +1,15 @@
-import { Box, Heading, Tag, VStack } from '@navikt/ds-react';
-import { FunctionComponent, ReactElement } from 'react';
+import { Box, Heading, VStack } from '@navikt/ds-react';
+import { FunctionComponent } from 'react';
 
 import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
-import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
 import Statusmelding from '~/KvitteringSide/Statusmelding';
 import VerticalSpacer from '~/VerticalSpacer';
-import { Aktsomhet, Korreksjonsgrunn, Refusjon, RefusjonStatus, statusTekst } from '~/types';
+import { Aktsomhet, Korreksjonsgrunn, Refusjon } from '~/types';
 import { InnloggetBruker } from '~/types/brukerContextType';
-import { formatterDato, NORSK_DATO_FORMAT } from '~/utils';
-import { storForbokstav } from '~/utils/stringUtils';
 import InformasjonFraAvtalenMentor from './InformasjonFraAvtaleMentor';
 import UtregningMentor from './UtregningMentor';
 import SummeringBoksMentor from './SummeringBoksMentor';
-import { addDays, isBefore } from 'date-fns';
-
-/**
- * For etterregistrerte avtaler av typen MENTOR vil det eksistere refusjoner som er "for tidlig",
- * hvor tilskuddsperioden var langt tilbake i tid, men de har allikevel ikke blitt sendt ut enda.
- * Da vil det se minst rart ut hvis vi sier at de sendes i morgen.
- */
-const refusjonSendesDato = (refusjon: Refusjon): string => {
-    const enDagEtterTilskuddsperioden = addDays(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom, 1);
-    const morgendagensDato = addDays(new Date(), 1);
-    const tidligsteDato = isBefore(enDagEtterTilskuddsperioden, morgendagensDato)
-        ? morgendagensDato
-        : enDagEtterTilskuddsperioden;
-    return formatterDato(tidligsteDato.toString());
-};
-
-export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
-    const statusetikettTekst =
-        refusjon.status === RefusjonStatus.FOR_TIDLIG
-            ? `sendes ${refusjonSendesDato(refusjon)}`
-            : statusTekst[refusjon.status];
-    if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
-        return <Tag variant="error">{storForbokstav(statusetikettTekst)} </Tag>;
-    } else if (refusjon.status === RefusjonStatus.UTBETALT) {
-        return (
-            <Tag variant="info">
-                {storForbokstav(statusetikettTekst)}{' '}
-                {refusjon.utbetaltTidspunkt && formatterDato(refusjon.utbetaltTidspunkt, NORSK_DATO_FORMAT)}
-            </Tag>
-        );
-    } else {
-        return (
-            <Tag variant="info">
-                {storForbokstav(statusetikettTekst)}{' '}
-                {refusjon.godkjentAvArbeidsgiver && formatterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_FORMAT)}
-            </Tag>
-        );
-    }
-};
+import StatusEtikettMentor from './StatusEtikettMentor';
 
 interface Props {
     aktsomhet?: Aktsomhet;
@@ -65,31 +24,17 @@ interface Props {
 }
 
 const KvitteringSideMentor: FunctionComponent<Props> = (props: Props) => {
-    const { refusjon, innloggetBruker, opprettKorreksjon, aktsomhet, settKid } = props;
+    const { refusjon, innloggetBruker, aktsomhet, settKid } = props;
     const innloggetRolle = innloggetBruker?.rolle;
 
     return (
         <VStack gap="space-16">
             <Box>
-                {innloggetBruker !== undefined &&
-                    innloggetBruker.harKorreksjonTilgang &&
-                    refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
-                    !refusjon.korreksjonId &&
-                    opprettKorreksjon !== undefined && (
-                        <>
-                            <OpprettKorreksjon
-                                tiltakType={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
-                                opprettKorreksjon={opprettKorreksjon}
-                            />
-                            <VerticalSpacer rem={1} />
-                        </>
-                    )}
-
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Heading level="2" size="large">
                         Refusjon for Mentor
                     </Heading>
-                    {etikettForRefusjonStatus(refusjon)}
+                    <StatusEtikettMentor refusjon={refusjon} />
                 </div>
                 <VerticalSpacer rem={1} />
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
