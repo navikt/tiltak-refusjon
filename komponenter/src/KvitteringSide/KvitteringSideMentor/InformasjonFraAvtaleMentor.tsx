@@ -1,4 +1,4 @@
-import { Alert, Heading, Label, BodyShort, Loader } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, Label, Loader } from '@navikt/ds-react';
 import Boks from '~/Boks';
 
 import EksternLenke from '~/EksternLenke/EksternLenke';
@@ -46,6 +46,8 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
         tilskuddTom,
         mentorAntallTimer,
         tilskuddsbeløp,
+        mentorFornavn,
+        mentorEtternavn,
     } = tilskuddsgrunnlag;
 
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${avtaleId}`;
@@ -82,6 +84,12 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
                 <Label>Deltaker: </Label>
                 <BodyShort size="small">
                     {deltakerFornavn} {deltakerEtternavn}
+                </BodyShort>
+            </IkonRad>
+            <IkonRad>
+                <Label>Mentor: </Label>
+                <BodyShort size="small">
+                    {mentorFornavn} {mentorEtternavn}
                 </BodyShort>
             </IkonRad>
             <IkonRad>
