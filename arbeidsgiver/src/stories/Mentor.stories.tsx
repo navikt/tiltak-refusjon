@@ -8,7 +8,7 @@ import { Diskresjonskode } from '~/types';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
 
 const meta = {
-    title: 'Refusjons Saksbehandler/Mentor',
+    title: 'Refusjons Arbeidsgiver/Mentor',
     component: KvitteringSideMentor,
     parameters: {
         // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
@@ -101,4 +101,14 @@ const mentorForTidlig: Refusjon = {
 export const MentorForTidlig: Story = {
     name: 'Mentor - for tidlig',
     args: { refusjon: mentorForTidlig, innloggetBruker },
+};
+
+export const MentorSendt: Story = {
+    name: 'Mentor - sendt krav',
+    args: { refusjon: { ...mentorForTidlig, status: RefusjonStatus.SENDT_KRAV }, innloggetBruker },
+};
+
+export const MentorUtbetalt: Story = {
+    name: 'Mentor - utbetalt',
+    args: { refusjon: { ...mentorForTidlig, status: RefusjonStatus.UTBETALT }, innloggetBruker },
 };
