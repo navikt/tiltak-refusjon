@@ -21,7 +21,7 @@ import { BrukerContextType } from '~/types/brukerContextType';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
-import KvitteringSideMentorArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideMentorArbeidsgiver';
+import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -59,7 +59,7 @@ const Komponent: FunctionComponent = () => {
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
             if (tiltakstype === 'MENTOR') {
-                return <KvitteringSideMentorArbeidsgiver aktsomhet={aktsomhet} refusjon={refusjon} />;
+                return <KvitteringSideMentor aktsomhet={aktsomhet} refusjon={refusjon} />;
             }
             return tiltakstype === 'VTAO' ? (
                 <KvitteringSideVTAOArbeidsgiver
@@ -106,9 +106,7 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.UTBETALING_FEILET:
             return (
                 <>
-                    {tiltakstype === 'MENTOR' && (
-                        <KvitteringSideMentorArbeidsgiver aktsomhet={aktsomhet} refusjon={refusjon} />
-                    )}
+                    {tiltakstype === 'MENTOR' && <KvitteringSideMentor aktsomhet={aktsomhet} refusjon={refusjon} />}
                     {tiltakstype === 'VTAO' && (
                         <KvitteringSideVTAOArbeidsgiver
                             aktsomhet={aktsomhet}

@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { Box, Heading, Tag, VStack } from '@navikt/ds-react';
 import { FunctionComponent, ReactElement } from 'react';
 
@@ -13,6 +12,7 @@ import { storForbokstav } from '~/utils/stringUtils';
 import InformasjonFraAvtalenMentor from './InformasjonFraAvtaleMentor';
 import UtregningMentor from './UtregningMentor';
 import SummeringBoksMentor from './SummeringBoksMentor';
+import { addDays, isBefore } from 'date-fns';
 
 /**
  * For etterregistrerte avtaler av typen MENTOR vil det eksistere refusjoner som er "for tidlig",
@@ -20,9 +20,9 @@ import SummeringBoksMentor from './SummeringBoksMentor';
  * Da vil det se minst rart ut hvis vi sier at de sendes i morgen.
  */
 const refusjonSendesDato = (refusjon: Refusjon): string => {
-    const enDagEtterTilskuddsperioden = moment(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom).add(1, 'days');
-    const morgendagensDato = moment().add(1, 'days');
-    const tidligsteDato = enDagEtterTilskuddsperioden.isBefore(morgendagensDato)
+    const enDagEtterTilskuddsperioden = addDays(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom, 1);
+    const morgendagensDato = addDays(new Date(), 1);
+    const tidligsteDato = isBefore(enDagEtterTilskuddsperioden, morgendagensDato)
         ? morgendagensDato
         : enDagEtterTilskuddsperioden;
     return formatterDato(tidligsteDato.toString());
