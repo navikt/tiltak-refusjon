@@ -64,7 +64,7 @@ const Landingsside: FunctionComponent = () => {
                 </div>
                 <ul>
                     <li>
-                        Dere må ha blitt tildelt enkeltrettigheten tiltaksrefusjon eller en av følgende Altinn-roller
+                        Dere må ha blitt tildelt enkeltrettigheten Tiltaksrefusjon eller en av følgende Altinn-roller
                         for å få tilgang til løsningen:
                     </li>
                     <div style={{ marginLeft: '2rem' }}>

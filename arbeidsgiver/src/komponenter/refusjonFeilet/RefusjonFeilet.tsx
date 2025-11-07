@@ -28,7 +28,7 @@ const RefusjonFeilet: FunctionComponent<Props> = ({
                 <li>regnskapsfører med signeringsrettighet</li>
             </ul>
             <BodyShort size="small">
-                Du kan også ha enkeltrettigheten <b>tiltaksrefusjon</b>.
+                Du kan også ha enkeltrettigheten <b>Tiltaksrefusjon</b>.
             </BodyShort>
         </>
     );
