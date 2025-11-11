@@ -1,0 +1,69 @@
+.utregning-rad {
+    &__utregning-wrapper {
+        padding: 0 1rem;
+        border-bottom: 1px solid #c6c2bf;
+        &--tykkbunn {
+            border-bottom: 2px solid #3e3832;
+        }
+        &--ingen-bunn {
+            border-bottom: none;
+        }
+    }
+
+    &__utregning-rad {
+        display: flex;
+        align-content: center;
+        justify-content: space-between;
+        height: 3.5rem;
+
+        svg {
+            min-width: 1.25rem;
+            min-height: 1.25rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    &__utregning-verdi svg {
+        min-width: 0.875rem;
+        margin-right: 0.5rem;
+        margin-top: 0.4rem;
+    }
+
+    &__label-innhold {
+        display: flex;
+    }
+
+    &__utregning-label {
+        min-width: 60%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 0.5rem;
+    }
+
+    &__utregning-verdi {
+        display: flex;
+        align-items: center;
+    }
+
+    &__operator {
+        line-height: 1.5625rem;
+        color: #979797;
+    }
+
+    &__sum {
+        margin-left: 1rem;
+        text-align: end;
+        min-width: 5rem;
+    }
+
+    &__utgår {
+        text-decoration: line-through;
+    }
+
+    &__ikon-placeholder {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-right: 0.5rem;
+    }
+}

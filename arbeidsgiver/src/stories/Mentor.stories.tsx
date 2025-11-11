@@ -1,0 +1,114 @@
+import { InnloggetBruker } from '~/types/brukerContextType';
+
+import { Meta, StoryObj } from '@storybook/react-vite';
+import { Refusjon } from '~/types/refusjon';
+import { RefusjonStatus } from '~/types/status';
+import { Tiltak } from '~/types/tiltak';
+import { Diskresjonskode } from '~/types';
+import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
+
+const meta = {
+    title: 'Refusjons Arbeidsgiver/Mentor',
+    component: KvitteringSideMentor,
+    parameters: {
+        // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
+        layout: 'fullscreen',
+    },
+} satisfies Meta<typeof KvitteringSideMentor>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+const innloggetBruker: InnloggetBruker = {
+    harKorreksjonTilgang: false,
+    identifikator: '123456',
+    rolle: 'ARBEIDSGIVER',
+};
+
+const mentorForTidlig: Refusjon = {
+    harInntektIAlleMåneder: true,
+    refusjonsgrunnlag: {
+        harFerietrekkForSammeMåned: false,
+        tilskuddsgrunnlag: {
+            avtaleId: '8931b3f3-c5e9-4041-9356-985f4415ec6a',
+            tilskuddsperiodeId: '255109d2-3e64-4c48-98d6-696d8c616500',
+            deltakerFornavn: 'Olav',
+            deltakerEtternavn: 'Over5gsen',
+            deltakerFnr: '08098138758',
+            arbeidsgiverFornavn: 'Arne',
+            arbeidsgiverEtternavn: 'Arbeidsgiver',
+            arbeidsgiverTlf: '41111111',
+            veilederNavIdent: 'X123456',
+            bedriftNavn: 'Kiwi Majorstuen',
+            bedriftNr: '999999999',
+            tilskuddFom: '2024-01-01',
+            tilskuddTom: '2024-01-31',
+            feriepengerSats: 0.12,
+            otpSats: 0.02,
+            arbeidsgiveravgiftSats: 0.141,
+            tiltakstype: Tiltak.MENTOR,
+            tilskuddsbeløp: 55000,
+            lønnstilskuddsprosent: 40,
+            avtaleNr: 3456,
+            løpenummer: 3,
+            enhet: '1000',
+            id: '01HNJE38VPDQ7CQP54S5A3TA5J',
+            mentorAntallTimer: 10,
+            mentorTimelonn: 230.5,
+        },
+        inntektsgrunnlag: undefined,
+        bedriftKontonummer: '10000008145',
+        bedriftKid: undefined,
+        inntekterKunFraTiltaket: true,
+        endretBruttoLønn: undefined,
+        fratrekkRefunderbarBeløp: false,
+        forrigeRefusjonMinusBeløp: 0,
+        beregning: {
+            lønn: 2305,
+            lønnFratrukketFerie: 200000,
+            feriepenger: 24000,
+            tjenestepensjon: 4480,
+            arbeidsgiveravgift: 32216,
+            sumUtgifter: 260696,
+            beregnetBeløp: 104278,
+            refusjonsbeløp: 55000,
+            overTilskuddsbeløp: true,
+            tidligereUtbetalt: 0,
+            fratrekkLønnFerie: 0,
+            tidligereRefundertBeløp: 0,
+            sumUtgifterFratrukketRefundertBeløp: 260696,
+            overFemGrunnbeløp: true,
+            id: '01HNJEBH2JD7CP0MFY7SY6W6JM',
+        },
+    },
+    bedriftNr: '999999999',
+    deltakerFnr: '08098138758',
+    id: '01HNJE38VPRVEDKK6SAS4QC7YH',
+    fristForGodkjenning: '2024-03-31',
+    forrigeFristForGodkjenning: undefined,
+    unntakOmInntekterFremitid: 0,
+    hentInntekterLengerFrem: '',
+    godkjentAvArbeidsgiver: '2024-02-01T13:40:00.997647Z',
+    status: RefusjonStatus.FOR_TIDLIG,
+    korreksjonId: undefined,
+    harTattStillingTilAlleInntektslinjer: true,
+    åpnetFørsteGang: '2024-01-22T15:55:56.514591Z',
+    sistEndret: '2024-01-22T15:56:06.292479Z',
+    senestMuligeGodkjenningsfrist: '2024-04-29',
+    diskresjonskode: Diskresjonskode.UGRADERT,
+};
+
+export const MentorForTidlig: Story = {
+    name: 'Mentor - for tidlig',
+    args: { refusjon: mentorForTidlig, innloggetBruker },
+};
+
+export const MentorSendt: Story = {
+    name: 'Mentor - sendt krav',
+    args: { refusjon: { ...mentorForTidlig, status: RefusjonStatus.SENDT_KRAV }, innloggetBruker },
+};
+
+export const MentorUtbetalt: Story = {
+    name: 'Mentor - utbetalt',
+    args: { refusjon: { ...mentorForTidlig, status: RefusjonStatus.UTBETALT }, innloggetBruker },
+};

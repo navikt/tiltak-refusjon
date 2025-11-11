@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Suspense } from 'react';
+import { FunctionComponent, Suspense } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router';
@@ -8,6 +8,7 @@ import HendelsesLogg from '@/refusjon/Hendelseslogg/Hendelseslogg';
 import HenterInntekterBoks from '~/HenterInntekterBoks';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
+import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
 import MerkForUnntakOmInntekterToMånederFrem from '@/refusjon/MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
 import TilbakeTilOversikt from '@/komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '~/VerticalSpacer';
@@ -46,6 +47,7 @@ const Komponent: FunctionComponent = () => {
     const brukerContext: BrukerContextType = useInnloggetBruker();
     const navigate = useNavigate();
     const { data: aktsomhet } = useRefusjonKreverAktsomhet(refusjon.id);
+    const tiltakstype = refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype;
 
     const opprettKorreksjon = async (
         grunner: Korreksjonsgrunn[],
@@ -53,7 +55,7 @@ const Komponent: FunctionComponent = () => {
         annenKorreksjonsGrunn?: string
     ) => {
         let oppdatertRefusjon;
-        if (refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === Tiltak.VTAO) {
+        if (tiltakstype === Tiltak.VTAO) {
             oppdatertRefusjon = await opprettKorreksjonsutkast(
                 refusjonId!,
                 [Korreksjonsgrunn.DELTAKER_HAR_IKKE_VÆRT_TILSTEDE_I_PERIODEN],
@@ -81,6 +83,21 @@ const Komponent: FunctionComponent = () => {
                         </div>
                         <VerticalSpacer rem={1} />
                         <KvitteringSideVTAO
+                            aktsomhet={aktsomhet}
+                            refusjon={refusjon}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                        />
+                    </>
+                );
+            }
+            if (tiltakstype == 'MENTOR') {
+                return (
+                    <>
+                        <div className={styles.fleks}>
+                            <HendelsesLogg refusjonId={refusjonId} />
+                        </div>
+                        <VerticalSpacer rem={1} />
+                        <KvitteringSideMentor
                             aktsomhet={aktsomhet}
                             refusjon={refusjon}
                             innloggetBruker={brukerContext.innloggetBruker}
@@ -166,15 +183,28 @@ const Komponent: FunctionComponent = () => {
                         <HendelsesLogg refusjonId={refusjonId} />
                     </div>
                     <VerticalSpacer rem={1} />
-
-                    {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype === 'VTAO' ? (
+                    {tiltakstype === 'MENTOR' && (
+                        <>
+                            <div className={styles.fleks}>
+                                <HendelsesLogg refusjonId={refusjonId} />
+                            </div>
+                            <VerticalSpacer rem={1} />
+                            <KvitteringSideMentor
+                                aktsomhet={aktsomhet}
+                                refusjon={refusjon}
+                                innloggetBruker={brukerContext.innloggetBruker}
+                            />
+                        </>
+                    )}
+                    {tiltakstype === 'VTAO' && (
                         <KvitteringSideVTAO
                             aktsomhet={aktsomhet}
                             refusjon={refusjon}
                             innloggetBruker={brukerContext.innloggetBruker}
                             opprettKorreksjon={opprettKorreksjon}
                         />
-                    ) : (
+                    )}
+                    {tiltakstype !== 'VTAO' && tiltakstype !== 'MENTOR' && (
                         <KvitteringSide
                             aktsomhet={aktsomhet}
                             refusjon={refusjon}

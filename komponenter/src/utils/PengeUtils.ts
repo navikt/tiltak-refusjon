@@ -8,3 +8,5 @@ export const formatterPenger = (penger = 0) =>
 
 export const summerInntektsgrunnlag = (inntektsgrunnlag?: Inntektsgrunnlag) =>
     inntektsgrunnlag ? inntektsgrunnlag.inntekter.map((ilinje) => ilinje.beløp).reduce((a, b) => a + b, 0) : 0;
+
+export const visTallMedNorskFormatering = (tall: number) => tall.toLocaleString('no-NB');

@@ -1,11 +1,14 @@
 import moment, { DurationInputArg2, Moment } from 'moment';
 import 'moment/dist/locale/nb';
 import { storForbokstav } from './stringUtils';
+import { format } from 'date-fns';
+import { nb } from 'date-fns/locale';
 
 moment.locale('nb');
 
 export const NORSK_MÅNEDÅR_FORMAT = 'YYYY/MM';
 export const NORSK_DATO_FORMAT = 'DD.MM.YYYY';
+export const NORSK_DATO_FORMAT_FN = 'dd.MM.yyyy';
 export const NORSK_DATO_FORMAT_SHORT = 'DD.MM.YY';
 export const NORSK_DATO_OG_TID_FORMAT = 'DD.MM.YYYY HH:mm';
 
@@ -16,6 +19,14 @@ export const formatterDato = (dato: string, format: string = NORSK_DATO_FORMAT) 
     } catch {
         // Kunne ikke caste stringen til dato.
         return dato;
+    }
+};
+
+export const formaterDatoFn = (dato: Date | string, formatString: string = NORSK_DATO_FORMAT_FN) => {
+    try {
+        return format(dato, formatString, { locale: nb });
+    } catch {
+        return 'Ugyldig dato';
     }
 };
 
