@@ -1,7 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { useHentRefusjoner } from '@/services/rest-service';
-import { antallRefusjoner } from '@/utils/amplitude-utils';
 import FinnerIngenRefusjoner from './FinnerIngenRefusjon/FinnerIngenRefusjoner';
 import { BrukerContextType } from '@/bruker/BrukerContextType';
 import useOppdaterPagedata from '@/bruker/bedriftsmenyRefusjon/useOppdaterPagedata';
@@ -24,7 +23,6 @@ const Oversikt: FunctionComponent = () => {
     const { refusjoner } = pageable;
 
     useOppdaterPagedata(pageable, valgtBedrift, setValgtBedrift);
-    antallRefusjoner(refusjoner.length > 0 ? refusjoner.length : 0);
 
     return (
         <nav className={cls.className} aria-label="Main">
