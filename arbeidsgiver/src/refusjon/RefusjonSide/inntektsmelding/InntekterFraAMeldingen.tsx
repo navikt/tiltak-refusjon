@@ -2,7 +2,6 @@ import { Alert, Button, Heading, Label, BodyShort, Loader } from '@navikt/ds-rea
 import { Fragment, FunctionComponent } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
 import { hentInntekterLengerFrem } from '../../../services/rest-service';
-import { refusjonApnet } from '../../../utils/amplitude-utils';
 import InntektsMeldingHeader from './InntektsMeldingHeader';
 import { inntektProperties } from './inntektProperties';
 import './inntektsMelding.less';
@@ -34,10 +33,7 @@ const InntekterFraAMeldingen: FunctionComponent<Props> = ({ refusjon, kvittering
     const cls = BEMHelper('inntektsmelding');
     const { inntektsgrunnlag } = refusjon.refusjonsgrunnlag;
 
-    const { antallInntekterSomErMedIGrunnlag, ingenInntekter, ingenRefunderbareInntekter } =
-        inntektProperties(refusjon);
-
-    refusjonApnet(refusjon, antallInntekterSomErMedIGrunnlag ?? 0, ingenInntekter, ingenRefunderbareInntekter);
+    const { ingenInntekter, ingenRefunderbareInntekter } = inntektProperties(refusjon);
 
     const finnesInntekterMenAlleErHuketAvForÅIkkeVæreOpptjentIPerioden = () => {
         if (ingenInntekter) {

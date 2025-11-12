@@ -5,7 +5,6 @@
         "@navikt/ds-css": "^7.20.0",
         "@navikt/ds-icons": "3.4.3",
         "@navikt/ds-react": "^7.20.0",
-        "amplitude-js": "8.21.9",
         "moment": "^2.29.1",
         "norsk-validator": "^1.2.0",
         "react": "^18.3.0",
@@ -13,7 +12,6 @@
         "react-router": "^7.9.4"
     },
     "devDependencies": {
-        "@types/amplitude-js": "^8.16.2",
         "@types/react": "^18.3.12",
         "@types/react-responsive": "^8.0.5",
         "vite-plugin-svgr": "^4.3.0"

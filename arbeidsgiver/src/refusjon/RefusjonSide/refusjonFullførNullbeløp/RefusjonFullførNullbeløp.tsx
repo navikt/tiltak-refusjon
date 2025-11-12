@@ -4,7 +4,6 @@ import { godkjennRefusjonMedNullbeløp, useHentRefusjon } from '../../../service
 
 import LagreKnapp from '../../../komponenter/LagreKnapp';
 import RefusjonFullførNullbeløpModal from './RefusjonFullførNullbeløpModal';
-import { UtbetaltStatus, innSendingRefusjon } from '../../../utils/amplitude-utils';
 import './refusjonFullførNullbeløp.less';
 import BEMHelper from '~/utils/bem';
 
@@ -20,16 +19,9 @@ const RefusjonFullførNullbeløp: FunctionComponent = () => {
     };
 
     const godkjennRefusjonen = async (): Promise<void> => {
-        try {
-            await godkjennRefusjonMedNullbeløp(refusjon.id, refusjon.sistEndret).then(() => {
-                navigate({ pathname: `/refusjon/${refusjon.id}/kvittering`, search: window.location.search });
-                innSendingRefusjon(UtbetaltStatus.OK, refusjon, undefined);
-            });
-        } catch (error) {
-            console.log('feil ved innsending:', error);
-            innSendingRefusjon(UtbetaltStatus.FEILET, refusjon, error as Error);
-            throw error;
-        }
+        await godkjennRefusjonMedNullbeløp(refusjon.id, refusjon.sistEndret).then(() => {
+            navigate({ pathname: `/refusjon/${refusjon.id}/kvittering`, search: window.location.search });
+        });
     };
 
     const harFerietrekkIPerioden = refusjon.refusjonsgrunnlag.inntektsgrunnlag?.inntekter.find((i) => {
