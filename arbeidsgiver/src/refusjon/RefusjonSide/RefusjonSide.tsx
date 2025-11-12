@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router';
 import Boks from '~/Boks';
 import { Aktsomhet, Refusjon } from '~/types';
 import { godkjennRefusjon } from '@/services/rest-service';
-import { innSendingRefusjon, UtbetaltStatus } from '@/utils/amplitude-utils';
 
 import InformasjonFraAvtalen from './informasjonAvtalen/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from './inntektsmelding/InntekterFraAMeldingen';
@@ -31,16 +30,9 @@ const RefusjonSide = (props: Props) => {
     const [feilmelding, setFeilmelding] = useState<string>();
 
     const godkjennRefusjonen = async (): Promise<void> => {
-        try {
-            await godkjennRefusjon(refusjon.id, refusjon.sistEndret).then(() => {
-                navigate({ pathname: `/refusjon/${refusjon.id}/kvittering`, search: window.location.search });
-                innSendingRefusjon(UtbetaltStatus.OK, refusjon, undefined);
-            });
-        } catch (error) {
-            console.log('feil ved innsending:', error);
-            innSendingRefusjon(UtbetaltStatus.FEILET, refusjon, error as Error);
-            throw error;
-        }
+        await godkjennRefusjon(refusjon.id, refusjon.sistEndret).then(() => {
+            navigate({ pathname: `/refusjon/${refusjon.id}/kvittering`, search: window.location.search });
+        });
     };
 
     return (

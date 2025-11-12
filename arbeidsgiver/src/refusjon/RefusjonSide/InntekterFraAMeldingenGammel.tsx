@@ -3,8 +3,6 @@ import sortBy from 'lodash.sortby';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
 
-import { refusjonApnet } from '../../utils/amplitude-utils';
-
 import { formatterPenger } from '~/utils/PengeUtils';
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 
@@ -44,8 +42,6 @@ const InntekterFraAMeldingen: FunctionComponent<Props> = ({ refusjon }) => {
         !!refusjon.refusjonsgrunnlag.inntektsgrunnlag &&
         refusjon.refusjonsgrunnlag.inntektsgrunnlag.inntekter.length > 0 &&
         antallInntekterSomErMedIGrunnlag === 0;
-
-    refusjonApnet(refusjon, antallInntekterSomErMedIGrunnlag ?? 0, ingenInntekter, ingenRefunderbareInntekter);
 
     return (
         <Boks variant="grå">

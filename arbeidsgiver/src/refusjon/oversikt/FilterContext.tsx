@@ -1,7 +1,5 @@
 import React, { FunctionComponent, PropsWithChildren, useContext, useEffect, useState } from 'react';
-import { registrerMenyValg } from '../../utils/amplitude-utils';
 import { useSearchParams } from 'react-router';
-import { LogReturn } from 'amplitude-js';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
 import { Filter, SortingOrder } from '~/types/filter';
@@ -70,10 +68,8 @@ export const FilterProvider: FunctionComponent<PropsWithChildren> = (props) => {
         setSearchParams(newSearchParams);
     };
 
-    const oppdaterFilter = (nyttFilter: Partial<Filter>): LogReturn => {
+    const oppdaterFilter = (nyttFilter: Partial<Filter>) => {
         oppdaterSearchParams(searchParams, nyttFilter);
-        if (nyttFilter.status) return registrerMenyValg(nyttFilter.status);
-        return registrerMenyValg('Alle');
     };
 
     return (
