@@ -23,7 +23,7 @@ const StatusTekst = (props: Props) => {
             </Tag>
         );
     } else if (props.status === RefusjonStatus.FOR_TIDLIG) {
-        if (props.tiltakstype === Tiltak.VTAO) {
+        if (props.tiltakstype === Tiltak.VTAO || props.tiltakstype === Tiltak.MENTOR) {
             return (
                 <Tag variant="info" size="small">
                     Sendes {formatterDato(moment(props.tilskuddTom).add(1, 'days').toString())}
