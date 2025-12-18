@@ -129,10 +129,8 @@ const InformasjonFraAvtalen = (props: Props) => {
                 <>
                     <VerticalSpacer rem={1} />
                     <Alert variant="error" size="small">
-                        Vi kan ikke finne noe kontonummer på deres virksomhet. Riktig kontonummer må{' '}
-                        <EksternLenke href="https://www.altinn.no/skjemaoversikt/arbeids--og-velferdsetaten-nav/bankkontonummer-for-refusjoner-fra-nav-til-arbeidsgiver/">
-                            sendes inn via Altinn.
-                        </EksternLenke>
+                        Vi kan ikke finne noe kontonummer på deres virksomhet. Riktig kontonummer må legges inn{' '}
+                        <EksternLenke href="https://www.nav.no/arbeidsgiver/endre-kontonummer">her.</EksternLenke>
                     </Alert>
                 </>
             )}
