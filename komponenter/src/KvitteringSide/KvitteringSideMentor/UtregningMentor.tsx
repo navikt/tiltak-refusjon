@@ -33,10 +33,7 @@ const UtregningMentor: FunctionComponent<Props> = (props) => {
         return;
     }
 
-    const reduksjonForDelvisPeriode = beregning
-        ? beregning.sumUtgifter - beregning.refusjonsbeløp
-        : 0;
-
+    const reduksjonForDelvisPeriode = beregning ? beregning.sumUtgifter - beregning.refusjonsbeløp : 0;
 
     return (
         <ExpansionCard aria-label="Beregning av tilskudd" open={ekspandert} onToggle={setEkspandert} size="small">
@@ -81,10 +78,10 @@ const UtregningMentor: FunctionComponent<Props> = (props) => {
                 />
                 {reduksjonForDelvisPeriode > 0 && (
                     <Utregningsrad
-                    labelTekst={<b>Reduksjon for delvis periode</b>}
-                    verdi={Math.abs(reduksjonForDelvisPeriode)}
-                    border={beregning && beregning?.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
-                />
+                        labelTekst={<b>Reduksjon for delvis periode</b>}
+                        verdi={Math.abs(reduksjonForDelvisPeriode)}
+                        border={beregning && beregning?.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
+                    />
                 )}
                 <Utregningsrad
                     labelTekst={<b>Til utbetaling</b>}
