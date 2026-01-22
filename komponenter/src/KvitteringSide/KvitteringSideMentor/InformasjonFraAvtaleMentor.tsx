@@ -90,7 +90,7 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
-                <Label>Avtalt antall timer med mentor i perioden: </Label>
+                <Label>Avtalt antall timer med mentor i måneden: </Label>
                 <BodyShort size="small">{visTallMedNorskFormatering(mentorAntallTimer || 0)}</BodyShort>
             </IkonRad>
             <IkonRad>

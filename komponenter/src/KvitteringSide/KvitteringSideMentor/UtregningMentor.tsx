@@ -79,6 +79,7 @@ const UtregningMentor: FunctionComponent<Props> = (props) => {
                 {reduksjonForDelvisPeriode > 0 && (
                     <Utregningsrad
                         labelTekst={<b>Reduksjon for delvis periode</b>}
+                        verdiOperator={<MinusIcon />}
                         verdi={Math.abs(reduksjonForDelvisPeriode)}
                         border={beregning && beregning?.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
                     />
