@@ -106,7 +106,13 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.UTBETALING_FEILET:
             return (
                 <>
-                    {tiltakstype === 'MENTOR' && <KvitteringSideMentor aktsomhet={aktsomhet} refusjon={refusjon} />}
+                    {tiltakstype === 'MENTOR' && (
+                        <KvitteringSideMentor
+                            aktsomhet={aktsomhet}
+                            refusjon={refusjon}
+                            innloggetBruker={brukerContext.innloggetBruker}
+                        />
+                    )}
                     {tiltakstype === 'VTAO' && (
                         <KvitteringSideVTAOArbeidsgiver
                             aktsomhet={aktsomhet}
