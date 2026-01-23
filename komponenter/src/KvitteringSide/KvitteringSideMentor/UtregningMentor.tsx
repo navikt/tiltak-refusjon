@@ -73,7 +73,7 @@ const UtregningMentor: FunctionComponent<Props> = (props) => {
                 />
                 <Utregningsrad
                     labelTekst={<b>Sum tilskudd for en måned</b>}
-                    verdi={(beregning?.sumUtgifter || 0)}
+                    verdi={beregning?.sumUtgifter || 0}
                     border={beregning && beregning?.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
                 />
                 {reduksjonForDelvisPeriode > 0 && (
