@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { ExpansionCard, RadioGroup, Radio } from '@navikt/ds-react';
 import { Tiltak } from '~/types/tiltak';
 import { Filter } from '~/types/filter';
@@ -19,6 +19,7 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
     const refusjonFilterTiltak: OptionProps[] = [
         { value: '', label: 'Alle' },
         { value: Tiltak.MIDLERTIDIG_LØNNSTILSKUDD, label: 'Midlertidig lønnstilskudd' },
+        { value: Tiltak.MENTOR, label: 'Mentor' },
         { value: Tiltak.VARIG_LØNNSTILSKUDD, label: 'Varig lønnstilskudd' },
         { value: Tiltak.SOMMERJOBB, label: 'Sommerjobb' },
         {
