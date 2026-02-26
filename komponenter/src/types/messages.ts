@@ -5,6 +5,7 @@ import { KorreksjonStatus, RefusjonStatus } from './status';
 export const tiltakstypeTekst: { [key in Tiltak]: string } = {
     MIDLERTIDIG_LONNSTILSKUDD: 'midlertidig lønnstilskudd',
     VARIG_LONNSTILSKUDD: 'varig lønnstilskudd',
+    FIREARIG_LONNSTILSKUDD: 'fireårig lønnstilskudd for unge',
     MENTOR: 'mentor',
     SOMMERJOBB: 'sommerjobb',
     VTAO: 'varig tilrettelagt arbeid i ordinær virksomhet',
