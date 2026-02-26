@@ -21,6 +21,7 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
         { value: Tiltak.MIDLERTIDIG_LØNNSTILSKUDD, label: 'Midlertidig lønnstilskudd' },
         { value: Tiltak.MENTOR, label: 'Mentor' },
         { value: Tiltak.VARIG_LØNNSTILSKUDD, label: 'Varig lønnstilskudd' },
+        { value: Tiltak.FIREARIG_LØNNSTILSKUDD, label: 'Fireårig lønnstilskudd for unge' },
         { value: Tiltak.SOMMERJOBB, label: 'Sommerjobb' },
         {
             value: Tiltak.VTAO,
