@@ -4,9 +4,7 @@ import { useHentRefusjoner } from '@/services/rest-service';
 import FinnerIngenRefusjoner from './FinnerIngenRefusjon/FinnerIngenRefusjoner';
 import { BrukerContextType } from '@/bruker/BrukerContextType';
 import useOppdaterPagedata from '@/bruker/bedriftsmenyRefusjon/useOppdaterPagedata';
-import OversiktTabell from '~/OversiktTabell';
-import ArbeidsgiverTableBody from '~/OversiktTabell/TableBody/ArbeidsgiverTableBody';
-import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
+import OversiktsTabell from '~/OversiktTabell';
 import './oversikt.less';
 import LenkePanel from '~/LenkePanel/LenkePanel';
 import { useFilter } from './FilterContext';
@@ -29,9 +27,11 @@ const Oversikt: FunctionComponent = () => {
             {refusjoner.length > 0 ? (
                 <>
                     <LenkePanel refusjoner={pageable.refusjoner} />
-                    <OversiktTabell
-                        tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />}
-                        tableBody={<ArbeidsgiverTableBody refusjoner={pageable.refusjoner} />}
+                    <OversiktsTabell
+                        avtalepart="arbeidsgiver"
+                        filter={filter}
+                        oppdaterFilter={oppdaterFilter}
+                        refusjoner={pageable.refusjoner}
                     />
                     <Paginering pageable={pageable} oppdaterFilter={oppdaterFilter} />
                 </>

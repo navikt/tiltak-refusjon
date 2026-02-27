@@ -1,11 +1,10 @@
-import React, { FunctionComponent, Suspense } from 'react';
+import React, { FunctionComponent } from 'react';
 
 import BEMHelper from '~/utils/bem';
 import Banner from '@/refusjon/oversikt/Banner';
 import Filtermeny from '@/refusjon/oversikt/Filtermeny';
 import IkkeTilgang403ErrorBoundary from '~/IkkeTilgang403ErrorBoundary';
 import Oversikt from '@/refusjon/oversikt/Oversikt';
-import OversiktSkeleton from '@/komponenter/OversiktSkeleton/OversiktSkeleton';
 import { BrukerContextType } from '~/types/brukerContextType';
 import { useFilter } from '@/refusjon/oversikt/FilterContext';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
@@ -36,9 +35,7 @@ const OversiktSide: FunctionComponent = () => {
                     </div>
                     <div className={cls.element('container')}>
                         <IkkeTilgang403ErrorBoundary filter={filter} pathTilForside={Path.OVERSIKT}>
-                            <Suspense fallback={<OversiktSkeleton />}>
-                                <Oversikt />
-                            </Suspense>
+                            <Oversikt />
                         </IkkeTilgang403ErrorBoundary>
                     </div>
                 </div>

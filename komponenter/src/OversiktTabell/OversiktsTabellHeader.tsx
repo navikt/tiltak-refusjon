@@ -1,22 +1,41 @@
 import { Table, Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import SortingValg from './SortingValg';
-import BEMHelper from '../../../utils/bem';
+import SortingValg from './Sortering/SortingValg';
+import BEMHelper from '../utils/bem';
 import { Filter, SortingOrder } from '~/types/filter';
+import { Avtalepart } from './OversiktsTabell';
+import styles from './OversiktsTabell.module.less';
 
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
+    avtalepart: Avtalepart;
 }
 
 const cls = BEMHelper('oversikt');
 
-const ArbeidsgiverTableHeader: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
+const OversiktsTabellHeader: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
     return (
         <Table.Header>
-            <Table.Row>
+            <Table.Row className={styles.tableRow}>
                 <Table.HeaderCell scope="col">
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className={styles.tableHeader}>
+                        <Label aria-label="Refusjonsnummer" title="Refusjonsnummer">
+                            Refusjon
+                        </Label>
+                        <SortingValg
+                            className={cls.className}
+                            filter={filter}
+                            oppdaterFilter={oppdaterFilter}
+                            sortingAsc={SortingOrder.REFUSJONSNUMMER_ASC}
+                            sortingDesc={SortingOrder.REFUSJONSNUMMER_DESC}
+                            highlightSortOrderAsc={filter.sorting === SortingOrder.REFUSJONSNUMMER_ASC}
+                            highlightSortOrderDesc={filter.sorting === SortingOrder.REFUSJONSNUMMER_DESC}
+                        />
+                    </div>
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                    <div className={styles.tableHeader}>
                         <Label>Tiltakstype</Label>
                         <SortingValg
                             className={cls.className}
@@ -30,7 +49,7 @@ const ArbeidsgiverTableHeader: FunctionComponent<Props> = ({ filter, oppdaterFil
                     </div>
                 </Table.HeaderCell>
                 <Table.HeaderCell scope="col">
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className={styles.tableHeader}>
                         <Label>Bedrift</Label>
                         <SortingValg
                             className={cls.className}
@@ -44,7 +63,7 @@ const ArbeidsgiverTableHeader: FunctionComponent<Props> = ({ filter, oppdaterFil
                     </div>
                 </Table.HeaderCell>
                 <Table.HeaderCell scope="col">
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className={styles.tableHeader}>
                         <Label className={cls.element('label')}>Deltaker</Label>
                         <SortingValg
                             className={cls.className}
@@ -58,7 +77,7 @@ const ArbeidsgiverTableHeader: FunctionComponent<Props> = ({ filter, oppdaterFil
                     </div>
                 </Table.HeaderCell>
                 <Table.HeaderCell scope="col">
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className={styles.tableHeader}>
                         <Label className={cls.element('label')}>Periode</Label>
                         <SortingValg
                             className={cls.className}
@@ -72,7 +91,7 @@ const ArbeidsgiverTableHeader: FunctionComponent<Props> = ({ filter, oppdaterFil
                     </div>
                 </Table.HeaderCell>
                 <Table.HeaderCell scope="col">
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className={styles.tableHeader}>
                         <Label className={cls.element('label')}>Status</Label>
                         <SortingValg
                             className={cls.className}
@@ -88,8 +107,14 @@ const ArbeidsgiverTableHeader: FunctionComponent<Props> = ({ filter, oppdaterFil
                     </div>
                 </Table.HeaderCell>
                 <Table.HeaderCell scope="col">
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Label className={cls.element('label')}>Frist for godkjenning</Label>
+                    <div className={styles.tableHeader}>
+                        <Label
+                            className={cls.element('label')}
+                            title="Frist for godkjenning"
+                            aria-label="Frist for godkjenning"
+                        >
+                            Frist
+                        </Label>
                         <SortingValg
                             className={cls.className}
                             filter={filter}
@@ -105,4 +130,4 @@ const ArbeidsgiverTableHeader: FunctionComponent<Props> = ({ filter, oppdaterFil
         </Table.Header>
     );
 };
-export default ArbeidsgiverTableHeader;
+export default OversiktsTabellHeader;

@@ -1,0 +1,94 @@
+import { BodyShort, Table } from '@navikt/ds-react';
+import { FunctionComponent } from 'react';
+import { useNavigate } from 'react-router';
+import StatusTekst from '~/StatusTekst';
+import { formatterDato, formatterPeriode } from '~/utils';
+import { BegrensetRefusjon } from '~/types/refusjon';
+import { kunStorForbokstav } from '~/utils/stringUtils';
+import { tiltakstypeTekstKort } from '~/types/messages';
+import { NORSK_DATO_FORMAT_SHORT } from '~/utils/datoUtils';
+import { Avtalepart } from './OversiktsTabell';
+import styles from './OversiktsTabell.module.less';
+import NavnMedDiskresjonskode from './NavnMedDiskresjonskode';
+
+type Props = {
+    refusjoner: BegrensetRefusjon[];
+    avtalepart: Avtalepart;
+};
+
+const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart }) => {
+    const navigate = useNavigate();
+
+    const navigerTilRefusjonEllerKorreksjon = (refusjon: BegrensetRefusjon, avtalepart: Avtalepart) => {
+        if (refusjon.korreksjonId && avtalepart === 'saksbehandler') {
+            navigate({
+                pathname: `/korreksjon/${refusjon.korreksjonId}`,
+                search: window.location.search,
+            });
+        } else {
+            navigate({
+                pathname: `/refusjon/${refusjon.id}`,
+                search: window.location.search,
+            });
+        }
+    };
+
+    return (
+        <Table.Body>
+            {refusjoner?.map((refusjon) => (
+                <Table.Row
+                    className={styles.tableRow}
+                    key={refusjon.id}
+                    onClick={(event) => {
+                        event.preventDefault();
+                        navigerTilRefusjonEllerKorreksjon(refusjon, avtalepart);
+                    }}
+                >
+                    <Table.DataCell>
+                        {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-
+                        {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}
+                    </Table.DataCell>
+                    <Table.DataCell>
+                        {kunStorForbokstav(
+                            tiltakstypeTekstKort[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
+                        )}
+                    </Table.DataCell>
+                    <Table.DataCell>
+                        <BodyShort size="small">{refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.bedriftNavn}</BodyShort>
+                    </Table.DataCell>
+                    <Table.DataCell>
+                        <NavnMedDiskresjonskode
+                            fornavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}
+                            etternavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
+                            diskresjonskode={refusjon.diskresjonskode}
+                        />
+                    </Table.DataCell>
+                    <Table.DataCell>
+                        {formatterPeriode(
+                            refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
+                            refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
+                            NORSK_DATO_FORMAT_SHORT
+                        )}
+                    </Table.DataCell>
+                    <Table.DataCell>
+                        <StatusTekst
+                            status={refusjon.status}
+                            tiltakstype={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
+                            tilskuddFom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom}
+                            tilskuddTom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom}
+                            fratrekkRefunderbarBeløp={refusjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp}
+                        />
+                    </Table.DataCell>
+                    <Table.DataCell>
+                        {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'VTAO' &&
+                        refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'MENTOR'
+                            ? formatterDato(refusjon.fristForGodkjenning)
+                            : ''}
+                    </Table.DataCell>
+                </Table.Row>
+            ))}
+        </Table.Body>
+    );
+};
+
+export default OversiktsTabellBody;

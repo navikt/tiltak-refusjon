@@ -1,14 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import Info from './Info';
 import { useHentRefusjoner } from '@/services/rest-service';
-
 import { useFilter } from './FilterContext';
 import OversiktTabell from '~/OversiktTabell';
 import './Oversikt.less';
 import LenkePanel from '~/LenkePanel/LenkePanel';
 import BEMHelper from '~/utils/bem';
-import ArbeidsgiverTableHeader from '~/OversiktTabell/TableHeader/ArbeidsgiverTableHeader';
-import ArbeidsgiverTableBody from '~/OversiktTabell/TableBody/ArbeidsgiverTableBody';
 import Paginering from '~/OversiktTabell/Pagination/paginering';
 
 const cls = BEMHelper('oversikt');
@@ -30,8 +27,10 @@ const Oversikt: FunctionComponent = () => {
         <nav className={cls.className} aria-label="Main" role={'list'}>
             <LenkePanel refusjoner={refusjonerPage.refusjoner} />
             <OversiktTabell
-                tableHeader={<ArbeidsgiverTableHeader filter={filter} oppdaterFilter={oppdaterFilter} />}
-                tableBody={<ArbeidsgiverTableBody refusjoner={refusjonerPage.refusjoner} />}
+                avtalepart="saksbehandler"
+                filter={filter}
+                oppdaterFilter={oppdaterFilter}
+                refusjoner={refusjonerPage.refusjoner}
             />
             <Paginering pageable={refusjonerPage} oppdaterFilter={oppdaterFilter} />
         </nav>
