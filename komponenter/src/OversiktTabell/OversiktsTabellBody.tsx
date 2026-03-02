@@ -10,6 +10,7 @@ import { NORSK_DATO_FORMAT_SHORT } from '~/utils/datoUtils';
 import { Avtalepart } from './OversiktsTabell';
 import styles from './OversiktsTabell.module.less';
 import NavnMedDiskresjonskode from './NavnMedDiskresjonskode';
+import { Tiltak } from '~/types/tiltak';
 
 type Props = {
     refusjoner: BegrensetRefusjon[];
@@ -32,6 +33,10 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
             });
         }
     };
+
+    function skalViseGodkjenningsfrist(refusjon: BegrensetRefusjon) {
+        return ![Tiltak.VTAO, Tiltak.MENTOR].includes(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype);
+    }
 
     return (
         <Table.Body>
@@ -80,10 +85,7 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
                         />
                     </Table.DataCell>
                     <Table.DataCell>
-                        {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'VTAO' &&
-                        refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype !== 'MENTOR'
-                            ? formatterDato(refusjon.fristForGodkjenning)
-                            : ''}
+                        {skalViseGodkjenningsfrist(refusjon) ? formatterDato(refusjon.fristForGodkjenning) : ''}
                     </Table.DataCell>
                 </Table.Row>
             ))}

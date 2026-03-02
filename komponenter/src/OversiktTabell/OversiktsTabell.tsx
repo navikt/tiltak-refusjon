@@ -1,5 +1,5 @@
 import { Table } from '@navikt/ds-react';
-import { FunctionComponent, Suspense } from 'react';
+import { Suspense } from 'react';
 import { BegrensetRefusjon, Filter } from '~/types';
 import OversiktsTabellHeader from './OversiktsTabellHeader';
 import OversiktsTabellBody from './OversiktsTabellBody';
