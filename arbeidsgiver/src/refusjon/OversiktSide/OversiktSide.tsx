@@ -1,9 +1,7 @@
-import React, { FunctionComponent, Suspense } from 'react';
-
+import React, { FunctionComponent } from 'react';
 import BEMHelper from '~/utils/bem';
 import Filtermeny from '~/Filtermeny/Filtermeny';
 import Oversikt from '@/refusjon/oversikt/Oversikt';
-import OversiktSkeleton from '@/komponenter/OversiktSkeleton/OversiktSkeleton';
 import { useFilter } from '@/refusjon/oversikt/FilterContext';
 import IkkeTilgang403ErrorBoundary from '~/IkkeTilgang403ErrorBoundary';
 import { Path } from '@/router/Router';
@@ -27,9 +25,7 @@ const OversiktSide: FunctionComponent = () => {
                 </div>
                 <div className={cls.element('container')}>
                     <IkkeTilgang403ErrorBoundary filter={filter} pathTilForside={Path.REFUSJON_OVERSIKT}>
-                        <Suspense fallback={<OversiktSkeleton />}>
-                            <Oversikt />
-                        </Suspense>
+                        <Oversikt />
                     </IkkeTilgang403ErrorBoundary>
                 </div>
             </div>
