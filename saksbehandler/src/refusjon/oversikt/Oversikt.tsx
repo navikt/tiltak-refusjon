@@ -28,7 +28,6 @@ const Oversikt: FunctionComponent = () => {
             <LenkePanel refusjoner={refusjonerPage.refusjoner} />
             <OversiktTabell
                 avtalepart="saksbehandler"
-                filter={filter}
                 oppdaterFilter={oppdaterFilter}
                 refusjoner={refusjonerPage.refusjoner}
             />
