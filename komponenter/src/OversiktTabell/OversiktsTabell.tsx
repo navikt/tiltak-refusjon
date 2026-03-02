@@ -15,7 +15,8 @@ interface Props {
     avtalepart: Avtalepart;
 }
 
-const OversiktsTabell: FunctionComponent<Props> = ({ filter, oppdaterFilter, refusjoner, avtalepart }) => {
+const OversiktsTabell = (props: Props) => {
+    const { filter, oppdaterFilter, refusjoner, avtalepart } = props;
     return (
         <Suspense fallback={<OversiktsTabellSkeleton avtalepart={avtalepart} />}>
             <Table role="list" className={styles.oversiktTabell}>
