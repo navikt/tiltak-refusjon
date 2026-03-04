@@ -1,17 +1,17 @@
 import { Skeleton, Table } from '@navikt/ds-react';
-import { FunctionComponent } from 'react';
 import OversiktsTabellHeader from './OversiktsTabellHeader';
 import styles from './OversiktsTabell.module.less';
-import { Avtalepart } from './OversiktsTabell';
+import { TableHeaderType } from './OversiktsTabell';
 
 interface Props {
-    avtalepart: Avtalepart;
+    headers: TableHeaderType[];
 }
 
-const OversiktsTabellSkeleton: FunctionComponent<Props> = ({ avtalepart }) => {
+const OversiktsTabellSkeleton = (props: Props) => {
+    const { headers } = props;
     return (
         <Table role="list" className={styles.oversiktTabell}>
-            <OversiktsTabellHeader filter={{}} oppdaterFilter={() => {}} avtalepart={avtalepart} />
+            <OversiktsTabellHeader headers={headers} />
             <Table.Body>
                 {[1, 2, 3].map((value) => (
                     <Table.Row key={value}>

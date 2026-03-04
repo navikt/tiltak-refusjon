@@ -1,4 +1,4 @@
-import { BodyShort, Table } from '@navikt/ds-react';
+import { Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router';
 import StatusTekst from '~/StatusTekst';
@@ -49,33 +49,33 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
                         navigerTilRefusjonEllerKorreksjon(refusjon, avtalepart);
                     }}
                 >
-                    <Table.DataCell>
+                    <Table.DataCell textSize="small">
                         {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-
                         {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}
                     </Table.DataCell>
-                    <Table.DataCell>
+                    <Table.DataCell textSize="small">
                         {kunStorForbokstav(
                             tiltakstypeTekstKort[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
                         )}
                     </Table.DataCell>
-                    <Table.DataCell>
-                        <BodyShort size="small">{refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.bedriftNavn}</BodyShort>
+                    <Table.DataCell textSize="small">
+                        {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.bedriftNavn}
                     </Table.DataCell>
-                    <Table.DataCell>
+                    <Table.DataCell textSize="small">
                         <NavnMedDiskresjonskode
                             fornavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn}
                             etternavn={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}
                             diskresjonskode={refusjon.diskresjonskode}
                         />
                     </Table.DataCell>
-                    <Table.DataCell>
+                    <Table.DataCell textSize="small">
                         {formatterPeriode(
                             refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                             refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
                             NORSK_DATO_FORMAT_SHORT
                         )}
                     </Table.DataCell>
-                    <Table.DataCell>
+                    <Table.DataCell textSize="small">
                         <StatusTekst
                             status={refusjon.status}
                             tiltakstype={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
@@ -84,7 +84,7 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
                             fratrekkRefunderbarBeløp={refusjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp}
                         />
                     </Table.DataCell>
-                    <Table.DataCell>
+                    <Table.DataCell textSize="small">
                         {skalViseGodkjenningsfrist(refusjon) ? formatterDato(refusjon.fristForGodkjenning) : ''}
                     </Table.DataCell>
                 </Table.Row>

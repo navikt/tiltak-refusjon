@@ -1,133 +1,45 @@
 import { Table, Label } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import SortingValg from './Sortering/SortingValg';
-import BEMHelper from '../utils/bem';
-import { Filter, SortingOrder } from '~/types/filter';
-import { Avtalepart } from './OversiktsTabell';
 import styles from './OversiktsTabell.module.less';
+import { RefusjonSortState, TableHeaderType } from './OversiktsTabell';
 
 interface Props {
-    filter: Filter;
-    oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
-    avtalepart: Avtalepart;
+    headers: TableHeaderType[];
+    sort?: RefusjonSortState;
 }
 
-const cls = BEMHelper('oversikt');
+const sortToText = (sort?: RefusjonSortState, header?: TableHeaderType) => {
+    if (!sort || sort.orderBy !== header?.navn) {
+        return '';
+    }
+    switch (sort.direction) {
+        case 'ascending':
+            return ' - stigende';
+        case 'descending':
+            return ' - synkende';
+        default:
+            return '';
+    }
+};
 
-const OversiktsTabellHeader: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
+const OversiktsTabellHeader: FunctionComponent<Props> = ({ headers, sort }) => {
     return (
         <Table.Header>
             <Table.Row className={styles.tableRow}>
-                <Table.HeaderCell scope="col">
-                    <div className={styles.tableHeader}>
-                        <Label aria-label="Refusjonsnummer" title="Refusjonsnummer">
-                            Refusjon
-                        </Label>
-                        <SortingValg
-                            className={cls.className}
-                            filter={filter}
-                            oppdaterFilter={oppdaterFilter}
-                            sortingAsc={SortingOrder.REFUSJONSNUMMER_ASC}
-                            sortingDesc={SortingOrder.REFUSJONSNUMMER_DESC}
-                            highlightSortOrderAsc={filter.sorting === SortingOrder.REFUSJONSNUMMER_ASC}
-                            highlightSortOrderDesc={filter.sorting === SortingOrder.REFUSJONSNUMMER_DESC}
-                        />
-                    </div>
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                    <div className={styles.tableHeader}>
-                        <Label>Tiltakstype</Label>
-                        <SortingValg
-                            className={cls.className}
-                            filter={filter}
-                            oppdaterFilter={oppdaterFilter}
-                            sortingAsc={SortingOrder.TILTAKSTYPE_ASC}
-                            sortingDesc={SortingOrder.TILTAKSTYPE_DESC}
-                            highlightSortOrderAsc={filter.sorting === SortingOrder.TILTAKSTYPE_ASC}
-                            highlightSortOrderDesc={filter.sorting === SortingOrder.TILTAKSTYPE_DESC}
-                        />
-                    </div>
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                    <div className={styles.tableHeader}>
-                        <Label>Bedrift</Label>
-                        <SortingValg
-                            className={cls.className}
-                            filter={filter}
-                            oppdaterFilter={oppdaterFilter}
-                            sortingAsc={SortingOrder.BEDRIFT_ASC}
-                            sortingDesc={SortingOrder.BEDRIFT_DESC}
-                            highlightSortOrderAsc={filter.sorting === SortingOrder.BEDRIFT_ASC}
-                            highlightSortOrderDesc={filter.sorting === SortingOrder.BEDRIFT_DESC}
-                        />
-                    </div>
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                    <div className={styles.tableHeader}>
-                        <Label className={cls.element('label')}>Deltaker</Label>
-                        <SortingValg
-                            className={cls.className}
-                            filter={filter}
-                            oppdaterFilter={oppdaterFilter}
-                            sortingAsc={SortingOrder.DELTAKER_ASC}
-                            sortingDesc={SortingOrder.DELTAKER_DESC}
-                            highlightSortOrderAsc={filter.sorting === SortingOrder.DELTAKER_ASC}
-                            highlightSortOrderDesc={filter.sorting === SortingOrder.DELTAKER_DESC}
-                        />
-                    </div>
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                    <div className={styles.tableHeader}>
-                        <Label className={cls.element('label')}>Periode</Label>
-                        <SortingValg
-                            className={cls.className}
-                            filter={filter}
-                            oppdaterFilter={oppdaterFilter}
-                            sortingAsc={SortingOrder.PERIODE_ASC}
-                            sortingDesc={SortingOrder.PERIODE_DESC}
-                            highlightSortOrderAsc={filter.sorting === SortingOrder.PERIODE_ASC}
-                            highlightSortOrderDesc={filter.sorting === SortingOrder.PERIODE_DESC}
-                        />
-                    </div>
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                    <div className={styles.tableHeader}>
-                        <Label className={cls.element('label')}>Status</Label>
-                        <SortingValg
-                            className={cls.className}
-                            filter={filter}
-                            oppdaterFilter={oppdaterFilter}
-                            sortingAsc={SortingOrder.STATUS_ASC}
-                            sortingDesc={SortingOrder.STATUS_DESC}
-                            highlightSortOrderAsc={
-                                filter.sorting === SortingOrder.STATUS_ASC || filter.sorting === undefined
-                            }
-                            highlightSortOrderDesc={filter.sorting === SortingOrder.STATUS_DESC}
-                        />
-                    </div>
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                    <div className={styles.tableHeader}>
-                        <Label
-                            className={cls.element('label')}
-                            title="Frist for godkjenning"
-                            aria-label="Frist for godkjenning"
-                        >
-                            Frist
-                        </Label>
-                        <SortingValg
-                            className={cls.className}
-                            filter={filter}
-                            oppdaterFilter={oppdaterFilter}
-                            sortingAsc={SortingOrder.FRISTFORGODKJENNING_ASC}
-                            sortingDesc={SortingOrder.FRISTFORGODKJENNING_DESC}
-                            highlightSortOrderAsc={filter.sorting === SortingOrder.FRISTFORGODKJENNING_ASC}
-                            highlightSortOrderDesc={filter.sorting === SortingOrder.FRISTFORGODKJENNING_DESC}
-                        />
-                    </div>
-                </Table.HeaderCell>
+                {headers.map((header) => (
+                    <Table.ColumnHeader
+                        key={header.navn}
+                        sortable
+                        sortKey={header.navn}
+                        className={styles.tableHeader}
+                        title={header.beskrivelse + sortToText(sort, header)}
+                    >
+                        <Label aria-label={header.beskrivelse}>{header.navn}</Label>
+                    </Table.ColumnHeader>
+                ))}
             </Table.Row>
         </Table.Header>
     );
 };
+
 export default OversiktsTabellHeader;
