@@ -38,6 +38,14 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
         return ![Tiltak.VTAO, Tiltak.MENTOR].includes(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype);
     }
 
+    function hentFulltRefusjonsnummer(refusjon: BegrensetRefusjon) {
+        const { avtaleNr, løpenummer, resendingsnummer } = refusjon.refusjonsgrunnlag.tilskuddsgrunnlag;
+        if (resendingsnummer) {
+            return `${avtaleNr}-${løpenummer}-R${resendingsnummer}`;
+        }
+        return `${avtaleNr}-${løpenummer}`;
+    }
+
     return (
         <Table.Body>
             {refusjoner?.map((refusjon) => (
@@ -49,10 +57,7 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
                         navigerTilRefusjonEllerKorreksjon(refusjon, avtalepart);
                     }}
                 >
-                    <Table.DataCell textSize="small">
-                        {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-
-                        {refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}
-                    </Table.DataCell>
+                    <Table.DataCell textSize="small">{hentFulltRefusjonsnummer(refusjon)}</Table.DataCell>
                     <Table.DataCell textSize="small">
                         {kunStorForbokstav(
                             tiltakstypeTekstKort[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
