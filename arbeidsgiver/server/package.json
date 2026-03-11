@@ -2,9 +2,15 @@
     "name": "tiltak-refusjon-arbeidsgiver",
     "version": "1.0.0",
     "license": "MIT",
+    "engines": {
+        "node": ">=22",
+        "npm": "please-use-pnpm",
+        "yarn": "please-use-pnpm",
+        "pnpm": ">=10"
+    },
     "scripts": {
         "build": "esbuild src/main.ts --bundle --platform=node --outfile=./dist/index.cjs --packages=external",
-        "postbuild": "cp package-lock.json ./dist && cp -r node_modules ./dist",
+        "postbuild": "cp pnpm-lock.yaml ./dist && cp -r node_modules ./dist",
         "prebuild": "tsc"
     },
     "dependencies": {
@@ -19,6 +25,7 @@
     },
     "devDependencies": {
         "@types/express": "^5.0.1",
+        "@types/node": "^22.0.0",
         "esbuild": "^0.25.4",
         "typescript": "^5.8.3"
     }

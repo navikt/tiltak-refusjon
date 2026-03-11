@@ -1,10 +1,18 @@
 {
     "name": "tiltak-refusjon-komponenter",
     "version": "1.0.0",
+    "engines": {
+        "node": ">=22",
+        "npm": "please-use-pnpm",
+        "yarn": "please-use-pnpm",
+        "pnpm": ">=10"
+    },
     "dependencies": {
+        "@navikt/aksel-icons": "^7.32.3",
         "@navikt/ds-css": "^7.20.0",
         "@navikt/ds-icons": "3.4.3",
         "@navikt/ds-react": "^7.20.0",
+        "date-fns": "^4.1.0",
         "moment": "^2.29.1",
         "norsk-validator": "^1.2.0",
         "react": "^18.3.0",
@@ -14,6 +22,8 @@
     "devDependencies": {
         "@types/react": "^18.3.12",
         "@types/react-responsive": "^8.0.5",
+        "typescript": "^5.9.3",
+        "vite": "^6.4.1",
         "vite-plugin-svgr": "^4.3.0"
     },
     "scripts": {

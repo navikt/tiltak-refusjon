@@ -2,11 +2,17 @@
     "name": "tiltak-refusjon-arbeidsgiver",
     "version": "0.1.0",
     "private": true,
+    "engines": {
+        "node": ">=22",
+        "npm": "please-use-pnpm",
+        "yarn": "please-use-pnpm",
+        "pnpm": ">=10"
+    },
     "scripts": {
         "dev": "vite",
-        "start": "npm run dev",
+        "start": "pnpm run dev",
         "build": "tsc && vite build",
-        "test-and-build": "npm run test && npm run build",
+        "test-and-build": "pnpm run test && pnpm run build",
         "preview": "vite preview",
         "pretty-svg": "pretty-quick --staged --pattern \"**/*.*(js|json|jsx|ts|tsx|css|scss|less)\" && sh ./svgo.sh",
         "test": "vitest --environment=jsdom --run",
@@ -15,6 +21,7 @@
         "build-storybook": "storybook build"
     },
     "dependencies": {
+        "@navikt/aksel-icons": "^7.32.3",
         "@navikt/bedriftsmeny": "^7.0.6",
         "@navikt/ds-css": "^7.20.0",
         "@navikt/ds-icons": "3.4.3",

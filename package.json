@@ -1,17 +1,23 @@
 {
     "name": "tiltak-refusjon",
     "version": "1.0.0",
-    "workspaces": [
-        "arbeidsgiver",
-        "komponenter",
-        "saksbehandler"
-    ],
+    "packageManager": "pnpm@10.30.3",
+    "engines": {
+        "node": ">=22",
+        "npm": "please-use-pnpm",
+        "yarn": "please-use-pnpm",
+        "pnpm": ">=10"
+    },
     "scripts": {
+        "preinstall": "npx only-allow pnpm",
+        "clean": "find . -name 'node_modules' -prune -exec rm -rf {} + && find . -name 'dist' -not -path '*/.git/*' -prune -exec rm -rf {} +",
         "lint": "eslint --max-warnings=0",
         "lint:fix": "eslint --max-warnings=0 --fix",
         "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
         "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-        "prepare": "husky"
+        "prepare": "husky",
+        "start:arbeidsgiver": "pnpm --filter tiltak-refusjon-arbeidsgiver dev",
+        "start:saksbehandler": "pnpm --filter tiltak-refusjon-saksbehandler dev"
     },
     "devDependencies": {
         "@eslint/js": "^9.25.1",
