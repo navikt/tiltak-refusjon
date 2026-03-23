@@ -11,4 +11,5 @@ COPY ./saksbehandler/dist ./build
 ENV TZ="Europe/Oslo"
 EXPOSE 3000
 
-CMD ["index.cjs"]
+ENTRYPOINT ["sh", "-c"]
+CMD ["node index.cjs"]
