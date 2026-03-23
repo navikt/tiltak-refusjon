@@ -59,15 +59,26 @@ const Komponent: FunctionComponent = () => {
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
             if (tiltakstype === 'MENTOR') {
-                return <KvitteringSideMentor aktsomhet={aktsomhet} refusjon={refusjon} />;
+                return (
+                    <KvitteringSideMentor
+                        aktsomhet={aktsomhet}
+                        innloggetBruker={brukerContext.innloggetBruker}
+                        refusjon={refusjon}
+                    />
+                );
             }
-            return tiltakstype === 'VTAO' ? (
-                <KvitteringSideVTAOArbeidsgiver
-                    aktsomhet={aktsomhet}
-                    innloggetBruker={brukerContext.innloggetBruker}
-                    refusjon={refusjon}
-                />
-            ) : (
+
+            if (tiltakstype === 'VTAO') {
+                return (
+                    <KvitteringSideVTAOArbeidsgiver
+                        aktsomhet={aktsomhet}
+                        innloggetBruker={brukerContext.innloggetBruker}
+                        refusjon={refusjon}
+                    />
+                );
+            }
+
+            return (
                 <FeilSide
                     advarselType="info"
                     feiltekst={
