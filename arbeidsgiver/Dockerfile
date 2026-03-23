@@ -8,7 +8,7 @@ ENV NODE_EXTRA_CA_CERTS=/etc/ssl/ca-bundle.pem
 COPY ./arbeidsgiver/server/dist .
 COPY ./arbeidsgiver/dist ./build
 
+ENV TZ="Europe/Oslo"
 EXPOSE 3000
 
-ENTRYPOINT ["sh", "-c"]
-CMD ["node index.cjs"]
+CMD ["index.cjs"]
