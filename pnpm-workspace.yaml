@@ -1,0 +1,8 @@
+packages:
+  - arbeidsgiver
+  - komponenter
+  - saksbehandler
+
+ignoredBuiltDependencies:
+  - '@sentry/cli'
+  - esbuild

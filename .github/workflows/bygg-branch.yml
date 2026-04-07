@@ -10,41 +10,47 @@ jobs:
   build:
     name: Bygg branch
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
     steps:
       - name: Sjekk ut kode
         uses: actions/checkout@v4
+      - name: Sett opp pnpm
+        uses: pnpm/action-setup@v4
       - name: Konfigurer Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: 24
+          cache: 'pnpm'
+      - name: Konfigurer pnpm
+        run: |
+          pnpm config set //npm.pkg.github.com/:_authToken $NODE_AUTH_TOKEN
+          pnpm config set engine-strict true
       - name: Installer
-        run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+        run: pnpm install --frozen-lockfile
       - name: Installer - Saksbehandler/Server
-        run: npm ci
+        # saksbehandler/server is not part of the pnpm workspace, so we install its
+        # dependencies independently with --ignore-workspace
+        run: pnpm install --ignore-workspace --frozen-lockfile
         working-directory: saksbehandler/server
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Installer - Arbeidsgiver/Server
-        run: npm ci
+        # arbeidsgiver/server is not part of the pnpm workspace, so we install its
+        # dependencies independently with --ignore-workspace
+        run: pnpm install --ignore-workspace --frozen-lockfile
         working-directory: arbeidsgiver/server
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Prettier
-        run: npm run prettier
+        run: pnpm run prettier
       - name: Linting
-        run: npm run lint
+        run: pnpm run lint
       - name: Komponenter - bygg
-        run: npm run build -w komponenter
+        run: pnpm --filter tiltak-refusjon-komponenter run build
       - name: Test og bygg - Saksbehandler
-        run: npm run test-and-build -w saksbehandler
+        run: pnpm --filter tiltak-refusjon-saksbehandler run test-and-build
       - name: Bygg - Saksbehandler/Server
-        run: npm run build
+        run: pnpm run build
         working-directory: saksbehandler/server
       - name: Test og bygg - Arbeidsgiver
-        run: npm run test-and-build -w arbeidsgiver
+        run: pnpm --filter tiltak-refusjon-arbeidsgiver run test-and-build
       - name: Bygg - Arbeidsgiver/Server
-        run: npm run build
+        run: pnpm run build
         working-directory: arbeidsgiver/server
