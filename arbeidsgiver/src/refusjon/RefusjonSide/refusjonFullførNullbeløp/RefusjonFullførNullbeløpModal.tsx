@@ -4,7 +4,7 @@ import { Alert } from '@navikt/ds-react';
 
 import { formatterPenger } from '~/utils/PengeUtils';
 import { Refusjon } from '~/types/refusjon';
-import { formatterPeriode } from '~/utils';
+import { formaterPeriode } from '~/utils';
 
 interface Properties {
     refusjon: Refusjon;
@@ -30,8 +30,8 @@ const RefusjonFullførNullbeløpModal: FunctionComponent<Properties> = ({
         >
             <Alert variant="warning">
                 Ved å fullføre denne refusjonen for den avtalte perioden{' '}
-                <b>{formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}.</b> godkjenner du
-                at refusjonsbeløpet er {formatterPenger(0)}
+                <b>{formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}.</b> godkjenner du at
+                refusjonsbeløpet er {formatterPenger(0)}
             </Alert>
         </GodkjennModal>
     );

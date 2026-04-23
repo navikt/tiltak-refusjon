@@ -5,7 +5,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { formatterPenger } from '~/utils/PengeUtils';
 import Boks from '~/Boks';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
-import { formatterPeriode } from '~/utils';
+import { formaterPeriode } from '~/utils';
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
@@ -22,7 +22,7 @@ const SummeringBoksMentor: FunctionComponent<Props> = (props) => {
                 <VerticalSpacer rem={0.5} />
                 <BodyShort size="small">
                     <b>{formatterPenger(props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp)}</b> for perioden{' '}
-                    {formatterPeriode(
+                    {formaterPeriode(
                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                     )}{' '}

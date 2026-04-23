@@ -5,7 +5,7 @@ import { BodyShort } from '@navikt/ds-react';
 import VerticalSpacer from '~/VerticalSpacer';
 import { formatterPenger } from '~/utils/PengeUtils';
 import { Refusjon } from '~/types/refusjon';
-import { formatterPeriode } from '~/utils';
+import { formaterPeriode } from '~/utils';
 
 interface Properties {
     refusjon: Refusjon;
@@ -32,7 +32,7 @@ const RefusjonGodkjennModal: FunctionComponent<Properties> = ({
                 <BodyShort size="small">
                     Du søker nå om refusjon for hele den avtalte perioden{' '}
                     <b>
-                        {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}. Dette kan du
+                        {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}. Dette kan du
                         kun gjøre en gang.
                     </b>{' '}
                     Sikre deg derfor at alle inntekter innenfor perioden er rapportert inn og at refusjonsbeløpet
@@ -56,7 +56,7 @@ const RefusjonGodkjennModal: FunctionComponent<Properties> = ({
                 <BodyShort size="small">
                     Du godtar nå beløpet for den avtalte perioden{' '}
                     <b>
-                        {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}. Dette kan du
+                        {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}. Dette kan du
                         kun gjøre en gang.
                     </b>{' '}
                     Sikre deg derfor at alle inntekter innenfor perioden er rapportert inn og at beløpet stemmer.

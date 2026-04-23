@@ -7,7 +7,7 @@ import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { formatterPenger } from '@/utils/PengeUtils';
-import { formatterPeriode, månedsNavn } from '~/utils';
+import { formaterPeriode, månedsNavn } from '~/utils';
 
 import styles from './InntekterFraTiltaketSpørsmål.module.less';
 
@@ -36,7 +36,7 @@ const HarTattStillingTilAlleInntektsLinjerNy: FunctionComponent<Props> = (props)
             <div className={styles.gronnBoks}>
                 <Heading size="small">
                     Inntekter som refunderes for{' '}
-                    {formatterPeriode(
+                    {formaterPeriode(
                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                     )}

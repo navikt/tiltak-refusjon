@@ -2,7 +2,7 @@ import { Label } from '@navikt/ds-react';
 import { formatterPenger } from '@/utils/PengeUtils';
 import { FunctionComponent } from 'react';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
-import { formatterPeriode } from '~/utils';
+import { formaterPeriode } from '~/utils';
 import { tiltakstypeTekst } from '~/types/messages';
 
 interface Props {
@@ -16,7 +16,7 @@ const InntekterFraTiltaketSvarNyLabel: FunctionComponent<Props> = ({ refusjonsgr
         .map((el) => el.beløp)
         .reduce((el, el2) => el + el2, 0);
 
-    const periode = formatterPeriode(
+    const periode = formaterPeriode(
         refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
         refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
         'DD.MM'

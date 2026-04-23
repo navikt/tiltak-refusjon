@@ -4,7 +4,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 
 import { formatterPenger } from '~/utils/PengeUtils';
 import { korreksjonsgrunnTekst, tiltakstypeTekst } from '~/types/messages';
-import { formatterDato } from '~/utils';
+import { formaterDato } from '~/utils';
 import { Korreksjon, Korreksjonsgrunn } from '~/types/refusjon';
 import { KorreksjonStatus } from '~/types/status';
 
@@ -39,7 +39,7 @@ const KorreksjonInfo: FunctionComponent<Props> = (props) => {
                         Det er blitt foretatt en ny beregning av refusjonen for sommerjobb. Det tidligere utbetalte
                         beløpet er fratrukket i denne korrigerte beregningen. Det vil bli etterbetalt{' '}
                         <b>{formatterPenger(refusjonsbelop)}</b>. Denne korreksjonen ble registrert{' '}
-                        {formatterDato(props.korreksjon.godkjentTidspunkt!)}. Pengene vil være på konto i løpet av 3-4
+                        {formaterDato(props.korreksjon.godkjentTidspunkt!)}. Pengene vil være på konto i løpet av 3-4
                         dager etter dette.
                     </BodyShort>
                     <VerticalSpacer rem={1} />
@@ -54,7 +54,7 @@ const KorreksjonInfo: FunctionComponent<Props> = (props) => {
                         {tiltakstypeTekst[props.korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}. Denne
                         korreksjonen er nå utbetalt. Det tidligere utbetalte beløpet er fratrukket i denne korrigerte
                         beregningen. Det er nå etterbetalt <b>{formatterPenger(refusjonsbelop)}</b>. Denne korreksjonen
-                        ble registrert {formatterDato(props.korreksjon.godkjentTidspunkt!)}.
+                        ble registrert {formaterDato(props.korreksjon.godkjentTidspunkt!)}.
                     </BodyShort>
                     <VerticalSpacer rem={1} />
                     <Korreksjonsgrunner />

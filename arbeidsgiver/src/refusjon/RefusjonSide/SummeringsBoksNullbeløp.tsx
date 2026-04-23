@@ -7,7 +7,7 @@ import { formatterPenger } from '~/utils/PengeUtils';
 import Boks from '~/Boks';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
-import { formatterPeriode } from '~/utils';
+import { formaterPeriode } from '~/utils';
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
@@ -23,7 +23,7 @@ const SummeringBoksNullbeløp: FunctionComponent<Props> = (props) => {
                 <VerticalSpacer rem={0.5} />
                 <Label>
                     Refusjonen er godtatt med {formatterPenger(0)} for perioden{' '}
-                    {formatterPeriode(
+                    {formaterPeriode(
                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                     )}

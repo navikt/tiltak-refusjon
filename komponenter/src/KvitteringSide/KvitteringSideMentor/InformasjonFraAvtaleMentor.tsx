@@ -8,7 +8,7 @@ import KIDInputValidator from '~/KIDInputValidator';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Refusjonsgrunnlag, RefusjonStatus } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
-import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formaterDato, formaterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { formatterPenger, visTallMedNorskFormatering } from '~/utils/PengeUtils';
 import { lagId } from '~/utils/stringUtils';
 
@@ -86,7 +86,7 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
             </IkonRad>
             <IkonRad>
                 <Label>Periode: </Label>
-                <BodyShort size="small">{formatterPeriode(tilskuddFom, tilskuddTom)}</BodyShort>
+                <BodyShort size="small">{formaterPeriode(tilskuddFom, tilskuddTom)}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
@@ -105,7 +105,7 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
                         {bedriftKontonummerInnhentetTidspunkt ? (
                             <>
                                 {bedriftKontonummer ?? 'Ikke funnet'} (hentet{' '}
-                                {formatterDato(bedriftKontonummerInnhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)})
+                                {formaterDato(bedriftKontonummerInnhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)})
                             </>
                         ) : (
                             'Ikke oppgitt'

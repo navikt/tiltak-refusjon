@@ -17,7 +17,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, RefusjonStatus, statusTekst, tiltakstypeTekst, Korreksjonsgrunn, Refusjon } from '~/types';
 import { Feature } from '@/featureToggles/features';
 import { InnloggetBruker } from '~/types/brukerContextType';
-import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formaterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
 import { useFeatureToggles } from '@/featureToggles/FeatureToggleProvider';
 
@@ -30,8 +30,7 @@ const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     return (
         <Tag variant="info">
             {storForbokstav(statusTekst[refusjon.status])}{' '}
-            {refusjon.godkjentAvArbeidsgiver &&
-                formatterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_OG_TID_FORMAT)}
+            {refusjon.godkjentAvArbeidsgiver && formaterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_OG_TID_FORMAT)}
         </Tag>
     );
 };

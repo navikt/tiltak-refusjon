@@ -4,7 +4,7 @@ import { formatterPenger } from '../../utils/PengeUtils';
 
 import { inntektBeskrivelse } from './InntekterFraAMeldingen/InntekterFraAMeldingen';
 import { Inntektslinje, Tilskuddsgrunnlag } from '~/types/refusjon';
-import { formatterDato, getMåned, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import { formaterDato, getMåned, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 type Props = {
     inntekter: Inntektslinje[];
@@ -37,9 +37,7 @@ const UtregningsradHvaInngårIDette: FunctionComponent<Props> = (props) => {
                                     <Table.DataCell style={{ maxWidth: '10rem' }}>
                                         {inntektBeskrivelse(inntekt.beskrivelse)}
                                     </Table.DataCell>
-                                    <Table.DataCell>
-                                        {formatterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}
-                                    </Table.DataCell>
+                                    <Table.DataCell>{formaterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</Table.DataCell>
                                     <Table.DataCell>{formatterPenger(inntekt.beløp)}</Table.DataCell>
                                     <Table.DataCell>
                                         {erFerietrekkForAnnenMåned && (

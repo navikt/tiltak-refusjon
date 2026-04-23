@@ -1,43 +1,39 @@
 import moment, { DurationInputArg2, Moment } from 'moment';
 import 'moment/dist/locale/nb';
 import { storForbokstav } from './stringUtils';
-import { format } from 'date-fns';
+import { addDays, format } from 'date-fns';
 import { nb } from 'date-fns/locale';
 
 moment.locale('nb');
 
-export const NORSK_MÅNEDÅR_FORMAT = 'YYYY/MM';
-export const NORSK_DATO_FORMAT = 'DD.MM.YYYY';
-export const NORSK_DATO_FORMAT_FN = 'dd.MM.yyyy';
-export const NORSK_DATO_FORMAT_SHORT = 'DD.MM.YY';
-export const NORSK_DATO_OG_TID_FORMAT = 'DD.MM.YYYY HH:mm';
+export const NORSK_MÅNEDÅR_FORMAT = 'yyyy/MM';
+export const NORSK_DATO_FORMAT = 'dd.MM.yyyy';
+export const NORSK_DATO_FORMAT_SHORT = 'dd.MM.yy';
+export const NORSK_DATO_OG_TID_FORMAT = 'dd.MM.yyyy HH:mm';
 
-export const formatterDato = (dato: string, format: string = NORSK_DATO_FORMAT) => {
+export const formaterDato = (dato: Date | string, formatString: string = NORSK_DATO_FORMAT) => {
     try {
-        const formattertDato = moment(dato).format(format);
-        return !formattertDato.includes('NaN') ? formattertDato : dato;
+        return format(dato, formatString, { locale: nb });
     } catch {
-        // Kunne ikke caste stringen til dato.
+        if (dato instanceof Date) {
+            return dato.toLocaleDateString('no-nb');
+        }
         return dato;
     }
 };
 
-export const formaterDatoFn = (dato: Date | string, formatString: string = NORSK_DATO_FORMAT_FN) => {
-    try {
-        return format(dato, formatString, { locale: nb });
-    } catch {
-        return 'Ugyldig dato';
-    }
+export const beregnDagenEtterOgFormater = (dato: string | Date, format: string = NORSK_DATO_FORMAT) => {
+    return formaterDato(addDays(dato, 1), format);
 };
 
-export const formatterPeriode = (fra: string, til: string, format: string = NORSK_DATO_FORMAT) => {
-    return formatterDato(fra, format) + ' – ' + formatterDato(til, format);
+export const formaterPeriode = (fra: string, til: string, format: string = NORSK_DATO_FORMAT) => {
+    return formaterDato(fra, format) + ' – ' + formaterDato(til, format);
 };
 
 export const getMåned = (dato: string) => {
     try {
-        const formattertDato = moment(dato).format('MMMM');
-        return !formattertDato.includes('NaN') ? storForbokstav(formattertDato) : dato;
+        const formatertDato = moment(dato).format('MMMM');
+        return !formatertDato.includes('NaN') ? storForbokstav(formatertDato) : dato;
     } catch {
         // Kunne ikke caste stringen til dato.
         return dato;

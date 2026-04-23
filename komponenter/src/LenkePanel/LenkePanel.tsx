@@ -2,7 +2,7 @@ import BEMHelper from '~/utils/bem';
 import { FunctionComponent } from 'react';
 import { LinkPanel, BodyShort } from '@navikt/ds-react';
 import { BegrensetRefusjon } from '~/types/refusjon';
-import { formatterDato, formatterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
+import { formaterDato, formaterPeriode, NORSK_DATO_FORMAT_SHORT } from '~/utils';
 import StatusTekst from '~/StatusTekst/StatusTekst';
 import { useNavigate } from 'react-router';
 interface Props {
@@ -40,7 +40,7 @@ const LenkePanel: FunctionComponent<Props> = ({ refusjoner }) => {
                     className={cls.element('title_row_column')}
                     aria-labelledby={cls.element('periode')}
                 >
-                    {formatterPeriode(
+                    {formaterPeriode(
                         refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                         refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
                         NORSK_DATO_FORMAT_SHORT
@@ -60,7 +60,7 @@ const LenkePanel: FunctionComponent<Props> = ({ refusjoner }) => {
                     className={cls.element('title_row_column')}
                     aria-labelledby={cls.element('frist-godkjenning')}
                 >
-                    {formatterDato(refusjon.fristForGodkjenning)}
+                    {formaterDato(refusjon.fristForGodkjenning)}
                 </BodyShort>
             </LinkPanel.Title>
         </LinkPanel>

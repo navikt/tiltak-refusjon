@@ -13,7 +13,7 @@ import sortBy from 'lodash.sortby';
 import { lønnsbeskrivelseTekst } from '~/types/messages';
 import { Korreksjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
-import { formatterDato, formatterPeriode, månedsNavn, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import { formaterDato, formaterPeriode, månedsNavn, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 const inntektBeskrivelse = (beskrivelse: string | undefined) => {
     if (beskrivelse === undefined) {
@@ -118,11 +118,11 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                                     return (
                                         <tr key={inntekt.id}>
                                             <td>{inntektBeskrivelse(inntekt.beskrivelse)}</td>
-                                            <td>{formatterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
+                                            <td>{formaterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
 
                                             <td>
                                                 {inntekt.opptjeningsperiodeFom && inntekt.opptjeningsperiodeTom ? (
-                                                    formatterPeriode(
+                                                    formaterPeriode(
                                                         inntekt.opptjeningsperiodeFom,
                                                         inntekt.opptjeningsperiodeTom,
                                                         'DD.MM'

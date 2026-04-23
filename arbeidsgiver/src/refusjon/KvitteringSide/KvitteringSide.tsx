@@ -15,7 +15,7 @@ import TidligereRefunderbarBeløpKvittering from '@/refusjon/RefusjonSide/Tidlig
 import Utregning from '@/komponenter/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, statusTekst, tiltakstypeTekst, RefusjonStatus, Refusjon } from '~/types';
-import { formatterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formaterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
@@ -25,7 +25,7 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
         return (
             <Tag variant="info">
                 {storForbokstav(statusTekst[refusjon.status])}{' '}
-                {refusjon.utbetaltTidspunkt && formatterDato(refusjon.utbetaltTidspunkt, NORSK_DATO_FORMAT)}
+                {refusjon.utbetaltTidspunkt && formaterDato(refusjon.utbetaltTidspunkt, NORSK_DATO_FORMAT)}
             </Tag>
         );
     } else {
@@ -33,7 +33,7 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
             <Tag variant="info">
                 {storForbokstav(statusTekst[refusjon.status])}{' '}
                 {refusjon.godkjentAvArbeidsgiver &&
-                    formatterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_OG_TID_FORMAT)}
+                    formaterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_OG_TID_FORMAT)}
             </Tag>
         );
     }

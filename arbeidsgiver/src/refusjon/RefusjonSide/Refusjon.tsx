@@ -15,7 +15,7 @@ import {
 import useSWRMutation from 'swr/mutation';
 import { mutate } from 'swr';
 import { RefusjonStatus } from '~/types/status';
-import { formatterDato } from '~/utils';
+import { beregnDagenEtterOgFormater, formaterDato } from '~/utils';
 import { Refusjon as RefusjonType } from '~/types/refusjon';
 import { BrukerContextType } from '~/types/brukerContextType';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
@@ -85,8 +85,8 @@ const Komponent: FunctionComponent = () => {
                         <>
                             <BodyShort style={{ marginBottom: '1rem' }}>
                                 Du kan søke om refusjon fra{' '}
-                                {formatterDato(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom)} når perioden
-                                er over.
+                                {beregnDagenEtterOgFormater(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom)}{' '}
+                                når perioden er over.
                             </BodyShort>
                             <BodyShort>
                                 Siste frist for å sende inn kravet er senest to måneder etter at perioden er over. Hvis
@@ -103,7 +103,7 @@ const Komponent: FunctionComponent = () => {
             return (
                 <FeilSide
                     advarselType="warning"
-                    feiltekst={`Fristen for å søke om refusjon for denne perioden gikk ut ${formatterDato(
+                    feiltekst={`Fristen for å søke om refusjon for denne perioden gikk ut ${formaterDato(
                         refusjon.fristForGodkjenning
                     )}. Innvilget tilskudd er derfor trukket tilbake.`}
                 />

@@ -9,7 +9,7 @@ import { BodyShort, Heading, Label, Radio, RadioGroup, debounce } from '@navikt/
 import BruttolønnUtbetaltInput from '@/refusjon/RefusjonSide/BruttolønnUtbetaltInput';
 import BEMHelper from '~/utils/bem';
 import { Refusjon } from '~/types/refusjon';
-import { formatterPeriode, månedsNavn } from '~/utils';
+import { formaterPeriode, månedsNavn } from '~/utils';
 import { tiltakstypeTekst } from '~/types/messages';
 interface Properties {
     setVisRefusjonInnsending: Dispatch<SetStateAction<boolean>>;
@@ -24,7 +24,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<Properties> = ({ setVisR
     const [endringBruttoLønn, setEndringBruttoLønn] = useState<string>(endretBruttoLønn?.toString() ?? '');
 
     const refusjonNummer = `${tilskuddsgrunnlag.avtaleNr}-${tilskuddsgrunnlag.løpenummer}`;
-    const periode = formatterPeriode(
+    const periode = formaterPeriode(
         refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
         refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
         'DD.MM'
@@ -54,7 +54,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<Properties> = ({ setVisR
         <div className={cls.element('inntekter-fra-tiltaket-boks')}>
             <Heading level="3" size="small">
                 Inntekter som skal refunderes for{' '}
-                {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
+                {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
             </Heading>
             <VerticalSpacer rem={1} />
             <BodyShort size="small">

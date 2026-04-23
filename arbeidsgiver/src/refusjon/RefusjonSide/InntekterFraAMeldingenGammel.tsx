@@ -11,7 +11,7 @@ import Boks from '~/Boks';
 import { lønnsbeskrivelseTekst } from '~/types/messages';
 import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
-import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import { formaterDato, formaterPeriode, NORSK_DATO_OG_TID_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 const inntektBeskrivelse = (beskrivelse: string | undefined) => {
     if (beskrivelse === undefined) {
@@ -51,7 +51,7 @@ const InntekterFraAMeldingen: FunctionComponent<Props> = ({ refusjon }) => {
             {refusjon.refusjonsgrunnlag.inntektsgrunnlag && (
                 <BodyShort size="small">
                     Sist hentet:{' '}
-                    {formatterDato(
+                    {formaterDato(
                         refusjon.refusjonsgrunnlag.inntektsgrunnlag.innhentetTidspunkt,
                         NORSK_DATO_OG_TID_FORMAT
                     )}
@@ -89,11 +89,11 @@ const InntekterFraAMeldingen: FunctionComponent<Props> = ({ refusjon }) => {
                                 ).map((inntekt) => (
                                     <tr key={inntekt.id}>
                                         <td>{inntektBeskrivelse(inntekt.beskrivelse)}</td>
-                                        <td>{formatterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
+                                        <td>{formaterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
 
                                         <td>
                                             {inntekt.opptjeningsperiodeFom && inntekt.opptjeningsperiodeTom ? (
-                                                formatterPeriode(
+                                                formaterPeriode(
                                                     inntekt.opptjeningsperiodeFom,
                                                     inntekt.opptjeningsperiodeTom,
                                                     'DD.MM'

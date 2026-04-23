@@ -4,7 +4,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { formatterPenger } from '../utils/PengeUtils';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
-import { formatterPeriode } from '~/utils';
+import { formaterPeriode } from '~/utils';
 import Boks from '~/Boks';
 
 const KorreksjonSummeringBoks: FunctionComponent<{ refusjonsgrunnlag: Refusjonsgrunnlag }> = ({
@@ -24,7 +24,7 @@ const KorreksjonSummeringBoks: FunctionComponent<{ refusjonsgrunnlag: Refusjonsg
                                 Dere skylder{' '}
                                 <b>{formatterPenger(Math.abs(refusjonsgrunnlag.beregning?.refusjonsbeløp || 0))}</b> for
                                 perioden{' '}
-                                {formatterPeriode(
+                                {formaterPeriode(
                                     refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                     refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                                 )}
@@ -39,7 +39,7 @@ const KorreksjonSummeringBoks: FunctionComponent<{ refusjonsgrunnlag: Refusjonsg
                             <VerticalSpacer rem={0.5} />
                             <BodyShort size="small">
                                 <b>{formatterPenger(refusjonsgrunnlag.beregning?.refusjonsbeløp || 0)}</b> for perioden{' '}
-                                {formatterPeriode(
+                                {formaterPeriode(
                                     refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                     refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                                 )}{' '}

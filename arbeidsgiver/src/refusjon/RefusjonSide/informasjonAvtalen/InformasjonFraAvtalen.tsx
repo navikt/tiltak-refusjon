@@ -8,7 +8,7 @@ import KIDInputValidator from '~/KIDInputValidator';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, tiltakstypeTekst } from '~/types';
 import { Refusjon } from '~/types/refusjon';
-import { formatterDato, formatterPeriode } from '~/utils';
+import { formaterDato, formaterPeriode } from '~/utils';
 import { formatterPenger } from '~/utils/PengeUtils';
 import React, { useCallback } from 'react';
 import { lagreBedriftKID } from '@/services/rest-service';
@@ -81,7 +81,7 @@ const InformasjonFraAvtalen = (props: Props) => {
             <IkonRad>
                 <Label>Periode: </Label>
                 <BodyShort size="small">
-                    {formatterPeriode(
+                    {formaterPeriode(
                         refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                         refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                     )}
@@ -90,7 +90,7 @@ const InformasjonFraAvtalen = (props: Props) => {
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Frist: </Label>
-                <BodyShort size="small">{formatterDato(refusjon.fristForGodkjenning)}</BodyShort>
+                <BodyShort size="small">{formaterDato(refusjon.fristForGodkjenning)}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>

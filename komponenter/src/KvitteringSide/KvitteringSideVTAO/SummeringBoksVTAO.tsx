@@ -1,7 +1,7 @@
 import Pengesedler from '@/asset/image/pengesedler.svg?react';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import { formatterPeriode } from '../../utils/datoUtils';
+import { formaterPeriode } from '../../utils/datoUtils';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import Boks from '~/Boks';
 import VerticalSpacer from '~/VerticalSpacer';
@@ -20,7 +20,7 @@ const SummeringBoksVTAO: FunctionComponent<{ refusjonsgrunnlag: Refusjonsgrunnla
                 <VerticalSpacer rem={0.5} />
                 <BodyShort size="small">
                     <b>{formatterPenger(tilskuddsgrunnlag.tilskuddsbeløp || 0)}</b> for perioden{' '}
-                    {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)} til kontonummer{' '}
+                    {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)} til kontonummer{' '}
                     {bedriftKontonummer}
                 </BodyShort>
                 <VerticalSpacer rem={1} />

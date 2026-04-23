@@ -10,7 +10,7 @@ import Utregning from '@/komponenter/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, KorreksjonStatus, korreksjonStatusTekst } from '~/types';
 import { Korreksjon, Refusjon } from '~/types/refusjon';
-import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formaterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
 
 import InntekterFraAMeldingenKorreksjon from './InntekterFraAMeldingenKorreksjon';
@@ -34,7 +34,7 @@ const KvitteringKorreksjon = (props: Props) => {
                     <Tag variant="info">
                         {storForbokstav(korreksjonStatusTekst[korreksjon.status])}{' '}
                         {korreksjon.status === KorreksjonStatus.TILLEGSUTBETALING &&
-                            formatterDato(korreksjon.godkjentTidspunkt!, NORSK_DATO_OG_TID_FORMAT)}
+                            formaterDato(korreksjon.godkjentTidspunkt!, NORSK_DATO_OG_TID_FORMAT)}
                     </Tag>
                 </div>
                 <VerticalSpacer rem={1} />
@@ -77,7 +77,7 @@ const KvitteringKorreksjon = (props: Props) => {
                                 Kvittering for refusjon
                             </Heading>
                             <Tag variant="info">
-                                Sendt krav {formatterDato(refusjon.godkjentAvArbeidsgiver!, NORSK_DATO_OG_TID_FORMAT)}
+                                Sendt krav {formaterDato(refusjon.godkjentAvArbeidsgiver!, NORSK_DATO_OG_TID_FORMAT)}
                             </Tag>
                         </div>
                         <VerticalSpacer rem={1} />

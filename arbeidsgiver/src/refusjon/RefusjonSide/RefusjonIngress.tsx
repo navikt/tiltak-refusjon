@@ -4,7 +4,7 @@ import { Tag, BodyShort, Heading } from '@navikt/ds-react';
 import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import { storForbokstav } from '~/utils/stringUtils';
-import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formaterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { statusTekst, tiltakstypeTekst } from '~/types/messages';
 import EksternLenke from '~/EksternLenke/EksternLenke';
 
@@ -24,7 +24,7 @@ const RefusjonIngress: FunctionComponent<Properties> = ({ refusjon }: PropsWithC
                 <Tag variant="info" size="small">
                     {storForbokstav(statusTekst[refusjon.status])}{' '}
                     {refusjon.godkjentAvArbeidsgiver &&
-                        formatterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_OG_TID_FORMAT)}
+                        formaterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_OG_TID_FORMAT)}
                 </Tag>
             </div>
             <BodyShort size="small" className={cls.element('ingress-text')}>

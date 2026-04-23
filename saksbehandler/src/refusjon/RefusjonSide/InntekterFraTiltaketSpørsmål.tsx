@@ -7,7 +7,7 @@ import { BodyShort, Heading, Label, Radio, RadioGroup, TextField } from '@navikt
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { endreBruttolønn, useHentKorreksjon } from '@/services/rest-service';
 import { formatterPenger } from '@/utils/PengeUtils';
-import { formatterPeriode, månedsNavn } from '~/utils';
+import { formaterPeriode, månedsNavn } from '~/utils';
 import { sumInntekterOpptjentIPeriode } from '@/utils/inntekterUtils';
 import { tiltakstypeTekst } from '~/types/messages';
 
@@ -24,7 +24,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
     const [endretBruttoLønn, setEndretBruttoLønn] = useState(refusjonsgrunnlag.endretBruttoLønn);
 
     const refusjonNummer = `${tilskuddsgrunnlag.avtaleNr}-${tilskuddsgrunnlag.løpenummer}`;
-    const periode = formatterPeriode(
+    const periode = formaterPeriode(
         korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
         korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
         'DD.MM'
@@ -59,7 +59,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
         <div className={styles.gronnBoks}>
             <Heading size="small">
                 Inntekter som skal refunderes for{' '}
-                {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
+                {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
             </Heading>
             <VerticalSpacer rem={1} />
             <BodyShort size="small">
