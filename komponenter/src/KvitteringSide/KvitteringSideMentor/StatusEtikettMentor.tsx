@@ -17,7 +17,7 @@ const refusjonSendesDato = (refusjon: Refusjon): string => {
     const tidligsteDato = isBefore(enDagEtterTilskuddsperioden, morgendagensDato)
         ? morgendagensDato
         : enDagEtterTilskuddsperioden;
-    return formaterDato(tidligsteDato.toString());
+    return formaterDato(tidligsteDato);
 };
 
 export type StatusEtikettProps = { refusjon: Refusjon };

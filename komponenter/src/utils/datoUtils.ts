@@ -6,24 +6,26 @@ import { nb } from 'date-fns/locale';
 
 moment.locale('nb');
 
+export const NORSK_DATO_MÅNED_FORMAT = 'dd.MM';
 export const NORSK_MÅNEDÅR_FORMAT = 'yyyy/MM';
 export const NORSK_DATO_FORMAT = 'dd.MM.yyyy';
 export const NORSK_DATO_FORMAT_SHORT = 'dd.MM.yy';
 export const NORSK_DATO_OG_TID_FORMAT = 'dd.MM.yyyy HH:mm';
 
-export const formaterDato = (dato: Date | string, formatString: string = NORSK_DATO_FORMAT) => {
+export const formaterDato = (dato: Date | string, formatString: string = NORSK_DATO_FORMAT): string => {
     try {
-        return format(dato, formatString, { locale: nb });
+        return format(new Date(dato), formatString, { locale: nb });
     } catch {
-        if (dato instanceof Date) {
-            return dato.toLocaleDateString('no-nb');
-        }
-        return dato;
+        return String(dato);
     }
 };
 
-export const beregnDagenEtterOgFormater = (dato: string | Date, format: string = NORSK_DATO_FORMAT) => {
-    return formaterDato(addDays(dato, 1), format);
+export const beregnDagenEtterOgFormater = (dato: string | Date, format: string = NORSK_DATO_FORMAT): string => {
+    try {
+        return formaterDato(addDays(new Date(dato), 1), format);
+    } catch {
+        return String(dato);
+    }
 };
 
 export const formaterPeriode = (fra: string, til: string, format: string = NORSK_DATO_FORMAT) => {

@@ -5,7 +5,7 @@ import { inntektBeskrivelse } from '../InntekterFraAMeldingen';
 import InntektValg from './InntektValg';
 import sortBy from 'lodash.sortby';
 import { Inntektslinje } from '~/types/refusjon';
-import { formaterDato, formaterPeriode, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import { formaterDato, formaterPeriode, NORSK_DATO_MÅNED_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 type Props = {
     inntektslinjer: Inntektslinje[];
@@ -31,7 +31,11 @@ const InntektsmeldingTabellBody: FunctionComponent<Props> = (props) => {
                     <td>{formaterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
                     <td>
                         {inntekt.opptjeningsperiodeFom && inntekt.opptjeningsperiodeTom ? (
-                            formaterPeriode(inntekt.opptjeningsperiodeFom, inntekt.opptjeningsperiodeTom, 'DD.MM')
+                            formaterPeriode(
+                                inntekt.opptjeningsperiodeFom,
+                                inntekt.opptjeningsperiodeTom,
+                                NORSK_DATO_MÅNED_FORMAT
+                            )
                         ) : (
                             <em>Ikke rapportert opptjenings&shy;periode</em>
                         )}

@@ -6,7 +6,7 @@ import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import Boks from '~/Boks';
 import { valgtBruttoLønn } from '@/utils/inntekterUtiles';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
-import { formaterPeriode, månedsNavn } from '~/utils';
+import { formaterPeriode, månedsNavn, NORSK_DATO_MÅNED_FORMAT } from '~/utils';
 import { tiltakstypeTekst } from '~/types/messages';
 
 type Props = {
@@ -18,7 +18,7 @@ const InntekterFraTiltaketSvar: FunctionComponent<Props> = (props) => {
     const periode = formaterPeriode(
         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
-        'DD.MM'
+        NORSK_DATO_MÅNED_FORMAT
     );
 
     if (

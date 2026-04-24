@@ -7,7 +7,7 @@ import { BodyShort, Heading, Label, Radio, RadioGroup, TextField } from '@navikt
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { endreBruttolønn, useHentKorreksjon } from '@/services/rest-service';
 import { formatterPenger } from '@/utils/PengeUtils';
-import { formaterPeriode, månedsNavn } from '~/utils';
+import { formaterPeriode, månedsNavn, NORSK_DATO_MÅNED_FORMAT } from '~/utils';
 import { sumInntekterOpptjentIPeriode } from '@/utils/inntekterUtils';
 import { tiltakstypeTekst } from '~/types/messages';
 
@@ -27,7 +27,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
     const periode = formaterPeriode(
         korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
         korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
-        'DD.MM'
+        NORSK_DATO_MÅNED_FORMAT
     );
 
     if (!refusjonsgrunnlag.inntektsgrunnlag) {

@@ -8,7 +8,7 @@ import { inntektBeskrivelse } from './inntektsmelding/InntekterFraAMeldingen';
 import '../RefusjonSide/InntekterFraAMeldingen.less';
 import { Inntektslinje } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
-import { formaterDato, formaterPeriode, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import { formaterDato, formaterPeriode, NORSK_DATO_MÅNED_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 type Props = {
     inntekter: Inntektslinje[];
@@ -52,7 +52,7 @@ const InntekterOpptjentIPeriodeTabell: FunctionComponent<Props> = (props) => {
                                     formaterPeriode(
                                         inntekt.opptjeningsperiodeFom,
                                         inntekt.opptjeningsperiodeTom,
-                                        'DD.MM'
+                                        NORSK_DATO_MÅNED_FORMAT
                                     )
                                 ) : (
                                     <em>Ikke rapportert opptjenings&shy;periode</em>

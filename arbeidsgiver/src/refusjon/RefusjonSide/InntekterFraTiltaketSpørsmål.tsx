@@ -9,7 +9,7 @@ import { BodyShort, Heading, Label, Radio, RadioGroup, debounce } from '@navikt/
 import BruttolønnUtbetaltInput from '@/refusjon/RefusjonSide/BruttolønnUtbetaltInput';
 import BEMHelper from '~/utils/bem';
 import { Refusjon } from '~/types/refusjon';
-import { formaterPeriode, månedsNavn } from '~/utils';
+import { formaterPeriode, månedsNavn, NORSK_DATO_MÅNED_FORMAT } from '~/utils';
 import { tiltakstypeTekst } from '~/types/messages';
 interface Properties {
     setVisRefusjonInnsending: Dispatch<SetStateAction<boolean>>;
@@ -27,7 +27,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<Properties> = ({ setVisR
     const periode = formaterPeriode(
         refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
         refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
-        'DD.MM'
+        NORSK_DATO_MÅNED_FORMAT
     );
 
     useEffect(() => {

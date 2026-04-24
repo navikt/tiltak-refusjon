@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Tag } from '@navikt/ds-react';
 import { statusTekst } from '../types/messages';
 import { RefusjonStatus } from '../types/status';
-import { formaterDato } from '../utils/datoUtils';
+import { formaterDato, beregnDagenEtterOgFormater } from '../utils/datoUtils';
 import { storForbokstav } from '../utils/stringUtils';
 import { Tiltak } from '../types/tiltak';
 import moment from 'moment';
@@ -32,7 +32,7 @@ const StatusTekst = (props: Props) => {
         }
         return (
             <Tag variant="info" size="small">
-                Søk fra {formaterDato(props.tilskuddTom)}
+                Søk fra {beregnDagenEtterOgFormater(props.tilskuddTom)}
             </Tag>
         );
     } else if (props.status === RefusjonStatus.UTBETALT) {

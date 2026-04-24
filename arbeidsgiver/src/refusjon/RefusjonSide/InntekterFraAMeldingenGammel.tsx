@@ -11,7 +11,13 @@ import Boks from '~/Boks';
 import { lønnsbeskrivelseTekst } from '~/types/messages';
 import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
-import { formaterDato, formaterPeriode, NORSK_DATO_OG_TID_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import {
+    formaterDato,
+    formaterPeriode,
+    NORSK_DATO_MÅNED_FORMAT,
+    NORSK_DATO_OG_TID_FORMAT,
+    NORSK_MÅNEDÅR_FORMAT,
+} from '~/utils';
 
 const inntektBeskrivelse = (beskrivelse: string | undefined) => {
     if (beskrivelse === undefined) {
@@ -96,7 +102,7 @@ const InntekterFraAMeldingen: FunctionComponent<Props> = ({ refusjon }) => {
                                                 formaterPeriode(
                                                     inntekt.opptjeningsperiodeFom,
                                                     inntekt.opptjeningsperiodeTom,
-                                                    'DD.MM'
+                                                    NORSK_DATO_MÅNED_FORMAT
                                                 )
                                             ) : (
                                                 <em>Ikke rapportert opptjenings&shy;periode</em>

@@ -5,7 +5,13 @@ import VerticalSpacer from '~/VerticalSpacer';
 import sortBy from 'lodash.sortby';
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 import { Inntektsgrunnlag } from '~/types/refusjon';
-import { formaterDato, formaterPeriode, NORSK_DATO_OG_TID_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import {
+    formaterDato,
+    formaterPeriode,
+    NORSK_DATO_MÅNED_FORMAT,
+    NORSK_DATO_OG_TID_FORMAT,
+    NORSK_MÅNEDÅR_FORMAT,
+} from '~/utils';
 import { formatterPenger } from '@/utils/PengeUtils';
 import { lønnsbeskrivelseTekst } from '~/types/messages';
 
@@ -79,7 +85,7 @@ const InntekterFraAMeldingenGammel: FunctionComponent<{
                                                 formaterPeriode(
                                                     inntekt.opptjeningsperiodeFom,
                                                     inntekt.opptjeningsperiodeTom,
-                                                    'DD.MM'
+                                                    NORSK_DATO_MÅNED_FORMAT
                                                 )
                                             ) : (
                                                 <em>Ikke rapportert opptjenings&shy;periode</em>
