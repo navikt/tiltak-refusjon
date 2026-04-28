@@ -11,7 +11,7 @@ import { Nettressurs, Status } from '~/nettressurs';
 import BEMHelper from '~/utils/bem';
 import { hendelseTekst } from '~/types/messages';
 import { Hendelse, HendelseType } from '~/types/refusjon';
-import { formatterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formaterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
 
 type Props = {
@@ -133,10 +133,10 @@ const HendelsesLogg: FunctionComponent<Props> = (props) => {
                                         <Table.Row key={varsel.id} role="row">
                                             <Table.DataCell role="cell" aria-labelledby="tidspunkt">
                                                 <UtgråetTekst
-                                                    title={formatterDato(varsel.tidspunkt)}
+                                                    title={formaterDato(varsel.tidspunkt)}
                                                     grå={varsel.skjules}
                                                 >
-                                                    {formatterDato(varsel.tidspunkt, NORSK_DATO_OG_TID_FORMAT)}
+                                                    {formaterDato(varsel.tidspunkt, NORSK_DATO_OG_TID_FORMAT)}
                                                 </UtgråetTekst>
                                             </Table.DataCell>
                                             <Table.DataCell
@@ -149,7 +149,7 @@ const HendelsesLogg: FunctionComponent<Props> = (props) => {
                                                     <HendelseIkon hendelse={varsel.event as HendelseType} />
                                                     <span style={{ marginLeft: '0.2rem' }}>
                                                         <UtgråetTekst
-                                                            title={formatterDato(varsel.tidspunkt)}
+                                                            title={formaterDato(varsel.tidspunkt)}
                                                             grå={varsel.skjules}
                                                         >
                                                             {hendelseVarselTekst(varsel)}
@@ -161,7 +161,7 @@ const HendelsesLogg: FunctionComponent<Props> = (props) => {
                                                 <div className={'ikonRad'} aria-labelledby="varsel">
                                                     <span style={{ marginRight: '0.5rem' }} aria-hidden="true">
                                                         <UtgråetTekst
-                                                            title={formatterDato(varsel.tidspunkt)}
+                                                            title={formaterDato(varsel.tidspunkt)}
                                                             grå={varsel.skjules}
                                                         >
                                                             {storForbokstav(varsel.utførtAv ? varsel.utførtAv : '')}

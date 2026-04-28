@@ -6,7 +6,7 @@ import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import Boks from '~/Boks';
 import { valgtBruttoLønn } from '@/utils/inntekterUtiles';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
-import { formatterPeriode, månedsNavn } from '~/utils';
+import { formaterPeriode, månedsNavn, NORSK_DATO_MÅNED_FORMAT } from '~/utils';
 import { tiltakstypeTekst } from '~/types/messages';
 
 type Props = {
@@ -15,10 +15,10 @@ type Props = {
 
 const InntekterFraTiltaketSvar: FunctionComponent<Props> = (props) => {
     const refusjonNummer = `${props.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-${props.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}`;
-    const periode = formatterPeriode(
+    const periode = formaterPeriode(
         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
-        'DD.MM'
+        NORSK_DATO_MÅNED_FORMAT
     );
 
     if (
@@ -38,7 +38,7 @@ const InntekterFraTiltaketSvar: FunctionComponent<Props> = (props) => {
             <Boks variant="grønn">
                 <Heading size="small">
                     Inntekter som refunderes for{' '}
-                    {formatterPeriode(
+                    {formaterPeriode(
                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                     )}

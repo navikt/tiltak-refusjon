@@ -6,7 +6,7 @@ import { formatterPenger } from '~/utils/PengeUtils';
 import { Alert, Label, BodyShort, Heading } from '@navikt/ds-react';
 import Boks from '~/Boks';
 import { tiltakstypeTekst } from '~/types/messages';
-import { formatterPeriode } from '~/utils';
+import { formaterPeriode } from '~/utils';
 
 type AlertStripeType = 'info' | 'success' | 'warning' | 'error';
 
@@ -29,7 +29,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
             <VerticalSpacer rem={1} />
             <Label>Periode:</Label>
             <BodyShort size="small">
-                {formatterPeriode(
+                {formaterPeriode(
                     refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                     refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                 )}

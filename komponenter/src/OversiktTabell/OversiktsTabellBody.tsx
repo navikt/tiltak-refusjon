@@ -2,7 +2,7 @@ import { Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router';
 import StatusTekst from '~/StatusTekst';
-import { formatterDato, formatterPeriode } from '~/utils';
+import { formaterDato, formaterPeriode } from '~/utils';
 import { BegrensetRefusjon } from '~/types/refusjon';
 import { kunStorForbokstav } from '~/utils/stringUtils';
 import { tiltakstypeTekstKort } from '~/types/messages';
@@ -74,7 +74,7 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
                         />
                     </Table.DataCell>
                     <Table.DataCell textSize="small">
-                        {formatterPeriode(
+                        {formaterPeriode(
                             refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                             refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,
                             NORSK_DATO_FORMAT_SHORT
@@ -90,7 +90,7 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
                         />
                     </Table.DataCell>
                     <Table.DataCell textSize="small">
-                        {skalViseGodkjenningsfrist(refusjon) ? formatterDato(refusjon.fristForGodkjenning) : ''}
+                        {skalViseGodkjenningsfrist(refusjon) ? formaterDato(refusjon.fristForGodkjenning) : ''}
                     </Table.DataCell>
                 </Table.Row>
             ))}

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Heading, TextField } from '@navikt/ds-react';
 import { Tilskuddsgrunnlag } from '~/types/refusjon';
-import { formatterPeriode } from '~/utils';
+import { formaterPeriode } from '~/utils';
 import VerticalSpacer from '~/VerticalSpacer';
 import Boks from '~/Boks';
 import { formatterPenger } from '~/utils/PengeUtils';
@@ -14,7 +14,7 @@ const TilskuddssatsVTAO: FunctionComponent<Props> = ({ tilskuddsgrunnlag }) => {
     return (
         <Boks variant="grønn">
             <Heading level="3" size="small">
-                Refusjon for {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
+                Refusjon for {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
             </Heading>
             <VerticalSpacer rem={1} />
             <TextField

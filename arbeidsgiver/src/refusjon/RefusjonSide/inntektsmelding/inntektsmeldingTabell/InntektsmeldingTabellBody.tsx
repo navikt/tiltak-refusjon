@@ -6,7 +6,7 @@ import { inntektBeskrivelse } from '../InntekterFraAMeldingen';
 import InntektValg from './InntektValg';
 import { valgtBruttoLønn } from '@/utils/inntekterUtiles';
 import { Inntektslinje } from '~/types/refusjon';
-import { formatterDato, formatterPeriode, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import { formaterDato, formaterPeriode, NORSK_DATO_MÅNED_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 type Props = {
     refusjonId: string;
@@ -24,11 +24,15 @@ const InntektsmeldingTabellBody: FunctionComponent<Props> = (props) => {
             ).map((inntekt) => (
                 <tr key={inntekt.id}>
                     <td>{inntektBeskrivelse(inntekt.beskrivelse)}</td>
-                    <td>{formatterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
+                    <td>{formaterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
 
                     <td>
                         {inntekt.opptjeningsperiodeFom && inntekt.opptjeningsperiodeTom ? (
-                            formatterPeriode(inntekt.opptjeningsperiodeFom, inntekt.opptjeningsperiodeTom, 'DD.MM')
+                            formaterPeriode(
+                                inntekt.opptjeningsperiodeFom,
+                                inntekt.opptjeningsperiodeTom,
+                                NORSK_DATO_MÅNED_FORMAT
+                            )
                         ) : (
                             <em>Ikke rapportert opptjenings&shy;periode</em>
                         )}

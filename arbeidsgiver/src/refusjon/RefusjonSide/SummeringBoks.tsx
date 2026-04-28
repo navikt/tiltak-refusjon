@@ -8,7 +8,7 @@ import { formatterPenger } from '~/utils/PengeUtils';
 import Boks from '~/Boks';
 import { Refusjonsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
-import { formatterPeriode } from '~/utils';
+import { formaterPeriode } from '~/utils';
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
@@ -37,7 +37,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                     <VerticalSpacer rem={0.5} />
                     <BodyShort size="small">
                         <b>{formatterPenger(props.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0)}</b> for perioden{' '}
-                        {formatterPeriode(
+                        {formaterPeriode(
                             props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                             props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                         )}{' '}
@@ -71,7 +71,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                                         Godta{' '}
                                         <b>{formatterPenger(props.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0)}</b>{' '}
                                         for perioden{' '}
-                                        {formatterPeriode(
+                                        {formaterPeriode(
                                             props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                             props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                                         )}{' '}
@@ -83,7 +83,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                             <>
                                 <Label>
                                     Refusjonen er godtatt med {formatterPenger(0)} for perioden{' '}
-                                    {formatterPeriode(
+                                    {formaterPeriode(
                                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                                     )}
@@ -138,7 +138,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                                 {formatterPenger(Math.abs(props.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0))}
                             </b>{' '}
                             <b>{formatterPenger(0)}</b> for perioden{' '}
-                            {formatterPeriode(
+                            {formaterPeriode(
                                 props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                 props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                             )}
@@ -149,7 +149,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                             Dere skylder{' '}
                             <b>{formatterPenger(Math.abs(props.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0))}</b>{' '}
                             for perioden{' '}
-                            {formatterPeriode(
+                            {formaterPeriode(
                                 props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                 props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                             )}

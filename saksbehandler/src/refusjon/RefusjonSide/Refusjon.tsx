@@ -13,7 +13,7 @@ import MerkForUnntakOmInntekterToMånederFrem from '@/refusjon/MerkForUnntakOmIn
 import TilbakeTilOversikt from '@/komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Tiltak, Korreksjonsgrunn, RefusjonStatus, BrukerContextType } from '~/types';
-import { formatterDato } from '~/utils';
+import { beregnDagenEtterOgFormater, formaterDato } from '~/utils';
 import { opprettKorreksjonsutkast, useHentRefusjon, useRefusjonKreverAktsomhet } from '@/services/rest-service';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 
@@ -115,7 +115,7 @@ const Komponent: FunctionComponent = () => {
                         aktsomhet={aktsomhet}
                         refusjon={refusjon}
                         advarselType="info"
-                        feiltekst={`Du kan søke om refusjon fra ${formatterDato(
+                        feiltekst={`Du kan søke om refusjon fra ${beregnDagenEtterOgFormater(
                             refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                         )} når perioden er over.`}
                     />
@@ -150,7 +150,7 @@ const Komponent: FunctionComponent = () => {
                         aktsomhet={aktsomhet}
                         refusjon={refusjon}
                         advarselType="warning"
-                        feiltekst={`Fristen for å søke om refusjon for denne perioden gikk ut ${formatterDato(
+                        feiltekst={`Fristen for å søke om refusjon for denne perioden gikk ut ${formaterDato(
                             refusjon.fristForGodkjenning
                         )}. Fristen kan ikke forlenges etter at den er utgått.`}
                     />

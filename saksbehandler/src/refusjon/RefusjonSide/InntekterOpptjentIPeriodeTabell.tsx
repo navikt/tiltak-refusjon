@@ -5,7 +5,7 @@ import sortBy from 'lodash.sortby';
 
 import { inntektBeskrivelse } from './InntekterFraAMeldingen/InntekterFraAMeldingen';
 import { Inntektslinje } from '~/types/refusjon';
-import { formatterDato, formatterPeriode, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import { formaterDato, formaterPeriode, NORSK_DATO_MÅNED_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
 
 import styles from './InntekterOpptjentIPeriodeTabell.module.less';
 
@@ -44,13 +44,13 @@ const InntekterOpptjentIPeriodeTabell: FunctionComponent<Props> = (props) => {
                     {sorterInntektslinjer(inntekterHuketAvForOpptjentIPeriode).map((inntekt) => (
                         <tr key={inntekt.id}>
                             <td>{inntektBeskrivelse(inntekt.beskrivelse)}</td>
-                            <td>{formatterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
+                            <td>{formaterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
                             <td>
                                 {inntekt.opptjeningsperiodeFom && inntekt.opptjeningsperiodeTom ? (
-                                    formatterPeriode(
+                                    formaterPeriode(
                                         inntekt.opptjeningsperiodeFom,
                                         inntekt.opptjeningsperiodeTom,
-                                        'DD.MM'
+                                        NORSK_DATO_MÅNED_FORMAT
                                     )
                                 ) : (
                                     <em>Ikke rapportert opptjenings&shy;periode</em>

@@ -9,7 +9,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Alert, Radio, RadioGroup, TextField, Heading, Label, BodyShort, debounce } from '@navikt/ds-react';
 import BEMHelper from '~/utils/bem';
 import { tiltakstypeTekst } from '~/types/messages';
-import { formatterDato } from '~/utils';
+import { formaterDato } from '~/utils';
 import { Refusjon } from '~/types/refusjon';
 
 interface Properties {
@@ -93,7 +93,7 @@ const TidligereRefunderbarBeløp: FunctionComponent<Properties> = ({ refusjon }:
             </RadioGroup>
             {fratrekk === true && (
                 <BodyShort size="small" className={cls.element('ny-frist')}>
-                    Ny frist for å søke refusjon: <strong>{formatterDato(refusjon.fristForGodkjenning)}</strong>
+                    Ny frist for å søke refusjon: <strong>{formaterDato(refusjon.fristForGodkjenning)}</strong>
                 </BodyShort>
             )}
 

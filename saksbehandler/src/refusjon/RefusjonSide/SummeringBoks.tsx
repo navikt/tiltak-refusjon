@@ -5,7 +5,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { Refusjonsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
 import { formatterPenger } from '@/utils/PengeUtils';
-import { formatterPeriode } from '~/utils';
+import { formaterPeriode } from '~/utils';
 
 import styles from './SummeringBoks.module.less';
 
@@ -35,7 +35,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                     <VerticalSpacer rem={0.5} />
                     <BodyShort size="small">
                         <b>{formatterPenger(props.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0)}</b> for perioden{' '}
-                        {formatterPeriode(
+                        {formaterPeriode(
                             props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                             props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                         )}{' '}
@@ -50,7 +50,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                     <BodyShort size="small">
                         <Label>
                             Refusjonen er godtatt med {formatterPenger(0)} for perioden{' '}
-                            {formatterPeriode(
+                            {formaterPeriode(
                                 props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                                 props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                             )}
@@ -95,7 +95,7 @@ const SummeringBoks: FunctionComponent<Props> = (props) => {
                         Dere skylder{' '}
                         <b>{formatterPenger(Math.abs(props.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0))}</b> for
                         perioden{' '}
-                        {formatterPeriode(
+                        {formaterPeriode(
                             props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
                             props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
                         )}

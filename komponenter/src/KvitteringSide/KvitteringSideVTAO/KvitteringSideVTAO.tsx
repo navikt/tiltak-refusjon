@@ -9,7 +9,7 @@ import Statusmelding from '~/KvitteringSide/Statusmelding';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Korreksjonsgrunn, Refusjon, RefusjonStatus, statusTekst } from '~/types';
 import { InnloggetBruker } from '~/types/brukerContextType';
-import { formatterDato, NORSK_DATO_FORMAT } from '~/utils';
+import { formaterDato, NORSK_DATO_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
 
 import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
@@ -27,7 +27,7 @@ const refusjonSendesDato = (refusjon: Refusjon): string => {
     const tidligsteDato = enDagEtterTilskuddsperioden.isBefore(morgendagensDato)
         ? morgendagensDato
         : enDagEtterTilskuddsperioden;
-    return formatterDato(tidligsteDato.toString());
+    return formaterDato(tidligsteDato.toString());
 };
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
@@ -41,14 +41,14 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
         return (
             <Tag variant="info">
                 {storForbokstav(statusetikettTekst)}{' '}
-                {refusjon.utbetaltTidspunkt && formatterDato(refusjon.utbetaltTidspunkt, NORSK_DATO_FORMAT)}
+                {refusjon.utbetaltTidspunkt && formaterDato(refusjon.utbetaltTidspunkt, NORSK_DATO_FORMAT)}
             </Tag>
         );
     } else {
         return (
             <Tag variant="info">
                 {storForbokstav(statusetikettTekst)}{' '}
-                {refusjon.godkjentAvArbeidsgiver && formatterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_FORMAT)}
+                {refusjon.godkjentAvArbeidsgiver && formaterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_FORMAT)}
             </Tag>
         );
     }

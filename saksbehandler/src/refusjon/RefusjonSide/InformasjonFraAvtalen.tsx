@@ -7,7 +7,7 @@ import Rad from '@/komponenter/Rad/Rad';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, tiltakstypeTekst } from '~/types';
 import { Tilskuddsgrunnlag } from '~/types/refusjon';
-import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formaterDato, formaterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { formatterPenger } from '@/utils/PengeUtils';
 
 interface Props {
@@ -64,16 +64,16 @@ const InformasjonFraAvtalen = (props: Props) => {
             <Rad>
                 <Label>Periode: </Label>
                 <BodyShort size="small">
-                    {formatterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
+                    {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
                 </BodyShort>
             </Rad>
             {fristForGodkjenning && (
                 <Rad>
                     <Label>Frist: </Label>
                     <BodyShort size="small">
-                        {formatterDato(fristForGodkjenning)}
+                        {formaterDato(fristForGodkjenning)}
                         {forrigeFristForGodkjenning
-                            ? `  (tidligere frist: ${formatterDato(forrigeFristForGodkjenning)})`
+                            ? `  (tidligere frist: ${formaterDato(forrigeFristForGodkjenning)})`
                             : ''}
                     </BodyShort>
                 </Rad>
@@ -88,7 +88,7 @@ const InformasjonFraAvtalen = (props: Props) => {
                     {bedriftKontonummerInnhentetTidspunkt ? (
                         <>
                             {bedriftKontonummer ?? 'Ikke funnet'} (hentet{' '}
-                            {formatterDato(bedriftKontonummerInnhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)})
+                            {formaterDato(bedriftKontonummerInnhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)})
                         </>
                     ) : (
                         'Ikke oppgitt'

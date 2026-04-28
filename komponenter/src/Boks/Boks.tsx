@@ -1,12 +1,11 @@
 import './Boks.less';
-import { Farger } from '~/utils/boksUtils';
 import { CSSProperties, FunctionComponent, PropsWithChildren } from 'react';
 import BEMHelper from '~/utils/bem';
 
 type Props = {
     className?: string;
     style?: CSSProperties;
-    variant: Farger;
+    variant: 'blå' | 'grønn' | 'grå' | 'hvit';
 };
 const cls = BEMHelper('boks');
 

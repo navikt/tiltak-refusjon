@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Refusjon, RefusjonStatus, statusTekst } from '~/types';
-import { formatterDato } from '~/utils';
+import { formaterDato } from '~/utils';
 import { Tag } from '@navikt/ds-react';
 import { addDays, isBefore } from 'date-fns';
 import { NORSK_DATO_FORMAT } from '~/utils/datoUtils';
@@ -17,7 +17,7 @@ const refusjonSendesDato = (refusjon: Refusjon): string => {
     const tidligsteDato = isBefore(enDagEtterTilskuddsperioden, morgendagensDato)
         ? morgendagensDato
         : enDagEtterTilskuddsperioden;
-    return formatterDato(tidligsteDato.toString());
+    return formaterDato(tidligsteDato);
 };
 
 export type StatusEtikettProps = { refusjon: Refusjon };
@@ -33,14 +33,14 @@ const StatusEtikettMentor = ({ refusjon }: StatusEtikettProps): ReactElement => 
         return (
             <Tag variant="info">
                 {storForbokstav(statusetikettTekst)}{' '}
-                {refusjon.utbetaltTidspunkt && formatterDato(refusjon.utbetaltTidspunkt, NORSK_DATO_FORMAT)}
+                {refusjon.utbetaltTidspunkt && formaterDato(refusjon.utbetaltTidspunkt, NORSK_DATO_FORMAT)}
             </Tag>
         );
     } else {
         return (
             <Tag variant="info">
                 {storForbokstav(statusetikettTekst)}{' '}
-                {refusjon.godkjentAvArbeidsgiver && formatterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_FORMAT)}
+                {refusjon.godkjentAvArbeidsgiver && formaterDato(refusjon.godkjentAvArbeidsgiver, NORSK_DATO_FORMAT)}
             </Tag>
         );
     }

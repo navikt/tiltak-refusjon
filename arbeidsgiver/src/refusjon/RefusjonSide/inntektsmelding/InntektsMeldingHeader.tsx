@@ -1,7 +1,7 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
-import { formatterDato, månedsNavn, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formaterDato, månedsNavn, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import BEMHelper from '~/utils/bem';
 
 interface Properties {
@@ -35,7 +35,7 @@ const InntektsMeldingHeader: FunctionComponent<Properties> = ({
             {refusjonsgrunnlag.inntektsgrunnlag && (
                 <BodyShort size="small">
                     Sist hentet:{' '}
-                    {formatterDato(refusjonsgrunnlag.inntektsgrunnlag.innhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)}
+                    {formaterDato(refusjonsgrunnlag.inntektsgrunnlag.innhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)}
                 </BodyShort>
             )}
         </div>

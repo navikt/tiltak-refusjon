@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Alert, BodyShort } from '@navikt/ds-react';
 import { RefusjonStatus } from '~/types/status';
-import { formatterDato, NORSK_DATO_FORMAT } from '~/utils/datoUtils';
+import { formaterDato, NORSK_DATO_FORMAT } from '~/utils/datoUtils';
 
 const Statusmelding: FunctionComponent<{
     status: RefusjonStatus;
@@ -20,7 +20,7 @@ const Statusmelding: FunctionComponent<{
             if (sendtTidspunkt) {
                 return (
                     <BodyShort size="small">
-                        Refusjonskravet ble sendt {formatterDato(sendtTidspunkt, NORSK_DATO_FORMAT)} og er nå utbetalt.
+                        Refusjonskravet ble sendt {formaterDato(sendtTidspunkt, NORSK_DATO_FORMAT)} og er nå utbetalt.
                     </BodyShort>
                 );
             }

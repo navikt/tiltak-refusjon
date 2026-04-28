@@ -5,7 +5,13 @@ import VerticalSpacer from '~/VerticalSpacer';
 import sortBy from 'lodash.sortby';
 import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 import { Inntektsgrunnlag } from '~/types/refusjon';
-import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import {
+    formaterDato,
+    formaterPeriode,
+    NORSK_DATO_MÅNED_FORMAT,
+    NORSK_DATO_OG_TID_FORMAT,
+    NORSK_MÅNEDÅR_FORMAT,
+} from '~/utils';
 import { formatterPenger } from '@/utils/PengeUtils';
 import { lønnsbeskrivelseTekst } from '~/types/messages';
 
@@ -43,8 +49,7 @@ const InntekterFraAMeldingenGammel: FunctionComponent<{
                 </Heading>
                 {props.inntektsgrunnlag && (
                     <BodyShort size="small">
-                        Sist hentet:{' '}
-                        {formatterDato(props.inntektsgrunnlag.innhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)}
+                        Sist hentet: {formaterDato(props.inntektsgrunnlag.innhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)}
                     </BodyShort>
                 )}
             </div>
@@ -73,14 +78,14 @@ const InntekterFraAMeldingenGammel: FunctionComponent<{
                                 ).map((inntekt) => (
                                     <tr key={inntekt.id}>
                                         <td>{inntektBeskrivelse(inntekt.beskrivelse)}</td>
-                                        <td>{formatterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
+                                        <td>{formaterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
 
                                         <td>
                                             {inntekt.opptjeningsperiodeFom && inntekt.opptjeningsperiodeTom ? (
-                                                formatterPeriode(
+                                                formaterPeriode(
                                                     inntekt.opptjeningsperiodeFom,
                                                     inntekt.opptjeningsperiodeTom,
-                                                    'DD.MM'
+                                                    NORSK_DATO_MÅNED_FORMAT
                                                 )
                                             ) : (
                                                 <em>Ikke rapportert opptjenings&shy;periode</em>

@@ -10,7 +10,7 @@ import KIDInputValidator from '~/KIDInputValidator';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Refusjonsgrunnlag, RefusjonStatus } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
-import { formatterDato, formatterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
+import { formaterDato, formaterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { lagId } from '~/utils/stringUtils';
 
 interface Props {
@@ -73,17 +73,17 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Avtaleperiode: </Label>
-                <BodyShort size="small">{formatterPeriode(avtaleFom || '', avtaleTom || '')}</BodyShort>
+                <BodyShort size="small">{formaterPeriode(avtaleFom || '', avtaleTom || '')}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Tilskuddsperiode: </Label>
-                <BodyShort size="small">{formatterPeriode(tilskuddFom, tilskuddTom)}</BodyShort>
+                <BodyShort size="small">{formaterPeriode(tilskuddFom, tilskuddTom)}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Forventet utbetalt: </Label>
-                <BodyShort size="small">{formatterDato(moment(tilskuddTom).add(3, 'days').toString())}</BodyShort>
+                <BodyShort size="small">{formaterDato(moment(tilskuddTom).add(3, 'days').toString())}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>
@@ -94,7 +94,7 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
                         {bedriftKontonummerInnhentetTidspunkt ? (
                             <>
                                 {bedriftKontonummer ?? 'Ikke funnet'} (hentet{' '}
-                                {formatterDato(bedriftKontonummerInnhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)})
+                                {formaterDato(bedriftKontonummerInnhentetTidspunkt, NORSK_DATO_OG_TID_FORMAT)})
                             </>
                         ) : (
                             'Ikke oppgitt'
