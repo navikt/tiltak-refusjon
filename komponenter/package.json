@@ -17,14 +17,12 @@
         "norsk-validator": "^1.2.0",
         "react": "^18.3.0",
         "react-responsive": "^10.0.1",
-        "react-router": "^7.9.4"
+        "react-router": "^7.14.2"
     },
     "devDependencies": {
         "@types/react": "^18.3.12",
         "@types/react-responsive": "^8.0.5",
-        "typescript": "^5.9.3",
-        "vite": "^6.4.1",
-        "vite-plugin-svgr": "^4.3.0"
+        "typescript": "^5.9.3"
     },
     "scripts": {
         "build": "tsc"
