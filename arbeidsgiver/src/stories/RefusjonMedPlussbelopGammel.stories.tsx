@@ -1,6 +1,6 @@
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
 import { Diskresjonskode } from '~/types';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
@@ -157,7 +157,7 @@ export const RefusjonPlussbelopGammel: Story = {
     name: 'Refusjon med plussbeløp (gammel visning)',
     args: { refusjon: refusjonPlussbelop },
     decorators: [
-        (Story, args) => (
+        ((Story, args) => (
             <div>
                 <h1>KvitteringSide: Refusjon med plussbeløp (gammel visning)</h1>
                 <p>
@@ -166,6 +166,6 @@ export const RefusjonPlussbelopGammel: Story = {
                 </p>
                 <Story {...args} />
             </div>
-        ),
+        )) as Decorator,
     ],
 };

@@ -1,6 +1,6 @@
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
 import { Diskresjonskode } from '~/types';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
@@ -146,11 +146,11 @@ export const RefusjonMinusbelop: Story = {
         innloggetBruker: { identifikator: '', harKorreksjonTilgang: false, rolle: 'ARBEIDSGIVER' },
     },
     decorators: [
-        (Story, args) => (
+        ((Story, args) => (
             <div>
                 <h1>KvitteringSide: Refusjon med minusbeløp</h1>
                 <Story {...args} />
             </div>
-        ),
+        )) as Decorator,
     ],
 };

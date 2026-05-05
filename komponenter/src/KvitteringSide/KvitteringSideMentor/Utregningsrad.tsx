@@ -8,8 +8,8 @@ import BEMHelper from '~/utils/bem';
 
 interface Props {
     labelIkon?: ReactNode;
-    labelTekst: string | JSX.Element;
-    labelSubtekst?: string | JSX.Element;
+    labelTekst: string | React.JSX.Element;
+    labelSubtekst?: string | React.JSX.Element;
     labelSats?: number;
     verdiOperator?: ReactNode;
     verdi: number | string;
