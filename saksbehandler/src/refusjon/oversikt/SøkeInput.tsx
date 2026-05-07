@@ -1,7 +1,7 @@
 import React, { FormEvent, FunctionComponent, useState } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
-import { Search } from '@navikt/ds-icons';
 import { TextField, TextFieldProps, Button } from '@navikt/ds-react';
+import { MagnifyingGlassIcon } from '@navikt/aksel-icons';
 
 interface Props {
     utførSøk: (søkeord: string) => void;
@@ -55,7 +55,7 @@ export const SøkeInput: FunctionComponent<Props & { textFieldProps?: TextFieldP
                 error={feil}
             />
             <VerticalSpacer rem={0.5} />
-            <Button variant="secondary" onClick={utførSøk} icon={<Search />}>
+            <Button variant="secondary" onClick={utførSøk} icon={<MagnifyingGlassIcon />}>
                 Søk
             </Button>
         </>

@@ -3,6 +3,12 @@ packages:
   - komponenter
   - saksbehandler
 
+allowBuilds:
+  '@sentry/cli': true
+  esbuild: true
+
 ignoredBuiltDependencies:
   - '@sentry/cli'
   - esbuild
+
+lockfileIncludeTarballUrl: true

@@ -1,4 +1,3 @@
-import { File } from '@navikt/ds-icons';
 import {
     EnvelopeClosedIcon,
     CheckmarkCircleIcon,
@@ -6,6 +5,7 @@ import {
     ClockIcon,
     PersonPencilIcon,
     XMarkOctagonIcon,
+    FileIcon,
 } from '@navikt/aksel-icons';
 import { FunctionComponent, ReactNode } from 'react';
 import { HendelseType } from '~/types/refusjon';
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const hendelsesIkon: { [key in HendelseType]: ReactNode } = {
-    RefusjonOpprettet: <File />,
+    RefusjonOpprettet: <FileIcon />,
     BeregningUtført: <DocPencilIcon />,
     GodkjentAvArbeidsgiver: <CheckmarkCircleIcon />,
     RefusjonGodkjentNullBeløp: <CheckmarkCircleIcon />,
