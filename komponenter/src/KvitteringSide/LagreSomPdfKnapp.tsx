@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
 import { Button } from '@navikt/ds-react';
 import { FileIcon } from '@navikt/aksel-icons';
 

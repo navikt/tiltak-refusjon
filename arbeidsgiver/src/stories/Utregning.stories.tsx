@@ -1,4 +1,4 @@
-import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Utregning from '@/komponenter/Utregning';
 import { Tiltak } from '~/types/tiltak';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
@@ -75,7 +75,7 @@ export const OppgjortMinusbeløp: Story = {
     name: 'Oppgjort minusbeløp',
     args: fratrekkData,
     decorators: [
-        ((Story, args) => (
+        (Story) => (
             <div>
                 <h1>Refusjon: Oppgjort minusbeløp, og over maks tilskudd</h1>
                 <p>
@@ -83,9 +83,9 @@ export const OppgjortMinusbeløp: Story = {
                     skyldig penger). Da må det beløpet trekkes fra i oppgjøret.
                 </p>
                 <p>Arbeidsgiver har også markert lønn som overstiger det avtalte tilskuddsbeløpet.</p>
-                <Story {...args} />
+                <Story />
             </div>
-        )) as Decorator,
+        ),
     ],
 };
 

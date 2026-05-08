@@ -1,6 +1,6 @@
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 
-import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Diskresjonskode } from '~/types';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
@@ -146,11 +146,11 @@ export const RefusjonMinusbelop: Story = {
     name: 'Refusjon med minusbeløp',
     args: { refusjon: refusjonMinusbelop },
     decorators: [
-        ((Story, args) => (
+        (Story) => (
             <div>
                 <h1>KvitteringSide: Refusjon med minusbeløp</h1>
-                <Story {...args} />
+                <Story />
             </div>
-        )) as Decorator,
+        ),
     ],
 };

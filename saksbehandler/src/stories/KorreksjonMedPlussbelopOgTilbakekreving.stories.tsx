@@ -1,5 +1,5 @@
 import KorreksjonKvitteringSide from '@/KorreksjonKvitteringSide/KorreksjonKvitteringSide';
-import type { Decorator, Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { Korreksjon } from '~/types/refusjon';
 import { Korreksjonsgrunn } from '~/types/refusjon';
 import { KorreksjonStatus } from '~/types/status';
@@ -136,11 +136,11 @@ export const KorreksjonMedPlussbelopOgTilbakekreving: Story = {
     name: 'Korreksjon med plussbeløp og tilbakekreving',
     args: { korreksjon: korreksjon },
     decorators: [
-        ((Story, args) => (
+        (Story) => (
             <div>
                 <h1>KvitteringKorreksjon: Korreksjon med plussbeløp og tilbakekreving</h1>
-                <Story {...args} />
+                <Story />
             </div>
-        )) as Decorator,
+        ),
     ],
 };

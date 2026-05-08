@@ -1,4 +1,5 @@
-import React, { FunctionComponent, PropsWithChildren, useRef, useState } from 'react';
+import type { FunctionComponent, PropsWithChildren } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { BodyLong, Button, Loader, Modal } from '@navikt/ds-react';
 import { useRefusjonKreverAktsomhet } from '@/services/rest-service';

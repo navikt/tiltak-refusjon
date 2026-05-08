@@ -1,5 +1,6 @@
 import { Alert, Loader, BodyShort, Heading } from '@navikt/ds-react';
-import React, { FunctionComponent, PropsWithChildren, Suspense } from 'react';
+import type { FunctionComponent, PropsWithChildren } from 'react';
+import { Suspense } from 'react';
 import * as Sentry from '@sentry/react';
 
 const ErrorBoundary: FunctionComponent<PropsWithChildren> = (props) => {

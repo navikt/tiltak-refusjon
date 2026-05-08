@@ -33,8 +33,9 @@ jobs:
           cache-dependency-path: pnpm-lock.yaml
       - name: Konfigurer pnpm
         run: |
+          pnpm config set @navikt:registry https://npm.pkg.github.com
           pnpm config set //npm.pkg.github.com/:_authToken $NODE_AUTH_TOKEN
-          pnpm config set engine-strict true
+          pnpm config set engine-strict true 
       - name: pnpm install
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Bygg storybook

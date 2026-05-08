@@ -15,7 +15,7 @@ const SummeringBoksMentor: FunctionComponent<Props> = (props) => {
     return (
         <Boks variant="blå">
             <div style={{ margin: 'auto 1.5rem auto 0' }}>
-                <Pengesedler />
+                <Pengesedler aria-hidden="true" focusable="false" />
             </div>
             <div>
                 <Label>Dere får utbetalt</Label>

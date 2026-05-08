@@ -28,8 +28,7 @@ jobs:
         run: |
           pnpm config set @navikt:registry https://npm.pkg.github.com
           pnpm config set //npm.pkg.github.com/:_authToken $NODE_AUTH_TOKEN
-          pnpm config set engine-strict true
-          
+          pnpm config set engine-strict true 
       - name: Installer
         run: pnpm install --frozen-lockfile
       - name: Installer - Saksbehandler/Server

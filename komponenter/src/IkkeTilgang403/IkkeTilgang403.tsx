@@ -33,7 +33,7 @@ function IkkeTilgang403(props: Props) {
 
     return (
         <Page.Block as="main" width="xl" gutters>
-            <Box paddingBlock="space-20 space-6">
+            <Box paddingBlock="space-20 space-16">
                 <Boks variant="hvit">
                     <VStack gap="space-12" align="start">
                         <div>
