@@ -32,8 +32,9 @@ jobs:
           cache: 'pnpm'
       - name: Konfigurer pnpm
         run: |
+          pnpm config set @navikt:registry https://npm.pkg.github.com
           pnpm config set //npm.pkg.github.com/:_authToken $NODE_AUTH_TOKEN
-          pnpm config set engine-strict true
+          pnpm config set engine-strict true 
       - name: Frontend pnpm install
         run: pnpm install --frozen-lockfile
       - name: Frontend - test, lint og bygg

@@ -157,10 +157,10 @@ export const RefusjonPlussbelop: Story = {
     name: 'Refusjon med plussbeløp',
     args: { refusjon: refusjonPlussbelop },
     decorators: [
-        (Story, args) => (
+        (Story) => (
             <div>
                 <h1>KvitteringSide: Refusjon med plussbeløp</h1>
-                <Story {...args} />
+                <Story />
             </div>
         ),
     ],

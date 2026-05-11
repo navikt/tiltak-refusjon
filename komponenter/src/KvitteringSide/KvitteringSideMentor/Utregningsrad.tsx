@@ -7,9 +7,9 @@ import { Tilskuddsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 
 interface Props {
-    labelIkon?: ReactNode;
-    labelTekst: string | JSX.Element;
-    labelSubtekst?: string | JSX.Element;
+    labelIkon?: string | ReactNode;
+    labelTekst: string | ReactNode;
+    labelSubtekst?: ReactNode;
     labelSats?: number;
     verdiOperator?: ReactNode;
     verdi: number | string;

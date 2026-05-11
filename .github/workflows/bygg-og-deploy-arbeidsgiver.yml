@@ -36,12 +36,13 @@ jobs:
           cache-dependency-path: pnpm-lock.yaml
       - name: Konfigurer pnpm
         run: |
+          pnpm config set @navikt:registry https://npm.pkg.github.com
           pnpm config set //npm.pkg.github.com/:_authToken $NODE_AUTH_TOKEN
-          pnpm config set engine-strict true
+          pnpm config set engine-strict true 
       - name: Installer
         run: pnpm install --frozen-lockfile --prefer-offline
       - name: Installer - Server
-        run: pnpm install --ignore-workspace --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile --prefer-offline
         working-directory: arbeidsgiver/server
       - name: Prettier
         run: pnpm run prettier

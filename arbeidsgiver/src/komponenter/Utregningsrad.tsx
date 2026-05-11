@@ -1,5 +1,5 @@
 import { BodyShort, Heading } from '@navikt/ds-react';
-import React, { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
+import type { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 
 import { formatterPenger } from '~/utils/PengeUtils';
 
@@ -8,11 +8,11 @@ import './Utregningsrad.less';
 import { Inntektslinje, Tilskuddsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 
-interface Props {
-    labelIkon?: React.ReactNode;
-    labelTekst: string | JSX.Element;
+interface UtregningsradProps {
+    labelIkon?: ReactNode;
+    labelTekst: ReactNode;
     labelSats?: number;
-    verdiOperator?: string | ReactNode;
+    verdiOperator?: ReactNode;
     verdi: number | string;
     ikkePenger?: boolean;
     border?: 'NORMAL' | 'TYKK' | 'INGEN';
@@ -24,8 +24,10 @@ interface Props {
 
 const cls = BEMHelper('utregning-rad');
 
-const Utregningsrad: FunctionComponent<PropsWithChildren<Props>> = (props) => {
-    const setIkon = (ikon?: React.ReactNode) =>
+const Utregningsrad: FunctionComponent<PropsWithChildren<UtregningsradProps>> = (
+    props: PropsWithChildren<UtregningsradProps>
+) => {
+    const setIkon = (ikon?: ReactNode) =>
         ikon ? ikon : <span className={cls.element('ikon-placeholder')} aria-hidden={true} />;
 
     const setOperator = (operator?: string | ReactNode) =>

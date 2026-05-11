@@ -157,10 +157,10 @@ export const RefusjonPlussbelop: Story = {
         innloggetBruker: { identifikator: '', harKorreksjonTilgang: false, rolle: 'ARBEIDSGIVER' },
     },
     decorators: [
-        (Story, args) => (
+        (Story) => (
             <div>
                 <h1>KvitteringSide: Refusjon med plussbeløp</h1>
-                <Story {...args} />
+                <Story />
             </div>
         ),
     ],

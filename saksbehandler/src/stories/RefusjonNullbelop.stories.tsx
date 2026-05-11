@@ -339,14 +339,14 @@ export const RefusjonNullbelop: Story = {
         innloggetBruker: { identifikator: '', harKorreksjonTilgang: false, rolle: 'ARBEIDSGIVER' },
     },
     decorators: [
-        (Story, args) => (
+        (Story) => (
             <div>
                 <h1>KvitteringSide: Refusjon med nullbeløp</h1>
                 <p>
                     Arbeidsgiveren har ikke oppgitt noe opptjent lønn i perioden, og dermed er det ikke noe penger å
                     utbetale.
                 </p>
-                <Story {...args} />
+                <Story />
             </div>
         ),
     ],

@@ -1,11 +1,10 @@
-import React, { FunctionComponent, PropsWithChildren, useRef, useState } from 'react';
+import type { FunctionComponent, PropsWithChildren } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { BodyLong, Button, Loader, Modal } from '@navikt/ds-react';
-import { Locked } from '@navikt/ds-icons';
-
 import { useRefusjonKreverAktsomhet } from '@/services/rest-service';
-
 import styles from './RefusjonKontroll.module.less';
+import { PadlockLockedIcon } from '@navikt/aksel-icons';
 
 const RefusjonKontroll: FunctionComponent<PropsWithChildren> = (props) => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
@@ -33,7 +32,7 @@ const RefusjonKontroll: FunctionComponent<PropsWithChildren> = (props) => {
                 ref={ref}
                 open={true}
                 header={{
-                    icon: <Locked title="Lås" />,
+                    icon: <PadlockLockedIcon title="Lås" />,
                     heading: 'Deltaker har adressebeskyttelse',
                 }}
                 onClose={() => {

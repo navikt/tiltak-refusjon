@@ -146,10 +146,10 @@ export const RefusjonMinusbelop: Story = {
         innloggetBruker: { identifikator: '', harKorreksjonTilgang: false, rolle: 'ARBEIDSGIVER' },
     },
     decorators: [
-        (Story, args) => (
+        (Story) => (
             <div>
                 <h1>KvitteringSide: Refusjon med minusbeløp</h1>
-                <Story {...args} />
+                <Story />
             </div>
         ),
     ],

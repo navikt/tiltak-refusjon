@@ -73,7 +73,7 @@ export const OppgjortMinusbeløp: Story = {
     args: fratrekkData,
 
     decorators: [
-        (Story, args) => (
+        (Story) => (
             <div>
                 <h1>Refusjon: Oppgjort minusbeløp, og over maks tilskudd</h1>
                 <p>
@@ -81,7 +81,7 @@ export const OppgjortMinusbeløp: Story = {
                     skyldig penger). Da må det beløpet trekkes fra i oppgjøret.
                 </p>
                 <p>Arbeidsgiver har også markert lønn som overstiger det avtalte tilskuddsbeløpet.</p>
-                <Story {...args} />
+                <Story />
             </div>
         ),
     ],
@@ -142,11 +142,11 @@ export const MangeInntektslinjer: Story = {
         },
     },
     decorators: [
-        (Story, args) => (
+        (Story) => (
             <div>
                 <h1>Refusjon: Mange inntektslinjer</h1>
                 <p>Arbeidsgiver har markert veldig mange inntektslinjer</p>
-                <Story {...args} />
+                <Story />
             </div>
         ),
     ],
@@ -206,14 +206,14 @@ export const KorreksjonTidligereUtbetalt: Story = {
         },
     },
     decorators: [
-        (Story, args) => (
+        (Story) => (
             <div>
                 <h1>Korreksjon: Tidligere skyldig beløp gir positivt utbetaling</h1>
                 <p>
                     Korreksjonen fører til minusbeløp (ferietrekk), men et tidligere minusbeløp har gjort arbeidsgiver
                     skyldig mye mer enn antatt, så de får dermed utbetalt penger
                 </p>
-                <Story {...args} />
+                <Story />
             </div>
         ),
     ],

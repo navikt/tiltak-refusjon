@@ -22,21 +22,20 @@ jobs:
         with:
           node-version: 24
           cache: 'pnpm'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@navikt'
       - name: Konfigurer pnpm
         run: |
+          pnpm config set @navikt:registry https://npm.pkg.github.com
           pnpm config set //npm.pkg.github.com/:_authToken $NODE_AUTH_TOKEN
-          pnpm config set engine-strict true
+          pnpm config set engine-strict true 
       - name: Installer
         run: pnpm install --frozen-lockfile
       - name: Installer - Saksbehandler/Server
-        # saksbehandler/server is not part of the pnpm workspace, so we install its
-        # dependencies independently with --ignore-workspace
-        run: pnpm install --ignore-workspace --frozen-lockfile
+        run: pnpm install --frozen-lockfile
         working-directory: saksbehandler/server
       - name: Installer - Arbeidsgiver/Server
-        # arbeidsgiver/server is not part of the pnpm workspace, so we install its
-        # dependencies independently with --ignore-workspace
-        run: pnpm install --ignore-workspace --frozen-lockfile
+        run: pnpm install --frozen-lockfile
         working-directory: arbeidsgiver/server
       - name: Prettier
         run: pnpm run prettier

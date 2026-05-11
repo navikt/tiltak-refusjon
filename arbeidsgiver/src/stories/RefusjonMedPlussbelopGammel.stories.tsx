@@ -157,14 +157,14 @@ export const RefusjonPlussbelopGammel: Story = {
     name: 'Refusjon med plussbeløp (gammel visning)',
     args: { refusjon: refusjonPlussbelop },
     decorators: [
-        (Story, args) => (
+        (Story) => (
             <div>
                 <h1>KvitteringSide: Refusjon med plussbeløp (gammel visning)</h1>
                 <p>
                     Før i tiden kunne man ikke velge om en inntektslinje var opptjent i perioden, og da hadde vi en
                     annen visning av inntekter
                 </p>
-                <Story {...args} />
+                <Story />
             </div>
         ),
     ],

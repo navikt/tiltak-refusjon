@@ -2,11 +2,12 @@
     "name": "tiltak-refusjon-arbeidsgiver",
     "version": "1.0.0",
     "license": "MIT",
+    "packageManager": "pnpm@11.0.6+sha512.97f906e1da2bedac3df83cadae04b4753a130092dd49d55cd36825ad3e623e9df3f97754f8f259e699172a360fac569acf2f908e7732bdae3eddb2dcf7e121fd",
     "engines": {
         "node": ">=24",
         "npm": "please-use-pnpm",
         "yarn": "please-use-pnpm",
-        "pnpm": ">=10"
+        "pnpm": ">=11"
     },
     "scripts": {
         "build": "esbuild src/main.ts --bundle --platform=node --outfile=./dist/index.cjs --packages=external",
@@ -14,8 +15,9 @@
         "prebuild": "tsc"
     },
     "dependencies": {
-        "@navikt/nav-dekoratoren-moduler": "^3.2.3",
-        "@navikt/oasis": "^3.8.0",
+        "@navikt/nav-dekoratoren-moduler": "^4.0.0",
+        "@navikt/oasis": "^4.1.4",
+        "@navikt/texas": "^4.1.4",
         "axios": "^1.15.0",
         "compression": "^1.8.0",
         "express": "^5.1.0",

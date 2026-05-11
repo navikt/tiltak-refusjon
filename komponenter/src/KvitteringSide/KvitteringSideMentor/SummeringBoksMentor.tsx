@@ -1,4 +1,4 @@
-import { Money } from '@navikt/ds-icons';
+import Pengesedler from '@/asset/image/pengesedler.svg?react';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
@@ -15,7 +15,7 @@ const SummeringBoksMentor: FunctionComponent<Props> = (props) => {
     return (
         <Boks variant="blå">
             <div style={{ margin: 'auto 1.5rem auto 0' }}>
-                <Money />
+                <Pengesedler aria-hidden="true" focusable="false" />
             </div>
             <div>
                 <Label>Dere får utbetalt</Label>

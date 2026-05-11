@@ -32,12 +32,13 @@ jobs:
           cache: 'pnpm'
       - name: Konfigurer pnpm
         run: |
+          pnpm config set @navikt:registry https://npm.pkg.github.com
           pnpm config set //npm.pkg.github.com/:_authToken $NODE_AUTH_TOKEN
-          pnpm config set engine-strict true
+          pnpm config set engine-strict true 
       - name: Frontend pnpm install
         run: pnpm install --frozen-lockfile
       - name: Server pnpm install
-        run: pnpm install --ignore-workspace --frozen-lockfile
+        run: pnpm install --frozen-lockfile
         working-directory: saksbehandler/server
       - name: Prettier
         run: pnpm run prettier

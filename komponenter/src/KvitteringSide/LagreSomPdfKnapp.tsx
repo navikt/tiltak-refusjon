@@ -1,13 +1,13 @@
-import { File } from '@navikt/ds-icons/cjs';
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
 import { Button } from '@navikt/ds-react';
+import { FileIcon } from '@navikt/aksel-icons';
 
 const LagreSomPdfKnapp: FunctionComponent<{ avtaleId: string }> = (props) => {
     const href = `/api/arbeidsgiver/refusjon/${props.avtaleId}/pdf`;
     return (
         <Button
             style={{ minWidth: '12rem' }}
-            icon={<File aria-hidden />}
+            icon={<FileIcon aria-hidden />}
             variant="secondary"
             onClick={() => {
                 window.open(href);
