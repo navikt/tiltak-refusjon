@@ -1,3 +1,2 @@
 FROM nginxinc/nginx-unprivileged:alpine
-COPY saksbehandler/nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./saksbehandler/storybook-static /usr/share/nginx/html
