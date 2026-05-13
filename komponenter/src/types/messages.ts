@@ -14,6 +14,7 @@ export const tiltakstypeTekst: { [key in Tiltak]: string } = {
 export const tiltakstypeTekstKort: { [key in Tiltak]: string } = {
     ...tiltakstypeTekst,
     VTAO: 'VTA-O',
+    FIREARIG_LONNSTILSKUDD: 'fireårig lønnstilskudd',
 };
 
 export const statusTekst: { [key in RefusjonStatus]: string } = {
