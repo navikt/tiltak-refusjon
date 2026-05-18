@@ -57,7 +57,7 @@ const RefusjonSide = (props: Props) => {
                     oppdateres i A-meldingen hos Altinn.
                 </EksternLenke>
                 Feriepenger, innskudd obligatorisk tjenestepensjon, arbeidsgiveravgiften og lønnstilskuddsprosenten er
-                hentet fra avtalen om midlertidig lønnstilskudd.
+                hentet fra avtalen om {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}.
             </BodyShort>
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen

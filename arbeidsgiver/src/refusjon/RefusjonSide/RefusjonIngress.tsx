@@ -36,7 +36,7 @@ const RefusjonIngress: FunctionComponent<Properties> = ({ refusjon }: PropsWithC
                     oppdateres i ditt lønnssystem.
                 </EksternLenke>
                 Feriepenger, innskudd obligatorisk tjenestepensjon, arbeidsgiveravgiften og lønnstilskuddsprosenten er
-                hentet fra avtalen om midlertidig lønnstilskudd.
+                hentet fra avtalen om {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}.
             </BodyShort>
             <BodyShort size="small" className={cls.element('ingress-text-refusjon')}>
                 Siste frist for å sende inn kravet er senest to måneder etter at perioden er over. Hvis fristen ikke
