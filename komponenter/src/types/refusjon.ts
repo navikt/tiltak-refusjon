@@ -22,7 +22,6 @@ export interface BegrensetRefusjon {
 export interface Refusjon {
     id: string;
     bedriftNr: string;
-    deltakerFnr: string;
     godkjentAvArbeidsgiver?: string;
     status: RefusjonStatus;
     forrigeFristForGodkjenning?: string;
@@ -44,7 +43,6 @@ export interface Korreksjon {
     id: string;
     korrigererRefusjonId: string;
     bedriftNr: string;
-    deltakerFnr: string;
     status: KorreksjonStatus;
     harInntektIAlleMåneder: boolean;
     kostnadssted?: string;
@@ -82,7 +80,6 @@ export interface Tilskuddsgrunnlag {
     bedriftNavn: string;
     bedriftNr: string;
     deltakerEtternavn: string;
-    deltakerFnr: string;
     deltakerFornavn: string;
     arbeidsgiverFornavn: string;
     arbeidsgiverEtternavn: string;
