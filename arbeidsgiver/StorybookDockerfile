@@ -1,2 +1,5 @@
 FROM nginxinc/nginx-unprivileged:alpine
 COPY ./arbeidsgiver/storybook-static /usr/share/nginx/html
+USER root
+RUN touch /usr/share/nginx/html/isAlive /usr/share/nginx/html/isReady
+USER nginx
