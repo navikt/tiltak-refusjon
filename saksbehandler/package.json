@@ -15,7 +15,6 @@
         "@navikt/ds-css": "^8.10.5",
         "@navikt/ds-react": "^8.10.5",
         "@navikt/fnrvalidator": "^2.2.1",
-        "@navikt/navspa": "^6.0.1",
         "@sentry/react": "^9.47.1",
         "axios": "^1.16.0",
         "classnames": "^2.5.1",
