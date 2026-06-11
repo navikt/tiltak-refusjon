@@ -1,3 +1,2 @@
 FROM nginxinc/nginx-unprivileged:alpine
 COPY ./saksbehandler/storybook-static /usr/share/nginx/html
-RUN touch /usr/share/nginx/html/isAlive /usr/share/nginx/html/isReady
