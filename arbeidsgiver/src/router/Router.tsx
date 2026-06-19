@@ -1,6 +1,7 @@
 import { createBrowserRouter, Outlet } from 'react-router';
 
 import AdvarselBannerTestversjon from '@/AdvarselBannerTestversjon/AdvarselBannerTestversjon';
+import AMeldingBanner from '@/AMeldingBanner/AMeldingBanner';
 import ErrorOgSuspenseHandlerMain from '@/ErrorOgSuspenseHandlerMain';
 import IkkeFunnet404 from '~/IkkeFunnet404';
 import OversiktRouteError from './OversiktRouteError';
@@ -53,6 +54,7 @@ const router = createBrowserRouter(
                                 <SuspenseHandler>
                                     <BrukerProvider>
                                         <div className={styles.wrapper}>
+                                            <AMeldingBanner />
                                             <Outlet />
                                         </div>
                                     </BrukerProvider>
