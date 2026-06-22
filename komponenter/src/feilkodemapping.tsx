@@ -16,7 +16,8 @@ export type Feilkode =
     | 'IKKE_TILGANG_TIL_DELTAKER_STRENGT_FORTROLIG'
     | 'IKKE_TILGANG_TIL_DELTAKER_FORTROLIG'
     | 'IKKE_TILGANG_TIL_DELTAKER_SKJERMET'
-    | 'IKKE_TILGANG_TIL_REFUSJON';
+    | 'IKKE_TILGANG_TIL_REFUSJON'
+    | 'INGEN_TILGANG';
 
 export const Feilmeldinger: { [key in Feilkode]: string } = {
     TEKNISK_FEIL_INNTEKTSOPPSLAG: 'Feil ved inntektsoppslag.',
@@ -42,4 +43,5 @@ export const Feilmeldinger: { [key in Feilkode]: string } = {
         'Dette er en refusjon med skjermede opplysninger. Du har ikke tilgang til denne refusjonen.',
     IKKE_TILGANG_TIL_REFUSJON:
         'Du har ikke tilgang til denne refusjonen. Vennligst påse at du har tilgang til enheten og deltaker.',
+    INGEN_TILGANG: 'Du har ikke tilgang til denne ressursen.',
 };
