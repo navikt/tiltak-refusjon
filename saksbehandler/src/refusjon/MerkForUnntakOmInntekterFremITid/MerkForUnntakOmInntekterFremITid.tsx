@@ -83,7 +83,7 @@ const ModalForm: FunctionComponent<{ refusjon: Refusjon; setOpen: (open: boolean
                 <TextField
                     style={{ width: '25%' }}
                     size="small"
-                    label={`Antall ekstra måneder etter perioden systemet skal hente innteker (maks 12)`}
+                    label={`Antall ekstra måneder etter perioden systemet skal hente inntekter (maks 12)`}
                     {...register('merking')}
                     error={errors.merking?.message}
                 />

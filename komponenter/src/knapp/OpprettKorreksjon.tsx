@@ -84,7 +84,7 @@ const OpprettKorreksjon: FunctionComponent<{
                                     <TextField
                                         style={{ width: '25%' }}
                                         size="small"
-                                        label={`Antall måneder etter perioden det skal hentes innteker (maks 12)`}
+                                        label={`Antall måneder etter perioden det skal hentes inntekter (maks 12)`}
                                         onChange={(event: ChangeEvent<HTMLInputElement>) => {
                                             const verdi: string = event.currentTarget.value;
                                             if (verdi.match(/^\d*$/) && parseInt(verdi, 10) <= 12) {
