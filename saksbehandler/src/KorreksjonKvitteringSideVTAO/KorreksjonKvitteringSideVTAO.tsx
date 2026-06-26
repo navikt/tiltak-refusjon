@@ -41,7 +41,7 @@ const KorreksjonKvitteringSide = (props: Props) => {
             {(korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp || 0) > 0 && (
                 <Alert variant="warning">
                     <BodyShort>
-                        <b>Beslutter NAV:</b> Du må vurdere tilbakekreving i samsvar med gjeldene rutine på{' '}
+                        <b>Beslutter NAV:</b> Du må vurdere tilbakekreving i samsvar med gjeldende rutine på{' '}
                         <b>
                             {formatterPenger(
                                 Math.abs(korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp || 0)

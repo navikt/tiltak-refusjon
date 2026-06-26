@@ -43,7 +43,7 @@ const OverstyrMinusbeløpOgFerietrekk: FunctionComponent<Props> = (props) => {
 
                         <VerticalSpacer rem={1} />
                         <Switch
-                            description="Huk av her hvis det allerde er trukket feriepenger for samme måned. Da vil ingen ferietrekk bli regnet med her."
+                            description="Huk av her hvis det allerede er trukket feriepenger for samme måned. Da vil ingen ferietrekk bli regnet med her."
                             checked={props.harFerietrekkForSammeMåned}
                             onChange={(e) => settHarFerietrekkForSammeMåned(korreksjonId!, e.currentTarget.checked)}
                         >
