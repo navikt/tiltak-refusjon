@@ -74,7 +74,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
             <VerticalSpacer rem={1} />
             <Label htmlFor={'inntekterKunFraTiltaket'}>
                 Er inntektene du har huket av{' '}
-                {sumInntekterOpptjent > 0 && <>({formatterPenger(sumInntekterOpptjent)})</>} tilknyttet refusjonssnummer{' '}
+                {sumInntekterOpptjent > 0 && <>({formatterPenger(sumInntekterOpptjent)})</>} tilknyttet refusjonsnummer{' '}
                 {refusjonNummer} for perioden {periode} for tiltaket{' '}
                 {tiltakstypeTekst[korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}?
             </Label>
