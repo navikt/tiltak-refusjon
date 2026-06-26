@@ -13,7 +13,7 @@ import { Feilkode, Feilmeldinger } from '~/feilkodemapping';
 const schema = z.object({
     merking: z.coerce
         .number({ invalid_type_error: 'Må være tall' })
-        .min(1, 'Må være mer en 1')
+        .min(1, 'Må være mer enn 1')
         .max(12, 'Må være mindre enn 12'),
 });
 

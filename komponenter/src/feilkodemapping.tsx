@@ -28,12 +28,12 @@ export const Feilmeldinger: { [key in Feilkode]: string } = {
     INGEN_BEDRIFTKONTONUMMER: 'Mangler kontonummer for bedriften',
     KORREKSJONSBELOP_NEGATIVT: 'Korreksjon kan kun sendes til utbetaling om restbeløpet er positivt.',
     SAMME_SAKSBEHANDLER_OG_BESLUTTER: 'Kan ikke beslutte egne korreksjoner',
-    INGEN_KORREKSJONSGRUNNER: 'Manger korreksjonsgrunn',
+    INGEN_KORREKSJONSGRUNNER: 'Mangler korreksjonsgrunn',
     INGEN_BESLUTTER: 'Du må oppgi en beslutter',
     KOSTNADSSTED_MANGLER: 'Du må oppgi kostnadssted',
     FOR_LANG_FORLENGELSE_AV_FRIST: 'For lang forlengelse av frist',
     HAR_ALLERDE_UNNTAK_OM_INNTEKTER_1_MND_FREM:
-        'Arbeidsgiver har allerede merket refusjonen for å hente 1 eksta måned.',
+        'Arbeidsgiver har allerede merket refusjonen for å hente 1 ekstra måned.',
     KORREKSJON_KOSTNADSSTED_ANNET_FYLKE: 'Kostnadsstedet må være i samme fylke som refusjonen',
     IKKE_TILGANG_TIL_DELTAKER_STRENGT_FORTROLIG:
         'Dette er en refusjon med strengt fortrolige opplysninger. Du har ikke tilgang til denne refusjonen.',
