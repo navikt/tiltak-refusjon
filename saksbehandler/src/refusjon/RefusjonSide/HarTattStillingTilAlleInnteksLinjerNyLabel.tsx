@@ -24,7 +24,7 @@ const InntekterFraTiltaketSvarNyLabel: FunctionComponent<Props> = ({ refusjonsgr
 
     return (
         <Label>
-            Er inntektene du har huket av ({formatterPenger(valgtBruttoLønn as number)}) tilknyttet refusjonssnummer{' '}
+            Er inntektene du har huket av ({formatterPenger(valgtBruttoLønn as number)}) tilknyttet refusjonsnummer{' '}
             {refusjonNummer} <br />
             for perioden {periode} for tiltaket {tiltakstypeTekst[refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}?
         </Label>
