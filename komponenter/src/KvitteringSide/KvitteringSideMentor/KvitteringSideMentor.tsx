@@ -42,12 +42,10 @@ const KvitteringSideMentor: FunctionComponent<Props> = (props: Props) => {
                     <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
                         <Statusmelding
                             status={refusjon.status}
-                            vtao={true}
+                            automatiskInnsending={true}
                             sendtTidspunkt={refusjon.godkjentAvArbeidsgiver}
                         />
-                        {innloggetBruker !== undefined && innloggetBruker.rolle === 'ARBEIDSGIVER' && (
-                            <LagreSomPdfKnapp avtaleId={refusjon.id} />
-                        )}
+                        {innloggetBruker?.rolle === 'ARBEIDSGIVER' && <LagreSomPdfKnapp avtaleId={refusjon.id} />}
                     </div>
                     <VerticalSpacer rem={1} />
                     <InformasjonFraAvtalenMentor
@@ -60,8 +58,8 @@ const KvitteringSideMentor: FunctionComponent<Props> = (props: Props) => {
                     />
                 </Box>
                 <UtregningMentor
-                    tilskuddsgrunnlag={props.refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                    beregning={props.refusjon.refusjonsgrunnlag.beregning}
+                    tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                    beregning={refusjon.refusjonsgrunnlag.beregning}
                 />
                 <SummeringBoksMentor refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
             </VStack>
