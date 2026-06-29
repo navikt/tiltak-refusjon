@@ -185,10 +185,6 @@ const Komponent: FunctionComponent = () => {
                     <VerticalSpacer rem={1} />
                     {tiltakstype === 'MENTOR' && (
                         <>
-                            <div className={styles.fleks}>
-                                <HendelsesLogg refusjonId={refusjonId} />
-                            </div>
-                            <VerticalSpacer rem={1} />
                             <KvitteringSideMentor
                                 aktsomhet={aktsomhet}
                                 refusjon={refusjon}
