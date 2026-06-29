@@ -6,8 +6,8 @@ import { formaterDato, NORSK_DATO_FORMAT } from '~/utils/datoUtils';
 const Statusmelding: FunctionComponent<{
     status: RefusjonStatus;
     sendtTidspunkt?: string;
-    vtao?: boolean;
-}> = ({ status, sendtTidspunkt, vtao }) => {
+    automatiskInnsending?: boolean;
+}> = ({ status, sendtTidspunkt, automatiskInnsending }) => {
     switch (status) {
         case RefusjonStatus.UTBETALING_FEILET:
             return (
@@ -33,7 +33,7 @@ const Statusmelding: FunctionComponent<{
                 </BodyShort>
             );
         case RefusjonStatus.FOR_TIDLIG:
-            if (vtao) {
+            if (automatiskInnsending) {
                 return (
                     <BodyShort size="small">
                         Refusjonskravet sendes inn automatisk når gjeldende periode er avsluttet.
