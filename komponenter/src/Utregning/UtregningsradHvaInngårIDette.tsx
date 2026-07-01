@@ -1,14 +1,20 @@
 import { HelpText, ReadMore, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import { formatterPenger } from '../../utils/PengeUtils';
+import { formatterPenger } from '~/utils/PengeUtils';
 
-import { inntektBeskrivelse } from './InntekterFraAMeldingen/InntekterFraAMeldingen';
 import { Inntektslinje, Tilskuddsgrunnlag } from '~/types/refusjon';
 import { formaterDato, getMåned, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import { lønnsbeskrivelseTekst } from '~/types/messages';
 
 type Props = {
     inntekter: Inntektslinje[];
     tilskuddsgrunnlag?: Tilskuddsgrunnlag;
+};
+
+const inntektBeskrivelse = (beskrivelse: string | undefined) => {
+    if (beskrivelse === undefined) return '';
+    else if (beskrivelse === '') return 'Inntekt';
+    return lønnsbeskrivelseTekst[beskrivelse] ?? 'Inntekt: ' + beskrivelse;
 };
 
 const UtregningsradHvaInngårIDette: FunctionComponent<Props> = (props) => {

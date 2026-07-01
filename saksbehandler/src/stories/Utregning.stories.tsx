@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import Utregning from '~/Utregning';
 import { Tiltak } from '~/types/tiltak';
 
 const meta = {
@@ -142,8 +142,11 @@ export const MangeInntektslinjer: Story = {
     decorators: [
         (Story) => (
             <div>
-                <h1>Refusjon: Mange inntektslinjer</h1>
-                <p>Arbeidsgiver har markert veldig mange inntektslinjer</p>
+                <h1>Refusjon: Minusbeløp, og overskrider tilskuddsbeløp</h1>
+                <p>
+                    Arbeidsgiver har markert veldig mange inntektslinjer, og har et tidligere minusbeløp. Da blir
+                    refusjonen redusert pga maks tilskuddsbeløp, og deretter trekkes minusbeløp
+                </p>
                 <Story />
             </div>
         ),

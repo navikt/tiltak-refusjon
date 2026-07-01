@@ -1,7 +1,7 @@
 import { Alert, ConfirmationPanel } from '@navikt/ds-react';
 import { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useState } from 'react';
 import LagreKnapp from '../../../komponenter/LagreKnapp';
-import Utregning from '../../../komponenter/Utregning';
+import Utregning from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 
 import SummeringBoks from '../SummeringBoks';
@@ -58,7 +58,6 @@ const RefusjonInnsending: FunctionComponent<Properties> = ({
                 beregning={refusjon.refusjonsgrunnlag.beregning}
                 tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
-                sumUtbetaltVarig={refusjon.refusjonsgrunnlag.sumUtbetaltVarig}
             />
             <SummeringBoks
                 erForKorreksjon={false}

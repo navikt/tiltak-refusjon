@@ -8,7 +8,7 @@ import Boks from '~/Boks';
 import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraTiltaketSpørsmål from '@/refusjon/RefusjonSide/InntekterFraTiltaketSpørsmål';
-import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import Utregning from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Korreksjon, KorreksjonStatus } from '~/types';
 

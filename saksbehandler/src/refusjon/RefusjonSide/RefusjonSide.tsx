@@ -11,7 +11,7 @@ import InformasjonFraAvtalen from './InformasjonFraAvtalen';
 import InntekterFraAMeldingen from './InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraTiltaketSvar from './HarTattStillingTilAlleInntektsLinjerNy';
 import TidligereRefunderbarBeløpKvittering from './TidligereRefunderbarBeløpKvittering';
-import Utregning from './Utregning';
+import Utregning from '~/Utregning';
 
 import './RefusjonSide.less';
 

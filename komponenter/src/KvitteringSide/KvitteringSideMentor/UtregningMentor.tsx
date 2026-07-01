@@ -13,7 +13,7 @@ import { FunctionComponent, useState } from 'react';
 
 import { formatterPenger, visTallMedNorskFormatering } from '~/utils/PengeUtils';
 
-import Utregningsrad from './Utregningsrad';
+import Utregningsrad from '~/Utregning/Utregningsrad';
 
 import { Beregning, Tilskuddsgrunnlag } from '~/types/refusjon';
 import { erNil } from '~/utils/predicates';
