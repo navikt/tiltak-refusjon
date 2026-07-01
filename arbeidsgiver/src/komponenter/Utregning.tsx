@@ -169,18 +169,13 @@ const Utregning: FunctionComponent<Props> = (props) => {
                             {beløpOver5G && (
                                 <>
                                     <BodyShort size="small">
-                                        Avtalen har nå oversteget fem ganger grunnbeløpet per år.{' '}
-                                        <b>
-                                            Det vil bli utbetalt {formatterPenger(beregning?.refusjonsbeløp)} for denne
-                                            perioden.
-                                        </b>{' '}
-                                        Refusjoner for resten av året vil settes til 0 kr, men dere må fortsatt sende
-                                        inn refusjoner hver måned.
+                                        Avtalen har nå oversteget fem ganger grunnbeløpet per år. Refusjoner for resten
+                                        av året vil settes til 0 kr, men dere må fortsatt sende inn refusjoner hver
+                                        måned.
                                     </BodyShort>
                                     <BodyShort size="small">
                                         <EksternLenke href="https://lovdata.no/forskrift/2015-12-11-1598/§10-7">
-                                            Forskrift om arbeidsmarkedstiltak (tiltaksforskriften) - Kapittel 10. Varig
-                                            lønnstilskudd
+                                            Les mer i tiltaksforskriften
                                         </EksternLenke>
                                     </BodyShort>
                                 </>
@@ -200,14 +195,37 @@ const Utregning: FunctionComponent<Props> = (props) => {
                     )}
                 </Utregningsrad>
             )}
+            {!erKorreksjon && beløpOverMaks && !beløpOver5G && beregning && (
+                <Utregningsrad
+                    labelIkon={<Pengesekken />}
+                    labelTekst="Avtalt tilskuddsbeløp"
+                    verdi={props.tilskuddsgrunnlag.tilskuddsbeløp}
+                    border="INGEN"
+                />
+            )}
+            {!erKorreksjon && beløpOverMaks && beløpOver5G && beregning && (
+                <Utregningsrad
+                    labelIkon={<Pengesekken />}
+                    labelTekst="Avtalt tilskuddsbeløp (gjenstående etter 5G)"
+                    verdi={beregning.refusjonsbeløp + beregning.tidligereUtbetalt}
+                    border="INGEN"
+                />
+            )}
             {erKorreksjon && (
                 <div className={beløpOverMaks ? cls.element('korreksjons-oppsummering') : ''}>
-                    {beløpOverMaks && beregning && (
+                    {beløpOverMaks && !beløpOver5G && beregning && (
                         <Utregningsrad
                             labelIkon={<Pengesekken />}
-                            labelTekst="Avtalt tilskuddsbeløp brukes som beregningsgrunnlag"
-                            verdiOperator={<ErlikTegn />}
+                            labelTekst="Avtalt tilskuddsbeløp"
                             verdi={props.tilskuddsgrunnlag.tilskuddsbeløp}
+                            border="INGEN"
+                        />
+                    )}
+                    {beløpOverMaks && beløpOver5G && beregning && (
+                        <Utregningsrad
+                            labelIkon={<Pengesekken />}
+                            labelTekst="Avtalt tilskuddsbeløp (gjenstående etter 5G)"
+                            verdi={beregning.refusjonsbeløp + beregning.tidligereUtbetalt}
                             border="INGEN"
                         />
                     )}
@@ -241,7 +259,7 @@ const Utregning: FunctionComponent<Props> = (props) => {
                                 <ReadMore size="small" header="Hva betyr dette?" defaultOpen={true}>
                                     <BodyShort size="small">
                                         Den opprinnelige refusjonen medførte en utbetaling på{' '}
-                                        {formatterPenger(Math.abs(props.beregning?.tidligereUtbetalt))}; dette trekkes
+                                        {formatterPenger(Math.abs(props.beregning?.tidligereUtbetalt))}. Beløpet trekkes
                                         fra denne beregningen.
                                     </BodyShort>
                                 </ReadMore>
