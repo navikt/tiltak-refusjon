@@ -171,8 +171,9 @@ const Utregning: FunctionComponent<Props> = (props) => {
                                     <BodyShort size="small">
                                         Avtalen har nå oversteget fem ganger grunnbeløpet per år.{' '}
                                         <b>
-                                            Det vil bli utbetalt {formatterPenger(beregning?.refusjonsbeløp)} for denne
-                                            perioden.
+                                            Det vil bli utbetalt{' '}
+                                            {formatterPenger(beregning.refusjonsbeløp + beregning.tidligereUtbetalt)}{' '}
+                                            for denne perioden.
                                         </b>{' '}
                                         Refusjoner for resten av året vil settes til 0 kr, men dere må fortsatt sende
                                         inn refusjoner hver måned.
