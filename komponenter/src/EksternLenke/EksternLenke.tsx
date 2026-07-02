@@ -6,7 +6,7 @@ import { Link, LinkProps } from '@navikt/ds-react';
 
 const EksternLenke: React.FunctionComponent<LinkProps> = (props) => {
     return (
-        <Link target="_blank" {...props}>
+        <Link target="_blank" rel="noopener noreferrer" {...props}>
             {props.children}
             <TilEkstern className="ekstern-lenke-icon" />
         </Link>
