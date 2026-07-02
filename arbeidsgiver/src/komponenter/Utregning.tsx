@@ -182,13 +182,8 @@ const Utregning: FunctionComponent<Props> = (props) => {
                             )}
                             {!beløpOver5G && (
                                 <BodyShort size="small">
-                                    Beregnet beløp er høyere enn refusjonsbeløpet.{' '}
-                                    <b>
-                                        Avtalt beløp er inntil {formatterPenger(props.tilskuddsgrunnlag.tilskuddsbeløp)}{' '}
-                                        for denne perioden.
-                                    </b>{' '}
-                                    Lønn i denne refusjonsperioden kan ikke endres og dere vil få utbetalt maks av
-                                    avtalt beløp.
+                                    Avtalt tilskuddsbeløp for refusjonsperioden kan ikke overstiges, og det vil bli
+                                    utbetalt maks av avtalt beløp.
                                 </BodyShort>
                             )}
                         </ReadMore>

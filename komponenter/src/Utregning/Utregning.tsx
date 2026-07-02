@@ -1,17 +1,20 @@
-import Bygg from '@/asset/image/bygg.svg?react';
-import { BankNoteIcon, PercentIcon } from '@navikt/aksel-icons';
-import Endret from '@/asset/image/endret.svg?react';
-import ErlikTegn from '@/asset/image/erlikTegn.svg?react';
-import MinusTegn from '@/asset/image/minusTegn.svg?react';
-import Pengesekken from '@/asset/image/pengesekkdollar.svg?react';
-import PlussTegn from '@/asset/image/plussTegn.svg?react';
-import ProsentTegn from '@/asset/image/prosentTegn.svg?react';
-import Sparegris from '@/asset/image/sparegris.svg?react';
-import Stranden from '@/asset/image/strand.svg?react';
+import {
+    BankNoteIcon,
+    PencilIcon,
+    PercentIcon,
+    Buildings2Icon,
+    MultiplyIcon,
+    EqualsIcon,
+    MinusIcon,
+    PlusIcon,
+    ParasolBeachIcon,
+    PiggybankIcon,
+    SackKronerIcon,
+} from '@navikt/aksel-icons';
 import { BodyShort, Heading, ReadMore } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
-import { formatterPenger } from '../../utils/PengeUtils';
+import { formatterPenger } from '../utils/PengeUtils';
 import Utregningsrad from './Utregningsrad';
 import './Utregning.less';
 import UtregningsradHvaInngårIDette from './UtregningsradHvaInngårIDette';
@@ -34,30 +37,34 @@ interface Props {
 const Utregning: FunctionComponent<Props> = (props) => {
     const cls = BEMHelper('utregning');
 
-    const { beregning, tilskuddsgrunnlag } = props;
-    const bruttoLønnsInntekter = props.inntektsgrunnlag?.inntekter.filter(
+    const { beregning, tilskuddsgrunnlag, erKorreksjon, inntektsgrunnlag } = props;
+    const bruttoLønnsInntekter = inntektsgrunnlag?.inntekter.filter(
         (inntekt) => inntekt.erMedIInntektsgrunnlag && inntekt.erOpptjentIPeriode === true
     );
-    const ferietrekkInntekter = props.inntektsgrunnlag?.inntekter.filter(
+    const ferietrekkInntekter = inntektsgrunnlag?.inntekter.filter(
         (inntekt) => inntekt.beskrivelse === 'trekkILoennForFerie'
     );
 
     const forrigeRefusjonMinusBeløp = -10000;
+    //const refusjonsbeløp = beregning?.refusjonsbeløp ?? 0;
+    const refusjonsbeløp = -10000;
+    // const tidligereRefundertBeløp = beregning?.tidligereRefundertBeløp ?? 0;
+    const tidligereRefundertBeløp = 1000;
+    const sumUtgifterFratrukketRefundertBeløp = beregning?.sumUtgifterFratrukketRefundertBeløp ?? 0;
 
     const harMinusBeløp = forrigeRefusjonMinusBeløp != null && forrigeRefusjonMinusBeløp < 0;
     const refusjonsnummer = props.refusjonsnummer.avtalenr + '-' + props.refusjonsnummer.løpenummer;
     const beløpOver5G = beregning?.overFemGrunnbeløp;
     const beløpOverMaks = beregning && (beregning.overTilskuddsbeløp || beløpOver5G);
-    const erKorreksjon = props.erKorreksjon;
 
-    const tilUtbetaling = (tykkBunn: boolean) => (
+    const tilUtbetaling = () => (
         <Utregningsrad
             labelIkon={<BankNoteIcon />}
             labelTekst={'Refusjonsbeløp til utbetaling'}
-            verdiOperator={<ErlikTegn />}
-            verdi={(beregning?.refusjonsbeløp || 0) ?? 'kan ikke beregne'}
+            verdiOperator={<EqualsIcon />}
+            verdi={refusjonsbeløp}
             ikkePenger={beregning === undefined}
-            border={tykkBunn ? 'TYKK' : 'INGEN'}
+            border="INGEN"
         />
     );
 
@@ -70,99 +77,92 @@ const Utregning: FunctionComponent<Props> = (props) => {
             <Utregningsrad labelTekst={'Bruttolønn i perioden'} verdi={beregning?.lønn || 0}>
                 <UtregningsradHvaInngårIDette
                     inntekter={bruttoLønnsInntekter ?? []}
-                    tilskuddsgrunnlag={props.tilskuddsgrunnlag}
+                    tilskuddsgrunnlag={tilskuddsgrunnlag}
                 />
             </Utregningsrad>
             {beregning && beregning.fratrekkLønnFerie !== 0 && (
                 <Utregningsrad
-                    labelIkon={<Stranden />}
+                    labelIkon={<ParasolBeachIcon />}
                     labelTekst="Fratrekk for ferie (hentet fra A-meldingen)"
-                    verdiOperator={beregning.fratrekkLønnFerie < 0 ? <MinusTegn /> : <PlussTegn />}
+                    verdiOperator={beregning.fratrekkLønnFerie < 0 ? <MinusIcon /> : <PlusIcon />}
                     verdi={
                         beregning.fratrekkLønnFerie < 0 ? beregning.fratrekkLønnFerie * -1 : beregning.fratrekkLønnFerie
                     }
                 >
                     <UtregningsradHvaInngårIDette
                         inntekter={ferietrekkInntekter ?? []}
-                        tilskuddsgrunnlag={props.tilskuddsgrunnlag}
+                        tilskuddsgrunnlag={tilskuddsgrunnlag}
                     />
                 </Utregningsrad>
             )}
 
-            <>
-                <Utregningsrad
-                    labelIkon={<Stranden />}
-                    labelTekst="Feriepenger"
-                    labelSats={props.tilskuddsgrunnlag.feriepengerSats}
-                    verdiOperator={(beregning?.feriepenger || 0) >= 0 ? <PlussTegn /> : <MinusTegn />}
-                    verdi={Math.abs(beregning?.feriepenger || 0)}
-                />
-                <Utregningsrad
-                    labelIkon={<Sparegris />}
-                    labelTekst="Innskudd obligatorisk tjenestepensjon"
-                    labelSats={props.tilskuddsgrunnlag.otpSats}
-                    verdiOperator={(beregning?.tjenestepensjon || 0) >= 0 ? <PlussTegn /> : <MinusTegn />}
-                    verdi={Math.abs(beregning?.tjenestepensjon || 0)}
-                />
-                <Utregningsrad
-                    labelIkon={<Bygg />}
-                    labelTekst="Arbeidsgiveravgift"
-                    labelSats={props.tilskuddsgrunnlag.arbeidsgiveravgiftSats}
-                    verdiOperator={(beregning?.arbeidsgiveravgift || 0) >= 0 ? <PlussTegn /> : <MinusTegn />}
-                    verdi={Math.abs(beregning?.arbeidsgiveravgift || 0)}
-                    border={beregning && beregning?.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
-                />
-                {beregning && beregning?.tidligereRefundertBeløp > 0 ? (
-                    <>
-                        <Utregningsrad
-                            labelIkon={<Pengesekken />}
-                            labelTekst="Sum brutto lønnsutgifter"
-                            verdiOperator={<ErlikTegn />}
-                            verdi={beregning?.sumUtgifter || 0}
-                        />
-                        <Utregningsrad
-                            labelIkon={<Endret />}
-                            labelTekst="Refunderbar lønn"
-                            verdiOperator={<MinusTegn />}
-                            verdi={beregning?.tidligereRefundertBeløp}
-                        />
-                        <Utregningsrad
-                            className={cls.element('grå-utregningsrad')}
-                            labelTekst="Refusjonsgrunnlag"
-                            verdiOperator={<ErlikTegn />}
-                            verdi={beregning?.sumUtgifterFratrukketRefundertBeløp}
-                            border="TYKK"
-                        />
-                    </>
-                ) : (
+            <Utregningsrad
+                labelIkon={<ParasolBeachIcon />}
+                labelTekst="Feriepenger"
+                labelSats={tilskuddsgrunnlag.feriepengerSats}
+                verdiOperator={(beregning?.feriepenger || 0) >= 0 ? <PlusIcon /> : <MinusIcon />}
+                verdi={Math.abs(beregning?.feriepenger || 0)}
+            />
+            <Utregningsrad
+                labelIkon={<PiggybankIcon />}
+                labelTekst="Innskudd obligatorisk tjenestepensjon"
+                labelSats={tilskuddsgrunnlag.otpSats}
+                verdiOperator={(beregning?.tjenestepensjon || 0) >= 0 ? <PlusIcon /> : <MinusIcon />}
+                verdi={Math.abs(beregning?.tjenestepensjon || 0)}
+            />
+            <Utregningsrad
+                labelIkon={<Buildings2Icon />}
+                labelTekst="Arbeidsgiveravgift"
+                labelSats={tilskuddsgrunnlag.arbeidsgiveravgiftSats}
+                verdiOperator={(beregning?.arbeidsgiveravgift || 0) >= 0 ? <PlusIcon /> : <MinusIcon />}
+                verdi={Math.abs(beregning?.arbeidsgiveravgift || 0)}
+                border={tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
+            />
+            {tidligereRefundertBeløp > 0 ? (
+                <>
+                    <Utregningsrad
+                        labelIkon={<SackKronerIcon />}
+                        labelTekst="Sum brutto lønnsutgifter"
+                        verdiOperator={<EqualsIcon />}
+                        verdi={beregning?.sumUtgifter || 0}
+                    />
+                    <Utregningsrad
+                        labelIkon={<PencilIcon />}
+                        labelTekst="Refunderbar lønn"
+                        verdiOperator={<MinusIcon />}
+                        verdi={tidligereRefundertBeløp}
+                        border="TYKK"
+                    />
                     <Utregningsrad
                         className={cls.element('grå-utregningsrad')}
                         labelTekst="Refusjonsgrunnlag"
-                        verdiOperator={<ErlikTegn />}
-                        verdi={beregning?.sumUtgifter || 0}
-                        border="TYKK"
+                        verdiOperator={<EqualsIcon />}
+                        verdi={sumUtgifterFratrukketRefundertBeløp}
                     />
-                )}
+                </>
+            ) : (
                 <Utregningsrad
-                    labelIkon={<PercentIcon />}
-                    labelTekst="Tilskuddsprosent"
-                    verdiOperator={<ProsentTegn />}
-                    ikkePenger
-                    verdi={tilskuddsgrunnlag.lønnstilskuddsprosent}
+                    className={cls.element('grå-utregningsrad')}
+                    labelTekst="Refusjonsgrunnlag"
+                    verdiOperator={<EqualsIcon />}
+                    verdi={beregning?.sumUtgifter || 0}
                 />
-            </>
+            )}
+            <Utregningsrad
+                labelIkon={<PercentIcon />}
+                labelTekst="Tilskuddsprosent"
+                verdiOperator={<MultiplyIcon />}
+                ikkePenger
+                verdi={tilskuddsgrunnlag.lønnstilskuddsprosent + ' %'}
+                border="TYKK"
+            />
 
             <VerticalSpacer rem={2} />
             {beregning && (beløpOverMaks || erKorreksjon || harMinusBeløp) && (
                 <Utregningsrad
                     utgår={beløpOverMaks}
-                    labelTekst={
-                        <>
-                            Beregning basert på innhentede inntekter
-                            {beløpOverMaks ? <b> UTGÅR</b> : null}
-                        </>
-                    }
-                    verdiOperator={<ErlikTegn />}
+                    labelTekst={<>Beregning basert på innhentede inntekter</>}
+                    verdiOperator={<EqualsIcon />}
                     border={erKorreksjon ? 'INGEN' : 'NORMAL'}
                     verdi={beregning.beregnetBeløp}
                 >
@@ -194,17 +194,17 @@ const Utregning: FunctionComponent<Props> = (props) => {
             )}
             {!erKorreksjon && beløpOverMaks && !beløpOver5G && beregning && (
                 <Utregningsrad
-                    labelIkon={<Pengesekken />}
+                    labelIkon={<SackKronerIcon />}
                     labelTekst="Avtalt tilskuddsbeløp"
-                    verdi={props.tilskuddsgrunnlag.tilskuddsbeløp}
+                    verdi={tilskuddsgrunnlag.tilskuddsbeløp}
                     border="INGEN"
                 />
             )}
             {!erKorreksjon && beløpOverMaks && beløpOver5G && beregning && (
                 <Utregningsrad
-                    labelIkon={<Pengesekken />}
+                    labelIkon={<SackKronerIcon />}
                     labelTekst="Avtalt tilskuddsbeløp (gjenstående etter 5G)"
-                    verdi={beregning.refusjonsbeløp + beregning.tidligereUtbetalt}
+                    verdi={refusjonsbeløp + beregning.tidligereUtbetalt}
                     border="INGEN"
                 />
             )}
@@ -212,79 +212,79 @@ const Utregning: FunctionComponent<Props> = (props) => {
                 <div className={beløpOverMaks ? cls.element('korreksjons-oppsummering') : ''}>
                     {beløpOverMaks && !beløpOver5G && beregning && (
                         <Utregningsrad
-                            labelIkon={<Pengesekken />}
+                            labelIkon={<SackKronerIcon />}
                             labelTekst="Avtalt tilskuddsbeløp"
-                            verdi={props.tilskuddsgrunnlag.tilskuddsbeløp}
+                            verdi={tilskuddsgrunnlag.tilskuddsbeløp}
                             border="INGEN"
                         />
                     )}
                     {beløpOverMaks && beløpOver5G && beregning && (
                         <Utregningsrad
-                            labelIkon={<Pengesekken />}
+                            labelIkon={<SackKronerIcon />}
                             labelTekst="Avtalt tilskuddsbeløp (gjenstående etter 5G)"
-                            verdi={beregning.refusjonsbeløp + beregning.tidligereUtbetalt}
+                            verdi={refusjonsbeløp + beregning.tidligereUtbetalt}
                             border="INGEN"
                         />
                     )}
                     {harMinusBeløp && (
                         <Utregningsrad
-                            labelIkon={<Endret />}
+                            labelIkon={<PencilIcon />}
                             labelTekst={'Ferietrekk fra tidligere refusjoner'}
-                            verdiOperator={<MinusTegn />}
+                            verdiOperator={<MinusIcon />}
                             verdi={Math.abs(forrigeRefusjonMinusBeløp)}
                             border="INGEN"
                         />
                     )}
-                    {props.beregning?.tidligereUtbetalt != null && props.beregning?.tidligereUtbetalt !== 0 && (
+                    {beregning?.tidligereUtbetalt != null && beregning?.tidligereUtbetalt !== 0 && (
                         <Utregningsrad
                             labelTekst={'Allerede utbetalt for refusjon ' + refusjonsnummer}
-                            verdiOperator={props.beregning?.tidligereUtbetalt > 0 ? <MinusTegn /> : <PlussTegn />}
-                            verdi={Math.abs(props.beregning?.tidligereUtbetalt ?? 0)}
-                            ikkePenger={props.beregning === undefined}
+                            verdiOperator={beregning?.tidligereUtbetalt > 0 ? <MinusIcon /> : <PlusIcon />}
+                            verdi={Math.abs(beregning?.tidligereUtbetalt ?? 0)}
+                            ikkePenger={beregning === undefined}
                             border="INGEN"
                         >
-                            {props.beregning?.tidligereUtbetalt < 0 && (
+                            {beregning?.tidligereUtbetalt < 0 && (
                                 <ReadMore size="small" header="Hva betyr dette?" defaultOpen={true}>
                                     <BodyShort size="small">
                                         Den opprinnelige refusjonen medførte et trekk på{' '}
-                                        {formatterPenger(Math.abs(props.beregning?.tidligereUtbetalt))}.
+                                        {formatterPenger(Math.abs(beregning?.tidligereUtbetalt))}.
                                     </BodyShort>
                                     <BodyShort size="small">Dette kompenseres for i denne beregningen.</BodyShort>
                                 </ReadMore>
                             )}
-                            {props.beregning?.tidligereUtbetalt >= 0 && (
+                            {beregning?.tidligereUtbetalt >= 0 && (
                                 <ReadMore size="small" header="Hva betyr dette?" defaultOpen={true}>
                                     <BodyShort size="small">
                                         Den opprinnelige refusjonen medførte en utbetaling på{' '}
-                                        {formatterPenger(Math.abs(props.beregning?.tidligereUtbetalt))}. Beløpet trekkes
-                                        fra denne beregningen.
+                                        {formatterPenger(Math.abs(beregning?.tidligereUtbetalt))}. Beløpet trekkes fra
+                                        denne beregningen.
                                     </BodyShort>
                                 </ReadMore>
                             )}
                         </Utregningsrad>
                     )}
-                    {tilUtbetaling(false)}
+                    {tilUtbetaling()}
                 </div>
             )}
             {!erKorreksjon && (
                 <>
                     {beregning && beregning.overTilskuddsbeløp && harMinusBeløp && (
                         <Utregningsrad
-                            labelIkon={<Pengesekken />}
+                            labelIkon={<SackKronerIcon />}
                             labelTekst="Tilskuddsbeløp (avtalt beløp for perioden)"
-                            verdi={props.tilskuddsgrunnlag.tilskuddsbeløp}
+                            verdi={tilskuddsgrunnlag.tilskuddsbeløp}
                         />
                     )}
                     {harMinusBeløp && (
                         <Utregningsrad
-                            labelIkon={<Endret />}
+                            labelIkon={<PencilIcon />}
                             labelTekst={'Resterende fratrekk for ferie fra tidligere refusjoner'}
-                            verdiOperator={<MinusTegn />}
+                            verdiOperator={<MinusIcon />}
                             verdi={Math.abs(forrigeRefusjonMinusBeløp)}
                             border="TYKK"
                         />
                     )}
-                    {tilUtbetaling(true)}
+                    {tilUtbetaling()}
                 </>
             )}
         </div>

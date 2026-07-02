@@ -6,7 +6,7 @@ import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/inntektsmelding/Innt
 import InntekterFraTiltaketSvar from '@/refusjon/RefusjonSide/InntekterFraTiltaketSvar';
 import KorreksjonInfo from './KorreksjonInfo';
 import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
-import Utregning from '@/komponenter/Utregning';
+import { Utregning } from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, KorreksjonStatus, korreksjonStatusTekst } from '~/types';
 import { Korreksjon, Refusjon } from '~/types/refusjon';
@@ -55,7 +55,6 @@ const KvitteringKorreksjon = (props: Props) => {
                     beregning={korreksjon.refusjonsgrunnlag.beregning}
                     tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                     inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
-                    sumUtbetaltVarig={korreksjon.refusjonsgrunnlag.sumUtbetaltVarig}
                 />
                 <VerticalSpacer rem={4} />
                 <SummeringBoks

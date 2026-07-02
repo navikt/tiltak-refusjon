@@ -1,0 +1,66 @@
+import { HelpText, ReadMore, Table } from '@navikt/ds-react';
+import { FunctionComponent } from 'react';
+import { formatterPenger } from '../utils/PengeUtils';
+
+import { Inntektslinje, Tilskuddsgrunnlag } from '~/types/refusjon';
+import { formaterDato, getMåned, NORSK_MÅNEDÅR_FORMAT } from '~/utils';
+import { lønnsbeskrivelseTekst } from '~/types/messages';
+
+type Props = {
+    inntekter: Inntektslinje[];
+    tilskuddsgrunnlag?: Tilskuddsgrunnlag;
+};
+
+const inntektBeskrivelse = (beskrivelse: string | undefined) => {
+    if (beskrivelse === undefined) return '';
+    else if (beskrivelse === '') return 'Inntekt';
+    return lønnsbeskrivelseTekst[beskrivelse] ?? 'Inntekt: ' + beskrivelse;
+};
+
+const UtregningsradHvaInngårIDette: FunctionComponent<Props> = (props) => {
+    return (
+        <ReadMore size="small" header="Hva inngår i dette?">
+            <div>
+                <Table size="small">
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell scope="col">Beskrivelse</Table.HeaderCell>
+                            <Table.HeaderCell scope="col">Måned</Table.HeaderCell>
+                            <Table.HeaderCell scope="col">Beløp</Table.HeaderCell>
+                            <Table.HeaderCell scope="col"></Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {props.inntekter.map((inntekt) => {
+                            const erFerietrekkForAnnenMåned =
+                                inntekt.beskrivelse === 'trekkILoennForFerie' &&
+                                getMåned(inntekt.måned) !== getMåned(props.tilskuddsgrunnlag?.tilskuddFom || '');
+                            return (
+                                <Table.Row
+                                    key={inntekt.id}
+                                    style={{ textDecoration: erFerietrekkForAnnenMåned ? 'line-through' : '' }}
+                                >
+                                    <Table.DataCell style={{ maxWidth: '10rem' }}>
+                                        {inntektBeskrivelse(inntekt.beskrivelse)}
+                                    </Table.DataCell>
+                                    <Table.DataCell>{formaterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</Table.DataCell>
+                                    <Table.DataCell>{formatterPenger(inntekt.beløp)}</Table.DataCell>
+                                    <Table.DataCell>
+                                        {erFerietrekkForAnnenMåned && (
+                                            <HelpText>
+                                                Dette ferietrekket hører til en annen måned enn refusjonen og vil ikke
+                                                bli trukket her.
+                                            </HelpText>
+                                        )}
+                                    </Table.DataCell>
+                                </Table.Row>
+                            );
+                        })}
+                    </Table.Body>
+                </Table>
+            </div>
+        </ReadMore>
+    );
+};
+
+export default UtregningsradHvaInngårIDette;
