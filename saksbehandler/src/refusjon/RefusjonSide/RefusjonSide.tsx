@@ -53,7 +53,7 @@ const RefusjonSide = (props: Props) => {
             <BodyShort size="small">
                 Vi henter inntektsopplysninger for deltakeren fra a-meldingen automatisk. Hvis inntektsopplysningene
                 ikke stemmer så må det{' '}
-                <EksternLenke href={'https://www.altinn.no/skjemaoversikt/a-ordningen/a-melding2/'}>
+                <EksternLenke href={'https://info.altinn.no/starte-og-drive/arbeidsforhold/lonn/a-meldingen/'}>
                     oppdateres i A-meldingen hos Altinn.
                 </EksternLenke>
                 Feriepenger, innskudd obligatorisk tjenestepensjon, arbeidsgiveravgiften og lønnstilskuddsprosenten er

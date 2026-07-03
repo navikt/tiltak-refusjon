@@ -32,7 +32,7 @@ const RefusjonIngress: FunctionComponent<Properties> = ({ refusjon }: PropsWithC
                 melding fra arbeidsgiver til NAV, SSB og Skatteetaten om ansattes inntekt, arbeidsforhold og
                 forskuddstrekk, samt arbeidsgiveravgift og finansskatt for virksomheten. Hvis inntektsopplysningene ikke
                 stemmer så må det{' '}
-                <EksternLenke href={'https://www.altinn.no/skjemaoversikt/a-ordningen/a-melding2/'}>
+                <EksternLenke href={'https://info.altinn.no/starte-og-drive/arbeidsforhold/lonn/a-meldingen/'}>
                     oppdateres i ditt lønnssystem.
                 </EksternLenke>
                 Feriepenger, innskudd obligatorisk tjenestepensjon, arbeidsgiveravgiften og lønnstilskuddsprosenten er
