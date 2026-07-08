@@ -33,9 +33,9 @@ export const søkevalg = (props: Props): SøkeValg[] => {
                     }}
                     feiletSøk={() => oppdaterFilter(tomtSøkeInput)}
                     valider={(verdi: string) =>
-                        verdi.search(/^[A-Z]\d{6}$/) === -1 ? 'Ikke gyldig NAV-ident' : undefined
+                        verdi.search(/^[A-Z]\d{6}$/) === -1 ? 'Ikke gyldig Nav-ident' : undefined
                     }
-                    textFieldProps={{ placeholder: 'NAV-ident', maxLength: 7, label: '' }}
+                    textFieldProps={{ placeholder: 'Nav-ident', maxLength: 7, label: '' }}
                     tidligereSok={aktivSøketype?.søkeVerdi}
                 />
             ),

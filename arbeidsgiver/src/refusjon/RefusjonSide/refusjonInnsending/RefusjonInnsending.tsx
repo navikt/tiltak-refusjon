@@ -75,7 +75,7 @@ const RefusjonInnsending: FunctionComponent<Properties> = ({
                 label="Jeg bekrefter at opplysningene er korrekte."
                 error={ikkeBekreftetFeilmelding}
             >
-                NAV og Riksrevisjonen kan iverksette kontroll (for eksempel stikkprøvekontroll) med at midlene nyttes
+                Nav og Riksrevisjonen kan iverksette kontroll (for eksempel stikkprøvekontroll) med at midlene nyttes
                 etter forutsetningene, jfr. Bevilgningsreglementet av 26.05.2005 § 10, 2. ledd
             </ConfirmationPanel>
 

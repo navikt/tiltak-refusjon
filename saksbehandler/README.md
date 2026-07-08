@@ -1,6 +1,6 @@
 # tiltak-refusjon-saksbehandler
 
-React-applikasjon (Vite) for saksbehandlere i tiltak-refusjon. Kjører på port `3002` lokalt, med en Express-backend som håndterer autentisering og proxy (kjører på port `3000`). Inkluderer NAV internarbeidsflate-dekoratøren.
+React-applikasjon (Vite) for saksbehandlere i tiltak-refusjon. Kjører på port `3002` lokalt, med en Express-backend som håndterer autentisering og proxy (kjører på port `3000`). Inkluderer Nav internarbeidsflate-dekoratøren.
 
 ## Forutsetninger
 
@@ -30,7 +30,7 @@ pnpm --filter tiltak-refusjon-saksbehandler dev
 Vite-dev-serveren proxyer:
 
 - `/api`-kall til `http://localhost:8081` — sørg for at backend kjører på den porten
-- `/internarbeidsflatedecorator` til NAV internarbeidsflate-dekoratøren (CDN)
+- `/internarbeidsflatedecorator` til Nav internarbeidsflate-dekoratøren (CDN)
 - `/modiacontextholder/api/decorator` til backend for innlogget saksbehandler
 
 ## Teknologier
@@ -38,7 +38,7 @@ Vite-dev-serveren proxyer:
 - **React 18** med TypeScript
 - **Vite** som bundler og dev-server
 - **Vitest** for testing
-- **NAV Aksel** (`@navikt/ds-react`) som komponentbibliotek
+- **Nav Aksel** (`@navikt/ds-react`) som komponentbibliotek
 - **React Hook Form** + **Zod** for skjemahåndtering og validering
 - **Storybook** for komponentutvikling og dokumentasjon
 - **Sentry** for feilsporing

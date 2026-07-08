@@ -43,7 +43,7 @@ const LokalLogin: FunctionComponent<Props> = (props) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <VerticalSpacer rem={2} />
-            <Label>Logg inn med NAV-ident</Label>
+            <Label>Logg inn med Nav-ident</Label>
             <VerticalSpacer rem={1} />
             <div style={{ display: 'flex', alignItems: 'flex-end' }}>
                 <TextField

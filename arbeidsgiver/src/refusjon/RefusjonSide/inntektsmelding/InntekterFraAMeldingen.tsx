@@ -141,8 +141,8 @@ const InntekterFraAMeldingen: FunctionComponent<Props> = ({ refusjon, kvittering
                             Du har huket av for at ingen av de innhentede inntektene er opptjent i {månedNavn}.
                         </Label>
                         <BodyShort size="small">
-                            Hvis du har rapportert inntekter for sent, kan du ta kontakt med NAV-veileder for å åpne for
-                            henting av inntekter som er rapport inn for senere måneder.
+                            Hvis du har rapportert inntekter for sent, kan du ta kontakt med Nav-veileder for å åpne for
+                            henting av inntekter som er rapportert inn for senere måneder.
                         </BodyShort>
                     </Alert>
                 </>
