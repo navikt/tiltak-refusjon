@@ -4,7 +4,6 @@ import type { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 import { formatterPenger } from '~/utils/PengeUtils';
 
 import styles from './Utregningsrad.module.less';
-import { Inntektslinje, Tilskuddsgrunnlag } from '~/types/refusjon';
 
 const visSatsMedNorskFormatering = (sats?: number) => (sats ? sats * 100 : 0).toLocaleString('no-NB');
 
@@ -17,8 +16,6 @@ interface UtregningsradProps {
     verdi: number | string;
     ikkePenger?: boolean;
     border?: 'NORMAL' | 'TYKK' | 'INGEN';
-    inntekter?: Inntektslinje[];
-    tilskuddsgunnlag?: Tilskuddsgrunnlag;
     className?: string;
     utgår?: boolean;
 }
