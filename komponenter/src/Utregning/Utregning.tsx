@@ -197,7 +197,6 @@ const Utregning: FunctionComponent<Props> = (props) => {
                         labelTekst={'Allerede utbetalt for refusjon ' + refusjonsnummer}
                         verdiOperator={beregning.tidligereUtbetalt > 0 ? <MinusIcon /> : <PlusIcon />}
                         verdi={Math.abs(beregning.tidligereUtbetalt)}
-                        ikkePenger={beregning === undefined}
                         border="INGEN"
                     >
                         {beregning.tidligereUtbetalt < 0 && (
@@ -225,7 +224,6 @@ const Utregning: FunctionComponent<Props> = (props) => {
                     labelTekst={'Refusjonsbeløp til utbetaling'}
                     verdiOperator={<EqualsIcon />}
                     verdi={refusjonsbeløp}
-                    ikkePenger={beregning === undefined}
                     border="INGEN"
                 />
             </div>

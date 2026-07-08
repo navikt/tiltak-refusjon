@@ -33,7 +33,7 @@ const UtregningMentor: FunctionComponent<Props> = (props) => {
         return;
     }
 
-    const reduksjonForDelvisPeriode = beregning ? beregning.sumUtgifter - beregning.refusjonsbeløp : 0;
+    const reduksjonForDelvisPeriode = beregning.sumUtgifter - beregning.refusjonsbeløp;
 
     return (
         <ExpansionCard aria-label="Beregning av tilskudd" open={ekspandert} onToggle={setEkspandert} size="small">
@@ -47,48 +47,47 @@ const UtregningMentor: FunctionComponent<Props> = (props) => {
                     labelIkon={<SackKronerIcon />}
                     labelTekst={'Timelønn × antall timer'}
                     labelSubtekst={`(${formatterPenger(mentorTimelonn)} × ${visTallMedNorskFormatering(mentorAntallTimer)})`}
-                    verdi={beregning?.lønn || 0}
+                    verdi={beregning.lønn}
                 />
                 <Utregningsrad
                     labelIkon={<ParasolBeachIcon />}
                     labelTekst="Feriepenger"
                     labelSats={tilskuddsgrunnlag.feriepengerSats}
-                    verdiOperator={(beregning?.feriepenger || 0) >= 0 ? <PlusIcon /> : <MinusIcon />}
-                    verdi={Math.abs(beregning?.feriepenger || 0)}
+                    verdiOperator={beregning.feriepenger >= 0 ? <PlusIcon /> : <MinusIcon />}
+                    verdi={Math.abs(beregning.feriepenger)}
                 />
                 <Utregningsrad
                     labelIkon={<PiggybankIcon />}
                     labelTekst="Obligatorisk tjenestepensjon"
                     labelSats={tilskuddsgrunnlag.otpSats}
-                    verdiOperator={(beregning?.tjenestepensjon || 0) >= 0 ? <PlusIcon /> : <MinusIcon />}
-                    verdi={Math.abs(beregning?.tjenestepensjon || 0)}
+                    verdiOperator={beregning.tjenestepensjon >= 0 ? <PlusIcon /> : <MinusIcon />}
+                    verdi={Math.abs(beregning.tjenestepensjon)}
                 />
                 <Utregningsrad
                     labelIkon={<Buildings2Icon />}
                     labelTekst="Arbeidsgiveravgift"
                     labelSats={tilskuddsgrunnlag.arbeidsgiveravgiftSats}
-                    verdiOperator={(beregning?.arbeidsgiveravgift || 0) >= 0 ? <PlusIcon /> : <MinusIcon />}
-                    verdi={Math.abs(beregning?.arbeidsgiveravgift || 0)}
-                    border={beregning && beregning?.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
+                    verdiOperator={beregning.arbeidsgiveravgift >= 0 ? <PlusIcon /> : <MinusIcon />}
+                    verdi={Math.abs(beregning.arbeidsgiveravgift)}
+                    border={beregning.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
                 />
                 <Utregningsrad
                     labelTekst={<b>Sum tilskudd for en måned</b>}
-                    verdi={beregning?.sumUtgifter || 0}
-                    border={beregning && beregning?.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
+                    verdi={beregning.sumUtgifter}
+                    border={beregning.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
                 />
                 {reduksjonForDelvisPeriode > 0 && (
                     <Utregningsrad
                         labelTekst={<b>Reduksjon for delvis periode</b>}
                         verdiOperator={<MinusIcon />}
                         verdi={reduksjonForDelvisPeriode}
-                        border={beregning && beregning?.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
+                        border={beregning.tidligereRefundertBeløp > 0 ? 'TYKK' : undefined}
                     />
                 )}
                 <Utregningsrad
                     labelTekst={<b>Til utbetaling</b>}
                     verdiOperator={<EqualsIcon />}
-                    verdi={(beregning?.refusjonsbeløp || 0) ?? 'kan ikke beregne'}
-                    ikkePenger={beregning === undefined}
+                    verdi={beregning.refusjonsbeløp}
                 />
             </ExpansionCard.Content>
         </ExpansionCard>
