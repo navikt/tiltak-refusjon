@@ -26,24 +26,26 @@ interface UtregningsradProps {
 const Utregningsrad: FunctionComponent<PropsWithChildren<UtregningsradProps>> = (
     props: PropsWithChildren<UtregningsradProps>
 ) => {
-    const border = () => {
-        switch (props.border) {
-            case 'NORMAL':
-            case undefined:
-                return '';
-            case 'TYKK':
-                return styles.tykkBunn;
-            case 'INGEN':
-                return styles.ingenBunn;
-            default:
-                return '';
-        }
-    };
+    let borderStyle = '';
+
+    switch (props.border) {
+        case 'NORMAL':
+        case undefined:
+            break;
+        case 'TYKK':
+            borderStyle = styles.tykkBunn;
+            break;
+        case 'INGEN':
+            borderStyle = styles.ingenBunn;
+            break;
+        default:
+            break;
+    }
 
     const labelTekstString = typeof props.labelTekst === 'string' ? props.labelTekst : undefined;
 
     return (
-        <div className={styles.utregningWrapper + ' ' + border() + (props.className ? ' ' + props.className : '')}>
+        <div className={styles.utregningWrapper + ' ' + borderStyle + (props.className ? ' ' + props.className : '')}>
             <div className={styles.rad}>
                 <div className={styles.utregningLabel}>
                     <div className={styles.labelInnhold}>
