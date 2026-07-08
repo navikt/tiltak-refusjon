@@ -167,19 +167,11 @@ const Utregning: FunctionComponent<Props> = (props) => {
                 </Utregningsrad>
             )}
             <div className={erKorreksjon ? styles.korreksjonsOppsummering : ''}>
-                {beløpOverMaks && !beløpOver5G && (
+                {beregning.overTilskuddsbeløp && (
                     <Utregningsrad
                         labelIkon={<SackKronerIcon />}
                         labelTekst="Avtalt tilskuddsbeløp"
                         verdi={tilskuddsgrunnlag.tilskuddsbeløp}
-                        border="INGEN"
-                    />
-                )}
-                {beløpOverMaks && beløpOver5G && (
-                    <Utregningsrad
-                        labelIkon={<SackKronerIcon />}
-                        labelTekst="Avtalt tilskuddsbeløp (gjenstående etter 5G)"
-                        verdi={refusjonsbeløp + beregning.tidligereUtbetalt}
                         border="INGEN"
                     />
                 )}
@@ -189,6 +181,21 @@ const Utregning: FunctionComponent<Props> = (props) => {
                         labelTekst={'Ferietrekk fra tidligere refusjoner'}
                         verdiOperator={<MinusIcon />}
                         verdi={Math.abs(forrigeRefusjonMinusBeløp)}
+                        border="INGEN"
+                    />
+                )}
+                <Utregningsrad
+                    labelTekst={'Beløp før 5G'}
+                    verdiOperator={<EqualsIcon />}
+                    verdi={tilskuddsgrunnlag.tilskuddsbeløp + (forrigeRefusjonMinusBeløp ?? 0)}
+                    border="INGEN"
+                    utgår={beløpOver5G}
+                />
+                {beløpOver5G && (
+                    <Utregningsrad
+                        labelIkon={<SackKronerIcon />}
+                        labelTekst="Avtalt tilskuddsbeløp (gjenstående etter 5G)"
+                        verdi={refusjonsbeløp + beregning.tidligereUtbetalt}
                         border="INGEN"
                     />
                 )}
