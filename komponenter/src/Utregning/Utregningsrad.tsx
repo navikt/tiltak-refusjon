@@ -5,8 +5,7 @@ import classnames from 'classnames';
 import { formatterPenger } from '~/utils/PengeUtils';
 
 import styles from './Utregningsrad.module.less';
-
-const visSatsMedNorskFormatering = (sats?: number) => (sats ? sats * 100 : 0).toLocaleString('no-NB');
+import { visSatsMedNorskFormatering } from '~/utils/numberUtils';
 
 interface UtregningsradProps {
     labelIkon?: ReactNode;
