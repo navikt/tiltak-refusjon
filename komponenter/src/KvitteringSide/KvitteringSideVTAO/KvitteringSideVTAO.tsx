@@ -101,7 +101,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
             </div>
             <VerticalSpacer rem={2} />
             <BodyLong>
-                Dere får et tilskudd fra NAV for varig tilrettelagt arbeid. Satsen settes årlig av departementet og
+                Dere får et tilskudd fra Nav for varig tilrettelagt arbeid. Satsen settes årlig av departementet og
                 avtale- og refusjonsløsningen vil automatisk oppdateres når det kommer nye satser.
             </BodyLong>
             <VerticalSpacer rem={1} />

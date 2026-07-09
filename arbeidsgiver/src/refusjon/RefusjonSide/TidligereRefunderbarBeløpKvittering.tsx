@@ -23,14 +23,14 @@ const TidligereRefunderbarBeløpKvittering: FunctionComponent<Properties> = ({
                 </Heading>
                 {refusjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp && refusjon.refusjonsgrunnlag.beregning && (
                     <>
-                        <Label>Har deltaker har hatt fravær med lønn som blir refundert av NAV i denne perioden?</Label>
+                        <Label>Har deltaker har hatt fravær med lønn som blir refundert av Nav i denne perioden?</Label>
                         <Label>Ja</Label>
                         <VerticalSpacer rem={1} />
                         <BodyShort size="small">
                             Har dere fått utbetalt refusjon av lønn på grunn av fravær for deltaker, for eksempel
                             refusjon av sykepenger, så skal dette beløpet trekkes fra refusjon om{' '}
                             {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}. Beløpet som
-                            skal trekkes fra er det beløpet dere har fått i refusjon av NAV.
+                            skal trekkes fra er det beløpet dere har fått i refusjon av Nav.
                         </BodyShort>
                         <VerticalSpacer rem={1} />
                         <Label>

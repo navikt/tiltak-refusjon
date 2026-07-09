@@ -74,7 +74,7 @@ const KorreksjonKvitteringSide = (props: Props) => {
             {(korreksjon.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0) >= 0 && (
                 <Alert variant="info">
                     <BodyShort>
-                        <b>Beslutter NAV:</b> Beløp blir automatisk utbetalt til arbeidsgiver. Midlene blir kostnadsført
+                        <b>Beslutter Nav:</b> Beløp blir automatisk utbetalt til arbeidsgiver. Midlene blir kostnadsført
                         på enhet {korreksjon.kostnadssted}.
                     </BodyShort>
                 </Alert>
@@ -82,7 +82,7 @@ const KorreksjonKvitteringSide = (props: Props) => {
             {(korreksjon.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0) < 0 && (
                 <Alert variant="warning">
                     <BodyShort>
-                        <b>Beslutter NAV:</b> Du må vurdere tilbakekreving i samsvar med gjeldende rutine på{' '}
+                        <b>Beslutter Nav:</b> Du må vurdere tilbakekreving i samsvar med gjeldende rutine på{' '}
                         <b>{formatterPenger(Math.abs(korreksjon.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0))}</b>
                     </BodyShort>
                 </Alert>

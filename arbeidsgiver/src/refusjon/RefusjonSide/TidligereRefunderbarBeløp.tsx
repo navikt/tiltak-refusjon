@@ -51,7 +51,7 @@ const TidligereRefunderbarBeløp: FunctionComponent<Properties> = ({ refusjon }:
                     Har dere fått utbetalt refusjon av lønn på grunn av fravær for deltaker, for eksempel refusjon av
                     sykepenger, så skal dette beløpet trekkes fra refusjon om{' '}
                     {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}. Beløpet som skal
-                    trekkes fra er det beløpet dere har fått i refusjon av NAV.
+                    trekkes fra er det beløpet dere har fått i refusjon av Nav.
                 </BodyShort>
                 <VerticalSpacer rem={0.5} />
                 <BodyShort size="small">
@@ -66,7 +66,7 @@ const TidligereRefunderbarBeløp: FunctionComponent<Properties> = ({ refusjon }:
                 har vært fraværende på grunn av egen eller barns sykdom i denne perioden.
             </Alert>
             <VerticalSpacer rem={1.75} />
-            <Label>Har deltaker hatt fravær med lønn som blir refundert av NAV i denne perioden?</Label>
+            <Label>Har deltaker hatt fravær med lønn som blir refundert av Nav i denne perioden?</Label>
 
             <RadioGroup legend="" value={fratrekk} className={cls.element('fratrekk-sykepenger-radiogroup')}>
                 <Radio

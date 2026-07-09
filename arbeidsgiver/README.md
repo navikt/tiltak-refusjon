@@ -1,6 +1,6 @@
 # tiltak-refusjon-arbeidsgiver
 
-React-applikasjon (Vite) for arbeidsgivere i tiltak-refusjon. Kjører på port `3001` lokalt, med en Express-backend som håndterer autentisering, proxy og NAV-dekoratøren (kjører på port `3000`).
+React-applikasjon (Vite) for arbeidsgivere i tiltak-refusjon. Kjører på port `3001` lokalt, med en Express-backend som håndterer autentisering, proxy og Nav-dekoratøren (kjører på port `3000`).
 
 ## Forutsetninger
 
@@ -34,7 +34,7 @@ Vite-dev-serveren proxyer `/api`-kall til `http://localhost:8081`. Sørg for at 
 - **React 18** med TypeScript
 - **Vite** som bundler og dev-server
 - **Vitest** for testing
-- **NAV Aksel** (`@navikt/ds-react`) som komponentbibliotek
+- **Nav Aksel** (`@navikt/ds-react`) som komponentbibliotek
 - **Storybook** for komponentutvikling og dokumentasjon
 - **Sentry** for feilsporing
 - **Less** for styling

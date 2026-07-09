@@ -70,7 +70,7 @@ const KorreksjonInfo: FunctionComponent<Props> = (props) => {
                     </BodyShort>
                     <BodyShort size="small">
                         {' '}
-                        NAV vil ta kontakt for nærmere detaljer vedrørende tilbakekrevingen.
+                        Nav vil ta kontakt for nærmere detaljer vedrørende tilbakekrevingen.
                     </BodyShort>
                     <VerticalSpacer rem={1} />
                     <Korreksjonsgrunner />

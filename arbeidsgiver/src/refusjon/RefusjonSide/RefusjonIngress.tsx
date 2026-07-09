@@ -29,7 +29,7 @@ const RefusjonIngress: FunctionComponent<Properties> = ({ refusjon }: PropsWithC
             </div>
             <BodyShort size="small" className={cls.element('ingress-text')}>
                 Vi henter inntektsopplysninger for deltakeren fra a-meldingen automatisk. A-meldingen er en månedlig
-                melding fra arbeidsgiver til NAV, SSB og Skatteetaten om ansattes inntekt, arbeidsforhold og
+                melding fra arbeidsgiver til Nav, SSB og Skatteetaten om ansattes inntekt, arbeidsforhold og
                 forskuddstrekk, samt arbeidsgiveravgift og finansskatt for virksomheten. Hvis inntektsopplysningene ikke
                 stemmer så må det{' '}
                 <EksternLenke href={'https://info.altinn.no/starte-og-drive/arbeidsforhold/lonn/a-meldingen/'}>
