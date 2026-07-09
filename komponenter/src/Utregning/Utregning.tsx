@@ -167,7 +167,7 @@ const Utregning: FunctionComponent<Props> = (props) => {
                 </Utregningsrad>
             )}
             <div className={erKorreksjon ? styles.korreksjonsOppsummering : ''}>
-                {beregning.overTilskuddsbeløp && (
+                {beregning.overTilskuddsbeløp && !beløpOver5G && (
                     <Utregningsrad
                         labelIkon={<SackKronerIcon />}
                         labelTekst="Avtalt tilskuddsbeløp"
@@ -175,7 +175,7 @@ const Utregning: FunctionComponent<Props> = (props) => {
                         border="INGEN"
                     />
                 )}
-                {harMinusBeløp && (
+                {harMinusBeløp && !beløpOver5G && (
                     <Utregningsrad
                         labelIkon={<PencilIcon />}
                         labelTekst={'Ferietrekk fra tidligere refusjoner'}
@@ -184,13 +184,6 @@ const Utregning: FunctionComponent<Props> = (props) => {
                         border="INGEN"
                     />
                 )}
-                <Utregningsrad
-                    labelTekst={'Beløp før 5G'}
-                    verdiOperator={<EqualsIcon />}
-                    verdi={tilskuddsgrunnlag.tilskuddsbeløp + (forrigeRefusjonMinusBeløp ?? 0)}
-                    border="INGEN"
-                    utgår={beløpOver5G}
-                />
                 {beløpOver5G && (
                     <Utregningsrad
                         labelIkon={<SackKronerIcon />}
