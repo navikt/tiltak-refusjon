@@ -221,7 +221,7 @@ export const KorreksjonTidligereUtbetalt: Story = {
 
 export const Korreksjon5G: Story = {
     args: {
-        refusjonsnummer: { avtalenr: 123, løpenummer: 3 },
+        refusjonsnummer: { avtalenr: 123, løpenummer: 3, resendingsnummer: 1 },
         erKorreksjon: true,
         beregning: {
             lønn: 100000,
