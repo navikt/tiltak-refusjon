@@ -1,5 +1,6 @@
 import { BodyShort } from '@navikt/ds-react';
 import type { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
+import classnames from 'classnames';
 
 import { formatterPenger } from '~/utils/PengeUtils';
 
@@ -23,26 +24,19 @@ interface UtregningsradProps {
 const Utregningsrad: FunctionComponent<PropsWithChildren<UtregningsradProps>> = (
     props: PropsWithChildren<UtregningsradProps>
 ) => {
-    let borderStyle = '';
-
-    switch (props.border) {
-        case 'NORMAL':
-        case undefined:
-            break;
-        case 'TYKK':
-            borderStyle = styles.tykkBunn;
-            break;
-        case 'INGEN':
-            borderStyle = styles.ingenBunn;
-            break;
-        default:
-            break;
-    }
-
     const labelTekstString = typeof props.labelTekst === 'string' ? props.labelTekst : undefined;
 
     return (
-        <div className={styles.utregningWrapper + ' ' + borderStyle + (props.className ? ' ' + props.className : '')}>
+        <div
+            className={classnames(
+                styles.utregningWrapper,
+                {
+                    [styles.tykkBunn]: props.border === 'TYKK',
+                    [styles.ingenBunn]: props.border === 'INGEN',
+                },
+                props.className
+            )}
+        >
             <div className={styles.rad}>
                 <div className={styles.utregningLabel}>
                     <div className={styles.labelInnhold}>
@@ -62,7 +56,7 @@ const Utregningsrad: FunctionComponent<PropsWithChildren<UtregningsradProps>> = 
                     {props.verdiOperator}
                     <BodyShort
                         size="small"
-                        className={[styles.sum, props.utgår && styles.utgaar].filter((x) => x).join(' ')}
+                        className={classnames(styles.sum, { [styles.utgaar]: props.utgår })}
                         aria-labelledby={labelTekstString}
                     >
                         {props.ikkePenger || typeof props.verdi === 'string'

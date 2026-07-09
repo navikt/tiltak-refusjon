@@ -16,10 +16,9 @@ import { formatterPenger, visTallMedNorskFormatering } from '~/utils/PengeUtils'
 import Utregningsrad from '~/Utregning/Utregningsrad';
 
 import { Beregning, Tilskuddsgrunnlag } from '~/types/refusjon';
-import { erNil } from '~/utils/predicates';
 
 interface Props {
-    beregning?: Beregning;
+    beregning: Beregning;
     tilskuddsgrunnlag: Tilskuddsgrunnlag;
 }
 
@@ -28,10 +27,6 @@ const UtregningMentor: FunctionComponent<Props> = (props) => {
 
     const { beregning, tilskuddsgrunnlag } = props;
     const { mentorAntallTimer = 0, mentorTimelonn = 0 } = tilskuddsgrunnlag;
-
-    if (erNil(beregning)) {
-        return;
-    }
 
     const reduksjonForDelvisPeriode = beregning.sumUtgifter - beregning.refusjonsbeløp;
 

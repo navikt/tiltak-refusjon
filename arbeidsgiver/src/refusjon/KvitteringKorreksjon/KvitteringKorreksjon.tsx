@@ -52,6 +52,7 @@ const KvitteringKorreksjon = (props: Props) => {
                             refusjonsnummer={{
                                 avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
                                 løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
+                                resendingsnummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.resendingsnummer,
                             }}
                             erKorreksjon={true}
                             beregning={korreksjon.refusjonsgrunnlag.beregning}
@@ -95,6 +96,7 @@ const KvitteringKorreksjon = (props: Props) => {
                                     refusjonsnummer={{
                                         avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
                                         løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
+                                        resendingsnummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.resendingsnummer,
                                     }}
                                     erKorreksjon={false}
                                     beregning={refusjon.refusjonsgrunnlag.beregning}

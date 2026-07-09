@@ -57,10 +57,12 @@ const KvitteringSideMentor: FunctionComponent<Props> = (props: Props) => {
                     settKid={settKid}
                 />
             </Box>
-            <UtregningMentor
-                tilskuddsgrunnlag={props.refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                beregning={props.refusjon.refusjonsgrunnlag.beregning}
-            />
+            {props.refusjon.refusjonsgrunnlag.beregning && (
+                <UtregningMentor
+                    tilskuddsgrunnlag={props.refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                    beregning={props.refusjon.refusjonsgrunnlag.beregning}
+                />
+            )}
             <SummeringBoksMentor refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
         </VStack>
     );

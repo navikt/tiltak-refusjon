@@ -261,6 +261,7 @@ export const Korreksjon5G: Story = {
             lønnstilskuddsprosent: 40,
             avtaleNr: 3456,
             løpenummer: 3,
+            resendingsnummer: 1,
             enhet: '1000',
             id: '01HKM5N9FCCAXXEHA5KZXTCV6B',
         },

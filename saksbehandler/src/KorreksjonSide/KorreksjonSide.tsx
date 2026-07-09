@@ -89,6 +89,8 @@ const KorreksjonSide = (props: Props) => {
                                         refusjonsnummer={{
                                             avtalenr: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
                                             løpenummer: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
+                                            resendingsnummer:
+                                                korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.resendingsnummer,
                                         }}
                                         erKorreksjon={true}
                                         beregning={korreksjon.refusjonsgrunnlag.beregning}

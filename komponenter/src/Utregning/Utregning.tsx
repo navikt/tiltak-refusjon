@@ -14,7 +14,7 @@ import {
 import { BodyShort, Heading, ReadMore } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
-import { formatterPenger } from '../utils/PengeUtils';
+import { formatterPenger } from '~/utils/PengeUtils';
 import Utregningsrad from './Utregningsrad';
 import styles from './Utregning.module.less';
 import UtregningsradHvaInngårIDette from './UtregningsradHvaInngårIDette';
@@ -25,6 +25,7 @@ interface Props {
     refusjonsnummer: {
         avtalenr: number;
         løpenummer: number;
+        resendingsnummer?: number;
     };
     erKorreksjon: boolean;
     beregning: Beregning;
@@ -44,7 +45,11 @@ const Utregning: FunctionComponent<Props> = (props) => {
 
     const { refusjonsbeløp, tidligereRefundertBeløp, sumUtgifterFratrukketRefundertBeløp } = beregning;
     const harMinusBeløp = forrigeRefusjonMinusBeløp != null && forrigeRefusjonMinusBeløp < 0;
-    const refusjonsnummer = props.refusjonsnummer.avtalenr + '-' + props.refusjonsnummer.løpenummer;
+    const refusjonsnummer =
+        props.refusjonsnummer.avtalenr +
+        '-' +
+        props.refusjonsnummer.løpenummer +
+        (props.refusjonsnummer.resendingsnummer ? '-R' + props.refusjonsnummer.resendingsnummer : '');
     const beløpOver5G = beregning.overFemGrunnbeløp;
     const beløpOverMaks = beregning.overTilskuddsbeløp || beløpOver5G;
 
