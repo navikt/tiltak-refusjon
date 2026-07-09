@@ -54,7 +54,7 @@ const Utregning: FunctionComponent<Props> = (props) => {
                 Utregningen
             </Heading>
             <VerticalSpacer rem={1} />
-            <Utregningsrad labelTekst={'Bruttolønn i perioden'} verdi={beregning.lønn}>
+            <Utregningsrad labelTekst="Bruttolønn i perioden" verdi={beregning.lønn}>
                 <UtregningsradHvaInngårIDette inntekter={bruttoLønnsInntekter} tilskuddsgrunnlag={tilskuddsgrunnlag} />
             </Utregningsrad>
             {beregning && beregning.fratrekkLønnFerie !== 0 && (
