@@ -42,10 +42,7 @@ const Utregning: FunctionComponent<Props> = (props) => {
     const ferietrekkInntekter =
         inntektsgrunnlag?.inntekter.filter((inntekt) => inntekt.beskrivelse === 'trekkILoennForFerie') ?? [];
 
-    const refusjonsbeløp = beregning.refusjonsbeløp;
-    const tidligereRefundertBeløp = beregning.tidligereRefundertBeløp;
-    const sumUtgifterFratrukketRefundertBeløp = beregning.sumUtgifterFratrukketRefundertBeløp;
-
+    const { refusjonsbeløp, tidligereRefundertBeløp, sumUtgifterFratrukketRefundertBeløp } = beregning;
     const harMinusBeløp = forrigeRefusjonMinusBeløp != null && forrigeRefusjonMinusBeløp < 0;
     const refusjonsnummer = props.refusjonsnummer.avtalenr + '-' + props.refusjonsnummer.løpenummer;
     const beløpOver5G = beregning.overFemGrunnbeløp;
