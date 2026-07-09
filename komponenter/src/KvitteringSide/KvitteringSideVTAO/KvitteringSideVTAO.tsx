@@ -94,7 +94,11 @@ const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
             </div>
             <VerticalSpacer rem={1} />
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
-                <Statusmelding status={refusjon.status} vtao={true} sendtTidspunkt={refusjon.godkjentAvArbeidsgiver} />
+                <Statusmelding
+                    status={refusjon.status}
+                    automatiskInnsending={true}
+                    sendtTidspunkt={refusjon.godkjentAvArbeidsgiver}
+                />
                 {innloggetBruker !== undefined && innloggetBruker.rolle === 'ARBEIDSGIVER' && (
                     <LagreSomPdfKnapp avtaleId={refusjon.id} />
                 )}
