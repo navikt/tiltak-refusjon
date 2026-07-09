@@ -133,7 +133,7 @@ export interface Beregning {
     sumUtgifterFratrukketRefundertBeløp: number;
     lønnFratrukketFerie: number;
     tidligereRefundertBeløp: number;
-    overFemGrunnbeløp: boolean;
+    overFemGrunnbeløp?: boolean;
 }
 
 export enum Korreksjonsgrunn {

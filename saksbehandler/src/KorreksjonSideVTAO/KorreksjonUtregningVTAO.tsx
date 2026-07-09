@@ -2,19 +2,16 @@ import ErlikTegn from '@/asset/image/erlikTegn.svg?react';
 import MinusTegn from '@/asset/image/minusTegn.svg?react';
 import { Heading, Table } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
-import '../refusjon/RefusjonSide/Utregning.less';
+import styles from '~/Utregning/Utregning.module.less';
 import { Tilskuddsgrunnlag } from '~/types/refusjon';
-import BEMHelper from '~/utils/bem';
 import VerticalSpacer from '~/VerticalSpacer';
 import { formatterPenger } from '~/utils/PengeUtils';
 
 const KorreksjonUtregningVTAO: FunctionComponent<{ tilskuddsgrunnlag: Tilskuddsgrunnlag }> = ({
     tilskuddsgrunnlag,
 }) => {
-    const cls = BEMHelper('utregning');
-
     return (
-        <div className={cls.className}>
+        <div className={styles.utregning}>
             <Heading level="2" size="medium">
                 Utregningen
             </Heading>

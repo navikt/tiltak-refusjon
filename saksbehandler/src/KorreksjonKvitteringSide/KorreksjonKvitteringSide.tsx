@@ -7,7 +7,7 @@ import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen
 import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraAMeldingenGammel from '@/refusjon/RefusjonSide/InntekterFraAmeldingenGammel';
 import TidligereRefunderbarBeløpKvittering from '@/refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
-import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import Utregning from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, korreksjonStatusTekst, Korreksjon } from '~/types';
 import { formatterPenger } from '@/utils/PengeUtils';
@@ -60,17 +60,22 @@ const KorreksjonKvitteringSide = (props: Props) => {
             )}
             <TidligereRefunderbarBeløpKvittering refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
             <VerticalSpacer rem={2} />
-            <Utregning
-                refusjonsnummer={{
-                    avtalenr: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                    løpenummer: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                }}
-                erKorreksjon={true}
-                beregning={korreksjon.refusjonsgrunnlag.beregning}
-                tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
-            />
-            <VerticalSpacer rem={2} />
+            {korreksjon.refusjonsgrunnlag.beregning && (
+                <>
+                    <Utregning
+                        refusjonsnummer={{
+                            avtalenr: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
+                            løpenummer: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
+                            resendingsnummer: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.resendingsnummer,
+                        }}
+                        erKorreksjon={true}
+                        beregning={korreksjon.refusjonsgrunnlag.beregning}
+                        tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                        inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
+                    />
+                    <VerticalSpacer rem={2} />
+                </>
+            )}
             {(korreksjon.refusjonsgrunnlag.beregning?.refusjonsbeløp || 0) >= 0 && (
                 <Alert variant="info">
                     <BodyShort>

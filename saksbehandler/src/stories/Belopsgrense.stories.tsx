@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import Utregning from '~/Utregning';
 import { Tiltak } from '~/types/tiltak';
 
 const meta = {

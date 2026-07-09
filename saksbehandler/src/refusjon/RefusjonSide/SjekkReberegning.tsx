@@ -5,7 +5,7 @@ import LagreKnapp from '../../komponenter/LagreKnapp';
 import VerticalSpacer from '~/VerticalSpacer';
 import BekreftelseModal from '~/BekreftelseModal';
 import { sjekkReberegning, useHentRefusjon } from '../../services/rest-service';
-import Utregning from './Utregning';
+import Utregning from '~/Utregning';
 import { Beregning } from '~/types/refusjon';
 
 const SjekkReberegning: FunctionComponent = () => {
@@ -63,6 +63,7 @@ const SjekkReberegning: FunctionComponent = () => {
                             refusjonsnummer={{
                                 avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
                                 løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
+                                resendingsnummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.resendingsnummer,
                             }}
                             erKorreksjon={false}
                             tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}

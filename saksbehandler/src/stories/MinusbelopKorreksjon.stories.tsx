@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import Utregning from '~/Utregning';
 import { Tiltak } from '~/types/tiltak';
 
 const meta = {
@@ -126,7 +126,7 @@ const korreksjonsdata = {
         arbeidsgiveravgift: 7030,
         sumUtgifter: 56892,
         beregnetBeløp: 22757,
-        refusjonsbeløp: 27137,
+        refusjonsbeløp: 9931,
         overTilskuddsbeløp: true,
         tidligereUtbetalt: -6558,
         fratrekkLønnFerie: -1200,
@@ -163,7 +163,7 @@ const korreksjonsdata = {
         godkjentAvBeslutterTidspunkt: '2023-10-01T10:15:04.040058',
         id: '01HKM5N9F8987C49Y2N06PDJ3E',
     },
-    forrigeRefusjonMinusBeløp: 0,
+    forrigeRefusjonMinusBeløp: -17206,
     inntektsgrunnlag: {
         inntekter: [
             {

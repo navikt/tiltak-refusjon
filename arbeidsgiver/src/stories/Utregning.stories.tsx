@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Utregning from '@/komponenter/Utregning';
+import Utregning from '~/Utregning';
 import { Tiltak } from '~/types/tiltak';
-import { Refusjonsgrunnlag } from '~/types/refusjon';
 
 const meta = {
     title: 'Utregning',
@@ -88,10 +87,7 @@ export const OppgjortMinusbeløp: Story = {
     ],
 };
 
-const refusjondata: Refusjonsgrunnlag & {
-    refusjonsnummer: { avtalenr: number; løpenummer: number };
-    erKorreksjon: boolean;
-} = {
+const refusjondata = {
     refusjonsnummer: {
         avtalenr: 1234,
         løpenummer: 2,
@@ -262,10 +258,7 @@ export const Belopsgrense: Story = {
     ),
 };
 
-const refusjondata5G: Refusjonsgrunnlag & {
-    refusjonsnummer: { avtalenr: number; løpenummer: number };
-    erKorreksjon: boolean;
-} = {
+const refusjondata5G = {
     refusjonsnummer: {
         avtalenr: 1234,
         løpenummer: 2,

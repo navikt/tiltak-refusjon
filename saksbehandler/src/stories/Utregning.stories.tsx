@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import Utregning from '~/Utregning';
 import { Tiltak } from '~/types/tiltak';
 
 const meta = {
@@ -142,8 +142,11 @@ export const MangeInntektslinjer: Story = {
     decorators: [
         (Story) => (
             <div>
-                <h1>Refusjon: Mange inntektslinjer</h1>
-                <p>Arbeidsgiver har markert veldig mange inntektslinjer</p>
+                <h1>Refusjon: Minusbeløp, og overskrider tilskuddsbeløp</h1>
+                <p>
+                    Arbeidsgiver har markert veldig mange inntektslinjer, og har et tidligere minusbeløp. Da blir
+                    refusjonen redusert pga maks tilskuddsbeløp, og deretter trekkes minusbeløp
+                </p>
                 <Story />
             </div>
         ),
@@ -210,6 +213,70 @@ export const KorreksjonTidligereUtbetalt: Story = {
                     Korreksjonen fører til minusbeløp (ferietrekk), men et tidligere minusbeløp har gjort arbeidsgiver
                     skyldig mye mer enn antatt, så de får dermed utbetalt penger
                 </p>
+                <Story />
+            </div>
+        ),
+    ],
+};
+
+export const Korreksjon5G: Story = {
+    args: {
+        refusjonsnummer: { avtalenr: 123, løpenummer: 3, resendingsnummer: 1 },
+        erKorreksjon: true,
+        beregning: {
+            lønn: 100000,
+            fratrekkLønnFerie: -35000,
+            lønnFratrukketFerie: 65000,
+            feriepenger: 7800,
+            tjenestepensjon: 1456,
+            arbeidsgiveravgift: 10470,
+            sumUtgifter: 84726,
+            tidligereRefundertBeløp: 500,
+            sumUtgifterFratrukketRefundertBeløp: 84226,
+            beregnetBeløp: 33690,
+            refusjonsbeløp: 9000,
+            overTilskuddsbeløp: true,
+            overFemGrunnbeløp: true,
+            tidligereUtbetalt: 5000,
+            id: '01HKM6F11VQ5PCFQF5HYTQRJ4D',
+        },
+        tilskuddsgrunnlag: {
+            avtaleId: 'a6d15904-3494-440a-9569-e4c486ba517e',
+            tilskuddsperiodeId: '5027bfa9-e581-4acd-b9c4-1f237d0256e7',
+            deltakerFornavn: 'Formye',
+            deltakerEtternavn: 'Ferietrekksen',
+            arbeidsgiverFornavn: 'Arne',
+            arbeidsgiverEtternavn: 'Arbeidsgiver',
+            arbeidsgiverTlf: '41111111',
+            veilederNavIdent: 'Z123456',
+            bedriftNavn: 'Kiwi Majorstuen',
+            bedriftNr: '999999999',
+            tilskuddFom: '2023-12-01',
+            tilskuddTom: '2023-12-31',
+            feriepengerSats: 0.12,
+            otpSats: 0.02,
+            arbeidsgiveravgiftSats: 0.141,
+            tiltakstype: Tiltak.SOMMERJOBB,
+            tilskuddsbeløp: 20000,
+            lønnstilskuddsprosent: 40,
+            avtaleNr: 3456,
+            løpenummer: 3,
+            resendingsnummer: 1,
+            enhet: '1000',
+            id: '01HKM5N9FCCAXXEHA5KZXTCV6B',
+        },
+        forrigeRefusjonMinusBeløp: -1000,
+        inntektsgrunnlag: {
+            inntekter: [],
+            bruttoLønn: 62000,
+            innhentetTidspunkt: '2024-01-08T10:29:07.387322',
+        },
+    },
+    decorators: [
+        (Story) => (
+            <div>
+                <h1>Korreksjon: Riktig visning ved 5G</h1>
+                <p>Korreksjon på en refusjon som endte opp over 5G.</p>
                 <Story />
             </div>
         ),

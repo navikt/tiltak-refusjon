@@ -12,7 +12,7 @@ import Statusmelding from '~/KvitteringSide/Statusmelding';
 import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
 import SummeringBoksNullbeløp from '@/refusjon/RefusjonSide/SummeringsBoksNullbeløp';
 import TidligereRefunderbarBeløpKvittering from '@/refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
-import Utregning from '@/komponenter/Utregning';
+import Utregning from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, statusTekst, tiltakstypeTekst, RefusjonStatus, Refusjon } from '~/types';
 import { formaterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
@@ -91,9 +91,9 @@ const KvitteringSide = (props: Props) => {
                     refusjonsnummer={{
                         avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
                         løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
+                        resendingsnummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.resendingsnummer,
                     }}
                     erKorreksjon={false}
-                    sumUtbetaltVarig={refusjon.refusjonsgrunnlag.sumUtbetaltVarig}
                     beregning={refusjon.refusjonsgrunnlag.beregning}
                     tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                     forrigeRefusjonMinusBeløp={refusjon.refusjonsgrunnlag.forrigeRefusjonMinusBeløp}
