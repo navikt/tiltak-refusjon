@@ -8,13 +8,14 @@ import { valgtBruttoLønn } from '@/utils/inntekterUtiles';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { formaterPeriode, månedsNavn, NORSK_DATO_MÅNED_FORMAT } from '~/utils';
 import { tiltakstypeTekst } from '~/types/messages';
+import { lagRefusjonsnummer } from '~/utils/stringUtils';
 
 type Props = {
     refusjonsgrunnlag: Refusjonsgrunnlag;
 };
 
 const InntekterFraTiltaketSvar: FunctionComponent<Props> = (props) => {
-    const refusjonNummer = `${props.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-${props.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}`;
+    const refusjonNummer = lagRefusjonsnummer(props.refusjonsgrunnlag.tilskuddsgrunnlag);
     const periode = formaterPeriode(
         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
         props.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,

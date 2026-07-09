@@ -11,7 +11,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Refusjonsgrunnlag, RefusjonStatus } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
 import { formaterDato, formaterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
-import { lagId } from '~/utils/stringUtils';
+import { lagRefusjonsnummer } from '~/utils/stringUtils';
 
 interface Props {
     aktsomhet?: Aktsomhet;
@@ -32,18 +32,8 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
         settKid,
     } = props;
 
-    const {
-        deltakerFornavn,
-        deltakerEtternavn,
-        avtaleId,
-        avtaleNr,
-        løpenummer,
-        resendingsnummer,
-        avtaleFom,
-        avtaleTom,
-        tilskuddFom,
-        tilskuddTom,
-    } = tilskuddsgrunnlag;
+    const { deltakerFornavn, deltakerEtternavn, avtaleId, avtaleFom, avtaleTom, tilskuddFom, tilskuddTom } =
+        tilskuddsgrunnlag;
 
     const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${avtaleId}`;
     const erArbeidsgiver = innloggetRolle === 'ARBEIDSGIVER';
@@ -68,7 +58,7 @@ const InformasjonFraAvtalenVTAO = (props: Props) => {
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Refusjonsnummer: </Label>
-                <BodyShort size="small">{lagId(avtaleNr, løpenummer, resendingsnummer)}</BodyShort>
+                <BodyShort size="small">{lagRefusjonsnummer(tilskuddsgrunnlag)}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>

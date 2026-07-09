@@ -15,7 +15,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const refusjonsdata = {
-    refusjonsnummer: { avtalenr: 123, løpenummer: 3 },
     erKorreksjon: false,
     beregning: {
         lønn: 20423,
@@ -116,7 +115,6 @@ const refusjonsdata = {
 };
 
 const korreksjonsdata = {
-    refusjonsnummer: { avtalenr: 123, løpenummer: 3 },
     erKorreksjon: true,
     beregning: {
         lønn: 44846,

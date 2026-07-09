@@ -4,13 +4,14 @@ import { FunctionComponent } from 'react';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
 import { formaterPeriode, NORSK_DATO_MÅNED_FORMAT } from '~/utils';
 import { tiltakstypeTekst } from '~/types/messages';
+import { lagRefusjonsnummer } from '~/utils/stringUtils';
 
 interface Props {
     refusjonsgrunnlag: Refusjonsgrunnlag;
 }
 
 const InntekterFraTiltaketSvarNyLabel: FunctionComponent<Props> = ({ refusjonsgrunnlag }) => {
-    const refusjonNummer = `${refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-${refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}`;
+    const refusjonNummer = lagRefusjonsnummer(refusjonsgrunnlag.tilskuddsgrunnlag);
     const valgtBruttoLønn = refusjonsgrunnlag.inntektsgrunnlag?.inntekter
         .filter((inntekt) => inntekt.erOpptjentIPeriode)
         .map((el) => el.beløp)

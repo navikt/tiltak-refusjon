@@ -1,3 +1,4 @@
+import { Tilskuddsgrunnlag } from '~/types';
 import { erNil } from './predicates';
 
 export const storForbokstav = (tekst: string) => {
@@ -8,7 +9,8 @@ export const kunStorForbokstav = (tekst: string) => {
     return tekst ? tekst.replace(/\b\w/, (v) => v.toUpperCase()) : tekst;
 };
 
-export const lagId = (avtaleNr: number, løpenummer: number, resendingsnummer: number | undefined | null): string => {
+export const lagRefusjonsnummer = (tilskuddsgrunnlag: Tilskuddsgrunnlag): string => {
+    const { avtaleNr, løpenummer, resendingsnummer } = tilskuddsgrunnlag;
     if (!erNil(resendingsnummer)) {
         return `T-${avtaleNr}-${løpenummer}-R${resendingsnummer}`;
     } else {

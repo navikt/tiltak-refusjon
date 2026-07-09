@@ -9,6 +9,7 @@ import { Aktsomhet, tiltakstypeTekst } from '~/types';
 import { Tilskuddsgrunnlag } from '~/types/refusjon';
 import { formaterDato, formaterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { formatterPenger } from '@/utils/PengeUtils';
+import { lagRefusjonsnummer } from '~/utils/stringUtils';
 
 interface Props {
     aktsomhet?: Aktsomhet;
@@ -31,7 +32,7 @@ const InformasjonFraAvtalen = (props: Props) => {
         bedriftKontonummerInnhentetTidspunkt,
     } = props;
     const avtaleLenke = `https://tiltaksgjennomforing.intern.nav.no/tiltaksgjennomforing/avtale/${tilskuddsgrunnlag.avtaleId}`;
-    const refusjonsnummer = `${tilskuddsgrunnlag.avtaleNr}-${tilskuddsgrunnlag.løpenummer}`;
+    const refusjonsnummer = lagRefusjonsnummer(tilskuddsgrunnlag);
 
     return (
         <Boks variant="grå">

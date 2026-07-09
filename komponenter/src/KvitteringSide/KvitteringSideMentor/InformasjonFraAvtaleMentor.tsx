@@ -10,7 +10,7 @@ import { Aktsomhet, Refusjonsgrunnlag, RefusjonStatus } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
 import { formaterDato, formaterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { formatterPenger, visTallMedNorskFormatering } from '~/utils/PengeUtils';
-import { lagId } from '~/utils/stringUtils';
+import { lagRefusjonsnummer } from '~/utils/stringUtils';
 
 interface Props {
     aktsomhet?: Aktsomhet;
@@ -35,13 +35,10 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
         deltakerFornavn,
         deltakerEtternavn,
         avtaleId,
-        avtaleNr,
         bedriftNavn,
         arbeidsgiverFornavn,
         arbeidsgiverEtternavn,
         arbeidsgiverTlf,
-        løpenummer,
-        resendingsnummer,
         tilskuddFom,
         tilskuddTom,
         mentorAntallTimer,
@@ -64,7 +61,7 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
             <VerticalSpacer rem={1} />
             <IkonRad>
                 <Label>Refusjonsnummer: </Label>
-                <BodyShort size="small">{lagId(avtaleNr, løpenummer, resendingsnummer)}</BodyShort>
+                <BodyShort size="small">{lagRefusjonsnummer(tilskuddsgrunnlag)}</BodyShort>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>

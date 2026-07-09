@@ -60,11 +60,6 @@ const SjekkReberegning: FunctionComponent = () => {
                     <div>
                         <VerticalSpacer rem={1} />
                         <Utregning
-                            refusjonsnummer={{
-                                avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                                løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                                resendingsnummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.resendingsnummer,
-                            }}
                             erKorreksjon={false}
                             tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                             beregning={beregning}

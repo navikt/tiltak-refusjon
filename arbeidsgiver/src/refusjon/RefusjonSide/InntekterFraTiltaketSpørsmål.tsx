@@ -11,6 +11,7 @@ import BEMHelper from '~/utils/bem';
 import { Refusjon } from '~/types/refusjon';
 import { formaterPeriode, månedsNavn, NORSK_DATO_MÅNED_FORMAT } from '~/utils';
 import { tiltakstypeTekst } from '~/types/messages';
+import { lagRefusjonsnummer } from '~/utils/stringUtils';
 interface Properties {
     setVisRefusjonInnsending: Dispatch<SetStateAction<boolean>>;
 }
@@ -23,7 +24,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<Properties> = ({ setVisR
     const [inntekterKunTiltaket, setInntekterKunTiltaket] = useState<boolean | undefined>(inntekterKunFraTiltaket);
     const [endringBruttoLønn, setEndringBruttoLønn] = useState<string>(endretBruttoLønn?.toString() ?? '');
 
-    const refusjonNummer = `${tilskuddsgrunnlag.avtaleNr}-${tilskuddsgrunnlag.løpenummer}`;
+    const refusjonNummer = lagRefusjonsnummer(tilskuddsgrunnlag);
     const periode = formaterPeriode(
         refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
         refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,

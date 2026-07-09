@@ -13,6 +13,7 @@ import { tiltakstypeTekst } from '~/types/messages';
 
 import InntekterOpptjentIPeriodeTabell from './InntekterOpptjentIPeriodeTabell';
 import styles from './InntekterFraTiltaketSpørsmål.module.less';
+import { lagRefusjonsnummer } from '~/utils/stringUtils';
 
 const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Refusjonsgrunnlag }> = (props) => {
     const cls = BEMHelper('refusjonside');
@@ -23,7 +24,7 @@ const InntekterFraTiltaketSpørsmål: FunctionComponent<{ refusjonsgrunnlag: Ref
     const [inntekterKunFraTiltaket, setInntekterKunFraTiltaket] = useState(refusjonsgrunnlag.inntekterKunFraTiltaket);
     const [endretBruttoLønn, setEndretBruttoLønn] = useState(refusjonsgrunnlag.endretBruttoLønn);
 
-    const refusjonNummer = `${tilskuddsgrunnlag.avtaleNr}-${tilskuddsgrunnlag.løpenummer}`;
+    const refusjonNummer = lagRefusjonsnummer(korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag);
     const periode = formaterPeriode(
         korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
         korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom,

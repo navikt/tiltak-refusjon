@@ -20,13 +20,9 @@ import styles from './Utregning.module.less';
 import UtregningsradHvaInngårIDette from './UtregningsradHvaInngårIDette';
 import { Beregning, Inntektsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
 import EksternLenke from '~/EksternLenke/EksternLenke';
+import { lagRefusjonsnummer } from '~/utils/stringUtils';
 
 interface Props {
-    refusjonsnummer: {
-        avtalenr: number;
-        løpenummer: number;
-        resendingsnummer?: number;
-    };
     erKorreksjon: boolean;
     beregning: Beregning;
     tilskuddsgrunnlag: Tilskuddsgrunnlag;
@@ -45,11 +41,7 @@ const Utregning: FunctionComponent<Props> = (props) => {
 
     const { refusjonsbeløp, tidligereRefundertBeløp, sumUtgifterFratrukketRefundertBeløp } = beregning;
     const harMinusBeløp = forrigeRefusjonMinusBeløp != null && forrigeRefusjonMinusBeløp < 0;
-    const refusjonsnummer =
-        props.refusjonsnummer.avtalenr +
-        '-' +
-        props.refusjonsnummer.løpenummer +
-        (props.refusjonsnummer.resendingsnummer ? '-R' + props.refusjonsnummer.resendingsnummer : '');
+    const refusjonsnummer = lagRefusjonsnummer(tilskuddsgrunnlag);
     const beløpOver5G = beregning.overFemGrunnbeløp;
     const beløpOverMaks = beregning.overTilskuddsbeløp || beløpOver5G;
 

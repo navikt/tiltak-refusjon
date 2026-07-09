@@ -16,7 +16,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const fratrekkData = {
-    refusjonsnummer: { avtalenr: 123, løpenummer: 3 },
     erKorreksjon: false,
     forrigeRefusjonMinusBeløp: -6558,
     beregning: {
@@ -90,7 +89,6 @@ export const MangeInntektslinjer: Story = {
     name: 'Minusbeløp og mange inntektslinjer',
     args: {
         forrigeRefusjonMinusBeløp: -6558,
-        refusjonsnummer: { avtalenr: 123, løpenummer: 3 },
         erKorreksjon: false,
         beregning: {
             lønn: 108115,
@@ -155,7 +153,6 @@ export const MangeInntektslinjer: Story = {
 
 export const KorreksjonTidligereUtbetalt: Story = {
     args: {
-        refusjonsnummer: { avtalenr: 123, løpenummer: 3 },
         erKorreksjon: true,
         beregning: {
             lønn: 32000,
@@ -221,7 +218,6 @@ export const KorreksjonTidligereUtbetalt: Story = {
 
 export const Korreksjon5G: Story = {
     args: {
-        refusjonsnummer: { avtalenr: 123, løpenummer: 3, resendingsnummer: 1 },
         erKorreksjon: true,
         beregning: {
             lønn: 100000,
