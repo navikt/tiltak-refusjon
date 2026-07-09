@@ -12,8 +12,12 @@ type Props = {
 };
 
 const inntektBeskrivelse = (beskrivelse: string | undefined) => {
-    if (beskrivelse === undefined) return '';
-    else if (beskrivelse === '') return 'Inntekt';
+    if (beskrivelse === undefined) {
+        return '';
+    }
+    if (beskrivelse === '') {
+        return 'Inntekt';
+    }
     return lønnsbeskrivelseTekst[beskrivelse] ?? 'Inntekt: ' + beskrivelse;
 };
 
