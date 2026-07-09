@@ -1,6 +1,6 @@
 import { Alert, ConfirmationPanel } from '@navikt/ds-react';
 import { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useState } from 'react';
-import LagreKnapp from '../../../komponenter/LagreKnapp';
+import LagreKnapp from '@/komponenter/LagreKnapp';
 import Utregning from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 
