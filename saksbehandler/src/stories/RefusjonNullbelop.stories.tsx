@@ -334,7 +334,6 @@ export const RefusjonNullbelop: Story = {
     name: 'Refusjon med nullbeløp',
     args: {
         refusjon: refusjonMedNullbelop,
-        innloggetBruker: { identifikator: '', harKorreksjonTilgang: false, rolle: 'ARBEIDSGIVER' },
     },
     decorators: [
         (Story) => (

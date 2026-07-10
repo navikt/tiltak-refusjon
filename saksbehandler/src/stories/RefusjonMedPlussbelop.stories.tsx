@@ -152,7 +152,6 @@ export const RefusjonPlussbelop: Story = {
     name: 'Refusjon med plussbeløp',
     args: {
         refusjon: refusjonPlussbelop,
-        innloggetBruker: { identifikator: '', harKorreksjonTilgang: false, rolle: 'ARBEIDSGIVER' },
     },
     decorators: [
         (Story) => (

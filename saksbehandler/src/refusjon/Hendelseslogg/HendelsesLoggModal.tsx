@@ -1,11 +1,7 @@
-import React, { FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
-
-import { Button, Checkbox, Modal, Table } from '@navikt/ds-react';
-
+import { FunctionComponent, useEffect, useState } from 'react';
+import { Checkbox, Modal, Table } from '@navikt/ds-react';
 import HendelseIkon from './HendelseIkon';
-
-import './Hendelseslogg.less';
-
+import './HendelsesLoggModal.less';
 import { hentHendelser } from '../../services/rest-service';
 import { Nettressurs, Status } from '~/nettressurs';
 import BEMHelper from '~/utils/bem';
@@ -13,9 +9,12 @@ import { hendelseTekst } from '~/types/messages';
 import { Hendelse, HendelseType } from '~/types/refusjon';
 import { formaterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
+import UtgråetTekst from '@/refusjon/Hendelseslogg/UtgråetTekst';
 
 type Props = {
-    refusjonId?: string;
+    refusjonId: string;
+    open: boolean;
+    onClose: () => void;
 };
 const cls = BEMHelper('hendelseslogg');
 
@@ -35,27 +34,22 @@ interface HendelseMedVisningsstatus extends Hendelse {
     skjules: boolean;
 }
 
-const HendelsesLogg: FunctionComponent<Props> = (props) => {
-    const [open, setOpen] = useState<boolean>(false);
+const HendelsesLoggModal: FunctionComponent<Props> = ({ refusjonId, open, onClose }) => {
     const [visAlle, setVisAlle] = useState<boolean>(false);
     const [hendelseslogg, setHendelseslogg] = useState<Nettressurs<HendelseMedVisningsstatus[]>>({
         status: Status.IkkeLastet,
     });
 
-    const UtgråetTekst: FunctionComponent<PropsWithChildren<{ grå: boolean; title?: string }>> = ({
-        children,
-        grå,
-        title,
-    }) => (
-        <span title={title} style={{ color: grå ? 'grey' : undefined, whiteSpace: 'pre-wrap' }}>
-            {children}
-        </span>
-    );
+    useEffect(() => {
+        if (!open) {
+            setVisAlle(false);
+        }
+    }, [open, setVisAlle]);
 
     useEffect(() => {
         if (open) {
             setHendelseslogg({ status: Status.LasterInn });
-            hentHendelser(props.refusjonId!)
+            hentHendelser(refusjonId)
                 .then((data: Hendelse[]) =>
                     setHendelseslogg({
                         status: Status.Lastet,
@@ -74,7 +68,7 @@ const HendelsesLogg: FunctionComponent<Props> = (props) => {
                 )
                 .catch((error: Error) => setHendelseslogg({ status: Status.Feil, error: error.message }));
         }
-    }, [open, props.refusjonId]);
+    }, [open, refusjonId]);
 
     let finnesMinstEnSomSkjules = false;
 
@@ -92,20 +86,7 @@ const HendelsesLogg: FunctionComponent<Props> = (props) => {
 
     return (
         <div className={cls.className}>
-            <Button
-                size="small"
-                variant="secondary"
-                className={cls.element('openButton')}
-                onClick={() => setOpen(!open)}
-            >
-                Hendelseslogg
-            </Button>
-            <Modal
-                open={open}
-                onClose={() => setOpen(false)}
-                aria-label="Hendelseslogg"
-                className={cls.element('modal')}
-            >
+            <Modal open={open} onClose={onClose} aria-label="Hendelseslogg" className={cls.element('modal')}>
                 <Modal.Header>
                     <h1>Hendelseslogg</h1>
                 </Modal.Header>
@@ -178,4 +159,4 @@ const HendelsesLogg: FunctionComponent<Props> = (props) => {
         </div>
     );
 };
-export default HendelsesLogg;
+export default HendelsesLoggModal;

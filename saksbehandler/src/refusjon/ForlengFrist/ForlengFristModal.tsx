@@ -1,12 +1,12 @@
 import Calender from '@/asset/image/calender2.svg?react';
-import { Button, Label, TextField } from '@navikt/ds-react';
+import { Label, TextField } from '@navikt/ds-react';
 import { FunctionComponent, useState } from 'react';
 import { nb } from 'date-fns/locale';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import BekreftelseModal from '~/BekreftelseModal';
 import { forlengFrist } from '@/services/rest-service';
-import './ForlengFrist.less';
+import './ForlengFristModal.less';
 import {
     finnFeilMeldingFraInputDialog,
     ForlengeDatoSkjemaGruppeFeil,
@@ -142,44 +142,32 @@ const ForlengFristModalKropp: FunctionComponent<{
     );
 };
 
-const ForlengFrist: FunctionComponent<{ refusjonId: string; tidligsteFrist: string; senesteFrist: string }> = ({
-    refusjonId,
-    tidligsteFrist,
-    senesteFrist,
-}) => {
-    const [open, setOpen] = useState<boolean>(false);
-
-    const openModal = () => {
-        setOpen(true);
-    };
-    const lukkModal = () => {
-        setOpen(false);
-    };
-
+const ForlengFristModal: FunctionComponent<{
+    refusjonId: string;
+    tidligsteFrist: string;
+    senesteFrist: string;
+    open: boolean;
+    onClose: () => void;
+}> = ({ refusjonId, tidligsteFrist, senesteFrist, open, onClose }) => {
     const oppdatereRefusjonFrist = async (dato: string, grunnlag: string, annetGrunnlag: string) => {
         const valgGrunn = grunnlag.includes('Annet') ? annetGrunnlag : grunnlag;
-        await forlengFrist(refusjonId!, {
+        await forlengFrist(refusjonId, {
             nyFrist: norskDatoTilISOString(dato),
             årsak: valgGrunn,
         });
-        setOpen(false);
+        onClose();
     };
 
+    if (!open) return null;
+
     return (
-        <div>
-            <Button size="small" variant="secondary" className={cls.element('openButton')} onClick={() => openModal()}>
-                Forleng frist
-            </Button>
-            {open && (
-                <ForlengFristModalKropp
-                    oppdatereRefusjonFrist={oppdatereRefusjonFrist}
-                    lukkModal={lukkModal}
-                    tidligsteFrist={tidligsteFrist}
-                    senesteFrist={senesteFrist}
-                />
-            )}
-        </div>
+        <ForlengFristModalKropp
+            oppdatereRefusjonFrist={oppdatereRefusjonFrist}
+            lukkModal={onClose}
+            tidligsteFrist={tidligsteFrist}
+            senesteFrist={senesteFrist}
+        />
     );
 };
 
-export default ForlengFrist;
+export default ForlengFristModal;

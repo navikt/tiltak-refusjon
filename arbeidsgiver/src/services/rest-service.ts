@@ -38,19 +38,19 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response?.status === 401) {
-            throw new AutentiseringError('Er ikke logget inn.');
+            throw new AutentiseringError('Er ikke logget inn (401).');
         }
         if (error.response?.status === 400 && error.response?.headers.feilkode) {
             throw new FeilkodeError(error.response?.headers.feilkode);
         }
         if (error.response?.status === 403) {
-            const feilmelding = error.response?.headers.feilkode || 'Bruker har ikke tilgang til ressursen.';
+            const feilmelding = error.response?.headers.feilkode || 'Bruker har ikke tilgang til ressursen (403).';
             throw new IkkeTilgangError(feilmelding);
         }
         if (error.response?.status === 404) {
-            throw new IkkeFunnetError('Fant ikke ressursen.');
+            throw new IkkeFunnetError('Fant ikke ressursen (404).');
         }
-        throw new ApiError('Feil ved kontakt mot baksystem.');
+        throw new ApiError(`Feil ved kontakt mot baksystem (${error.response?.status}).`);
     }
 );
 

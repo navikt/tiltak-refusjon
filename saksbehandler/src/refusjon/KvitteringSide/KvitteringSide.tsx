@@ -1,13 +1,13 @@
 import { ReactElement } from 'react';
-import { Heading, Tag } from '@navikt/ds-react';
+import { Heading, Tag, VStack } from '@navikt/ds-react';
 
 import Boks from '~/Boks';
 import HarTattStillingTilAlleInntektsLinjerGammel from '@/refusjon/RefusjonSide/HarTattStillingTilAlleInntektsLinjerGammel';
 import HarTattStillingTilAlleInntektsLinjerNy from '@/refusjon/RefusjonSide/HarTattStillingTilAlleInntektsLinjerNy';
+import HandlingerMeny from '@/refusjon/RefusjonSide/HandlingerMeny';
 import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraAMeldingenGammel from '@/refusjon/RefusjonSide/InntekterFraAmeldingenGammel';
-import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
 import SjekkReberegning from '@/refusjon/RefusjonSide/SjekkReberegning';
 import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
 import SummeringBoksNullbeløp from '@/refusjon/RefusjonSide/SummeringBoksNullbeløp';
@@ -16,7 +16,6 @@ import Utregning from '@/refusjon/RefusjonSide/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, RefusjonStatus, statusTekst, tiltakstypeTekst, Korreksjonsgrunn, Refusjon } from '~/types';
 import { Feature } from '@/featureToggles/features';
-import { InnloggetBruker } from '~/types/brukerContextType';
 import { formaterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
 import { useFeatureToggles } from '@/featureToggles/FeatureToggleProvider';
@@ -38,7 +37,6 @@ const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
 interface Props {
     aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
-    innloggetBruker: InnloggetBruker;
     opprettKorreksjon?: (
         grunner: Korreksjonsgrunn[],
         unntakOmInntekterFremitid?: number,
@@ -47,30 +45,21 @@ interface Props {
 }
 
 const KvitteringSide = (props: Props) => {
-    const { aktsomhet, refusjon, innloggetBruker, opprettKorreksjon } = props;
+    const { aktsomhet, refusjon, opprettKorreksjon } = props;
     const refusjonsgrunnlag = refusjon.refusjonsgrunnlag;
     const featureToggles = useFeatureToggles();
 
     return (
         <Boks variant="hvit">
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                {innloggetBruker.harKorreksjonTilgang &&
-                    refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
-                    opprettKorreksjon &&
-                    !refusjon.korreksjonId && (
-                        <OpprettKorreksjon
-                            tiltakType={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
-                            opprettKorreksjon={opprettKorreksjon}
-                        />
-                    )}
-                {featureToggles[Feature.Reberegning] && <SjekkReberegning />}
-            </div>
-            <VerticalSpacer rem={2} />
+            {featureToggles[Feature.Reberegning] && <SjekkReberegning />}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading size="large" role="heading">
                     Refusjon for {tiltakstypeTekst[refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
                 </Heading>
-                {etikettForRefusjonStatus(refusjon)}
+                <VStack gap="space-16" align="end">
+                    {etikettForRefusjonStatus(refusjon)}
+                    <HandlingerMeny refusjon={refusjon} opprettKorreksjon={opprettKorreksjon} />
+                </VStack>
             </div>
             <VerticalSpacer rem={1} />
             <Statusmelding status={refusjon.status} />

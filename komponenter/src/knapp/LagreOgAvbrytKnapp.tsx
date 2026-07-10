@@ -1,6 +1,5 @@
 import React, { FunctionComponent, HTMLAttributes, useEffect, useRef, useState } from 'react';
-import { Alert, Button, ButtonProps } from '@navikt/ds-react';
-import VerticalSpacer from '~/VerticalSpacer';
+import { Alert, Button, ButtonProps, HStack, VStack } from '@navikt/ds-react';
 import { Nettressurs, Status } from '~/nettressurs';
 import { handterFeil } from '~/utils/apiFeilUtils';
 
@@ -24,18 +23,22 @@ const LagreOgAvbrytKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
             await lagreFunksjon();
             setOppslag({ status: Status.Sendt });
         } catch (error) {
+            const visFeil = (melding: string) => {
+                setOppslag({ status: Status.Feil, error: melding });
+                setFeilmelding(melding);
+            };
             if (error instanceof Error) {
-                handterFeil(error, (melding) => {
-                    setOppslag({ status: Status.Feil, error: melding });
-                    setFeilmelding(melding);
-                });
+                try {
+                    handterFeil(error, visFeil);
+                } catch {
+                    visFeil(error.message || 'Det har skjedd en uventet feil');
+                }
             } else {
-                const feilmelding =
+                const melding =
                     !!error && typeof error === 'object' && 'feilmelding' in error
                         ? (error.feilmelding as string)
                         : 'Uventet feil';
-                setOppslag({ status: Status.Feil, error: feilmelding });
-                setFeilmelding(feilmelding);
+                visFeil(melding);
             }
         }
     };
@@ -47,30 +50,26 @@ const LagreOgAvbrytKnapp: FunctionComponent<Props & ButtonProps> = (props) => {
     }, [oppslag.status]);
 
     return (
-        <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Button style={{ padding: '0.5rem 3rem', marginRight: '0.5rem' }} variant="secondary" onClick={avbryt}>
+        <VStack gap="space-12" align="end">
+            <HStack gap="space-12">
+                <Button variant="secondary" onClick={avbryt}>
                     Avbryt
                 </Button>
                 <Button
-                    style={{ padding: '0.5rem 2.5rem' }}
                     loading={oppslag.status === Status.LasterInn}
                     disabled={oppslag.status === Status.LasterInn}
                     onClick={onClick}
                     {...knappBaseProps}
                 ></Button>
-            </div>
+            </HStack>
             {oppslag.status === Status.Feil && (
-                <>
-                    <VerticalSpacer rem={0.5} />
-                    <Alert variant="warning" size="small">
-                        <div ref={feilRef} aria-live="polite">
-                            {feilmelding}
-                        </div>
-                    </Alert>
-                </>
+                <Alert variant="warning" size="small">
+                    <div ref={feilRef} aria-live="polite">
+                        {feilmelding}
+                    </div>
+                </Alert>
             )}
-        </div>
+        </VStack>
     );
 };
 

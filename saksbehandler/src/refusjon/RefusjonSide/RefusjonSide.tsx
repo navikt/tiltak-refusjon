@@ -6,6 +6,7 @@ import StatusTekst from '~/StatusTekst';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Refusjon, tiltakstypeTekst } from '~/types';
 
+import HandlingerMeny from './HandlingerMeny';
 import HarTattStillingTilAlleInntektsLinjerGammel from './HarTattStillingTilAlleInntektsLinjerGammel';
 import InformasjonFraAvtalen from './InformasjonFraAvtalen';
 import InntekterFraAMeldingen from './InntekterFraAMeldingen/InntekterFraAMeldingen';
@@ -26,17 +27,18 @@ const RefusjonSide = (props: Props) => {
     return (
         <Boks variant="hvit">
             {refusjon.status === 'KLAR_FOR_INNSENDING' && refusjon.refusjonsgrunnlag.inntektsgrunnlag === null && (
-                <Alert variant="info" size="small">
-                    <Heading spacing size="small">
-                        Obs! Arbeidsgiver har ikke vært inne på denne refusjonen.
-                    </Heading>
-                    Det har aldri vært forsøkt hentet inntektsgrunnlag og kontonummer, noe som gjøres hver gang
-                    arbeidsgiver åpner refusjoner som er klare for innsending.
-                </Alert>
+                <>
+                    <Alert variant="info" size="small">
+                        <Heading spacing size="small">
+                            Obs! Arbeidsgiver har ikke vært inne på denne refusjonen.
+                        </Heading>
+                        Det har aldri vært forsøkt hentet inntektsgrunnlag og kontonummer, noe som gjøres hver gang
+                        arbeidsgiver åpner refusjoner som er klare for innsending.
+                    </Alert>
+                    <VerticalSpacer rem={2} />
+                </>
             )}
-            <VerticalSpacer rem={2} />
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '1rem' }}>
                 <Heading size="large" level="1">
                     Beregning av refusjon for{' '}
                     {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
@@ -48,18 +50,21 @@ const RefusjonSide = (props: Props) => {
                     tilskuddTom={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom}
                     fratrekkRefunderbarBeløp={refusjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp}
                 />
+                <BodyShort size="small">
+                    Vi henter inntektsopplysninger for deltakeren fra a-meldingen automatisk. Hvis inntektsopplysningene
+                    ikke stemmer så må det{' '}
+                    <EksternLenke href={'https://info.altinn.no/starte-og-drive/arbeidsforhold/lonn/a-meldingen/'}>
+                        oppdateres i A-meldingen hos Altinn.
+                    </EksternLenke>
+                    Feriepenger, innskudd obligatorisk tjenestepensjon, arbeidsgiveravgiften og lønnstilskuddsprosenten
+                    er hentet fra avtalen om{' '}
+                    {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}.
+                </BodyShort>
+                <div style={{ margin: 'auto 0 auto auto' }}>
+                    <HandlingerMeny refusjon={refusjon} visHandlinger />
+                </div>
             </div>
             <VerticalSpacer rem={1} />
-            <BodyShort size="small">
-                Vi henter inntektsopplysninger for deltakeren fra a-meldingen automatisk. Hvis inntektsopplysningene
-                ikke stemmer så må det{' '}
-                <EksternLenke href={'https://info.altinn.no/starte-og-drive/arbeidsforhold/lonn/a-meldingen/'}>
-                    oppdateres i A-meldingen hos Altinn.
-                </EksternLenke>
-                Feriepenger, innskudd obligatorisk tjenestepensjon, arbeidsgiveravgiften og lønnstilskuddsprosenten er
-                hentet fra avtalen om {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}.
-            </BodyShort>
-            <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
                 aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
