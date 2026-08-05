@@ -1,4 +1,3 @@
-import { InnloggetBruker } from '~/types/brukerContextType';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 
 import { Meta, StoryObj } from '@storybook/react-vite';
@@ -18,12 +17,6 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-const innloggetBruker: InnloggetBruker = {
-    harKorreksjonTilgang: false,
-    identifikator: '123456',
-    rolle: 'ARBEIDSGIVER',
-};
 
 const førOver5GRefusjon: Refusjon = {
     harInntektIAlleMåneder: true,
@@ -112,5 +105,5 @@ const førOver5GRefusjon: Refusjon = {
 
 export const RefusjonFør5G: Story = {
     name: 'Refusjon før 5g overskrides',
-    args: { refusjon: førOver5GRefusjon, innloggetBruker },
+    args: { refusjon: førOver5GRefusjon },
 };

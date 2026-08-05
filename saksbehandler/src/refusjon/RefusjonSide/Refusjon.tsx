@@ -3,13 +3,11 @@ import { Alert } from '@navikt/ds-react';
 import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router';
 
-import ForlengFrist from '@/refusjon/ForlengFrist/ForlengFrist';
-import HendelsesLogg from '@/refusjon/Hendelseslogg/Hendelseslogg';
+import HandlingerMeny from './HandlingerMeny';
 import HenterInntekterBoks from '~/HenterInntekterBoks';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
-import MerkForUnntakOmInntekterToMånederFrem from '@/refusjon/MerkForUnntakOmInntekterFremITid/MerkForUnntakOmInntekterFremITid';
 import TilbakeTilOversikt from '@/komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Tiltak, Korreksjonsgrunn, RefusjonStatus, BrukerContextType } from '~/types';
@@ -19,7 +17,6 @@ import { useInnloggetBruker } from '@/bruker/BrukerContext';
 
 import FeilSide from './FeilSide';
 import RefusjonSide from './RefusjonSide';
-import styles from './Refusjon.module.less';
 
 const Advarsler: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
@@ -75,101 +72,57 @@ const Komponent: FunctionComponent = () => {
 
     switch (refusjon.status) {
         case RefusjonStatus.FOR_TIDLIG:
-            if (refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype == 'VTAO') {
+            if (tiltakstype === Tiltak.VTAO) {
                 return (
-                    <>
-                        <div className={styles.fleks}>
-                            <HendelsesLogg refusjonId={refusjonId} />
-                        </div>
-                        <VerticalSpacer rem={1} />
-                        <KvitteringSideVTAO
-                            aktsomhet={aktsomhet}
-                            refusjon={refusjon}
-                            innloggetBruker={brukerContext.innloggetBruker}
-                        />
-                    </>
+                    <KvitteringSideVTAO
+                        aktsomhet={aktsomhet}
+                        refusjon={refusjon}
+                        innloggetBruker={brukerContext.innloggetBruker}
+                        headerActions={<HandlingerMeny refusjon={refusjon} />}
+                    />
                 );
             }
-            if (tiltakstype == 'MENTOR') {
+            if (tiltakstype === Tiltak.MENTOR) {
                 return (
-                    <>
-                        <div className={styles.fleks}>
-                            <HendelsesLogg refusjonId={refusjonId} />
-                        </div>
-                        <VerticalSpacer rem={1} />
-                        <KvitteringSideMentor
-                            aktsomhet={aktsomhet}
-                            refusjon={refusjon}
-                            innloggetBruker={brukerContext.innloggetBruker}
-                        />
-                    </>
+                    <KvitteringSideMentor
+                        aktsomhet={aktsomhet}
+                        refusjon={refusjon}
+                        innloggetBruker={brukerContext.innloggetBruker}
+                        headerActions={<HandlingerMeny refusjon={refusjon} />}
+                    />
                 );
             }
             return (
-                <>
-                    <div className={styles.fleks}>
-                        <HendelsesLogg refusjonId={refusjonId} />
-                    </div>
-                    <VerticalSpacer rem={1} />
-                    <FeilSide
-                        aktsomhet={aktsomhet}
-                        refusjon={refusjon}
-                        advarselType="info"
-                        feiltekst={`Du kan søke om refusjon fra ${beregnDagenEtterOgFormater(
-                            refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
-                        )} når perioden er over.`}
-                    />
-                </>
+                <FeilSide
+                    aktsomhet={aktsomhet}
+                    refusjon={refusjon}
+                    advarselType="info"
+                    feiltekst={`Du kan søke om refusjon fra ${beregnDagenEtterOgFormater(
+                        refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
+                    )} når perioden er over.`}
+                />
             );
         case RefusjonStatus.KLAR_FOR_INNSENDING:
-            return (
-                <>
-                    <div className={styles.fleks}>
-                        <ForlengFrist
-                            refusjonId={refusjon.id}
-                            tidligsteFrist={refusjon.fristForGodkjenning}
-                            senesteFrist={refusjon.senestMuligeGodkjenningsfrist}
-                        />
-                        {brukerContext.innloggetBruker.harKorreksjonTilgang && (
-                            <MerkForUnntakOmInntekterToMånederFrem refusjon={refusjon} />
-                        )}
-                        <HendelsesLogg refusjonId={refusjonId} />
-                    </div>
-                    <VerticalSpacer rem={1} />
-                    <RefusjonSide aktsomhet={aktsomhet} refusjon={refusjon} />
-                </>
-            );
+            return <RefusjonSide aktsomhet={aktsomhet} refusjon={refusjon} />;
         case RefusjonStatus.UTGÅTT:
             return (
-                <>
-                    <div className={styles.fleks}>
-                        <HendelsesLogg refusjonId={refusjonId} />
-                    </div>
-                    <VerticalSpacer rem={1} />
-                    <FeilSide
-                        aktsomhet={aktsomhet}
-                        refusjon={refusjon}
-                        advarselType="warning"
-                        feiltekst={`Fristen for å søke om refusjon for denne perioden gikk ut ${formaterDato(
-                            refusjon.fristForGodkjenning
-                        )}. Fristen kan ikke forlenges etter at den er utgått.`}
-                    />
-                </>
+                <FeilSide
+                    aktsomhet={aktsomhet}
+                    refusjon={refusjon}
+                    advarselType="warning"
+                    feiltekst={`Fristen for å søke om refusjon for denne perioden gikk ut ${formaterDato(
+                        refusjon.fristForGodkjenning
+                    )}. Fristen kan ikke forlenges etter at den er utgått.`}
+                />
             );
         case RefusjonStatus.ANNULLERT:
             return (
-                <>
-                    <div className={styles.fleks}>
-                        <HendelsesLogg refusjonId={refusjonId} />
-                    </div>
-                    <VerticalSpacer rem={1} />
-                    <FeilSide
-                        aktsomhet={aktsomhet}
-                        refusjon={refusjon}
-                        advarselType="warning"
-                        feiltekst="Refusjonen er annullert. Avtalen ble annullert."
-                    />
-                </>
+                <FeilSide
+                    aktsomhet={aktsomhet}
+                    refusjon={refusjon}
+                    advarselType="warning"
+                    feiltekst="Refusjonen er annullert. Avtalen ble annullert."
+                />
             );
         case RefusjonStatus.SENDT_KRAV:
         case RefusjonStatus.GODKJENT_MINUSBELØP:
@@ -177,43 +130,27 @@ const Komponent: FunctionComponent = () => {
         case RefusjonStatus.UTBETALT:
         case RefusjonStatus.UTBETALING_FEILET:
         case RefusjonStatus.KORRIGERT:
-            return (
-                <>
-                    <div className={styles.fleks}>
-                        <HendelsesLogg refusjonId={refusjonId} />
-                    </div>
-                    <VerticalSpacer rem={1} />
-                    {tiltakstype === 'MENTOR' && (
-                        <>
-                            <div className={styles.fleks}>
-                                <HendelsesLogg refusjonId={refusjonId} />
-                            </div>
-                            <VerticalSpacer rem={1} />
-                            <KvitteringSideMentor
-                                aktsomhet={aktsomhet}
-                                refusjon={refusjon}
-                                innloggetBruker={brukerContext.innloggetBruker}
-                            />
-                        </>
-                    )}
-                    {tiltakstype === 'VTAO' && (
-                        <KvitteringSideVTAO
-                            aktsomhet={aktsomhet}
-                            refusjon={refusjon}
-                            innloggetBruker={brukerContext.innloggetBruker}
-                            opprettKorreksjon={opprettKorreksjon}
-                        />
-                    )}
-                    {tiltakstype !== 'VTAO' && tiltakstype !== 'MENTOR' && (
-                        <KvitteringSide
-                            aktsomhet={aktsomhet}
-                            refusjon={refusjon}
-                            innloggetBruker={brukerContext.innloggetBruker}
-                            opprettKorreksjon={opprettKorreksjon}
-                        />
-                    )}
-                </>
-            );
+            if (tiltakstype === Tiltak.MENTOR) {
+                return (
+                    <KvitteringSideMentor
+                        aktsomhet={aktsomhet}
+                        refusjon={refusjon}
+                        innloggetBruker={brukerContext.innloggetBruker}
+                        headerActions={<HandlingerMeny refusjon={refusjon} />}
+                    />
+                );
+            }
+            if (tiltakstype === Tiltak.VTAO) {
+                return (
+                    <KvitteringSideVTAO
+                        aktsomhet={aktsomhet}
+                        refusjon={refusjon}
+                        innloggetBruker={brukerContext.innloggetBruker}
+                        headerActions={<HandlingerMeny refusjon={refusjon} opprettKorreksjon={opprettKorreksjon} />}
+                    />
+                );
+            }
+            return <KvitteringSide aktsomhet={aktsomhet} refusjon={refusjon} opprettKorreksjon={opprettKorreksjon} />;
     }
 };
 

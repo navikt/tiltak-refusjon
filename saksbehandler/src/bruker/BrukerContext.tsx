@@ -3,7 +3,7 @@ import { hentInnloggetBruker } from '../services/rest-service';
 import { BrukerContextType, InnloggetBruker } from '~/types/brukerContextType';
 import LokalLogin from '../LokalLogin/LokalLogin';
 
-const BrukerContext = React.createContext<BrukerContextType | undefined>(undefined);
+export const BrukerContext = React.createContext<BrukerContextType | undefined>(undefined);
 
 // Egen hook fordi det sjekkes at den blir brukt riktig, og kan ha undefined som defaultValue
 export const useInnloggetBruker = () => {

@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import { merkForUnntakOmInntekterFremITid } from '../../services/rest-service';
 import VerticalSpacer from '~/VerticalSpacer';
 import { BodyShort, TextField, Button, Modal, Heading } from '@navikt/ds-react';
@@ -19,23 +19,27 @@ const schema = z.object({
 
 type FormFields = z.infer<typeof schema>;
 
-const MerkForUnntakOmInntekterFremITid: FunctionComponent<{ refusjon: Refusjon }> = ({ refusjon }) => {
-    const [open, setOpen] = useState<boolean>(false);
-
+const MerkForUnntakOmInntekterFremITidModal: FunctionComponent<{
+    refusjon: Refusjon;
+    open: boolean;
+    onClose: () => void;
+}> = ({ refusjon, open, onClose }) => {
     return (
-        <div>
-            <Button size="small" variant="secondary" onClick={() => setOpen(!open)}>
-                Hent inntekter lenger frem
-            </Button>
-            <Modal open={open} onClose={() => setOpen(false)} aria-labelledby="modal-heading">
-                <Modal.Header>
-                    <Heading level="2" size="large">
-                        Merk refusjonen for henting av inntekter frem i tid
-                    </Heading>
-                </Modal.Header>
-                {open && <ModalForm refusjon={refusjon} setOpen={setOpen} />}
-            </Modal>
-        </div>
+        <Modal open={open} onClose={onClose} aria-labelledby="modal-heading">
+            <Modal.Header>
+                <Heading level="2" size="large">
+                    Merk refusjonen for henting av inntekter frem i tid
+                </Heading>
+            </Modal.Header>
+            {open && (
+                <ModalForm
+                    refusjon={refusjon}
+                    setOpen={(isOpen) => {
+                        if (!isOpen) onClose();
+                    }}
+                />
+            )}
+        </Modal>
     );
 };
 
@@ -107,4 +111,4 @@ const ModalForm: FunctionComponent<{ refusjon: Refusjon; setOpen: (open: boolean
     );
 };
 
-export default MerkForUnntakOmInntekterFremITid;
+export default MerkForUnntakOmInntekterFremITidModal;

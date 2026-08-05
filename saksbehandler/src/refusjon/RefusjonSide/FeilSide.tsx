@@ -1,10 +1,11 @@
-import { Alert, Heading } from '@navikt/ds-react';
+import { Alert, Heading, HStack } from '@navikt/ds-react';
 
 import Boks from '~/Boks';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Refusjon, tiltakstypeTekst } from '~/types';
 
 import InformasjonFraAvtalen from './InformasjonFraAvtalen';
+import HandlingerMeny from '@/refusjon/RefusjonSide/HandlingerMeny';
 
 type AlertStripeType = 'info' | 'success' | 'warning' | 'error';
 
@@ -24,10 +25,13 @@ const FeilSide = (props: Props) => {
                 {feiltekst}
             </Alert>
             <VerticalSpacer rem={2} />
-            <Heading size="large">
-                Refusjon av {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
-            </Heading>
-            <VerticalSpacer rem={1} />
+            <HStack justify="space-between">
+                <Heading size="large">
+                    Refusjon av {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
+                </Heading>
+                <HandlingerMeny refusjon={refusjon} />
+            </HStack>
+            <VerticalSpacer rem={2} />
             <InformasjonFraAvtalen
                 aktsomhet={aktsomhet}
                 tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}

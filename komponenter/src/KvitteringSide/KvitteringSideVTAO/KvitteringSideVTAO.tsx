@@ -1,13 +1,12 @@
 import moment from 'moment';
-import { BodyLong, Heading, Tag } from '@navikt/ds-react';
-import { FunctionComponent, ReactElement } from 'react';
+import { BodyLong, Heading, Tag, VStack } from '@navikt/ds-react';
+import { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import Boks from '~/Boks/Boks';
 import LagreSomPdfKnapp from '~/KvitteringSide/LagreSomPdfKnapp';
-import OpprettKorreksjon from '~/knapp/OpprettKorreksjon';
 import Statusmelding from '~/KvitteringSide/Statusmelding';
 import VerticalSpacer from '~/VerticalSpacer';
-import { Aktsomhet, Korreksjonsgrunn, Refusjon, RefusjonStatus, statusTekst } from '~/types';
+import { Aktsomhet, Refusjon, RefusjonStatus, statusTekst } from '~/types';
 import { InnloggetBruker } from '~/types/brukerContextType';
 import { formaterDato, NORSK_DATO_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
@@ -58,39 +57,24 @@ interface Props {
     aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
     innloggetBruker?: InnloggetBruker;
-    opprettKorreksjon?: (
-        grunner: Korreksjonsgrunn[],
-        unntakOmInntekterFremitid?: number,
-        annenKorreksjonsGrunn?: string
-    ) => Promise<void>;
     settKid?: (kid?: string) => void;
+    headerActions?: ReactNode;
 }
 
 const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
-    const { refusjon, innloggetBruker, opprettKorreksjon, aktsomhet, settKid } = props;
+    const { refusjon, innloggetBruker, aktsomhet, settKid, headerActions } = props;
     const innloggetRolle = innloggetBruker?.rolle;
 
     return (
         <Boks variant="hvit">
-            {innloggetBruker !== undefined &&
-                innloggetBruker.harKorreksjonTilgang &&
-                refusjon.status !== RefusjonStatus.UTBETALING_FEILET &&
-                !refusjon.korreksjonId &&
-                opprettKorreksjon !== undefined && (
-                    <>
-                        <OpprettKorreksjon
-                            tiltakType={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype}
-                            opprettKorreksjon={opprettKorreksjon}
-                        />
-                        <VerticalSpacer rem={1} />
-                    </>
-                )}
-
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading level="2" size="large">
                     Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
                 </Heading>
-                {etikettForRefusjonStatus(refusjon)}
+                <VStack gap="space-16" align="end">
+                    {etikettForRefusjonStatus(refusjon)}
+                    {headerActions}
+                </VStack>
             </div>
             <VerticalSpacer rem={1} />
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
