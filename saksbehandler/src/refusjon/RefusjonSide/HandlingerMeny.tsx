@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 import { ActionMenu, Box, Button } from '@navikt/ds-react';
-import { ChevronDownIcon } from '@navikt/aksel-icons';
+import { BulletListIcon, ChevronDownIcon, ForwardIcon, NotePencilDashIcon, WalletIcon } from '@navikt/aksel-icons';
 import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import ForlengFrist from '@/refusjon/ForlengFrist/ForlengFristModal';
 import HendelsesLogg from '@/refusjon/Hendelseslogg/HendelsesLoggModal';
@@ -43,11 +43,13 @@ const HandlingerMeny: FunctionComponent<Props> = ({ refusjon, visHandlinger = fa
                     {visHandlinger && (
                         <ActionMenu.Group aria-label="Handlinger">
                             <ActionMenu.Item onSelect={() => setActiveModal('forlengFrist')}>
+                                <ForwardIcon />
                                 Forleng frist
                             </ActionMenu.Item>
                             {innloggetBruker.harKorreksjonTilgang && (
                                 <ActionMenu.Item onSelect={() => setActiveModal('inntekter')}>
-                                    Hent inntekter lenger frem
+                                    <WalletIcon />
+                                    Hent inntekter for senere perioder
                                 </ActionMenu.Item>
                             )}
                         </ActionMenu.Group>
@@ -55,6 +57,7 @@ const HandlingerMeny: FunctionComponent<Props> = ({ refusjon, visHandlinger = fa
                     {visKorreksjon && (
                         <ActionMenu.Group aria-label="Korreksjon">
                             <ActionMenu.Item onSelect={() => setActiveModal('korreksjon')}>
+                                <NotePencilDashIcon />
                                 Opprett korreksjonsutkast
                             </ActionMenu.Item>
                         </ActionMenu.Group>
@@ -62,6 +65,7 @@ const HandlingerMeny: FunctionComponent<Props> = ({ refusjon, visHandlinger = fa
                     {(visHandlinger || visKorreksjon) && <ActionMenu.Divider />}
                     <ActionMenu.Group aria-label="Logg">
                         <ActionMenu.Item onSelect={() => setActiveModal('hendelseslogg')}>
+                            <BulletListIcon />
                             Hendelseslogg
                         </ActionMenu.Item>
                     </ActionMenu.Group>
@@ -75,7 +79,7 @@ const HandlingerMeny: FunctionComponent<Props> = ({ refusjon, visHandlinger = fa
             {visHandlinger && (
                 <ForlengFrist
                     refusjonId={refusjon.id}
-                    tidligsteFrist={refusjon.fristForGodkjenning}
+                    eksisterendeFrist={refusjon.fristForGodkjenning}
                     senesteFrist={refusjon.senestMuligeGodkjenningsfrist}
                     open={activeModal === 'forlengFrist'}
                     onClose={() => setActiveModal(null)}

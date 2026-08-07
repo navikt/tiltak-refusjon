@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react';
 import { merkForUnntakOmInntekterFremITid } from '../../services/rest-service';
 import VerticalSpacer from '~/VerticalSpacer';
-import { BodyShort, TextField, Button, Modal, Heading } from '@navikt/ds-react';
-
+import { BodyShort, Button, Modal, Heading, Select } from '@navikt/ds-react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,8 +12,8 @@ import { Feilkode, Feilmeldinger } from '~/feilkodemapping';
 const schema = z.object({
     merking: z.coerce
         .number({ invalid_type_error: 'Må være tall' })
-        .min(1, 'Må være mer enn 1')
-        .max(12, 'Må være mindre enn 12'),
+        .min(1, 'Må være minst 1')
+        .max(12, 'Kan ikke være mer enn 12'),
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -78,19 +77,24 @@ const ModalForm: FunctionComponent<{ refusjon: Refusjon; setOpen: (open: boolean
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Modal.Body>
-                <BodyShort size="small">
+                <BodyShort>
                     Hvis unntaksregelen er aktivert vil systemet hente inntekter for valgt antall måneder etter
                     perioden, i stedet for én måned som standard. Nytt inntektsoppslag vil gjøres neste gang
                     arbeidsgiver åpner refusjonen.
                 </BodyShort>
                 <VerticalSpacer rem={1} />
-                <TextField
+                <Select
                     style={{ width: '25%' }}
-                    size="small"
-                    label={`Antall ekstra måneder etter perioden systemet skal hente inntekter (maks 12)`}
+                    label="Antall ekstra måneder etter perioden systemet skal hente inntekter"
                     {...register('merking')}
                     error={errors.merking?.message}
-                />
+                >
+                    {Array.from({ length: 12 }, (_, i) => i + 1).map((antall) => (
+                        <option key={antall} value={antall}>
+                            {antall}
+                        </option>
+                    ))}
+                </Select>
             </Modal.Body>
             <Modal.Footer>
                 <Button disabled={isSubmitting} type="submit">
