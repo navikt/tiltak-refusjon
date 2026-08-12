@@ -1,154 +1,141 @@
-import Calender from '@/asset/image/calender2.svg?react';
-import { Label, TextField } from '@navikt/ds-react';
-import { FunctionComponent, useState } from 'react';
-import { nb } from 'date-fns/locale';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
+import { BodyShort, DatePicker, DateValidationT, useDatepicker } from '@navikt/ds-react';
+import { FunctionComponent, SetStateAction, useRef } from 'react';
+import { z } from 'zod';
+import { useForm, useController, SubmitHandler, SubmitErrorHandler, Resolver } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import BekreftelseModal from '~/BekreftelseModal';
 import { forlengFrist } from '@/services/rest-service';
-import './ForlengFristModal.less';
-import {
-    finnFeilMeldingFraInputDialog,
-    ForlengeDatoSkjemaGruppeFeil,
-    norskDatoTilISOString,
-    parseNorskDato,
-    erGyldigDato,
-    datoTilNorskString,
-} from './forlengFristUtils';
+import { norskDatoTilISOString, datoTilNorskString, nesteDag } from './forlengFristUtils';
 import GrunnlagTilForlengelse from './GrunnlagTilForlengelse';
-import { FeilkodeError } from '~/types/errors';
-import BEMHelper from '~/utils/bem';
+import VerticalSpacer from '~/VerticalSpacer';
 
-const cls = BEMHelper('forleng-frist');
+const schema = z
+    .object({
+        dato: z.date({ required_error: 'Må sette frist.' }),
+        grunnlag: z.string().min(1, 'Må sette grunn til forlengelse.'),
+        annetGrunnlag: z.string(),
+    })
+    .refine(({ grunnlag, annetGrunnlag }) => !(grunnlag.includes('Annet') && annetGrunnlag.trim().length === 0), {
+        message: 'Mangler tekst for annet grunnlag.',
+        path: ['annetGrunnlag'],
+    });
+
+type FormFields = z.infer<typeof schema>;
 
 const ForlengFristModalKropp: FunctionComponent<{
-    tidligsteFrist: string;
+    eksisterendeFrist: string;
     senesteFrist: string;
     lukkModal: () => void;
     oppdatereRefusjonFrist: (dato: string, grunnlag: string, annetGrunnlag: string) => Promise<void>;
-}> = ({ tidligsteFrist, senesteFrist, oppdatereRefusjonFrist, lukkModal }) => {
-    const tidligsteFristDato = new Date(Date.parse(tidligsteFrist));
+}> = ({ eksisterendeFrist, senesteFrist, oppdatereRefusjonFrist, lukkModal }) => {
+    const eksisterendeFristDato = new Date(Date.parse(eksisterendeFrist));
     const senesteFristDato = new Date(Date.parse(senesteFrist));
-    const senesteFristNorskDatoStreng = datoTilNorskString(senesteFristDato);
 
-    const [month, setMonth] = useState<Date>(tidligsteFristDato);
-    const [datoFraDatoVelger, setDatoFraDatoVelger] = useState<Date>(tidligsteFristDato);
-    const [datoFraInputFelt, setDatoFraInputFelt] = useState<string>(datoTilNorskString(tidligsteFristDato));
-    const [grunnlag, setGrunnlag] = useState<string>('');
-    const [annetGrunnlag, setAnnetGrunnlag] = useState<string>('');
-    const [skjemaGruppeFeilmeldinger, setSkjemaGruppeFeilmeldinger] = useState<ForlengeDatoSkjemaGruppeFeil[] | []>([]);
+    const datePickerValidationRef = useRef<DateValidationT | undefined>(undefined);
 
-    const setNyFeilMelding = (id: string, feilMelding: string) => {
-        setSkjemaGruppeFeilmeldinger((prevState) => [...prevState, ...[{ id: id, feilMelding: feilMelding }]]);
+    const {
+        control,
+        handleSubmit,
+        setValue,
+        watch,
+        setError,
+        formState: { errors, isSubmitted },
+    } = useForm<FormFields>({
+        resolver: (async (values, context, options) => {
+            const result = await zodResolver(schema)(values, context, options);
+            const dpv = datePickerValidationRef.current;
+            if (dpv?.isBefore || dpv?.isAfter || dpv?.isInvalid) {
+                const message = dpv.isBefore
+                    ? `Ny frist kan ikke være før ${datoTilNorskString(nesteDag(eksisterendeFristDato))}.`
+                    : dpv.isAfter
+                      ? `Ny frist kan ikke være etter ${datoTilNorskString(senesteFristDato)}.`
+                      : 'Ugyldig dato. DD.MM.YYYY.';
+                return { ...result, errors: { ...result.errors, dato: { type: 'custom', message } } };
+            }
+            return result;
+        }) as Resolver<FormFields>,
+        defaultValues: { grunnlag: '', annetGrunnlag: '' },
+    });
+
+    const { field: datoField } = useController({ control, name: 'dato', defaultValue: undefined as unknown as Date });
+
+    const grunnlag = watch('grunnlag');
+    const annetGrunnlag = watch('annetGrunnlag');
+
+    const setGrunnlag = (action: SetStateAction<string>) => {
+        const next = typeof action === 'function' ? action(grunnlag) : action;
+        setValue('grunnlag', next, { shouldValidate: isSubmitted });
     };
 
-    const sjekkInnsendingsInformasjon = () => {
-        let KAN_SENDE_INN: boolean = true;
-        setSkjemaGruppeFeilmeldinger([]);
-        const parseDate = parseNorskDato(datoFraInputFelt);
-        if (isNaN(parseDate.getTime())) {
-            setNyFeilMelding('ugyldig-datoformat', 'Ugyldig datoformat. DD.MM.YYYY.');
-            KAN_SENDE_INN = false;
-        }
-        if (parseDate <= tidligsteFristDato) {
-            setNyFeilMelding('for-kort-frist', 'Ny frist må være etter opprinnelig frist.');
-            KAN_SENDE_INN = false;
-        }
-        if (parseDate > senesteFristDato) {
-            setNyFeilMelding('for-lang-frist', `Frist kan ikke overstige ${senesteFristNorskDatoStreng}.`);
-            KAN_SENDE_INN = false;
-        }
-        if (grunnlag.length === 0) {
-            setNyFeilMelding('mangler-grunnlag', 'Må sette grunn til forlenglse.');
-            KAN_SENDE_INN = false;
-        }
-        if (grunnlag.includes('Annet') && annetGrunnlag.trim().length === 0) {
-            setNyFeilMelding('mangler-annet', 'Mangler tekst for annet grunnlag.');
-            KAN_SENDE_INN = false;
-        }
-        if (KAN_SENDE_INN) {
-            setSkjemaGruppeFeilmeldinger([]);
-            return oppdatereRefusjonFrist(datoFraInputFelt, grunnlag, annetGrunnlag);
-        } else {
-            return Promise.reject(new FeilkodeError('Alle påkrevde felter må være utfylt'));
+    const setAnnetGrunnlag = (action: SetStateAction<string>) => {
+        const next = typeof action === 'function' ? action(annetGrunnlag) : action;
+        setValue('annetGrunnlag', next, { shouldValidate: isSubmitted });
+    };
+
+    const onSubmit: SubmitHandler<FormFields> = ({ dato, grunnlag, annetGrunnlag }) =>
+        oppdatereRefusjonFrist(datoTilNorskString(dato), grunnlag, annetGrunnlag);
+
+    const onError: SubmitErrorHandler<FormFields> = () => {
+        if (grunnlag.includes('Annet') && !annetGrunnlag.trim()) {
+            setError('annetGrunnlag', { message: 'Mangler tekst for annet grunnlag.' });
         }
     };
+
+    const { datepickerProps, inputProps } = useDatepicker({
+        today: eksisterendeFristDato,
+        fromDate: nesteDag(eksisterendeFristDato),
+        toDate: senesteFristDato,
+        inputFormat: 'dd.MM.yyyy',
+        allowTwoDigitYear: true,
+        onDateChange: datoField.onChange,
+        onValidate: (validation) => {
+            datePickerValidationRef.current = validation;
+        },
+    });
+
+    const kanForlengeFrist = eksisterendeFristDato < senesteFristDato;
 
     return (
         <BekreftelseModal
             isOpen={true}
             lukkModal={lukkModal}
-            bekreft={sjekkInnsendingsInformasjon}
+            bekreft={() => handleSubmit(onSubmit, onError)()}
             tittel={'Forleng refusjonsfrist'}
-            containerStyle={{ minWidth: 'unset' }}
+            containerStyle={{ minWidth: '35rem' }}
         >
-            <div className={cls.className}>
-                <DayPicker
-                    month={month}
-                    onMonthChange={setMonth}
-                    selected={datoFraDatoVelger}
-                    onDayClick={(day) => {
-                        setDatoFraInputFelt(datoTilNorskString(day));
-                        setDatoFraDatoVelger(day);
-                    }}
-                    locale={nb}
-                    disabled={{
-                        before: tidligsteFristDato,
-                        after: senesteFristDato,
-                    }}
-                />
-                <div className={cls.element('text-wrapper')}>
-                    <div className={cls.element('dato-input')}>
-                        <div className={cls.element('dato-label')}>
-                            <Calender width={20} height={20} />
-                            <Label className={cls.element('label')} htmlFor="dato-label">
-                                Dato
-                            </Label>
-                        </div>
-                        <div className={cls.element('input-wrapper')}>
-                            <TextField
-                                label=""
-                                hideLabel
-                                error={finnFeilMeldingFraInputDialog(
-                                    ['ugyldig-datoformat', 'for-kort-frist', 'for-lang-frist'],
-                                    skjemaGruppeFeilmeldinger
-                                )}
-                                onChange={(event) => {
-                                    const input = event.target.value;
-                                    const parsedDate = parseNorskDato(input);
-                                    if (erGyldigDato(parsedDate)) {
-                                        setDatoFraDatoVelger(parsedDate);
-                                        setMonth(parsedDate);
-                                    }
-                                    setDatoFraInputFelt(input);
-                                }}
-                                className={cls.element('input-felt-dato')}
-                                id="dato-input"
-                                size="small"
-                                value={datoFraInputFelt}
-                            />
-                        </div>
-                    </div>
+            {kanForlengeFrist ? (
+                <>
+                    <DatePicker {...datepickerProps}>
+                        <DatePicker.Input {...inputProps} label="Ny Frist" error={errors.dato?.message} />
+                    </DatePicker>
+                    <VerticalSpacer rem={1} />
                     <GrunnlagTilForlengelse
                         grunnlag={grunnlag}
                         setGrunnlag={setGrunnlag}
                         annetGrunnlag={annetGrunnlag}
                         setAnnetGrunnlag={setAnnetGrunnlag}
-                        skjemaGruppeFeilmeldinger={skjemaGruppeFeilmeldinger}
+                        grunnlagFeilmelding={errors.grunnlag?.message}
+                        annetGrunnlagFeilmelding={errors.annetGrunnlag?.message}
                     />
-                </div>
-            </div>
+                </>
+            ) : (
+                <>
+                    <BodyShort>Refusjonsfristen kan ikke lenger forlenges.</BodyShort>
+                    <BodyShort>Nåværende frist er {datoTilNorskString(eksisterendeFristDato)}.</BodyShort>
+                    <BodyShort>Seneste mulige frist er {datoTilNorskString(senesteFristDato)}.</BodyShort>
+                </>
+            )}
         </BekreftelseModal>
     );
 };
 
 const ForlengFristModal: FunctionComponent<{
     refusjonId: string;
-    tidligsteFrist: string;
+    eksisterendeFrist: string;
     senesteFrist: string;
     open: boolean;
     onClose: () => void;
-}> = ({ refusjonId, tidligsteFrist, senesteFrist, open, onClose }) => {
+}> = ({ refusjonId, eksisterendeFrist, senesteFrist, open, onClose }) => {
     const oppdatereRefusjonFrist = async (dato: string, grunnlag: string, annetGrunnlag: string) => {
         const valgGrunn = grunnlag.includes('Annet') ? annetGrunnlag : grunnlag;
         await forlengFrist(refusjonId, {
@@ -164,7 +151,7 @@ const ForlengFristModal: FunctionComponent<{
         <ForlengFristModalKropp
             oppdatereRefusjonFrist={oppdatereRefusjonFrist}
             lukkModal={onClose}
-            tidligsteFrist={tidligsteFrist}
+            eksisterendeFrist={eksisterendeFrist}
             senesteFrist={senesteFrist}
         />
     );

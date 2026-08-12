@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from 'react';
-import { Checkbox, Modal, Table } from '@navikt/ds-react';
+import { Checkbox, Heading, Modal, Table } from '@navikt/ds-react';
 import HendelseIkon from './HendelseIkon';
 import './HendelsesLoggModal.less';
 import { hentHendelser } from '../../services/rest-service';
@@ -88,7 +88,7 @@ const HendelsesLoggModal: FunctionComponent<Props> = ({ refusjonId, open, onClos
         <div className={cls.className}>
             <Modal open={open} onClose={onClose} aria-label="Hendelseslogg" className={cls.element('modal')}>
                 <Modal.Header>
-                    <h1>Hendelseslogg</h1>
+                    <Heading size="medium">Hendelseslogg</Heading>
                 </Modal.Header>
                 <Modal.Body>
                     {finnesMinstEnSomSkjules && (
