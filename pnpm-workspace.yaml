@@ -4,7 +4,6 @@ packages:
   - saksbehandler
 
 allowBuilds:
-  '@sentry/cli': true
   esbuild: true
 
 lockfileIncludeTarballUrl: true

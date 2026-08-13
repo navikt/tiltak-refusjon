@@ -41,7 +41,6 @@ Vite-dev-serveren proxyer:
 - **Nav Aksel** (`@navikt/ds-react`) som komponentbibliotek
 - **React Hook Form** + **Zod** for skjemahåndtering og validering
 - **Storybook** for komponentutvikling og dokumentasjon
-- **Sentry** for feilsporing
 - **Less** for styling
 
 ## Felles komponenter

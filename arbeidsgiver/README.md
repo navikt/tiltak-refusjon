@@ -36,7 +36,6 @@ Vite-dev-serveren proxyer `/api`-kall til `http://localhost:8081`. Sørg for at 
 - **Vitest** for testing
 - **Nav Aksel** (`@navikt/ds-react`) som komponentbibliotek
 - **Storybook** for komponentutvikling og dokumentasjon
-- **Sentry** for feilsporing
 - **Less** for styling
 
 ## Felles komponenter

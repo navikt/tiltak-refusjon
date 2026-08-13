@@ -9,9 +9,6 @@ on:
       - 'komponenter/**'
   workflow_dispatch:
 
-env:
-  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-
 jobs:
   bygg:
     name: Bygg og deploy
@@ -55,8 +52,6 @@ jobs:
       - name: Bygg - Server
         run: pnpm run build
         working-directory: arbeidsgiver/server
-      - name: Sett opp sentry release
-        run: pnpm --filter tiltak-refusjon-arbeidsgiver run release
       - name: Push docker image to GAR
         uses: nais/docker-build-push@v0
         id: docker-build-push
