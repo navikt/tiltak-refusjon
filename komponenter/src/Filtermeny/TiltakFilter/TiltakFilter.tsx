@@ -5,10 +5,24 @@ import { Filter } from '~/types/filter';
 
 interface OptionProps {
     value: string;
-    label?: string;
+    label: string;
     hidden?: boolean;
     description?: string;
 }
+
+const refusjonFilterTiltak: OptionProps[] = [
+    { value: '', label: 'Alle' },
+    { value: Tiltak.MIDLERTIDIG_LØNNSTILSKUDD, label: 'Midlertidig lønnstilskudd' },
+    { value: Tiltak.MENTOR, label: 'Mentor' },
+    { value: Tiltak.VARIG_LØNNSTILSKUDD, label: 'Varig lønnstilskudd' },
+    { value: Tiltak.FIREARIG_LØNNSTILSKUDD, label: 'Fireårig lønnstilskudd for unge' },
+    { value: Tiltak.SOMMERJOBB, label: 'Sommerjobb' },
+    {
+        value: Tiltak.VTAO,
+        label: 'VTA-O',
+        description: 'Varig tilrettelagt arbeid i ordinær virksomhet',
+    },
+].toSorted((a, b) => a.label.localeCompare(b.label, 'nb'));
 
 interface Props {
     filter: Filter;
@@ -16,20 +30,6 @@ interface Props {
 }
 
 const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
-    const refusjonFilterTiltak: OptionProps[] = [
-        { value: '', label: 'Alle' },
-        { value: Tiltak.MIDLERTIDIG_LØNNSTILSKUDD, label: 'Midlertidig lønnstilskudd' },
-        { value: Tiltak.MENTOR, label: 'Mentor' },
-        { value: Tiltak.VARIG_LØNNSTILSKUDD, label: 'Varig lønnstilskudd' },
-        { value: Tiltak.FIREARIG_LØNNSTILSKUDD, label: 'Fireårig lønnstilskudd for unge' },
-        { value: Tiltak.SOMMERJOBB, label: 'Sommerjobb' },
-        {
-            value: Tiltak.VTAO,
-            label: 'VTA-O',
-            description: 'Varig tilrettelagt arbeid i ordinær virksomhet',
-        },
-    ];
-
     return (
         <div role="menubar" aria-label="meny for filtrering av refusjoner">
             <ExpansionCard size="small" aria-label="Small-variant" defaultOpen={true}>
@@ -57,7 +57,7 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
                                         oppdaterFilter({ tiltakstype: nyTiltaktype || undefined });
                                     }}
                                 >
-                                    {option.value === '' ? 'Alle' : option.label}
+                                    {option.label}
                                 </Radio>
                             ))}
                     </RadioGroup>
