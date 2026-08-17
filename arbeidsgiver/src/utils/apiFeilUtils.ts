@@ -11,7 +11,6 @@ export const handterFeil = (
             const feilmeldingTekst = Feilmeldinger[error.message as Feilkode];
             if (!feilmeldingTekst) {
                 visFeilmelding('Det har skjedd en feil: ' + error.message);
-                //Sentry.captureEvent({ message: 'Feilmelding er ikke mappet: ' + error.message });
                 break;
             }
             visFeilmelding(feilmeldingTekst);
