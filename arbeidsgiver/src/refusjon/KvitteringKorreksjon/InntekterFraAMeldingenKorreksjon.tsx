@@ -126,9 +126,14 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                                                                 )}
                                                             </td>
                                                             <td>
-                                                                {inntekt.erOpptjentIPeriode && (<label>Ja</label>)}
-                                                                {inntekt.erOpptjentIPeriode === false && (<label>Nei</label>)}
-                                                                {!inntekt.erOpptjentIPeriode && inntekt.erOpptjentIPeriode !== false && (<label>Ikke satt</label>)}
+                                                                {inntekt.erOpptjentIPeriode && <label>Ja</label>}
+                                                                {inntekt.erOpptjentIPeriode === false && (
+                                                                    <label>Nei</label>
+                                                                )}
+                                                                {!inntekt.erOpptjentIPeriode &&
+                                                                    inntekt.erOpptjentIPeriode !== false && (
+                                                                        <label>Ikke satt</label>
+                                                                    )}
                                                             </td>
                                                             <td>{formatterPenger(inntekt.beløp)}</td>
                                                         </tr>
@@ -142,23 +147,23 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                             ))}
                         {korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.bruttoLønn !== undefined &&
                             korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.bruttoLønn !== null && (
-                            <table className={cls.element('inntekterTabell')}>
-                                <tbody>
-                                    <tr>
-                                        <td colSpan={4}>
-                                            <b>Sum</b>
-                                        </td>
-                                        <td>
-                                            <b style={{ whiteSpace: 'nowrap' }}>
-                                                {formatterPenger(
-                                                    korreksjon.refusjonsgrunnlag.inntektsgrunnlag.bruttoLønn
-                                                )}
-                                            </b>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        )}
+                                <table className={cls.element('inntekterTabell')}>
+                                    <tbody>
+                                        <tr>
+                                            <td colSpan={4}>
+                                                <b>Sum</b>
+                                            </td>
+                                            <td>
+                                                <b style={{ whiteSpace: 'nowrap' }}>
+                                                    {formatterPenger(
+                                                        korreksjon.refusjonsgrunnlag.inntektsgrunnlag.bruttoLønn
+                                                    )}
+                                                </b>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            )}
                     </>
                 )}
             {ingenInntekter && (
