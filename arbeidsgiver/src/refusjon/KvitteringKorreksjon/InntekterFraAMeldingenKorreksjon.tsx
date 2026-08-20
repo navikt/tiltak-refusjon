@@ -109,9 +109,6 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                                                         'id',
                                                     ]
                                                 ).map((inntekt) => {
-                                                    let inntektValg = 'Ikke valgt';
-                                                    if (inntekt.erOpptjentIPeriode) inntektValg = 'Ja';
-                                                    if (inntekt.erOpptjentIPeriode === false) inntektValg = 'Nei';
                                                     return (
                                                         <tr key={inntekt.id}>
                                                             <td>{inntektBeskrivelse(inntekt.beskrivelse)}</td>
@@ -129,7 +126,9 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                                                                 )}
                                                             </td>
                                                             <td>
-                                                                <label>{inntektValg}</label>
+                                                                {inntekt.erOpptjentIPeriode && (<label>Ja</label>)}
+                                                                {inntekt.erOpptjentIPeriode === false && (<label>Nei</label>)}
+                                                                {!inntekt.erOpptjentIPeriode && inntekt.erOpptjentIPeriode !== false && (<label>Ikke satt</label>)}
                                                             </td>
                                                             <td>{formatterPenger(inntekt.beløp)}</td>
                                                         </tr>
@@ -141,7 +140,8 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                                     <VerticalSpacer rem={1} />
                                 </Fragment>
                             ))}
-                        {korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.bruttoLønn && (
+                        {korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.bruttoLønn !== undefined &&
+                            korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.bruttoLønn !== null && (
                             <table className={cls.element('inntekterTabell')}>
                                 <tbody>
                                     <tr>
