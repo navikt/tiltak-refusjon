@@ -81,14 +81,10 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                             )
                             .map(([aarManed, inntektslinjer]) => (
                                 <Fragment key={aarManed}>
-                                    <Heading
-                                        level="3"
-                                        size="small"
-                                        style={{ display: 'flex', justifyContent: 'center' }}
-                                    >
+                                    <Heading level="3" size="small" className={cls.element('månedHeading')}>
                                         Inntekt rapportert for {månedsNavn(aarManed)} ({aarManed})
                                     </Heading>
-                                    <div style={{ borderTop: '1px solid #06893b' }}>
+                                    <div className={cls.element('månedTabellWrapper')}>
                                         <table className={cls.element('inntekterTabell')}>
                                             <thead>
                                                 <tr>
