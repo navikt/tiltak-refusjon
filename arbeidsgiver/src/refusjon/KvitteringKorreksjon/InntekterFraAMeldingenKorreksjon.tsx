@@ -81,7 +81,11 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                             )
                             .map(([aarManed, inntektslinjer]) => (
                                 <Fragment key={aarManed}>
-                                    <Heading level="3" size="small" style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Heading
+                                        level="3"
+                                        size="small"
+                                        style={{ display: 'flex', justifyContent: 'center' }}
+                                    >
                                         Inntekt rapportert for {månedsNavn(aarManed)} ({aarManed})
                                     </Heading>
                                     <div style={{ borderTop: '1px solid #06893b' }}>
@@ -98,7 +102,12 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                                             <tbody>
                                                 {sortBy(
                                                     inntektslinjer.filter((inntekt) => inntekt.erMedIInntektsgrunnlag),
-                                                    ['opptjeningsperiodeFom', 'opptjeningsperiodeTom', 'beskrivelse', 'id']
+                                                    [
+                                                        'opptjeningsperiodeFom',
+                                                        'opptjeningsperiodeTom',
+                                                        'beskrivelse',
+                                                        'id',
+                                                    ]
                                                 ).map((inntekt) => {
                                                     let inntektValg = 'Ikke valgt';
                                                     if (inntekt.erOpptjentIPeriode) inntektValg = 'Ja';
