@@ -9,8 +9,13 @@ importers:
   .:
     dependencies:
       '@navikt/nav-dekoratoren-moduler':
+<<<<<<< HEAD
         specifier: ^4.5.0
         version: 4.5.0(html-react-parser@6.1.0(react@19.2.6))(react@19.2.6)
+=======
+        specifier: ^4.3.0
+        version: 4.3.0(html-react-parser@6.1.0(react@19.2.6))(react@19.2.6)
+>>>>>>> fec0d7a (Setter opp Innblikk sporing for arbeidsgivervisningen)
       '@navikt/oasis':
         specifier: ^4.1.4
         version: 4.1.4
@@ -242,8 +247,13 @@ packages:
     resolution: {integrity: sha512-bopCvqEogyFcmrJiBxK/Mr25d6yPKF7GR36MGrJqiHCPJYf1rDu6lK4cpooTG4Q//D/1xTkHRom8ZH5BI6dTew==, tarball: https://npm.pkg.github.com/download/@navikt/analytics-types/0.0.9/5919241a6dbb782eb101fff3234ce5c36d16e942}
     engines: {node: '>=20.0.0', npm: '>=9.0.0'}
 
+<<<<<<< HEAD
   '@navikt/nav-dekoratoren-moduler@4.5.0':
     resolution: {integrity: sha512-0eTtpgk+kOGjxncAA5PT2+yLPIobPdvIMVJzWDVdlZmuKUGG1NMoom8DYtnCPkro3Mw+dZeoFJ0TVY+4F57J5Q==, tarball: https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/4.5.0/e3c7d8e6e3f2efd2fb46952564e6c9c47ca200ad}
+=======
+  '@navikt/nav-dekoratoren-moduler@4.3.0':
+    resolution: {integrity: sha512-DpUW0J1pIAncsEh698x6mSt7UsILEIbrYFzKTDuXem0y2bYjG+ki78NV2lhN/nPYXcoVYizsC1eetH72VMEoEw==, tarball: https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/4.3.0/d2d64c4afd0201f3a1e8ec8fba9651c05fdfb736}
+>>>>>>> fec0d7a (Setter opp Innblikk sporing for arbeidsgivervisningen)
     engines: {node: 24.x}
     peerDependencies:
       html-react-parser: '>=5.x'
