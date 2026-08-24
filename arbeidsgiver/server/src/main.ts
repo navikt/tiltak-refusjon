@@ -12,7 +12,17 @@ const eksternCspMiddleware = (): Handler => {
 
     return async (_, res, next) => {
         if (!csp) {
-            csp = await buildCspHeader({}, { env: process.env.MILJO === 'prod-gcp' ? 'prod' : 'dev' });
+            csp = await buildCspHeader(
+                {
+                    'script-src': ["'self'", 'https://cdn.nav.no'],
+                    'connect-src': [
+                        "'self'",
+                        'https://reops-event-proxy.nav.no',
+                        'https://reops-event-proxy.ekstern.dev.nav.no',
+                    ],
+                },
+                { env: process.env.MILJO === 'prod-gcp' ? 'prod' : 'dev' }
+            );
         }
         res.setHeader('Content-Security-Policy', csp);
         next();
