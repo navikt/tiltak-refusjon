@@ -7,7 +7,7 @@ export const SPORING_SCRIPT_SRC_PROD = 'https://cdn.nav.no/team-researchops/spor
 export const SPORING_WEBSITE_ID_DEV = 'a901f04e-0b4c-438e-9d98-89021358556a';
 export const SPORING_WEBSITE_ID_PROD = '8d405f94-9968-4897-b1d8-5c159cc2fabd';
 
-export type PageType = 'forside' | 'oversikt' | 'refusjon' | 'kvittering' | 'ikke-funnet';
+export type PageType = 'forside' | 'oversikt' | 'refusjon' | 'kvittering' | 'ukjent-side';
 
 type AnalyticsPayload = Record<string, unknown> & {
     url?: string;
@@ -27,23 +27,25 @@ export function getWebsiteId(hostname: string): string {
 }
 
 export function getPageType(pathname: string): PageType {
-    if (pathname === '/' || pathname === '') {
+    const normalizedPathname = normalizePathname(pathname);
+
+    if (normalizedPathname === '/' || normalizedPathname === '') {
         return 'forside';
     }
 
-    if (pathname === '/refusjon') {
+    if (normalizedPathname === '/refusjon') {
         return 'oversikt';
     }
 
-    if (/^\/refusjon\/[^/]+\/kvittering\/?$/.test(pathname)) {
+    if (/^\/refusjon\/[^/]+\/kvittering\/?$/.test(normalizedPathname)) {
         return 'kvittering';
     }
 
-    if (/^\/refusjon\/[^/]+\/?.*$/.test(pathname)) {
+    if (/^\/refusjon\/[^/]+\/?.*$/.test(normalizedPathname)) {
         return 'refusjon';
     }
 
-    return 'ikke-funnet';
+    return 'ukjent-side';
 }
 
 export function createBeforeSendHandler(): BeforeSendHandler {
@@ -97,6 +99,14 @@ function isDevelopmentHostname(hostname: string): boolean {
         hostname.includes('.dev.nav.no') ||
         hostname.includes('.intern.dev.nav.no')
     );
+}
+
+function normalizePathname(pathname: string): string {
+    if (pathname.length <= 1) {
+        return pathname;
+    }
+
+    return pathname.replace(/\/+$/, '');
 }
 
 if (typeof window !== 'undefined') {

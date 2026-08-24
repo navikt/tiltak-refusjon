@@ -31,9 +31,10 @@ describe('sporing', () => {
     it('maps paths to page types', () => {
         expect(getPageType('/')).toBe('forside');
         expect(getPageType('/refusjon')).toBe('oversikt');
+        expect(getPageType('/refusjon/')).toBe('oversikt');
         expect(getPageType('/refusjon/123')).toBe('refusjon');
         expect(getPageType('/refusjon/123/kvittering')).toBe('kvittering');
-        expect(getPageType('/ukjent')).toBe('ikke-funnet');
+        expect(getPageType('/ukjent')).toBe('ukjent-side');
     });
 
     it('redacts url and referrer values', () => {
