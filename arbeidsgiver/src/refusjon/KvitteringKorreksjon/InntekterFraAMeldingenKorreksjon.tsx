@@ -74,86 +74,92 @@ const InntekterFraAMeldingenKorreksjon: FunctionComponent<Props> = ({ korreksjon
                     (inntekt) => inntekt.erMedIInntektsgrunnlag
                 ) && (
                     <>
-                        <div>
-                            <VerticalSpacer rem={1} />
-                            {inntektGrupperListeSortert.map(([aarManed]) => (
+                        <VerticalSpacer rem={1} />
+                        {inntektGrupperListeSortert
+                            .filter(([, inntektslinjer]) =>
+                                inntektslinjer.some((inntekt) => inntekt.erMedIInntektsgrunnlag)
+                            )
+                            .map(([aarManed, inntektslinjer]) => (
                                 <Fragment key={aarManed}>
-                                    <Heading
-                                        level="3"
-                                        size="small"
-                                        style={{
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            borderBottom: '1px solid #06893b',
-                                        }}
-                                    >
+                                    <Heading level="3" size="small" className={cls.element('månedHeading')}>
                                         Inntekt rapportert for {månedsNavn(aarManed)} ({aarManed})
                                     </Heading>
+                                    <div className={cls.element('månedTabellWrapper')}>
+                                        <table className={cls.element('inntekterTabell')}>
+                                            <thead>
+                                                <tr>
+                                                    <th>Beskriv&shy;else</th>
+                                                    <th>År/mnd</th>
+                                                    <th>Opptjenings&shy;periode</th>
+                                                    <th>Opptjent i {månedNavn}?</th>
+                                                    <th>Beløp</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {sortBy(
+                                                    inntektslinjer.filter((inntekt) => inntekt.erMedIInntektsgrunnlag),
+                                                    [
+                                                        'opptjeningsperiodeFom',
+                                                        'opptjeningsperiodeTom',
+                                                        'beskrivelse',
+                                                        'id',
+                                                    ]
+                                                ).map((inntekt) => {
+                                                    return (
+                                                        <tr key={inntekt.id}>
+                                                            <td>{inntektBeskrivelse(inntekt.beskrivelse)}</td>
+                                                            <td>{formaterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
+                                                            <td>
+                                                                {inntekt.opptjeningsperiodeFom &&
+                                                                inntekt.opptjeningsperiodeTom ? (
+                                                                    formaterPeriode(
+                                                                        inntekt.opptjeningsperiodeFom,
+                                                                        inntekt.opptjeningsperiodeTom,
+                                                                        NORSK_DATO_MÅNED_FORMAT
+                                                                    )
+                                                                ) : (
+                                                                    <em>Ikke rapportert opptjenings&shy;periode</em>
+                                                                )}
+                                                            </td>
+                                                            <td>
+                                                                {inntekt.erOpptjentIPeriode && <label>Ja</label>}
+                                                                {inntekt.erOpptjentIPeriode === false && (
+                                                                    <label>Nei</label>
+                                                                )}
+                                                                {!inntekt.erOpptjentIPeriode &&
+                                                                    inntekt.erOpptjentIPeriode !== false && (
+                                                                        <label>Ikke satt</label>
+                                                                    )}
+                                                            </td>
+                                                            <td>{formatterPenger(inntekt.beløp)}</td>
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     <VerticalSpacer rem={1} />
                                 </Fragment>
                             ))}
-                        </div>
-
-                        <VerticalSpacer rem={1} />
-                        <table className={cls.element('inntekterTabell')}>
-                            <thead>
-                                <tr>
-                                    <th>Beskriv&shy;else</th>
-                                    <th>År/mnd</th>
-                                    <th>Opptjenings&shy;periode</th>
-                                    <th>Opptjent i {månedNavn}?</th>
-                                    <th>Beløp</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {sortBy(
-                                    korreksjon.refusjonsgrunnlag.inntektsgrunnlag.inntekter.filter(
-                                        (inntekt) => inntekt.erMedIInntektsgrunnlag
-                                    ),
-                                    ['måned', 'opptjeningsperiodeFom', 'opptjeningsperiodeTom', 'beskrivelse', 'id']
-                                ).map((inntekt) => {
-                                    let inntektValg = 'Ikke valgt';
-                                    if (inntekt.erOpptjentIPeriode) inntektValg = 'Ja';
-                                    if (inntekt.erOpptjentIPeriode === false) inntektValg = 'Nei';
-                                    return (
-                                        <tr key={inntekt.id}>
-                                            <td>{inntektBeskrivelse(inntekt.beskrivelse)}</td>
-                                            <td>{formaterDato(inntekt.måned, NORSK_MÅNEDÅR_FORMAT)}</td>
-
-                                            <td>
-                                                {inntekt.opptjeningsperiodeFom && inntekt.opptjeningsperiodeTom ? (
-                                                    formaterPeriode(
-                                                        inntekt.opptjeningsperiodeFom,
-                                                        inntekt.opptjeningsperiodeTom,
-                                                        NORSK_DATO_MÅNED_FORMAT
-                                                    )
-                                                ) : (
-                                                    <em>Ikke rapportert opptjenings&shy;periode</em>
-                                                )}
+                        {korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.bruttoLønn !== undefined &&
+                            korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.bruttoLønn !== null && (
+                                <table className={cls.element('inntekterTabell')}>
+                                    <tbody>
+                                        <tr>
+                                            <td colSpan={4}>
+                                                <b>Sum</b>
                                             </td>
                                             <td>
-                                                <label>{inntektValg}</label>
+                                                <b style={{ whiteSpace: 'nowrap' }}>
+                                                    {formatterPenger(
+                                                        korreksjon.refusjonsgrunnlag.inntektsgrunnlag.bruttoLønn
+                                                    )}
+                                                </b>
                                             </td>
-                                            <td>{formatterPenger(inntekt.beløp)}</td>
                                         </tr>
-                                    );
-                                })}
-                                {korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.bruttoLønn && (
-                                    <tr>
-                                        <td colSpan={4}>
-                                            <b>Sum</b>
-                                        </td>
-                                        <td>
-                                            <b style={{ whiteSpace: 'nowrap' }}>
-                                                {formatterPenger(
-                                                    korreksjon.refusjonsgrunnlag.inntektsgrunnlag.bruttoLønn
-                                                )}
-                                            </b>
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
+                            )}
                     </>
                 )}
             {ingenInntekter && (
