@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
 import { awaitDecoratorData } from '@navikt/nav-dekoratoren-moduler';
-
-import {
-    createBeforeSendHandler,
-    getAnalyticsConsent,
-    getSporingScriptSrc,
-    getWebsiteId,
-    SPORING_SCRIPT_ID,
-    updateConsentDisabledFlag,
-} from './sporing';
+import { preInnsending } from '~/sporing/preInnsending';
+import { SPORING_SCRIPT_ID } from '~/sporing/config';
+import { settOppSporingsSkript } from '~/sporing/script';
+import { aktiverSporing, deaktiverSporing } from '~/sporing/localStorage';
+import { hentGjeldendeSamtykke, hentSidetype } from './sporing';
 
 function InnblikkSporing() {
-    const [analyticsConsent, setAnalyticsConsent] = useState<boolean | null>(null);
+    const [harGittSamtykke, setHarGittSamtykke] = useState<boolean>(false);
 
     useEffect(() => {
         let aktiv = true;
@@ -21,7 +17,7 @@ function InnblikkSporing() {
                 return;
             }
 
-            setAnalyticsConsent(getAnalyticsConsent());
+            setHarGittSamtykke(hentGjeldendeSamtykke().consent.analytics);
         };
 
         void (async () => {
@@ -44,39 +40,35 @@ function InnblikkSporing() {
     }, []);
 
     useEffect(() => {
-        if (analyticsConsent === null) {
+        const eksisterendeSkript = document.getElementById(SPORING_SCRIPT_ID);
+
+        if (!harGittSamtykke) {
+            deaktiverSporing();
+            eksisterendeSkript?.remove();
             return;
         }
 
-        updateConsentDisabledFlag(analyticsConsent);
+        aktiverSporing();
 
-        const existingScript = document.getElementById(SPORING_SCRIPT_ID);
-
-        if (!analyticsConsent) {
-            existingScript?.remove();
+        if (eksisterendeSkript) {
             return;
         }
-
-        if (existingScript) {
-            return;
-        }
-
-        const hostname = window.location.hostname;
-        const script = document.createElement('script');
-        script.id = SPORING_SCRIPT_ID;
-        script.defer = true;
-        script.src = getSporingScriptSrc(hostname);
-        script.setAttribute('data-website-id', getWebsiteId(hostname));
-        script.setAttribute('data-tag', 'tiltak-refusjon');
-        script.setAttribute('data-before-send', 'beforeSendAnalytics');
-        script.setAttribute('data-exclude-search', 'true');
 
         if (!window.beforeSendAnalytics) {
-            window.beforeSendAnalytics = createBeforeSendHandler();
+            window.beforeSendAnalytics = preInnsending(hentSidetype);
         }
 
+        const script = settOppSporingsSkript(window.location.hostname);
         document.head.appendChild(script);
-    }, [analyticsConsent]);
+    }, [harGittSamtykke]);
+
+    useEffect(() => {
+        return () => {
+            const skript = document.getElementById(SPORING_SCRIPT_ID);
+            skript?.remove();
+            delete window.beforeSendAnalytics;
+        };
+    }, []);
 
     return null;
 }
