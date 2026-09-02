@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { awaitDecoratorData } from '@navikt/nav-dekoratoren-moduler';
 import { preInnsending } from '~/sporing/preInnsending';
 import { SPORING_SCRIPT_ID } from '~/sporing/config';
-import { settOppSporingsSkript } from '~/sporing/script';
+import { settOppSporingsskript } from '~/sporing/script';
 import { aktiverSporing, deaktiverSporing } from '~/sporing/localStorage';
 import { hentGjeldendeSamtykke, hentSidetype } from './sporing';
 
@@ -58,7 +58,7 @@ function InnblikkSporing() {
             window.beforeSendAnalytics = preInnsending(hentSidetype);
         }
 
-        const script = settOppSporingsSkript(window.location.hostname);
+        const script = settOppSporingsskript(window.location.hostname);
         document.head.appendChild(script);
     }, [harGittSamtykke]);
 

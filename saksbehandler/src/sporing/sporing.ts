@@ -1,4 +1,4 @@
-type PageType = 'forside' | 'oversikt' | 'refusjon' | 'kvittering' | 'ukjent-side';
+type PageType = 'oversikt' | 'refusjon' | 'kvittering' | 'ukjent-side';
 
 export function hentSidetype(pathname: string): PageType {
     if (pathname === '/' || pathname === '') {

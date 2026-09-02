@@ -1,6 +1,6 @@
 import { hentNettstedId, hentSporingsSkriptUrl, SPORING_SCRIPT_ID } from './config';
 
-export function settOppSporingsSkript(hostname: string): HTMLScriptElement {
+export function settOppSporingsskript(hostname: string): HTMLScriptElement {
     const script = document.createElement('script');
     script.id = SPORING_SCRIPT_ID;
     script.defer = true;
