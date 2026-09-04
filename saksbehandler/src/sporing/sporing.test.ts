@@ -10,12 +10,12 @@ import {
     SPORING_WEBSITE_ID_PROD,
 } from '~/sporing/config';
 import { sladdFnrOgNavIdent } from '~/sporing/sladding';
-
 import { hentSidetype } from './sporing';
 
 describe('sporing', () => {
     beforeEach(() => {
         window.history.pushState({}, '', '/');
+        localStorage.clear();
     });
 
     it('mapper hostnames til riktige sporingsressurser', () => {
@@ -29,10 +29,9 @@ describe('sporing', () => {
     });
 
     it('mapper stier til sidetyper', () => {
-        expect(hentSidetype('/')).toBe('forside');
-        expect(hentSidetype('/refusjon')).toBe('oversikt');
-        expect(hentSidetype('/refusjon/')).toBe('oversikt');
+        expect(hentSidetype('/')).toBe('oversikt');
         expect(hentSidetype('/refusjon/123')).toBe('refusjon');
+        expect(hentSidetype('/korreksjon/123')).toBe('refusjon');
         expect(hentSidetype('/refusjon/123/kvittering')).toBe('kvittering');
         expect(hentSidetype('/ukjent')).toBe('ukjent-side');
     });
