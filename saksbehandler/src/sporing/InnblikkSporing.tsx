@@ -2,14 +2,21 @@ import { useEffect } from 'react';
 import { preInnsending } from '~/sporing/preInnsending';
 import { SPORING_SCRIPT_ID } from '~/sporing/config';
 import { settOppSporingsskript } from '~/sporing/script';
-import { aktiverSporing } from '~/sporing/localStorage';
 import { hentSidetype } from './sporing';
+import { useSporingAktiv } from './sporingsvalg';
 
 function InnblikkSporing() {
-    useEffect(() => {
-        aktiverSporing();
+    const sporingAktiv = useSporingAktiv();
 
-        if (document.getElementById(SPORING_SCRIPT_ID)) {
+    useEffect(() => {
+        const eksisterendeSkript = document.getElementById(SPORING_SCRIPT_ID);
+
+        if (!sporingAktiv) {
+            eksisterendeSkript?.remove();
+            return;
+        }
+
+        if (eksisterendeSkript) {
             return;
         }
 
@@ -19,7 +26,7 @@ function InnblikkSporing() {
 
         const script = settOppSporingsskript(window.location.hostname);
         document.head.appendChild(script);
-    }, []);
+    }, [sporingAktiv]);
 
     return null;
 }

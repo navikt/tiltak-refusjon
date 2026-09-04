@@ -1,9 +1,10 @@
-import { cleanup, render, waitFor } from '@testing-library/react';
+import { act, cleanup, render, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { SPORING_SCRIPT_ID } from '~/sporing/config';
 
 import InnblikkSporing from './InnblikkSporing';
-import { deaktiverSporing, erSporingDeaktivert } from '~/sporing/localStorage';
+import { deaktiverSporing } from '~/sporing/localStorage';
+import { settSporingsvalg } from './sporingsvalg';
 
 describe('InnblikkSporing', () => {
     beforeEach(() => {
@@ -18,11 +19,9 @@ describe('InnblikkSporing', () => {
     });
 
     it('laster sporingsskript og setter forventede attributter', async () => {
-        deaktiverSporing();
         render(<InnblikkSporing />);
 
         await waitFor(() => {
-            expect(erSporingDeaktivert()).toBe(false);
             expect(document.getElementById(SPORING_SCRIPT_ID)).toBeInstanceOf(HTMLScriptElement);
         });
 
@@ -32,6 +31,29 @@ describe('InnblikkSporing', () => {
         expect(script.getAttribute('data-before-send')).toBe('beforeSendAnalytics');
         expect(script.getAttribute('data-exclude-search')).toBe('true');
         expect(script.src).toContain('sporing-dev.js');
+    });
+
+    it('laster ikke sporingsskript når bruker har skrudd av sporing', async () => {
+        deaktiverSporing();
+        render(<InnblikkSporing />);
+
+        await waitFor(() => {
+            expect(document.getElementById(SPORING_SCRIPT_ID)).toBeNull();
+        });
+    });
+
+    it('fjerner sporingsskript når bruker skrur av sporing underveis', async () => {
+        render(<InnblikkSporing />);
+
+        await waitFor(() => {
+            expect(document.getElementById(SPORING_SCRIPT_ID)).toBeInstanceOf(HTMLScriptElement);
+        });
+
+        act(() => {
+            settSporingsvalg(false);
+        });
+
+        expect(document.getElementById(SPORING_SCRIPT_ID)).toBeNull();
     });
 
     it('injiserer ikke duplikate skript-tagger', async () => {
