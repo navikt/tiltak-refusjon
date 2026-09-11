@@ -22,6 +22,7 @@ import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
+import NyRefusjonSide from '@/refusjon/RefusjonSide/NyRefusjonSide/NyRefusjonSide';
 
 const Komponent: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -98,7 +99,7 @@ const Komponent: FunctionComponent = () => {
                 />
             );
         case RefusjonStatus.KLAR_FOR_INNSENDING:
-            return <RefusjonSide aktsomhet={aktsomhet} refusjon={refusjon} />;
+            return <NyRefusjonSide aktsomhet={aktsomhet} refusjon={refusjon} />;
         case RefusjonStatus.UTGÅTT:
             return (
                 <FeilSide

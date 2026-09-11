@@ -34,6 +34,7 @@ interface Props {
     forrigeRefusjonMinusBeløp?: number;
     inntektsgrunnlag?: Inntektsgrunnlag;
     sumUtbetaltVarig?: number;
+    skjulTittel?: boolean;
 }
 
 const Utregning: FunctionComponent<Props> = (props) => {
@@ -66,10 +67,14 @@ const Utregning: FunctionComponent<Props> = (props) => {
 
     return (
         <div className={cls.className}>
-            <Heading level="3" size="medium">
-                Utregningen
-            </Heading>
-            <VerticalSpacer rem={1} />
+            {!props.skjulTittel && (
+                <>
+                    <Heading level="3" size="medium">
+                        Utregningen
+                    </Heading>
+                    <VerticalSpacer rem={1} />
+                </>
+            )}
             <Utregningsrad labelTekst={'Bruttolønn i perioden'} verdi={beregning?.lønn || 0}>
                 <UtregningsradHvaInngårIDette
                     inntekter={bruttoLønnsInntekter ?? []}

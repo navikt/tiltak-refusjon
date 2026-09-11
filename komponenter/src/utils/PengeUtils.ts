@@ -4,7 +4,7 @@ export const formatterPenger = (penger = 0) =>
         signDisplay: 'never',
         style: 'decimal',
         maximumFractionDigits: 2,
-    }).format(penger)} kr`;
+    }).format(penger)}\u00A0kr`;
 
 export const summerInntektsgrunnlag = (inntektsgrunnlag?: Inntektsgrunnlag) =>
     inntektsgrunnlag ? inntektsgrunnlag.inntekter.map((ilinje) => ilinje.beløp).reduce((a, b) => a + b, 0) : 0;

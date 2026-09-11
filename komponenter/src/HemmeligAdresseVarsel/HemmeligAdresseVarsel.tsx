@@ -18,7 +18,7 @@ const HemmeligAdresseVarsel = (props: Props) => {
     }
 
     return (
-        <Alert variant="warning" className={styles.container}>
+        <Alert variant="warning">
             <Heading spacing size="small" level="3">
                 {(Diskresjonskode.STRENGT_FORTROLIG === diskresjonskode ||
                     Diskresjonskode.STRENGT_FORTROLIG_UTLAND === diskresjonskode) && <>Hemmelig adresse - Kode 6</>}
