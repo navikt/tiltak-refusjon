@@ -44,8 +44,7 @@ const Statusmelding: FunctionComponent<{
         default:
             return (
                 <BodyShort size="small">
-                    Refusjonskravet er nå sendt. Det vil ta 3–4 dager før pengene kommer på kontoen. Denne refusjonen
-                    vil bli tatt vare på under “Sendt krav”.
+                    Refusjonskravet er nå sendt. Det vil ta 3–4 dager før pengene kommer på kontoen.
                 </BodyShort>
             );
     }
