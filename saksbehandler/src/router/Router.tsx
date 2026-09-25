@@ -8,6 +8,7 @@ import OversiktRouteError from './OversiktRouteError';
 import OversiktSide from '@/refusjon/OversiktSide/OversiktSide';
 import Refusjon from '@/refusjon/RefusjonSide/Refusjon';
 import ScrollToTop from '@/komponenter/ScrollToTop';
+import SporingInfo from '@/sporing/SporingInfo';
 import { BrukerProvider } from '@/bruker/BrukerContext';
 import { FeatureToggleProvider } from '@/featureToggles/FeatureToggleProvider';
 import { FilterProvider } from '@/refusjon/oversikt/FilterContext';
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
                     <AdvarselBannerTestversjon />
                     <InternflateDekoratør />
                     <Outlet />
+                    <SporingInfo />
                 </ErrorBoundary>
             ),
             children: [

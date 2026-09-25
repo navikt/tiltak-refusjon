@@ -1,5 +1,7 @@
 import { cleanup, render, waitFor } from '@testing-library/react';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
+import { SPORING_SCRIPT_ID } from '~/sporing/config';
+import { erSporingDeaktivert } from '~/sporing/localStorage';
 
 let analyticsConsent = false;
 
@@ -14,7 +16,6 @@ vi.mock('@navikt/nav-dekoratoren-moduler', () => ({
 }));
 
 import InnblikkSporing from './InnblikkSporing';
-import { SPORING_SCRIPT_ID } from './sporing';
 
 describe('InnblikkSporing', () => {
     beforeEach(() => {
@@ -29,23 +30,23 @@ describe('InnblikkSporing', () => {
         delete window.beforeSendAnalytics;
     });
 
-    it('does not load tracking before consent', async () => {
+    it('laster ikke inn sporing før samtykke', async () => {
         render(<InnblikkSporing />);
 
         await waitFor(() => {
-            expect(localStorage.getItem('sporing.disabled')).toBe('1');
+            expect(erSporingDeaktivert()).toBe(true);
             expect(document.getElementById(SPORING_SCRIPT_ID)).toBeNull();
         });
     });
 
-    it('loads tracking after consent and updates the disable flag', async () => {
+    it('laster inn sporing etter samtykke og oppdaterer deaktivert-flagget', async () => {
         render(<InnblikkSporing />);
 
         analyticsConsent = true;
         window.dispatchEvent(new Event('consentAllWebStorage'));
 
         await waitFor(() => {
-            expect(localStorage.getItem('sporing.disabled')).toBeNull();
+            expect(erSporingDeaktivert()).toBe(false);
             expect(document.getElementById(SPORING_SCRIPT_ID)).toBeInstanceOf(HTMLScriptElement);
         });
 
@@ -57,7 +58,7 @@ describe('InnblikkSporing', () => {
         expect(script.src).toContain('sporing-dev.js');
     });
 
-    it('removes tracking and disables it when consent is revoked', async () => {
+    it('fjerner sporing og deaktiverer den når samtykke trekkes tilbake', async () => {
         analyticsConsent = true;
         render(<InnblikkSporing />);
 
@@ -69,7 +70,7 @@ describe('InnblikkSporing', () => {
         window.dispatchEvent(new Event('refuseOptionalWebStorage'));
 
         await waitFor(() => {
-            expect(localStorage.getItem('sporing.disabled')).toBe('1');
+            expect(erSporingDeaktivert()).toBe(true);
             expect(document.getElementById(SPORING_SCRIPT_ID)).toBeNull();
         });
     });

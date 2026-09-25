@@ -6,5 +6,5 @@
             "~/*": ["../komponenter/src/*"]
         }
     },
-    "include": ["src"]
+    "include": ["src", "../komponenter/src/sporing/window.d.ts"]
 }
