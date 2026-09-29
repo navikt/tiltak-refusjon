@@ -1,6 +1,7 @@
 import { KorreksjonStatus, RefusjonStatus } from './status';
 import { Tiltak } from './tiltak';
 import { Diskresjonskode } from './aktsomhet';
+import { Utregning } from './utregning';
 
 export interface PageableRefusjon {
     currentPage: number;
@@ -37,6 +38,7 @@ export interface Refusjon {
     harInntektIAlleMåneder: boolean;
     senestMuligeGodkjenningsfrist: string;
     diskresjonskode: Diskresjonskode;
+    utregning?: Utregning;
 }
 
 export interface Korreksjon {
@@ -52,6 +54,7 @@ export interface Korreksjon {
     godkjentTidspunkt?: string;
     unntakOmInntekterFremitid: number;
     sistEndret: string;
+    utregning?: Utregning;
 }
 
 export interface Refusjonsgrunnlag {
