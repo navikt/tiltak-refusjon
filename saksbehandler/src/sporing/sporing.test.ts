@@ -31,7 +31,7 @@ describe('sporing', () => {
     it('mapper stier til sidetyper', () => {
         expect(hentSidetype('/')).toBe('oversikt');
         expect(hentSidetype('/refusjon/123')).toBe('refusjon');
-        expect(hentSidetype('/korreksjon/123')).toBe('refusjon');
+        expect(hentSidetype('/korreksjon/123')).toBe('korreksjon');
         expect(hentSidetype('/refusjon/123/kvittering')).toBe('kvittering');
         expect(hentSidetype('/ukjent')).toBe('ukjent-side');
     });

@@ -1,4 +1,4 @@
-type PageType = 'oversikt' | 'refusjon' | 'kvittering' | 'ukjent-side';
+type PageType = 'oversikt' | 'refusjon' | 'korreksjon' | 'kvittering' | 'ukjent-side';
 
 export function hentSidetype(pathname: string): PageType {
     if (pathname === '/' || pathname === '') {
@@ -9,8 +9,12 @@ export function hentSidetype(pathname: string): PageType {
         return 'kvittering';
     }
 
-    if (pathname.includes('refusjon') || pathname.includes('korreksjon')) {
+    if (pathname.includes('refusjon')) {
         return 'refusjon';
+    }
+
+    if (pathname.includes('korreksjon')) {
+        return 'korreksjon';
     }
 
     return 'ukjent-side';

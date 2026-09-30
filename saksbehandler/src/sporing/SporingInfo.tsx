@@ -1,6 +1,6 @@
 import { BodyShort, Box, HStack, ReadMore, Switch, VStack } from '@navikt/ds-react';
 import { settSporingsvalg, useSporingAktiv } from './sporingsvalg';
-import './SporingInfo.less';
+import styles from './SporingInfo.module.less';
 
 function SporingInfo() {
     const sporingAktiv = useSporingAktiv();
@@ -8,7 +8,7 @@ function SporingInfo() {
     return (
         <Box
             as="footer"
-            className="sporing-info"
+            className={styles.sporingInfo}
             background="raised"
             borderColor="neutral-subtle"
             borderWidth="1 0 0 0"
