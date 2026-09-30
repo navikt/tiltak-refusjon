@@ -6,16 +6,8 @@ export function sladdFnrOgNavIdent(value?: string): string | undefined {
         return value;
     }
 
-    let redacted = value;
-
-    try {
-        const url = new URL(value);
-        url.search = '';
-        url.hash = '';
-        redacted = url.toString();
-    } catch {
-        redacted = value;
-    }
+    const queryOrHashStart = value.search(/[?#]/);
+    const redacted = queryOrHashStart === -1 ? value : value.slice(0, queryOrHashStart);
 
     return redacted.replace(fnrRegex, '***********').replace(navIdentRegex, '*******');
 }

@@ -3,7 +3,7 @@ export function deaktiverSporing(): void {
         window.localStorage.setItem('sporing.disabled', '1');
     } catch {
         console.error('Could not set localStorage item "sporing.disabled"');
-        // setItem kan kaste feil hvis lagring er fult eller blokkert av strengere cookie settings
+        // setItem kan kaste feil hvis lagring er fullt eller blokkert av strengere cookie settings
     }
 }
 

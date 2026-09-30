@@ -1,15 +1,15 @@
 import { getCurrentConsent } from '@navikt/nav-dekoratoren-moduler';
 
-type PageType = 'forside' | 'oversikt' | 'refusjon' | 'kvittering' | 'ukjent-side';
+type PageType = 'forside' | 'oversikt' | 'refusjon' | 'korreksjon' | 'kvittering' | 'ukjent-side';
 
 export function hentSidetype(pathname: string): PageType {
-    const normalizedPathname = normaliserStinavn(pathname);
+    const normalisertStinavn = normaliserStinavn(pathname);
 
-    if (normalizedPathname === '/' || normalizedPathname === '') {
+    if (normalisertStinavn === '/' || normalisertStinavn === '') {
         return 'forside';
     }
 
-    if (normalizedPathname === '/refusjon') {
+    if (normalisertStinavn === '/refusjon') {
         return 'oversikt';
     }
 
@@ -17,8 +17,12 @@ export function hentSidetype(pathname: string): PageType {
         return 'kvittering';
     }
 
-    if (pathname.includes('refusjon') || pathname.includes('korreksjon')) {
+    if (pathname.includes('refusjon')) {
         return 'refusjon';
+    }
+
+    if (pathname.includes('korreksjon')) {
+        return 'korreksjon';
     }
 
     return 'ukjent-side';
@@ -28,10 +32,10 @@ export function hentGjeldendeSamtykke() {
     return getCurrentConsent();
 }
 
-function normaliserStinavn(pathname: string): string {
-    if (pathname.length <= 1) {
-        return pathname;
+function normaliserStinavn(sti: string): string {
+    if (sti.length <= 1) {
+        return sti;
     }
 
-    return pathname.replace(/\/+$/, '');
+    return sti.replace(/\/+$/, '');
 }
