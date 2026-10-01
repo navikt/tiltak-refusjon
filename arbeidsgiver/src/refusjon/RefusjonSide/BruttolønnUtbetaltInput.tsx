@@ -11,7 +11,7 @@ interface Props {
     refusjon: Refusjon;
     inntektsgrunnlag: Inntektsgrunnlag;
     setEndringBruttoLønn: React.Dispatch<SetStateAction<string>>;
-    endringBruttoLønn: string;
+    endringBruttoLønn?: string;
     delayEndreBruttolønn: (
         refusjonId: string,
         inntekterKunFraTiltaket: boolean | null,
@@ -26,11 +26,12 @@ const BruttolønnUtbetaltInput = (props: Props) => {
     const cls = BEMHelper('refusjonside');
     const sumInntekterOpptjent: number = sumInntekterOpptjentIPeriode(inntektsgrunnlag);
     const { tilskuddsgrunnlag } = refusjon.refusjonsgrunnlag;
-    const [lokalBruttolønnVerdi, setLokalBruttolønnVerdi] = useState('');
+    const [lokalBruttolønnVerdi, setLokalBruttolønnVerdi] = useState(props.endringBruttoLønn ?? '');
     const [feilmelding, setFeilmelding] = useState('');
     return (
         <>
             <TextField
+                htmlSize={18}
                 className={cls.element('bruttolønn-utbetalt-for-periode')}
                 size="small"
                 inputMode="numeric"
