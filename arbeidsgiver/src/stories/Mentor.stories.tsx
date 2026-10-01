@@ -100,15 +100,23 @@ const mentorForTidlig: Refusjon = {
 
 export const MentorForTidlig: Story = {
     name: 'Mentor - for tidlig',
-    args: { refusjon: mentorForTidlig, innloggetBruker },
+    args: { refusjon: mentorForTidlig, innloggetBruker, rolle: 'arbeidsgiver' },
 };
 
 export const MentorSendt: Story = {
     name: 'Mentor - sendt krav',
-    args: { refusjon: { ...mentorForTidlig, status: RefusjonStatus.SENDT_KRAV }, innloggetBruker },
+    args: {
+        refusjon: { ...mentorForTidlig, status: RefusjonStatus.SENDT_KRAV },
+        innloggetBruker,
+        rolle: 'arbeidsgiver',
+    },
 };
 
 export const MentorUtbetalt: Story = {
     name: 'Mentor - utbetalt',
-    args: { refusjon: { ...mentorForTidlig, status: RefusjonStatus.UTBETALT }, innloggetBruker },
+    args: {
+        refusjon: { ...mentorForTidlig, status: RefusjonStatus.UTBETALT },
+        innloggetBruker,
+        rolle: 'arbeidsgiver',
+    },
 };
