@@ -9,6 +9,7 @@ import {
     Filter,
     IkkeFunnetError,
     IkkeTilgangError,
+    Inntektslinje,
     Korreksjon,
     PageableRefusjon,
     Refusjon,
@@ -123,6 +124,26 @@ export const settTidligereRefunderbarBeløp = async (
     );
     await mutate(`/refusjon/${refusjonId}`);
     return response.data;
+};
+
+export const setInntektslinjerOpptjentIPeriode = async (
+    refusjonId: string,
+    opptjent: Inntektslinje[],
+    sistEndret: string
+): Promise<void> => {
+    await api.post(
+        `/refusjon/${refusjonId}/sett-inntektslinjer-opptjent-i-periode`,
+        opptjent.map((inntektslinje) => ({
+            inntektslinjeId: inntektslinje.id,
+            erOpptjentIPeriode: inntektslinje.erOpptjentIPeriode,
+        })),
+        {
+            headers: {
+                'If-Unmodified-Since': sistEndret,
+            },
+        }
+    );
+    await mutate(`/refusjon/${refusjonId}`);
 };
 
 export const setInntektslinjeOpptjentIPeriode = async (

@@ -5,6 +5,7 @@ import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
 import { Diskresjonskode } from '~/types';
+import { medInntekterForPerioden } from '~/stories/medInntekterForPerioden';
 
 const meta = {
     title: 'Refusjons Saksbehandler/KvitteringSide',
@@ -21,6 +22,8 @@ type Story = StoryObj<typeof meta>;
 const førOver5GRefusjon: Refusjon = {
     harInntektIAlleMåneder: true,
     refusjonsgrunnlag: {
+        bruttolonnOpptjentIPerioden: 200000,
+        ferietrekkIPerioden: 0,
         harFerietrekkForSammeMåned: false,
         tilskuddsgrunnlag: {
             avtaleId: 'd9f6b823-6e8b-4f66-aca5-52c1dbdb0282',
@@ -46,7 +49,7 @@ const førOver5GRefusjon: Refusjon = {
             enhet: '1000',
             id: '01HNJE38VPKCFXEHJCQWC29EFE',
         },
-        inntektsgrunnlag: {
+        inntektsgrunnlag: medInntekterForPerioden({
             inntekter: [
                 {
                     inntektType: 'LOENNSINNTEKT',
@@ -62,7 +65,7 @@ const førOver5GRefusjon: Refusjon = {
             ],
             bruttoLønn: 200000.0,
             innhentetTidspunkt: '2024-02-01T14:36:10.520514',
-        },
+        }),
         bedriftKontonummer: '10000008145',
         bedriftKid: undefined,
         inntekterKunFraTiltaket: true,

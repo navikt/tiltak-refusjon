@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import Utregning from '@/refusjon/RefusjonSide/Utregning';
 import { Tiltak } from '~/types/tiltak';
+import { medInntekterForPerioden } from '~/stories/medInntekterForPerioden';
 
 const meta = {
     title: 'Refusjons Saksbehandler/Utregning',
@@ -62,7 +63,7 @@ const refusjonsdata = {
         id: '01HKM5N9F8987C49Y2N06PDJ3E',
     },
     forrigeRefusjonMinusBeløp: -17206,
-    inntektsgrunnlag: {
+    inntektsgrunnlag: medInntekterForPerioden({
         inntekter: [
             {
                 inntektType: 'LOENNSINNTEKT',
@@ -112,7 +113,7 @@ const refusjonsdata = {
         bruttoLønn: 20423,
         id: '01HKM6HPY7VC0KTQRTGPGAZ547',
         innhentetTidspunkt: '2024-01-08T10:30:35.335458',
-    },
+    }),
 };
 
 const korreksjonsdata = {
@@ -164,7 +165,7 @@ const korreksjonsdata = {
         id: '01HKM5N9F8987C49Y2N06PDJ3E',
     },
     forrigeRefusjonMinusBeløp: 0,
-    inntektsgrunnlag: {
+    inntektsgrunnlag: medInntekterForPerioden({
         inntekter: [
             {
                 inntektType: 'LOENNSINNTEKT',
@@ -280,7 +281,7 @@ const korreksjonsdata = {
         bruttoLønn: 44846,
         id: '01HKMSX7EDBF2VCT9H35NBC2NA',
         innhentetTidspunkt: '2024-01-08T16:08:55.629546',
-    },
+    }),
 };
 
 export const MinusbelopKorreksjon: Story = {
