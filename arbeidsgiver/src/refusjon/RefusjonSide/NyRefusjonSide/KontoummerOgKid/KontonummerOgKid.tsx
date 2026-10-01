@@ -33,52 +33,49 @@ function KontonummerOgKid(props: Props) {
 
     const { control, register, formState, getValues } = useFormContext<KidOgKontonummerFields>();
 
+    if (!åpnetFørsteGang) {
+        return <Loader size="small" title="Henter kontonummer" />;
+    }
+
     return (
         <VStack gap="space-20">
-            {åpnetFørsteGang && (
-                <>
+            <TextField
+                htmlSize={18}
+                label="Kontonummer"
+                description={
+                    <>
+                        Hvis kontonummeret ikke stemmer, må det oppdateres hos{' '}
+                        <EksternLenke href="https://www.nav.no/arbeidsgiver/endre-kontonummer">Nav</EksternLenke>
+                    </>
+                }
+                size="small"
+                type="text"
+                error={formState.errors.kontonummer?.message}
+                readOnly
+                {...register('kontonummer')}
+            />
+            <Controller
+                name="kid"
+                control={control}
+                render={({ field }) => (
                     <TextField
+                        {...field}
                         htmlSize={18}
-                        label="Kontonummer"
-                        description={
-                            <>
-                                Hvis kontonummeret ikke stemmer, må det oppdateres hos{' '}
-                                <EksternLenke href="https://www.nav.no/arbeidsgiver/endre-kontonummer">
-                                    Nav
-                                </EksternLenke>
-                            </>
-                        }
+                        label="KID-nummer"
                         size="small"
                         type="text"
-                        error={formState.errors.kontonummer?.message}
-                        readOnly
-                        {...register('kontonummer')}
+                        error={formState.errors.kid?.message}
+                        onBlur={() => {
+                            field.onBlur();
+                            const erGyldig = kidOgKontonummerSchema.safeParse({
+                                kid: field.value,
+                                kontonummer: getValues('kontonummer'),
+                            }).success;
+                            lagreBedriftKID(id, sistEndret, erGyldig ? field.value : undefined);
+                        }}
                     />
-                    <Controller
-                        name="kid"
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                htmlSize={18}
-                                label="KID-nummer"
-                                size="small"
-                                type="text"
-                                error={formState.errors.kid?.message}
-                                onBlur={() => {
-                                    field.onBlur();
-                                    const erGyldig = kidOgKontonummerSchema.safeParse({
-                                        kid: field.value,
-                                        kontonummer: getValues('kontonummer'),
-                                    }).success;
-                                    lagreBedriftKID(id, sistEndret, erGyldig ? field.value : undefined);
-                                }}
-                            />
-                        )}
-                    />
-                </>
-            )}
-            {!åpnetFørsteGang && <Loader size="small" title="Henter kontonummer" />}
+                )}
+            />
         </VStack>
     );
 }

@@ -1,3 +1,3 @@
-import RefusjonsideV2 from './RefusjonsideV2';
+import NyRefusjonside from './NyRefusjonside';
 
-export default RefusjonsideV2;
+export default NyRefusjonside;

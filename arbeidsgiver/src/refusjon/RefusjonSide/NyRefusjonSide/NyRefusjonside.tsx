@@ -33,12 +33,7 @@ interface Props {
     aktsomhet?: Aktsomhet;
 }
 
-type RefusjonFormFields =
-    | FravaerFields
-    | (FravaerFields & InntektFields)
-    | (FravaerFields & InntektFields & BruttolonnFields)
-    | (FravaerFields & InntektFields & BruttolonnFields & KidOgKontonummerFields)
-    | (FravaerFields & InntektFields & BruttolonnFields & KidOgKontonummerFields & BekreftelseFields);
+type RefusjonFormFields = FravaerFields & InntektFields & BruttolonnFields & KidOgKontonummerFields & BekreftelseFields;
 
 const schema = (refusjon: Refusjon, seksjon: Record<Seksjon, boolean>) => {
     let schema: ZodTypeAny = fravaerSchema;
@@ -57,7 +52,7 @@ const schema = (refusjon: Refusjon, seksjon: Record<Seksjon, boolean>) => {
     return schema;
 };
 
-const RefusjonsideV2 = (props: Props) => {
+const NyRefusjonside = (props: Props) => {
     const { refusjon, aktsomhet } = props;
     const { tilskuddsgrunnlag } = refusjon.refusjonsgrunnlag;
 
@@ -77,14 +72,9 @@ const RefusjonsideV2 = (props: Props) => {
         resolver: zodResolver(schema(refusjon, seksjon)),
     });
 
-    const godkjennRefusjonen = async (): Promise<void> => {
-        await godkjennRefusjon(refusjon.id, refusjon.sistEndret).then(() => {
-            navigate({ pathname: `/refusjon/${refusjon.id}/kvittering`, search: window.location.search });
-        });
-    };
-
-    const onSubmit = () => {
-        setVisGodkjennModal(true);
+    const godkjennRefusjonen = async () => {
+        await godkjennRefusjon(refusjon.id, refusjon.sistEndret);
+        navigate({ pathname: `/refusjon/${refusjon.id}/kvittering`, search: window.location.search });
     };
 
     const onFravaerChange = useCallback(
@@ -136,7 +126,7 @@ const RefusjonsideV2 = (props: Props) => {
                         </VStack>
                         <KreverInntekter refusjon={refusjon}>
                             <FormProvider {...form}>
-                                <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
+                                <form onSubmit={form.handleSubmit(() => setVisGodkjennModal(true))} noValidate>
                                     <VStack gap={{ xs: 'space-40', md: 'space-64' }}>
                                         {seksjon.FRAVAER && <Fravaer refusjon={refusjon} onChange={onFravaerChange} />}
                                         {seksjon.INNTEKT_TABELL && (
@@ -172,4 +162,4 @@ const RefusjonsideV2 = (props: Props) => {
     );
 };
 
-export default RefusjonsideV2;
+export default NyRefusjonside;

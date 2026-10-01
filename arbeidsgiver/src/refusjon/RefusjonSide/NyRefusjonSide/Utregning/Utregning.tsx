@@ -1,7 +1,7 @@
 import { Box, ExpansionCard } from '@navikt/ds-react';
 import React from 'react';
 import { Refusjon } from '~/types';
-import { default as UtregningKomponent } from '@/komponenter/Utregning';
+import UtregningKomponent from '@/komponenter/Utregning';
 
 interface Props {
     refusjon: Refusjon;

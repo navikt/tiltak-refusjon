@@ -4,10 +4,11 @@ import { Radio, RadioGroup, TextField, VStack } from '@navikt/ds-react';
 import { endreBruttolønn } from '@/services/rest-service';
 import { useFormContext, Controller, useWatch } from 'react-hook-form';
 import { z } from 'zod';
-import { sumInntekterOpptjentIPeriode } from '@/utils/inntekterUtiles';
 
-export const lagBruttolonnSchema = (refusjon: Refusjon) =>
-    z
+export const lagBruttolonnSchema = (refusjon: Refusjon) => {
+    const { bruttolonnOpptjentIPerioden } = refusjon.refusjonsgrunnlag;
+
+    return z
         .object({
             harAndreRefusjoner: z.boolean({
                 required_error: 'Du må svare på om inntektene er tilknyttet andre refusjoner',
@@ -40,17 +41,15 @@ export const lagBruttolonnSchema = (refusjon: Refusjon) =>
                 });
             }
 
-            const sumInntekterOpptjent = refusjon.refusjonsgrunnlag.inntektsgrunnlag
-                ? sumInntekterOpptjentIPeriode(refusjon.refusjonsgrunnlag.inntektsgrunnlag)
-                : 0;
-            if (data.bruttolonn && parseInt(data.bruttolonn, 10) > sumInntekterOpptjent) {
+            if (data.bruttolonn && parseInt(data.bruttolonn, 10) > bruttolonnOpptjentIPerioden) {
                 ctx.addIssue({
                     code: z.ZodIssueCode.custom,
                     path: ['bruttolonn'],
-                    message: `Beløpet er høyre enn sum bruttolønn. Det må være det samme eller lavere enn ${sumInntekterOpptjent} kr.`,
+                    message: `Beløpet er høyre enn sum bruttolønn. Det må være det samme eller lavere enn ${bruttolonnOpptjentIPerioden} kr.`,
                 });
             }
         });
+};
 
 export type BruttolonnFields = z.infer<ReturnType<typeof lagBruttolonnSchema>>;
 

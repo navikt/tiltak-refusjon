@@ -32,9 +32,7 @@ function InntektAccordion(props: Props) {
                                         size="small"
                                         variant="secondary"
                                         icon={<ArrowsCirclepathIcon aria-hidden />}
-                                        onClick={async () => {
-                                            await merkForHentingAvInntekterFrem(id, true, sistEndret);
-                                        }}
+                                        onClick={() => merkForHentingAvInntekterFrem(id, true, sistEndret)}
                                     >
                                         Hent inntekter rapportert i{' '}
                                         {månedsNavnPlusMåned(tilskuddsgrunnlag.tilskuddFom, 1)}

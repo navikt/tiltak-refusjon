@@ -29,7 +29,12 @@ const SummeringBoks = (props: Props) => {
         return null;
     }
 
-    if (beregning?.refusjonsbeløp > 0) {
+    const { refusjonsbeløp } = beregning;
+    const periode = formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom);
+    const erRefundertBeløpTrukketFra = beregning.sumUtgifter !== beregning.sumUtgifterFratrukketRefundertBeløp;
+    const erSisteTilskuddsperiode = erSisteTilskuddsperiodeIAvtalen(tilskuddsgrunnlag);
+
+    if (refusjonsbeløp > 0) {
         return (
             <Box borderColor="accent-subtle" borderRadius="8" borderWidth="3" padding="space-12">
                 <HStack align="center" gap="space-20" wrap={false}>
@@ -37,9 +42,8 @@ const SummeringBoks = (props: Props) => {
                     <VStack gap="space-4">
                         <Label>Dere får utbetalt</Label>
                         <BodyShort size="small">
-                            <b>{formatterPenger(beregning?.refusjonsbeløp || 0)}</b> for perioden{' '}
-                            {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)} til
-                            kontonummer {bedriftKontonummer}
+                            <b>{formatterPenger(refusjonsbeløp)}</b> for perioden {periode} til kontonummer{' '}
+                            {bedriftKontonummer}
                         </BodyShort>
                     </VStack>
                 </HStack>
@@ -47,7 +51,7 @@ const SummeringBoks = (props: Props) => {
         );
     }
 
-    if (beregning?.refusjonsbeløp < 0) {
+    if (refusjonsbeløp < 0) {
         return (
             <Box borderColor="accent-subtle" borderRadius="8" borderWidth="3" padding="space-12">
                 <HStack align="center" gap="space-20" wrap={false}>
@@ -55,7 +59,7 @@ const SummeringBoks = (props: Props) => {
                     <VStack gap="space-4">
                         {beregning.lønnFratrukketFerie < 0 && (
                             <>
-                                {erSisteTilskuddsperiodeIAvtalen(tilskuddsgrunnlag) ? (
+                                {erSisteTilskuddsperiode ? (
                                     <BodyShort size="small">
                                         Fratrekk for ferie er større enn bruttolønn i perioden. Ettersom tiltaket er
                                         avsluttet vil dette beløpet bli sett bort fra.
@@ -68,35 +72,29 @@ const SummeringBoks = (props: Props) => {
                                         refusjonsbeløpet overføres til neste periode.
                                     </BodyShort>
                                 )}
-
-                                <BodyShort size="small">
-                                    {beregning.sumUtgifter !== beregning?.sumUtgifterFratrukketRefundertBeløp && (
-                                        <>
-                                            Vi tar ikke hensyn til oppgitt refunderbar lønn (
-                                            {formatterPenger(beregning?.tidligereRefundertBeløp)}) ved negativt
-                                            refusjonsbeløp. Dette er altså ikke med i beregnet refusjonsbeløp.{' '}
-                                        </>
-                                    )}
-                                </BodyShort>
-                                <Label>
-                                    {props.status === 'KLAR_FOR_INNSENDING' && 'Dere må fortsatt trykke fullfør under.'}
-                                </Label>
+                                {erRefundertBeløpTrukketFra && (
+                                    <BodyShort size="small">
+                                        Vi tar ikke hensyn til oppgitt refunderbar lønn (
+                                        {formatterPenger(beregning.tidligereRefundertBeløp)}) ved negativt
+                                        refusjonsbeløp. Dette er altså ikke med i beregnet refusjonsbeløp.
+                                    </BodyShort>
+                                )}
+                                {status === 'KLAR_FOR_INNSENDING' && (
+                                    <Label>Dere må fortsatt trykke fullfør under.</Label>
+                                )}
                             </>
                         )}
-                        {erSisteTilskuddsperiodeIAvtalen(tilskuddsgrunnlag) ? (
+                        {erSisteTilskuddsperiode ? (
                             <BodyShort size="small">
                                 Dere skylder{' '}
                                 <b style={{ textDecoration: 'line-through' }}>
-                                    {formatterPenger(Math.abs(beregning?.refusjonsbeløp || 0))}
+                                    {formatterPenger(Math.abs(refusjonsbeløp))}
                                 </b>{' '}
-                                <b>{formatterPenger(0)}</b> for perioden{' '}
-                                {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}.
+                                <b>{formatterPenger(0)}</b> for perioden {periode}.
                             </BodyShort>
                         ) : (
                             <BodyShort size="small">
-                                Dere skylder <b>{formatterPenger(Math.abs(beregning?.refusjonsbeløp || 0))}</b> for
-                                perioden {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
-                                .{' '}
+                                Dere skylder <b>{formatterPenger(Math.abs(refusjonsbeløp))}</b> for perioden {periode}.{' '}
                                 {erForKorreksjon ? 'Beløpet vil tilbakekreves' : 'Dette vil trekkes fra neste refusjon'}
                                 .
                             </BodyShort>
@@ -107,51 +105,49 @@ const SummeringBoks = (props: Props) => {
         );
     }
 
+    if (status !== 'KLAR_FOR_INNSENDING') {
+        return (
+            <Box borderColor="accent-subtle" borderRadius="8" borderWidth="3" padding="space-12">
+                <HStack align="center" gap="space-20" wrap={false}>
+                    <BrevMedVarsel />
+                    <Label>
+                        Refusjonen er godtatt med {formatterPenger(0)} for perioden {periode}
+                    </Label>
+                </HStack>
+            </Box>
+        );
+    }
+
+    if (erRefundertBeløpTrukketFra) {
+        return (
+            <Box borderColor="accent-subtle" borderRadius="8" borderWidth="3" padding="space-12">
+                <HStack align="center" gap="space-20" wrap={false}>
+                    <Pengesedler />
+                    <VStack gap="space-4">
+                        <BodyShort size="small">
+                            Oppgitt refunderbar lønn <b>({formatterPenger(beregning.tidligereRefundertBeløp)})</b> gir
+                            et negativt refusjonsgrunnlag og refusjonsbeløpet settes da til {formatterPenger(0)}.
+                        </BodyShort>
+                        <Label>
+                            Godta <b>{formatterPenger(refusjonsbeløp)}</b> for perioden {periode} ved å trykke fullfør
+                            under.
+                        </Label>
+                    </VStack>
+                </HStack>
+            </Box>
+        );
+    }
+
     return (
         <Box borderColor="accent-subtle" borderRadius="8" borderWidth="3" padding="space-12">
             <HStack align="center" gap="space-20" wrap={false}>
-                {status === 'KLAR_FOR_INNSENDING' &&
-                    beregning.sumUtgifter === beregning?.sumUtgifterFratrukketRefundertBeløp && (
-                        <>
-                            <BrevMedVarsel />
-                            <VStack gap="space-4">
-                                <Label>Refusjonen sendes inn med nullbeløp</Label>
-                                <BodyShort>
-                                    Det utbetales {formatterPenger(0)} for perioden{' '}
-                                    {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
-                                </BodyShort>
-                            </VStack>
-                        </>
-                    )}
-                {status === 'KLAR_FOR_INNSENDING' &&
-                    beregning.sumUtgifter !== beregning?.sumUtgifterFratrukketRefundertBeløp && (
-                        <>
-                            <Pengesedler />
-                            <VStack gap="space-4">
-                                <BodyShort size="small">
-                                    Oppgitt refunderbar lønn{' '}
-                                    <b>({formatterPenger(beregning?.tidligereRefundertBeløp)})</b> gir et negativt
-                                    refusjonsgrunnlag og refusjonsbeløpet settes da til {formatterPenger(0)}.
-                                </BodyShort>
-                                <Label>
-                                    Godta <b>{formatterPenger(beregning?.refusjonsbeløp || 0)}</b> for perioden{' '}
-                                    {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)} ved
-                                    å trykke fullfør under.
-                                </Label>
-                            </VStack>
-                        </>
-                    )}
-                {props.status !== 'KLAR_FOR_INNSENDING' && (
-                    <>
-                        <BrevMedVarsel />
-                        <VStack gap="space-4">
-                            <Label>
-                                Refusjonen er godtatt med {formatterPenger(0)} for perioden{' '}
-                                {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}
-                            </Label>
-                        </VStack>
-                    </>
-                )}
+                <BrevMedVarsel />
+                <VStack gap="space-4">
+                    <Label>Refusjonen sendes inn med nullbeløp</Label>
+                    <BodyShort>
+                        Det utbetales {formatterPenger(0)} for perioden {periode}
+                    </BodyShort>
+                </VStack>
             </HStack>
         </Box>
     );

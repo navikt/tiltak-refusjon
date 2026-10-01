@@ -1,4 +1,4 @@
-import React, { Fragment, PropsWithChildren, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { BodyShort, Box, Checkbox, Heading, HStack, InlineMessage, Label, Table, VStack } from '@navikt/ds-react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { z } from 'zod';
@@ -48,10 +48,12 @@ export const inntektDefaultValues = (refusjon: Refusjon): InntektFields => {
 
 interface Props {
     refusjon: Refusjon;
-    onChange: (change: { erGyldig: boolean; belop?: number } & InntektFields) => void;
+    onChange: (change: { erGyldig: boolean; belop: number } & InntektFields) => void;
 }
 
-function InntektTabell(props: PropsWithChildren<Props>) {
+const settVerdiOpts = { shouldDirty: true, shouldValidate: true };
+
+function InntektTabell(props: Props) {
     const { refusjon, onChange } = props;
     const { id, sistEndret, refusjonsgrunnlag } = refusjon;
     const { inntektsgrunnlag, tilskuddsgrunnlag, bruttolonnOpptjentIPerioden, ferietrekkIPerioden } = refusjonsgrunnlag;
@@ -85,30 +87,18 @@ function InntektTabell(props: PropsWithChildren<Props>) {
 
     useEffect(() => {
         const nyeInntekter = inntektsgrunnlag?.inntekterForPerioden ?? [];
-        const erLike = erInntektLike(nyeInntekter, inntekter);
-        if (!erLike) {
+        if (!erInntektLike(nyeInntekter, inntekter)) {
             setInntekter(nyeInntekter);
-            const harOpptjentInntekt = harOpptjentInntekterIPerioden(nyeInntekter);
-            setValue('harOpptjentInntektIPerioden', harOpptjentInntekt, {
-                shouldDirty: true,
-                shouldValidate: true,
-            });
+            setValue('harOpptjentInntektIPerioden', harOpptjentInntekterIPerioden(nyeInntekter), settVerdiOpts);
             resetField('harIkkeOpptjentInntekterIPerioden');
         }
-    }, [inntekter, inntektsgrunnlag?.inntekter, setValue, resetField]);
+    }, [inntekter, inntektsgrunnlag?.inntekterForPerioden, setValue, resetField]);
 
     const onInntektslinjeChange = async (endring: Inntektsendring) => {
         const nyeInntekter = oppdaterInntektslinjeOpptjentIPeriode(inntekter, endring);
-        const harOpptjentInntekt = harOpptjentInntekterIPerioden(nyeInntekter);
 
-        setValue('harOpptjentInntektIPerioden', harOpptjentInntekt, {
-            shouldDirty: true,
-            shouldValidate: true,
-        });
-        setValue('harIkkeOpptjentInntekterIPerioden', endring.type === 'INGEN-INNTEKTER', {
-            shouldDirty: true,
-            shouldValidate: true,
-        });
+        setValue('harOpptjentInntektIPerioden', harOpptjentInntekterIPerioden(nyeInntekter), settVerdiOpts);
+        setValue('harIkkeOpptjentInntekterIPerioden', endring.type === 'INGEN-INNTEKTER', settVerdiOpts);
         setInntekter(nyeInntekter);
 
         await setInntektslinjerOpptjentIPeriode(id, nyeInntekter, sistEndret);
@@ -139,7 +129,7 @@ function InntektTabell(props: PropsWithChildren<Props>) {
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
-                            {inntekter?.map((inntekt, i) => (
+                            {inntekter.map((inntekt, i) => (
                                 <Fragment key={inntekt.id}>
                                     {(i === 0 || inntekter[i - 1].måned !== inntekt.måned) && (
                                         <Table.Row shadeOnHover={false}>
@@ -165,9 +155,9 @@ function InntektTabell(props: PropsWithChildren<Props>) {
                                                 <Checkbox
                                                     checked={!!inntekt.erOpptjentIPeriode}
                                                     hideLabel
-                                                    onChange={async (e) => {
+                                                    onChange={(e) => {
                                                         e.stopPropagation();
-                                                        await onInntektslinjeChange({
+                                                        onInntektslinjeChange({
                                                             type: 'INNTEKT',
                                                             id: inntekt.id,
                                                             erOpptjentIPeriode: !inntekt.erOpptjentIPeriode,

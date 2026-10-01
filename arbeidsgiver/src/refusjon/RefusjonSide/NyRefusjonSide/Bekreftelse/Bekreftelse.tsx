@@ -2,7 +2,7 @@ import { Alert, BodyShort, Button, List, VStack } from '@navikt/ds-react';
 import GodkjenningsPanel from '@/komponenter/GodkjenningsPanel';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import Vilkaar from '@/refusjon/RefusjonSide/NyRefusjonside/Bekreftelse/Vilkaar';
+import Vilkaar from './Vilkaar';
 import { z } from 'zod';
 
 const BEKREFTELSE_FEILMELDING = 'Du må bekrefte at opplysningene er riktige før du kan sende inn skjemaet.';
@@ -24,7 +24,7 @@ function Bekreftelse() {
 
     const feilmeldinger = Object.entries(formState.errors)
         .map(([felt, error]) => ({ felt, melding: error?.message }))
-        .filter((feil) => typeof feil.melding === 'string' && !!feil.melding);
+        .filter((feil) => !!feil.melding);
 
     const visFeiloppsummering = formState.submitCount > 0 && feilmeldinger.length > 0;
 

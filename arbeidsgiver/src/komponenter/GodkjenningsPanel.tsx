@@ -29,16 +29,15 @@ const GodkjenningsPanel = ({
             <VStack gap="space-16">
                 {children}
                 <Checkbox
-                    aria-describedby={error ? 'godkjenning-panel-feilmelding' : undefined}
+                    aria-describedby={error ? errorId : undefined}
                     checked={isChecked}
                     error={!!error}
-                    errorId={error ? errorId : undefined}
                     onChange={(event) => setChecked(event.currentTarget.checked)}
                 >
                     {checkboxLabel}
                 </Checkbox>
                 {error && (
-                    <InlineMessage id="godkjenning-panel-feilmelding" status="error">
+                    <InlineMessage id={errorId} status="error">
                         {error}
                     </InlineMessage>
                 )}
