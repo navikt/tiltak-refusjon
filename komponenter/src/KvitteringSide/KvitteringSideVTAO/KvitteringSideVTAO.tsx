@@ -14,6 +14,7 @@ import { storForbokstav } from '~/utils/stringUtils';
 import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
 import SummeringBoksVTAO from './SummeringBoksVTAO';
 import TilskuddssatsVTAO from './TilskuddssatsVTAO';
+import MainWrapper from '~/MainWrapper';
 
 /**
  * For etterregistrerte avtaler av typen VTA-O vil det eksistere refusjoner som er "for tidlig",
@@ -56,52 +57,59 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
 interface Props {
     aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
+    rolle: 'arbeidsgiver' | 'saksbehandler';
     innloggetBruker?: InnloggetBruker;
     settKid?: (kid?: string) => void;
     headerActions?: ReactNode;
 }
 
 const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
-    const { refusjon, innloggetBruker, aktsomhet, settKid, headerActions } = props;
+    const { refusjon, rolle, innloggetBruker, aktsomhet, settKid, headerActions } = props;
     const innloggetRolle = innloggetBruker?.rolle;
 
     return (
-        <Boks variant="hvit">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Heading level="2" size="large">
-                    Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
-                </Heading>
-                <VStack gap="space-16" align="end">
-                    {etikettForRefusjonStatus(refusjon)}
-                    {headerActions}
-                </VStack>
-            </div>
-            <VerticalSpacer rem={1} />
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
-                <Statusmelding status={refusjon.status} vtao={true} sendtTidspunkt={refusjon.godkjentAvArbeidsgiver} />
-                {innloggetBruker !== undefined && innloggetBruker.rolle === 'ARBEIDSGIVER' && (
-                    <LagreSomPdfKnapp avtaleId={refusjon.id} />
-                )}
-            </div>
-            <VerticalSpacer rem={2} />
-            <BodyLong>
-                Dere får et tilskudd fra Nav for varig tilrettelagt arbeid. Satsen settes årlig av departementet og
-                avtale- og refusjonsløsningen vil automatisk oppdateres når det kommer nye satser.
-            </BodyLong>
-            <VerticalSpacer rem={1} />
-            <InformasjonFraAvtalenVTAO
-                aktsomhet={aktsomhet}
-                innloggetRolle={innloggetRolle}
-                refusjonStatus={refusjon.status}
-                refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
-                åpnetFørsteGang={refusjon.åpnetFørsteGang}
-                settKid={settKid}
-            />
-            <VerticalSpacer rem={2} />
-            <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
-            <VerticalSpacer rem={1} />
-            <SummeringBoksVTAO refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
-        </Boks>
+        <MainWrapper rolle={rolle}>
+            <Boks variant="hvit">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Heading level="2" size="large">
+                        Refusjon for Varig tilrettelagt arbeid i ordinær virksomhet (VTA-O)
+                    </Heading>
+                    <VStack gap="space-16" align="end">
+                        {etikettForRefusjonStatus(refusjon)}
+                        {headerActions}
+                    </VStack>
+                </div>
+                <VerticalSpacer rem={1} />
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
+                    <Statusmelding
+                        status={refusjon.status}
+                        vtao={true}
+                        sendtTidspunkt={refusjon.godkjentAvArbeidsgiver}
+                    />
+                    {innloggetBruker !== undefined && innloggetBruker.rolle === 'ARBEIDSGIVER' && (
+                        <LagreSomPdfKnapp avtaleId={refusjon.id} />
+                    )}
+                </div>
+                <VerticalSpacer rem={2} />
+                <BodyLong>
+                    Dere får et tilskudd fra Nav for varig tilrettelagt arbeid. Satsen settes årlig av departementet og
+                    avtale- og refusjonsløsningen vil automatisk oppdateres når det kommer nye satser.
+                </BodyLong>
+                <VerticalSpacer rem={1} />
+                <InformasjonFraAvtalenVTAO
+                    aktsomhet={aktsomhet}
+                    innloggetRolle={innloggetRolle}
+                    refusjonStatus={refusjon.status}
+                    refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
+                    åpnetFørsteGang={refusjon.åpnetFørsteGang}
+                    settKid={settKid}
+                />
+                <VerticalSpacer rem={2} />
+                <TilskuddssatsVTAO tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
+                <VerticalSpacer rem={1} />
+                <SummeringBoksVTAO refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
+            </Boks>
+        </MainWrapper>
     );
 };
 

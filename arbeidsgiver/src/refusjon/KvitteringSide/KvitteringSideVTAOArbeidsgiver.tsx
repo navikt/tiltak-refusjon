@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import { lagreBedriftKID } from '@/services/rest-service';
 
-type Props = Omit<React.ComponentProps<typeof KvitteringSideVTAO>, 'settKid'>;
+type Props = Omit<React.ComponentProps<typeof KvitteringSideVTAO>, 'rolle' | 'settKid'>;
 
 function KvitteringSideVTAOArbeidsgiver(props: Props) {
     const { refusjon } = props;
@@ -15,7 +15,7 @@ function KvitteringSideVTAOArbeidsgiver(props: Props) {
         [refusjon.id, refusjon.sistEndret]
     );
 
-    return <KvitteringSideVTAO {...props} settKid={settKid} />;
+    return <KvitteringSideVTAO {...props} rolle="arbeidsgiver" settKid={settKid} />;
 }
 
 export default KvitteringSideVTAOArbeidsgiver;

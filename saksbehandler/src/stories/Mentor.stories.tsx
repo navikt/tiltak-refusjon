@@ -100,5 +100,5 @@ const mentorForTidlig: Refusjon = {
 
 export const MentorForTidlig: Story = {
     name: 'Mentor - for tidlig',
-    args: { refusjon: mentorForTidlig, innloggetBruker },
+    args: { refusjon: mentorForTidlig, innloggetBruker, rolle: 'saksbehandler' },
 };

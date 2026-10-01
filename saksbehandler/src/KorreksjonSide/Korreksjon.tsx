@@ -7,10 +7,10 @@ import KorreksjonKvitteringSide from '@/KorreksjonKvitteringSide/KorreksjonKvitt
 import KorreksjonKvitteringSideVTAO from '@/KorreksjonKvitteringSideVTAO/KorreksjonKvitteringSideVTAO';
 import KorreksjonSide from './KorreksjonSide';
 import KorreksjonSideVTAO from '@/KorreksjonSideVTAO/KorreksjonSideVTAO';
-import TilbakeTilOversikt from '@/komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '~/VerticalSpacer';
 import { korreksjonsgrunnTekst, KorreksjonStatus } from '~/types';
 import { useHentKorreksjon, useRefusjonKreverAktsomhet } from '@/services/rest-service';
+import MainWrapper from '~/MainWrapper';
 
 const Advarsler: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
@@ -62,15 +62,12 @@ const Komponent: FunctionComponent = () => {
 
 const Refusjon: FunctionComponent = () => {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ flex: '0 0 55rem', flexShrink: 1 }}>
-                <TilbakeTilOversikt />
-                <Suspense fallback={null}>
-                    <Advarsler />
-                    <Komponent />
-                </Suspense>
-            </div>
-        </div>
+        <MainWrapper rolle="saksbehandler" bredde="smal">
+            <Suspense fallback={null}>
+                <Advarsler />
+                <Komponent />
+            </Suspense>
+        </MainWrapper>
     );
 };
 
