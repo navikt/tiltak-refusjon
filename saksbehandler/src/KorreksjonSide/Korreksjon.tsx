@@ -62,7 +62,7 @@ const Komponent: FunctionComponent = () => {
 
 const Refusjon: FunctionComponent = () => {
     return (
-        <MainWrapper rolle="saksbehandler">
+        <MainWrapper rolle="saksbehandler" bredde="smal">
             <Suspense fallback={null}>
                 <Advarsler />
                 <Komponent />
