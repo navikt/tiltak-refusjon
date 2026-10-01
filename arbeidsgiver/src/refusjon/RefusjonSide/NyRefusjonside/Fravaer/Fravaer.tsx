@@ -87,6 +87,7 @@ function Fravaer(props: Props) {
                     render={({ field }) => (
                         <RadioGroup
                             {...field}
+                            value={field.value ?? null}
                             legend="Har deltaker hatt fravær med lønn som blir refundert av Nav i denne perioden?"
                             size="small"
                             error={formState.errors.fravaer?.message}

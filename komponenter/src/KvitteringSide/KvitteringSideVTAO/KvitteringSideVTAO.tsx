@@ -57,17 +57,18 @@ export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
 interface Props {
     aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
+    rolle: 'arbeidsgiver' | 'saksbehandler';
     innloggetBruker?: InnloggetBruker;
     settKid?: (kid?: string) => void;
     headerActions?: ReactNode;
 }
 
 const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
-    const { refusjon, innloggetBruker, aktsomhet, settKid, headerActions } = props;
+    const { refusjon, rolle, innloggetBruker, aktsomhet, settKid, headerActions } = props;
     const innloggetRolle = innloggetBruker?.rolle;
 
     return (
-        <MainWrapper>
+        <MainWrapper rolle={rolle}>
             <Boks variant="hvit">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Heading level="2" size="large">

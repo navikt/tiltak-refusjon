@@ -37,7 +37,7 @@ const RefusjonSide = (props: Props) => {
     };
 
     return (
-        <MainWrapper>
+        <MainWrapper rolle="arbeidsgiver">
             <Boks variant="hvit">
                 <RefusjonIngress refusjon={refusjon} />
                 <InformasjonFraAvtalen refusjon={refusjon} aktsomhet={aktsomhet} onFeil={setFeilmelding} />

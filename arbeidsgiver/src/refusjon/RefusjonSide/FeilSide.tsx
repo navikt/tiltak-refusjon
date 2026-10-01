@@ -21,7 +21,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
     const refusjon = useHentRefusjon(refusjonId);
 
     return (
-        <MainWrapper>
+        <MainWrapper rolle="arbeidsgiver">
             <Boks variant="hvit">
                 <Alert variant={props.advarselType}>{props.feiltekst}</Alert>
                 <VerticalSpacer rem={2} />

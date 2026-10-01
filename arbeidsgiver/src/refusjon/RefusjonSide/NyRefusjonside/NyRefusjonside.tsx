@@ -14,18 +14,19 @@ import { Aktsomhet, Refusjon, statusTekst, tiltakstypeTekst } from '~/types';
 import { formaterDato } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
 
-import Bruttolonn, { BruttolonnFields, bruttolonnDefaultValues, lagBruttolonnSchema } from './Bruttolonn/Bruttolonn';
-import Fravaer, { FravaerFields, fravaerDefaultValues, fravaerSchema } from './Fravaer/Fravaer';
+import Bruttolonn, { BruttolonnFields, bruttolonnDefaultValues, lagBruttolonnSchema } from './Bruttolonn';
+import Fravaer, { FravaerFields, fravaerDefaultValues, fravaerSchema } from './Fravaer';
 import MainWrapper from '~/MainWrapper';
 import useRefusjonsideSteg, { Seksjon, Steg } from './useRefusjonsideSteg';
 import Oppsummering from './Oppsummering';
 import { InntektFields, inntektDefaultValues, InntektTabell, inntektSchema, KreverInntekter } from './Inntekter';
-import Bekreftelse, { BekreftelseFields, bekreftelseDefaultValues, bekreftelseSchema } from './Bekreftelse/Bekreftelse';
+import Bekreftelse, { BekreftelseFields, bekreftelseDefaultValues, bekreftelseSchema } from './Bekreftelse';
 import Utregning from './Utregning';
 import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
 import { ZodTypeAny } from 'zod';
 import RefusjonGodkjennModal from '@/refusjon/RefusjonSide/RefusjonGodkjennModal';
-import { godkjennRefusjon } from '@/services/rest-service';
+import RefusjonFullførNullbeløpModal from '@/refusjon/RefusjonSide/refusjonFullførNullbeløp/RefusjonFullførNullbeløpModal';
+import { godkjennRefusjon, godkjennRefusjonMedNullbeløp } from '@/services/rest-service';
 import { useNavigate } from 'react-router';
 
 interface Props {
@@ -54,7 +55,7 @@ const schema = (refusjon: Refusjon, seksjon: Record<Seksjon, boolean>) => {
 
 const NyRefusjonside = (props: Props) => {
     const { refusjon, aktsomhet } = props;
-    const { tilskuddsgrunnlag } = refusjon.refusjonsgrunnlag;
+    const { tilskuddsgrunnlag, beregning } = refusjon.refusjonsgrunnlag;
 
     const navigate = useNavigate();
     const { seksjon, endreSteg } = useRefusjonsideSteg();
@@ -73,7 +74,11 @@ const NyRefusjonside = (props: Props) => {
     });
 
     const godkjennRefusjonen = async () => {
-        await godkjennRefusjon(refusjon.id, refusjon.sistEndret);
+        if (beregning?.refusjonsbeløp === 0) {
+            await godkjennRefusjonMedNullbeløp(refusjon.id, refusjon.sistEndret);
+        } else {
+            await godkjennRefusjon(refusjon.id, refusjon.sistEndret);
+        }
         navigate({ pathname: `/refusjon/${refusjon.id}/kvittering`, search: window.location.search });
     };
 
@@ -101,7 +106,7 @@ const NyRefusjonside = (props: Props) => {
 
     return (
         <>
-            <MainWrapper bredde="smal">
+            <MainWrapper rolle="arbeidsgiver" bredde="smal">
                 <Box background="default" padding={{ xs: 'space-16', md: 'space-32' }}>
                     <VStack gap={{ xs: 'space-40', md: 'space-64' }}>
                         <VStack gap="space-24">
@@ -150,7 +155,15 @@ const NyRefusjonside = (props: Props) => {
                     </VStack>
                 </Box>
             </MainWrapper>
-            {visGodkjennModal && (
+            {visGodkjennModal && beregning?.refusjonsbeløp === 0 && (
+                <RefusjonFullførNullbeløpModal
+                    refusjon={refusjon}
+                    visGodkjennModal={visGodkjennModal}
+                    setVisGodkjennModal={setVisGodkjennModal}
+                    godkjennRefusjonen={godkjennRefusjonen}
+                />
+            )}
+            {visGodkjennModal && beregning?.refusjonsbeløp !== 0 && (
                 <RefusjonGodkjennModal
                     refusjon={refusjon}
                     visGodkjennModal={visGodkjennModal}

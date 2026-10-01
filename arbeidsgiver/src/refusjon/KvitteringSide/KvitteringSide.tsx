@@ -52,7 +52,7 @@ const KvitteringSide = (props: Props) => {
     }
 
     return (
-        <MainWrapper>
+        <MainWrapper rolle="arbeidsgiver">
             <Boks variant="hvit">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Heading size="large" role="heading">

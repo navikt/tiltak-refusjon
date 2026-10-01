@@ -16,17 +16,18 @@ import MainWrapper from '~/MainWrapper';
 interface Props {
     aktsomhet?: Aktsomhet;
     refusjon: Refusjon;
+    rolle: 'arbeidsgiver' | 'saksbehandler';
     innloggetBruker?: InnloggetBruker;
     settKid?: (kid?: string) => void;
     headerActions?: ReactNode;
 }
 
 const KvitteringSideMentor: FunctionComponent<Props> = (props: Props) => {
-    const { refusjon, innloggetBruker, aktsomhet, settKid, headerActions } = props;
+    const { refusjon, rolle, innloggetBruker, aktsomhet, settKid, headerActions } = props;
     const innloggetRolle = innloggetBruker?.rolle;
 
     return (
-        <MainWrapper>
+        <MainWrapper rolle={rolle}>
             <VStack gap="space-16">
                 <Boks variant="hvit">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

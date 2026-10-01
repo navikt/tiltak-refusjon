@@ -21,7 +21,7 @@ const FeilSide = (props: Props) => {
     const { aktsomhet, refusjon, feiltekst, advarselType } = props;
 
     return (
-        <MainWrapper>
+        <MainWrapper rolle="saksbehandler">
             <Boks variant="hvit">
                 <Alert variant={advarselType} size="small">
                     {feiltekst}

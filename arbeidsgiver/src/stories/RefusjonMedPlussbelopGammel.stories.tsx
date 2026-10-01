@@ -5,6 +5,7 @@ import { Diskresjonskode } from '~/types';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
+import { medInntekterForPerioden } from '~/stories/medInntekterForPerioden';
 
 const meta = {
     title: 'KvitteringSide',
@@ -20,6 +21,8 @@ type Story = StoryObj<typeof meta>;
 
 const refusjonPlussbelop: Refusjon = {
     refusjonsgrunnlag: {
+        bruttolonnOpptjentIPerioden: 12000,
+        ferietrekkIPerioden: -1200,
         tilskuddsgrunnlag: {
             avtaleId: 'a2d4b23d-91f3-4384-b9e7-b2455586fbe3',
             avtaleFom: undefined,
@@ -46,7 +49,7 @@ const refusjonPlussbelop: Refusjon = {
             enhet: '1000',
             id: '01HMGY26W4BD9WA745B6541NWQ',
         },
-        inntektsgrunnlag: {
+        inntektsgrunnlag: medInntekterForPerioden({
             inntekter: [
                 {
                     inntektType: 'LOENNSINNTEKT',
@@ -106,7 +109,7 @@ const refusjonPlussbelop: Refusjon = {
             ],
             bruttoLønn: 22423.0,
             innhentetTidspunkt: '2024-01-19T14:20:55.110261',
-        },
+        }),
         bedriftKontonummer: '10000008145',
         bedriftKid: undefined,
         inntekterKunFraTiltaket: true,

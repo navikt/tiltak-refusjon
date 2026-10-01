@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import Utregning from '@/komponenter/Utregning';
 import { Tiltak } from '~/types/tiltak';
 import { Refusjonsgrunnlag } from '~/types/refusjon';
+import { medInntekterForPerioden } from '~/stories/medInntekterForPerioden';
 
 const meta = {
     title: 'Utregning',
@@ -63,11 +64,11 @@ const fratrekkData = {
         arbeidsgiverTlf: '12345678',
         id: '01HKM5N9F88835R2DSANTK3WPN',
     },
-    inntektsgrunnlag: {
+    inntektsgrunnlag: medInntekterForPerioden({
         inntekter: [],
         bruttoLønn: 108115,
         innhentetTidspunkt: '2024-01-08T10:31:43.265423',
-    },
+    }),
 };
 
 export const OppgjortMinusbeløp: Story = {
@@ -92,6 +93,8 @@ const refusjondata: Refusjonsgrunnlag & {
     refusjonsnummer: { avtalenr: number; løpenummer: number };
     erKorreksjon: boolean;
 } = {
+    bruttolonnOpptjentIPerioden: 42846,
+    ferietrekkIPerioden: 0,
     refusjonsnummer: {
         avtalenr: 1234,
         løpenummer: 2,
@@ -142,7 +145,7 @@ const refusjondata: Refusjonsgrunnlag & {
         enhet: '1000',
         id: '01HKM5N9FB3VAVBBE7APWJZKP7',
     },
-    inntektsgrunnlag: {
+    inntektsgrunnlag: medInntekterForPerioden({
         inntekter: [
             {
                 inntektType: 'LOENNSINNTEKT',
@@ -246,7 +249,7 @@ const refusjondata: Refusjonsgrunnlag & {
         ],
         bruttoLønn: 42846,
         innhentetTidspunkt: '2024-01-08T15:26:50.019561',
-    },
+    }),
 };
 
 export const Belopsgrense: Story = {
@@ -266,6 +269,8 @@ const refusjondata5G: Refusjonsgrunnlag & {
     refusjonsnummer: { avtalenr: number; løpenummer: number };
     erKorreksjon: boolean;
 } = {
+    bruttolonnOpptjentIPerioden: 42846,
+    ferietrekkIPerioden: 0,
     refusjonsnummer: {
         avtalenr: 1234,
         løpenummer: 2,
@@ -316,7 +321,7 @@ const refusjondata5G: Refusjonsgrunnlag & {
         enhet: '1000',
         id: '01HKM5N9FB3VAVBBE7APWJZKP7',
     },
-    inntektsgrunnlag: {
+    inntektsgrunnlag: medInntekterForPerioden({
         inntekter: [
             {
                 inntektType: 'LOENNSINNTEKT',
@@ -420,7 +425,7 @@ const refusjondata5G: Refusjonsgrunnlag & {
         ],
         bruttoLønn: 42846,
         innhentetTidspunkt: '2024-01-08T15:26:50.019561',
-    },
+    }),
 };
 
 export const Belopsgrense5G: Story = {

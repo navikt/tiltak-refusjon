@@ -26,7 +26,7 @@ const RefusjonSide = (props: Props) => {
     const { aktsomhet, refusjon } = props;
 
     return (
-        <MainWrapper>
+        <MainWrapper rolle="saksbehandler">
             <Boks variant="hvit">
                 {refusjon.status === 'KLAR_FOR_INNSENDING' && refusjon.refusjonsgrunnlag.inntektsgrunnlag === null && (
                     <>

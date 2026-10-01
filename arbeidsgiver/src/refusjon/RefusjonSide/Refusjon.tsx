@@ -63,6 +63,7 @@ const Refusjon: FunctionComponent = () => {
                         aktsomhet={aktsomhet}
                         innloggetBruker={brukerContext.innloggetBruker}
                         refusjon={refusjon}
+                        rolle="arbeidsgiver"
                     />
                 );
             }
@@ -121,6 +122,7 @@ const Refusjon: FunctionComponent = () => {
                             aktsomhet={aktsomhet}
                             refusjon={refusjon}
                             innloggetBruker={brukerContext.innloggetBruker}
+                            rolle="arbeidsgiver"
                         />
                     )}
                     {tiltakstype === 'VTAO' && (

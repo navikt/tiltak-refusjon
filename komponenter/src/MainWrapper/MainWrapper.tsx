@@ -1,16 +1,18 @@
 import { PropsWithChildren } from 'react';
+import { Link } from 'react-router';
 import classNames from 'classnames';
 
-import TilbakeTilOversikt from 'tiltak-refusjon-arbeidsgiver/src/komponenter/TilbakeTilOversikt';
-
 import styles from './MainWrapper.module.less';
+import { ChevronLeftIcon } from '@navikt/aksel-icons';
+import { HStack } from '@navikt/ds-react';
 
 interface Props {
     bredde?: 'smal' | 'bred';
+    rolle: 'saksbehandler' | 'arbeidsgiver';
 }
 
 function MainWrapper(props: PropsWithChildren<Props>) {
-    const { children, bredde = 'bred' } = props;
+    const { children, bredde = 'bred', rolle } = props;
 
     return (
         <main
@@ -19,7 +21,15 @@ function MainWrapper(props: PropsWithChildren<Props>) {
                 [styles.mainBred]: bredde === 'bred',
             })}
         >
-            <TilbakeTilOversikt />
+            <HStack asChild gap="space-1" align="center" width="fit-content" marginBlock="space-0 space-8">
+                <Link
+                    to={{ pathname: rolle === 'arbeidsgiver' ? '/refusjon' : '/', search: window.location.search }}
+                    className={styles.lenke}
+                >
+                    <ChevronLeftIcon aria-hidden={true} />
+                    Tilbake til oversikt
+                </Link>
+            </HStack>
             {children}
         </main>
     );

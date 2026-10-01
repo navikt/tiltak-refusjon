@@ -12,6 +12,10 @@ function KreverInntekter(props: PropsWithChildren<Props>) {
     const { refusjon, children } = props;
     const { inntektsgrunnlag } = refusjon.refusjonsgrunnlag;
 
+    if (inntektsgrunnlag?.inntekter.length === 0 && refusjon.åpnetFørsteGang) {
+        return <Loader type="L" />;
+    }
+
     if (inntektsgrunnlag?.inntekter.length === 0 && !refusjon.åpnetFørsteGang) {
         return (
             <VStack gap="space-24">

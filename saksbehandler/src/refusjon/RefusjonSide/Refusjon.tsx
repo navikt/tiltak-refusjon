@@ -78,6 +78,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -88,6 +89,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -136,6 +138,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -146,6 +149,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} opprettKorreksjon={opprettKorreksjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }

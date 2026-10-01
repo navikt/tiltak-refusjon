@@ -51,7 +51,7 @@ const KvitteringSide = (props: Props) => {
     const featureToggles = useFeatureToggles();
 
     return (
-        <MainWrapper>
+        <MainWrapper rolle="saksbehandler">
             <Boks variant="hvit">
                 {featureToggles[Feature.Reberegning] && <SjekkReberegning />}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

@@ -28,6 +28,8 @@ const innloggetBruker: InnloggetBruker = {
 const mentorForTidlig: Refusjon = {
     harInntektIAlleMåneder: true,
     refusjonsgrunnlag: {
+        bruttolonnOpptjentIPerioden: 0,
+        ferietrekkIPerioden: 0,
         harFerietrekkForSammeMåned: false,
         tilskuddsgrunnlag: {
             avtaleId: '8931b3f3-c5e9-4041-9356-985f4415ec6a',
@@ -98,5 +100,5 @@ const mentorForTidlig: Refusjon = {
 
 export const MentorForTidlig: Story = {
     name: 'Mentor - for tidlig',
-    args: { refusjon: mentorForTidlig, innloggetBruker },
+    args: { refusjon: mentorForTidlig, innloggetBruker, rolle: 'saksbehandler' },
 };
