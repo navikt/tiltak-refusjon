@@ -3,8 +3,6 @@ import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import validator from 'norsk-validator';
 import { TextField, debounce } from '@navikt/ds-react';
 
-import styles from './KIDInputValidator.module.less';
-
 interface Props {
     kid?: string;
     label?: ReactNode;
@@ -40,7 +38,7 @@ const KIDInputValidator = (props: Props) => {
     return (
         <>
             <TextField
-                className={styles.textField}
+                htmlSize={18}
                 hideLabel={hideLabel}
                 label={label}
                 placeholder="KID-nummer"

@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode, useId } from 'react';
 
-import { BodyShort, Box, Checkbox, VStack } from '@navikt/ds-react';
+import { Box, Checkbox, InlineMessage, VStack } from '@navikt/ds-react';
 
 interface GodkjenningsPanelProps {
     isChecked: boolean;
@@ -29,6 +29,7 @@ const GodkjenningsPanel = ({
             <VStack gap="space-16">
                 {children}
                 <Checkbox
+                    aria-describedby={error ? 'godkjenning-panel-feilmelding' : undefined}
                     checked={isChecked}
                     error={!!error}
                     errorId={error ? errorId : undefined}
@@ -37,9 +38,9 @@ const GodkjenningsPanel = ({
                     {checkboxLabel}
                 </Checkbox>
                 {error && (
-                    <BodyShort id={errorId} size="small" role="alert">
+                    <InlineMessage id="godkjenning-panel-feilmelding" status="error">
                         {error}
-                    </BodyShort>
+                    </InlineMessage>
                 )}
             </VStack>
         </Box>

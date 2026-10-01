@@ -1,9 +1,7 @@
 import React, { FunctionComponent, useEffect, useRef } from 'react';
-import TilbakeTilOversikt from '@/komponenter/TilbakeTilOversikt';
 import KvitteringKorreksjon from '@/refusjon/KvitteringKorreksjon/KvitteringKorreksjon';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import FeilSide from './FeilSide';
-import RefusjonSide from './RefusjonSide';
 import { BodyShort } from '@navikt/ds-react';
 import { useParams } from 'react-router';
 import {
@@ -22,9 +20,9 @@ import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
-import NyRefusjonSide from '@/refusjon/RefusjonSide/NyRefusjonSide/NyRefusjonSide';
+import RefusjonsideV2 from '@/refusjon/RefusjonSide/NyRefusjonside/RefusjonsideV2';
 
-const Komponent: FunctionComponent = () => {
+const Refusjon: FunctionComponent = () => {
     const { refusjonId } = useParams();
     const refusjon = useHentRefusjon(refusjonId);
     const erLastet = useRef(false);
@@ -99,7 +97,7 @@ const Komponent: FunctionComponent = () => {
                 />
             );
         case RefusjonStatus.KLAR_FOR_INNSENDING:
-            return <NyRefusjonSide aktsomhet={aktsomhet} refusjon={refusjon} />;
+            return <RefusjonsideV2 aktsomhet={aktsomhet} refusjon={refusjon} />;
         case RefusjonStatus.UTGÅTT:
             return (
                 <FeilSide
@@ -146,17 +144,6 @@ const Komponent: FunctionComponent = () => {
 const Korreksjonskvittering = ({ refusjon, aktsomhet }: { refusjon: RefusjonType; aktsomhet?: Aktsomhet }) => {
     const korreksjon = useHentKorreksjon(refusjon.korreksjonId!);
     return <KvitteringKorreksjon refusjon={refusjon} korreksjon={korreksjon} aktsomhet={aktsomhet} />;
-};
-
-const Refusjon: FunctionComponent = () => {
-    return (
-        <div style={{ margin: '0 auto', maxWidth: '80rem' }}>
-            <div style={{ flex: '0 0 55rem', flexShrink: 1 }}>
-                <TilbakeTilOversikt />
-                <Komponent />
-            </div>
-        </div>
-    );
 };
 
 export default Refusjon;

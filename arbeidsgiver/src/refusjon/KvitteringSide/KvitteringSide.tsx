@@ -17,6 +17,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, statusTekst, tiltakstypeTekst, RefusjonStatus, Refusjon } from '~/types';
 import { formaterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
+import MainWrapper from '~/MainWrapper';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -51,67 +52,71 @@ const KvitteringSide = (props: Props) => {
     }
 
     return (
-        <Boks variant="hvit">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Heading size="large" role="heading">
-                    Refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
-                </Heading>
-                {etikettForRefusjonStatus(refusjon)}
-            </div>
-            <VerticalSpacer rem={1} />
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
-                <Statusmelding status={refusjon.status} sendtTidspunkt={refusjon.godkjentAvArbeidsgiver} />
-                <LagreSomPdfKnapp avtaleId={refusjon.id} />
-            </div>
+        <MainWrapper>
+            <Boks variant="hvit">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Heading size="large" role="heading">
+                        Refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
+                    </Heading>
+                    {etikettForRefusjonStatus(refusjon)}
+                </div>
+                <VerticalSpacer rem={1} />
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '5rem' }}>
+                    <Statusmelding status={refusjon.status} sendtTidspunkt={refusjon.godkjentAvArbeidsgiver} />
+                    <LagreSomPdfKnapp avtaleId={refusjon.id} />
+                </div>
 
-            <VerticalSpacer rem={2} />
-            <InformasjonFraAvtalen refusjon={refusjon} aktsomhet={aktsomhet} />
-            <VerticalSpacer rem={2} />
-            {refusjon.refusjonsgrunnlag.inntektsgrunnlag.inntekter.find(
-                // Dersom det ikke finnes en eneste inntektslinje som har blitt huket av (ja eller nei), så viser vi gammel versjon av InntekterFraAMeldingen
-                (i) => i.erOpptjentIPeriode !== null && i.erOpptjentIPeriode !== undefined
-            ) ? (
-                <>
-                    <InntekterFraAMeldingen refusjon={refusjon} kvitteringVisning={true} />
-                    <VerticalSpacer rem={2} />
-                    <InntekterFraTiltaketSvar refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
-                    <TidligereRefunderbarBeløpKvittering refusjon={refusjon} />
-                </>
-            ) : (
-                <>
-                    {refusjon.status !== 'GODKJENT_NULLBELØP' && <InntekterFraAMeldingenGammel refusjon={refusjon} />}
-                    <VerticalSpacer rem={2} />
-                    <InntekterFraTiltaketSvarGammel refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
-                    <TidligereRefunderbarBeløpKvittering refusjon={refusjon} />
-                </>
-            )}
-            <VerticalSpacer rem={2} />
-            {refusjon.refusjonsgrunnlag.beregning && (
-                <Utregning
-                    refusjonsnummer={{
-                        avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                        løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                    }}
-                    erKorreksjon={false}
-                    sumUtbetaltVarig={refusjon.refusjonsgrunnlag.sumUtbetaltVarig}
-                    beregning={refusjon.refusjonsgrunnlag.beregning}
-                    tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                    forrigeRefusjonMinusBeløp={refusjon.refusjonsgrunnlag.forrigeRefusjonMinusBeløp}
-                    inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
-                />
-            )}
-            <VerticalSpacer rem={4} />
-            {refusjon.status === 'GODKJENT_NULLBELØP' && (
-                <SummeringBoksNullbeløp refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
-            )}
-            {refusjon.status !== 'GODKJENT_NULLBELØP' && (
-                <SummeringBoks
-                    erForKorreksjon={false}
-                    refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
-                    status={refusjon.status}
-                />
-            )}
-        </Boks>
+                <VerticalSpacer rem={2} />
+                <InformasjonFraAvtalen refusjon={refusjon} aktsomhet={aktsomhet} />
+                <VerticalSpacer rem={2} />
+                {refusjon.refusjonsgrunnlag.inntektsgrunnlag.inntekter.find(
+                    // Dersom det ikke finnes en eneste inntektslinje som har blitt huket av (ja eller nei), så viser vi gammel versjon av InntekterFraAMeldingen
+                    (i) => i.erOpptjentIPeriode !== null && i.erOpptjentIPeriode !== undefined
+                ) ? (
+                    <>
+                        <InntekterFraAMeldingen refusjon={refusjon} kvitteringVisning={true} />
+                        <VerticalSpacer rem={2} />
+                        <InntekterFraTiltaketSvar refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
+                        <TidligereRefunderbarBeløpKvittering refusjon={refusjon} />
+                    </>
+                ) : (
+                    <>
+                        {refusjon.status !== 'GODKJENT_NULLBELØP' && (
+                            <InntekterFraAMeldingenGammel refusjon={refusjon} />
+                        )}
+                        <VerticalSpacer rem={2} />
+                        <InntekterFraTiltaketSvarGammel refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
+                        <TidligereRefunderbarBeløpKvittering refusjon={refusjon} />
+                    </>
+                )}
+                <VerticalSpacer rem={2} />
+                {refusjon.refusjonsgrunnlag.beregning && (
+                    <Utregning
+                        refusjonsnummer={{
+                            avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
+                            løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
+                        }}
+                        erKorreksjon={false}
+                        sumUtbetaltVarig={refusjon.refusjonsgrunnlag.sumUtbetaltVarig}
+                        beregning={refusjon.refusjonsgrunnlag.beregning}
+                        tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                        forrigeRefusjonMinusBeløp={refusjon.refusjonsgrunnlag.forrigeRefusjonMinusBeløp}
+                        inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
+                    />
+                )}
+                <VerticalSpacer rem={4} />
+                {refusjon.status === 'GODKJENT_NULLBELØP' && (
+                    <SummeringBoksNullbeløp refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
+                )}
+                {refusjon.status !== 'GODKJENT_NULLBELØP' && (
+                    <SummeringBoks
+                        erForKorreksjon={false}
+                        refusjonsgrunnlag={refusjon.refusjonsgrunnlag}
+                        status={refusjon.status}
+                    />
+                )}
+            </Boks>
+        </MainWrapper>
     );
 };
 

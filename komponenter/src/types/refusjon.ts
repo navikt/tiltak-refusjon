@@ -68,6 +68,8 @@ export interface Refusjonsgrunnlag {
     harFerietrekkForSammeMåned: boolean;
     refunderbarBeløp?: number;
     sumUtbetaltVarig?: number;
+    bruttolonnOpptjentIPerioden: number;
+    ferietrekkIPerioden: number;
 }
 
 export interface Tilskuddsgrunnlag {
@@ -103,6 +105,7 @@ export interface Tilskuddsgrunnlag {
 export interface Inntektsgrunnlag {
     innhentetTidspunkt: string;
     inntekter: Inntektslinje[];
+    inntekterForPerioden: Inntektslinje[];
     bruttoLønn: number;
 }
 

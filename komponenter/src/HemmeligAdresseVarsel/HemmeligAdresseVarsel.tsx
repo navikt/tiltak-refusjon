@@ -1,7 +1,6 @@
 import React from 'react';
 import { Alert, Heading } from '@navikt/ds-react';
 
-import styles from './HemmeligAdresseVarsel.module.less';
 import { Aktsomhet, Diskresjonskode } from '~/types';
 
 interface Props {
