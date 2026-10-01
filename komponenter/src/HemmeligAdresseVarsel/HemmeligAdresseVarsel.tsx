@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert, Heading } from '@navikt/ds-react';
 
+import styles from './HemmeligAdresseVarsel.module.less';
 import { Aktsomhet, Diskresjonskode } from '~/types';
 
 interface Props {
@@ -17,7 +18,7 @@ const HemmeligAdresseVarsel = (props: Props) => {
     }
 
     return (
-        <Alert variant="warning">
+        <Alert variant="warning" className={styles.container}>
             <Heading spacing size="small" level="3">
                 {(Diskresjonskode.STRENGT_FORTROLIG === diskresjonskode ||
                     Diskresjonskode.STRENGT_FORTROLIG_UTLAND === diskresjonskode) && <>Hemmelig adresse - Kode 6</>}
