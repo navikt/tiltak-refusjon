@@ -15,6 +15,7 @@ import RefusjonInnsending from './refusjonInnsending/RefusjonInnsending';
 import TidligereRefunderbarBeløp from './TidligereRefunderbarBeløp';
 
 import './RefusjonSide.less';
+import MainWrapper from '~/MainWrapper';
 
 interface Props {
     refusjon: Refusjon;
@@ -36,7 +37,7 @@ const RefusjonSide = (props: Props) => {
     };
 
     return (
-        <div role="main">
+        <MainWrapper rolle="arbeidsgiver">
             <Boks variant="hvit">
                 <RefusjonIngress refusjon={refusjon} />
                 <InformasjonFraAvtalen refusjon={refusjon} aktsomhet={aktsomhet} onFeil={setFeilmelding} />
@@ -58,7 +59,7 @@ const RefusjonSide = (props: Props) => {
                 setVisGodkjennModal={setVisGodkjennModal}
                 godkjennRefusjonen={godkjennRefusjonen}
             />
-        </div>
+        </MainWrapper>
     );
 };
 

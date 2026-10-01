@@ -8,7 +8,6 @@ import HenterInntekterBoks from '~/HenterInntekterBoks';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
-import TilbakeTilOversikt from '@/komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Tiltak, Korreksjonsgrunn, RefusjonStatus, BrukerContextType } from '~/types';
 import { beregnDagenEtterOgFormater, formaterDato } from '~/utils';
@@ -79,6 +78,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -89,6 +89,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -137,6 +138,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -147,6 +149,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} opprettKorreksjon={opprettKorreksjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -156,15 +159,10 @@ const Komponent: FunctionComponent = () => {
 
 const Refusjon: FunctionComponent = () => {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ flex: '0 0 80rem', flexShrink: 1 }}>
-                <TilbakeTilOversikt />
-                <Suspense fallback={<HenterInntekterBoks />}>
-                    <Advarsler />
-                    <Komponent />
-                </Suspense>
-            </div>
-        </div>
+        <Suspense fallback={<HenterInntekterBoks />}>
+            <Advarsler />
+            <Komponent />
+        </Suspense>
     );
 };
 
