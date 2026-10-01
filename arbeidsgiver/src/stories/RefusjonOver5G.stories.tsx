@@ -5,6 +5,7 @@ import { Diskresjonskode } from '~/types';
 import { Refusjon } from '~/types/refusjon';
 import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
+import { medInntekterForPerioden } from '~/stories/medInntekterForPerioden';
 
 const meta = {
     title: 'KvitteringSide',
@@ -20,6 +21,8 @@ type Story = StoryObj<typeof meta>;
 
 const førOver5GRefusjon: Refusjon = {
     refusjonsgrunnlag: {
+        bruttolonnOpptjentIPerioden: 200000,
+        ferietrekkIPerioden: 0,
         tilskuddsgrunnlag: {
             avtaleId: 'd9f6b823-6e8b-4f66-aca5-52c1dbdb0282',
             avtaleFom: undefined,
@@ -46,7 +49,7 @@ const førOver5GRefusjon: Refusjon = {
             enhet: '1000',
             id: '01HNJE38VPKCFXEHJCQWC29EFE',
         },
-        inntektsgrunnlag: {
+        inntektsgrunnlag: medInntekterForPerioden({
             inntekter: [
                 {
                     inntektType: 'LOENNSINNTEKT',
@@ -62,7 +65,7 @@ const førOver5GRefusjon: Refusjon = {
             ],
             bruttoLønn: 200000.0,
             innhentetTidspunkt: '2024-02-01T14:36:10.520514',
-        },
+        }),
         bedriftKontonummer: '10000008145',
         bedriftKid: undefined,
         inntekterKunFraTiltaket: true,
@@ -115,6 +118,8 @@ export const RefusjonFør5G: Story = {
 
 const over5gRefusjon: Refusjon = {
     refusjonsgrunnlag: {
+        bruttolonnOpptjentIPerioden: 200000,
+        ferietrekkIPerioden: 0,
         tilskuddsgrunnlag: {
             avtaleId: '4d34c301-22c1-4671-8295-d3c4099c67df',
             avtaleFom: undefined,
@@ -141,7 +146,7 @@ const over5gRefusjon: Refusjon = {
             enhet: '1000',
             id: '01HNJE38VPHVWS9Z8HDS9A2M7J',
         },
-        inntektsgrunnlag: {
+        inntektsgrunnlag: medInntekterForPerioden({
             inntekter: [
                 {
                     inntektType: 'LOENNSINNTEKT',
@@ -157,7 +162,7 @@ const over5gRefusjon: Refusjon = {
             ],
             bruttoLønn: 200000.0,
             innhentetTidspunkt: '2024-02-01T14:36:27.493631',
-        },
+        }),
         bedriftKontonummer: '10000008145',
         bedriftKid: undefined,
         inntekterKunFraTiltaket: true,
@@ -210,6 +215,8 @@ export const RefusjonOverskrider5G: Story = {
 
 const etter5GRefusjon: Refusjon = {
     refusjonsgrunnlag: {
+        bruttolonnOpptjentIPerioden: 200000,
+        ferietrekkIPerioden: 0,
         tilskuddsgrunnlag: {
             avtaleId: '8931b3f3-c5e9-4041-9356-985f4415ec6a',
             avtaleFom: undefined,
@@ -236,7 +243,7 @@ const etter5GRefusjon: Refusjon = {
             enhet: '1000',
             id: '01HNJE38VPDQ7CQP54S5A3TA5J',
         },
-        inntektsgrunnlag: {
+        inntektsgrunnlag: medInntekterForPerioden({
             inntekter: [
                 {
                     inntektType: 'LOENNSINNTEKT',
@@ -252,7 +259,7 @@ const etter5GRefusjon: Refusjon = {
             ],
             bruttoLønn: 200000.0,
             innhentetTidspunkt: '2024-02-01T14:39:49.917987',
-        },
+        }),
         bedriftKontonummer: '10000008145',
         bedriftKid: undefined,
         inntekterKunFraTiltaket: true,

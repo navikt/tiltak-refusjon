@@ -5,6 +5,7 @@ import type { Korreksjon } from '~/types/refusjon';
 import { Korreksjonsgrunn } from '~/types/refusjon';
 import { KorreksjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
+import { medInntekterForPerioden } from '~/stories/medInntekterForPerioden';
 
 const meta = {
     title: 'Refusjons Saksbehandler/Korreksjon kvittering',
@@ -21,6 +22,8 @@ type Story = StoryObj<typeof meta>;
 const korreksjon: Korreksjon = {
     korrigererRefusjonId: '01HMRY4Y4RRKBW8QT5VQAHRA58',
     refusjonsgrunnlag: {
+        bruttolonnOpptjentIPerioden: 62000,
+        ferietrekkIPerioden: -35000,
         tilskuddsgrunnlag: {
             avtaleId: 'd5c44c9c-1a97-4db3-abbd-5c738aec0613',
             tilskuddsperiodeId: '2f6c1c6a-a1d5-4797-8690-8530a8bbf92f',
@@ -45,7 +48,7 @@ const korreksjon: Korreksjon = {
             enhet: '1000',
             id: '01HMRY4Y4RAJJN459TD4GR5BGH',
         },
-        inntektsgrunnlag: {
+        inntektsgrunnlag: medInntekterForPerioden({
             inntekter: [
                 {
                     inntektType: 'LOENNSINNTEKT',
@@ -94,7 +97,7 @@ const korreksjon: Korreksjon = {
             ],
             bruttoLønn: 62000.0,
             innhentetTidspunkt: '2024-01-22T16:56:58.286935',
-        },
+        }),
         bedriftKontonummer: '10000008145',
         bedriftKid: undefined,
         inntekterKunFraTiltaket: true,
