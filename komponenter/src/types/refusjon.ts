@@ -37,6 +37,53 @@ export interface Refusjon {
     harInntektIAlleMåneder: boolean;
     senestMuligeGodkjenningsfrist: string;
     diskresjonskode: Diskresjonskode;
+    utregning?: Utregning;
+}
+
+export interface Utregning {
+    grupperinger: Utregningsgruppe[];
+}
+
+export interface Utregningsgruppe {
+    rader: Utregningslinje[];
+}
+
+export interface Utregningslinje {
+    type: UtregningsLinjeType;
+    label: string;
+    verdi: Verdi;
+    fortegn?: Fortegn;
+    utledning?: Verdi;
+    utgårFordi?: UtgårÅrsak;
+}
+
+export enum Fortegn {
+    PLUSS = '+',
+    MINUS = '-',
+    ER_LIK = '=',
+    MULTIPLISER = '×',
+}
+
+export enum UtgårÅrsak {
+    FEM_GRUNNBELOP = 'FEM_GRUNNBELOP',
+    AVTALT_TILSKUDD = 'AVTALT_TILSKUDD',
+}
+
+export enum UtregningsLinjeType {
+    BRUTTOLONN_I_PERIODEN = 'BRUTTOLONN_I_PERIODEN',
+    FERIEPENGER = 'FERIEPENGER',
+    OBLIGATORISK_TJENESTEPENSJON = 'OBLIGATORISK_TJENESTEPENSJON',
+    ARBEIDSGIVERAVGIFT = 'ARBEIDSGIVERAVGIFT',
+    REFUSJONSBELØP_TIL_UTBETALING = 'REFUSJONSBELØP_TIL_UTBETALING',
+    TILSKUDDSPROSENT = 'TILSKUDDSPROSENT',
+    BEREGNET_BELOP = 'BEREGNET_BELOP',
+    TIMELONN_X_TIMER = 'TIMELONN_X_TIMER',
+    FERIETREKK = 'FERIETREKK',
+    RESTERENDE_FRATREKK_FOR_FERIE_FRA_TIDLIGERE_REFUSJONER = 'RESTERENDE_FRATREKK_FOR_FERIE_FRA_TIDLIGERE_REFUSJONER',
+}
+
+export interface Verdi {
+    formatertVerdi: string;
 }
 
 export interface Korreksjon {
@@ -52,6 +99,7 @@ export interface Korreksjon {
     godkjentTidspunkt?: string;
     unntakOmInntekterFremitid: number;
     sistEndret: string;
+    utregning?: Utregning;
 }
 
 export interface Refusjonsgrunnlag {
