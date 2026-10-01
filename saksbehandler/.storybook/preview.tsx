@@ -2,6 +2,7 @@ import React from 'react';
 import type { Preview } from '@storybook/react-vite';
 import '@/index.css';
 import '@navikt/ds-css';
+import { MemoryRouter } from 'react-router';
 import { BrukerContext } from '@/bruker/BrukerContext';
 
 const mockInnloggetBruker = {
@@ -22,9 +23,11 @@ const preview: Preview = {
     },
     decorators: [
         (Story) => (
-            <BrukerContext.Provider value={{ innloggetBruker: mockInnloggetBruker }}>
-                <Story />
-            </BrukerContext.Provider>
+            <MemoryRouter>
+                <BrukerContext.Provider value={{ innloggetBruker: mockInnloggetBruker }}>
+                    <Story />
+                </BrukerContext.Provider>
+            </MemoryRouter>
         ),
     ],
 };
