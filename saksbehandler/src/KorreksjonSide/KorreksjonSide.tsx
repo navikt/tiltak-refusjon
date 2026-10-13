@@ -8,7 +8,7 @@ import Boks from '~/Boks';
 import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraTiltaketSpørsmål from '@/refusjon/RefusjonSide/InntekterFraTiltaketSpørsmål';
-import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import Utregning from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Korreksjon, KorreksjonStatus } from '~/types';
 
@@ -86,17 +86,9 @@ const KorreksjonSide = (props: Props) => {
                                         }
                                     />
                                     <Utregning
-                                        refusjonsnummer={{
-                                            avtalenr: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                                            løpenummer: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                                        }}
-                                        erKorreksjon={true}
-                                        beregning={korreksjon.refusjonsgrunnlag.beregning}
-                                        tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                                        forrigeRefusjonMinusBeløp={
-                                            korreksjon.refusjonsgrunnlag.forrigeRefusjonMinusBeløp
-                                        }
                                         inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
+                                        utregning={korreksjon.utregning}
+                                        tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                                     />
                                     <VerticalSpacer rem={1} />
                                     {korreksjonstype() === 'TILLEGSUTBETALING' && <BekreftUtbetalKorreksjon />}
