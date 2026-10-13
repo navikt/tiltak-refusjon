@@ -8,17 +8,14 @@ import HandlingerMeny from '@/refusjon/RefusjonSide/HandlingerMeny';
 import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraAMeldingenGammel from '@/refusjon/RefusjonSide/InntekterFraAmeldingenGammel';
-import SjekkReberegning from '@/refusjon/RefusjonSide/SjekkReberegning';
 import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
 import SummeringBoksNullbeløp from '@/refusjon/RefusjonSide/SummeringBoksNullbeløp';
 import TidligereRefunderbarBeløpKvittering from '@/refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
 import Utregning from '@/refusjon/RefusjonSide/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, RefusjonStatus, statusTekst, tiltakstypeTekst, Korreksjonsgrunn, Refusjon } from '~/types';
-import { Feature } from '@/featureToggles/features';
 import { formaterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
-import { useFeatureToggles } from '@/featureToggles/FeatureToggleProvider';
 
 import Statusmelding from './Statusmelding';
 import { MainContainer } from '~/Container';
@@ -48,12 +45,10 @@ interface Props {
 const KvitteringSide = (props: Props) => {
     const { aktsomhet, refusjon, opprettKorreksjon } = props;
     const refusjonsgrunnlag = refusjon.refusjonsgrunnlag;
-    const featureToggles = useFeatureToggles();
 
     return (
         <MainContainer rolle="saksbehandler">
             <Boks variant="hvit">
-                {featureToggles[Feature.Reberegning] && <SjekkReberegning />}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Heading size="large" role="heading">
                         Refusjon for {tiltakstypeTekst[refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
