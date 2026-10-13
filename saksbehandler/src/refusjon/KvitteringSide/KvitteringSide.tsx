@@ -11,7 +11,7 @@ import InntekterFraAMeldingenGammel from '@/refusjon/RefusjonSide/InntekterFraAm
 import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
 import SummeringBoksNullbeløp from '@/refusjon/RefusjonSide/SummeringBoksNullbeløp';
 import TidligereRefunderbarBeløpKvittering from '@/refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
-import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import Utregning from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, RefusjonStatus, statusTekst, tiltakstypeTekst, Korreksjonsgrunn, Refusjon } from '~/types';
 import { formaterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
@@ -99,19 +99,11 @@ const KvitteringSide = (props: Props) => {
                     </>
                 )}
                 <VerticalSpacer rem={2} />
-                {refusjon.refusjonsgrunnlag.beregning && (
-                    <Utregning
-                        refusjonsnummer={{
-                            avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                            løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                        }}
-                        erKorreksjon={false}
-                        beregning={refusjonsgrunnlag.beregning}
-                        tilskuddsgrunnlag={refusjonsgrunnlag.tilskuddsgrunnlag}
-                        forrigeRefusjonMinusBeløp={refusjon.refusjonsgrunnlag.forrigeRefusjonMinusBeløp}
-                        inntektsgrunnlag={refusjonsgrunnlag.inntektsgrunnlag}
-                    />
-                )}
+                <Utregning
+                    utregning={refusjon.utregning}
+                    tilskuddsgrunnlag={refusjonsgrunnlag.tilskuddsgrunnlag}
+                    inntektsgrunnlag={refusjonsgrunnlag.inntektsgrunnlag}
+                />
                 <VerticalSpacer rem={4} />
                 {refusjon.status === 'GODKJENT_NULLBELØP' && (
                     <SummeringBoksNullbeløp refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />

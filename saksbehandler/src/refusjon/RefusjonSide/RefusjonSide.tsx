@@ -13,7 +13,7 @@ import InformasjonFraAvtalen from './InformasjonFraAvtalen';
 import InntekterFraAMeldingen from './InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraTiltaketSvar from './HarTattStillingTilAlleInntektsLinjerNy';
 import TidligereRefunderbarBeløpKvittering from './TidligereRefunderbarBeløpKvittering';
-import Utregning from './Utregning';
+import Utregning from '~/Utregning';
 
 import './RefusjonSide.less';
 
@@ -95,19 +95,11 @@ const RefusjonSide = (props: Props) => {
                 <VerticalSpacer rem={2} />
                 <TidligereRefunderbarBeløpKvittering refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
                 <VerticalSpacer rem={2} />
-                {refusjon.refusjonsgrunnlag.beregning && (
-                    <Utregning
-                        refusjonsnummer={{
-                            avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                            løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                        }}
-                        erKorreksjon={false}
-                        beregning={refusjon.refusjonsgrunnlag.beregning}
-                        tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                        forrigeRefusjonMinusBeløp={refusjon.refusjonsgrunnlag.forrigeRefusjonMinusBeløp}
-                        inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
-                    />
-                )}
+                <Utregning
+                    utregning={refusjon.utregning}
+                    tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                    inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
+                />
             </Boks>
         </MainContainer>
     );

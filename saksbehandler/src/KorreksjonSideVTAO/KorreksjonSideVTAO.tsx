@@ -41,7 +41,10 @@ const KorreksjonSideVTAO = (props: Props) => {
                 <VerticalSpacer rem={2} />
                 <TilskuddssatsVTAO tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
                 <VerticalSpacer rem={1} />
-                <Utregning tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag} utregning={korreksjon.utregning} />
+                <Utregning
+                    tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                    utregning={korreksjon.utregning}
+                />
                 <VerticalSpacer rem={1} />
                 <BekreftTilbakekrevKorreksjon />
             </Boks>

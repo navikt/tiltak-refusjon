@@ -40,7 +40,10 @@ const KorreksjonKvitteringSide = (props: Props) => {
                     }
                 />
                 <VerticalSpacer rem={2} />
-                <Utregning tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag} utregning={korreksjon.utregning} />
+                <Utregning
+                    tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                    utregning={korreksjon.utregning}
+                />
                 <VerticalSpacer rem={2} />
                 {(korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp || 0) > 0 && (
                     <Alert variant="warning">
