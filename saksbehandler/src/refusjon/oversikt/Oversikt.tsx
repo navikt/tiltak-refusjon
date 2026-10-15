@@ -27,6 +27,7 @@ const Oversikt: FunctionComponent = () => {
         <nav className={cls.className} aria-label="Main" role={'list'}>
             <LenkePanel refusjoner={refusjonerPage.refusjoner} />
             <OversiktTabell
+                filter={filter}
                 avtalepart="saksbehandler"
                 oppdaterFilter={oppdaterFilter}
                 refusjoner={refusjonerPage.refusjoner}
