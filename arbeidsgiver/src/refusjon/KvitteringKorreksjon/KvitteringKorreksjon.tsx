@@ -1,19 +1,19 @@
 import { ExpansionCard, Heading, Tag } from '@navikt/ds-react';
 
-import Boks from '~/Boks';
 import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/informasjonAvtalen/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/inntektsmelding/InntekterFraAMeldingen';
 import InntekterFraTiltaketSvar from '@/refusjon/RefusjonSide/InntekterFraTiltaketSvar';
-import KorreksjonInfo from './KorreksjonInfo';
 import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
 import Utregning from '@/komponenter/Utregning';
+
+import Boks from '~/Boks';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, KorreksjonStatus, korreksjonStatusTekst } from '~/types';
 import { Korreksjon, Refusjon } from '~/types/refusjon';
 import { formaterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
 import { MainContainer } from '~/Container';
-
+import KorreksjonInfo from './KorreksjonInfo';
 import InntekterFraAMeldingenKorreksjon from './InntekterFraAMeldingenKorreksjon';
 
 interface Props {

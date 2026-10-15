@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import StatusTekst from '~/StatusTekst';
 import { formaterDato, formaterPeriode } from '~/utils';
 import { BegrensetRefusjon } from '~/types/refusjon';
-import { kunStorForbokstav } from '~/utils/stringUtils';
+import { kunStorForbokstav, lagRefusjonsnummer } from '~/utils/stringUtils';
 import { tiltakstypeTekstKort } from '~/types/messages';
 import { NORSK_DATO_FORMAT_SHORT } from '~/utils/datoUtils';
 import { Avtalepart } from './OversiktsTabell';
@@ -38,14 +38,6 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
         return ![Tiltak.VTAO, Tiltak.MENTOR].includes(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype);
     }
 
-    function hentFulltRefusjonsnummer(refusjon: BegrensetRefusjon) {
-        const { avtaleNr, løpenummer, resendingsnummer } = refusjon.refusjonsgrunnlag.tilskuddsgrunnlag;
-        if (resendingsnummer) {
-            return `${avtaleNr}-${løpenummer}-R${resendingsnummer}`;
-        }
-        return `${avtaleNr}-${løpenummer}`;
-    }
-
     return (
         <Table.Body>
             {refusjoner?.map((refusjon) => (
@@ -57,7 +49,9 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
                         navigerTilRefusjonEllerKorreksjon(refusjon, avtalepart);
                     }}
                 >
-                    <Table.DataCell textSize="small">{hentFulltRefusjonsnummer(refusjon)}</Table.DataCell>
+                    <Table.DataCell textSize="small">
+                        {lagRefusjonsnummer(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag)}
+                    </Table.DataCell>
                     <Table.DataCell textSize="small">
                         {kunStorForbokstav(
                             tiltakstypeTekstKort[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]
