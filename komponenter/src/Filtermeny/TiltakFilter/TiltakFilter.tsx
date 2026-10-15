@@ -22,6 +22,10 @@ const refusjonFilterTiltak: OptionProps[] = [
         label: 'VTA-O',
         description: 'Varig tilrettelagt arbeid i ordinær virksomhet',
     },
+    {
+        value: Tiltak.INKLUDERINGSTILSKUDD,
+        label: 'Inkluderingstilskudd',
+    },
 ].toSorted((a, b) => a.label.localeCompare(b.label, 'nb'));
 
 interface Props {

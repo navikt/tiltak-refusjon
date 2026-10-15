@@ -1,27 +1,33 @@
 import React, { useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import z, { ZodTypeAny } from 'zod';
 import { useNavigate } from 'react-router';
-import { BodyShort, Box, Heading, HStack, Tag, VStack } from '@navikt/ds-react';
 
-import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
+import { BodyShort, Box, Heading, HStack, List, Tag, VStack } from '@navikt/ds-react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { godkjennRefusjon, godkjennRefusjonMedNullbeløp } from '@/services/rest-service';
 import RefusjonFullførNullbeløpModal from '@/refusjon/RefusjonSide/refusjonFullførNullbeløp/RefusjonFullførNullbeløpModal';
 import RefusjonGodkjennModal from '@/refusjon/RefusjonSide/RefusjonGodkjennModal';
 import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
+import Oppsummering from '@/refusjon/RefusjonSide/Oppsummering';
+import Bekreftelse, {
+    BekreftelseFields,
+    bekreftelseDefaultValues,
+    bekreftelseSchema,
+} from '@/refusjon/RefusjonSide/Bekreftelse';
+
+import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
 import { Aktsomhet, Refusjon, statusTekst, tiltakstypeTekst } from '~/types';
 import { MainContainer } from '~/Container';
 import { formaterDato } from '~/utils';
-import { godkjennRefusjon, godkjennRefusjonMedNullbeløp } from '@/services/rest-service';
 import { storForbokstav } from '~/utils/stringUtils';
+import Utregning from '~/Utregning';
 
 import Bruttolonn, { BruttolonnFields, bruttolonnDefaultValues, lagBruttolonnSchema } from './Bruttolonn';
 import Fravaer, { FravaerFields, fravaerDefaultValues, fravaerSchema } from './Fravaer';
 import useRefusjonsideSteg, { Seksjon, Steg } from './useRefusjonsideSteg';
-import Oppsummering from './Oppsummering';
 import { InntektFields, inntektDefaultValues, InntektTabell, inntektSchema, KreverInntekter } from './Inntekter';
-import Bekreftelse, { BekreftelseFields, bekreftelseDefaultValues, bekreftelseSchema } from './Bekreftelse';
-import Utregning from '~/Utregning';
+import StandardVilkaar from './StandardVilkaar';
 import KontonummerOgKid, {
     kidOgKontonummerDefaultValues,
     KidOgKontonummerFields,
@@ -155,7 +161,19 @@ const NyRefusjonside = (props: Props) => {
                                                 inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
                                             />
                                         )}
-                                        {seksjon.BEKREFTELSE && <Bekreftelse />}
+                                        {seksjon.BEKREFTELSE && (
+                                            <VStack gap="space-12">
+                                                <StandardVilkaar />
+                                                <Bekreftelse>
+                                                    <List>
+                                                        <List.Item>Innholdet i avtalen er korrekt</List.Item>
+                                                        <List.Item>
+                                                            Kravene til arbeidsgiver er lest og forstått
+                                                        </List.Item>
+                                                    </List>
+                                                </Bekreftelse>
+                                            </VStack>
+                                        )}
                                     </VStack>
                                 </form>
                             </FormProvider>
