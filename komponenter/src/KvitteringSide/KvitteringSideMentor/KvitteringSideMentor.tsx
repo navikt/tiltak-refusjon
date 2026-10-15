@@ -11,7 +11,7 @@ import UtregningMentor from './UtregningMentor';
 import SummeringBoksMentor from './SummeringBoksMentor';
 import StatusEtikettMentor from './StatusEtikettMentor';
 import Boks from '~/Boks';
-import MainWrapper from '~/MainWrapper';
+import { MainContainer } from '~/Container';
 
 interface Props {
     aktsomhet?: Aktsomhet;
@@ -27,7 +27,7 @@ const KvitteringSideMentor: FunctionComponent<Props> = (props: Props) => {
     const innloggetRolle = innloggetBruker?.rolle;
 
     return (
-        <MainWrapper rolle={rolle}>
+        <MainContainer rolle={rolle}>
             <VStack gap="space-16">
                 <Boks variant="hvit">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -67,7 +67,7 @@ const KvitteringSideMentor: FunctionComponent<Props> = (props: Props) => {
                     <SummeringBoksMentor refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
                 </Boks>
             </VStack>
-        </MainWrapper>
+        </MainContainer>
     );
 };
 

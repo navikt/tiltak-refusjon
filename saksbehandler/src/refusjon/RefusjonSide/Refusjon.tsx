@@ -1,10 +1,9 @@
-import { FunctionComponent, Suspense } from 'react';
+import { FunctionComponent } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router';
 
 import HandlingerMeny from './HandlingerMeny';
-import HenterInntekterBoks from '~/HenterInntekterBoks';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
@@ -16,6 +15,7 @@ import { useInnloggetBruker } from '@/bruker/BrukerContext';
 
 import FeilSide from './FeilSide';
 import RefusjonSide from './RefusjonSide';
+import { InnholdContainer } from '~/Container';
 
 const Advarsler: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
@@ -25,13 +25,13 @@ const Advarsler: FunctionComponent = () => {
     return (
         <>
             {brukerContext.innloggetBruker.harKorreksjonTilgang && refusjon.korreksjonId && (
-                <>
+                <InnholdContainer>
                     <Alert variant="info" size="small">
                         Denne refusjonen er det gjort korrigeringer på.{' '}
                         <Link to={`/korreksjon/${refusjon.korreksjonId}`}>Klikk her for å åpne korreksjonen.</Link>
                     </Alert>
                     <VerticalSpacer rem={1} />
-                </>
+                </InnholdContainer>
             )}
         </>
     );
@@ -159,10 +159,10 @@ const Komponent: FunctionComponent = () => {
 
 const Refusjon: FunctionComponent = () => {
     return (
-        <Suspense fallback={<HenterInntekterBoks />}>
+        <>
             <Advarsler />
             <Komponent />
-        </Suspense>
+        </>
     );
 };
 

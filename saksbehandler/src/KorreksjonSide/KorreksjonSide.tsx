@@ -14,6 +14,7 @@ import { Aktsomhet, Korreksjon, KorreksjonStatus } from '~/types';
 
 import OverstyrMinusbeløpOgFerietrekk from './OverstyrMinusbeløpOgFerietrekk';
 import TidligereRefunderbarBeløp from './TidligereRefunderbarBeløp';
+import { MainContainer } from '~/Container';
 
 interface Props {
     aktsomhet?: Aktsomhet;
@@ -37,76 +38,80 @@ const KorreksjonSide = (props: Props) => {
     };
 
     return (
-        <Boks variant="hvit">
-            <BekreftSlettKorreksjon />
+        <MainContainer rolle="saksbehandler">
+            <Boks variant="hvit">
+                <BekreftSlettKorreksjon />
 
-            <VerticalSpacer rem={2} />
+                <VerticalSpacer rem={2} />
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Heading size="large" role="heading">
-                    Korreksjonsutkast
-                </Heading>
-            </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Heading size="large" role="heading">
+                        Korreksjonsutkast
+                    </Heading>
+                </div>
 
-            <VerticalSpacer rem={1} />
-            <BodyShort size="small">
-                Dette er en korreksjon av tidligere utbetalt refusjon. Det beregnes her et foreløpig oppgjør fratrukket
-                beløpet som er utbetalt tidligere. Dette er foreløpig et utkast, og den vises ikke for arbeidsgiver før
-                den fullføres.
-            </BodyShort>
-            <VerticalSpacer rem={2} />
-            <InformasjonFraAvtalen
-                aktsomhet={aktsomhet}
-                tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                bedriftKid={korreksjon.refusjonsgrunnlag.bedriftKid}
-                bedriftKontonummer={korreksjon.refusjonsgrunnlag.bedriftKontonummer}
-                bedriftKontonummerInnhentetTidspunkt={korreksjon.refusjonsgrunnlag.bedriftKontonummerInnhentetTidspunkt}
-            />
-            <VerticalSpacer rem={2} />
-            <InntekterFraAMeldingen
-                inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
-                refusjonsgrunnlag={korreksjon.refusjonsgrunnlag}
-                unntakOmInntekterFremitid={0}
-                kvitteringVisning={false}
-                korreksjonId={korreksjon.id}
-            />
-            <VerticalSpacer rem={2} />
-            {korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.inntekter.length !== 0 &&
-                korreksjon.harTattStillingTilAlleInntektslinjer && (
-                    <>
-                        <InntekterFraTiltaketSpørsmål refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
-                        <TidligereRefunderbarBeløp refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
-                        <VerticalSpacer rem={2} />
-                        {korreksjon.refusjonsgrunnlag.beregning &&
-                            typeof korreksjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp === 'boolean' && (
-                                <>
-                                    <OverstyrMinusbeløpOgFerietrekk
-                                        harFerietrekkForSammeMåned={
-                                            korreksjon.refusjonsgrunnlag.harFerietrekkForSammeMåned
-                                        }
-                                    />
-                                    <Utregning
-                                        refusjonsnummer={{
-                                            avtalenr: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                                            løpenummer: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                                        }}
-                                        erKorreksjon={true}
-                                        beregning={korreksjon.refusjonsgrunnlag.beregning}
-                                        tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                                        forrigeRefusjonMinusBeløp={
-                                            korreksjon.refusjonsgrunnlag.forrigeRefusjonMinusBeløp
-                                        }
-                                        inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
-                                    />
-                                    <VerticalSpacer rem={1} />
-                                    {korreksjonstype() === 'TILLEGSUTBETALING' && <BekreftUtbetalKorreksjon />}
-                                    {korreksjonstype() === 'TILBAKEKREVING' && <BekreftTilbakekrevKorreksjon />}
-                                    {korreksjonstype() === 'OPPGJORT' && <BekreftOppgjørKorreksjon />}
-                                </>
-                            )}
-                    </>
-                )}
-        </Boks>
+                <VerticalSpacer rem={1} />
+                <BodyShort size="small">
+                    Dette er en korreksjon av tidligere utbetalt refusjon. Det beregnes her et foreløpig oppgjør
+                    fratrukket beløpet som er utbetalt tidligere. Dette er foreløpig et utkast, og den vises ikke for
+                    arbeidsgiver før den fullføres.
+                </BodyShort>
+                <VerticalSpacer rem={2} />
+                <InformasjonFraAvtalen
+                    aktsomhet={aktsomhet}
+                    tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                    bedriftKid={korreksjon.refusjonsgrunnlag.bedriftKid}
+                    bedriftKontonummer={korreksjon.refusjonsgrunnlag.bedriftKontonummer}
+                    bedriftKontonummerInnhentetTidspunkt={
+                        korreksjon.refusjonsgrunnlag.bedriftKontonummerInnhentetTidspunkt
+                    }
+                />
+                <VerticalSpacer rem={2} />
+                <InntekterFraAMeldingen
+                    inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
+                    refusjonsgrunnlag={korreksjon.refusjonsgrunnlag}
+                    unntakOmInntekterFremitid={0}
+                    kvitteringVisning={false}
+                    korreksjonId={korreksjon.id}
+                />
+                <VerticalSpacer rem={2} />
+                {korreksjon.refusjonsgrunnlag.inntektsgrunnlag?.inntekter.length !== 0 &&
+                    korreksjon.harTattStillingTilAlleInntektslinjer && (
+                        <>
+                            <InntekterFraTiltaketSpørsmål refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
+                            <TidligereRefunderbarBeløp refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
+                            <VerticalSpacer rem={2} />
+                            {korreksjon.refusjonsgrunnlag.beregning &&
+                                typeof korreksjon.refusjonsgrunnlag.fratrekkRefunderbarBeløp === 'boolean' && (
+                                    <>
+                                        <OverstyrMinusbeløpOgFerietrekk
+                                            harFerietrekkForSammeMåned={
+                                                korreksjon.refusjonsgrunnlag.harFerietrekkForSammeMåned
+                                            }
+                                        />
+                                        <Utregning
+                                            refusjonsnummer={{
+                                                avtalenr: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
+                                                løpenummer: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
+                                            }}
+                                            erKorreksjon={true}
+                                            beregning={korreksjon.refusjonsgrunnlag.beregning}
+                                            tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                                            forrigeRefusjonMinusBeløp={
+                                                korreksjon.refusjonsgrunnlag.forrigeRefusjonMinusBeløp
+                                            }
+                                            inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
+                                        />
+                                        <VerticalSpacer rem={1} />
+                                        {korreksjonstype() === 'TILLEGSUTBETALING' && <BekreftUtbetalKorreksjon />}
+                                        {korreksjonstype() === 'TILBAKEKREVING' && <BekreftTilbakekrevKorreksjon />}
+                                        {korreksjonstype() === 'OPPGJORT' && <BekreftOppgjørKorreksjon />}
+                                    </>
+                                )}
+                        </>
+                    )}
+            </Boks>
+        </MainContainer>
     );
 };
 

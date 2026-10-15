@@ -6,7 +6,7 @@ import { Aktsomhet, Refusjon, tiltakstypeTekst } from '~/types';
 
 import InformasjonFraAvtalen from './InformasjonFraAvtalen';
 import HandlingerMeny from '@/refusjon/RefusjonSide/HandlingerMeny';
-import MainWrapper from '~/MainWrapper';
+import { MainContainer } from '~/Container';
 
 type AlertStripeType = 'info' | 'success' | 'warning' | 'error';
 
@@ -21,7 +21,7 @@ const FeilSide = (props: Props) => {
     const { aktsomhet, refusjon, feiltekst, advarselType } = props;
 
     return (
-        <MainWrapper rolle="saksbehandler">
+        <MainContainer rolle="saksbehandler">
             <Boks variant="hvit">
                 <Alert variant={advarselType} size="small">
                     {feiltekst}
@@ -45,7 +45,7 @@ const FeilSide = (props: Props) => {
                     }
                 />
             </Boks>
-        </MainWrapper>
+        </MainContainer>
     );
 };
 

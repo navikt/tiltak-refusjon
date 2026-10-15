@@ -2,19 +2,20 @@ import { createBrowserRouter, Outlet } from 'react-router';
 
 import AdvarselBannerTestversjon from '@/AdvarselBannerTestversjon/AdvarselBannerTestversjon';
 import AMeldingBanner from '@/AMeldingBanner/AMeldingBanner';
-import ErrorOgSuspenseHandlerMain from '@/ErrorOgSuspenseHandlerMain';
+import ErrorBoundary from '@/ErrorBoundary';
 import IkkeFunnet404 from '~/IkkeFunnet404';
 import OversiktRouteError from './OversiktRouteError';
 import OversiktSide from '@/refusjon/OversiktSide/OversiktSide';
 import Refusjon from '@/refusjon/RefusjonSide/Refusjon';
 import ScrollToTop from '@/komponenter/ScrollToTop';
-import SuspenseHandler from '@/SuspenseHandler';
 import { BrukerProvider } from '@/bruker/BrukerContext';
 import { FilterProvider } from '@/refusjon/oversikt/FilterContext';
 import RefusjonKontroll from '@/komponenter/refusjon-kontroll/RefusjonKontroll';
 
-import styles from './Router.module.less';
 import Landingsside from '@/Landingsside';
+import { Suspense } from 'react';
+import LasterBoks from '~/LasterBoks';
+import { InnholdProvider } from '~/Container';
 
 export const basename = '/';
 
@@ -29,11 +30,13 @@ const router = createBrowserRouter(
         {
             path: Path.LANDINGSSIDE,
             element: (
-                <ErrorOgSuspenseHandlerMain>
+                <ErrorBoundary>
                     <ScrollToTop />
                     <AdvarselBannerTestversjon />
-                    <Outlet />
-                </ErrorOgSuspenseHandlerMain>
+                    <InnholdProvider>
+                        <Outlet />
+                    </InnholdProvider>
+                </ErrorBoundary>
             ),
             children: [
                 {
@@ -51,14 +54,12 @@ const router = createBrowserRouter(
                         {
                             path: Path.REFUSJON_OVERSIKT,
                             element: (
-                                <SuspenseHandler>
+                                <Suspense fallback={<LasterBoks />}>
                                     <BrukerProvider>
-                                        <div className={styles.wrapper}>
-                                            <AMeldingBanner />
-                                            <Outlet />
-                                        </div>
+                                        <AMeldingBanner />
+                                        <Outlet />
                                     </BrukerProvider>
-                                </SuspenseHandler>
+                                </Suspense>
                             ),
                             children: [
                                 {

@@ -14,8 +14,7 @@ import { storForbokstav } from '~/utils/stringUtils';
 import InformasjonFraAvtalenVTAO from './InformasjonFraAvtaleVTAO';
 import SummeringBoksVTAO from './SummeringBoksVTAO';
 import TilskuddssatsVTAO from './TilskuddssatsVTAO';
-import MainWrapper from '~/MainWrapper';
-
+import { MainContainer } from '~/Container';
 /**
  * For etterregistrerte avtaler av typen VTA-O vil det eksistere refusjoner som er "for tidlig",
  * hvor tilskuddsperioden var langt tilbake i tid, men de har allikevel ikke blitt sendt ut enda.
@@ -68,7 +67,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
     const innloggetRolle = innloggetBruker?.rolle;
 
     return (
-        <MainWrapper rolle={rolle}>
+        <MainContainer rolle={rolle}>
             <Boks variant="hvit">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Heading level="2" size="large">
@@ -109,7 +108,7 @@ const KvitteringSideVTAO: FunctionComponent<Props> = (props: Props) => {
                 <VerticalSpacer rem={1} />
                 <SummeringBoksVTAO refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
             </Boks>
-        </MainWrapper>
+        </MainContainer>
     );
 };
 

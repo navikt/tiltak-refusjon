@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import Boks from '~/Boks';
 import { Aktsomhet, Refusjon } from '~/types';
 import { godkjennRefusjon } from '@/services/rest-service';
+import { MainContainer } from '~/Container';
 
 import InformasjonFraAvtalen from './informasjonAvtalen/InformasjonFraAvtalen';
 import InntekterFraAMeldingen from './inntektsmelding/InntekterFraAMeldingen';
@@ -15,7 +16,6 @@ import RefusjonInnsending from './refusjonInnsending/RefusjonInnsending';
 import TidligereRefunderbarBeløp from './TidligereRefunderbarBeløp';
 
 import './RefusjonSide.less';
-import MainWrapper from '~/MainWrapper';
 
 interface Props {
     refusjon: Refusjon;
@@ -37,7 +37,7 @@ const RefusjonSide = (props: Props) => {
     };
 
     return (
-        <MainWrapper rolle="arbeidsgiver">
+        <MainContainer rolle="arbeidsgiver">
             <Boks variant="hvit">
                 <RefusjonIngress refusjon={refusjon} />
                 <InformasjonFraAvtalen refusjon={refusjon} aktsomhet={aktsomhet} onFeil={setFeilmelding} />
@@ -59,7 +59,7 @@ const RefusjonSide = (props: Props) => {
                 setVisGodkjennModal={setVisGodkjennModal}
                 godkjennRefusjonen={godkjennRefusjonen}
             />
-        </MainWrapper>
+        </MainContainer>
     );
 };
 

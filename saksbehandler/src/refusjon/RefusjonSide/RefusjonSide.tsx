@@ -5,6 +5,7 @@ import EksternLenke from '~/EksternLenke/EksternLenke';
 import StatusTekst from '~/StatusTekst';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Refusjon, tiltakstypeTekst } from '~/types';
+import { MainContainer } from '~/Container';
 
 import HandlingerMeny from './HandlingerMeny';
 import HarTattStillingTilAlleInntektsLinjerGammel from './HarTattStillingTilAlleInntektsLinjerGammel';
@@ -15,7 +16,6 @@ import TidligereRefunderbarBeløpKvittering from './TidligereRefunderbarBeløpKv
 import Utregning from './Utregning';
 
 import './RefusjonSide.less';
-import MainWrapper from '~/MainWrapper';
 
 interface Props {
     aktsomhet?: Aktsomhet;
@@ -26,7 +26,7 @@ const RefusjonSide = (props: Props) => {
     const { aktsomhet, refusjon } = props;
 
     return (
-        <MainWrapper rolle="saksbehandler">
+        <MainContainer rolle="saksbehandler">
             <Boks variant="hvit">
                 {refusjon.status === 'KLAR_FOR_INNSENDING' && refusjon.refusjonsgrunnlag.inntektsgrunnlag === null && (
                     <>
@@ -109,7 +109,7 @@ const RefusjonSide = (props: Props) => {
                     />
                 )}
             </Boks>
-        </MainWrapper>
+        </MainContainer>
     );
 };
 

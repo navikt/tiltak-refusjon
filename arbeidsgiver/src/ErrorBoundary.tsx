@@ -1,7 +1,6 @@
-import { FunctionComponent, PropsWithChildren, Suspense, Component, ReactNode } from 'react';
+import { FunctionComponent, PropsWithChildren, Component, ReactNode } from 'react';
 import VerticalSpacer from '~/VerticalSpacer';
-import { Alert, BodyShort, Heading, Loader } from '@navikt/ds-react';
-import Boks from '~/Boks';
+import { Alert, BodyShort, Heading } from '@navikt/ds-react';
 
 type ErrorBoundaryState = { error?: unknown };
 
@@ -26,7 +25,7 @@ class ReactErrorBoundary extends Component<
     }
 }
 
-const ErrorOgSuspenseHandlerMain: FunctionComponent<PropsWithChildren> = (props) => (
+const ErrorBoundary: FunctionComponent<PropsWithChildren> = (props) => (
     <ReactErrorBoundary
         fallback={({ error }: { error?: unknown }) => (
             <>
@@ -40,18 +39,8 @@ const ErrorOgSuspenseHandlerMain: FunctionComponent<PropsWithChildren> = (props)
             </>
         )}
     >
-        <Suspense
-            fallback={
-                <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-                    <Boks variant="hvit" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                        <Loader type="XL" />
-                    </Boks>
-                </div>
-            }
-        >
-            {props.children}
-        </Suspense>
+        {props.children}
     </ReactErrorBoundary>
 );
 
-export default ErrorOgSuspenseHandlerMain;
+export default ErrorBoundary;

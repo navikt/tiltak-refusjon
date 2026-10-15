@@ -1,10 +1,9 @@
 import { SortState, Table } from '@navikt/ds-react';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BegrensetRefusjon, Filter, SortingOrder } from '~/types';
 import OversiktsTabellHeader from './OversiktsTabellHeader';
 import OversiktsTabellBody from './OversiktsTabellBody';
 import styles from './OversiktsTabell.module.less';
-import OversiktsTabellSkeleton from './OversiktsTabellSkeleton';
 
 export type Avtalepart = 'saksbehandler' | 'arbeidsgiver';
 
@@ -19,7 +18,7 @@ export type TableHeaderType = {
     beskrivelse: string;
 };
 
-const tableHeaders: TableHeaderType[] = [
+export const tableHeaders: TableHeaderType[] = [
     { navn: 'Refusjon', beskrivelse: 'Refusjonsnummer' },
     { navn: 'Tiltakstype', beskrivelse: 'Tiltakstype' },
     { navn: 'Bedrift', beskrivelse: 'Bedrift' },
@@ -89,12 +88,10 @@ const OversiktsTabell = (props: Props) => {
     };
 
     return (
-        <Suspense fallback={<OversiktsTabellSkeleton headers={tableHeaders} />}>
-            <Table role="list" className={styles.oversiktTabell} sort={sort} onSortChange={handleSort}>
-                <OversiktsTabellHeader headers={tableHeaders} sort={sort} />
-                <OversiktsTabellBody refusjoner={refusjoner} avtalepart={avtalepart} />
-            </Table>
-        </Suspense>
+        <Table role="list" className={styles.oversiktTabell} sort={sort} onSortChange={handleSort}>
+            <OversiktsTabellHeader headers={tableHeaders} sort={sort} />
+            <OversiktsTabellBody refusjoner={refusjoner} avtalepart={avtalepart} />
+        </Table>
     );
 };
 

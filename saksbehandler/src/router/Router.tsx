@@ -12,6 +12,9 @@ import { BrukerProvider } from '@/bruker/BrukerContext';
 import { FeatureToggleProvider } from '@/featureToggles/FeatureToggleProvider';
 import { FilterProvider } from '@/refusjon/oversikt/FilterContext';
 import IkkeFunnet404 from '~/IkkeFunnet404';
+import { Suspense } from 'react';
+import LasterBoks from '~/LasterBoks';
+import { InnholdProvider } from '~/Container';
 
 export const basename = '/';
 
@@ -30,7 +33,9 @@ const router = createBrowserRouter(
                     <ScrollToTop />
                     <AdvarselBannerTestversjon />
                     <InternflateDekoratør />
-                    <Outlet />
+                    <InnholdProvider>
+                        <Outlet />
+                    </InnholdProvider>
                 </ErrorBoundary>
             ),
             children: [
@@ -41,13 +46,15 @@ const router = createBrowserRouter(
                 {
                     path: Path.OVERSIKT,
                     element: (
-                        <BrukerProvider>
-                            <FeatureToggleProvider>
-                                <FilterProvider>
-                                    <Outlet />
-                                </FilterProvider>
-                            </FeatureToggleProvider>
-                        </BrukerProvider>
+                        <Suspense fallback={<LasterBoks />}>
+                            <BrukerProvider>
+                                <FeatureToggleProvider>
+                                    <FilterProvider>
+                                        <Outlet />
+                                    </FilterProvider>
+                                </FeatureToggleProvider>
+                            </BrukerProvider>
+                        </Suspense>
                     ),
                     errorElement: <OversiktRouteError />,
                     children: [

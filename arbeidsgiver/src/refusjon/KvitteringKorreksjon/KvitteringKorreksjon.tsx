@@ -12,9 +12,9 @@ import { Aktsomhet, KorreksjonStatus, korreksjonStatusTekst } from '~/types';
 import { Korreksjon, Refusjon } from '~/types/refusjon';
 import { formaterDato, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
+import { MainContainer } from '~/Container';
 
 import InntekterFraAMeldingenKorreksjon from './InntekterFraAMeldingenKorreksjon';
-import MainWrapper from '~/MainWrapper';
 
 interface Props {
     aktsomhet?: Aktsomhet;
@@ -26,7 +26,7 @@ const KvitteringKorreksjon = (props: Props) => {
     const { refusjon, korreksjon, aktsomhet } = props;
 
     return (
-        <MainWrapper rolle="arbeidsgiver">
+        <MainContainer rolle="arbeidsgiver">
             <Boks variant="hvit">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Heading size="large" role="heading">
@@ -108,7 +108,7 @@ const KvitteringKorreksjon = (props: Props) => {
                 </ExpansionCard.Content>
             </ExpansionCard>
             <VerticalSpacer rem={2} />
-        </MainWrapper>
+        </MainContainer>
     );
 };
 

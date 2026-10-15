@@ -21,7 +21,7 @@ import { storForbokstav } from '~/utils/stringUtils';
 import { useFeatureToggles } from '@/featureToggles/FeatureToggleProvider';
 
 import Statusmelding from './Statusmelding';
-import MainWrapper from '~/MainWrapper';
+import { MainContainer } from '~/Container';
 
 const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -51,7 +51,7 @@ const KvitteringSide = (props: Props) => {
     const featureToggles = useFeatureToggles();
 
     return (
-        <MainWrapper rolle="saksbehandler">
+        <MainContainer rolle="saksbehandler">
             <Boks variant="hvit">
                 {featureToggles[Feature.Reberegning] && <SjekkReberegning />}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -128,7 +128,7 @@ const KvitteringSide = (props: Props) => {
                     />
                 )}
             </Boks>
-        </MainWrapper>
+        </MainContainer>
     );
 };
 

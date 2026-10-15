@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Suspense } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router';
@@ -10,14 +10,14 @@ import KorreksjonSideVTAO from '@/KorreksjonSideVTAO/KorreksjonSideVTAO';
 import VerticalSpacer from '~/VerticalSpacer';
 import { korreksjonsgrunnTekst, KorreksjonStatus } from '~/types';
 import { useHentKorreksjon, useRefusjonKreverAktsomhet } from '@/services/rest-service';
-import MainWrapper from '~/MainWrapper';
+import { InnholdContainer } from '~/Container';
 
 const Advarsler: FunctionComponent = () => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
     const korreksjon = useHentKorreksjon(korreksjonId!);
 
     return (
-        <>
+        <InnholdContainer>
             <Alert variant="info" size="small">
                 Dette er en korreksjon av tidligere utbetalt refusjon. Årsak til korreksjon:
                 <br />
@@ -31,7 +31,7 @@ const Advarsler: FunctionComponent = () => {
                 </Link>
             </Alert>
             <VerticalSpacer rem={1} />
-        </>
+        </InnholdContainer>
     );
 };
 
@@ -62,12 +62,10 @@ const Komponent: FunctionComponent = () => {
 
 const Refusjon: FunctionComponent = () => {
     return (
-        <MainWrapper rolle="saksbehandler" bredde="smal">
-            <Suspense fallback={null}>
-                <Advarsler />
-                <Komponent />
-            </Suspense>
-        </MainWrapper>
+        <>
+            <Advarsler />
+            <Komponent />
+        </>
     );
 };
 

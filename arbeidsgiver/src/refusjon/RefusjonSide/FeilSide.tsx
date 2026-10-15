@@ -1,13 +1,13 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { useParams } from 'react-router';
 import VerticalSpacer from '~/VerticalSpacer';
-import { useHentRefusjon } from '../../services/rest-service';
+import { useHentRefusjon } from '@/services/rest-service';
 import { formatterPenger } from '~/utils/PengeUtils';
 import { Alert, Label, BodyShort, Heading } from '@navikt/ds-react';
 import Boks from '~/Boks';
 import { tiltakstypeTekst } from '~/types/messages';
 import { formaterPeriode } from '~/utils';
-import MainWrapper from '~/MainWrapper';
+import { MainContainer } from '~/Container';
 
 type AlertStripeType = 'info' | 'success' | 'warning' | 'error';
 
@@ -21,7 +21,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
     const refusjon = useHentRefusjon(refusjonId);
 
     return (
-        <MainWrapper rolle="arbeidsgiver">
+        <MainContainer rolle="arbeidsgiver">
             <Boks variant="hvit">
                 <Alert variant={props.advarselType}>{props.feiltekst}</Alert>
                 <VerticalSpacer rem={2} />
@@ -45,7 +45,7 @@ const FeilSide: FunctionComponent<Props> = (props) => {
                 <Label>Deltaker:</Label>
                 <BodyShort size="small">{`${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerFornavn} ${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.deltakerEtternavn}`}</BodyShort>
             </Boks>
-        </MainWrapper>
+        </MainContainer>
     );
 };
 

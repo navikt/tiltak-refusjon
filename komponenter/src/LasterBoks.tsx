@@ -3,14 +3,14 @@ import { BodyShort, Loader } from '@navikt/ds-react';
 import Boks from '~/Boks';
 import VerticalSpacer from '~/VerticalSpacer';
 
-const HenterInntekterBoks: FunctionComponent = () => {
+const LasterBoks: FunctionComponent = () => {
     return (
         <Boks variant="hvit" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
             <Loader type="XL" />
             <VerticalSpacer rem={1} />
-            <BodyShort size="small">Henter inntektsopplysninger fra a-meldingen...</BodyShort>
+            <BodyShort size="small">Laster...</BodyShort>
         </Boks>
     );
 };
 
-export default HenterInntekterBoks;
+export default LasterBoks;

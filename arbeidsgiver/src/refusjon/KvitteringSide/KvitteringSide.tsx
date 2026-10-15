@@ -17,7 +17,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, statusTekst, tiltakstypeTekst, RefusjonStatus, Refusjon } from '~/types';
 import { formaterDato, NORSK_DATO_FORMAT, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { storForbokstav } from '~/utils/stringUtils';
-import MainWrapper from '~/MainWrapper';
+import { MainContainer } from '~/Container';
 
 export const etikettForRefusjonStatus = (refusjon: Refusjon): ReactElement => {
     if (refusjon.status === RefusjonStatus.UTBETALING_FEILET) {
@@ -52,7 +52,7 @@ const KvitteringSide = (props: Props) => {
     }
 
     return (
-        <MainWrapper rolle="arbeidsgiver">
+        <MainContainer rolle="arbeidsgiver">
             <Boks variant="hvit">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Heading size="large" role="heading">
@@ -116,7 +116,7 @@ const KvitteringSide = (props: Props) => {
                     />
                 )}
             </Boks>
-        </MainWrapper>
+        </MainContainer>
     );
 };
 
