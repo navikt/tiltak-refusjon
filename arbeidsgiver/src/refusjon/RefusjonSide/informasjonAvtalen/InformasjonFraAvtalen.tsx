@@ -9,6 +9,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, tiltakstypeTekst } from '~/types';
 import { Refusjon } from '~/types/refusjon';
 import { formaterDato, formaterPeriode } from '~/utils';
+import { lagAvtaleLenke } from '~/utils/lenkeUtils';
 import { formatterPenger } from '~/utils/PengeUtils';
 import React, { useCallback } from 'react';
 import { lagreBedriftKID } from '@/services/rest-service';
@@ -21,7 +22,7 @@ interface Props {
 
 const InformasjonFraAvtalen = (props: Props) => {
     const { refusjon, aktsomhet, onFeil = (f) => f } = props;
-    const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleId}`;
+    const avtaleLenke = lagAvtaleLenke(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleId, 'ARBEIDSGIVER');
     const refusjonsnummer = `${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr}-${refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer}`;
 
     const settKid = useCallback(

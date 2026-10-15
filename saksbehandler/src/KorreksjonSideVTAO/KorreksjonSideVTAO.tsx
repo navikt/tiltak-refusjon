@@ -34,6 +34,7 @@ const KorreksjonSideVTAO = (props: Props) => {
             <VerticalSpacer rem={2} />
             <InformasjonFraAvtalenVTAO
                 aktsomhet={aktsomhet}
+                innloggetRolle="BESLUTTER"
                 åpnetFørsteGang={'Trengs ikke på korreksjon'}
                 refusjonsgrunnlag={refusjonsgrunnlag}
             />
