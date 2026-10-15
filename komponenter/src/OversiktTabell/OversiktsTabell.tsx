@@ -9,6 +9,7 @@ import OversiktsTabellSkeleton from './OversiktsTabellSkeleton';
 export type Avtalepart = 'saksbehandler' | 'arbeidsgiver';
 
 interface Props {
+    filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
     refusjoner: BegrensetRefusjon[];
     avtalepart: Avtalepart;
@@ -62,12 +63,15 @@ const getSortingOrder = (sort?: RefusjonSortState): SortingOrder | undefined => 
 };
 
 const OversiktsTabell = (props: Props) => {
-    const { oppdaterFilter, refusjoner, avtalepart } = props;
+    const { filter, oppdaterFilter, refusjoner, avtalepart } = props;
     const [sort, setSort] = useState<RefusjonSortState | undefined>();
 
     useEffect(() => {
-        oppdaterFilter({ sorting: getSortingOrder(sort) });
-    }, [sort]);
+        const sorting = getSortingOrder(sort);
+        if (filter.sorting !== sorting) {
+            oppdaterFilter({ sorting });
+        }
+    }, [sort, filter]);
 
     const handleSort = (sortkey: string) => {
         if (sort?.orderBy !== sortkey) {
