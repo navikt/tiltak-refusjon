@@ -41,7 +41,7 @@ export const inntektDefaultValues = (refusjon: Refusjon): InntektFields => {
     } = refusjon;
 
     return {
-        harOpptjentInntektIPerioden: harOpptjentInntekterIPerioden(inntektsgrunnlag?.inntekter ?? []),
+        harOpptjentInntektIPerioden: harOpptjentInntekterIPerioden(inntektsgrunnlag?.inntekterForPerioden ?? []),
         harIkkeOpptjentInntekterIPerioden: undefined,
     };
 };
@@ -64,6 +64,7 @@ function InntektTabell(props: Props) {
         name: ['harOpptjentInntektIPerioden', 'harIkkeOpptjentInntekterIPerioden'],
     });
     const [inntekter, setInntekter] = useState<Inntektslinje[]>(inntektsgrunnlag?.inntekterForPerioden ?? []);
+    const [isLoading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const erGyldig = inntektSchema.safeParse({
@@ -95,13 +96,22 @@ function InntektTabell(props: Props) {
     }, [inntekter, inntektsgrunnlag?.inntekterForPerioden, setValue, resetField]);
 
     const onInntektslinjeChange = async (endring: Inntektsendring) => {
+        if (isLoading) {
+            return;
+        }
+
         const nyeInntekter = oppdaterInntektslinjeOpptjentIPeriode(inntekter, endring);
+        setLoading(true);
 
         setValue('harOpptjentInntektIPerioden', harOpptjentInntekterIPerioden(nyeInntekter), settVerdiOpts);
         setValue('harIkkeOpptjentInntekterIPerioden', endring.type === 'INGEN-INNTEKTER', settVerdiOpts);
         setInntekter(nyeInntekter);
 
-        await setInntektslinjerOpptjentIPeriode(id, nyeInntekter, sistEndret);
+        try {
+            await setInntektslinjerOpptjentIPeriode(id, nyeInntekter, sistEndret);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const feilmelding = formState.errors.harIkkeOpptjentInntekterIPerioden?.message;
@@ -142,6 +152,7 @@ function InntektTabell(props: Props) {
                                     )}
                                     <Table.Row
                                         selected={!!inntekt.erOpptjentIPeriode}
+                                        aria-disabled={isLoading}
                                         onRowClick={() =>
                                             onInntektslinjeChange({
                                                 type: 'INNTEKT',
@@ -155,6 +166,7 @@ function InntektTabell(props: Props) {
                                                 <Checkbox
                                                     checked={!!inntekt.erOpptjentIPeriode}
                                                     hideLabel
+                                                    disabled={isLoading}
                                                     onChange={(e) => {
                                                         e.stopPropagation();
                                                         onInntektslinjeChange({
@@ -213,12 +225,14 @@ function InntektTabell(props: Props) {
                             <Table.Row
                                 selected={harIkkeOpptjentInntekterIPerioden ?? false}
                                 onRowClick={() => onInntektslinjeChange({ type: 'INGEN-INNTEKTER' })}
+                                aria-disabled={isLoading}
                             >
                                 <Table.DataCell colSpan={3}>
                                     <HStack align="center" gap="space-8" wrap={false}>
                                         <Checkbox
                                             checked={harIkkeOpptjentInntekterIPerioden ?? false}
                                             hideLabel
+                                            disabled={isLoading}
                                             onChange={() => onInntektslinjeChange({ type: 'INGEN-INNTEKTER' })}
                                         >
                                             Velg "Det er ikke opptjent inntekter i perioden"
