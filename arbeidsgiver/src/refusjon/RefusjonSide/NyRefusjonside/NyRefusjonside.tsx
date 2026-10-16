@@ -1,33 +1,32 @@
 import React, { useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
+import { ZodTypeAny } from 'zod';
+import { useNavigate } from 'react-router';
 import { BodyShort, Box, Heading, HStack, Tag, VStack } from '@navikt/ds-react';
 
 import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
-import KontonummerOgKid, {
-    kidOgKontonummerDefaultValues,
-    KidOgKontonummerFields,
-    kidOgKontonummerSchema,
-} from './KontoummerOgKid/KontonummerOgKid';
+import RefusjonFullførNullbeløpModal from '@/refusjon/RefusjonSide/refusjonFullførNullbeløp/RefusjonFullførNullbeløpModal';
+import RefusjonGodkjennModal from '@/refusjon/RefusjonSide/RefusjonGodkjennModal';
+import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
 import { Aktsomhet, Refusjon, statusTekst, tiltakstypeTekst } from '~/types';
+import { MainContainer } from '~/Container';
 import { formaterDato } from '~/utils';
+import { godkjennRefusjon, godkjennRefusjonMedNullbeløp } from '@/services/rest-service';
 import { storForbokstav } from '~/utils/stringUtils';
 
 import Bruttolonn, { BruttolonnFields, bruttolonnDefaultValues, lagBruttolonnSchema } from './Bruttolonn';
 import Fravaer, { FravaerFields, fravaerDefaultValues, fravaerSchema } from './Fravaer';
-import MainWrapper from '~/MainWrapper';
 import useRefusjonsideSteg, { Seksjon, Steg } from './useRefusjonsideSteg';
 import Oppsummering from './Oppsummering';
 import { InntektFields, inntektDefaultValues, InntektTabell, inntektSchema, KreverInntekter } from './Inntekter';
 import Bekreftelse, { BekreftelseFields, bekreftelseDefaultValues, bekreftelseSchema } from './Bekreftelse';
 import Utregning from './Utregning';
-import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
-import { ZodTypeAny } from 'zod';
-import RefusjonGodkjennModal from '@/refusjon/RefusjonSide/RefusjonGodkjennModal';
-import RefusjonFullførNullbeløpModal from '@/refusjon/RefusjonSide/refusjonFullførNullbeløp/RefusjonFullførNullbeløpModal';
-import { godkjennRefusjon, godkjennRefusjonMedNullbeløp } from '@/services/rest-service';
-import { useNavigate } from 'react-router';
+import KontonummerOgKid, {
+    kidOgKontonummerDefaultValues,
+    KidOgKontonummerFields,
+    kidOgKontonummerSchema,
+} from './KontonummerOgKid';
 
 interface Props {
     refusjon: Refusjon;
@@ -58,7 +57,7 @@ const NyRefusjonside = (props: Props) => {
     const { tilskuddsgrunnlag, beregning } = refusjon.refusjonsgrunnlag;
 
     const navigate = useNavigate();
-    const { seksjon, endreSteg } = useRefusjonsideSteg();
+    const { steg, seksjon, endreSteg } = useRefusjonsideSteg();
     const [visGodkjennModal, setVisGodkjennModal] = useState<boolean>(false);
 
     const form = useForm<RefusjonFormFields>({
@@ -74,7 +73,7 @@ const NyRefusjonside = (props: Props) => {
     });
 
     const godkjennRefusjonen = async () => {
-        if (beregning?.refusjonsbeløp === 0) {
+        if (steg === Steg.NULLBELOP) {
             await godkjennRefusjonMedNullbeløp(refusjon.id, refusjon.sistEndret);
         } else {
             await godkjennRefusjon(refusjon.id, refusjon.sistEndret);
@@ -106,7 +105,7 @@ const NyRefusjonside = (props: Props) => {
 
     return (
         <>
-            <MainWrapper rolle="arbeidsgiver" bredde="smal">
+            <MainContainer rolle="arbeidsgiver" bredde="lg">
                 <Box background="default" padding={{ xs: 'space-16', md: 'space-32' }}>
                     <VStack gap={{ xs: 'space-40', md: 'space-64' }}>
                         <VStack gap="space-24">
@@ -154,8 +153,8 @@ const NyRefusjonside = (props: Props) => {
                         </KreverInntekter>
                     </VStack>
                 </Box>
-            </MainWrapper>
-            {visGodkjennModal && beregning?.refusjonsbeløp === 0 && (
+            </MainContainer>
+            {visGodkjennModal && steg === Steg.NULLBELOP && (
                 <RefusjonFullførNullbeløpModal
                     refusjon={refusjon}
                     visGodkjennModal={visGodkjennModal}
