@@ -18,7 +18,7 @@ export enum Seksjon {
     BEKREFTELSE = 'BEKREFTELSE',
 }
 
-const initalState: Record<Seksjon, boolean> = {
+const initialState: Record<Seksjon, boolean> = {
     [Seksjon.FRAVAER]: true,
     [Seksjon.INNTEKT_TABELL]: false,
     [Seksjon.BRUTTOLONN]: false,
@@ -29,21 +29,21 @@ const initalState: Record<Seksjon, boolean> = {
 };
 
 function useRefusjonssideSteg() {
-    const [seksjon, setSeksjon] = useState<Record<Seksjon, boolean>>(initalState);
+    const [seksjon, setSeksjon] = useState<Record<Seksjon, boolean>>(initialState);
 
     const endreSteg = useCallback(
         (steg: Steg) => {
             switch (steg) {
                 case Steg.INNTEKTER: {
                     return setSeksjon({
-                        ...initalState,
+                        ...initialState,
                         [Seksjon.FRAVAER]: true,
                         [Seksjon.INNTEKT_TABELL]: true,
                     });
                 }
                 case Steg.MINUSBELOP: {
                     return setSeksjon({
-                        ...initalState,
+                        ...initialState,
                         [Seksjon.FRAVAER]: true,
                         [Seksjon.INNTEKT_TABELL]: true,
                         [Seksjon.UTBETALINGSINFO]: true,
@@ -53,7 +53,7 @@ function useRefusjonssideSteg() {
                 }
                 case Steg.NULLBELOP: {
                     return setSeksjon({
-                        ...initalState,
+                        ...initialState,
                         [Seksjon.FRAVAER]: true,
                         [Seksjon.INNTEKT_TABELL]: true,
                         [Seksjon.UTBETALINGSINFO]: true,
@@ -62,7 +62,7 @@ function useRefusjonssideSteg() {
                 }
                 case Steg.BEREGNING_OG_BEKREFTELSE: {
                     return setSeksjon({
-                        ...initalState,
+                        ...initialState,
                         [Seksjon.FRAVAER]: true,
                         [Seksjon.INNTEKT_TABELL]: true,
                         [Seksjon.BRUTTOLONN]: true,
@@ -73,7 +73,7 @@ function useRefusjonssideSteg() {
                     });
                 }
                 default: {
-                    return setSeksjon(initalState);
+                    return setSeksjon(initialState);
                 }
             }
         },
