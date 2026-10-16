@@ -21,7 +21,7 @@ import useRefusjonsideSteg, { Seksjon, Steg } from './useRefusjonsideSteg';
 import Oppsummering from './Oppsummering';
 import { InntektFields, inntektDefaultValues, InntektTabell, inntektSchema, KreverInntekter } from './Inntekter';
 import Bekreftelse, { BekreftelseFields, bekreftelseDefaultValues, bekreftelseSchema } from './Bekreftelse';
-import Utregning from './Utregning';
+import Utregning from '~/Utregning';
 import KontonummerOgKid, {
     kidOgKontonummerDefaultValues,
     KidOgKontonummerFields,
@@ -148,7 +148,13 @@ const NyRefusjonside = (props: Props) => {
                                                 status={refusjon.status}
                                             />
                                         )}
-                                        {seksjon.UTREGNING && <Utregning refusjon={refusjon} />}
+                                        {seksjon.UTREGNING && (
+                                            <Utregning
+                                                utregning={refusjon.utregning}
+                                                tilskuddsgrunnlag={tilskuddsgrunnlag}
+                                                inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
+                                            />
+                                        )}
                                         {seksjon.BEKREFTELSE && <Bekreftelse />}
                                     </VStack>
                                 </form>
