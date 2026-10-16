@@ -55,6 +55,8 @@ export const FilterProvider: FunctionComponent<PropsWithChildren> = (props) => {
         if (Object.prototype.hasOwnProperty.call(nyttFilter, 'tiltakstype') && nyttFilter.tiltakstype === undefined)
             newSearchParams.delete('tiltakstype');
         if (nyttFilter.tiltakstype) newSearchParams.set('tiltakstype', nyttFilter.tiltakstype);
+        if (Object.prototype.hasOwnProperty.call(nyttFilter, 'sorting') && nyttFilter.sorting === undefined)
+            newSearchParams.delete('sorting');
         if (nyttFilter.sorting) newSearchParams.set('sorting', nyttFilter.sorting);
         // Sneaky javascript-logikk: side 0 vil tolkes som false, så vi må sjekke det også
         if (

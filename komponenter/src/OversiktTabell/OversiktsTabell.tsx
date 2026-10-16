@@ -1,5 +1,5 @@
 import { SortState, Table } from '@navikt/ds-react';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { BegrensetRefusjon, Filter, SortingOrder } from '~/types';
 import OversiktsTabellHeader from './OversiktsTabellHeader';
 import OversiktsTabellBody from './OversiktsTabellBody';
@@ -62,34 +62,63 @@ const getSortingOrder = (sort?: RefusjonSortState): SortingOrder | undefined => 
     }
 };
 
+const getSortState = (sorting?: SortingOrder): RefusjonSortState | undefined => {
+    switch (sorting) {
+        case SortingOrder.REFUSJONSNUMMER_ASC:
+            return { orderBy: 'Refusjon', direction: 'ascending' };
+        case SortingOrder.REFUSJONSNUMMER_DESC:
+            return { orderBy: 'Refusjon', direction: 'descending' };
+        case SortingOrder.TILTAKSTYPE_ASC:
+            return { orderBy: 'Tiltakstype', direction: 'ascending' };
+        case SortingOrder.TILTAKSTYPE_DESC:
+            return { orderBy: 'Tiltakstype', direction: 'descending' };
+        case SortingOrder.BEDRIFT_ASC:
+            return { orderBy: 'Bedrift', direction: 'ascending' };
+        case SortingOrder.BEDRIFT_DESC:
+            return { orderBy: 'Bedrift', direction: 'descending' };
+        case SortingOrder.DELTAKER_ASC:
+            return { orderBy: 'Deltaker', direction: 'ascending' };
+        case SortingOrder.DELTAKER_DESC:
+            return { orderBy: 'Deltaker', direction: 'descending' };
+        case SortingOrder.PERIODE_ASC:
+            return { orderBy: 'Periode', direction: 'ascending' };
+        case SortingOrder.PERIODE_DESC:
+            return { orderBy: 'Periode', direction: 'descending' };
+        case SortingOrder.STATUS_ASC:
+            return { orderBy: 'Status', direction: 'ascending' };
+        case SortingOrder.STATUS_DESC:
+            return { orderBy: 'Status', direction: 'descending' };
+        case SortingOrder.FRISTFORGODKJENNING_ASC:
+            return { orderBy: 'Frist', direction: 'ascending' };
+        case SortingOrder.FRISTFORGODKJENNING_DESC:
+            return { orderBy: 'Frist', direction: 'descending' };
+        default:
+            return undefined;
+    }
+};
+
 const OversiktsTabell = (props: Props) => {
     const { filter, oppdaterFilter, refusjoner, avtalepart } = props;
-    const [sort, setSort] = useState<RefusjonSortState | undefined>();
-
-    useEffect(() => {
-        const sorting = getSortingOrder(sort);
-        if (filter.sorting !== sorting) {
-            oppdaterFilter({ sorting });
-        }
-    }, [sort, filter]);
+    const sort = getSortState(filter.sorting);
 
     const handleSort = (sortkey: string) => {
+        let nextSort: RefusjonSortState | undefined;
         if (sort?.orderBy !== sortkey) {
-            setSort({ orderBy: sortkey, direction: 'ascending' });
+            nextSort = { orderBy: sortkey, direction: 'ascending' };
         } else {
-            switch (sort?.direction) {
-                case undefined:
-                case 'none':
-                    setSort({ orderBy: sortkey, direction: 'ascending' });
-                    break;
+            switch (sort.direction) {
                 case 'ascending':
-                    setSort({ orderBy: sortkey, direction: 'descending' });
+                    nextSort = { orderBy: sortkey, direction: 'descending' };
                     break;
                 case 'descending':
+                    nextSort = undefined;
+                    break;
                 default:
-                    setSort(undefined);
+                    nextSort = { orderBy: sortkey, direction: 'ascending' };
             }
         }
+
+        oppdaterFilter({ sorting: getSortingOrder(nextSort) });
     };
 
     return (
