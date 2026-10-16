@@ -21,6 +21,7 @@ import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
 import NyRefusjonside from '@/refusjon/RefusjonSide/NyRefusjonside/NyRefusjonside';
+import InkluderingstilskuddRefusjonside from '@/refusjon/RefusjonSide/InkluderingstilskuddRefusjonside';
 
 const Refusjon: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -98,6 +99,9 @@ const Refusjon: FunctionComponent = () => {
                 />
             );
         case RefusjonStatus.KLAR_FOR_INNSENDING:
+            if (tiltakstype === 'INKLUDERINGSTILSKUDD') {
+                return <InkluderingstilskuddRefusjonside aktsomhet={aktsomhet} refusjon={refusjon} />;
+            }
             return <NyRefusjonside aktsomhet={aktsomhet} refusjon={refusjon} />;
         case RefusjonStatus.UTGÅTT:
             return (

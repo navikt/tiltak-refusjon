@@ -1,11 +1,20 @@
 import { Alert, BodyShort, Button, List, VStack } from '@navikt/ds-react';
 import GodkjenningsPanel from '@/komponenter/GodkjenningsPanel';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import Vilkaar from './Vilkaar';
 import { z } from 'zod';
 
 const BEKREFTELSE_FEILMELDING = 'Du må bekrefte at opplysningene er riktige før du kan sende inn skjemaet.';
+
+const STANDARD_PUNKTER = ['Innholdet i avtalen er korrekt', 'Kravene til arbeidsgiver er lest og forstått'];
+
+interface Props {
+    punkter?: string[];
+    vilkaar?: ReactNode;
+    knappetekst?: string;
+    innsendingDeaktivert?: boolean;
+}
 
 export const bekreftelseSchema = z.object({
     bekreftetOpplysninger: z
@@ -19,7 +28,12 @@ export const bekreftelseDefaultValues = (): Partial<BekreftelseFields> => ({
     bekreftetOpplysninger: false,
 });
 
-function Bekreftelse() {
+function Bekreftelse({
+    punkter = STANDARD_PUNKTER,
+    vilkaar = <Vilkaar />,
+    knappetekst = 'Fullfør',
+    innsendingDeaktivert = false,
+}: Props = {}) {
     const { control, formState } = useFormContext<BekreftelseFields>();
 
     const feilmeldinger = Object.entries(formState.errors)
@@ -31,7 +45,7 @@ function Bekreftelse() {
     return (
         <>
             <VStack gap="space-12">
-                <Vilkaar />
+                {vilkaar}
                 <Controller
                     name="bekreftetOpplysninger"
                     control={control}
@@ -43,8 +57,9 @@ function Bekreftelse() {
                             setChecked={field.onChange}
                         >
                             <List>
-                                <List.Item>Innholdet i avtalen er korrekt</List.Item>
-                                <List.Item>Kravene til arbeidsgiver er lest og forstått</List.Item>
+                                {punkter.map((punkt) => (
+                                    <List.Item key={punkt}>{punkt}</List.Item>
+                                ))}
                             </List>
                         </GodkjenningsPanel>
                     )}
@@ -63,8 +78,8 @@ function Bekreftelse() {
                 </Alert>
             )}
             <div>
-                <Button type="submit" variant="primary">
-                    Fullfør
+                <Button type="submit" variant="primary" disabled={innsendingDeaktivert}>
+                    {knappetekst}
                 </Button>
             </div>
         </>
