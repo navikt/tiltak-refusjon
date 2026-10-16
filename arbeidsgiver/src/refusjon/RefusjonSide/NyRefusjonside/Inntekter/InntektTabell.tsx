@@ -152,7 +152,6 @@ function InntektTabell(props: Props) {
                                     )}
                                     <Table.Row
                                         selected={!!inntekt.erOpptjentIPeriode}
-                                        aria-disabled={isLoading}
                                         onRowClick={() =>
                                             onInntektslinjeChange({
                                                 type: 'INNTEKT',
@@ -166,7 +165,6 @@ function InntektTabell(props: Props) {
                                                 <Checkbox
                                                     checked={!!inntekt.erOpptjentIPeriode}
                                                     hideLabel
-                                                    disabled={isLoading}
                                                     onChange={(e) => {
                                                         e.stopPropagation();
                                                         onInntektslinjeChange({
@@ -225,14 +223,12 @@ function InntektTabell(props: Props) {
                             <Table.Row
                                 selected={harIkkeOpptjentInntekterIPerioden ?? false}
                                 onRowClick={() => onInntektslinjeChange({ type: 'INGEN-INNTEKTER' })}
-                                aria-disabled={isLoading}
                             >
                                 <Table.DataCell colSpan={3}>
                                     <HStack align="center" gap="space-8" wrap={false}>
                                         <Checkbox
                                             checked={harIkkeOpptjentInntekterIPerioden ?? false}
                                             hideLabel
-                                            disabled={isLoading}
                                             onChange={() => onInntektslinjeChange({ type: 'INGEN-INNTEKTER' })}
                                         >
                                             Velg "Det er ikke opptjent inntekter i perioden"

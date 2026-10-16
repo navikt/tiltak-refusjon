@@ -5,7 +5,12 @@ export type Inntektsendring =
     | { type: 'INNTEKT'; id: string; erOpptjentIPeriode: boolean };
 
 export const erInntektLike = (a: Inntektslinje[], b: Inntektslinje[]): boolean =>
-    a.length === b.length && a.every((inntekt, index) => inntekt.id === b[index].id);
+    a.length === b.length &&
+    a.every((inntekt, index) => {
+        const { id: IdA, erOpptjentIPeriode: erOpptjentIPeriodeA } = inntekt;
+        const { id: IdB, erOpptjentIPeriode: erOpptjentIPeriodeB } = b[index];
+        return IdA === IdB && erOpptjentIPeriodeA === erOpptjentIPeriodeB;
+    });
 
 export const harOpptjentInntekterIPerioden = (inntekter: Inntektslinje[]): boolean =>
     inntekter.some((inntekt) => inntekt.erOpptjentIPeriode);
