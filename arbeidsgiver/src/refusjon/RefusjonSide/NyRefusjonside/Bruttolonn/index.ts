@@ -1,4 +1,4 @@
-import Bruttlonn from './Bruttolonn';
+import Bruttolonn from './Bruttolonn';
 export * from './Bruttolonn';
 
-export default Bruttlonn;
+export default Bruttolonn;

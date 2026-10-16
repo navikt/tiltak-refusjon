@@ -6,6 +6,7 @@ import { useFormContext, useWatch, Controller } from 'react-hook-form';
 import { Refusjon, tiltakstypeTekst } from '~/types';
 import { settTidligereRefunderbarBeløp } from '@/services/rest-service';
 import { formaterDato } from '~/utils';
+import { erNil } from '~/utils/predicates';
 
 export const fravaerSchema = z
     .object({
@@ -53,7 +54,7 @@ export const fravaerDefaultValues = (refusjon: Refusjon): Partial<FravaerFields>
     const { fratrekkRefunderbarBeløp, refunderbarBeløp } = refusjon.refusjonsgrunnlag;
     return {
         fravaer: fratrekkRefunderbarBeløp ?? undefined,
-        refundert: fratrekkRefunderbarBeløp && refunderbarBeløp ? true : null,
+        refundert: fratrekkRefunderbarBeløp ? !erNil(refunderbarBeløp) : null,
         belop: refunderbarBeløp?.toString() ?? '',
     };
 };
@@ -164,9 +165,9 @@ function Fravaer(props: Props) {
                                 field.onBlur();
                                 settTidligereRefunderbarBeløp(
                                     id,
-                                    true,
+                                    erGyldig,
                                     sistEndret,
-                                    parseInt(e.currentTarget.value, 10)
+                                    erGyldig ? parseInt(e.currentTarget.value, 10) : null
                                 );
                             }}
                         />
@@ -185,8 +186,7 @@ function Fravaer(props: Props) {
                             Fristen er automatisk utsatt mens dere venter på riktig beløp for refusjon for fravær.
                         </BodyShort>
                         <BodyShort spacing>
-                            Refusjonen for midlertidig lønnstilskudd kan fylles ut og sendes inn etter beløpet er
-                            mottatt.
+                            Refusjonen for {tiltakstypeSomTekst} kan fylles ut og sendes inn etter beløpet er mottatt.
                         </BodyShort>
                         <BodyShort spacing>
                             Dersom dere har søkt om refusjon for fravær og venter på riktig beløp, må dere vente med å

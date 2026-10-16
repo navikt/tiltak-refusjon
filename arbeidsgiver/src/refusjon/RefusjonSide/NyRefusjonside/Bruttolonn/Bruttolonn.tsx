@@ -45,7 +45,7 @@ export const lagBruttolonnSchema = (refusjon: Refusjon) => {
                 ctx.addIssue({
                     code: z.ZodIssueCode.custom,
                     path: ['bruttolonn'],
-                    message: `Beløpet er høyre enn sum bruttolønn. Det må være det samme eller lavere enn ${bruttolonnOpptjentIPerioden} kr.`,
+                    message: `Beløpet er høyere enn sum bruttolønn. Det må være det samme eller lavere enn ${bruttolonnOpptjentIPerioden} kr.`,
                 });
             }
         });
