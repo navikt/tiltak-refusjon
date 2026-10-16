@@ -4,19 +4,18 @@ import BekreftSlettKorreksjon from '@/refusjon/RefusjonSide/BekreftSlettKorreksj
 import BekreftTilbakekrevKorreksjon from '@/refusjon/RefusjonSide/BekreftTilbakekrevKorreksjon';
 import Boks from '~/Boks';
 import InformasjonFraAvtalenVTAO from '~/KvitteringSide/KvitteringSideVTAO/InformasjonFraAvtaleVTAO';
-import KorreksjonUtregningVTAO from './KorreksjonUtregningVTAO';
 import TilskuddssatsVTAO from '~/KvitteringSide/KvitteringSideVTAO/TilskuddssatsVTAO';
 import VerticalSpacer from '~/VerticalSpacer';
-import { Aktsomhet, Refusjonsgrunnlag } from '~/types';
+import { Aktsomhet, Korreksjon } from '~/types';
+import Utregning from '~/Utregning';
 
 interface Props {
     aktsomhet?: Aktsomhet;
-    refusjonsgrunnlag: Refusjonsgrunnlag;
+    korreksjon: Korreksjon;
 }
 
 const KorreksjonSideVTAO = (props: Props) => {
-    const { aktsomhet, refusjonsgrunnlag } = props;
-    const { tilskuddsgrunnlag } = refusjonsgrunnlag;
+    const { aktsomhet, korreksjon } = props;
 
     return (
         <Boks variant="hvit">
@@ -35,12 +34,15 @@ const KorreksjonSideVTAO = (props: Props) => {
             <InformasjonFraAvtalenVTAO
                 aktsomhet={aktsomhet}
                 åpnetFørsteGang={'Trengs ikke på korreksjon'}
-                refusjonsgrunnlag={refusjonsgrunnlag}
+                refusjonsgrunnlag={korreksjon.refusjonsgrunnlag}
             />
             <VerticalSpacer rem={2} />
-            <TilskuddssatsVTAO tilskuddsgrunnlag={tilskuddsgrunnlag} />
+            <TilskuddssatsVTAO tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
             <VerticalSpacer rem={1} />
-            <KorreksjonUtregningVTAO tilskuddsgrunnlag={tilskuddsgrunnlag} />
+            <Utregning
+                tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                utregning={korreksjon.utregning}
+            />
             <VerticalSpacer rem={1} />
             <BekreftTilbakekrevKorreksjon />
         </Boks>
