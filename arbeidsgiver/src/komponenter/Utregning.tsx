@@ -22,6 +22,7 @@ import './Utregning.less';
 import { Beregning, Inntektsgrunnlag, Tilskuddsgrunnlag } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
 import EksternLenke from '~/EksternLenke/EksternLenke';
+import classNames from 'classnames';
 
 interface Props {
     refusjonsnummer: {
@@ -34,12 +35,14 @@ interface Props {
     forrigeRefusjonMinusBeløp?: number;
     inntektsgrunnlag?: Inntektsgrunnlag;
     sumUtbetaltVarig?: number;
+    skjulTittel?: boolean;
+    visRamme?: boolean;
 }
 
 const Utregning: FunctionComponent<Props> = (props) => {
     const cls = BEMHelper('utregning');
 
-    const { beregning, tilskuddsgrunnlag, forrigeRefusjonMinusBeløp } = props;
+    const { beregning, tilskuddsgrunnlag, forrigeRefusjonMinusBeløp, visRamme = true } = props;
     const bruttoLønnsInntekter = props.inntektsgrunnlag?.inntekter.filter(
         (inntekt) => inntekt.erMedIInntektsgrunnlag && inntekt.erOpptjentIPeriode === true
     );
@@ -65,11 +68,15 @@ const Utregning: FunctionComponent<Props> = (props) => {
     );
 
     return (
-        <div className={cls.className}>
-            <Heading level="3" size="medium">
-                Utregningen
-            </Heading>
-            <VerticalSpacer rem={1} />
+        <div className={classNames(cls.className, { [cls.modifier('ramme')]: visRamme })}>
+            {!props.skjulTittel && (
+                <>
+                    <Heading level="3" size="medium">
+                        Utregningen
+                    </Heading>
+                    <VerticalSpacer rem={1} />
+                </>
+            )}
             <Utregningsrad labelTekst={'Bruttolønn i perioden'} verdi={beregning?.lønn || 0}>
                 <UtregningsradHvaInngårIDette
                     inntekter={bruttoLønnsInntekter ?? []}

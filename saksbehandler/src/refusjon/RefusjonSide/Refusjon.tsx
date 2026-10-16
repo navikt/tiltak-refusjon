@@ -23,7 +23,7 @@ const Advarsler: FunctionComponent = () => {
     const brukerContext: BrukerContextType = useInnloggetBruker();
 
     return (
-        <>
+        <InnholdContainer>
             {brukerContext.innloggetBruker.harKorreksjonTilgang && refusjon.korreksjonId && (
                 <InnholdContainer>
                     <Alert variant="info" size="small">
@@ -33,7 +33,7 @@ const Advarsler: FunctionComponent = () => {
                     <VerticalSpacer rem={1} />
                 </InnholdContainer>
             )}
-        </>
+        </InnholdContainer>
     );
 };
 
