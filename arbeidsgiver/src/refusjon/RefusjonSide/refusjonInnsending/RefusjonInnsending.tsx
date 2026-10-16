@@ -1,10 +1,10 @@
 import { Alert, ConfirmationPanel } from '@navikt/ds-react';
 import { Dispatch, FunctionComponent, PropsWithChildren, SetStateAction, useState } from 'react';
-import LagreKnapp from '../../../komponenter/LagreKnapp';
-import Utregning from '../../../komponenter/Utregning';
+import LagreKnapp from '@/komponenter/LagreKnapp';
+import Utregning from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 
-import SummeringBoks from '../SummeringBoks';
+import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
 import './refusjonInnsending.less';
 import { Refusjon } from '~/types/refusjon';
 import BEMHelper from '~/utils/bem';
@@ -49,17 +49,11 @@ const RefusjonInnsending: FunctionComponent<Properties> = ({
     return (
         <div className={cls.className}>
             <Utregning
-                refusjonsnummer={{
-                    avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                    løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                }}
-                erKorreksjon={false}
-                forrigeRefusjonMinusBeløp={refusjon.refusjonsgrunnlag?.forrigeRefusjonMinusBeløp || 0}
-                beregning={refusjon.refusjonsgrunnlag.beregning}
-                tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
-                sumUtbetaltVarig={refusjon.refusjonsgrunnlag.sumUtbetaltVarig}
+                tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                utregning={refusjon.utregning}
             />
+            <VerticalSpacer rem={4} />
             <SummeringBoks
                 erForKorreksjon={false}
                 refusjonsgrunnlag={refusjon.refusjonsgrunnlag}

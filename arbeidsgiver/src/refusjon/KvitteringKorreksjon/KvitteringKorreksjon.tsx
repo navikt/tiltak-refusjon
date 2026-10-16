@@ -6,7 +6,7 @@ import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/inntektsmelding/Innt
 import InntekterFraTiltaketSvar from '@/refusjon/RefusjonSide/InntekterFraTiltaketSvar';
 import KorreksjonInfo from './KorreksjonInfo';
 import SummeringBoks from '@/refusjon/RefusjonSide/SummeringBoks';
-import Utregning from '@/komponenter/Utregning';
+import Utregning from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, KorreksjonStatus, korreksjonStatusTekst } from '~/types';
 import { Korreksjon, Refusjon } from '~/types/refusjon';
@@ -48,15 +48,9 @@ const KvitteringKorreksjon = (props: Props) => {
                 <InntekterFraTiltaketSvar refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
                 <VerticalSpacer rem={2} />
                 <Utregning
-                    refusjonsnummer={{
-                        avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                        løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                    }}
-                    erKorreksjon={true}
-                    beregning={korreksjon.refusjonsgrunnlag.beregning}
-                    tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                    utregning={korreksjon.utregning}
                     inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
-                    sumUtbetaltVarig={korreksjon.refusjonsgrunnlag.sumUtbetaltVarig}
+                    tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                 />
                 <VerticalSpacer rem={4} />
                 <SummeringBoks
@@ -88,15 +82,9 @@ const KvitteringKorreksjon = (props: Props) => {
                         <InntekterFraTiltaketSvar refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
                         <VerticalSpacer rem={2} />
                         <Utregning
-                            refusjonsnummer={{
-                                avtalenr: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                                løpenummer: refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                            }}
-                            erKorreksjon={false}
-                            beregning={refusjon.refusjonsgrunnlag.beregning}
-                            tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                            forrigeRefusjonMinusBeløp={refusjon.refusjonsgrunnlag.forrigeRefusjonMinusBeløp}
+                            utregning={refusjon.utregning}
                             inntektsgrunnlag={refusjon.refusjonsgrunnlag.inntektsgrunnlag}
+                            tilskuddsgrunnlag={refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                         />
                         <VerticalSpacer rem={4} />
                         <SummeringBoks
