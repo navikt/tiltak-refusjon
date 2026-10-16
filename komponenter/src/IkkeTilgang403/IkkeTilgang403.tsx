@@ -1,8 +1,9 @@
-import { BodyShort, Box, Heading, List, Page, VStack, Button } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, List, VStack, Button } from '@navikt/ds-react';
 import { Link } from 'react-router';
 
 import Boks from '~/Boks';
 import { Feilkode, Feilmeldinger } from '~/feilkodemapping';
+import { MainContainer } from '~/Container';
 
 interface Props {
     feilmelding?: string;
@@ -32,7 +33,7 @@ function IkkeTilgang403(props: Props) {
     }
 
     return (
-        <Page.Block as="main" width="xl" gutters>
+        <MainContainer>
             <Box paddingBlock="space-20 space-16">
                 <Boks variant="hvit">
                     <VStack gap="space-12" align="start">
@@ -55,7 +56,7 @@ function IkkeTilgang403(props: Props) {
                     </VStack>
                 </Boks>
             </Box>
-        </Page.Block>
+        </MainContainer>
     );
 }
 

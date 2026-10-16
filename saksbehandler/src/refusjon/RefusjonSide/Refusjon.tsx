@@ -1,14 +1,12 @@
-import { FunctionComponent, Suspense } from 'react';
+import { FunctionComponent } from 'react';
 import { Alert } from '@navikt/ds-react';
 import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router';
 
 import HandlingerMeny from './HandlingerMeny';
-import HenterInntekterBoks from '~/HenterInntekterBoks';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import KvitteringSideVTAO from '~/KvitteringSide/KvitteringSideVTAO';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
-import TilbakeTilOversikt from '@/komponenter/tilbake-til-oversikt/TilbakeTilOversikt';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Tiltak, Korreksjonsgrunn, RefusjonStatus, BrukerContextType } from '~/types';
 import { beregnDagenEtterOgFormater, formaterDato } from '~/utils';
@@ -17,6 +15,7 @@ import { useInnloggetBruker } from '@/bruker/BrukerContext';
 
 import FeilSide from './FeilSide';
 import RefusjonSide from './RefusjonSide';
+import { InnholdContainer } from '~/Container';
 
 const Advarsler: FunctionComponent = () => {
     const { refusjonId } = useParams<{ refusjonId: string }>();
@@ -26,13 +25,13 @@ const Advarsler: FunctionComponent = () => {
     return (
         <>
             {brukerContext.innloggetBruker.harKorreksjonTilgang && refusjon.korreksjonId && (
-                <>
+                <InnholdContainer>
                     <Alert variant="info" size="small">
                         Denne refusjonen er det gjort korrigeringer på.{' '}
                         <Link to={`/korreksjon/${refusjon.korreksjonId}`}>Klikk her for å åpne korreksjonen.</Link>
                     </Alert>
                     <VerticalSpacer rem={1} />
-                </>
+                </InnholdContainer>
             )}
         </>
     );
@@ -79,6 +78,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -89,6 +89,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -137,6 +138,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -147,6 +149,7 @@ const Komponent: FunctionComponent = () => {
                         refusjon={refusjon}
                         innloggetBruker={brukerContext.innloggetBruker}
                         headerActions={<HandlingerMeny refusjon={refusjon} opprettKorreksjon={opprettKorreksjon} />}
+                        rolle="saksbehandler"
                     />
                 );
             }
@@ -156,15 +159,10 @@ const Komponent: FunctionComponent = () => {
 
 const Refusjon: FunctionComponent = () => {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ flex: '0 0 80rem', flexShrink: 1 }}>
-                <TilbakeTilOversikt />
-                <Suspense fallback={<HenterInntekterBoks />}>
-                    <Advarsler />
-                    <Komponent />
-                </Suspense>
-            </div>
-        </div>
+        <>
+            <Advarsler />
+            <Komponent />
+        </>
     );
 };
 

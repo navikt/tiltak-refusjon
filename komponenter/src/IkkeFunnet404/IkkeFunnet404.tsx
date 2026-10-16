@@ -1,8 +1,9 @@
 import { Link } from 'react-router';
-import { BodyShort, Box, Button, Heading, List, Page, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Button, Heading, List, VStack } from '@navikt/ds-react';
 
 import Boks from '~/Boks';
 import React from 'react';
+import { MainContainer } from '~/Container';
 
 interface Props {
     pathTilForside?: string;
@@ -13,7 +14,7 @@ function IkkeFunnet404(props: Props) {
     const { pathTilForside = '/', arbeidsgiver = false } = props;
 
     return (
-        <Page.Block as="main" width="xl" gutters>
+        <MainContainer>
             <Box paddingBlock="space-20 space-16" data-aksel-template="404-v2">
                 <Boks variant="hvit">
                     <VStack gap="space-12" align="start">
@@ -41,7 +42,7 @@ function IkkeFunnet404(props: Props) {
                     </VStack>
                 </Boks>
             </Box>
-        </Page.Block>
+        </MainContainer>
     );
 }
 
