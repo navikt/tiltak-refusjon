@@ -16,6 +16,7 @@ const GodkjenningsPanel = ({
     checkboxLabel,
     error,
 }: PropsWithChildren<GodkjenningsPanelProps>) => {
+    const descriptionId = useId();
     const errorId = useId();
 
     return (
@@ -27,9 +28,9 @@ const GodkjenningsPanel = ({
             padding={{ xs: 'space-16', md: 'space-20' }}
         >
             <VStack gap="space-16">
-                {children}
+                <div id={descriptionId}>{children}</div>
                 <Checkbox
-                    aria-describedby={error ? errorId : undefined}
+                    aria-describedby={[descriptionId, error ? errorId : undefined].filter(Boolean).join(' ')}
                     checked={isChecked}
                     error={!!error}
                     onChange={(event) => setChecked(event.currentTarget.checked)}
