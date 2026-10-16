@@ -37,6 +37,7 @@ function Bekreftelse() {
                     control={control}
                     render={({ field, fieldState }) => (
                         <GodkjenningsPanel
+                            {...field}
                             checkboxLabel="Ja, jeg bekrefter."
                             error={fieldState.error?.message}
                             isChecked={field.value ?? false}
