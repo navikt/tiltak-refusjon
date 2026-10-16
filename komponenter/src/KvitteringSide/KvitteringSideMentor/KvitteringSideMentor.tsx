@@ -7,7 +7,7 @@ import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Refusjon } from '~/types';
 import { InnloggetBruker } from '~/types/brukerContextType';
 import InformasjonFraAvtalenMentor from './InformasjonFraAvtaleMentor';
-import UtregningMentor from './UtregningMentor';
+import Utregning from '~/Utregning/Utregning';
 import SummeringBoksMentor from './SummeringBoksMentor';
 import StatusEtikettMentor from './StatusEtikettMentor';
 import Boks from '~/Boks';
@@ -59,11 +59,12 @@ const KvitteringSideMentor: FunctionComponent<Props> = (props: Props) => {
                         åpnetFørsteGang={refusjon.åpnetFørsteGang}
                         settKid={settKid}
                     />
-                    <VerticalSpacer rem={1} />
-                    <UtregningMentor
+                    <VerticalSpacer rem={2} />
+                    <Utregning
                         tilskuddsgrunnlag={props.refusjon.refusjonsgrunnlag.tilskuddsgrunnlag}
-                        beregning={props.refusjon.refusjonsgrunnlag.beregning}
+                        utregning={props.refusjon.utregning}
                     />
+                    <VerticalSpacer rem={4} />
                     <SummeringBoksMentor refusjonsgrunnlag={refusjon.refusjonsgrunnlag} />
                 </Boks>
             </VStack>
