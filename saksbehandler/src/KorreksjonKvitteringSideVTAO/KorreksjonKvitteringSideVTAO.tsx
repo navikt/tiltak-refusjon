@@ -4,11 +4,11 @@ import { Alert, BodyShort, Heading, Tag } from '@navikt/ds-react';
 import Boks from '~/Boks';
 import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen';
 import KorreksjonSummeringBoksVTAO from './KorreksjonSummeringBoksVTAO';
-import KorreksjonUtregningVTAO from '@/KorreksjonSideVTAO/KorreksjonUtregningVTAO';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, Korreksjon } from '~/types';
 import { korreksjonStatusTekst } from '~/types/messages';
 import { storForbokstav } from '~/utils/stringUtils';
+import Utregning from '~/Utregning';
 
 interface Props {
     aktsomhet?: Aktsomhet;
@@ -36,7 +36,10 @@ const KorreksjonKvitteringSide = (props: Props) => {
                 bedriftKontonummerInnhentetTidspunkt={korreksjon.refusjonsgrunnlag.bedriftKontonummerInnhentetTidspunkt}
             />
             <VerticalSpacer rem={2} />
-            <KorreksjonUtregningVTAO tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag} />
+            <Utregning
+                tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
+                utregning={korreksjon.utregning}
+            />
             <VerticalSpacer rem={2} />
             {(korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddsbeløp || 0) > 0 && (
                 <Alert variant="warning">
