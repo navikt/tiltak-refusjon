@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import validator from 'norsk-validator';
 import { TextField, debounce } from '@navikt/ds-react';
 
-import styles from './KIDInputValidator.module.less';
-
 interface Props {
     kid?: string;
+    label?: ReactNode;
+    hideLabel?: boolean;
     onEndring?: (kid?: string) => void;
     onFeil?: (msg?: string) => void;
 }
@@ -14,7 +14,7 @@ interface Props {
 const bedriftKidRegex = new RegExp('[^ 0-9\\d]|^0+$');
 
 const KIDInputValidator = (props: Props) => {
-    const { onEndring = (f) => f, onFeil = (f) => f } = props;
+    const { label = 'KID-nummer', hideLabel = true, onEndring = (f) => f, onFeil = (f) => f } = props;
 
     const [kid, setKid] = useState(props.kid || '');
     const [feil, setfeil] = useState(false);
@@ -38,9 +38,9 @@ const KIDInputValidator = (props: Props) => {
     return (
         <>
             <TextField
-                className={styles.textField}
-                hideLabel
-                label="KID-nummer"
+                htmlSize={18}
+                hideLabel={hideLabel}
+                label={label}
                 placeholder="KID-nummer"
                 value={kid}
                 size="small"
