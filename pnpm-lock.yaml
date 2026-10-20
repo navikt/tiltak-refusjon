@@ -29,6 +29,9 @@ importers:
 
   arbeidsgiver:
     dependencies:
+      '@hookform/resolvers':
+        specifier: ^5.2.2
+        version: 5.2.2(react-hook-form@7.75.0(react@19.2.6))
       '@navikt/aksel-icons':
         specifier: ^8.10.5
         version: 8.10.5
@@ -80,6 +83,9 @@ importers:
       react-dom:
         specifier: ^19.2.5
         version: 19.2.6(react@19.2.6)
+      react-hook-form:
+        specifier: ^7.75.0
+        version: 7.75.0(react@19.2.6)
       react-modal:
         specifier: ^3.16.3
         version: 3.16.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -92,6 +98,9 @@ importers:
       swr:
         specifier: ^2.4.1
         version: 2.4.1(react@19.2.6)
+      zod:
+        specifier: ^3.25.76
+        version: 3.25.76
     devDependencies:
       '@storybook/addon-docs':
         specifier: ^9.1.20
