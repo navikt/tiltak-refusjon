@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import useSWR, { SWRConfiguration, mutate } from 'swr';
+import useSWR, { SWRConfiguration, SWRResponse, mutate } from 'swr';
 
+import { Feature, FeatureToggles } from '@/featureToggles';
 import {
     Aktsomhet,
     ApiError,
@@ -264,4 +265,15 @@ export const hentInntekterLengerFrem = async (
 
 export const useRefusjonKreverAktsomhet = (refusjonId?: string) => {
     return useSWR<Aktsomhet>(refusjonId ? `/refusjon/${refusjonId}/aktsomhet` : undefined, swrConfig);
+};
+
+export const useFeatureToggles = (): SWRResponse<FeatureToggles, Error> => {
+    const url = `/feature?${Object.values(Feature)
+        .map((feature) => `feature=${feature}`)
+        .join('&')}`;
+    return useSWR<FeatureToggles, Error>(url, {
+        ...swrConfig,
+        suspense: false,
+        onError: () => console.error('Kunne ikke hente feature toggles'),
+    });
 };

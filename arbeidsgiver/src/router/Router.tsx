@@ -1,4 +1,5 @@
 import { createBrowserRouter, Outlet } from 'react-router';
+import { Suspense } from 'react';
 
 import AdvarselBannerTestversjon from '@/AdvarselBannerTestversjon/AdvarselBannerTestversjon';
 import AMeldingBanner from '@/AMeldingBanner/AMeldingBanner';
@@ -9,13 +10,12 @@ import OversiktSide from '@/refusjon/OversiktSide/OversiktSide';
 import Refusjon from '@/refusjon/RefusjonSide/Refusjon';
 import ScrollToTop from '@/komponenter/ScrollToTop';
 import { BrukerProvider } from '@/bruker/BrukerContext';
+import { FeatureTogglesProvider } from '@/featureToggles';
 import { FilterProvider } from '@/refusjon/oversikt/FilterContext';
 import RefusjonKontroll from '@/komponenter/refusjon-kontroll/RefusjonKontroll';
-
-import Landingsside from '@/Landingsside';
-import { Suspense } from 'react';
 import LasterBoks from '~/LasterBoks';
 import { InnholdProvider } from '~/Container';
+import Landingsside from '@/Landingsside';
 
 export const basename = '/';
 
@@ -55,10 +55,12 @@ const router = createBrowserRouter(
                             path: Path.REFUSJON_OVERSIKT,
                             element: (
                                 <Suspense fallback={<LasterBoks />}>
-                                    <BrukerProvider>
-                                        <AMeldingBanner />
-                                        <Outlet />
-                                    </BrukerProvider>
+                                    <FeatureTogglesProvider>
+                                        <BrukerProvider>
+                                            <AMeldingBanner />
+                                            <Outlet />
+                                        </BrukerProvider>
+                                    </FeatureTogglesProvider>
                                 </Suspense>
                             ),
                             children: [
