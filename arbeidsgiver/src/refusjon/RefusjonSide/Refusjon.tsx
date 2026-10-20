@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useEffect, useRef } from 'react';
-import TilbakeTilOversikt from '@/komponenter/TilbakeTilOversikt';
 import KvitteringKorreksjon from '@/refusjon/KvitteringKorreksjon/KvitteringKorreksjon';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import FeilSide from './FeilSide';
@@ -23,7 +22,7 @@ import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
 
-const Komponent: FunctionComponent = () => {
+const Refusjon: FunctionComponent = () => {
     const { refusjonId } = useParams();
     const refusjon = useHentRefusjon(refusjonId);
     const erLastet = useRef(false);
@@ -64,6 +63,7 @@ const Komponent: FunctionComponent = () => {
                         aktsomhet={aktsomhet}
                         innloggetBruker={brukerContext.innloggetBruker}
                         refusjon={refusjon}
+                        rolle="arbeidsgiver"
                     />
                 );
             }
@@ -122,6 +122,7 @@ const Komponent: FunctionComponent = () => {
                             aktsomhet={aktsomhet}
                             refusjon={refusjon}
                             innloggetBruker={brukerContext.innloggetBruker}
+                            rolle="arbeidsgiver"
                         />
                     )}
                     {tiltakstype === 'VTAO' && (
@@ -145,17 +146,6 @@ const Komponent: FunctionComponent = () => {
 const Korreksjonskvittering = ({ refusjon, aktsomhet }: { refusjon: RefusjonType; aktsomhet?: Aktsomhet }) => {
     const korreksjon = useHentKorreksjon(refusjon.korreksjonId!);
     return <KvitteringKorreksjon refusjon={refusjon} korreksjon={korreksjon} aktsomhet={aktsomhet} />;
-};
-
-const Refusjon: FunctionComponent = () => {
-    return (
-        <div style={{ margin: '0 auto', maxWidth: '80rem' }}>
-            <div style={{ flex: '0 0 55rem', flexShrink: 1 }}>
-                <TilbakeTilOversikt />
-                <Komponent />
-            </div>
-        </div>
-    );
 };
 
 export default Refusjon;

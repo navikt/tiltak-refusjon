@@ -11,6 +11,8 @@ import { useInnloggetBruker } from '@/bruker/BrukerContext';
 
 import './OversiktSide.less';
 import { Path } from '@/router/Router';
+import { OversiktsTabellSuspense } from '~/OversiktTabell';
+import { MainContainer } from '~/Container';
 
 const cls = BEMHelper('OversiktSide');
 
@@ -24,23 +26,27 @@ const OversiktSide: FunctionComponent = () => {
     };
 
     return (
-        <div className={cls.className}>
-            <div className={cls.element('banner')}>
-                <Banner />
-            </div>
-            <div className={cls.element('oversikt')}>
-                <div className={cls.element('wrapper')}>
-                    <div className={cls.element('meny')}>
-                        <Filtermeny filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
-                    </div>
-                    <div className={cls.element('container')}>
-                        <IkkeTilgang403ErrorBoundary filter={filter} pathTilForside={Path.OVERSIKT}>
-                            <Oversikt />
-                        </IkkeTilgang403ErrorBoundary>
+        <MainContainer bredde="2xl">
+            <div className={cls.className}>
+                <div className={cls.element('banner')}>
+                    <Banner />
+                </div>
+                <div className={cls.element('oversikt')}>
+                    <div className={cls.element('wrapper')}>
+                        <div className={cls.element('meny')}>
+                            <Filtermeny filter={filter} oppdaterFilter={oppdaterFilter} options={options} />
+                        </div>
+                        <div className={cls.element('container')}>
+                            <IkkeTilgang403ErrorBoundary filter={filter} pathTilForside={Path.OVERSIKT}>
+                                <OversiktsTabellSuspense>
+                                    <Oversikt />
+                                </OversiktsTabellSuspense>
+                            </IkkeTilgang403ErrorBoundary>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </MainContainer>
     );
 };
 

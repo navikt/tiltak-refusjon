@@ -1,5 +1,5 @@
-import { Alert, BodyShort, Heading, Loader } from '@navikt/ds-react';
-import { Component, type FunctionComponent, type PropsWithChildren, type ReactNode, Suspense } from 'react';
+import { Alert, BodyShort, Heading } from '@navikt/ds-react';
+import { Component, type FunctionComponent, type PropsWithChildren, type ReactNode } from 'react';
 
 type ErrorBoundaryState = { error?: unknown };
 
@@ -40,15 +40,7 @@ const ErrorBoundary: FunctionComponent<PropsWithChildren> = (props) => {
                 </>
             )}
         >
-            <Suspense
-                fallback={
-                    <div style={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                        <Loader variant="neutral" size="xlarge" />
-                    </div>
-                }
-            >
-                {props.children}
-            </Suspense>
+            {props.children}
         </ReactErrorBoundary>
     );
 };
