@@ -30,9 +30,12 @@ const initialState: Record<Seksjon, boolean> = {
 
 function useRefusjonssideSteg() {
     const [seksjon, setSeksjon] = useState<Record<Seksjon, boolean>>(initialState);
+    const [steg, setSteg] = useState<Steg>(Steg.FRAVAER);
 
     const endreSteg = useCallback(
         (steg: Steg) => {
+            setSteg(steg);
+
             switch (steg) {
                 case Steg.INNTEKTER: {
                     return setSeksjon({
@@ -77,10 +80,11 @@ function useRefusjonssideSteg() {
                 }
             }
         },
-        [setSeksjon]
+        [setSteg, setSeksjon]
     );
 
     return {
+        steg,
         seksjon,
         endreSteg,
     };

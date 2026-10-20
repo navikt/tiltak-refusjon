@@ -2,7 +2,6 @@ import React, { FunctionComponent, useEffect, useRef } from 'react';
 import KvitteringKorreksjon from '@/refusjon/KvitteringKorreksjon/KvitteringKorreksjon';
 import KvitteringSide from '@/refusjon/KvitteringSide/KvitteringSide';
 import FeilSide from './FeilSide';
-import RefusjonSide from './RefusjonSide';
 import { BodyShort } from '@navikt/ds-react';
 import { useParams } from 'react-router';
 import {
@@ -21,6 +20,7 @@ import { useInnloggetBruker } from '@/bruker/BrukerContext';
 import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
+import RefusjonSide from '@/refusjon/RefusjonSide/RefusjonSide';
 
 const Refusjon: FunctionComponent = () => {
     const { refusjonId } = useParams();

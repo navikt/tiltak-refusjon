@@ -3,6 +3,7 @@ import { formaterPeriode } from '~/utils';
 import EksternLenke from '~/EksternLenke/EksternLenke';
 import React from 'react';
 import { Refusjon } from '~/types';
+import { formatterPenger } from '~/utils/PengeUtils';
 
 interface Props {
     refusjon: Refusjon;
@@ -24,6 +25,10 @@ function Oppsummering(props: Props) {
             <HGrid columns={{ xs: 1, sm: '6.25rem 1fr' }} gap={{ xs: 'space-2', sm: 'space-8' }}>
                 <BodyShort weight="semibold">Periode</BodyShort>
                 <BodyShort>{formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}</BodyShort>
+            </HGrid>
+            <HGrid columns={{ xs: 1, sm: '6.25rem 1fr' }} gap={{ xs: 'space-2', sm: 'space-8' }}>
+                <BodyShort weight="semibold">Avtalt beløp</BodyShort>
+                <BodyShort>Inntil {formatterPenger(tilskuddsgrunnlag.tilskuddsbeløp)}</BodyShort>
             </HGrid>
             <HGrid columns={{ xs: 1, sm: '6.25rem 1fr' }} gap={{ xs: 'space-2', sm: 'space-8' }}>
                 <BodyShort weight="semibold">Deltaker</BodyShort>
