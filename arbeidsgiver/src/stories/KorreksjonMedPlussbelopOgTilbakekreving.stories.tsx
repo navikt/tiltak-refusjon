@@ -5,6 +5,7 @@ import { Diskresjonskode } from '~/types';
 import { Korreksjon, Korreksjonsgrunn, Refusjon } from '~/types/refusjon';
 import { KorreksjonStatus, RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
+import { medInntekterForPerioden } from '~/stories/medInntekterForPerioden';
 
 const meta = {
     title: 'KvitteringKorreksjon',
@@ -20,6 +21,8 @@ type Story = StoryObj<typeof meta>;
 
 const refusjon: Refusjon = {
     refusjonsgrunnlag: {
+        bruttolonnOpptjentIPerioden: 62000,
+        ferietrekkIPerioden: -35000,
         tilskuddsgrunnlag: {
             avtaleId: 'a2bfd3ef-6e81-4f63-b631-f4d00aebe68a',
             avtaleFom: undefined,
@@ -46,7 +49,7 @@ const refusjon: Refusjon = {
             enhet: '1000',
             id: '01HMRW629XHD1N2W33BDFTVJTJ',
         },
-        inntektsgrunnlag: {
+        inntektsgrunnlag: medInntekterForPerioden({
             inntekter: [
                 {
                     inntektType: 'LOENNSINNTEKT',
@@ -95,7 +98,7 @@ const refusjon: Refusjon = {
             ],
             bruttoLønn: 62000.0,
             innhentetTidspunkt: '2024-01-22T16:22:30.536188',
-        },
+        }),
         bedriftKontonummer: '10000008145',
         bedriftKid: undefined,
         inntekterKunFraTiltaket: true,
@@ -143,6 +146,8 @@ const refusjon: Refusjon = {
 const korreksjon: Korreksjon = {
     korrigererRefusjonId: '01HMRW629X08FN1WNPVJWTNTF1',
     refusjonsgrunnlag: {
+        bruttolonnOpptjentIPerioden: 60000,
+        ferietrekkIPerioden: -35000,
         tilskuddsgrunnlag: {
             avtaleId: 'a2bfd3ef-6e81-4f63-b631-f4d00aebe68a',
             avtaleFom: undefined,
@@ -169,7 +174,7 @@ const korreksjon: Korreksjon = {
             enhet: '1000',
             id: '01HMRW629XHD1N2W33BDFTVJTJ',
         },
-        inntektsgrunnlag: {
+        inntektsgrunnlag: medInntekterForPerioden({
             inntekter: [
                 {
                     inntektType: 'LOENNSINNTEKT',
@@ -218,7 +223,7 @@ const korreksjon: Korreksjon = {
             ],
             bruttoLønn: 62000.0,
             innhentetTidspunkt: '2024-01-22T16:23:18.951698',
-        },
+        }),
         bedriftKontonummer: '10000008145',
         bedriftKid: undefined,
         inntekterKunFraTiltaket: true,

@@ -17,6 +17,8 @@ type Story = StoryObj<typeof meta>;
 const mentorForTidlig: Refusjon = {
     harInntektIAlleMåneder: true,
     refusjonsgrunnlag: {
+        bruttolonnOpptjentIPerioden: 0,
+        ferietrekkIPerioden: 0,
         harFerietrekkForSammeMåned: false,
         tilskuddsgrunnlag: {
             avtaleId: '8931b3f3-c5e9-4041-9356-985f4415ec6a',
