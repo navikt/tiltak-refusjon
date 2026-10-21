@@ -6,11 +6,10 @@
 #   saksbehandler (pnpm-workspace.yaml): Node.js, Docker, Vite
 
 [propose]
-# Suggested by: arbeidsgiver, komponenter, saksbehandler
-allow_localhost_any = true
+allow_localhost_any = false
 
 [propose.allow]
-localhost = [5173, 6006]
+localhost = [3001, 3002, 6006, 8081]
 
 ## Machine-specific — these belong in ~/.config/cplt/config.toml, not here.
 ## Copy the [section] headers too: keys pasted at the end of that file are
