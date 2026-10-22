@@ -1,5 +1,4 @@
 import { SortState, Table } from '@navikt/ds-react';
-import { useEffect, useState } from 'react';
 import { BegrensetRefusjon, Filter, SortingOrder } from '~/types';
 import OversiktsTabellHeader from './OversiktsTabellHeader';
 import OversiktsTabellBody from './OversiktsTabellBody';
