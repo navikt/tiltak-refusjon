@@ -23,22 +23,23 @@ function KreverInntekter(props: PropsWithChildren<Props>) {
         );
     }
 
-    if (inntektsgrunnlag?.inntekterForPerioden.length === 0) {
-        return (
-            <VStack gap="space-24">
-                <Heading level="2" size="small">
-                    Inntekter i perioden
-                </Heading>
-                <Alert variant="warning" size="small">
-                    Vi kan ikke finne noen lønnsinntekter fra a-meldingen for denne perioden. Når a-meldingen er
-                    oppdatert vil inntektsopplysningene vises her automatisk.
-                </Alert>
-                <InntektAccordion refusjon={refusjon} />
-            </VStack>
-        );
-    }
-
-    return children;
+    return (
+        <>
+            {inntektsgrunnlag?.inntekterForPerioden.length === 0 && (
+                <VStack gap="space-24">
+                    <Heading level="2" size="small">
+                        Inntekter i perioden
+                    </Heading>
+                    <Alert variant="warning" size="small">
+                        Vi kan ikke finne noen lønnsinntekter fra a-meldingen for denne perioden. Når a-meldingen er
+                        oppdatert vil inntektsopplysningene vises her automatisk.
+                    </Alert>
+                    <InntektAccordion refusjon={refusjon} />
+                </VStack>
+            )}
+            {children}
+        </>
+    );
 }
 
 export default KreverInntekter;

@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ZodTypeAny } from 'zod';
+import z, { ZodTypeAny } from 'zod';
 import { useNavigate } from 'react-router';
 import { BodyShort, Box, Heading, HStack, Tag, VStack } from '@navikt/ds-react';
 
@@ -36,7 +36,10 @@ interface Props {
 type RefusjonFormFields = FravaerFields & InntektFields & BruttolonnFields & KidOgKontonummerFields & BekreftelseFields;
 
 const schema = (refusjon: Refusjon, seksjon: Record<Seksjon, boolean>) => {
-    let schema: ZodTypeAny = fravaerSchema;
+    let schema: ZodTypeAny = z.object({});
+    if (seksjon.FRAVAER) {
+        schema = schema.and(fravaerSchema);
+    }
     if (seksjon.INNTEKT_TABELL) {
         schema = schema.and(inntektSchema);
     }
@@ -54,10 +57,10 @@ const schema = (refusjon: Refusjon, seksjon: Record<Seksjon, boolean>) => {
 
 const NyRefusjonside = (props: Props) => {
     const { refusjon, aktsomhet } = props;
-    const { tilskuddsgrunnlag, beregning } = refusjon.refusjonsgrunnlag;
+    const { tilskuddsgrunnlag } = refusjon.refusjonsgrunnlag;
 
     const navigate = useNavigate();
-    const { steg, seksjon, endreSteg } = useRefusjonsideSteg();
+    const { steg, seksjon, endreSteg } = useRefusjonsideSteg(refusjon);
     const [visGodkjennModal, setVisGodkjennModal] = useState<boolean>(false);
 
     const form = useForm<RefusjonFormFields>({
@@ -162,7 +165,7 @@ const NyRefusjonside = (props: Props) => {
                     godkjennRefusjonen={godkjennRefusjonen}
                 />
             )}
-            {visGodkjennModal && beregning?.refusjonsbeløp !== 0 && (
+            {visGodkjennModal && steg !== Steg.NULLBELOP && (
                 <RefusjonGodkjennModal
                     refusjon={refusjon}
                     visGodkjennModal={visGodkjennModal}

@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { Refusjon } from '~/types';
 
 export enum Steg {
     FRAVAER = 'FRAVAER',
@@ -19,7 +20,7 @@ export enum Seksjon {
 }
 
 const initialState: Record<Seksjon, boolean> = {
-    [Seksjon.FRAVAER]: true,
+    [Seksjon.FRAVAER]: false,
     [Seksjon.INNTEKT_TABELL]: false,
     [Seksjon.BRUTTOLONN]: false,
     [Seksjon.KID_OG_KONTONUMMER]: false,
@@ -28,15 +29,24 @@ const initialState: Record<Seksjon, boolean> = {
     [Seksjon.BEKREFTELSE]: false,
 };
 
-function useRefusjonssideSteg() {
+function useRefusjonssideSteg(refusjon: Refusjon) {
+    const {
+        refusjonsgrunnlag: { inntektsgrunnlag },
+    } = refusjon;
+    const [steg, setSteg] = useState<Steg>();
     const [seksjon, setSeksjon] = useState<Record<Seksjon, boolean>>(initialState);
-    const [steg, setSteg] = useState<Steg>(Steg.FRAVAER);
+    const manglerInntekter = inntektsgrunnlag?.inntekterForPerioden.length === 0;
 
     const endreSteg = useCallback(
         (steg: Steg) => {
             setSteg(steg);
 
             switch (steg) {
+                case Steg.FRAVAER:
+                    return setSeksjon({
+                        ...initialState,
+                        [Seksjon.FRAVAER]: true,
+                    });
                 case Steg.INNTEKTER: {
                     return setSeksjon({
                         ...initialState,
@@ -55,13 +65,18 @@ function useRefusjonssideSteg() {
                     });
                 }
                 case Steg.NULLBELOP: {
-                    return setSeksjon({
-                        ...initialState,
-                        [Seksjon.FRAVAER]: true,
-                        [Seksjon.INNTEKT_TABELL]: true,
-                        [Seksjon.UTBETALINGSINFO]: true,
-                        [Seksjon.BEKREFTELSE]: true,
-                    });
+                    return manglerInntekter
+                        ? setSeksjon({
+                              ...initialState,
+                              [Seksjon.BEKREFTELSE]: true,
+                          })
+                        : setSeksjon({
+                              ...initialState,
+                              [Seksjon.FRAVAER]: true,
+                              [Seksjon.INNTEKT_TABELL]: true,
+                              [Seksjon.UTBETALINGSINFO]: true,
+                              [Seksjon.BEKREFTELSE]: true,
+                          });
                 }
                 case Steg.BEREGNING_OG_BEKREFTELSE: {
                     return setSeksjon({
@@ -80,8 +95,12 @@ function useRefusjonssideSteg() {
                 }
             }
         },
-        [setSteg, setSeksjon]
+        [setSteg, setSeksjon, manglerInntekter]
     );
+
+    useEffect(() => {
+        endreSteg(manglerInntekter ? Steg.NULLBELOP : Steg.FRAVAER);
+    }, [endreSteg, manglerInntekter]);
 
     return {
         steg,
