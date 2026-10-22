@@ -4,6 +4,7 @@ import EksternLenke from '~/EksternLenke/EksternLenke';
 import React from 'react';
 import { Refusjon } from '~/types';
 import { formatterPenger } from '~/utils/PengeUtils';
+import { avtaleLenke } from '~/utils/lenkeUtils';
 
 interface Props {
     refusjon: Refusjon;
@@ -39,9 +40,7 @@ function Oppsummering(props: Props) {
             <HGrid columns={{ xs: 1, sm: '6.25rem 1fr' }} gap={{ xs: 'space-2', sm: 'space-8' }}>
                 <BodyShort weight="semibold">Avtale</BodyShort>
                 <BodyShort>
-                    <EksternLenke
-                        href={`https://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${tilskuddsgrunnlag.avtaleId}`}
-                    >
+                    <EksternLenke href={avtaleLenke(tilskuddsgrunnlag.avtaleId, 'ARBEIDSGIVER')}>
                         {tilskuddsgrunnlag.avtaleNr}
                     </EksternLenke>
                 </BodyShort>
