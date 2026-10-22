@@ -7,7 +7,7 @@ import InformasjonFraAvtalen from '@/refusjon/RefusjonSide/InformasjonFraAvtalen
 import InntekterFraAMeldingen from '@/refusjon/RefusjonSide/InntekterFraAMeldingen/InntekterFraAMeldingen';
 import InntekterFraAMeldingenGammel from '@/refusjon/RefusjonSide/InntekterFraAmeldingenGammel';
 import TidligereRefunderbarBeløpKvittering from '@/refusjon/RefusjonSide/TidligereRefunderbarBeløpKvittering';
-import Utregning from '@/refusjon/RefusjonSide/Utregning';
+import Utregning from '~/Utregning';
 import VerticalSpacer from '~/VerticalSpacer';
 import { Aktsomhet, korreksjonStatusTekst, Korreksjon } from '~/types';
 import { formatterPenger } from '@/utils/PengeUtils';
@@ -67,12 +67,7 @@ const KorreksjonKvitteringSide = (props: Props) => {
                 <TidligereRefunderbarBeløpKvittering refusjonsgrunnlag={korreksjon.refusjonsgrunnlag} />
                 <VerticalSpacer rem={2} />
                 <Utregning
-                    refusjonsnummer={{
-                        avtalenr: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.avtaleNr,
-                        løpenummer: korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag.løpenummer,
-                    }}
-                    erKorreksjon={true}
-                    beregning={korreksjon.refusjonsgrunnlag.beregning}
+                    utregning={korreksjon.utregning}
                     tilskuddsgrunnlag={korreksjon.refusjonsgrunnlag.tilskuddsgrunnlag}
                     inntektsgrunnlag={korreksjon.refusjonsgrunnlag.inntektsgrunnlag}
                 />
