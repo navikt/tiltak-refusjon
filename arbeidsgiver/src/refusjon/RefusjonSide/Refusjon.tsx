@@ -21,6 +21,8 @@ import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
 import RefusjonSide from '@/refusjon/RefusjonSide/RefusjonSide';
+import { useFeatureToggle } from '@/featureToggles';
+import NyRefusjonside from '@/refusjon/RefusjonSide/NyRefusjonside';
 
 const Refusjon: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -29,8 +31,8 @@ const Refusjon: FunctionComponent = () => {
     const brukerContext: BrukerContextType = useInnloggetBruker();
     const { data: aktsomhet } = useRefusjonKreverAktsomhet(refusjon.id);
     const tiltakstype = refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype;
-
     const { trigger, isMutating, reset } = useSWRMutation(`/refusjon/${refusjonId}`, oppdaterRefusjonFetcher);
+    const { arbeidsgiverNyRefusjon } = useFeatureToggle();
 
     useEffect(() => {
         const asyncTrigger = async () => {
@@ -98,7 +100,11 @@ const Refusjon: FunctionComponent = () => {
                 />
             );
         case RefusjonStatus.KLAR_FOR_INNSENDING:
-            return <RefusjonSide aktsomhet={aktsomhet} refusjon={refusjon} />;
+            return arbeidsgiverNyRefusjon ? (
+                <NyRefusjonside refusjon={refusjon} aktsomhet={aktsomhet} />
+            ) : (
+                <RefusjonSide aktsomhet={aktsomhet} refusjon={refusjon} />
+            );
         case RefusjonStatus.UTGÅTT:
             return (
                 <FeilSide
