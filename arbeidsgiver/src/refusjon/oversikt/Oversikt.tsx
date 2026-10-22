@@ -28,6 +28,7 @@ const Oversikt: FunctionComponent = () => {
                 <>
                     <LenkePanel refusjoner={pageable.refusjoner} />
                     <OversiktsTabell
+                        filter={filter}
                         avtalepart="arbeidsgiver"
                         oppdaterFilter={oppdaterFilter}
                         refusjoner={pageable.refusjoner}
