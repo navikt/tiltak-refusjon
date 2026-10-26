@@ -29,6 +29,11 @@ const UtgårÅrsakBeskrivelse = (props: Props) => {
                     dere vil få utbetalt maks av avtalt beløp.
                 </BodyShort>
             )}
+            {utgårÅrsak === UtgårÅrsak.FRAVAERSTREKK_GIR_MINUSBELOP && (
+                <BodyShort size="small">
+                    Tidligere refundert beløp grunnet fravær kan ikke føre til et økt negativt beløp i denne refusjonen.
+                </BodyShort>
+            )}
         </ReadMore>
     );
 };
