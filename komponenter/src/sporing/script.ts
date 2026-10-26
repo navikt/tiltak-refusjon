@@ -2,6 +2,11 @@ import { hentNettstedId, hentSporingsSkriptUrl, SPORING_SCRIPT_ID } from './conf
 import { BeforeSendHandler } from './preInnsending';
 
 export function lastInnSporingsskript(hostname: string, beforeSend: BeforeSendHandler): void {
+    // Ikke send sporing ved lokal kjøring (vite dev-server)
+    if (import.meta.env.MODE === 'development') {
+        return;
+    }
+
     window.beforeSendAnalytics ??= beforeSend;
 
     if (document.getElementById(SPORING_SCRIPT_ID)) {
