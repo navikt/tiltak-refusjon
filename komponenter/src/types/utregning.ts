@@ -23,6 +23,7 @@ export enum Fortegn {
 export enum UtgårÅrsak {
     OVER_AVTALT_TILSKUDD = 'OVER_AVTALT_TILSKUDD',
     OVER_FEM_GRUNNBELOP = 'OVER_FEM_GRUNNBELOP',
+    FRAVAERSTREKK_GIR_MINUSBELOP = 'FRAVAERSTREKK_GIR_MINUSBELOP',
 }
 
 export enum UtregningsLinjeType {
