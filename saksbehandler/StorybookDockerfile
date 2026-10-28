@@ -1,5 +1,7 @@
-FROM nginxinc/nginx-unprivileged:alpine
-COPY ./saksbehandler/storybook-static /usr/share/nginx/html
+FROM cgr.dev/chainguard/nginx:latest-dev AS prepare
 USER root
+COPY ./saksbehandler/storybook-static /usr/share/nginx/html
 RUN touch /usr/share/nginx/html/isAlive /usr/share/nginx/html/isReady
-USER nginx
+
+FROM cgr.dev/chainguard/nginx:latest
+COPY --from=prepare /usr/share/nginx/html /usr/share/nginx/html
