@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface AvtaltUtgift {
     navn: string;
     kategori: string;
@@ -11,41 +13,19 @@ export const AVTALTE_UTGIFTER: AvtaltUtgift[] = [
     { navn: 'Photoshop', kategori: 'b', avtaltBeløp: 432 },
 ];
 
-export type UtgiftBeløp = Record<string, string>;
+export type UtgiftBeløp = Record<string, number | undefined>;
 
-export const parseBeløp = (verdi: string | undefined): number | undefined => {
-    if (verdi === undefined || verdi.trim() === '') return undefined;
-    const normalisert = verdi.replace(/\s/g, '').replace(',', '.');
-    if (!/^\d+(\.\d{1,2})?$/.test(normalisert)) return undefined;
-    return Number(normalisert);
-};
+// PLACEHOLDER: antatt kontrakt mot tiltak-refusjon-api. Justeres når endepunktet finnes.
+export const utgiftsberegningRequestSchema = z.object({
+    utgifter: z.array(z.object({ navn: z.string(), beløp: z.number().nonnegative() })),
+});
 
-export const beløpFeilmelding = (verdi: string | undefined, maksGrense?: number): string | undefined => {
-    if (verdi === undefined || verdi.trim() === '') return undefined;
-    const beløp = parseBeløp(verdi);
-    if (beløp === undefined) return 'Beløpet må være et positivt tall med maks to desimaler';
-    if (maksGrense !== undefined && beløp > maksGrense) return `Beløpet kan ikke overstige ${maksGrense}`;
-    return undefined;
-};
+export type UtgiftsberegningRequest = z.infer<typeof utgiftsberegningRequestSchema>;
 
-export interface Utgiftsberegning {
-    sumUtgifter: number;
-    fratrekkOverstigendeBeløp: number;
-    refusjonsbeløp: number;
-}
+export const utgiftsberegningSchema = z.object({
+    sumUtgifter: z.number(),
+    fratrekkOverstigendeBeløp: z.number(),
+    refusjonsbeløp: z.number(),
+});
 
-const avrund = (beløp: number) => Math.round(beløp * 100) / 100;
-
-export const beregnUtgifter = (utgifter: AvtaltUtgift[], beløp: UtgiftBeløp): Utgiftsberegning => {
-    const linjer = utgifter.map((utgift) => {
-        const brukt = parseBeløp(beløp[utgift.navn]) ?? 0;
-        return { brukt, fratrekk: Math.max(0, brukt - utgift.avtaltBeløp) };
-    });
-    const sumUtgifter = avrund(linjer.reduce((sum, linje) => sum + linje.brukt, 0));
-    const fratrekkOverstigendeBeløp = avrund(linjer.reduce((sum, linje) => sum + linje.fratrekk, 0));
-    return {
-        sumUtgifter,
-        fratrekkOverstigendeBeløp,
-        refusjonsbeløp: avrund(sumUtgifter - fratrekkOverstigendeBeløp),
-    };
-};
+export type Utgiftsberegning = z.infer<typeof utgiftsberegningSchema>;

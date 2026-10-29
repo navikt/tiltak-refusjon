@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import StatusTekst from '~/StatusTekst';
 import { formaterDato, formaterPeriode } from '~/utils';
 import { BegrensetRefusjon } from '~/types/refusjon';
-import { kunStorForbokstav, lagRefusjonsnummer } from '~/utils/stringUtils';
+import { kunStorForbokstav, refusjonsnummer } from '~/utils/stringUtils';
 import { tiltakstypeTekstKort } from '~/types/messages';
 import { NORSK_DATO_FORMAT_SHORT } from '~/utils/datoUtils';
 import { Avtalepart } from './OversiktsTabell';
@@ -50,7 +50,7 @@ const OversiktsTabellBody: FunctionComponent<Props> = ({ refusjoner, avtalepart 
                     }}
                 >
                     <Table.DataCell textSize="small">
-                        {lagRefusjonsnummer(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag)}
+                        {refusjonsnummer(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag)}
                     </Table.DataCell>
                     <Table.DataCell textSize="small">
                         {kunStorForbokstav(

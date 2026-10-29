@@ -17,7 +17,7 @@ export const lagId = (avtaleNr: number, løpenummer: number, resendingsnummer: n
     }
 };
 
-export const lagRefusjonsnummer = ({
+export const refusjonsnummer = ({
     avtaleNr,
     løpenummer,
     resendingsnummer,

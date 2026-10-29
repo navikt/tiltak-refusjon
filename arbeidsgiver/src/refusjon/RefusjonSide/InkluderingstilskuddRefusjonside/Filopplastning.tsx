@@ -7,7 +7,6 @@ import {
     FileUpload,
     Heading,
     Table,
-    TextField,
     UNSAFE_Combobox,
     VStack,
 } from '@navikt/ds-react';
@@ -17,8 +16,9 @@ import { Refusjon } from '~/types';
 import { avtaleLenke } from '~/utils/lenkeUtils';
 import VerticalSpacer from '~/VerticalSpacer';
 import { formatterPenger } from '~/utils/PengeUtils';
+import TallInput from '@/komponenter/tall-input/TallInput';
 
-import { AvtaltUtgift, beløpFeilmelding, UtgiftBeløp } from './utgifter';
+import { AvtaltUtgift, UtgiftBeløp } from './utgifter';
 import { formaterDato } from '~/utils/datoUtils';
 
 const MAKS_FILSTØRRELSE_MB = 50;
@@ -36,7 +36,7 @@ interface Props {
     valgteUtgiftsnavn: string[];
     setValgteUtgiftsnavn: (navn: string[]) => void;
     beløp: UtgiftBeløp;
-    setBeløp: (navn: string, verdi: string) => void;
+    setBeløp: (navn: string, verdi?: number) => void;
     sumUtgifter: number;
 }
 
@@ -75,7 +75,7 @@ const Filopplastning = ({
                 {acceptedFiles.length > 0 && (
                     <VStack gap="space-8">
                         <Heading level="2" size="xsmall">
-                            {`Vedlegg (${acceptedFiles.length})`}
+                            Vedlegg ({acceptedFiles.length})
                         </Heading>
                         <VStack as="ul" gap="space-12">
                             {acceptedFiles.map((file) => (
@@ -152,14 +152,16 @@ const Filopplastning = ({
                                         : '-'}
                                 </Table.DataCell>
                                 <Table.DataCell>
-                                    <TextField
+                                    <TallInput
+                                        name={utgift.navn}
                                         label={`Sum for ${utgift.navn}`}
                                         hideLabel
                                         size="small"
-                                        inputMode="decimal"
-                                        value={beløp[utgift.navn] ?? ''}
-                                        onChange={(e) => setBeløp(utgift.navn, e.target.value)}
-                                        error={beløpFeilmelding(beløp[utgift.navn], 99999999)}
+                                        desimaler
+                                        min={0}
+                                        maks={99999999}
+                                        verdi={beløp[utgift.navn]}
+                                        settVerdi={(verdi) => setBeløp(utgift.navn, verdi)}
                                     />
                                 </Table.DataCell>
                             </Table.Row>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { BodyShort, Box, Heading, HStack, Tag, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, HStack, List, Tag, VStack } from '@navikt/ds-react';
 
 import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
 import KontonummerOgKid, {
@@ -14,18 +14,19 @@ import Bekreftelse, {
     bekreftelseDefaultValues,
     BekreftelseFields,
     bekreftelseSchema,
-} from '@/refusjon/RefusjonSide/NyRefusjonside/Bekreftelse';
-import Oppsummering from '@/refusjon/RefusjonSide/NyRefusjonside/Oppsummering';
+} from '@/refusjon/RefusjonSide/Bekreftelse';
+import Oppsummering from '@/refusjon/RefusjonSide/Oppsummering';
 import { Aktsomhet, Refusjon, statusTekst, tiltakstypeTekst } from '~/types';
 import { formaterDato } from '~/utils';
-import { lagRefusjonsnummer, storForbokstav } from '~/utils/stringUtils';
+import { refusjonsnummer, storForbokstav } from '~/utils/stringUtils';
 import MainContainer from '~/Container/MainContainer';
+import { usePlaceholderBeregnUtgifter } from '@/services/rest-service';
 
 import Filopplastning from './Filopplastning';
 import InkluderingstilskuddSummeringBoks from './InkluderingstilskuddSummeringBoks';
 import InkluderingstilskuddUtregning from './InkluderingstilskuddUtregning';
 import InkluderingstilskuddVilkaar from './InkluderingstilskuddVilkaar';
-import { AVTALTE_UTGIFTER, beregnUtgifter, UtgiftBeløp } from './utgifter';
+import { AVTALTE_UTGIFTER, UtgiftBeløp, Utgiftsberegning } from './utgifter';
 
 interface Props {
     refusjon: Refusjon;
@@ -39,6 +40,8 @@ const schema = kidOgKontonummerSchema.and(bekreftelseSchema);
 // Innsending er deaktivert til backend kan ta imot utgifter og vedlegg
 const INNSENDING_STØTTES = false;
 
+const TOM_BEREGNING: Utgiftsberegning = { sumUtgifter: 0, fratrekkOverstigendeBeløp: 0, refusjonsbeløp: 0 };
+
 const InkluderingstilskuddRefusjonside = (props: Props) => {
     const { refusjon, aktsomhet } = props;
     const { tilskuddsgrunnlag, bedriftKontonummer } = refusjon.refusjonsgrunnlag;
@@ -47,7 +50,9 @@ const InkluderingstilskuddRefusjonside = (props: Props) => {
     const [beløp, setBeløp] = useState<UtgiftBeløp>({});
 
     const valgteUtgifter = AVTALTE_UTGIFTER.filter((utgift) => valgteUtgiftsnavn.includes(utgift.navn));
-    const beregning = beregnUtgifter(valgteUtgifter, beløp);
+    const { data: beregning = TOM_BEREGNING } = usePlaceholderBeregnUtgifter(refusjon.id, {
+        utgifter: valgteUtgifter.map((utgift) => ({ navn: utgift.navn, beløp: beløp[utgift.navn] ?? 0 })),
+    });
 
     const form = useForm<RefusjonFormFields>({
         defaultValues: {
@@ -73,7 +78,7 @@ const InkluderingstilskuddRefusjonside = (props: Props) => {
                             <div>
                                 <Heading level="1" size="medium">
                                     Refusjonsnr{' '}
-                                    {lagRefusjonsnummer({
+                                    {refusjonsnummer({
                                         avtaleNr: tilskuddsgrunnlag.avtaleNr,
                                         løpenummer: tilskuddsgrunnlag.løpenummer,
                                         resendingsnummer: tilskuddsgrunnlag.resendingsnummer,
@@ -111,15 +116,18 @@ const InkluderingstilskuddRefusjonside = (props: Props) => {
                                     />
                                     <InkluderingstilskuddUtregning beregning={beregning} />
                                 </VStack>
-                                <Bekreftelse
-                                    vilkaar={<InkluderingstilskuddVilkaar />}
-                                    punkter={[
-                                        'Innholdet i refusjonskravet er korrekt',
-                                        'Kravene til arbeidsgiver er lest og forstått',
-                                    ]}
-                                    knappetekst="Send inn refusjonskrav"
-                                    innsendingDeaktivert={!INNSENDING_STØTTES}
-                                />
+                                <VStack gap="space-12">
+                                    <InkluderingstilskuddVilkaar />
+                                    <Bekreftelse
+                                        knappetekst="Send inn refusjonskrav"
+                                        innsendingDeaktivert={!INNSENDING_STØTTES}
+                                    >
+                                        <List>
+                                            <List.Item>Innholdet i refusjonskravet er korrekt</List.Item>
+                                            <List.Item>Kravene til arbeidsgiver er lest og forstått</List.Item>
+                                        </List>
+                                    </Bekreftelse>
+                                </VStack>
                             </VStack>
                         </form>
                     </FormProvider>

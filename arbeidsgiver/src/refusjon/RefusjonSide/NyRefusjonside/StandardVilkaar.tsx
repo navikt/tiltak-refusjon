@@ -3,7 +3,7 @@ import { BriefcaseIcon, CalendarIcon, InformationSquareIcon, WalletIcon } from '
 
 import EksternLenke from '~/EksternLenke/EksternLenke';
 
-function Vilkaar() {
+function StandardVilkaar() {
     return (
         <Box borderColor="info" borderRadius="12" borderWidth="1" overflow="hidden">
             <Box
@@ -65,4 +65,4 @@ function Vilkaar() {
     );
 }
 
-export default Vilkaar;
+export default StandardVilkaar;
