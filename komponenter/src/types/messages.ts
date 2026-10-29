@@ -9,6 +9,7 @@ export const tiltakstypeTekst: { [key in Tiltak]: string } = {
     MENTOR: 'mentor',
     SOMMERJOBB: 'sommerjobb',
     VTAO: 'varig tilrettelagt arbeid i ordinær virksomhet',
+    INKLUDERINGSTILSKUDD: 'inkluderingstilskudd',
 };
 
 export const tiltakstypeTekstKort: { [key in Tiltak]: string } = {

@@ -18,6 +18,11 @@ import {
 
 import { BrukerContextType, InnloggetBruker } from '@/bruker/BrukerContextType';
 import { BedriftvalgType } from '@/bruker/bedriftsmenyRefusjon/api/api';
+import {
+    Utgiftsberegning,
+    UtgiftsberegningRequest,
+    utgiftsberegningSchema,
+} from '@/refusjon/RefusjonSide/InkluderingstilskuddRefusjonside/utgifter';
 
 const api = axios.create({
     baseURL: '/api/arbeidsgiver',
@@ -277,3 +282,18 @@ export const useFeatureToggles = (): SWRResponse<FeatureToggles, Error> => {
         onError: () => console.error('Kunne ikke hente feature toggles'),
     });
 };
+
+// PLACEHOLDER: gjør ikke noe nettverkskall og returnerer faste verdier.
+// Erstattes av kall mot tiltak-refusjon-api når endepunktet for utgiftsberegning finnes.
+export const placeholderBeregnUtgifter = async (request: UtgiftsberegningRequest): Promise<Utgiftsberegning> => {
+    const sum = request.utgifter.map((u) => u.beløp).reduce((a, b) => a + b, 0);
+    return utgiftsberegningSchema.parse({ sumUtgifter: sum, fratrekkOverstigendeBeløp: 4, refusjonsbeløp: sum - 4 });
+};
+
+// PLACEHOLDER: SWR-nøkkelen er antatt, og fetcheren byttes til api.post når endepunktet finnes.
+export const usePlaceholderBeregnUtgifter = (refusjonId: string, request: UtgiftsberegningRequest) =>
+    useSWR<Utgiftsberegning>(
+        [`/refusjon/${refusjonId}/beregn-utgifter`, request],
+        ([, req]: [string, UtgiftsberegningRequest]) => placeholderBeregnUtgifter(req),
+        { keepPreviousData: true, revalidateOnFocus: false }
+    );
