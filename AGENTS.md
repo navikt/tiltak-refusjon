@@ -22,7 +22,7 @@ The repo holds two separate apps that share a component library. Both are thin f
 
 ## Setup & local development
 
-Requires Node `>=24` and pnpm `>=11` (`packageManager` in `package.json`). npm and yarn are blocked by `preinstall`.
+Requires Node `>=26` and pnpm `>=12` (`packageManager` in `package.json`). npm and yarn are blocked by `preinstall`.
 
 `@navikt/*` packages come from GitHub Packages (`.npmrc`). Authenticate with a GitHub token that has `read:packages`:
 
