@@ -11,6 +11,8 @@ import {
     PercentIcon,
     PiggybankIcon,
     SackKronerIcon,
+    SealXMarkIcon,
+    ReceiptIcon,
 } from '@navikt/aksel-icons';
 import { Utregningslinje, UtregningsLinjeType } from '~/types/utregning';
 import FortegnIkon from './FortegnIkon';
@@ -24,23 +26,27 @@ interface Props {
 const ikonForType = (type: UtregningsLinjeType) => {
     switch (type) {
         case UtregningsLinjeType.FERIEPENGER:
-            return <ParasolBeachIcon aria-hidden={true} />;
+            return <ParasolBeachIcon aria-hidden />;
         case UtregningsLinjeType.ARBEIDSGIVERAVGIFT:
-            return <Buildings2Icon aria-hidden={true} />;
+            return <Buildings2Icon aria-hidden />;
         case UtregningsLinjeType.OBLIGATORISK_TJENESTEPENSJON:
-            return <PiggybankIcon aria-hidden={true} />;
+            return <PiggybankIcon aria-hidden />;
         case UtregningsLinjeType.TILSKUDDSPROSENT:
-            return <PercentIcon aria-hidden={true} />;
+            return <PercentIcon aria-hidden />;
         case UtregningsLinjeType.REFUSJONSBELOP_TIL_UTBETALING:
-            return <BankNoteIcon aria-hidden={true} />;
+            return <BankNoteIcon aria-hidden />;
         case UtregningsLinjeType.TIMELONN_X_TIMER:
         case UtregningsLinjeType.AVTALT_BELOP:
         case UtregningsLinjeType.AVTALT_BELOP_REST_5G:
-            return <SackKronerIcon aria-hidden={true} />;
+            return <SackKronerIcon aria-hidden />;
         case UtregningsLinjeType.RESTERENDE_FRATREKK_FOR_FERIE_FRA_TIDLIGERE_REFUSJONER:
-            return <PencilIcon aria-hidden={true} />;
+            return <PencilIcon aria-hidden />;
+        case UtregningsLinjeType.FRATREKK_FOR_OVERSTIGENDE_BELOP:
+            return <SealXMarkIcon aria-hidden />;
+        case UtregningsLinjeType.UTGIFTER_I_PERIODEN:
+            return <ReceiptIcon aria-hidden />;
         default:
-            return <span className={styles.ikonPlaceholder} aria-hidden={true} />;
+            return <span className={styles.ikonPlaceholder} aria-hidden />;
     }
 };
 

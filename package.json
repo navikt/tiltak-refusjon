@@ -17,7 +17,9 @@
         "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
         "prepare": "husky",
         "start:arbeidsgiver": "pnpm --filter tiltak-refusjon-arbeidsgiver dev",
-        "start:saksbehandler": "pnpm --filter tiltak-refusjon-saksbehandler dev"
+        "start:saksbehandler": "pnpm --filter tiltak-refusjon-saksbehandler dev",
+        "storybook:arbeidsgiver": "pnpm --filter tiltak-refusjon-arbeidsgiver storybook",
+        "storybook:saksbehandler": "pnpm --filter tiltak-refusjon-saksbehandler storybook"
     },
     "devDependencies": {
         "@eslint/js": "^9.39.4",

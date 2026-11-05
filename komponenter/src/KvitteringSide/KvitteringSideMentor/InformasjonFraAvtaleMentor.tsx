@@ -10,6 +10,7 @@ import { Aktsomhet, Refusjonsgrunnlag, RefusjonStatus } from '~/types';
 import { InnloggetRolle } from '~/types/brukerContextType';
 import { formaterDato, formaterPeriode, NORSK_DATO_OG_TID_FORMAT } from '~/utils';
 import { formatterPenger, visTallMedNorskFormatering } from '~/utils/PengeUtils';
+import { avtaleLenke } from '~/utils/lenkeUtils';
 import { lagId } from '~/utils/stringUtils';
 
 interface Props {
@@ -48,7 +49,6 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
         tilskuddsbeløp,
     } = tilskuddsgrunnlag;
 
-    const avtaleLenke = `http://arbeidsgiver.nav.no/tiltaksgjennomforing/avtale/${avtaleId}`;
     const erArbeidsgiver = innloggetRolle === 'ARBEIDSGIVER';
 
     return (
@@ -59,7 +59,7 @@ const InformasjonFraAvtalenMentor = (props: Props) => {
             <VerticalSpacer rem={1} />
             {aktsomhet?.kreverAktsomhet && <HemmeligAdresseVarsel aktsomhet={aktsomhet} />}
             <IkonRad>
-                <EksternLenke href={avtaleLenke}>Avtale om mentor</EksternLenke>
+                <EksternLenke href={avtaleLenke(avtaleId, innloggetRolle)}>Avtale om mentor</EksternLenke>
             </IkonRad>
             <VerticalSpacer rem={1} />
             <IkonRad>

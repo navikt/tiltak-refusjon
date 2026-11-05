@@ -1,4 +1,4 @@
-import { Box, Heading, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, ReadMore, VStack } from '@navikt/ds-react';
 import { FunctionComponent } from 'react';
 
 import Utregningsrad from './Utregningsrad';
@@ -55,6 +55,14 @@ const Utregning: FunctionComponent<Props> = (props) => {
                                     inntekter={ferietrekkInntekter ?? []}
                                     tilskuddsgrunnlag={tilskuddsgrunnlag}
                                 />
+                            )}
+                            {rad.type === UtregningsLinjeType.FRATREKK_FOR_OVERSTIGENDE_BELOP && (
+                                <ReadMore size="small" header="Hva betyr dette?" defaultOpen>
+                                    <BodyShort size="small">
+                                        Én eller flere av utgiftene overstiger avtalt beløp. Det avtalte beløpet
+                                        utbetales.
+                                    </BodyShort>
+                                </ReadMore>
                             )}
                             {rad.utgårGrunn && <UtgårÅrsakBeskrivelse utgårÅrsak={rad.utgårGrunn} />}
                         </Utregningsrad>
