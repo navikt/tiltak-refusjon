@@ -21,7 +21,7 @@ import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
 import RefusjonSide from '@/refusjon/RefusjonSide/RefusjonSide';
-import { useFeatureToggle } from '@/featureToggles';
+import { useFeatureToggles } from '@/featureToggles';
 import NyRefusjonside from '@/refusjon/RefusjonSide/NyRefusjonside';
 import InkluderingstilskuddRefusjonside from '@/refusjon/RefusjonSide/InkluderingstilskuddRefusjonside';
 
@@ -36,7 +36,7 @@ const Refusjon: FunctionComponent = () => {
     const { data: aktsomhet } = useRefusjonKreverAktsomhet(refusjon.id);
     const tiltakstype = refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype;
     const { trigger, isMutating, reset } = useSWRMutation(`/refusjon/${refusjonId}`, oppdaterRefusjonFetcher);
-    const { arbeidsgiverNyRefusjon, inkluderingstilskuddRefusjon, laster: lasterFeatureToggles } = useFeatureToggle();
+    const { arbeidsgiverNyRefusjon, inkluderingstilskuddRefusjon, laster: lasterFeatureToggles } = useFeatureToggles();
     const erInkluderingstilskudd = tiltakstype === Tiltak.INKLUDERINGSTILSKUDD;
     const erInkluderingstilskuddSkjult = erInkluderingstilskudd && !inkluderingstilskuddRefusjon;
 
@@ -104,6 +104,7 @@ const Refusjon: FunctionComponent = () => {
                             </BodyShort>
                         </>
                     }
+                    aktsomhet={aktsomhet}
                 />
             );
         case RefusjonStatus.KLAR_FOR_INNSENDING:
@@ -117,6 +118,7 @@ const Refusjon: FunctionComponent = () => {
                     <FeilSide
                         advarselType="info"
                         feiltekst="Det er foreløpig ikke mulig å søke om refusjon for inkluderingstilskudd her."
+                        aktsomhet={aktsomhet}
                     />
                 );
             }
@@ -132,10 +134,11 @@ const Refusjon: FunctionComponent = () => {
                     feiltekst={`Fristen for å søke om refusjon for denne perioden gikk ut ${formaterDato(
                         refusjon.fristForGodkjenning
                     )}. Innvilget tilskudd er derfor trukket tilbake.`}
+                    aktsomhet={aktsomhet}
                 />
             );
         case RefusjonStatus.ANNULLERT:
-            return <FeilSide advarselType="warning" feiltekst="Refusjonen er annullert." />;
+            return <FeilSide advarselType="warning" feiltekst="Refusjonen er annullert." aktsomhet={aktsomhet} />;
         case RefusjonStatus.SENDT_KRAV:
         case RefusjonStatus.GODKJENT_MINUSBELØP:
         case RefusjonStatus.GODKJENT_NULLBELØP:

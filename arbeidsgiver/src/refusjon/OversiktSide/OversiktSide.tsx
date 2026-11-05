@@ -1,24 +1,31 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import BEMHelper from '~/utils/bem';
 import Filtermeny from '~/Filtermeny/Filtermeny';
 import Oversikt from '@/refusjon/oversikt/Oversikt';
 import { useFilter } from '@/refusjon/oversikt/FilterContext';
 import IkkeTilgang403ErrorBoundary from '~/IkkeTilgang403ErrorBoundary';
 import { Path } from '@/router/Router';
-import { useFeatureToggle } from '@/featureToggles';
+import { useFeatureToggles } from '@/featureToggles';
 import { OversiktsTabellSuspense } from '~/OversiktTabell';
 import './OversiktSide.less';
 import { MainContainer } from '~/Container';
+import { Tiltak } from '~/types/tiltak';
 
 const cls = BEMHelper('OversiktSide');
 
 const OversiktSide: FunctionComponent = () => {
     const { filter, oppdaterFilter } = useFilter();
-    const { inkluderingstilskuddRefusjon } = useFeatureToggle();
+    const { inkluderingstilskuddRefusjon, laster } = useFeatureToggles();
     const options = {
         erArbeidsgiver: true,
         harKorreksjonTilgang: false,
     };
+
+    useEffect(() => {
+        if (!laster && !inkluderingstilskuddRefusjon && filter.tiltakstype === Tiltak.INKLUDERINGSTILSKUDD) {
+            oppdaterFilter({ tiltakstype: undefined }, true);
+        }
+    }, [laster, inkluderingstilskuddRefusjon, filter.tiltakstype, oppdaterFilter]);
 
     return (
         <MainContainer bredde="2xl">

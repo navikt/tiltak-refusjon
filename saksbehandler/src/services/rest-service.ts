@@ -1,7 +1,7 @@
 import axios from 'axios';
-import useSWR, { mutate, SWRConfiguration } from 'swr';
+import useSWR, { mutate, SWRConfiguration, SWRResponse } from 'swr';
 import { InnloggetBruker } from '~/types/brukerContextType';
-import { Feature } from '../featureToggles/features';
+import { Feature, FeatureToggles } from '~/featureToggles/features';
 import { Filter } from '~/types/filter';
 import { Beregning, Hendelse, Korreksjon, Korreksjonsgrunn, PageableRefusjon, Refusjon } from '~/types/refusjon';
 import { useFilter } from '@/refusjon/oversikt/FilterContext';
@@ -94,9 +94,15 @@ export const endreBruttolønn = async (korreksjonId: string, inntekterKunFraTilt
     return response.data;
 };
 
-export const hentFeatureToggles = async (featureToggles: Feature[]) => {
-    const response = await api.get('/feature?' + featureToggles.map((feature) => `feature=${feature}`).join('&'));
-    return response.data;
+export const useHentFeatureToggles = (): SWRResponse<FeatureToggles, Error> => {
+    const url = `/feature?${Object.values(Feature)
+        .map((feature) => `feature=${feature}`)
+        .join('&')}`;
+    return useSWR<FeatureToggles, Error>(url, {
+        ...swrConfig,
+        suspense: false,
+        onError: () => console.error('Kunne ikke hente feature toggles'),
+    });
 };
 
 export interface ForlengFristRequest {

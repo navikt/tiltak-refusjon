@@ -10,7 +10,7 @@ import Refusjon from '@/refusjon/RefusjonSide/Refusjon';
 import ScrollToTop from '@/komponenter/ScrollToTop';
 import SporingInfo from '@/sporing/SporingInfo';
 import { BrukerProvider } from '@/bruker/BrukerContext';
-import { FeatureToggleProvider } from '@/featureToggles/FeatureToggleProvider';
+import { FeatureToggleProvider } from '@/featureToggles';
 import { FilterProvider } from '@/refusjon/oversikt/FilterContext';
 import IkkeFunnet404 from '~/IkkeFunnet404';
 import { Suspense } from 'react';
