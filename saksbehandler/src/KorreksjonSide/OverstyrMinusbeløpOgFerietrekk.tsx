@@ -1,8 +1,7 @@
 import { Alert, Switch, TextField } from '@navikt/ds-react';
 import { ChangeEvent, FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router';
-import { useFeatureToggles } from '../featureToggles/FeatureToggleProvider';
-import { Feature } from '../featureToggles/features';
+import { useFeatureToggles } from '@/featureToggles';
 import VerticalSpacer from '~/VerticalSpacer';
 import { settHarFerietrekkForSammeMåned, settMinusbeløpManuelt } from '../services/rest-service';
 
@@ -13,9 +12,9 @@ type Props = {
 const OverstyrMinusbeløpOgFerietrekk: FunctionComponent<Props> = (props) => {
     const { korreksjonId } = useParams<{ korreksjonId: string }>();
     const [belop, setBelop] = useState<string>('');
-    const featureToggles = useFeatureToggles();
+    const { manueltMinusbelop } = useFeatureToggles();
 
-    if (!featureToggles[Feature.ManueltMinusbelop]) {
+    if (!manueltMinusbelop) {
         return null;
     } else {
         return (
