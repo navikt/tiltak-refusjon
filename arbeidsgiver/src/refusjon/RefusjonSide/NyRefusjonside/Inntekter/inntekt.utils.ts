@@ -1,8 +1,7 @@
 import { Inntektslinje } from '~/types';
 
 export type Inntektsendring =
-    | { type: 'INGEN-INNTEKTER' }
-    | { type: 'INNTEKT'; id: string; erOpptjentIPeriode: boolean };
+    { type: 'INGEN-INNTEKTER' } | { type: 'INNTEKT'; id: string; erOpptjentIPeriode: boolean };
 
 export const erInntektLike = (a: Inntektslinje[], b: Inntektslinje[]): boolean =>
     a.length === b.length &&

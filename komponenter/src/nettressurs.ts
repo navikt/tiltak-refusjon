@@ -1,10 +1,10 @@
 export enum Status {
-    'IkkeLastet',
-    'LasterInn',
-    'SenderInn',
-    'Lastet',
-    'Sendt',
-    'Feil',
+    IkkeLastet,
+    LasterInn,
+    SenderInn,
+    Lastet,
+    Sendt,
+    Feil,
 }
 
 export interface IkkeLastet {
