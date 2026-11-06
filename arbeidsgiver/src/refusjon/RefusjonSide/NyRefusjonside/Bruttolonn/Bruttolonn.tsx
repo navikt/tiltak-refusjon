@@ -11,7 +11,10 @@ export const lagBruttolonnSchema = (refusjon: Refusjon) => {
     return z
         .object({
             harAndreRefusjoner: z.boolean({
-                required_error: 'Du må svare på om inntektene er tilknyttet andre refusjoner',
+                error: (issue) =>
+                    issue.input === undefined
+                        ? 'Du må svare på om inntektene er tilknyttet andre refusjoner'
+                        : undefined,
             }),
             erBruttolonnKorrekt: z.boolean().nullable(),
             bruttolonn: z.string().optional(),
@@ -19,7 +22,7 @@ export const lagBruttolonnSchema = (refusjon: Refusjon) => {
         .superRefine((data, ctx) => {
             if (data.harAndreRefusjoner && data.erBruttolonnKorrekt === null) {
                 ctx.addIssue({
-                    code: z.ZodIssueCode.custom,
+                    code: 'custom',
                     path: ['erBruttolonnKorrekt'],
                     message: 'Du må svare på om utregnet bruttolønn er korrekt',
                 });
@@ -27,7 +30,7 @@ export const lagBruttolonnSchema = (refusjon: Refusjon) => {
 
             if (data.harAndreRefusjoner && data.erBruttolonnKorrekt === false && !data.bruttolonn) {
                 ctx.addIssue({
-                    code: z.ZodIssueCode.custom,
+                    code: 'custom',
                     path: ['bruttolonn'],
                     message: 'Du må oppgi bruttolønn',
                 });
@@ -35,7 +38,7 @@ export const lagBruttolonnSchema = (refusjon: Refusjon) => {
 
             if (data.bruttolonn && !/^\d*$/.test(data.bruttolonn)) {
                 ctx.addIssue({
-                    code: z.ZodIssueCode.custom,
+                    code: 'custom',
                     path: ['bruttolonn'],
                     message: 'Bruttolønn kan kun bestå av tall',
                 });
@@ -43,7 +46,7 @@ export const lagBruttolonnSchema = (refusjon: Refusjon) => {
 
             if (data.bruttolonn && parseInt(data.bruttolonn, 10) > bruttolonnOpptjentIPerioden) {
                 ctx.addIssue({
-                    code: z.ZodIssueCode.custom,
+                    code: 'custom',
                     path: ['bruttolonn'],
                     message: `Beløpet er høyere enn sum bruttolønn. Det må være det samme eller lavere enn ${bruttolonnOpptjentIPerioden} kr.`,
                 });

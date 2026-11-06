@@ -11,7 +11,9 @@ import { Feilkode, Feilmeldinger } from '~/feilkodemapping';
 
 const schema = z.object({
     merking: z.coerce
-        .number({ invalid_type_error: 'Må være tall' })
+        .number({
+            error: (issue) => (issue.input === undefined ? undefined : 'Må være tall'),
+        })
         .min(1, 'Må være minst 1')
         .max(12, 'Kan ikke være mer enn 12'),
 });

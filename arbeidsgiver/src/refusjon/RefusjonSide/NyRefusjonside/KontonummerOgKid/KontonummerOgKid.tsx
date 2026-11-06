@@ -8,10 +8,15 @@ import { Controller, useFormContext } from 'react-hook-form';
 import validator from 'norsk-validator';
 
 export const kidOgKontonummerSchema = z.object({
-    kontonummer: z.string({ required_error: 'Vi kan ikke finne noe kontonummer på deres virksomhet' }),
+    kontonummer: z.string({
+        error: (issue) =>
+            issue.input === undefined ? 'Vi kan ikke finne noe kontonummer på deres virksomhet' : undefined,
+    }),
     kid: z
         .string()
-        .refine((kid) => !kid || validator.kidnummer(kid), { message: 'KID-nummeret er ikke gyldig' })
+        .refine((kid) => !kid || validator.kidnummer(kid), {
+            error: 'KID-nummeret er ikke gyldig',
+        })
         .optional(),
 });
 

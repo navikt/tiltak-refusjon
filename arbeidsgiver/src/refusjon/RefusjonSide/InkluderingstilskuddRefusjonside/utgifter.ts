@@ -19,7 +19,7 @@ export type UtgiftBeløp = Record<string, number | undefined>;
 
 // PLACEHOLDER: antatt kontrakt mot tiltak-refusjon-api. Justeres når endepunktet finnes.
 export const utgiftsberegningRequestSchema = z.object({
-    utgifter: z.array(z.object({ navn: z.string(), beløp: z.number().int().nonnegative() })),
+    utgifter: z.array(z.object({ navn: z.string(), beløp: z.int().nonnegative() })),
 });
 
 export type UtgiftsberegningRequest = z.infer<typeof utgiftsberegningRequestSchema>;
