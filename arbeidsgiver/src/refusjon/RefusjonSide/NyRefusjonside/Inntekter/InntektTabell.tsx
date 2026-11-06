@@ -26,7 +26,7 @@ export const inntektSchema = z
     .superRefine((data, ctx) => {
         if (!data.harOpptjentInntektIPerioden && !data.harIkkeOpptjentInntekterIPerioden) {
             ctx.addIssue({
-                code: z.ZodIssueCode.custom,
+                code: 'custom',
                 path: ['harIkkeOpptjentInntekterIPerioden'],
                 message: 'Du må velge minst én inntekt eller bekrefte at det ikke er opptjent inntekter i perioden',
             });

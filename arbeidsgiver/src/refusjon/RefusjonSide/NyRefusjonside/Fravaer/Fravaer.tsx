@@ -10,14 +10,16 @@ import { erNil } from '~/utils/predicates';
 
 export const fravaerSchema = z
     .object({
-        fravaer: z.boolean({ required_error: 'Du må svare på om deltakeren har hatt fravær' }),
+        fravaer: z.boolean({
+            error: (issue) => (issue.input === undefined ? 'Du må svare på om deltakeren har hatt fravær' : undefined),
+        }),
         refundert: z.boolean().nullable(),
         belop: z.string().optional(),
     })
     .superRefine((data, ctx) => {
         if (data.fravaer && data.refundert === null) {
             ctx.addIssue({
-                code: z.ZodIssueCode.custom,
+                code: 'custom',
                 path: ['refundert'],
                 message: 'Du må svare på om beløpet har blitt refundert',
             });
@@ -25,7 +27,7 @@ export const fravaerSchema = z
 
         if (data.fravaer && data.refundert === false) {
             ctx.addIssue({
-                code: z.ZodIssueCode.custom,
+                code: 'custom',
                 path: ['refundert'],
                 message: 'Beløpet må være refundert for å kunne sende inn refusjonen',
             });
@@ -33,7 +35,7 @@ export const fravaerSchema = z
 
         if (data.fravaer && data.refundert && !data.belop) {
             ctx.addIssue({
-                code: z.ZodIssueCode.custom,
+                code: 'custom',
                 path: ['belop'],
                 message: 'Du må oppgi beløpet',
             });
@@ -41,7 +43,7 @@ export const fravaerSchema = z
 
         if (data.belop && !/^\d*$/.test(data.belop)) {
             ctx.addIssue({
-                code: z.ZodIssueCode.custom,
+                code: 'custom',
                 path: ['belop'],
                 message: 'Beløpet må kun bestå av tall',
             });
