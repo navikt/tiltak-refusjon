@@ -74,7 +74,7 @@ const ForlengFristModalKropp: FunctionComponent<{
         setValue('annetGrunnlag', next, { shouldValidate: isSubmitted });
     };
 
-    const onSubmit: SubmitHandler<FormFields> = ({ dato, grunnlag, annetGrunnlag }) =>
+    const onSubmit: SubmitHandler<FormFields, Promise<void>> = ({ dato, grunnlag, annetGrunnlag }) =>
         oppdatereRefusjonFrist(datoTilNorskString(dato), grunnlag, annetGrunnlag);
 
     const onError: SubmitErrorHandler<FormFields> = () => {
@@ -101,7 +101,7 @@ const ForlengFristModalKropp: FunctionComponent<{
         <BekreftelseModal
             isOpen={true}
             lukkModal={lukkModal}
-            bekreft={() => handleSubmit(onSubmit, onError)()}
+            bekreft={handleSubmit(onSubmit, onError)}
             tittel={'Forleng refusjonsfrist'}
             containerStyle={{ minWidth: '35rem' }}
         >

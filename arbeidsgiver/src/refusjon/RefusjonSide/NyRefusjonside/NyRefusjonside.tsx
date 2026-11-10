@@ -42,7 +42,7 @@ interface Props {
 type RefusjonFormFields = FravaerFields & InntektFields & BruttolonnFields & KidOgKontonummerFields & BekreftelseFields;
 
 const schema = (refusjon: Refusjon, seksjon: Record<Seksjon, boolean>) => {
-    let schema: ZodType = z.object({});
+    let schema: ZodType<Partial<RefusjonFormFields>, Partial<RefusjonFormFields>> = z.object({});
     if (seksjon.FRAVAER) {
         schema = schema.and(fravaerSchema);
     }
@@ -69,7 +69,7 @@ const NyRefusjonside = (props: Props) => {
     const { steg, seksjon, endreSteg } = useRefusjonsideSteg(refusjon);
     const [visGodkjennModal, setVisGodkjennModal] = useState<boolean>(false);
 
-    const form = useForm<RefusjonFormFields>({
+    const form = useForm<Partial<RefusjonFormFields>>({
         defaultValues: {
             ...fravaerDefaultValues(refusjon),
             ...inntektDefaultValues(refusjon),

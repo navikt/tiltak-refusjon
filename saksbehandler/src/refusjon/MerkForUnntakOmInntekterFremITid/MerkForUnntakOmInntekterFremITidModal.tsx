@@ -55,7 +55,7 @@ const ModalForm: FunctionComponent<{ refusjon: Refusjon; setOpen: (open: boolean
         handleSubmit,
         setError,
         formState: { errors, isSubmitting },
-    } = useForm<FormFields>({
+    } = useForm<z.input<typeof schema>, unknown, FormFields>({
         defaultValues: {
             merking: refusjon.unntakOmInntekterFremitid,
         },
