@@ -8,15 +8,12 @@ import Boks from '~/Boks';
 import { tiltakstypeTekst } from '~/types/messages';
 import { formaterPeriode } from '~/utils';
 import { MainContainer } from '~/Container';
-import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
-import { Aktsomhet } from '~/types';
 
 type AlertStripeType = 'info' | 'success' | 'warning' | 'error';
 
 type Props = {
     feiltekst: ReactNode;
     advarselType: AlertStripeType;
-    aktsomhet?: Aktsomhet;
 };
 
 const FeilSide: FunctionComponent<Props> = (props) => {
@@ -28,12 +25,6 @@ const FeilSide: FunctionComponent<Props> = (props) => {
             <Boks variant="hvit">
                 <Alert variant={props.advarselType}>{props.feiltekst}</Alert>
                 <VerticalSpacer rem={2} />
-                {props.aktsomhet?.kreverAktsomhet && (
-                    <>
-                        <HemmeligAdresseVarsel aktsomhet={props.aktsomhet} />
-                        <VerticalSpacer rem={2} />
-                    </>
-                )}
                 <Heading level="2" size="large">
                     Refusjon for {tiltakstypeTekst[refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype]}
                 </Heading>

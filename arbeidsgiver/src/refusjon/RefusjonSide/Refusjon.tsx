@@ -104,7 +104,6 @@ const Refusjon: FunctionComponent = () => {
                             </BodyShort>
                         </>
                     }
-                    aktsomhet={aktsomhet}
                 />
             );
         case RefusjonStatus.KLAR_FOR_INNSENDING:
@@ -118,7 +117,6 @@ const Refusjon: FunctionComponent = () => {
                     <FeilSide
                         advarselType="info"
                         feiltekst="Det er foreløpig ikke mulig å søke om refusjon for inkluderingstilskudd her."
-                        aktsomhet={aktsomhet}
                     />
                 );
             }
@@ -134,11 +132,10 @@ const Refusjon: FunctionComponent = () => {
                     feiltekst={`Fristen for å søke om refusjon for denne perioden gikk ut ${formaterDato(
                         refusjon.fristForGodkjenning
                     )}. Innvilget tilskudd er derfor trukket tilbake.`}
-                    aktsomhet={aktsomhet}
                 />
             );
         case RefusjonStatus.ANNULLERT:
-            return <FeilSide advarselType="warning" feiltekst="Refusjonen er annullert." aktsomhet={aktsomhet} />;
+            return <FeilSide advarselType="warning" feiltekst="Refusjonen er annullert." />;
         case RefusjonStatus.SENDT_KRAV:
         case RefusjonStatus.GODKJENT_MINUSBELØP:
         case RefusjonStatus.GODKJENT_NULLBELØP:

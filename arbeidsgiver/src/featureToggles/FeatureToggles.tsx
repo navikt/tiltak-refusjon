@@ -1,4 +1,4 @@
-import { lagFeatureToggleContext } from '~/featureToggles/lagFeatureToggleContext';
+import { featureToggleContext } from '~/featureToggles/lagFeatureToggleContext';
 import { useHentFeatureToggles } from '@/services/rest-service';
 
-export const { FeatureToggleProvider, useFeatureToggles } = lagFeatureToggleContext(useHentFeatureToggles);
+export const { FeatureToggleProvider, useFeatureToggles } = featureToggleContext(useHentFeatureToggles);

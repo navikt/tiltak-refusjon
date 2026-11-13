@@ -10,7 +10,7 @@ type FeatureToggleRespons = {
 
 export type FeatureToggleContextType = FeatureToggles & { laster: boolean };
 
-export const lagFeatureToggleContext = (useHentFeatureToggles: () => FeatureToggleRespons) => {
+export const featureToggleContext = (useHentFeatureToggles: () => FeatureToggleRespons) => {
     const FeatureToggleContext = createContext<FeatureToggleContextType | undefined>(undefined);
 
     const FeatureToggleProvider = ({ children }: PropsWithChildren) => {
