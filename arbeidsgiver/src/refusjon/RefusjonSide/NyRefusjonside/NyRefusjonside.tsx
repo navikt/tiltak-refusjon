@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import z, { ZodTypeAny } from 'zod';
+import z, { ZodType } from 'zod';
 import { useNavigate } from 'react-router';
 
 import { BodyShort, Box, Heading, HStack, List, Tag, VStack } from '@navikt/ds-react';
@@ -42,7 +42,7 @@ interface Props {
 type RefusjonFormFields = FravaerFields & InntektFields & BruttolonnFields & KidOgKontonummerFields & BekreftelseFields;
 
 const schema = (refusjon: Refusjon, seksjon: Record<Seksjon, boolean>) => {
-    let schema: ZodTypeAny = z.object({});
+    let schema: ZodType<Partial<RefusjonFormFields>, Partial<RefusjonFormFields>> = z.object({});
     if (seksjon.FRAVAER) {
         schema = schema.and(fravaerSchema);
     }
@@ -69,7 +69,7 @@ const NyRefusjonside = (props: Props) => {
     const { steg, seksjon, endreSteg } = useRefusjonsideSteg(refusjon);
     const [visGodkjennModal, setVisGodkjennModal] = useState<boolean>(false);
 
-    const form = useForm<RefusjonFormFields>({
+    const form = useForm<Partial<RefusjonFormFields>>({
         defaultValues: {
             ...fravaerDefaultValues(refusjon),
             ...inntektDefaultValues(refusjon),

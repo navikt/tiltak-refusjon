@@ -11,13 +11,15 @@ import VerticalSpacer from '~/VerticalSpacer';
 
 const schema = z
     .object({
-        dato: z.date({ required_error: 'Må sette frist.' }),
+        dato: z.date({
+            error: (issue) => (issue.input === undefined ? 'Må sette frist.' : undefined),
+        }),
         grunnlag: z.string().min(1, 'Må sette grunn til forlengelse.'),
         annetGrunnlag: z.string(),
     })
     .refine(({ grunnlag, annetGrunnlag }) => !(grunnlag.includes('Annet') && annetGrunnlag.trim().length === 0), {
-        message: 'Mangler tekst for annet grunnlag.',
         path: ['annetGrunnlag'],
+        error: 'Mangler tekst for annet grunnlag.',
     });
 
 type FormFields = z.infer<typeof schema>;
@@ -72,7 +74,7 @@ const ForlengFristModalKropp: FunctionComponent<{
         setValue('annetGrunnlag', next, { shouldValidate: isSubmitted });
     };
 
-    const onSubmit: SubmitHandler<FormFields> = ({ dato, grunnlag, annetGrunnlag }) =>
+    const onSubmit: SubmitHandler<FormFields, Promise<void>> = ({ dato, grunnlag, annetGrunnlag }) =>
         oppdatereRefusjonFrist(datoTilNorskString(dato), grunnlag, annetGrunnlag);
 
     const onError: SubmitErrorHandler<FormFields> = () => {
@@ -99,7 +101,7 @@ const ForlengFristModalKropp: FunctionComponent<{
         <BekreftelseModal
             isOpen={true}
             lukkModal={lukkModal}
-            bekreft={() => handleSubmit(onSubmit, onError)()}
+            bekreft={handleSubmit(onSubmit, onError)}
             tittel={'Forleng refusjonsfrist'}
             containerStyle={{ minWidth: '35rem' }}
         >

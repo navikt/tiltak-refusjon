@@ -14,7 +14,9 @@ interface Props {
 
 export const bekreftelseSchema = z.object({
     bekreftetOpplysninger: z
-        .boolean({ required_error: BEKREFTELSE_FEILMELDING })
+        .boolean({
+            error: (issue) => (issue.input === undefined ? BEKREFTELSE_FEILMELDING : undefined),
+        })
         .refine((bekreftet) => bekreftet, { message: BEKREFTELSE_FEILMELDING }),
 });
 
