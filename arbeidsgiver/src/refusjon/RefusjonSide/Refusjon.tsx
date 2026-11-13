@@ -21,8 +21,12 @@ import { Aktsomhet } from '~/types';
 import KvitteringSideVTAOArbeidsgiver from '@/refusjon/KvitteringSide/KvitteringSideVTAOArbeidsgiver';
 import KvitteringSideMentor from '~/KvitteringSide/KvitteringSideMentor';
 import RefusjonSide from '@/refusjon/RefusjonSide/RefusjonSide';
-import { useFeatureToggle } from '@/featureToggles';
+import { useFeatureToggles } from '@/featureToggles';
 import NyRefusjonside from '@/refusjon/RefusjonSide/NyRefusjonside';
+import InkluderingstilskuddRefusjonside from '@/refusjon/RefusjonSide/InkluderingstilskuddRefusjonside';
+
+import { Tiltak } from '~/types/tiltak';
+import LasterBoks from '~/LasterBoks';
 
 const Refusjon: FunctionComponent = () => {
     const { refusjonId } = useParams();
@@ -32,7 +36,9 @@ const Refusjon: FunctionComponent = () => {
     const { data: aktsomhet } = useRefusjonKreverAktsomhet(refusjon.id);
     const tiltakstype = refusjon.refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype;
     const { trigger, isMutating, reset } = useSWRMutation(`/refusjon/${refusjonId}`, oppdaterRefusjonFetcher);
-    const { arbeidsgiverNyRefusjon } = useFeatureToggle();
+    const { arbeidsgiverNyRefusjon, inkluderingstilskuddRefusjon, laster: lasterFeatureToggles } = useFeatureToggles();
+    const erInkluderingstilskudd = tiltakstype === Tiltak.INKLUDERINGSTILSKUDD;
+    const erInkluderingstilskuddSkjult = erInkluderingstilskudd && !inkluderingstilskuddRefusjon;
 
     useEffect(() => {
         const asyncTrigger = async () => {
@@ -45,6 +51,7 @@ const Refusjon: FunctionComponent = () => {
         };
         if (
             refusjon &&
+            !erInkluderingstilskuddSkjult &&
             (refusjon.status === RefusjonStatus.FOR_TIDLIG || refusjon.status === RefusjonStatus.KLAR_FOR_INNSENDING) &&
             !erLastet.current
         ) {
@@ -53,7 +60,7 @@ const Refusjon: FunctionComponent = () => {
                 erLastet.current = true;
             }
         }
-    }, [isMutating, refusjon, trigger, reset, refusjonId]);
+    }, [isMutating, refusjon, trigger, reset, refusjonId, erInkluderingstilskuddSkjult]);
 
     if (!refusjon) return null;
 
@@ -100,6 +107,19 @@ const Refusjon: FunctionComponent = () => {
                 />
             );
         case RefusjonStatus.KLAR_FOR_INNSENDING:
+            if (erInkluderingstilskudd) {
+                if (lasterFeatureToggles) {
+                    return <LasterBoks />;
+                }
+                return inkluderingstilskuddRefusjon ? (
+                    <InkluderingstilskuddRefusjonside refusjon={refusjon} aktsomhet={aktsomhet} />
+                ) : (
+                    <FeilSide
+                        advarselType="info"
+                        feiltekst="Det er foreløpig ikke mulig å søke om refusjon for inkluderingstilskudd her."
+                    />
+                );
+            }
             return arbeidsgiverNyRefusjon ? (
                 <NyRefusjonside refusjon={refusjon} aktsomhet={aktsomhet} />
             ) : (

@@ -4,7 +4,10 @@ import { RefusjonStatus } from '~/types/status';
 import { Tiltak } from '~/types/tiltak';
 import { Filter, SortingOrder } from '~/types/filter';
 
-type FilterContextType = { filter: Filter; oppdaterFilter: (nyttFilter: Partial<Filter>) => void };
+type FilterContextType = {
+    filter: Filter;
+    oppdaterFilter: (nyttFilter: Partial<Filter>, erstattHistorikk?: boolean) => void;
+};
 
 const FilterContext = React.createContext<FilterContextType | undefined>(undefined);
 
@@ -38,7 +41,11 @@ export const FilterProvider: FunctionComponent<PropsWithChildren> = (props) => {
     }, [searchParams]);
 
     // Lite elegant og høyst manuell måte å oppdatere adresselinjen på når vi setter nye filterverdier
-    const oppdaterSearchParams = (searchParams: URLSearchParams, nyttFilter: Partial<Filter>) => {
+    const oppdaterSearchParams = (
+        searchParams: URLSearchParams,
+        nyttFilter: Partial<Filter>,
+        erstattHistorikk: boolean = false
+    ) => {
         const newSearchParams = new URLSearchParams(searchParams);
         // Hvis vi bytter status eller tiltakstype, gå til page 0 (status='Alle' er undefined, så vi bruker hasOwnProperty)
         if (
@@ -67,11 +74,11 @@ export const FilterProvider: FunctionComponent<PropsWithChildren> = (props) => {
         if (nyttFilter.page) newSearchParams.set('page', `${nyttFilter.page}`);
         if (nyttFilter.size) newSearchParams.set('size', `${nyttFilter.size}`);
 
-        setSearchParams(newSearchParams);
+        setSearchParams(newSearchParams, { replace: erstattHistorikk });
     };
 
-    const oppdaterFilter = (nyttFilter: Partial<Filter>) => {
-        oppdaterSearchParams(searchParams, nyttFilter);
+    const oppdaterFilter = (nyttFilter: Partial<Filter>, erstattHistorikk?: boolean) => {
+        oppdaterSearchParams(searchParams, nyttFilter, erstattHistorikk);
     };
 
     return (

@@ -31,9 +31,10 @@ const refusjonFilterTiltak: OptionProps[] = [
 interface Props {
     filter: Filter;
     oppdaterFilter: (nyttFilter: Partial<Filter>) => void;
+    visInkluderingstilskudd?: boolean;
 }
 
-const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
+const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter, visInkluderingstilskudd = false }) => {
     return (
         <div role="menubar" aria-label="meny for filtrering av refusjoner">
             <ExpansionCard size="small" aria-label="Small-variant" defaultOpen={true}>
@@ -48,6 +49,9 @@ const TiltakFilter: FunctionComponent<Props> = ({ filter, oppdaterFilter }) => {
                     >
                         {refusjonFilterTiltak
                             .filter((option: OptionProps) => {
+                                if (option.value === Tiltak.INKLUDERINGSTILSKUDD && !visInkluderingstilskudd) {
+                                    return false;
+                                }
                                 return !option.hidden;
                             })
                             .map((option: OptionProps, index: number) => (

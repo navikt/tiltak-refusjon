@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import useSWR, { SWRConfiguration, SWRResponse, mutate } from 'swr';
 
-import { Feature, FeatureToggles } from '@/featureToggles';
+import { Feature, FeatureToggles } from '~/featureToggles/features';
 import {
     Aktsomhet,
     ApiError,
@@ -272,7 +272,7 @@ export const useRefusjonKreverAktsomhet = (refusjonId?: string) => {
     return useSWR<Aktsomhet>(refusjonId ? `/refusjon/${refusjonId}/aktsomhet` : undefined, swrConfig);
 };
 
-export const useFeatureToggles = (): SWRResponse<FeatureToggles, Error> => {
+export const useHentFeatureToggles = (): SWRResponse<FeatureToggles, Error> => {
     const url = `/feature?${Object.values(Feature)
         .map((feature) => `feature=${feature}`)
         .join('&')}`;

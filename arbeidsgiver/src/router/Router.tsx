@@ -10,7 +10,7 @@ import OversiktSide from '@/refusjon/OversiktSide/OversiktSide';
 import Refusjon from '@/refusjon/RefusjonSide/Refusjon';
 import ScrollToTop from '@/komponenter/ScrollToTop';
 import { BrukerProvider } from '@/bruker/BrukerContext';
-import { FeatureTogglesProvider } from '@/featureToggles';
+import { FeatureToggleProvider } from '@/featureToggles';
 import { FilterProvider } from '@/refusjon/oversikt/FilterContext';
 import RefusjonKontroll from '@/komponenter/refusjon-kontroll/RefusjonKontroll';
 import LasterBoks from '~/LasterBoks';
@@ -55,12 +55,12 @@ const router = createBrowserRouter(
                             path: Path.REFUSJON_OVERSIKT,
                             element: (
                                 <Suspense fallback={<LasterBoks />}>
-                                    <FeatureTogglesProvider>
+                                    <FeatureToggleProvider>
                                         <BrukerProvider>
                                             <AMeldingBanner />
                                             <Outlet />
                                         </BrukerProvider>
-                                    </FeatureTogglesProvider>
+                                    </FeatureToggleProvider>
                                 </Suspense>
                             ),
                             children: [
