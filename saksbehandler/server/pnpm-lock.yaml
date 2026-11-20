@@ -179,8 +179,8 @@ importers:
         specifier: ^8.3.0
         version: 8.3.0
       http-proxy-middleware:
-        specifier: ^3.0.10
-        version: 3.0.10
+        specifier: ^4.2.2
+        version: 4.2.2
     devDependencies:
       '@types/express':
         specifier: ^5.0.6
@@ -390,9 +390,6 @@ packages:
   '@types/http-errors@2.0.5':
     resolution: {integrity: sha512-r8Tayk8HJnX0FztbZN7oVqGccWgw98T/0neJphO91KkmOzug1KkofZURD4UaD5uH8AqcFLfdPErnBod0u71/qg==, tarball: https://registry.npmjs.org/@types/http-errors/-/http-errors-2.0.5.tgz}
 
-  '@types/http-proxy@1.17.17':
-    resolution: {integrity: sha512-ED6LB+Z1AVylNTu7hdzuBqOgMnvG/ld6wGCG8wFnAzKX5uyW2K3WD52v0gnLCTK/VLpXtKckgWuyScYK6cSPaw==, tarball: https://registry.npmjs.org/@types/http-proxy/-/http-proxy-1.17.17.tgz}
-
   '@types/node@22.20.5':
     resolution: {integrity: sha512-U2+DNr+wSjpsTS/wZGYHq7GcwfuSmKiKvoPvK22zwTlRhU91yOniN4qRR5KhIjvif7ysw/dz/hKmfDH0Ris4aA==, tarball: https://registry.npmjs.org/@types/node/-/node-22.20.5.tgz}
 
@@ -519,9 +516,6 @@ packages:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==, tarball: https://registry.npmjs.org/etag/-/etag-1.8.1.tgz}
     engines: {node: '>= 0.6'}
 
-  eventemitter3@4.0.7:
-    resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==, tarball: https://registry.npmjs.org/eventemitter3/-/eventemitter3-4.0.7.tgz}
-
   express@5.3.0:
     resolution: {integrity: sha512-qCqy1xSoaugxOD4IVHb1ZWdkvCF2W3aE2okKouWj8VwJ+ztskSiXoBnCSJqfKT+cVPJhuJqe9YLbY425+Zh00g==, tarball: https://registry.npmjs.org/express/-/express-5.3.0.tgz}
     engines: {node: '>= 18'}
@@ -533,15 +527,6 @@ packages:
   finalhandler@2.1.1:
     resolution: {integrity: sha512-S8KoZgRZN+a5rNwqTxlZZePjT/4cnm0ROV70LedRHZ0p8u9fRID0hJUZQpkKLzro8LfmC8sx23bY6tVNxv8pQA==, tarball: https://registry.npmjs.org/finalhandler/-/finalhandler-2.1.1.tgz}
     engines: {node: '>= 18.0.0'}
-
-  follow-redirects@1.16.2:
-    resolution: {integrity: sha512-/kVP2U8z596Ia0gwFrwyIeo74ta5aVmSeU1FfAUMAmcEP5EP7zydmag3SLiN64NaRKef3lxsq7i/g7ltJQDGow==, tarball: https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.16.2.tgz}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
 
   forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==, tarball: https://registry.npmjs.org/forwarded/-/forwarded-0.2.0.tgz}
@@ -582,13 +567,12 @@ packages:
     resolution: {integrity: sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==, tarball: https://registry.npmjs.org/http-errors/-/http-errors-2.0.1.tgz}
     engines: {node: '>= 0.8'}
 
-  http-proxy-middleware@3.0.10:
-    resolution: {integrity: sha512-Niw9P+62tB2DuWJ/Vjxn53gAmDrRBM7hku8YRoxMFQu7pAkhITq0Dq9Uw4X/8hnAZ9kHsnDuBXKMzuN2i/RnGw==, tarball: https://registry.npmjs.org/http-proxy-middleware/-/http-proxy-middleware-3.0.10.tgz}
-    engines: {node: ^14.18.0 || ^16.10.0 || >=18.0.0}
+  http-proxy-middleware@4.2.2:
+    resolution: {integrity: sha512-GHP6tbjWsdSZbWSyqYvwPwoR76ozJ2IccVYoBR702N9vfqO0KBIwJ9vkDRErxwbb5Z6ej2Wn+9D/YitlUTseSQ==, tarball: https://registry.npmjs.org/http-proxy-middleware/-/http-proxy-middleware-4.2.2.tgz}
+    engines: {node: ^22.15.0 || ^24.0.0 || >=26.0.0}
 
-  http-proxy@1.18.1:
-    resolution: {integrity: sha512-7mz/721AbnJwIVbnaSv1Cz3Am0ZLT/UBwkC92VlxhXv/k/BBQfM2fXElQNC27BVGr0uwUpplYPQM9LnaBMR5NQ==, tarball: https://registry.npmjs.org/http-proxy/-/http-proxy-1.18.1.tgz}
-    engines: {node: '>=8.0.0'}
+  httpxy@0.5.6:
+    resolution: {integrity: sha512-iqc3nOxvNb5FxbhJozt8wNmHgjlmk4zzba512jMEXVwHCEBCbGAj49eGfy5PI8ts3/LFSFq8siiSNqwfY1AlfQ==, tarball: https://registry.npmjs.org/httpxy/-/httpxy-0.5.6.tgz}
 
   iconv-lite@0.7.3:
     resolution: {integrity: sha512-IKXpvIzjnC9XTAUbVBcMfGS0EPaIXtW6v+zr+RRp+hqULEpo0owZax6wyRwPOJbWbzjYspQwusTsfVr0ifh4uQ==, tarball: https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.7.3.tgz}
@@ -613,9 +597,9 @@ packages:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==, tarball: https://registry.npmjs.org/is-number/-/is-number-7.0.0.tgz}
     engines: {node: '>=0.12.0'}
 
-  is-plain-object@5.1.0:
-    resolution: {integrity: sha512-bUi/yjmtKYcRVUtWRGr0UA6xEFh2I6zWUwMrUXB3s7bmYCaZ8a+0ZsTRkrawh/mzlSD1Y0Ph8bp/U+TvBpWDNw==, tarball: https://registry.npmjs.org/is-plain-object/-/is-plain-object-5.1.0.tgz}
-    engines: {node: '>=0.10.0'}
+  is-plain-obj@4.1.0:
+    resolution: {integrity: sha512-+Pgi+vMuUNkJyExiMBt5IlFoMyKnr5zhJ4Uspz58WOhBF5QoIZkFyNHIbBAtHwzVAgk5RtndVNsDRN61/mmDqg==, tarball: https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-4.1.0.tgz}
+    engines: {node: '>=12'}
 
   is-promise@4.0.0:
     resolution: {integrity: sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==, tarball: https://registry.npmjs.org/is-promise/-/is-promise-4.0.0.tgz}
@@ -702,9 +686,6 @@ packages:
   raw-body@3.0.2:
     resolution: {integrity: sha512-K5zQjDllxWkf7Z5xJdV0/B0WTNqx6vxG70zJE4N0kBs4LovmEYWJzQGxC9bS9RAKu3bgM40lrd5zoLJ12MQ5BA==, tarball: https://registry.npmjs.org/raw-body/-/raw-body-3.0.2.tgz}
     engines: {node: '>= 0.10'}
-
-  requires-port@1.0.0:
-    resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==, tarball: https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz}
 
   router@2.2.0:
     resolution: {integrity: sha512-nLTrUKm2UyiL7rlhapu/Zl45FwNgkZGaCpZbIHajDYgwlJCOzLSk+cIPAnsEqV955GjILJnKbdQC1nVPz+gAYQ==, tarball: https://registry.npmjs.org/router/-/router-2.2.0.tgz}
@@ -905,10 +886,6 @@ snapshots:
 
   '@types/http-errors@2.0.5': {}
 
-  '@types/http-proxy@1.17.17':
-    dependencies:
-      '@types/node': 22.20.5
-
   '@types/node@22.20.5':
     dependencies:
       undici-types: 6.21.0
@@ -1051,8 +1028,6 @@ snapshots:
 
   etag@1.8.1: {}
 
-  eventemitter3@4.0.7: {}
-
   express@5.3.0:
     dependencies:
       accepts: 2.0.0
@@ -1101,10 +1076,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  follow-redirects@1.16.2(debug@4.4.3):
-    optionalDependencies:
-      debug: 4.4.3
-
   forwarded@0.2.0: {}
 
   fresh@2.0.0: {}
@@ -1147,24 +1118,17 @@ snapshots:
       statuses: 2.0.2
       toidentifier: 1.0.1
 
-  http-proxy-middleware@3.0.10:
+  http-proxy-middleware@4.2.2:
     dependencies:
-      '@types/http-proxy': 1.17.17
       debug: 4.4.3
-      http-proxy: 1.18.1(debug@4.4.3)
+      httpxy: 0.5.6
       is-glob: 4.0.3
-      is-plain-object: 5.1.0
+      is-plain-obj: 4.1.0
       micromatch: 4.0.8
     transitivePeerDependencies:
       - supports-color
 
-  http-proxy@1.18.1(debug@4.4.3):
-    dependencies:
-      eventemitter3: 4.0.7
-      follow-redirects: 1.16.2(debug@4.4.3)
-      requires-port: 1.0.0
-    transitivePeerDependencies:
-      - debug
+  httpxy@0.5.6: {}
 
   iconv-lite@0.7.3:
     dependencies:
@@ -1182,7 +1146,7 @@ snapshots:
 
   is-number@7.0.0: {}
 
-  is-plain-object@5.1.0: {}
+  is-plain-obj@4.1.0: {}
 
   is-promise@4.0.0: {}
 
@@ -1251,8 +1215,6 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.7.3
       unpipe: 1.0.0
-
-  requires-port@1.0.0: {}
 
   router@2.2.0:
     dependencies:
