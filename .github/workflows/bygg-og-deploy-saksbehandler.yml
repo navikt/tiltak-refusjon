@@ -22,7 +22,7 @@ jobs:
       image: ${{ steps.docker-build-push.outputs.image }}
     steps:
       - name: Sjekk ut kode
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Sett opp pnpm
         uses: pnpm/action-setup@v4
       - name: Konfigurer Node
@@ -70,7 +70,7 @@ jobs:
       id-token: write
     steps:
       - name: Sjekk ut kode
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Deploy til dev-gcp
         uses: nais/deploy/actions/deploy@v2
         env:
@@ -87,7 +87,7 @@ jobs:
       id-token: write
     steps:
       - name: Sjekk ut kode
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Deploy til dev-gcp
         uses: nais/deploy/actions/deploy@v2
         env:
@@ -105,7 +105,7 @@ jobs:
       id-token: write
     steps:
       - name: Sjekk ut kode
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Deploy til prod-gcp
         uses: nais/deploy/actions/deploy@v2
         env:
