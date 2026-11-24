@@ -15,6 +15,8 @@ pnpm --dir saksbehandler/server run build
 pnpm --dir arbeidsgiver/server run build
 ```
 
+`pnpm run check` runs all of these in one command. `pnpm run verify` does the same from a clean install.
+
 Read [`AGENTS.md`](../AGENTS.md) for setup, project structure, patterns, domain glossary and boundaries. It is the single source of truth.
 
 ## Reviews

@@ -35,7 +35,7 @@ Vite-dev-serveren proxyer:
 
 ## Teknologier
 
-- **React 18** med TypeScript
+- **React 19** med TypeScript
 - **Vite** som bundler og dev-server
 - **Vitest** for testing
 - **Nav Aksel** (`@navikt/ds-react`) som komponentbibliotek
