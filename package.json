@@ -10,7 +10,7 @@
     },
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "clean": "find . -name 'node_modules' -prune -exec rm -rf {} + && find . \\( -name 'dist' -o -name 'storybook-static' \\) -not -path '*/.git/*' -prune -exec rm -rf {} +",
+        "clean": "rm -rf node_modules arbeidsgiver/node_modules saksbehandler/node_modules komponenter/node_modules arbeidsgiver/server/node_modules saksbehandler/server/node_modules arbeidsgiver/dist saksbehandler/dist arbeidsgiver/server/dist saksbehandler/server/dist arbeidsgiver/storybook-static saksbehandler/storybook-static",
         "lint": "eslint --max-warnings=0",
         "lint:fix": "eslint --max-warnings=0 --fix",
         "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",

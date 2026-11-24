@@ -124,7 +124,7 @@ Stegene kan også kjøres hver for seg:
 
 ### Rydde opp
 
-Fjern alle `node_modules`-, `dist`- og `storybook-static`-mapper i hele repoet:
+Fjern `node_modules`, `dist` og `storybook-static` i alle pakkene:
 
 ```bash
 pnpm clean
@@ -134,7 +134,9 @@ Dette sletter:
 
 - `node_modules` i rot, alle workspaces og begge `server`-mappene
 - `dist` i `arbeidsgiver`, `arbeidsgiver/server`, `saksbehandler` og `saksbehandler/server`
-- `storybook-static` etter `build-storybook`
+- `storybook-static` i `arbeidsgiver` og `saksbehandler`
+
+Legger du til en ny pakke eller byggemappe, må den også legges til i `clean` i `package.json`.
 
 Installer deretter på nytt med:
 
