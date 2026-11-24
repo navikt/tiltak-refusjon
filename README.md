@@ -95,9 +95,36 @@ pnpm -r run <kommando>
 pnpm -r run test
 ```
 
+### Sjekke endringer
+
+Kjør lint, formatering, tester og bygg:
+
+```bash
+pnpm run check
+```
+
+`check` kjører `lint`, `prettier`, `test` og `build`, og stopper ved første feil. `build` kjører `tsc` i alle pakkene, så typefeil blir også fanget. Endrer du `package.json`, installerer pnpm avhengighetene før scriptene kjører.
+
+Vil du starte helt fra bunnen, for eksempel før en PR eller når noe virker rart lokalt:
+
+```bash
+pnpm run verify
+```
+
+`verify` kjører `clean` og `install:all` og deretter `check`. Den sletter `node_modules` og installerer alt på nytt, så den tar lengre tid.
+
+Stegene kan også kjøres hver for seg:
+
+| Kommando               | Beskrivelse                                                            |
+| ---------------------- | ---------------------------------------------------------------------- |
+| `pnpm run install:all` | Installer workspaces og begge `server`-mappene med `--frozen-lockfile` |
+| `pnpm run typecheck`   | Kjør bare `tsc` i alle workspaces og begge `server`-mappene            |
+| `pnpm run test`        | Kjør testene i `arbeidsgiver` og `saksbehandler`                       |
+| `pnpm run build`       | Bygg alle workspaces og begge `server`-mappene                         |
+
 ### Rydde opp
 
-Fjern alle `node_modules`- og `dist`-mapper i hele repoet:
+Fjern alle `node_modules`-, `dist`- og `storybook-static`-mapper i hele repoet:
 
 ```bash
 pnpm clean
@@ -105,11 +132,12 @@ pnpm clean
 
 Dette sletter:
 
-- `node_modules` i rot og alle workspaces
+- `node_modules` i rot, alle workspaces og begge `server`-mappene
 - `dist` i `arbeidsgiver`, `arbeidsgiver/server`, `saksbehandler` og `saksbehandler/server`
+- `storybook-static` etter `build-storybook`
 
 Installer deretter på nytt med:
 
 ```bash
-pnpm install
+pnpm run install:all
 ```

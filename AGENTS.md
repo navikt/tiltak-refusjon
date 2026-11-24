@@ -71,6 +71,8 @@ pnpm --dir saksbehandler/server run build
 pnpm --dir arbeidsgiver/server run build
 ```
 
+After making changes, run `pnpm run check`. It runs `lint`, `prettier`, `test` and `build` (which includes `tsc` in every package). `pnpm run verify` runs `clean` and `install:all` first, then `check`; use it only for a full reset, since it deletes and reinstalls `node_modules` and needs access to GitHub Packages.
+
 `test-and-build` runs `vitest --environment=jsdom --run`, then `tsc && vite build`. Use `pnpm run prettier:fix` and `pnpm run lint:fix` to fix formatting and lint errors. ESLint runs with `--max-warnings=0`.
 
 The Husky pre-commit hook runs `prettier:fix`, `lint:fix` and `pretty-svg` (SVG optimisation in arbeidsgiver).

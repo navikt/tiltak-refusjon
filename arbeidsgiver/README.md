@@ -31,7 +31,7 @@ Vite-dev-serveren proxyer `/api`-kall til `http://localhost:8081`. Sørg for at 
 
 ## Teknologier
 
-- **React 18** med TypeScript
+- **React 19** med TypeScript
 - **Vite** som bundler og dev-server
 - **Vitest** for testing
 - **Nav Aksel** (`@navikt/ds-react`) som komponentbibliotek
