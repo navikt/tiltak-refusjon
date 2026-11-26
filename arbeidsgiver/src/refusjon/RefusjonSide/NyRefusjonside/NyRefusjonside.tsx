@@ -20,7 +20,7 @@ import HemmeligAdresseVarsel from '~/HemmeligAdresseVarsel';
 import { Aktsomhet, Refusjon, statusTekst, tiltakstypeTekst } from '~/types';
 import { MainContainer } from '~/Container';
 import { formaterDato } from '~/utils';
-import { storForbokstav } from '~/utils/stringUtils';
+import { refusjonsnummer, storForbokstav } from '~/utils/stringUtils';
 import Utregning from '~/Utregning';
 
 import Bruttolonn, { BruttolonnFields, bruttolonnDefaultValues, lagBruttolonnSchema } from './Bruttolonn';
@@ -114,7 +114,7 @@ const NyRefusjonside = (props: Props) => {
 
     return (
         <>
-            <MainContainer rolle="arbeidsgiver" bredde="lg">
+            <MainContainer rolle="arbeidsgiver">
                 <Box background="default" padding={{ xs: 'space-16', md: 'space-32' }}>
                     <VStack gap={{ xs: 'space-40', md: 'space-64' }}>
                         <VStack gap="space-24">
@@ -122,7 +122,7 @@ const NyRefusjonside = (props: Props) => {
                                 <HStack align="start" gap="space-16" justify="space-between" wrap>
                                     <div>
                                         <Heading level="1" size="medium">
-                                            Refusjonsnr {tilskuddsgrunnlag.avtaleNr}-{tilskuddsgrunnlag.løpenummer}
+                                            Refusjonsnr {refusjonsnummer(tilskuddsgrunnlag)}
                                         </Heading>
                                         <BodyShort size="small">
                                             {storForbokstav(tiltakstypeTekst[tilskuddsgrunnlag.tiltakstype])}
