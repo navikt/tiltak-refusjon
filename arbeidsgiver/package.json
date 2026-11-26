@@ -31,7 +31,7 @@
         "axios": "^1.21.0",
         "classnames": "2.5.1",
         "cookie-parser": "^1.4.7",
-        "http-proxy-middleware": "^3.0.10",
+        "http-proxy-middleware": "^4.2.2",
         "lodash.groupby": "^4.6.0",
         "lodash.sortby": "^4.7.0",
         "lodash.sumby": "^4.6.0",
