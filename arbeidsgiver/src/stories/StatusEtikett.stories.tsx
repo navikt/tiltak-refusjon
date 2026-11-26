@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite/*';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import StatusEtikettMentor from '~/KvitteringSide/KvitteringSideMentor/StatusEtikettMentor';
 import { Diskresjonskode, Refusjon, RefusjonStatus, Tiltak } from '~/types';
 
