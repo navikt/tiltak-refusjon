@@ -125,7 +125,8 @@ function InntektTabell(props: Props) {
                 <VStack gap="space-2">
                     <Label size="small">Inntektsopplysninger hentes automatisk fra a-meldingen</Label>
                     <BodyShort size="small">
-                        Huk av de inntektene som er opptjent i {månedsNavn(tilskuddsgrunnlag.tilskuddFom)}, og som er
+                        Huk av de inntektene som er opptjent i perioden{' '}
+                        {formaterPeriode(tilskuddsgrunnlag.tilskuddFom, tilskuddsgrunnlag.tilskuddTom)}, og som er
                         tilknyttet denne refusjonen for {tiltakstypeTekst[tilskuddsgrunnlag.tiltakstype]}.
                     </BodyShort>
                 </VStack>

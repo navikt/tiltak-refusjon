@@ -4,6 +4,8 @@ import { Radio, RadioGroup, TextField, VStack } from '@navikt/ds-react';
 import { endreBruttolønn } from '@/services/rest-service';
 import { useFormContext, Controller, useWatch } from 'react-hook-form';
 import { z } from 'zod';
+import { formaterPeriode } from '~/utils';
+import { refusjonsnummer } from '~/utils/stringUtils';
 
 export const lagBruttolonnSchema = (refusjon: Refusjon) => {
     const { bruttolonnOpptjentIPerioden } = refusjon.refusjonsgrunnlag;
@@ -83,6 +85,12 @@ const Bruttolonn = (props: Props) => {
     });
     const tiltakstypeSomTekst = tiltakstypeTekst[refusjonsgrunnlag.tilskuddsgrunnlag.tiltakstype];
 
+    const periode = formaterPeriode(
+        refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddFom,
+        refusjonsgrunnlag.tilskuddsgrunnlag.tilskuddTom
+    );
+    const refnr = refusjonsnummer(refusjon.refusjonsgrunnlag.tilskuddsgrunnlag);
+
     return (
         <VStack gap="space-12">
             <Controller
@@ -91,7 +99,7 @@ const Bruttolonn = (props: Props) => {
                 render={({ field }) => (
                     <RadioGroup
                         {...field}
-                        legend={`Er noen av de valgte inntektene tilknyttet andre refusjoner for ${tiltakstypeSomTekst}?`}
+                        legend={`Er noen av de valgte inntektene tilknyttet andre refusjoner?`}
                         error={formState.errors.harAndreRefusjoner?.message}
                         size="small"
                         onChange={(value) => {
@@ -103,8 +111,18 @@ const Bruttolonn = (props: Props) => {
                             resetField('bruttolonn', { defaultValue: '' });
                         }}
                     >
-                        <Radio value={true}>Ja</Radio>
-                        <Radio value={false}>Nei</Radio>
+                        <Radio
+                            value={true}
+                            description="En eller flere av de valgte inntektene er brukt i andre refusjonskrav"
+                        >
+                            Ja
+                        </Radio>
+                        <Radio
+                            value={false}
+                            description={`Valgte inntekter er kun tilknyttet ${tiltakstypeSomTekst} ${refnr} for perioden ${periode}`}
+                        >
+                            Nei
+                        </Radio>
                     </RadioGroup>
                 )}
             />
